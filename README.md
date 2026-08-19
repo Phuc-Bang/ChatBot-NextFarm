@@ -76,12 +76,12 @@ Chi tiết đầy đủ ở [quy chuẩn v2.0](docs/NEXTFARM_PROBLEM_A_STANDARD_
 | P0 | Nền móng repo, hạ tầng Postgres | ✅ xong |
 | P1 | Crawler (HTML + PDF, robots.txt, sitemap, phân trang) | ✅ xong — 31 tài liệu |
 | P2 | Duyệt tri thức (2 luồng) | 🔧 công cụ xong, **chờ người duyệt** |
-| P3 | Tập kiểm thử — **đóng băng** | 🔄 5/13 nhóm, 92 case |
+| P3 | Tập kiểm thử — **đóng băng** | 🔄 10/13 nhóm, 200 case — chưa đóng băng |
 | P4 | Đo baseline C0 (LLM trần) | ⛔ chờ khoá API hoặc model cục bộ |
 | P5 | Cơ sở dữ liệu tri thức | ✅ xong — lược đồ, chunking, nạp dữ liệu |
-| P6 | Truy xuất lai | ⛔ chờ chọn embedding model |
-| P7 | RAG (C1) | ☐ |
-| P8 | Guardrail (C2) — cấu hình sản phẩm | ☐ |
+| P6 | Truy xuất lai | 🔄 chuẩn hoá + từ khoá xong; vector chờ model |
+| P7 | RAG (C1) | ⛔ chờ model |
+| P8 | Guardrail (C2) — cấu hình sản phẩm | 🔄 Intent Router + Scope Check + mẫu từ chối xong; lớp LLM và Grounding chờ model |
 | P9 | Báo cáo so sánh | ☐ |
 | P10 | API + giao diện | ☐ |
 | P11 | Tài liệu giao hàng | ☐ |
@@ -95,12 +95,37 @@ Chi tiết đầy đủ ở [quy chuẩn v2.0](docs/NEXTFARM_PROBLEM_A_STANDARD_
 | Chunk | 292 (rủi ro cao 44 · cần cảnh báo 93) |
 | Chunk **index được** | **0** — chưa tài liệu nào được duyệt |
 | Câu ứng viên số liệu | 193 (12 rủi ro cao) |
-| Case kiểm thử | 92 / 5 nhóm |
-| Test tự động | 96 xanh |
+| Case kiểm thử | 200 / 10 nhóm (chưa đóng băng) |
+| Test tự động | 217 xanh |
 
 > Con số **0 chunk index được** là hành vi đúng, không phải lỗi: DEC-005 quy
 > định không duyệt thì không vào kho tri thức. Cổng chặn là view
 > `indexable_chunk`, được cài ở tầng dữ liệu chứ không phải ở lời hứa.
+
+### Tầng từ chối — đo được ngay, không cần model
+
+Ba bước đầu của chuỗi xử lý (chuẩn hoá → Intent Router → Scope Check) không
+gọi model nào, nên đo được ngay hôm nay:
+
+```bash
+python evaluation/runners/eval_tu_choi.py
+```
+
+| Trên 200 case của tập kiểm thử v1 | |
+|---|---|
+| Case phải bị chặn | 124 |
+| — chặn đúng loại | **118** |
+| — chặn an toàn nhưng kém cụ thể | 6 |
+| — **lọt sang nhánh trả lời** | **0** |
+| Case phải đi tiếp | 76 |
+| — **bị chặn oan** | **0** |
+| Câu hỏi biến dạng giữ nguyên hành vi | 48/51 (3 case đổi đều theo hướng *an toàn hơn*) |
+
+Con số này **cao hơn con số trên câu hỏi thật**, vì người viết luật và người
+viết tập kiểm thử là một. Nó dùng để biết tầng từ chối có chạy đúng không,
+không dùng để báo cáo với NextFarm như tỷ lệ chính xác của hệ thống — con số
+đó chỉ đến từ C0/C1/C2 và từ bộ câu hỏi do chuyên gia NextFarm chấm (§32).
+Xem [`docs/reports/P8_intent_router.md`](docs/reports/P8_intent_router.md).
 
 ---
 
@@ -148,3 +173,6 @@ Ghi ở đây để không ai hiểu nhầm về phạm vi:
 - **Người duyệt tri thức không phải chuyên gia nông nghiệp.** Quy trình duyệt kiểm *chứng cứ* (nguồn, tier, cây, vùng), không kiểm *chân lý nông học*.
 - **Chưa có tài liệu sản phẩm NextFarm**, nên câu hỏi về tính năng app luôn bị từ chối.
 - Một số ngưỡng trong quy chuẩn là **giả định của đội** (`[ASM]`), chờ NextFarm xác nhận — xem §9.
+- **Intent Router mới có lớp rule.** Lớp LLM few-shot (§11.3) chưa làm được vì chưa chốt model (DEC-015). Khi không luật nào khớp, router trả về `nguồn = "mac_dinh"` với độ tin cậy 0 — đó là *"lớp rule không biết"*, không phải *"câu này là nông học"*.
+- **Tập kiểm thử chưa đóng băng.** Còn ba nhóm (`known_answer`, `paraphrase`, `contradictory`) phụ thuộc vào số liệu đã duyệt ở P2. Đóng băng khi đủ 13 nhóm.
+- **Bỏ dấu làm sập khớp trọn từ** (DEC-031, §13.4). Tiếng Việt viết rời từng âm tiết nên `bật`/`bắt`, `giờ`/`gió`, `van`/`vẫn`, `tôi`/`tỏi` thành cùng một chuỗi sau khi bỏ dấu. Đã xử lý bằng khớp có dấu khi người dùng gõ dấu, cộng bảng ngoại lệ — nhưng đây là rủi ro thường trực cho mọi thành phần khớp từ khoá về sau.
