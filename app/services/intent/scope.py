@@ -128,7 +128,11 @@ DONG_AM_CO_DAU = {
     "cam": ([], ["kết", "chịu", "đoan"]),
     "hành": ([], ["động", "chính", "vi", "trình", "nghề"]),
     "bông": ([], ["lúa", "hoa", "gòn"]),
-    "thơm": ([], ["ngon", "mùi", "quá", "hơn"]),
+    # "Bắc thơm", "gạo thơm", "lúa thơm" la ten giong lua, khong phai dua
+    "thơm": (["bắc", "gạo", "lúa", "nếp", "mùi", "hoa"],
+             ["ngon", "mùi", "quá", "hơn", "số"]),
+    # "một khóm", "khóm lúa" la bui cay, khong phai dua
+    "khóm": (["một", "mỗi", "từng", "các", "những"], ["lúa", "mạ"]),
     "tiêu": ([], ["chuẩn", "thụ", "diệt", "hao", "chí", "đề", "biểu", "cực"]),
     "lan": (["bò", "leo", "mọc"], ["rộng", "truyền", "toả", "tỏa", "nhanh"]),
     "nho": ([], ["nhỏ"]),

@@ -151,8 +151,9 @@ TIEU_TU_YEU_CAU = [
 # --- product_feature: hoi ve chinh san pham va dich vu ---
 TU_SAN_PHAM = [
     "app", "ung dung", "phan mem", "nextfarm", "next farm", "tinh nang",
-    "man hinh", "giao dien", "nut", "cai dat", "dang nhap", "dang ky",
+    "man hinh", "giao dien", "nut", "cai dat", "dang nhap",
     "tai khoan", "thong bao", "phien ban", "cap nhat app", "menu",
+    "dang ky tai khoan", "dang ky app",
     "goi cuoc", "phi dich vu", "ho tro ky thuat", "web", "website",
     # Ho tu vung san pham va dich vu - cung mot ho voi danh sach muc 11.3
     "mat khau", "dang xuat", "phan quyen", "chia quyen", "quyen",

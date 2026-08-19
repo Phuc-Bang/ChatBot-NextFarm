@@ -52,6 +52,10 @@ KHOA_HOP_LE = {
     # hanh vi co GIU NGUYEN so voi case goc hay khong - thay vi so voi mot
     # ky vong chep tay, vi chep tay se troi.
     "derived_from",
+    # Cau tra loi BAT BUOC kem cau canh bao (muc 19 case C4). Cung ho voi
+    # must_not_contain_number va must_not_claim_action: mot khang dinh ve
+    # hanh vi, cham duoc tu dong.
+    "must_have_caution",
 }
 KHOA_BAT_BUOC = {"case_id", "question", "expected_behavior"}
 

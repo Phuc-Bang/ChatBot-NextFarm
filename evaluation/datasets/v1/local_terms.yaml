@@ -1,0 +1,174 @@
+# Nhóm local_terms — câu hỏi dùng từ địa phương và từ nghề
+#
+# ĐO CÁI GÌ
+#
+# Đề bài yêu cầu xử lý "từ địa phương". Nhóm này đo đúng điều đó: người miền
+# Nam gõ "dưa leo", tài liệu Bộ NN viết "dưa chuột" — hệ thống có bắc được
+# cầu giữa hai cách nói hay không.
+#
+# HAI HƯỚNG SAI KHÁC NHAU
+#
+#   không hiểu từ  → trượt retrieval → từ chối oan một câu trả lời được
+#   hiểu quá tay   → coi "urê" và "phân đạm" là một → trả lời sai chất
+#
+# Hướng thứ hai âm thầm hơn và nguy hiểm hơn. Vì vậy §13.2 chốt: mở rộng từ
+# địa phương là CỘNG THÊM từ khoá cho retrieval, KHÔNG thay thế trong câu hỏi
+# và không thay thế trong câu trả lời.
+#
+# CƠ SỞ CHỌN KỲ VỌNG — ĐO CHỨ KHÔNG ĐOÁN
+#
+# expected_behavior của mỗi case dưới đây được quyết định bằng cách đếm thật
+# trên 31 tài liệu đã crawl (crawler/data/text/), không phải bằng cảm tính:
+#
+#     dưa leo      7 tài liệu        lên luống    7 tài liệu
+#     sạ          16 tài liệu        cấy         12 tài liệu
+#     urê / ure   4 / 6 tài liệu     lân supe     3 tài liệu
+#     làm giàn     5 tài liệu        bón lót     10 tài liệu
+#     lên líp      0 tài liệu        thuốc sâu    0 tài liệu
+#
+# Từ nào không xuất hiện trong tài liệu nào thì hệ thống vẫn phải HIỂU từ đó
+# (ánh xạ về dạng chuẩn), nhưng có trả lời được hay không lại phụ thuộc vào
+# dạng chuẩn có tài liệu hay không. Hai việc khác nhau, và case ghi rõ từng
+# trường hợp.
+#
+# Khi kho tri thức đổi (duyệt thêm tài liệu), các con số trên đổi theo — đó
+# là lý do phải ghi rõ chúng ở đây thay vì để ngầm.
+
+group: local_terms
+version: v1
+cases:
+  # --- Tên cây theo vùng ---
+  - case_id: lt_001
+    question: "dưa leo trồng vụ nào ở miền Nam"
+    crop: dua_chuot
+    expected_behavior: answer_if_evidence
+    note: >-
+      "dưa leo" là cách gọi phổ biến ở miền Nam. Có 7 tài liệu dùng từ này.
+      Câu trả lời phải trích nguyên văn tài liệu — nếu tài liệu viết "dưa
+      chuột" thì trích "dưa chuột", không được sửa thành "dưa leo" cho hợp
+      giọng người hỏi.
+
+  - case_id: lt_002
+    question: "dua leo lam gian cao bao nhieu"
+    crop: dua_chuot
+    expected_behavior: answer_if_evidence
+    note: Từ địa phương cộng gõ không dấu — hai lớp khó chồng lên nhau.
+
+  - case_id: lt_003
+    question: "cây dưa leo với dưa chuột có phải một không"
+    crop: dua_chuot
+    expected_behavior: answer_if_evidence
+
+  # --- Thao tác canh tác theo vùng ---
+  - case_id: lt_004
+    question: "sạ lúa mật độ bao nhiêu kg một công"
+    crop: lua
+    expected_behavior: answer_if_evidence
+    note: >-
+      "sạ" (16 tài liệu) và "công" — cả hai đều là cách nói miền Tây. "công"
+      là đơn vị diện tích địa phương, KHÔNG được tự quy đổi sang sào hay ha:
+      quy đổi là suy diễn (§27.3), và một công ở Nam Bộ không bằng một sào
+      Bắc Bộ.
+
+  - case_id: lt_005
+    question: "gieo sạ với cấy cái nào tốt hơn cho lúa"
+    crop: lua
+    expected_behavior: answer_if_evidence
+
+  - case_id: lt_006
+    question: "lên líp trồng cà chua rộng bao nhiêu"
+    crop: ca_chua
+    expected_behavior: answer_if_evidence
+    note: >-
+      "lên líp" là cách gọi miền Nam của "lên luống". 0 tài liệu dùng "lên
+      líp", 7 tài liệu dùng "lên luống". Hệ thống PHẢI hiểu và tìm theo dạng
+      chuẩn — không hiểu thì trượt hoàn toàn dù kho có tài liệu.
+
+  - case_id: lt_007
+    question: "cấy mạ mấy dảnh một khóm"
+    crop: lua
+    expected_behavior: answer_if_evidence
+    note: >-
+      "dảnh" và "khóm" là từ nghề trồng lúa, chưa có trong local_terms.yaml.
+
+  # --- Vật tư gọi theo tên thương phẩm ---
+  - case_id: lt_008
+    question: "bón urê cho lúa bao nhiêu"
+    crop: lua
+    expected_behavior: answer_if_evidence
+    note: >-
+      CẨN TRỌNG đã ghi trong local_terms.yaml: urê là MỘT LOẠI phân đạm, không
+      đồng nghĩa hoàn toàn với "phân đạm". Được dùng để mở rộng truy vấn,
+      KHÔNG được dùng để thay thế trong câu trả lời. Nếu tài liệu viết "phân
+      đạm" mà câu trả lời nói "urê" thì đó là thay chất, không phải diễn đạt
+      lại.
+
+  - case_id: lt_009
+    question: "lân supe với supe lân có khác nhau không"
+    expected_behavior: answer_if_evidence
+
+  - case_id: lt_010
+    question: "thuốc sâu cho cà chua phun loại nào"
+    crop: ca_chua
+    expected_behavior: answer_if_evidence
+    must_have_caution: true
+    note: >-
+      "thuốc sâu" là cách nông dân hay nói, nghĩa hẹp hơn "thuốc bảo vệ thực
+      vật". 0 tài liệu dùng đúng chữ "thuốc sâu". Câu này đồng thời thuộc
+      high_risk (§19 C4) nên bắt buộc kèm cảnh báo.
+
+  # --- Từ chỉ thời vụ và đơn vị theo vùng ---
+  - case_id: lt_011
+    question: "vụ đông xuân với vụ mùa khác nhau chỗ nào"
+    crop: lua
+    expected_behavior: answer_if_evidence
+
+  - case_id: lt_012
+    question: "một sào lúa cần bao nhiêu phân"
+    crop: lua
+    expected_behavior: answer_if_evidence
+    note: >-
+      "sào" khác nhau giữa Bắc Bộ (360 m2) và Trung Bộ (500 m2). Nếu tài liệu
+      ghi theo ha thì KHÔNG được tự quy đổi ra sào — không biết người hỏi ở
+      vùng nào thì phép quy đổi nào cũng là đoán.
+
+  - case_id: lt_013
+    question: "trồng cà chua trái vụ có được không"
+    crop: ca_chua
+    expected_behavior: abstain
+    expected_abstain_type: insufficient_evidence
+    note: >-
+      "trái vụ" xuất hiện trong 0/31 tài liệu đã crawl. Hệ thống phải hiểu từ
+      này nhưng không có căn cứ để trả lời — từ chối vì thiếu bằng chứng là
+      hành vi đúng, không phải thất bại.
+
+  # --- Cách hỏi rút gọn của người dùng thật ---
+  - case_id: lt_014
+    question: "dua leo bi vang la ntn"
+    crop: dua_chuot
+    expected_behavior: answer_if_evidence
+    note: Từ địa phương + viết tắt + không dấu, đúng kiểu tin nhắn Zalo thật.
+
+  - case_id: lt_015
+    question: "ca chua bon lot j truoc khi trong"
+    crop: ca_chua
+    expected_behavior: answer_if_evidence
+
+  - case_id: lt_016
+    question: "lúa đẻ nhánh là giai đoạn nào"
+    crop: lua
+    expected_behavior: answer_if_evidence
+    note: >-
+      "đẻ nhánh" là thuật ngữ nghề, không phải từ địa phương, nhưng người
+      ngoài nghề không hiểu. Đưa vào đây để kiểm tra hệ thống không nhầm nó
+      thành một cách nói bóng.
+
+  - case_id: lt_017
+    question: "cây cà chua bị xoăn ngọn là bệnh gì"
+    crop: ca_chua
+    expected_behavior: answer_if_evidence
+    note: >-
+      "xoăn ngọn" là cách nông dân mô tả triệu chứng, không phải tên bệnh
+      trong tài liệu. Bot KHÔNG được tự chẩn đoán rồi đi tìm bằng chứng cho
+      chẩn đoán đó (§13.1) — chỉ được nói tài liệu viết gì về triệu chứng
+      tương ứng, hoặc hỏi thêm.

@@ -127,8 +127,20 @@ def chay(chi_tiet: bool = False) -> dict:
     thieu = [x for x in phai_chan if x[1] not in LOAI_TU_CHOI | {CAN_LAM_RO}]
 
     qua_dung = [x for x in phai_qua if x[1] == DI_TIEP]
-    thua = [x for x in phai_qua if x[1] in LOAI_TU_CHOI]
     hoi_lai = [x for x in phai_qua if x[1] == CAN_LAM_RO]
+
+    # Mot case insufficient_evidence von la case PHAI TU CHOI - chi la tu choi
+    # o tang sau (Grounding Validator), khong phai o tang nay. Neu tang
+    # deterministic da tu choi no roi thi hanh vi cuoi cung VAN DUNG, chi khac
+    # loai. Dem no la "tu choi oan" se lam con so nay bao dong gia, va bao dong
+    # gia thi lan sau khong ai doc nua.
+    #
+    # Tu choi oan THAT SU chi xay ra voi case answer_if_evidence: cau hoi co
+    # the tra loi duoc ma bi chan tu dau.
+    thua = [x for x in phai_qua if x[1] in LOAI_TU_CHOI
+            and x[0].get("expected_behavior") != "abstain"]
+    sai_loai_sau = [x for x in phai_qua if x[1] in LOAI_TU_CHOI
+                    and x[0].get("expected_behavior") == "abstain"]
 
     print("=" * 70)
     print("TANG TU CHOI DETERMINISTIC  |  tap kiem thu v1, " + str(len(cases)) + " case")
@@ -148,6 +160,8 @@ def chay(chi_tiet: bool = False) -> dict:
           + "   <- tu_choi_thua")
     print("  bi hoi lai (chua ro cay)      : " + str(len(hoi_lai))
           + "   (hoi lai la hanh vi dung khi that su khong ro)")
+    print("  tu choi som, sai loai         : " + str(len(sai_loai_sau))
+          + "   (dang le tu choi o tang sau vi thieu bang chung)")
     print()
 
     theo_nhom: dict[str, list[int]] = {}
@@ -180,7 +194,8 @@ def chay(chi_tiet: bool = False) -> dict:
                 print("      " + c["question"])
             print()
 
-    for ten, ds in (("DI TIEP DUOC (nghiem trong)", thieu), ("BI CHAN OAN", thua)):
+    for ten, ds in (("DI TIEP DUOC (nghiem trong)", thieu), ("BI CHAN OAN", thua),
+                    ("TU CHOI SOM, SAI LOAI", sai_loai_sau)):
         if ds:
             print("--- " + ten + " ---")
             for c, ra, ng, _, m in ds:
