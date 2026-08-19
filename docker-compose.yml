@@ -11,7 +11,9 @@ services:
       # Collation C de hanh vi sap xep on dinh giua cac may
       POSTGRES_INITDB_ARGS: "--encoding=UTF8"
     ports:
-      - "${POSTGRES_PORT:-5432}:5432"
+      # Cong 5432 tren may dev thuong da bi mot PostgreSQL cai san chiem.
+      # Dung 55432 de khong tranh chap - doi trong .env neu can.
+      - "${POSTGRES_PORT:-15432}:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
       # Script trong thu muc nay chi chay LAN DAU khi volume con rong
