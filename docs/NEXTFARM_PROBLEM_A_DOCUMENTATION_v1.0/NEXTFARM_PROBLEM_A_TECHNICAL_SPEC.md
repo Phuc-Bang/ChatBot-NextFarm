@@ -1,6 +1,21 @@
 # NextFarm – Bài toán A: Bot trả lời sai / bịa đặt
 ## Technical Specification & Project Agreement v1.0
 
+> # ⚠️ BẢN NÀY ĐÃ ĐƯỢC THAY THẾ
+>
+> Quy chuẩn đang áp dụng là [`docs/NEXTFARM_PROBLEM_A_STANDARD_v2.0.md`](../NEXTFARM_PROBLEM_A_STANDARD_v2.0.md). Bản v1.0 này được giữ lại **chỉ để tham khảo lịch sử** — đừng dùng nó làm căn cứ khi viết code.
+>
+> Tám điểm đã được sửa ở v2.0 (chi tiết ở mục 0.5 của bản mới):
+>
+> 1. Thiếu Intent Router → chỉ phủ 2/4 hiện tượng đề bài nêu; câu hỏi số liệu vườn vẫn lọt qua Scope Check và bị trả lời bằng số liệu sách kèm citation
+> 2. Gộp chung ba loại "chưa biết" → v2.0 tách thành `[ASM]` / `[EXT]` / `[TODO]`
+> 3. Bộ metric có thể bị gian lận bằng cách từ chối mọi câu hỏi
+> 4. Mâu thuẫn với `CRAWLER_GUIDE.md` về đơn vị duyệt (câu hay tài liệu)
+> 5. Không nói keyword search làm bằng gì, trong khi PostgreSQL không có cấu hình FTS tiếng Việt
+> 6. Grounding Validator để trống, dù đó là hàng rào chống bịa cuối cùng
+> 7. Fine-tuning khoá cứng `Có`, không có ngân sách latency
+> 8. Quy mô nguồn quá nhỏ, chưa đọc được PDF, chưa có quy tắc `robots.txt`
+
 > **Ngôn ngữ:** Tiếng Việt  
 > **Trạng thái:** REQUIREMENT LOCKED v1.0  
 > **Phạm vi:** Proof of Concept (PoC) định hướng production  
