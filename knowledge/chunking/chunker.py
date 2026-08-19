@@ -32,13 +32,20 @@ NGUYEN TAC
 from __future__ import annotations
 
 import re
-import unicodedata
+import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 
 import yaml
 
 BASE = Path(__file__).resolve().parent
+sys.path.insert(0, str(BASE.parent.parent))
+
+# bo_dau dinh nghia MOT LAN o app/core/text.py va dung chung cho ca phia nap
+# du lieu (file nay) lan phia cau hoi (app/services/normalization). Hai phia
+# bo dau khac nhau thi keyword search truot lang le - xem giai thich trong
+# app/core/text.py.
+from app.core.text import bo_dau  # noqa: E402
 LEXICON = BASE.parent / "lexicon" / "high_risk_terms.yaml"
 
 # Kich thuoc muc tieu tinh bang KY TU (khong phai token).
@@ -57,18 +64,6 @@ TIEU_DE = [
     re.compile(r"^\s*[-*+•]\s*(\S.{0,60}):\s*$"),                # - Bon phan:
     re.compile(r"^\s*(\S.{0,60}):\s*$"),                         # Thoi vu:
 ]
-
-
-def bo_dau(text: str) -> str:
-    """Bo dau tieng Viet, giu nguyen chu va so.
-
-    Khop voi hanh vi cua unaccent trong PostgreSQL cho tieng Viet: d gach
-    ngang -> d, va cac dau thanh/dau mu bi loai.
-    """
-    text = text.replace("đ", "d").replace("Đ", "D")
-    nfd = unicodedata.normalize("NFD", text)
-    khong_dau = "".join(c for c in nfd if not unicodedata.combining(c))
-    return unicodedata.normalize("NFC", khong_dau).lower()
 
 
 def tai_tu_khoa_rui_ro() -> tuple[list[str], list[str]]:
