@@ -19,113 +19,646 @@
 # đang mở rộng bằng crawler/discover.py.
 
 sources:
-  # ---------------- Cà chua ----------------
-  - id: hanoi_ca_chua
-    crop: ca_chua
-    region: dong_bang_song_hong
-    publisher: So NN&MT Ha Noi
-    source_tier: 1
-    url: https://sonnptnt.hanoi.gov.vn/cat172/2039/Ky-thuat-trong-cay-ca-chua
-
-  - id: lamdong_ca_chua
-    crop: ca_chua
-    region: tay_nguyen
-    publisher: Khuyen nong Lam Dong
-    source_tier: 1
-    url: http://khuyennong.lamdong.gov.vn/ky-thuat-trong-trot/ki-thuat-trong-rau/290-quy-trinh-k-thu-t-tr-ng-cay-ca-chua
-
-  # ---------------- Dưa chuột ----------------
-  - id: ninhbinh_dua_chuot_dong
-    crop: dua_chuot
-    region: dong_bang_song_hong
-    publisher: Khuyen nong Ninh Binh
-    source_tier: 1
-    url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/ky-thuat-trong-va-cham-soc-dua-chuot-vu-dong-781.html
-
-  - id: ninhbinh_dua_chuot_quytrinh
-    crop: dua_chuot
-    region: dong_bang_song_hong
-    publisher: Khuyen nong Ninh Binh
-    source_tier: 1
-    url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/quy-trinh-san-xuat-dua-chuot-792.html
-
-  - id: hatinh_dua_chuot_vietgap
-    crop: dua_chuot
-    region: bac_trung_bo
-    publisher: NTM Ha Tinh
-    source_tier: 1
-    url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ky-thuat-trong-dua-chuot-theo-huong-tieu-chuan-VietGAP-7401.html
-
-  - id: laichau_dua_chuot_xuanhe
-    crop: dua_chuot
-    region: trung_du_mien_nui
-    publisher: So NN&MT Lai Chau
-    source_tier: 1
-    url: https://sonnmt.laichau.gov.vn/thu-vien/tai-lieu/ky-thuat-trong-va-cham-soc-cay-dua-chuot-vu-xuan-he.html
-
-  # Bổ sung đợt 2 — tìm qua công cụ tìm kiếm, CHƯA kiểm chứng cho tới khi
-  # crawl.py chạy thật. Nguồn nào lỗi thì để nguyên là lỗi.
-  - id: lamdong_ca_chua_ghep
-    crop: ca_chua
-    region: tay_nguyen
-    publisher: Khuyen nong Lam Dong
-    source_tier: 1
-    url: http://khuyennong.lamdong.gov.vn/ky-thuat-trong-trot/ki-thuat-trong-rau/797-ky-thuat-san-xuat-cay-giong-ca-chua-ghep
-
-  # Nguồn PDF đầu tiên — dùng để kiểm chứng DEC-027 trên tài liệu thật
-  - id: lamdong_ca_chua_cherry_pdf
-    crop: ca_chua
-    region: tay_nguyen
-    publisher: Khuyen nong Lam Dong
-    source_tier: 1
-    url: http://khuyennong.lamdong.gov.vn/attachments/article/2876/QUY%20TRINH%20CA%20CHUA%20CHERRY.FINAL%20BAN%20HANH.pdf
-
-  - id: lamdong_ttbvtv_ca_chua
-    crop: ca_chua
-    region: tay_nguyen
-    publisher: Chi cuc Trong trot va BVTV Lam Dong
-    source_tier: 1
-    url: https://ttbvtv.lamdong.gov.vn/chi-dao-san-xuat/quy-trinh-trong-trot/cay-rau-hoa-3/690-quy-trinh-ky-thuat-trong-cay-ca-chua
-
-  - id: ninhbinh_gntt_ca_chua
-    crop: ca_chua
-    region: dong_bang_song_hong
-    publisher: Khuyen nong Ninh Binh
-    source_tier: 1
-    url: https://gntt.ninhbinh.gov.vn/khuyen-nong/ky-thuat-trong-cay-ca-chua-458.html
-
-  - id: hcm_dost_ca_chua_bi
-    crop: ca_chua
-    region: dong_nam_bo
-    publisher: So KH&CN TP Ho Chi Minh
-    source_tier: 1
-    url: https://dost.hochiminhcity.gov.vn/mo-hinh-ung-dung-trong-nong-nghiep/quy-trinh-ky-thuat-trong-ca-chua-bi-solanum-lycopersicum-l/
-
-  - id: bacgiang_ntm_ca_chua_bi
-    crop: ca_chua
-    region: trung_du_mien_nui
-    publisher: NTM Bac Giang
-    source_tier: 1
-    url: https://nongthonmoi.bacgiang.gov.vn/chi-tiet-tin-tuc/-/asset_publisher/NcYe9bmb4WZ5/content/ky-thuat-trong-ca-chua-bi
-
-  - id: phanbonquocgia_ca_chua
-    crop: ca_chua
-    region: toan_quoc
-    publisher: Trung tam Khao kiem nghiem Phan bon Quoc gia
-    source_tier: 1
-    url: https://phanbonquocgia.gov.vn/ky-thuat-trong-va-bon-phan-cho-cay-ca-chua/
-
-  # ---------------- Lúa ----------------
-  - id: gso_lua_dong_xuan_2024
-    crop: lua
-    region: toan_quoc
-    publisher: Tong cuc Thong ke
-    source_tier: 1
-    url: https://www.gso.gov.vn/tin-tuc-thong-ke/2024/07/ket-qua-san-xuat-vu-dong-xuan-nam-2024/
-
-  - id: quangtri_lua_ngap_kho_xen_ke
-    crop: lua
-    region: bac_trung_bo
-    publisher: Trung tam Khuyen nong Quang Tri
-    source_tier: 1
-    url: https://khuyennong.quangtri.gov.vn/tin-hoat-dong-nganh/trien-khai-thi-diem-mo-hinh-tuoi-ngap-kho-xen-ke-trong-canh-tac-lua-thich-ung-voi-bien-doi-khi-hau-1104.html
+- id: hanoi_ca_chua
+  crop: ca_chua
+  region: dong_bang_song_hong
+  publisher: So NN&MT Ha Noi
+  source_tier: 1
+  url: https://sonnptnt.hanoi.gov.vn/cat172/2039/Ky-thuat-trong-cay-ca-chua
+- id: lamdong_ca_chua
+  crop: ca_chua
+  region: tay_nguyen
+  publisher: Khuyen nong Lam Dong
+  source_tier: 1
+  url: http://khuyennong.lamdong.gov.vn/ky-thuat-trong-trot/ki-thuat-trong-rau/290-quy-trinh-k-thu-t-tr-ng-cay-ca-chua
+- id: ninhbinh_dua_chuot_dong
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  publisher: Khuyen nong Ninh Binh
+  source_tier: 1
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/ky-thuat-trong-va-cham-soc-dua-chuot-vu-dong-781.html
+- id: ninhbinh_dua_chuot_quytrinh
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  publisher: Khuyen nong Ninh Binh
+  source_tier: 1
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/quy-trinh-san-xuat-dua-chuot-792.html
+- id: hatinh_dua_chuot_vietgap
+  crop: dua_chuot
+  region: bac_trung_bo
+  publisher: NTM Ha Tinh
+  source_tier: 1
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ky-thuat-trong-dua-chuot-theo-huong-tieu-chuan-VietGAP-7401.html
+- id: laichau_dua_chuot_xuanhe
+  crop: dua_chuot
+  region: trung_du_mien_nui
+  publisher: So NN&MT Lai Chau
+  source_tier: 1
+  url: https://sonnmt.laichau.gov.vn/thu-vien/tai-lieu/ky-thuat-trong-va-cham-soc-cay-dua-chuot-vu-xuan-he.html
+- id: lamdong_ca_chua_ghep
+  crop: ca_chua
+  region: tay_nguyen
+  publisher: Khuyen nong Lam Dong
+  source_tier: 1
+  url: http://khuyennong.lamdong.gov.vn/ky-thuat-trong-trot/ki-thuat-trong-rau/797-ky-thuat-san-xuat-cay-giong-ca-chua-ghep
+- id: lamdong_ca_chua_cherry_pdf
+  crop: ca_chua
+  region: tay_nguyen
+  publisher: Khuyen nong Lam Dong
+  source_tier: 1
+  url: http://khuyennong.lamdong.gov.vn/attachments/article/2876/QUY%20TRINH%20CA%20CHUA%20CHERRY.FINAL%20BAN%20HANH.pdf
+- id: lamdong_ttbvtv_ca_chua
+  crop: ca_chua
+  region: tay_nguyen
+  publisher: Chi cuc Trong trot va BVTV Lam Dong
+  source_tier: 1
+  url: https://ttbvtv.lamdong.gov.vn/chi-dao-san-xuat/quy-trinh-trong-trot/cay-rau-hoa-3/690-quy-trinh-ky-thuat-trong-cay-ca-chua
+- id: ninhbinh_gntt_ca_chua
+  crop: ca_chua
+  region: dong_bang_song_hong
+  publisher: Khuyen nong Ninh Binh
+  source_tier: 1
+  url: https://gntt.ninhbinh.gov.vn/khuyen-nong/ky-thuat-trong-cay-ca-chua-458.html
+- id: hcm_dost_ca_chua_bi
+  crop: ca_chua
+  region: dong_nam_bo
+  publisher: So KH&CN TP Ho Chi Minh
+  source_tier: 1
+  url: https://dost.hochiminhcity.gov.vn/mo-hinh-ung-dung-trong-nong-nghiep/quy-trinh-ky-thuat-trong-ca-chua-bi-solanum-lycopersicum-l/
+- id: bacgiang_ntm_ca_chua_bi
+  crop: ca_chua
+  region: trung_du_mien_nui
+  publisher: NTM Bac Giang
+  source_tier: 1
+  url: https://nongthonmoi.bacgiang.gov.vn/chi-tiet-tin-tuc/-/asset_publisher/NcYe9bmb4WZ5/content/ky-thuat-trong-ca-chua-bi
+- id: phanbonquocgia_ca_chua
+  crop: ca_chua
+  region: toan_quoc
+  publisher: Trung tam Khao kiem nghiem Phan bon Quoc gia
+  source_tier: 1
+  url: https://phanbonquocgia.gov.vn/ky-thuat-trong-va-bon-phan-cho-cay-ca-chua/
+- id: gso_lua_dong_xuan_2024
+  crop: lua
+  region: toan_quoc
+  publisher: Tong cuc Thong ke
+  source_tier: 1
+  url: https://www.gso.gov.vn/tin-tuc-thong-ke/2024/07/ket-qua-san-xuat-vu-dong-xuan-nam-2024/
+- id: quangtri_lua_ngap_kho_xen_ke
+  crop: lua
+  region: bac_trung_bo
+  publisher: Trung tam Khuyen nong Quang Tri
+  source_tier: 1
+  url: https://khuyennong.quangtri.gov.vn/tin-hoat-dong-nganh/trien-khai-thi-diem-mo-hinh-tuoi-ngap-kho-xen-ke-trong-canh-tac-lua-thich-ung-voi-bien-doi-khi-hau-1104.html
+- id: lua__ninh_binh_danh_gia_trien_vong
+  crop: lua
+  region: dong_bang_song_hong
+  publisher: Khuyen nong Ninh Binh
+  source_tier: 1
+  url: https://khuyennong.ninhbinh.gov.vn/trong-trot/ninh-binh-danh-gia-trien-vong-giong-lua-lai-chat-luong-bac-xuyen-88-1032.html
+  discovered_from: ninhbinh_kht
+  discovered_anchor: Ninh Bình đánh giá triển vọng giống lúa lai chất lượng Bắc Xuyên 88
+- id: lua__khac_phuc_anh_huong_mua_bao
+  crop: lua
+  region: dong_bang_song_hong
+  publisher: Khuyen nong Ninh Binh
+  source_tier: 1
+  url: https://khuyennong.ninhbinh.gov.vn/trong-trot/khac-phuc-anh-huong-mua-bao-do-hoan-luu-cua-con-bao-so-5-kajiki-doi-voi-lua-va-cay-rau-mau-tren-dia-ban-tinh-ninh-binh-940.html
+  discovered_from: ninhbinh_kht
+  discovered_anchor: Khắc phục ảnh hưởng mưa bão do hoàn lưu cuả cơn bão số 5 (Kajiki) đối với lúa và cây rau màu trên địa
+    bàn tỉnh Ninh Bình
+- id: lua__chitietvb_1142
+  crop: lua
+  region: dong_bang_song_hong
+  publisher: Khuyen nong Ninh Binh
+  source_tier: 1
+  url: https://khuyennong.ninhbinh.gov.vn/van-ban/chitietvb-1142.html
+  discovered_from: ninhbinh_kht
+  discovered_anchor: Nghị quyết Quy định nguyên tắc, phạm vi, định mức hỗ trợ và việc sử dụng kinh phí hỗ trợ sản xuất, bảo
+    vệ đất trồng lúa trên địa bàn tỉnh Ninh Bình
+- id: lua__long_an_trien_khai_chuong_trinh
+  crop: lua
+  region: bac_trung_bo
+  publisher: NTM Ha Tinh
+  source_tier: 1
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/long-an-trien-khai-chuong-trinh-ho-tro-gia-giong-xay-dung-mo-hinh-ung-dung-cong-nghe-tien-tien-trong-san-xuat-lua-120833.html
+  discovered_from: hatinh_khcn
+  discovered_anchor: 'Long An: Triển khai chương trình hỗ trợ giá giống, xây dựng mô hình ứng dụng công nghệ tiên tiến trong
+    sản xuất lúa'
+- id: lua__mach_nuoc_phong_tru_dich_hai
+  crop: lua
+  region: bac_trung_bo
+  publisher: NTM Ha Tinh
+  source_tier: 1
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/mach-nuoc-phong-tru-dich-hai-tren-lua-he-thu-o-ha-tinh-119321.html
+  discovered_from: hatinh_khcn
+  discovered_anchor: “Mách nước” phòng trừ dịch hại trên lúa hè thu ở Hà Tĩnh (17/08/2021)
+- id: lua__hai_phong_trong_thu_nghiem_thanh
+  crop: lua
+  region: bac_trung_bo
+  publisher: NTM Ha Tinh
+  source_tier: 1
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/hai-phong-trong-thu-nghiem-thanh-cong-lua-j02-116562.html
+  discovered_from: hatinh_khcn
+  discovered_anchor: 'Hải Phòng: Trồng thử nghiệm thành công lúa J02'
+- id: lua__hue_phat_trien_vung_san_xuat
+  crop: lua
+  region: bac_trung_bo
+  publisher: NTM Ha Tinh
+  source_tier: 1
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/hue-phat-trien-vung-san-xuat-lua-chat-luong-cao-loi-nhuan-tang-them-10-15-115080.html
+  discovered_from: hatinh_khcn
+  discovered_anchor: 'Huế: Phát triển vùng sản xuất lúa chất lượng cao lợi nhuận tăng thêm 10-15%'
+- id: lua__cong_cu_ky_thuat_so_chinh
+  crop: lua
+  region: bac_trung_bo
+  publisher: NTM Ha Tinh
+  source_tier: 1
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cong-cu-ky-thuat-so-chinh-xac-giup-nong-dan-trong-lua-nepal-tang-nang-suat-lua-115069.html
+  discovered_from: hatinh_khcn
+  discovered_anchor: Công cụ kỹ thuật số chính xác giúp nông dân trồng lúa Nepal tăng năng suất lúa (30/05/2021)
+- id: lua__mot_so_van_de_can_thuc
+  crop: lua
+  region: bac_trung_bo
+  publisher: NTM Ha Tinh
+  source_tier: 1
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/mot-so-van-de-can-thuc-hien-tot-trong-san-xuat-lua-vu-he-thu-2021-115012.html
+  discovered_from: hatinh_khcn
+  discovered_anchor: Một số vấn đề cần thực hiện tốt trong sản xuất lúa vụ Hè thu 2021 (28/05/2021)
+- id: lua__dua_giong_lua_st24_ngon_nhat
+  crop: lua
+  region: bac_trung_bo
+  publisher: NTM Ha Tinh
+  source_tier: 1
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/dua-giong-lua-st24-ngon-nhat-nhi-the-gioi-ve-trong-ruong-nha-nong-dan-ha-tinh-duoc-mua-boi-thu-114211.html
+  discovered_from: hatinh_khcn
+  discovered_anchor: Đưa giống lúa ST24 ngon nhất nhì thế giới về trồng ruộng nhà, nông dân Hà Tĩnh được mùa bội thu
+- id: lua__nhung_giong_lua_chat_luong_thich
+  crop: lua
+  region: bac_trung_bo
+  publisher: NTM Ha Tinh
+  source_tier: 1
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/nhung-giong-lua-chat-luong-thich-hop-san-xuat-2-vu-cua-vinaseed-113596.html
+  discovered_from: hatinh_khcn
+  discovered_anchor: Những giống lúa chất lượng thích hợp sản xuất 2 vụ của Vinaseed (06/05/2021)
+- id: lua__nghe_an_chi_thi_ung_dung
+  crop: lua
+  region: bac_trung_bo
+  publisher: NTM Ha Tinh
+  source_tier: 1
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/nghe-an-chi-thi-ung-dung-tien-bo-ky-thuat-vu-lua-xuan-2021-110162.html
+  discovered_from: hatinh_khcn
+  discovered_anchor: Nghệ An chỉ thị ứng dụng tiến bộ kỹ thuật vụ lúa xuân 2021
+- id: lua__phong_tru_co_dai_cho_lua
+  crop: lua
+  region: bac_trung_bo
+  publisher: NTM Ha Tinh
+  source_tier: 1
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/phong-tru-co-dai-cho-lua-gieo-sa-vu-dong-xuan-109014.html
+  discovered_from: hatinh_khcn
+  discovered_anchor: Phòng trừ cỏ dại cho lúa gieo sạ vụ Đông Xuân
+- id: lua__cay_lua_bang_may_giai_phap
+  crop: lua
+  region: bac_trung_bo
+  publisher: NTM Ha Tinh
+  source_tier: 1
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cay-lua-bang-may-giai-phap-san-xuat-lua-thich-ung-voi-dieu-kien-bien-doi-khi-hau-106269.html
+  discovered_from: hatinh_khcn
+  discovered_anchor: Cấy lúa bằng máy - Giải pháp sản xuất lúa thích ứng với điều kiện biến đổi khí hậu (18/12/2020)
+- id: lua__ung_dung_nong_nghiep_cong_nghe
+  crop: lua
+  region: bac_trung_bo
+  publisher: NTM Ha Tinh
+  source_tier: 1
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ung-dung-nong-nghiep-cong-nghe-cao-trong-san-xuat-lua-102217.html
+  discovered_from: hatinh_khcn
+  discovered_anchor: Ứng dụng nông nghiệp công nghệ cao trong sản xuất lúa (23/10/2020)
+- id: dua_chuot__dua_chuot_nhat_ban_trong_nha
+  crop: dua_chuot
+  region: bac_trung_bo
+  publisher: NTM Ha Tinh
+  source_tier: 1
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/dua-chuot-nhat-ban-trong-nha-luoi-chat-luong-cao-nang-suat-vuot-troi-92361.html
+  discovered_from: hatinh_khcn
+  discovered_anchor: Dưa chuột Nhật Bản trồng nhà lưới, chất lượng cao, năng suất vượt trội
+- id: lua__cham_soc_lua_xuan_o_mien
+  crop: lua
+  region: bac_trung_bo
+  publisher: NTM Ha Tinh
+  source_tier: 1
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cham-soc-lua-xuan-o-mien-bac-thich-ung-thoi-tiet-bat-thuong-91604.html
+  discovered_from: hatinh_khcn
+  discovered_anchor: Chăm sóc lúa Xuân ở miền Bắc thích ứng thời tiết bất thường (06/04/2020)
+- id: ca_chua__song_khoe_thu_kha_tien_nho
+  crop: ca_chua
+  region: bac_trung_bo
+  publisher: NTM Ha Tinh
+  source_tier: 1
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Song-khoe-thu-kha-tien-nho-trong-ca-chua-VietGAP-trai-sai-phat-hon-90754.html
+  discovered_from: hatinh_khcn
+  discovered_anchor: Sống khỏe, thu khá tiền nhờ trồng cà chua VietGAP trái sai "phát hờn"
+- id: lua__day_manh_canh_tac_lua_theo
+  crop: lua
+  region: bac_trung_bo
+  publisher: NTM Ha Tinh
+  source_tier: 1
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Day-manh-canh-tac-lua-theo-SRI-IPM-82361.html
+  discovered_from: hatinh_khcn
+  discovered_anchor: Đẩy mạnh canh tác lúa theo SRI, IPM (28/06/2018)
+- id: lua__huong_dan_quy_trinh_ky_thuat
+  crop: lua
+  region: bac_trung_bo
+  publisher: Trung tam Khuyen nong Quang Tri
+  source_tier: 1
+  url: https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/huong-dan-quy-trinh-ky-thuat-trong-ngo-sinh-khoi-tren-dat-lua-chuyen-doi-1305.html
+  discovered_from: quangtri_khkt
+  discovered_anchor: HƯỚNG DẪN QUY TRÌNH KỸ THUẬT TRỒNG NGÔ SINH KHỐI TRÊN ĐẤT LÚA CHUYỂN ĐỔI
+- id: lua__huong_dan_phong_tru_dich_hai
+  crop: lua
+  region: bac_trung_bo
+  publisher: Trung tam Khuyen nong Quang Tri
+  source_tier: 1
+  url: https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/huong-dan-phong-tru-dich-hai-lua-giai-doan-truoc-trong-va-sau-tro-1285.html
+  discovered_from: quangtri_khkt
+  discovered_anchor: HƯỚNG DẪN PHÒNG TRỪ DỊCH HẠI LÚA GIAI ĐOẠN TRƯỚC, TRONG VÀ SAU TRỔ
+- id: lua__danh_gia_mo_hinh_chuyen_doi
+  crop: lua
+  region: bac_trung_bo
+  publisher: Trung tam Khuyen nong Quang Tri
+  source_tier: 1
+  url: https://khuyennong.quangtri.gov.vn/tin-tuc-su-kien/danh-gia-mo-hinh-chuyen-doi-dat-lua-kem-hieu-qua-sang-trong-ngo-sinh-khoi-1323.html
+  discovered_from: quangtri_khkt
+  discovered_anchor: Đánh giá mô hình chuyển đổi đất lúa kém hiệu quả sang trồng ngô sinh khối
+- id: lua__dong_thap_hoi_thao_lien_ket
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/thong-tin-thi-truong/thi-truong-trong-nuoc/dong-thap-hoi-thao-lien-ket-san-xuat-tieu-thu-lua-chat-luong-cao-huong-den-phat-trien-xanh-va-ben-vung-32373.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: thong tin thi truong thi truong trong nuoc dong thap hoi thao lien ket san xuat tieu thu lua chat luong
+    cao huong den phat trien xanh va ben vung 3237
+- id: lua__can_tho_hoi_thao_dau_bo
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/can-tho-hoi-thao-dau-bo-mo-hinh-canh-tac-lua-thong-minh-phat-thai-thap-32371.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: hoat dong khuyen nong chuyen giao tbkt can tho hoi thao dau bo mo hinh canh tac lua thong minh phat thai
+    thap 32371.html
+- id: lua__hai_phong_so_ket_du_an
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/hai-phong-so-ket-du-an-tuoi-uot-kho-xen-ke-awd-thuc-day-san-xuat-lua-giam-phat-thai-32370.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: hoat dong khuyen nong chuyen giao tbkt hai phong so ket du an tuoi uot kho xen ke awd thuc day san xuat
+    lua giam phat thai 32370.html
+- id: lua__phong_tru_sau_cuon_la_nho
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/thien-tai-dich-hai/phong-tru-sau-cuon-la-nho-lua-6-va-mot-so-sinh-vat-gay-hai-cuoi-vu-tren-lua-vu-mua-tai-cac-tinh-thanh-pho-phia-bac-32369.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: thien tai dich hai phong tru sau cuon la nho lua 6 va mot so sinh vat gay hai cuoi vu tren lua vu mua
+    tai cac tinh thanh pho phia bac 32369.html
+- id: lua__de_an_1_trieu_hecta_lua
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/1-trieu-hecta-chuyen-canh-lua-chat-luong-cao/de-an-1-trieu-hecta-lua-chat-luong-cao-ra-soat-quy-hoach-chuan-hoa-ky-thuat-xay-dung-thuong-hieu-hat-gao-xanh-32367.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: '1 trieu hecta chuyen canh lua chat luong cao de an 1 trieu hecta lua chat luong cao ra soat quy hoach
+    chuan hoa ky thuat xay dung thuong hieu hat gao '
+- id: lua__ha_tinh_chu_dong_chay_lut
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/thien-tai-dich-hai/ha-tinh-chu-dong-chay-lut-thu-hoach-som-lua-he-thu-o-vung-ngoai-de-duc-tho-32350.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: thien tai dich hai ha tinh chu dong chay lut thu hoach som lua he thu o vung ngoai de duc tho 32350.html
+- id: lua__nghe_an_hieu_qua_mo_hinh
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/nghe-an-hieu-qua-mo-hinh-chuyen-doi-trong-rau-ram-tren-dat-lua-vu-he-thu-2026-32349.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: hoat dong khuyen nong chuyen giao tbkt nghe an hieu qua mo hinh chuyen doi trong rau ram tren dat lua
+    vu he thu 2026 32349.html
+- id: lua__du_an_trvc_thuc_day_san
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/du-an-trvc-thuc-day-san-xuat-lua-phat-thai-thap-tai-cac-hop-tac-xa-o-an-giang-32313.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: hoat dong khuyen nong chuyen giao tbkt du an trvc thuc day san xuat lua phat thai thap tai cac hop tac
+    xa o an giang 32313.html
+- id: lua__thuy_loi_thong_minh_dieu_kien
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/1-trieu-hecta-chuyen-canh-lua-chat-luong-cao/thuy-loi-thong-minh-dieu-kien-de-de-an-1-trieu-ha-lua-phat-huy-hieu-qua-32286.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: 1 trieu hecta chuyen canh lua chat luong cao thuy loi thong minh dieu kien de de an 1 trieu ha lua phat
+    huy hieu qua 32286.html
+- id: lua__khuyen_nong_can_tho_dong_hanh
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/khuyen-nong-can-tho-dong-hanh-nhan-rong-mo-hinh-canh-tac-lua-thong-minh-giam-phat-thai-32277.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: hoat dong khuyen nong chuyen giao tbkt khuyen nong can tho dong hanh nhan rong mo hinh canh tac lua thong
+    minh giam phat thai 32277.html
+- id: lua__ha_tinh_khan_truong_trien_khai
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/thien-tai-dich-hai/ha-tinh-khan-truong-trien-khai-dong-bo-giai-phap-phong-tru-dich-hai-tren-lua-he-thu-32255.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: thien tai dich hai ha tinh khan truong trien khai dong bo giai phap phong tru dich hai tren lua he thu
+    32255.html
+- id: lua__hai_phong_chuyen_doi_dat_lua
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/chuong-trinh-nganh-nong-nghiep/tai-co-cau-nganh-nong-nghiep/hai-phong-chuyen-doi-dat-lua-kem-hieu-qua-sang-san-xuat-cay-an-qua-gia-tri-cao-32239.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: chuong trinh nganh nong nghiep tai co cau nganh nong nghiep hai phong chuyen doi dat lua kem hieu qua
+    sang san xuat cay an qua gia tri cao 32239.html
+- id: lua__dong_thap_thanh_lap_ban_chi
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/thong-tin-huan-luyen/dong-thap-thanh-lap-ban-chi-dao-thuc-hien-de-an-1-trieu-hec-ta-chuyen-canh-lua-chat-luong-cao-xa-tam-nong-32238.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: hoat dong khuyen nong thong tin huan luyen dong thap thanh lap ban chi dao thuc hien de an 1 trieu hec
+    ta chuyen canh lua chat luong cao xa tam nong 3
+- id: lua__hai_phong_xay_dung_doi_ngu
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/thong-tin-huan-luyen/hai-phong-xay-dung-doi-ngu-giang-vien-nguon-thuc-day-canh-tac-lua-ben-vung-giam-phat-thai-khi-nha-kinh-32221.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: hoat dong khuyen nong thong tin huan luyen hai phong xay dung doi ngu giang vien nguon thuc day canh
+    tac lua ben vung giam phat thai khi nha kinh 3222
+- id: lua__dong_thap_toa_dam_giai_phap
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/thong-tin-huan-luyen/dong-thap-toa-dam-giai-phap-trien-khai-de-an-1-trieu-hec-ta-lua-chat-luong-cao-phat-thai-thap-gan-voi-tang-truong-xanh-32215.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: 'hoat dong khuyen nong thong tin huan luyen dong thap toa dam giai phap trien khai de an 1 trieu hec
+    ta lua chat luong cao phat thai thap gan voi tang '
+- id: lua__ca_mau_hieu_qua_mo_hinh
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/ca-mau-hieu-qua-mo-hinh-lua-huu-co-tom-32206.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: hoat dong khuyen nong chuyen giao tbkt ca mau hieu qua mo hinh lua huu co tom 32206.html
+- id: ca_chua__ca_chua_bi_mo_loi_khoi
+  crop: ca_chua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/khoa-hoc-cong-nghe/khcn-nuoc-ngoai/ca-chua-bi-mo-loi-khoi-nghiep-xanh-cho-nong-dan-tre-zambia-32189.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: khoa hoc cong nghe khcn nuoc ngoai ca chua bi mo loi khoi nghiep xanh cho nong dan tre zambia 32189.html
+- id: lua__chuyen_doi_so_va_quan_ly
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/chuong-trinh-nganh-nong-nghiep/tai-co-cau-nganh-nong-nghiep/chuyen-doi-so-va-quan-ly-phat-thai-nen-tang-phat-trien-vung-lua-chat-luong-cao-phat-thai-thap-32188.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: chuong trinh nganh nong nghiep tai co cau nganh nong nghiep chuyen doi so va quan ly phat thai nen tang
+    phat trien vung lua chat luong cao phat thai t
+- id: lua__hai_phong_ngay_hoi_lua_ruoi
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/thong-tin-huan-luyen/hai-phong-ngay-hoi-lua-ruoi-huu-co-va-xuc-tien-thuong-mai-san-pham-nong-nghiep-san-pham-ocop-nam-2026-32173.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: hoat dong khuyen nong thong tin huan luyen hai phong ngay hoi lua ruoi huu co va xuc tien thuong mai
+    san pham nong nghiep san pham ocop nam 2026 32173
+- id: lua__vinh_long_hoi_thao_chuyen_giao
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/thong-tin-huan-luyen/vinh-long-hoi-thao-chuyen-giao-cong-nghe-san-xuat-lua-ben-vung-va-chu-dong-truyen-thong-phong-tranh-han-xam-nhap-man-32156.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: hoat dong khuyen nong thong tin huan luyen vinh long hoi thao chuyen giao cong nghe san xuat lua ben
+    vung va chu dong truyen thong phong tranh han xam
+- id: lua__dong_thap_san_xuat_lua_sinh
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/chuong-trinh-nganh-nong-nghiep/tai-co-cau-nganh-nong-nghiep/dong-thap-san-xuat-lua-sinh-thai-gop-phan-thuc-hien-de-an-bao-ton-seu-dau-do-32150.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: chuong trinh nganh nong nghiep tai co cau nganh nong nghiep dong thap san xuat lua sinh thai gop phan
+    thuc hien de an bao ton seu dau do 32150.html
+- id: dua_chuot__dat_san_kem_hieu_qua_khoi
+  crop: dua_chuot
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/chuong-trinh-nganh-nong-nghiep/tai-co-cau-nganh-nong-nghiep/dat-san-kem-hieu-qua-khoi-sac-nho-dua-chuot-huu-co-32108.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: chuong trinh nganh nong nghiep tai co cau nganh nong nghiep dat san kem hieu qua khoi sac nho dua chuot
+    huu co 32108.html
+- id: lua__nghe_an_khao_nghiem_giong_lua
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/nghe-an-khao-nghiem-giong-lua-syn12-va-syn8-tai-mot-xa-mien-nui-dac-biet-kho-khan-32102.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: hoat dong khuyen nong chuyen giao tbkt nghe an khao nghiem giong lua syn12 va syn8 tai mot xa mien nui
+    dac biet kho khan 32102.html
+- id: lua__kien_dinh_muc_tieu_va_doi
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/1-trieu-hecta-chuyen-canh-lua-chat-luong-cao/kien-dinh-muc-tieu-va-doi-moi-phuong-thuc-thuc-hien-de-an-mot-trieu-hec-ta-lua-chat-luong-cao-32135.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: 1 trieu hecta chuyen canh lua chat luong cao kien dinh muc tieu va doi moi phuong thuc thuc hien de an
+    mot trieu hec ta lua chat luong cao 32135.html
+- id: lua__ma_khay_may_cay_mo_huong
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/ma-khay-may-cay-mo-huong-san-xuat-lua-hieu-qua-giam-phat-thai-32082.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: hoat dong khuyen nong chuyen giao tbkt ma khay may cay mo huong san xuat lua hieu qua giam phat thai
+    32082.html
+- id: lua__quang_tri_khan_truong_thu_hoach
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/anh-dep-khuyen-nong/quang-tri-khan-truong-thu-hoach-lua-vu-dong-xuan-32078.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: anh dep khuyen nong quang tri khan truong thu hoach lua vu dong xuan 32078.html
+- id: ca_chua__lien_ket_san_xuat_ca_chua
+  crop: ca_chua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/lien-ket-san-xuat-ca-chua-boxer-huong-di-ben-vung-cho-dong-bao-dan-toc-thieu-so-lam-dong-32072.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: hoat dong khuyen nong chuyen giao tbkt lien ket san xuat ca chua boxer huong di ben vung cho dong bao
+    dan toc thieu so lam dong 32072.html
+- id: lua__nong_dan_ha_tinh_xuyen_le
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/anh-dep-khuyen-nong/nong-dan-ha-tinh-xuyen-le-thu-hoach-lua-xuan-32064.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: anh dep khuyen nong nong dan ha tinh xuyen le thu hoach lua xuan 32064.html
+- id: lua__dak_lak_buoc_dot_pha_tu
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/chuong-trinh-nganh-nong-nghiep/tai-co-cau-nganh-nong-nghiep/dak-lak-buoc-dot-pha-tu-chuyen-doi-kep-trong-lien-ket-chuoi-gia-tri-lua-gao-ea-sup-tren-nen-tang-so-noi-vung-bien-gioi-32044.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: chuong trinh nganh nong nghiep tai co cau nganh nong nghiep dak lak buoc dot pha tu chuyen doi kep trong
+    lien ket chuoi gia tri lua gao ea sup tren ne
+- id: lua__nguoi_giu_lua_lang_nghe_lam
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/guong-san-xuat-gioi/nguoi-giu-lua-lang-nghe-lam-banh-da-vung-cat-ngan-32038.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: guong san xuat gioi nguoi giu lua lang nghe lam banh da vung cat ngan 32038.html
+- id: lua__gia_lai_mo_hinh_canh_tac
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/gia-lai-mo-hinh-canh-tac-lua-huu-co-nang-cao-gia-tri-kinh-te-va-bao-ve-moi-truong-32035.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: hoat dong khuyen nong chuyen giao tbkt gia lai mo hinh canh tac lua huu co nang cao gia tri kinh te va
+    bao ve moi truong 32035.html
+- id: lua__vinh_long_mo_hinh_canh_tac
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/vinh-long-mo-hinh-canh-tac-lua-ben-vung-bayer-forward-farming-tang-nang-suat-giam-chi-phi-huong-toi-phat-thai-thap-32034.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: hoat dong khuyen nong chuyen giao tbkt vinh long mo hinh canh tac lua ben vung bayer forward farming
+    tang nang suat giam chi phi huong toi phat thai t
+- id: lua__hai_phong_mo_rong_mo_hinh
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/chuong-trinh-nganh-nong-nghiep/tai-co-cau-nganh-nong-nghiep/hai-phong-mo-rong-mo-hinh-san-xuat-lua-giam-phat-thai-huong-toi-nong-nghiep-xanh-ben-vung-32003.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: 'chuong trinh nganh nong nghiep tai co cau nganh nong nghiep hai phong mo rong mo hinh san xuat lua giam
+    phat thai huong toi nong nghiep xanh ben vung '
+- id: lua__nong_dan_lao_cai_chu_dong
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/thien-tai-dich-hai/nong-dan-lao-cai-chu-dong-canh-dong-kiem-soat-sau-benh-tren-lua-31979.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: thien tai dich hai nong dan lao cai chu dong canh dong kiem soat sau benh tren lua 31979.html
+- id: lua__an_giang_ung_dung_cong_nghe
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/an-giang-ung-dung-cong-nghe-cao-uu-tien-su-dung-phan-huu-co-vao-canh-tac-lua-cho-nhieu-loi-ich-31976.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: hoat dong khuyen nong chuyen giao tbkt an giang ung dung cong nghe cao uu tien su dung phan huu co vao
+    canh tac lua cho nhieu loi ich 31976.html
+- id: lua__canh_tac_lua_va_ca_phe
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/thu-vien-khuyen-nong/thu-vien-sach-kn/canh-tac-lua-va-ca-phe-giam-nhe-tac-dong-den-bien-doi-khi-hau-31971.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: thu vien khuyen nong thu vien sach kn canh tac lua va ca phe giam nhe tac dong den bien doi khi hau 31971.html
+- id: dua_chuot__trong_dua_chuot_huu_co_trong
+  crop: dua_chuot
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/guong-san-xuat-gioi/trong-dua-chuot-huu-co-trong-nha-mang-cho-hieu-qua-kinh-te-cao-31956.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: guong san xuat gioi trong dua chuot huu co trong nha mang cho hieu qua kinh te cao 31956.html
+- id: lua__tuyen_quang_tang_cuong_phong_tru
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/thien-tai-dich-hai/tuyen-quang-tang-cuong-phong-tru-benh-dao-on-bao-ve-lua-vu-xuan-2026-31951.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: thien tai dich hai tuyen quang tang cuong phong tru benh dao on bao ve lua vu xuan 2026 31951.html
+- id: lua__ngay_hoi_nong_dan_trong_lua
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/thong-tin-huan-luyen/ngay-hoi-nong-dan-trong-lua-dbscl-nam-2026-31928.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: hoat dong khuyen nong thong tin huan luyen ngay hoi nong dan trong lua dbscl nam 2026 31928.html
+- id: lua__lao_cai_soi_noi_hoi_thi
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/thong-tin-huan-luyen/lao-cai-soi-noi-hoi-thi-cay-lua-ky-vong-mot-vu-mua-thang-loi-31922.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: hoat dong khuyen nong thong tin huan luyen lao cai soi noi hoi thi cay lua ky vong mot vu mua thang loi
+    31922.html
+- id: lua__an_giang_canh_dong_lon_dap
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/1-trieu-hecta-chuyen-canh-lua-chat-luong-cao/an-giang-canh-dong-lon-dap-ung-vung-nguyen-lieu-31909.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: 1 trieu hecta chuyen canh lua chat luong cao an giang canh dong lon dap ung vung nguyen lieu 31909.html
+- id: lua__an_giang_gan_5_nghin_nong
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/1-trieu-hecta-chuyen-canh-lua-chat-luong-cao/an-giang-gan-5-nghin-nong-dan-tham-du-trien-khai-quy-trinh-san-xuat-lua-chat-luong-cao-phat-thai-thap-31842.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: 1 trieu hecta chuyen canh lua chat luong cao an giang gan 5 nghin nong dan tham du trien khai quy trinh
+    san xuat lua chat luong cao phat thai thap 318
+- id: lua__gia_lai_tham_canh_lua_huu
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khuyen nong Quoc gia
+  source_tier: 1
+  url: https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/gia-lai-tham-canh-lua-huu-co-tang-chat-luong-tang-loi-nhuan-31790.html
+  discovered_from: khuyennongvn_sitemap
+  discovered_anchor: hoat dong khuyen nong chuyen giao tbkt gia lai tham canh lua huu co tang chat luong tang loi nhuan 31790.html
