@@ -1,0 +1,72 @@
+# Từ địa phương và từ đồng nghĩa — LỚP 2 của xử lý tiếng Việt (§13.2)
+#
+# NGUYÊN TẮC: giống abbreviations.yaml — người viết tay, không để LLM tự sinh.
+#
+# GIỚI HẠN QUAN TRỌNG:
+#   Danh sách này CHƯA đầy đủ và CHƯA được đối chiếu với cách nói thật của
+#   nông dân từng vùng. Chỉ chứa những cặp từ đồng nghĩa phổ biến, chắc chắn.
+#   Trạng thái: [ASM] — giả định của đội.
+#
+#   Từ địa phương thật chỉ biết được từ hai nguồn:
+#     a) log hội thoại thật của NextFarm (§37.6 mục 7)
+#     b) chính các tài liệu đã crawl — mỗi vùng dùng từ khác nhau
+#   Trước khi có (a), tuyệt đối không suy đoán thêm từ địa phương.
+#
+# CẤU TRÚC: canonical là dạng chuẩn dùng trong knowledge base.
+
+terms:
+  # --- Ba cây trong phạm vi PoC ---
+  - canonical: dưa chuột
+    variants: [dưa leo]
+    region_note: "dưa leo là cách gọi phổ biến ở miền Nam"
+
+  - canonical: lúa
+    variants: [cây lúa]
+    note: >-
+      KHÔNG gộp "thóc" và "gạo" vào đây. Lúa là cây, thóc là hạt sau thu
+      hoạch, gạo là hạt đã xay xát. Gộp lại sẽ làm retrieval trả về tài liệu
+      bảo quản/chế biến khi người dùng hỏi về canh tác.
+
+  - canonical: cà chua
+    variants: []
+    note: "chưa ghi nhận biến thể địa phương nào trong tài liệu đã crawl"
+
+  # --- Thao tác canh tác ---
+  - canonical: gieo sạ
+    variants: [sạ, gieo thẳng]
+    region_note: "sạ phổ biến ở đồng bằng sông Cửu Long"
+
+  - canonical: cấy
+    variants: [cấy lúa, cấy mạ]
+
+  - canonical: bón lót
+    variants: []
+    note: "bón trước khi trồng"
+
+  - canonical: bón thúc
+    variants: []
+    note: "bón trong quá trình sinh trưởng"
+
+  - canonical: lên luống
+    variants: [lên líp, làm luống]
+    region_note: "líp là cách gọi ở miền Nam"
+
+  # --- Vật tư ---
+  - canonical: phân đạm
+    variants: [urê, ure, phân ure]
+    note: >-
+      CẨN TRỌNG: urê là một loại phân đạm cụ thể, không hoàn toàn đồng nghĩa
+      với "phân đạm". Chỉ dùng để mở rộng truy vấn, KHÔNG dùng để thay thế
+      trong câu trả lời.
+
+  - canonical: phân lân
+    variants: [supe lân, lân supe]
+
+  - canonical: phân kali
+    variants: [kali, KCl]
+
+  - canonical: thuốc bảo vệ thực vật
+    variants: [thuốc BVTV, thuốc sâu, thuốc trừ sâu]
+    note: >-
+      "thuốc sâu" là cách nông dân hay nói nhưng nghĩa hẹp hơn. Câu hỏi trúng
+      nhóm này luôn được xếp vào high-risk (§19 case C4).
