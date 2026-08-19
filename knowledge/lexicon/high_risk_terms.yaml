@@ -1,54 +1,77 @@
-# Từ khoá nội dung rủi ro cao — quy chuẩn v2.0 §19 case C4 và §24.4
+# Từ khoá nội dung rủi ro — quy chuẩn v2.0 §19 case C4 và §24.4
 #
-# TÁC DỤNG (hai chỗ, đều là hàng rào an toàn, không phải bộ lọc nội dung):
+# HAI MỨC, HAI HỆ QUẢ KHÁC NHAU
 #
-#   1. Lúc chunking: chunk trúng từ khoá ở đây bị đánh cờ is_high_risk và
-#      phải DUYỆT LẺ TỪNG CHUNK, không được duyệt gộp theo tài liệu (§24.4).
-#   2. Lúc trả lời: câu trả lời trúng nhóm này bắt buộc phải qua Grounding
-#      Validator tầng 2, và bắt buộc kèm cảnh báo. Thiếu evidence → abstain
-#      tuyệt đối, không có ngoại lệ.
+#   high_risk_terms  → chunk PHẢI ĐƯỢC DUYỆT LẺ TỪNG CHUNK trước khi index
+#                      (§24.4). Đây là nội dung mà sai một con số là hỏng
+#                      mùa vụ hoặc gây độc: tên thuốc, hoạt chất, liều lượng,
+#                      nồng độ, thời gian cách ly.
 #
-# NGUYÊN TẮC: thà đánh cờ thừa còn hơn bỏ sót. Đánh cờ thừa chỉ tốn thêm thời
-# gian duyệt; bỏ sót thì bot có thể đưa liều lượng thuốc sai cho nông dân.
+#   caution_terms    → chunk vẫn duyệt gộp theo tài liệu như bình thường,
+#                      nhưng câu trả lời dùng chunk này BẮT BUỘC kèm câu
+#                      cảnh báo (§19 C4). Đây là từ chỉ CHỦ ĐỀ sâu bệnh —
+#                      bản thân nó không mang con số nguy hiểm.
 #
-# File này KHÔNG chứa tên hoạt chất cụ thể hay liều lượng — chỉ chứa từ khoá
-# nhận diện chủ đề. Mọi con số vẫn phải đến từ tài liệu đã crawl.
+# VÌ SAO PHẢI TÁCH
+#
+# Bản đầu gộp chung một danh sách rộng. Đo trên 292 chunk thật:
+#   - danh sách rộng  → 96 chunk phải duyệt lẻ (33%)
+#   - danh sách hẹp   → 34 chunk (12%)
+# Chênh lệch do "sâu bệnh" (45 chunk) và "phòng trừ" (31 chunk) — hai từ chỉ
+# chủ đề, gần như tài liệu canh tác nào cũng có.
+#
+# Bắt duyệt lẻ 96 chunk là tiêu mất ~1,6 giờ trong ngân sách duyệt ~10 giờ của
+# đội một người (ASM-05, §27.4), mà không đổi lại an toàn tương xứng: một
+# chunk chỉ nói "cần phòng trừ sâu bệnh kịp thời" không chứa con số nào để bịa.
+#
+# Nguyên tắc "thà đánh cờ thừa còn hơn bỏ sót" vẫn giữ nguyên — nhưng đánh cờ
+# thừa ở mức CẢNH BÁO, không phải ở mức BẮT DUYỆT LẺ.
+#
+# File này KHÔNG chứa tên hoạt chất cụ thể hay liều lượng. Mọi con số vẫn phải
+# đến từ tài liệu đã crawl.
 
+# ---------------------------------------------------------------------
+# Mức 1 — bắt buộc duyệt lẻ từng chunk
+# ---------------------------------------------------------------------
 high_risk_terms:
-  # --- Thuốc và hoá chất ---
-  - thuốc
+  # Thuốc và hoá chất gọi đích danh
   - thuốc bảo vệ thực vật
-  - thuốc BVTV
+  - thuốc bvtv
   - thuốc trừ sâu
   - thuốc trừ bệnh
   - thuốc trừ cỏ
   - thuốc diệt cỏ
+  - phun thuốc
   - hoạt chất
   - chế phẩm
   - hoá chất
-  - vôi bột
 
-  # --- Liều lượng và cách dùng ---
+  # Liều lượng và cách dùng — sai là gây độc
   - liều lượng
   - nồng độ
   - pha loãng
-  - phun
-  - phun thuốc
-  - lần phun
   - thời gian cách ly
   - cách ly
   - dư lượng
   - ngộ độc
 
-  # --- Cụm chỉ dẫn định lượng nguy hiểm nếu sai ---
+  # Cụm chỉ dẫn định lượng
   - ml/lít
   - g/lít
   - cc/bình
   - gói/bình
 
-  # --- Sinh vật gây hại (câu hỏi thường dẫn tới hỏi thuốc) ---
+# ---------------------------------------------------------------------
+# Mức 2 — chỉ bắt buộc kèm cảnh báo trong câu trả lời
+# ---------------------------------------------------------------------
+caution_terms:
   - sâu bệnh
   - dịch hại
   - phòng trừ
   - trừ sâu
   - trừ bệnh
+  - phun
+  - vôi bột
+  - bệnh héo xanh
+  - bệnh mốc sương
+  - bệnh đạo ôn

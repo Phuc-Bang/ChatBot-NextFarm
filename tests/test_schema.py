@@ -74,11 +74,14 @@ def them_chunk(cur, did, **kw):
     cid = ma()
     cur.execute(
         "INSERT INTO chunk (chunk_id, document_id, ordinal, text, text_unaccent, "
-        "is_high_risk, reviewed_high_risk, approved) "
-        "VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
+        "is_high_risk, needs_caution, reviewed_high_risk, approved) "
+        "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
         (cid, did, kw.get("ordinal", 1), kw.get("text", "Cà chua cần đất tơi xốp"),
          kw.get("text_unaccent", "ca chua can dat toi xop"),
-         kw.get("is_high_risk", False), kw.get("reviewed_high_risk", False),
+         kw.get("is_high_risk", False),
+         # rui ro cao thi duong nhien phai kem canh bao
+         kw.get("needs_caution", kw.get("is_high_risk", False)),
+         kw.get("reviewed_high_risk", False),
          kw.get("approved", True)))
     return cid
 
@@ -176,6 +179,16 @@ def test_khong_nhan_cay_ngoai_pham_vi(conn):
         sid = them_source(cur)
         with pytest.raises(psycopg.errors.CheckViolation):
             them_document(cur, sid, approved=False, crop="ca_phe")
+
+
+def test_rui_ro_cao_ma_khong_kem_canh_bao_bi_chan(conn):
+    """Muc 19 case C4: noi dung rui ro cao luon phai kem canh bao."""
+    with conn.cursor() as cur:
+        sid = them_source(cur)
+        did = them_document(cur, sid, approved=True)
+        with pytest.raises(psycopg.errors.CheckViolation):
+            them_chunk(cur, did, is_high_risk=True, needs_caution=False,
+                       reviewed_high_risk=True, approved=True)
 
 
 def test_fact_khoang_gia_tri_nguoc_bi_chan(conn):
