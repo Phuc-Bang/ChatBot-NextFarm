@@ -25,3 +25,30 @@ seeds:
     region: trung_du_mien_nui
     source_tier: 1
     url: https://sonnmt.laichau.gov.vn/thu-vien/tai-lieu/
+
+  # Bổ sung đợt 2 — chuyên mục kỹ thuật, không phải trang tin hoạt động.
+  # Ba seed đợt 1 là cổng tin tức nên thu về chủ yếu là tin, không phải
+  # quy trình canh tác (xem docs/reports/P1_crawl_report.md mục 3).
+  - id: lamdong_ki_thuat_trong_rau
+    publisher: Khuyen nong Lam Dong
+    region: tay_nguyen
+    source_tier: 1
+    url: http://khuyennong.lamdong.gov.vn/ky-thuat-trong-trot/ki-thuat-trong-rau
+
+  - id: lamdong_ttbvtv_quy_trinh
+    publisher: Chi cuc Trong trot va BVTV Lam Dong
+    region: tay_nguyen
+    source_tier: 1
+    url: https://ttbvtv.lamdong.gov.vn/chi-dao-san-xuat/quy-trinh-trong-trot
+
+  - id: quangtri_khkt
+    publisher: Trung tam Khuyen nong Quang Tri
+    region: bac_trung_bo
+    source_tier: 1
+    url: https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/
+
+  - id: ninhbinh_gntt_khuyennong
+    publisher: Khuyen nong Ninh Binh
+    region: dong_bang_song_hong
+    source_tier: 1
+    url: https://gntt.ninhbinh.gov.vn/khuyen-nong/

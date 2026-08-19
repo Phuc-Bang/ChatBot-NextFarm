@@ -1,5 +1,5 @@
 {
-  "discovered_at": "2026-08-19T12:04:49.268796+00:00",
+  "discovered_at": "2026-08-19T12:11:56.978685+00:00",
   "seeds": [
     {
       "seed_id": "ninhbinh_kht",
@@ -18,6 +18,27 @@
       "status": "ok",
       "found": 0,
       "new": 0
+    },
+    {
+      "seed_id": "lamdong_ki_thuat_trong_rau",
+      "status": "failed",
+      "error": "HTTP 404"
+    },
+    {
+      "seed_id": "lamdong_ttbvtv_quy_trinh",
+      "status": "failed",
+      "error": "TooManyRedirects: Exceeded 30 redirects."
+    },
+    {
+      "seed_id": "quangtri_khkt",
+      "status": "ok",
+      "found": 22,
+      "new": 22
+    },
+    {
+      "seed_id": "ninhbinh_gntt_khuyennong",
+      "status": "failed",
+      "error": "HTTP 404"
     }
   ],
   "candidates": [
@@ -270,6 +291,204 @@
       "crop_guess": null,
       "seed_id": "hatinh_khcn",
       "publisher": "NTM Ha Tinh",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/nhen-do-hai-san-va-bien-phap-phong-tru-hieu-qua-1306.html",
+      "anchor": "NHỆN ĐỎ HẠI SẮN VÀ BIỆN PHÁP PHÒNG TRỪ HIỆU QUẢ",
+      "crop_guess": null,
+      "seed_id": "quangtri_khkt",
+      "publisher": "Trung tam Khuyen nong Quang Tri",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/huong-dan-quy-trinh-ky-thuat-trong-ngo-sinh-khoi-tren-dat-lua-chuyen-doi-1305.html",
+      "anchor": "HƯỚNG DẪN QUY TRÌNH KỸ THUẬT TRỒNG NGÔ SINH KHỐI TRÊN ĐẤT LÚA CHUYỂN ĐỔI",
+      "crop_guess": "lua",
+      "seed_id": "quangtri_khkt",
+      "publisher": "Trung tam Khuyen nong Quang Tri",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/hieu-qua-cay-muop-dang-tren-dat-cat-1293.html",
+      "anchor": "HIỆU QUẢ CÂY MƯỚP ĐẮNG TRÊN ĐẤT CÁT",
+      "crop_guess": null,
+      "seed_id": "quangtri_khkt",
+      "publisher": "Trung tam Khuyen nong Quang Tri",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/ban-tin-dich-vu-khi-hau-nong-nghiep-thang-5-2026-1289.html",
+      "anchor": "Bản tin dịch vụ khí hậu Nông nghiệp tháng 5/2026",
+      "crop_guess": null,
+      "seed_id": "quangtri_khkt",
+      "publisher": "Trung tam Khuyen nong Quang Tri",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/huong-dan-phong-tru-dich-hai-lua-giai-doan-truoc-trong-va-sau-tro-1285.html",
+      "anchor": "HƯỚNG DẪN PHÒNG TRỪ DỊCH HẠI LÚA GIAI ĐOẠN TRƯỚC, TRONG VÀ SAU TRỔ",
+      "crop_guess": "lua",
+      "seed_id": "quangtri_khkt",
+      "publisher": "Trung tam Khuyen nong Quang Tri",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/chuan-bi-dieu-kien-chan-nuoi-cho-vu-san-xuat-moi-1261.html",
+      "anchor": "Chuẩn bị điều kiện chăn nuôi cho vụ sản xuất mới",
+      "crop_guess": null,
+      "seed_id": "quangtri_khkt",
+      "publisher": "Trung tam Khuyen nong Quang Tri",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/huong-dan-su-dung-thuoc-tru-co-an-toan-trong-vu-dong-xuan-2025-2026-1260.html",
+      "anchor": "HƯỚNG DẪN SỬ DỤNG THUỐC TRỪ CỎ AN TOÀN TRONG VỤ ĐÔNG XUÂN 2025-2026",
+      "crop_guess": null,
+      "seed_id": "quangtri_khkt",
+      "publisher": "Trung tam Khuyen nong Quang Tri",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/to-roi-1246.html",
+      "anchor": "Tăng cường khả năng chống chịu cho các hộ sản xuất nông nghiệp nhỏ dễ bị tổn thương trước tác động của biến đổi khí hậu thông qua các giải pháp thích ứng dựa vào thiên nhiên có trách nhiệm giới (NbSA) tại Hà Tĩnh và Quảng Trị",
+      "crop_guess": null,
+      "seed_id": "quangtri_khkt",
+      "publisher": "Trung tam Khuyen nong Quang Tri",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/day-manh-cong-tac-phap-che-trong-hoat-dong-lam-nghiep-nham-bao-ve-rung-ben-vung-1239.html",
+      "anchor": "Đẩy mạnh công tác pháp chế trong hoạt động lâm nghiệp nhằm bảo vệ rừng bền vững",
+      "crop_guess": null,
+      "seed_id": "quangtri_khkt",
+      "publisher": "Trung tam Khuyen nong Quang Tri",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/nguon-luc-don-bay-cho-cong-tac-quan-ly-bao-ve-rung-o-dakrong-1237.html",
+      "anchor": "Nguồn lực “đòn bẩy” cho công tác quản lý, bảo vệ rừng ở Đakrông",
+      "crop_guess": null,
+      "seed_id": "quangtri_khkt",
+      "publisher": "Trung tam Khuyen nong Quang Tri",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/xay-dung-chi-dan-dia-ly-cho-nong-san-dia-phuong-1236.html",
+      "anchor": "Xây dựng chỉ dẫn địa lý cho nông sản địa phương",
+      "crop_guess": null,
+      "seed_id": "quangtri_khkt",
+      "publisher": "Trung tam Khuyen nong Quang Tri",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/phien-cho-khuyen-nong-noi-ket-noi-va-quang-ba-san-pham-nong-nghiep-dia-phuong-1235.html",
+      "anchor": "“Phiên chợ khuyến nông” - nơi kết nối và quảng bá sản phẩm nông nghiệp địa phương",
+      "crop_guess": null,
+      "seed_id": "quangtri_khkt",
+      "publisher": "Trung tam Khuyen nong Quang Tri",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/giai-phap-phat-trien-ben-vung-cay-ca-phe-quang-tri-1234.html",
+      "anchor": "Giải pháp phát triển bền vững cây cà phê Quảng Trị",
+      "crop_guess": null,
+      "seed_id": "quangtri_khkt",
+      "publisher": "Trung tam Khuyen nong Quang Tri",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/tang-cuong-tuyen-truyen-chong-khai-thac-iuu-1231.html",
+      "anchor": "Tăng cường tuyên truyền chống khai thác IUU",
+      "crop_guess": null,
+      "seed_id": "quangtri_khkt",
+      "publisher": "Trung tam Khuyen nong Quang Tri",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/phat-trien-ho-tieu-huu-co-co-hoi-va-thach-thuc-1230.html",
+      "anchor": "Phát triển hồ tiêu hữu cơ CƠ HỘI VÀ THÁCH THỨC",
+      "crop_guess": null,
+      "seed_id": "quangtri_khkt",
+      "publisher": "Trung tam Khuyen nong Quang Tri",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/ung-dung-che-pham-sinh-hoc-de-xu-ly-cac-vung-dat-bi-boi-lap-sau-bao-lu-1226.html",
+      "anchor": "Ứng dụng chế phẩm sinh học để xử lý các vùng đất bị bồi lấp sau bão lũ",
+      "crop_guess": null,
+      "seed_id": "quangtri_khkt",
+      "publisher": "Trung tam Khuyen nong Quang Tri",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/huong-dan-bien-phap-phong-tru-tong-hop-benh-kham-la-san-nien-vu-2026-1225.html",
+      "anchor": "Hướng dẫn biện pháp phòng trừ tổng hợp bệnh khảm lá sắn niên vụ 2026",
+      "crop_guess": null,
+      "seed_id": "quangtri_khkt",
+      "publisher": "Trung tam Khuyen nong Quang Tri",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/chu-dong-ung-pho-voi-mua-mua-bao-trong-nuoi-trong-thuy-san-nam-2025-1224.html",
+      "anchor": "Chủ động ứng phó với mùa mưa, bão trong nuôi trồng thủy sản năm 2025",
+      "crop_guess": null,
+      "seed_id": "quangtri_khkt",
+      "publisher": "Trung tam Khuyen nong Quang Tri",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/tinh-quang-tri-day-manh-phat-trien-ca-phe-chat-luong-1106.html",
+      "anchor": "TỈNH QUẢNG TRỊ ĐẨY MẠNH PHÁT TRIỂN CÀ PHÊ CHẤT LƯỢNG",
+      "crop_guess": null,
+      "seed_id": "quangtri_khkt",
+      "publisher": "Trung tam Khuyen nong Quang Tri",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.quangtri.gov.vn/nvlaws/Cong-van/Huong-dan-xay-dung-du-toan-ngan-sach-nha-nuoc-nam-2027-3855/",
+      "anchor": "Hướng dẫn xây dựng dự toán ngân sách nhà nước năm 2027",
+      "crop_guess": null,
+      "seed_id": "quangtri_khkt",
+      "publisher": "Trung tam Khuyen nong Quang Tri",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.quangtri.gov.vn/nvlaws/Thong-bao/THONG-BAO-Tinh-hinh-san-xuat-va-sinh-vat-gay-hai-cay-trong-Tu-ngay-20-5-27-5-2026-3853/",
+      "anchor": "THÔNG BÁO Tình hình sản xuất và sinh vật gây hại cây trồng (Từ ngày 20/5 - 27/5/2026)",
+      "crop_guess": null,
+      "seed_id": "quangtri_khkt",
+      "publisher": "Trung tam Khuyen nong Quang Tri",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.quangtri.gov.vn/nvlaws/Quyet-dinh/QUYET-DINH-Ban-hanh-cac-dinh-muc-kinh-te-ky-thuat-khuyen-nong-3844/",
+      "anchor": "QUYẾT ĐỊNH Ban hành các định mức kinh tế kỹ thuật khuyến nông",
+      "crop_guess": null,
+      "seed_id": "quangtri_khkt",
+      "publisher": "Trung tam Khuyen nong Quang Tri",
       "region_hint": "bac_trung_bo",
       "source_tier": 1
     }

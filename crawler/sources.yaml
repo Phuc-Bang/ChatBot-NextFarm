@@ -63,6 +63,58 @@ sources:
     source_tier: 1
     url: https://sonnmt.laichau.gov.vn/thu-vien/tai-lieu/ky-thuat-trong-va-cham-soc-cay-dua-chuot-vu-xuan-he.html
 
+  # Bổ sung đợt 2 — tìm qua công cụ tìm kiếm, CHƯA kiểm chứng cho tới khi
+  # crawl.py chạy thật. Nguồn nào lỗi thì để nguyên là lỗi.
+  - id: lamdong_ca_chua_ghep
+    crop: ca_chua
+    region: tay_nguyen
+    publisher: Khuyen nong Lam Dong
+    source_tier: 1
+    url: http://khuyennong.lamdong.gov.vn/ky-thuat-trong-trot/ki-thuat-trong-rau/797-ky-thuat-san-xuat-cay-giong-ca-chua-ghep
+
+  # Nguồn PDF đầu tiên — dùng để kiểm chứng DEC-027 trên tài liệu thật
+  - id: lamdong_ca_chua_cherry_pdf
+    crop: ca_chua
+    region: tay_nguyen
+    publisher: Khuyen nong Lam Dong
+    source_tier: 1
+    url: http://khuyennong.lamdong.gov.vn/attachments/article/2876/QUY%20TRINH%20CA%20CHUA%20CHERRY.FINAL%20BAN%20HANH.pdf
+
+  - id: lamdong_ttbvtv_ca_chua
+    crop: ca_chua
+    region: tay_nguyen
+    publisher: Chi cuc Trong trot va BVTV Lam Dong
+    source_tier: 1
+    url: https://ttbvtv.lamdong.gov.vn/chi-dao-san-xuat/quy-trinh-trong-trot/cay-rau-hoa-3/690-quy-trinh-ky-thuat-trong-cay-ca-chua
+
+  - id: ninhbinh_gntt_ca_chua
+    crop: ca_chua
+    region: dong_bang_song_hong
+    publisher: Khuyen nong Ninh Binh
+    source_tier: 1
+    url: https://gntt.ninhbinh.gov.vn/khuyen-nong/ky-thuat-trong-cay-ca-chua-458.html
+
+  - id: hcm_dost_ca_chua_bi
+    crop: ca_chua
+    region: dong_nam_bo
+    publisher: So KH&CN TP Ho Chi Minh
+    source_tier: 1
+    url: https://dost.hochiminhcity.gov.vn/mo-hinh-ung-dung-trong-nong-nghiep/quy-trinh-ky-thuat-trong-ca-chua-bi-solanum-lycopersicum-l/
+
+  - id: bacgiang_ntm_ca_chua_bi
+    crop: ca_chua
+    region: trung_du_mien_nui
+    publisher: NTM Bac Giang
+    source_tier: 1
+    url: https://nongthonmoi.bacgiang.gov.vn/chi-tiet-tin-tuc/-/asset_publisher/NcYe9bmb4WZ5/content/ky-thuat-trong-ca-chua-bi
+
+  - id: phanbonquocgia_ca_chua
+    crop: ca_chua
+    region: toan_quoc
+    publisher: Trung tam Khao kiem nghiem Phan bon Quoc gia
+    source_tier: 1
+    url: https://phanbonquocgia.gov.vn/ky-thuat-trong-va-bon-phan-cho-cay-ca-chua/
+
   # ---------------- Lúa ----------------
   - id: gso_lua_dong_xuan_2024
     crop: lua
@@ -70,3 +122,10 @@ sources:
     publisher: Tong cuc Thong ke
     source_tier: 1
     url: https://www.gso.gov.vn/tin-tuc-thong-ke/2024/07/ket-qua-san-xuat-vu-dong-xuan-nam-2024/
+
+  - id: quangtri_lua_ngap_kho_xen_ke
+    crop: lua
+    region: bac_trung_bo
+    publisher: Trung tam Khuyen nong Quang Tri
+    source_tier: 1
+    url: https://khuyennong.quangtri.gov.vn/tin-hoat-dong-nganh/trien-khai-thi-diem-mo-hinh-tuoi-ngap-kho-xen-ke-trong-canh-tac-lua-thich-ung-voi-bien-doi-khi-hau-1104.html
