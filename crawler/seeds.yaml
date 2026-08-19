@@ -6,29 +6,45 @@
 #
 # region ở đây là GỢI Ý cho người duyệt, không phải kết luận: một trang
 # khuyến nông tỉnh vẫn có thể đăng lại tài liệu của vùng khác.
+#
+# page_pattern: mẫu URL trang thứ N, dùng {page}. Mẫu này được xác minh bằng
+# cách so tập liên kết bài viết giữa trang 1 và trang 2 — không suy đoán từ
+# hình dạng URL. Seed nào không có page_pattern thì chỉ đọc một trang.
+# Seed nào giữ lại dù đang lỗi là để mỗi lần chạy đều kiểm chứng lại.
 
 seeds:
+  # ---- Đã xác minh phân trang ----
   - id: ninhbinh_kht
     publisher: Khuyen nong Ninh Binh
     region: dong_bang_song_hong
     source_tier: 1
     url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/
+    page_pattern: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/page-{page}/
+    max_pages: 25
 
   - id: hatinh_khcn
     publisher: NTM Ha Tinh
     region: bac_trung_bo
     source_tier: 1
     url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/
+    page_pattern: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/page-{page}/
+    max_pages: 40      # trang cuối là 153, lấy dần theo đợt
 
+  - id: quangtri_khkt
+    publisher: Trung tam Khuyen nong Quang Tri
+    region: bac_trung_bo
+    source_tier: 1
+    url: https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/
+    page_pattern: https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/page/{page}
+    max_pages: 25
+
+  # ---- Chưa có phân trang / đang lỗi, giữ để kiểm chứng lại mỗi lần chạy ----
   - id: laichau_tailieu
     publisher: So NN&MT Lai Chau
     region: trung_du_mien_nui
     source_tier: 1
     url: https://sonnmt.laichau.gov.vn/thu-vien/tai-lieu/
 
-  # Bổ sung đợt 2 — chuyên mục kỹ thuật, không phải trang tin hoạt động.
-  # Ba seed đợt 1 là cổng tin tức nên thu về chủ yếu là tin, không phải
-  # quy trình canh tác (xem docs/reports/P1_crawl_report.md mục 3).
   - id: lamdong_ki_thuat_trong_rau
     publisher: Khuyen nong Lam Dong
     region: tay_nguyen
@@ -41,14 +57,19 @@ seeds:
     source_tier: 1
     url: https://ttbvtv.lamdong.gov.vn/chi-dao-san-xuat/quy-trinh-trong-trot
 
-  - id: quangtri_khkt
-    publisher: Trung tam Khuyen nong Quang Tri
-    region: bac_trung_bo
-    source_tier: 1
-    url: https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/
-
   - id: ninhbinh_gntt_khuyennong
     publisher: Khuyen nong Ninh Binh
     region: dong_bang_song_hong
     source_tier: 1
     url: https://gntt.ninhbinh.gov.vn/khuyen-nong/
+
+  # ---- Seed dạng sitemap ----
+  # Sitemap là cách phát hiện vừa đầy đủ vừa lịch sự nhất: đọc đúng file mà
+  # chính trang web công bố cho máy tìm kiếm. Trung tâm Khuyến nông Quốc gia
+  # chia sitemap theo ngày, mỗi ngày ~100 URL, slug mô tả rõ nội dung.
+  - id: khuyennongvn_sitemap
+    publisher: Trung tam Khuyen nong Quoc gia
+    region: toan_quoc
+    source_tier: 1
+    sitemap: https://khuyennongvn.gov.vn/sitemap.xml
+    max_sitemaps: 190

@@ -19,3 +19,6 @@ venv/
 Thumbs.db
 .idea/
 .vscode/
+
+# Log tam cua cac lan chay discover/crawl
+docs/reports/_*.log

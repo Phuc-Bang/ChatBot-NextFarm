@@ -113,23 +113,11 @@ def existing_urls() -> set[str]:
     return {s["url"] for s in (cfg.get("sources") or [])}
 
 
-def harvest(seed: dict, session, robots: RobotsCache, throttle: DomainThrottle,
-            max_links: int) -> tuple[list[dict], str | None]:
-    """Tra ve (danh sach de xuat, loi). Loi != None nghia la seed that bai."""
-    url = seed["url"]
-
-    decision = robots.check(url)
-    if not decision.allowed:
-        return [], "robots: " + decision.reason
-
-    throttle.wait(url, override=decision.crawl_delay)
-    content, _ctype, http_status, err = fetch(url, session)
-    if content is None:
-        return [], err or ("HTTP " + str(http_status))
-
+def links_from_page(url: str, content: bytes, seed: dict,
+                    seen: set[str]) -> list[dict]:
+    """Rut lien ket bai viet tu MOT trang danh sach."""
     soup = BeautifulSoup(content, "lxml")
     host = urlsplit(url).netloc
-    seen: set[str] = set()
     found: list[dict] = []
 
     for a in soup.find_all("a", href=True):
@@ -150,28 +138,161 @@ def harvest(seed: dict, session, robots: RobotsCache, throttle: DomainThrottle,
         if not looks_like_article(clean, anchor):
             continue
 
-        crop = guess_crop(anchor + " " + clean)
         seen.add(clean)
         found.append({
             "url": clean,
             "anchor": anchor,
-            "crop_guess": crop,            # None = khong chac, nguoi duyet quyet
+            # None = khong chac, de nguoi duyet quyet
+            "crop_guess": guess_crop(anchor + " " + clean),
             "seed_id": seed["id"],
             "publisher": seed.get("publisher"),
             "region_hint": seed.get("region"),
             "source_tier": seed.get("source_tier"),
         })
-        if len(found) >= max_links:
+    return found
+
+
+def page_urls(seed: dict, max_pages: int):
+    """Sinh URL tung trang danh sach.
+
+    Seed khong khai bao page_pattern thi chi co dung mot trang. Trang chuyen
+    muc chi hien tin moi nhat, nen tai lieu ky thuat cu nam o cac trang sau -
+    day la ly do phai co phan trang (xem P1_crawl_report muc 5).
+    """
+    yield seed["url"]
+    pattern = seed.get("page_pattern")
+    if not pattern:
+        return
+    limit = min(max_pages, int(seed.get("max_pages", max_pages)))
+    for page in range(2, limit + 1):
+        yield pattern.format(page=page)
+
+
+LOC_RE = re.compile(r"<loc>\s*([^<\s]+)\s*</loc>", re.IGNORECASE)
+
+
+def slug_text(url: str) -> str:
+    """Bien duong dan URL thanh chuoi doc duoc de doan cay trong.
+
+    Sitemap khong co anchor text, nhung slug cua cac trang nay mo ta kha ro
+    noi dung nen dung duoc thay the.
+    """
+    path = urlsplit(url).path
+    return path.replace("-", " ").replace("/", " ").replace("_", " ")
+
+
+def harvest_sitemap(seed: dict, session, robots: RobotsCache,
+                    throttle: DomainThrottle, max_links: int
+                    ) -> tuple[list[dict], str | None]:
+    """Thu thap URL tu sitemap.
+
+    Sitemap la cach phat hien vua day du vua lich su nhat: doc dung file ma
+    chinh trang web cong bo de may tim kiem su dung, thay vi do dam qua tung
+    trang danh sach.
+
+    Khac voi seed chuyen muc, o day CHI giu URL doan duoc cay trong - neu
+    khong loc thi mot sitemap co the sinh ra hang chuc nghin de xuat vo dung.
+    """
+    root = seed["sitemap"]
+    decision = robots.check(root)
+    if not decision.allowed:
+        return [], "robots: " + decision.reason
+
+    max_children = int(seed.get("max_sitemaps", 40))
+    to_read = [root]
+    da_doc: set[str] = set()
+    seen: set[str] = set()
+    found: list[dict] = []
+    loi_dau = None
+
+    while to_read and len(found) < max_links:
+        url = to_read.pop(0)
+        if url in da_doc:
+            continue
+        da_doc.add(url)
+
+        throttle.wait(url, override=decision.crawl_delay)
+        content, _ctype, http_status, err = fetch(url, session)
+        if content is None:
+            if url == root:
+                return [], err or ("HTTP " + str(http_status))
+            loi_dau = loi_dau or err
+            continue
+
+        for loc in LOC_RE.findall(content.decode("utf-8", errors="replace")):
+            if loc.lower().endswith(".xml"):
+                if len(da_doc) + len(to_read) < max_children:
+                    to_read.append(loc)
+                continue
+
+            # Bo URL di dang: mot so muc trong sitemap noi hai dia chi vao nhau
+            if loc.count("://") != 1:
+                continue
+            if loc in seen:
+                continue
+
+            text = slug_text(loc)
+            crop = guess_crop(text)
+            if crop is None:          # sitemap khong co anchor -> chi giu cai chac
+                continue
+
+            seen.add(loc)
+            found.append({
+                "url": loc,
+                "anchor": " ".join(text.split())[:160],
+                "crop_guess": crop,
+                "seed_id": seed["id"],
+                "publisher": seed.get("publisher"),
+                "region_hint": seed.get("region"),
+                "source_tier": seed.get("source_tier"),
+                "from_sitemap": True,
+            })
+
+    return found[:max_links], None
+
+
+def harvest(seed: dict, session, robots: RobotsCache, throttle: DomainThrottle,
+            max_links: int, max_pages: int) -> tuple[list[dict], str | None]:
+    """Tra ve (danh sach de xuat, loi). Loi != None nghia la seed that bai hoan toan."""
+    if seed.get("sitemap"):
+        return harvest_sitemap(seed, session, robots, throttle, max_links)
+
+    decision = robots.check(seed["url"])
+    if not decision.allowed:
+        return [], "robots: " + decision.reason
+
+    seen: set[str] = set()
+    found: list[dict] = []
+    trang_rong = 0
+
+    for url in page_urls(seed, max_pages):
+        throttle.wait(url, override=decision.crawl_delay)
+        content, _ctype, http_status, err = fetch(url, session)
+
+        if content is None:
+            if not found:                   # ngay trang dau da hong
+                return [], err or ("HTTP " + str(http_status))
+            break                           # het trang, dung lai - khong phai loi
+
+        moi = links_from_page(url, content, seed, seen)
+        found.extend(moi)
+
+        # Hai trang lien tiep khong ra lien ket moi -> coi nhu het noi dung.
+        # Dung som de khong lam phien may chu cua ho.
+        trang_rong = trang_rong + 1 if not moi else 0
+        if trang_rong >= 2 or len(found) >= max_links:
             break
 
-    return found, None
+    return found[:max_links], None
 
 
 def main() -> None:
     ap = argparse.ArgumentParser(description="Tim URL bai viet tu trang chuyen muc")
     ap.add_argument("--seed", nargs="*", help="Chi chay cac seed_id nay")
-    ap.add_argument("--max-links", type=int, default=60,
-                    help="So link toi da lay tu moi trang chuyen muc")
+    ap.add_argument("--max-links", type=int, default=400,
+                    help="So link toi da lay tu moi seed")
+    ap.add_argument("--max-pages", type=int, default=10,
+                    help="So trang danh sach toi da duyet moi seed")
     args = ap.parse_args()
 
     seeds = load_seeds()
@@ -188,7 +309,8 @@ def main() -> None:
     seed_status: list[dict] = []
 
     for seed in seeds:
-        found, err = harvest(seed, session, robots, throttle, args.max_links)
+        found, err = harvest(seed, session, robots, throttle,
+                             args.max_links, args.max_pages)
         if err:
             print("[XX] " + seed["id"] + ": " + err)
             seed_status.append({"seed_id": seed["id"], "status": "failed", "error": err})
