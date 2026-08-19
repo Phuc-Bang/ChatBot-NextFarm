@@ -267,6 +267,7 @@ Intent Router ở §11 chính là mối nối giữa hai giai đoạn: giai đo�
 | **DEC-028** | **Đạo đức crawl** | Đọc `robots.txt` trước mỗi domain, giữ `DELAY ≥ 3s`, User-Agent có liên hệ thật, ghi nguồn đầy đủ trong mọi câu trả lời và báo cáo | Dự án hợp tác thật với doanh nghiệp — không được để rủi ro pháp lý/uy tín |
 | **DEC-029** | **Vai trò reviewer** | Reviewer = chính người thực hiện. Reviewer kiểm **chứng cứ**, không kiểm **chân lý nông học**. | Solo, không có chuyên gia nông nghiệp. Tiêu chí duyệt phải là thứ kiểm được (§27) |
 | **DEC-030** | **Tài liệu chuẩn** | Tài liệu này là nguồn sự thật duy nhất; v1.0 và CRAWLER_GUIDE thành tài liệu tham khảo | Tránh tình trạng hai tài liệu mô tả hai hệ thống |
+| **DEC-031** | **Va chạm do bỏ dấu** | Khớp trọn từ trên bản bỏ dấu phải kèm bảng ngoại lệ có ghi lý do, và mỗi thành phần khớp từ khoá phải có bộ câu hỏi thật ngoài tập kiểm thử làm lưới an toàn | Bỏ dấu xoá dấu thanh, nên `bật`/`bắt`, `giờ`/`gió`, `van`/`vẫn` thành cùng một chuỗi. Đo được ở P8 §13.4 |
 
 ## 9. Sổ giả định — `[ASM]`
 
@@ -494,6 +495,38 @@ Ví dụ ranh giới:
 ### 13.3. Vì sao không dùng LLM để "sửa" câu hỏi
 
 Cho LLM viết lại câu hỏi trước khi retrieval là con đường ngắn nhất để bịa: LLM sẽ tự thêm dấu, tự thêm từ, tự thêm ngữ cảnh. Câu `bon dam cho lua bao nhieu` có thể bị viết lại thành `bón đạm cho lúa giai đoạn đẻ nhánh bao nhiêu kg/ha` — và từ đó mọi thứ phía sau đều lệch mà không ai biết. Chuẩn hoá phải deterministic và **kiểm tra được bằng unit test**.
+
+### 13.4. `[DEC-031]` Bỏ dấu làm sập khớp trọn từ — hệ quả cho mọi thành phần khớp từ khoá
+
+> **Đo được ở P8, ngày 2026-08-20. Ảnh hưởng tới mọi nơi trong hệ thống có khớp từ khoá trên bản bỏ dấu: Intent Router, Scope Check, chunker, extract, keyword retrieval.**
+
+Dự án đã hai lần hỏng vì khớp **chuỗi con**: `"ph"` khớp trong *"cát pha"* (làm sai nhãn 73/129 câu ứng viên), `"mạ"` khớp trong *"mạnh"*. Cả hai đã sửa bằng khớp **trọn từ**.
+
+Khớp trọn từ là điều kiện **cần**, không phải điều kiện **đủ**. Sau khi bỏ dấu:
+
+| Chuỗi sau bỏ dấu | Thực ra là những từ nào |
+|---|---|
+| `bat` | **bật** đèn · **bắt** đầu · **bắt** buộc |
+| `gio` | mấy **giờ** · thông **gió** · quạt **gió** |
+| `van` | **van** nước · cây **vẫn** héo · **vấn** đề |
+| `dung` | **dừng** lại · **dùng** phân gì |
+| `tuoi` | **tưới** nước · **tuổi** cây |
+
+Tiếng Anh viết `start` và `turn on` thành hai chuỗi khác hẳn nhau. Tiếng Việt viết rời từng âm tiết, nên `bật` và `bắt` chỉ khác nhau đúng một dấu thanh — và bỏ dấu xoá đúng cái dấu thanh đó.
+
+Bỏ dấu **không bỏ được**: nó là cơ chế giải bài toán câu hỏi không dấu ở tầng dữ liệu (§14.3). Vì vậy phải sống chung với va chạm một cách có kiểm soát:
+
+1. **Bảng ngoại lệ có ghi lý do.** Mỗi va chạm đã gặp được ghi kèm từ đi kèm làm nó vô hiệu (`thông gió` vô hiệu hoá `gió` với nghĩa `giờ`). Mỗi dòng phải truy được về một câu hỏi thật đã bị xử lý sai.
+2. **Từ dễ va chạm không được nhận bằng chính nó.** `van` chỉ tính là thiết bị khi đi kèm từ định danh: `van số`, `van khu`, `van châm`, `van 3`.
+3. **Dấu hiệu ngữ pháp thay cho dấu hiệu từ vựng khi có thể.** Từ để hỏi (*nào, gì, thế nào, sao*) loại một câu khỏi nhánh mệnh lệnh, vì câu hỏi thông tin không phải mệnh lệnh — quy tắc này không phụ thuộc vào dấu thanh nên không bị va chạm.
+
+**Cách phát hiện — bắt buộc áp dụng cho mọi thành phần khớp từ khoá:**
+
+Va chạm loại này **không** hiện ra trong tập kiểm thử nếu tập đó chỉ chứa case *phải bị chặn*. Nó chỉ hiện ra ở hướng ngược lại: câu hỏi hợp lệ bị chặn oan. Vì vậy mỗi thành phần khớp từ khoá phải có kèm một **bộ câu hỏi nông học thật, không lấy từ tập kiểm thử**, làm lưới an toàn thường trực.
+
+Ở P8, bộ 32 câu này phát hiện 2 câu bị từ chối oan mà 92 case của tập kiểm thử v1 không thấy.
+
+---
 
 ## 14. `[DEC-021]` Hybrid Retrieval
 
