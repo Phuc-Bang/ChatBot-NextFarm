@@ -73,3 +73,31 @@ seeds:
     source_tier: 1
     sitemap: https://khuyennongvn.gov.vn/sitemap.xml
     max_sitemaps: 190
+
+  # ---- Thư viện kỹ thuật theo nhóm cây (không phải cổng tin tức) ----
+  # Tìm được qua menu của phanbonquocgia.gov.vn. Đây đúng là thứ các cổng tin
+  # khuyến nông tỉnh không có: chuyên mục chỉ chứa bài kỹ thuật, không lẫn tin
+  # hoạt động. WordPress nên phân trang chuẩn /page/{n}/.
+  - id: phanbon_luong_thuc
+    publisher: Trung tam Khao kiem nghiem Phan bon Quoc gia
+    region: toan_quoc
+    source_tier: 1
+    url: https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/
+    page_pattern: https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/{page}/
+    max_pages: 15
+
+  - id: phanbon_thuc_pham
+    publisher: Trung tam Khao kiem nghiem Phan bon Quoc gia
+    region: toan_quoc
+    source_tier: 1
+    url: https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/
+    page_pattern: https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/{page}/
+    max_pages: 15
+
+  - id: phanbon_ki_thuat
+    publisher: Trung tam Khao kiem nghiem Phan bon Quoc gia
+    region: toan_quoc
+    source_tier: 1
+    url: https://phanbonquocgia.gov.vn/ki-thuat-bon-phan/
+    page_pattern: https://phanbonquocgia.gov.vn/ki-thuat-bon-phan/page/{page}/
+    max_pages: 20

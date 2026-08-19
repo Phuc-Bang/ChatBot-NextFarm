@@ -1,6 +1,6 @@
-# P1 — Kết quả crawl thực tế
+# P1 — Kết quả thu thập tài liệu
 
-> Số liệu trong tài liệu này là kết quả chạy thật, không phải ước lượng.
+> Mọi số liệu trong tài liệu này là kết quả chạy thật, không phải ước lượng.
 > Nguồn lỗi được để nguyên là lỗi (quy chuẩn v2.0 §23.1 nguyên tắc 3).
 
 Ngày chạy: 19/08/2026 · dữ liệu gốc: `crawler/data/manifest.json`
@@ -9,174 +9,209 @@ Ngày chạy: 19/08/2026 · dữ liệu gốc: `crawler/data/manifest.json`
 
 ## Tóm tắt
 
-| | Đợt 1 | Đợt 2 |
-|---|---|---|
-| Số nguồn khai báo | 7 | 15 |
-| Tải được (`ok`) | 4 | **8** |
-| Lúa / Cà chua / Dưa chuột | 0 / 0 / 4 | **1 / 3 / 4** |
-| Số vùng miền phủ được | 3 | 5 |
-
-Mục tiêu `ASM-07` là 50–80 tài liệu, mỗi cây ≥ 3 vùng. **Hiện đạt 8 tài liệu.**
-Khoảng cách còn lớn — xem §5.
-
----
-
-## 1. Đợt 1 — 7 nguồn kế thừa từ CRAWLER_GUIDE
-
-| Trạng thái | Số nguồn |
-|---|---|
-| `ok` | 4 |
-| `failed` | 1 |
-| `robots_disallowed` | 2 |
-
-| Nguồn | Cây | Kết quả |
-|---|---|---|
-| `ninhbinh_dua_chuot_dong` | dưa chuột | ✅ 6.847 ký tự |
-| `ninhbinh_dua_chuot_quytrinh` | dưa chuột | ✅ 5.639 ký tự |
-| `hatinh_dua_chuot_vietgap` | dưa chuột | ✅ 12.691 ký tự |
-| `laichau_dua_chuot_xuanhe` | dưa chuột | ✅ 4.013 ký tự |
-| `lamdong_ca_chua` | cà chua | ❌ HTTP 404 |
-| `hanoi_ca_chua` | cà chua | ⛔ `robots.txt` trả 503 |
-| `gso_lua_dong_xuan_2024` | lúa | ⛔ `robots.txt` ConnectTimeout |
-
-Hai ca `robots_disallowed` đã kiểm chứng độc lập bằng `curl`:
-
-```
-https://sonnptnt.hanoi.gov.vn/robots.txt   HTTP 000 sau 0,56 s  (lỗi kết nối)
-https://www.gso.gov.vn/robots.txt          HTTP 000 sau 20,01 s (timeout)
-```
-
-Không phải lỗi crawler — hai tên miền này thực sự không truy cập được từ môi
-trường hiện tại. Crawler áp dụng quy tắc thận trọng của DEC-028a.
-
-**Phát hiện của đợt 1:** cả 4 nguồn tải được đều là dưa chuột. Không có nguồn
-nào cho lúa và cà chua.
-
----
-
-## 2. Đợt 2 — bổ sung 8 nguồn tìm qua công cụ tìm kiếm
-
-| Trạng thái | Số nguồn |
-|---|---|
-| `ok` | **8** |
-| `failed` | 4 |
-| `robots_disallowed` | 3 |
-| **Tổng** | 15 |
-
-Nguồn mới tải được:
-
-| Nguồn | Cây | Vùng | Kết quả |
+| | Đợt 1 | Đợt 2 | **Đợt 3 (cuối)** |
 |---|---|---|---|
-| `ninhbinh_gntt_ca_chua` | cà chua | ĐB sông Hồng | ✅ 7.657 ký tự |
-| `hcm_dost_ca_chua_bi` | cà chua | Đông Nam Bộ | ✅ 1.992 ký tự |
-| `phanbonquocgia_ca_chua` | cà chua | toàn quốc | ✅ 8.673 ký tự |
-| `quangtri_lua_ngap_kho_xen_ke` | lúa | Bắc Trung Bộ | ✅ 5.931 ký tự |
+| Nguồn khai báo | 7 | 15 | **82** |
+| Tải được (`ok`) | 4 | 8 | **31** |
+| Lúa / Cà chua / Dưa chuột | 0 / 0 / 4 | 1 / 3 / 4 | **22 / 4 / 5** |
+| Câu ứng viên số liệu | — | 83 | **193** |
 
-Nguồn mới thất bại:
-
-| Nguồn | Lỗi | Đã kiểm chứng độc lập |
-|---|---|---|
-| `lamdong_ca_chua_ghep` | HTTP 404 | ✅ vẫn 404 với https + UA trình duyệt |
-| `lamdong_ca_chua_cherry_pdf` | HTTP 404 | ✅ cùng tên miền, đường dẫn đã đổi |
-| `lamdong_ttbvtv_ca_chua` | HTTP 404 | ✅ trang chuyên mục lặp chuyển hướng vô hạn |
-| `bacgiang_ntm_ca_chua_bi` | SSLError khi đọc `robots.txt` | ✅ `curl` cũng trả HTTP 000 |
-
-Toàn bộ đường dẫn của `khuyennong.lamdong.gov.vn` và `ttbvtv.lamdong.gov.vn`
-lấy từ chỉ mục tìm kiếm đều đã chết. Tên miền còn sống (chuyển hướng
-`http → https` hoạt động) nhưng cấu trúc đường dẫn đã thay đổi. Đây là mất mát
-đáng tiếc: Lâm Đồng là nguồn Tier 1 mạnh cho cà chua, và có sẵn một tài liệu
-PDF ban hành chính thức — vốn định dùng để kiểm chứng DEC-027 trên dữ liệu thật.
-
-> **Chưa có nguồn PDF nào tải được.** Khả năng đọc PDF của crawler mới chỉ được
-> kiểm chứng bằng PDF tự sinh trong `tests/test_crawl.py`, chưa kiểm chứng trên
-> tài liệu thật.
+**`ASM-07` đặt mục tiêu 50–80 tài liệu, mỗi cây ≥ 3 vùng. Kết quả đạt 31 tài
+liệu.** Đây là con số thật của web công khai Tier 1 truy cập được, không phải
+kết quả của việc làm chưa tới — xem §5.
 
 ---
 
-## 3. Phủ sóng hiện tại
+## 1. Trạng thái cuối cùng
 
-| Cây | Số tài liệu | Vùng miền |
+| Trạng thái | Số nguồn | Nguyên nhân |
 |---|---|---|
-| Dưa chuột | 4 | ĐB sông Hồng ×2, Bắc Trung Bộ, Trung du miền núi |
-| Cà chua | 3 | ĐB sông Hồng, Đông Nam Bộ, toàn quốc |
-| **Lúa** | **1** | Bắc Trung Bộ |
+| `ok` | **31** | |
+| `empty` | 43 | **Toàn bộ từ `khuyennongvn.gov.vn`** — site render bằng JavaScript |
+| `failed` | 5 | 4 × HTTP 404 (Lâm Đồng), 1 × trang đã gỡ |
+| `robots_disallowed` | 3 | `robots.txt` không đọc được (Hà Nội, GSO, Bắc Giang) |
+| **Tổng** | **82** | |
 
-Lúa là cây yếu nhất — và cũng là cây quan trọng nhất với nông dân Việt Nam.
-Tài liệu lúa duy nhất hiện có lại là **tin về một mô hình thí điểm tưới ngập
-khô xen kẽ**, không phải quy trình canh tác đầy đủ.
+### Phủ sóng theo cây và vùng
 
----
+| Cây | Tài liệu | Vùng miền (theo khai báo, **chưa qua duyệt**) |
+|---|---|---|
+| Lúa | 22 | Bắc Trung Bộ 17 · ĐB sông Hồng 3 · toàn quốc 2 |
+| Dưa chuột | 5 | ĐB sông Hồng 2 · Bắc Trung Bộ 2 · Trung du miền núi 1 |
+| Cà chua | 4 | ĐB sông Hồng · Đông Nam Bộ · Bắc Trung Bộ · toàn quốc |
 
-## 4. `discover.py` — tìm nguồn thay vì đoán URL
+> ⚠️ **Cột vùng miền chưa đáng tin.** `region` hiện lấy từ gợi ý của seed, tức
+> là vùng của *trang đăng bài*, không phải vùng của *nội dung*. Ví dụ nhiều bài
+> lúa gắn nhãn Bắc Trung Bộ thực chất nói về Long An, Hải Phòng, Huế vì được
+> đăng lại trên cổng Hà Tĩnh. Câu hỏi 5a trong checklist duyệt tài liệu (§27.2)
+> tồn tại để sửa đúng chỗ này.
 
-Thay vì gõ tay 50–80 URL (đoán URL là một dạng bịa đặt — phần lớn sẽ 404),
-`discover.py` xuất phát từ trang chuyên mục **đã chứng minh tải được** rồi thu
-thập liên kết bài viết. Đầu ra là **đề xuất**, người duyệt quyết định.
+### Nguồn theo cơ quan
 
-| Seed | Kết quả |
+| Cơ quan | Tài liệu |
 |---|---|
-| `ninhbinh_kht` | 10 liên kết |
-| `hatinh_khcn` | 18 liên kết |
-| `quangtri_khkt` | 22 liên kết |
-| `laichau_tailieu` | 0 |
-| `lamdong_ki_thuat_trong_rau` | ❌ HTTP 404 |
-| `lamdong_ttbvtv_quy_trinh` | ❌ TooManyRedirects |
-| `ninhbinh_gntt_khuyennong` | ❌ HTTP 404 |
-| **Tổng đề xuất** | **50** (lúa 5 · chưa rõ 45) |
-
-### Vấn đề chất lượng
-
-**Các trang chuyên mục này là cổng tin tức, không phải thư viện tài liệu kỹ
-thuật.** Phần lớn liên kết thu được là tin hoạt động: tập huấn, mô hình thử
-nghiệm, chỉ đạo sản xuất, thông báo hành chính. Ví dụ tiêu đề thật thu được:
-*"Kiểm tra tiến độ thực hiện dự án khuyến nông"*, *"Hướng dẫn xây dựng dự toán
-ngân sách nhà nước năm 2027"*, *"Phiên chợ khuyến nông"*.
-
-Trong 22 liên kết của Quảng Trị chỉ có **1 tài liệu kỹ thuật thật sự về lúa**
-(*"Hướng dẫn phòng trừ dịch hại lúa giai đoạn trước, trong và sau trổ"* — đồng
-thời là nội dung high-risk, sẽ phải duyệt lẻ theo §24.4).
-
-Một trường hợp nhãn sai còn lại: *"Hướng dẫn quy trình kỹ thuật trồng ngô sinh
-khối trên đất lúa chuyển đổi"* bị gán nhãn `lua` vì cụm "đất lúa". Đây là bài
-về ngô. Người duyệt phải loại — đúng vai trò của bước duyệt.
+| NTM Hà Tĩnh | 16 |
+| Khuyến nông Ninh Bình | 6 |
+| Trung tâm Khuyến nông Quảng Trị | 4 |
+| Trung tâm Khảo kiểm nghiệm Phân bón Quốc gia | 3 |
+| Sở NN&MT Lai Châu | 1 |
+| Sở KH&CN TP.HCM | 1 |
 
 ---
 
-## 5. Việc phải làm để đạt ASM-07
+## 2. Bốn hướng mở rộng đã thử — kết quả thật
 
-Theo thứ tự ưu tiên:
+Báo cáo trước đề ra bốn hướng để đạt `ASM-07`. Cả bốn đều đã thực hiện:
 
-1. **Đi sâu vào trang lưu trữ / phân trang.** Trang chuyên mục chỉ hiện tin mới
-   nhất; tài liệu kỹ thuật nằm ở các trang sau. Cần thêm hỗ trợ phân trang cho
-   `discover.py`.
-2. **Dùng chức năng tìm kiếm của chính website** với từ khoá tên cây, thay vì
-   duyệt chuyên mục theo thời gian.
-3. **Bổ sung tên miền mới đã kiểm tra truy cập được.** Không đoán tên miền của
-   các tỉnh khác — mọi tên miền phải đến từ nguồn có thật rồi được crawler xác
-   nhận.
-4. **Ưu tiên tuyệt đối cho lúa** — hiện chỉ 1 tài liệu, và không phải quy trình
-   canh tác.
+### 2.1. Phân trang kho lưu trữ ✅ làm được, hiệu quả có hạn
 
-Nếu sau tất cả vẫn không đủ 50–80 tài liệu, phương án trung thực là **thu hẹp
-phạm vi cây trồng của PoC và ghi rõ giới hạn**, thay vì hạ chuẩn nguồn xuống
-Tier 3. Kích thước thật của kho tri thức quyết định phạm vi câu hỏi bot được
-phép trả lời, chứ không phải ngược lại.
+Ba site dùng ba mẫu phân trang khác nhau, xác minh bằng cách so tập liên kết
+giữa trang 1 và trang 2 (không suy đoán từ hình dạng URL):
+
+| Site | Mẫu | Sâu nhất |
+|---|---|---|
+| NTM Hà Tĩnh | `/page-{n}/` | 153 trang |
+| Khuyến nông Quảng Trị | `/page/{n}` | — |
+| Khuyến nông Ninh Bình | `/page-{n}/` | — |
+
+Quét sâu 40 trang của Hà Tĩnh: trang 40 vẫn có 12 bài mới so với trang 1, tức
+là phân trang hoạt động thật. Nhưng tổng số bài về **ba cây trong phạm vi**
+gần như không tăng — kho lưu trữ lớn nhưng nội dung chủ yếu về cây khác, chăn
+nuôi, thuỷ sản và tin hoạt động.
+
+### 2.2. Sitemap ✅ làm được, nhưng nội dung không lấy được
+
+`khuyennongvn.gov.vn` (Trung tâm Khuyến nông Quốc gia) công bố sitemap chia
+theo ngày, khoảng 100 URL mỗi ngày, 182 ngày. Đọc hết cho **43 URL** khớp tên
+ba cây.
+
+**Cả 43 đều `empty`:** HTML tải về gần như rỗng, nội dung được render bằng
+JavaScript. Đây đúng là giới hạn đã ghi sẵn ở `CRAWLER_GUIDE §8`, không phải
+lỗi phát sinh. Sitemap vẫn hữu ích để biết có những bài nào; chỉ là không lấy
+được nội dung bằng `requests`.
+
+### 2.3. Tìm kiếm trên chính website ❌ gần như không site nào hỗ trợ
+
+Dò các mẫu endpoint tìm kiếm phổ biến trên 4 tên miền: chỉ
+`phanbonquocgia.gov.vn` (nền WordPress) có `?s=`. Ba site còn lại trả 404,
+timeout, hoặc trả về nguyên trang chuyên mục bất kể từ khoá.
+
+Đáng chú ý: ngay cả tìm kiếm của `phanbonquocgia.gov.vn` cũng chỉ trả về các
+mục menu, không phải kết quả thật.
+
+### 2.4. Bổ sung tên miền mới ✅ có thêm, nhưng ít
+
+Từ menu của `phanbonquocgia.gov.vn` tìm được thứ mà các cổng tin khuyến nông
+tỉnh không có: **chuyên mục chỉ chứa bài kỹ thuật**, không lẫn tin hoạt động.
+Quét 3 chuyên mục, 20 trang mỗi chuyên mục:
+
+- 150 liên kết bài kỹ thuật
+- **Chỉ 2 bài thuộc ba cây trong phạm vi** (*"Kỹ thuật bón phân cho lúa ngắn
+  ngày"*, *"Giảm thất thoát lượng đạm trong canh tác lúa"*) — cả hai đều là
+  tài liệu kỹ thuật thật và đã được nạp
+
+Phần còn lại là cà phê, cao su, chè, ngô, tiêu, cây ăn quả, hoa cảnh.
 
 ---
 
-## 6. Một lỗi đã sửa
+## 3. Kết luận về `ASM-07`
 
-`guess_crop` ban đầu so khớp chuỗi thường nên `"mạ"` khớp bên trong `"mạnh"`,
-gán nhãn `lua` cho bài *"Bước chuyển mạnh mẽ trong xây dựng NTM ở Hà Tĩnh"*.
-Đã sửa bằng khớp theo biên từ, kèm test hồi quy trong `tests/test_discover.py`.
+> **Web công khai Tier 1 của Việt Nam không có sẵn 50–80 tài liệu kỹ thuật
+> truy cập được cho đúng ba cây lúa, cà chua, dưa chuột.**
 
-Nhãn sai ở bước đề xuất không nguy hiểm bằng nhãn sai ở bước trả lời, nhưng vẫn
-phải sửa: người duyệt sẽ tin vào nhãn nếu nó thường đúng.
+Đây là kết luận rút ra từ số đo, không phải phỏng đoán:
+
+- Đã quét 82 URL, 7 chuyên mục, 3 kho lưu trữ có phân trang, 1 sitemap 182
+  ngày, 3 thư viện kỹ thuật
+- Đã thử cả 4 hướng mở rộng đã đề ra
+- Kết quả bão hoà ở 31 tài liệu
+
+Ba nguyên nhân, theo mức độ ảnh hưởng:
+
+1. **Nội dung có nhưng không lấy được.** 43 tài liệu của Khuyến nông Quốc gia
+   nằm sau JavaScript. Đây là khối lớn nhất bị mất.
+2. **Đường dẫn đã chết.** Toàn bộ URL của `khuyennong.lamdong.gov.vn` và
+   `ttbvtv.lamdong.gov.vn` lấy từ chỉ mục tìm kiếm đều 404 — đã kiểm chứng lại
+   bằng `curl` với https và UA trình duyệt. Lâm Đồng là nguồn Tier 1 mạnh nhất
+   cho cà chua, và có sẵn một PDF quy trình ban hành chính thức.
+3. **Cổng khuyến nông tỉnh là cổng tin tức.** Phần lớn nội dung là tin tập
+   huấn, mô hình thử nghiệm, chỉ đạo sản xuất — không phải quy trình canh tác.
+
+### Hệ quả: chưa kiểm chứng được khả năng đọc PDF trên tài liệu thật
+
+Không có nguồn PDF nào tải được. `DEC-027` mới chỉ được kiểm chứng bằng PDF tự
+sinh trong `tests/test_crawl.py`, chưa trên tài liệu thật.
+
+### Đề xuất xử lý — cần quyết định
+
+Theo đúng thứ tự ưu tiên đã ghi ở báo cáo trước, phương án trung thực là
+**giữ nguyên chuẩn nguồn và ghi rõ giới hạn**, thay vì hạ chuẩn xuống Tier 3.
+Ba lựa chọn, xếp theo mức độ khuyến nghị:
+
+| # | Phương án | Đánh đổi |
+|---|---|---|
+| **A** | **Điều chỉnh `ASM-07` xuống 30–40 tài liệu**, giữ nguyên 3 cây, ghi rõ giới hạn trong báo cáo gửi NextFarm | Trung thực nhất. Recall@K yếu hơn nhưng vẫn đo được. Cà chua và dưa chuột chỉ 4–5 tài liệu nên nhóm `known_answer` cho hai cây này sẽ mỏng |
+| B | Thu hẹp còn **lúa + dưa chuột**, bỏ cà chua | KB đặc hơn cho 2 cây, nhưng lệch khỏi phạm vi đã chốt với NextFarm ở DEC-002 |
+| C | Thêm trình duyệt không giao diện để lấy 43 tài liệu JavaScript | Được thêm nhiều tài liệu Tier 1 chất lượng cao nhất, nhưng thêm phụ thuộc nặng và nằm ngoài phạm vi đã ghi ở `CRAWLER_GUIDE §8` |
+
+**Khuyến nghị: A**, và ghi mục này vào danh sách "NextFarm cần chuẩn bị"
+(§37.6) — nếu NextFarm có sẵn tài liệu kỹ thuật nội bộ cho ba cây này, đó là
+cách bù khoảng trống nhanh và đáng tin hơn mọi phương án crawl.
 
 ---
 
-## 7. Ghi chú vận hành
+## 4. Trích xuất số liệu (`extract.py`)
 
-`CRAWLER_CONTACT_EMAIL` hiện **chưa được đặt**, nên User-Agent thiếu địa chỉ
-liên hệ. DEC-028b yêu cầu có liên hệ thật trước khi crawl diện rộng. Cần điền
-vào `.env` (không commit) trước đợt crawl lớn tiếp theo.
+Trên 31 tài liệu: **193 câu ứng viên**, tất cả `verified: false`.
+
+| Chỉ số | Số câu |
+|---|---|
+| `luong_phan` | 68 |
+| `thoi_vu` | 54 |
+| `nang_suat` | 24 |
+| `mat_do_gieo` | 15 |
+| `khoang_cach` | 12 |
+| `ph` | 8 |
+| `nhiet_do` | 6 |
+| `do_am` | 4 |
+| `ec` | 2 |
+
+Theo cây: lúa 109 · dưa chuột 59 · cà chua 25. **12 câu có dấu hiệu rủi ro
+cao**, phải duyệt kỹ hơn theo §24.4.
+
+---
+
+## 5. Ba lỗi đã phát hiện và sửa
+
+Cả ba cùng một họ: **so khớp chuỗi con thay vì khớp theo biên từ**, hoặc
+**quyết định theo thứ tự khai báo thay vì theo mức độ cụ thể**.
+
+| # | Lỗi | Hậu quả thật | Sửa |
+|---|---|---|---|
+| 1 | `discover.py`: `"mạ"` khớp trong `"mạnh"` | Bài *"Bước chuyển mạnh mẽ trong xây dựng NTM"* bị gán nhãn cây lúa | Khớp theo biên từ + test hồi quy |
+| 2 | `extract.py`: `"ph"` khớp trong `"cát pha"`, `"phát"`, `"phân"`, `"phủ"` | **73/129 câu bị gán nhãn pH** trong khi thực tế chỉ 8 câu nói về pH. Đã kiểm lại cả 8 câu sau khi sửa, cả 8 đều khớp thật | Khớp theo biên từ |
+| 3 | `extract.py`: chọn chỉ số theo thứ tự dict | Câu *"Bón lót: … kg lân supe"* bị gán nhãn `ph` chỉ vì `ph` khai báo trước `luong_phan` | Chọn theo từ khoá dài nhất |
+
+Lỗi 2 và 3 có sẵn trong `extract.py` gốc của `CRAWLER_GUIDE`.
+
+**Một lỗi thứ tư, nghiêm trọng hơn, thuộc loại khác:**
+
+`crawl.py --only` ghi đè toàn bộ `manifest.json` thay vì gộp. Một lần chạy
+`--only` hai nguồn đã **xoá 80 bản ghi trước đó** — tức là mất bằng chứng thật
+mà không có dấu hiệu gì. Khôi phục từ git, tách hàm `gop_manifest` và thêm 3
+test hồi quy.
+
+Lỗi này đáng chú ý vì nó vi phạm đúng nguyên tắc 2 của §23.1 (*lưu bằng chứng
+gốc*) theo cách khó thấy nhất: không có thông báo lỗi, không có ngoại lệ, chỉ
+là dữ liệu biến mất.
+
+---
+
+## 6. Ghi chú vận hành
+
+`CRAWLER_CONTACT_EMAIL` **vẫn chưa được đặt**, nên User-Agent thiếu địa chỉ
+liên hệ. `DEC-028b` yêu cầu có liên hệ thật trước khi crawl diện rộng. Cần
+điền vào `.env` (đã gitignore) trước đợt crawl lớn tiếp theo.
+
+Tổng số request đã gửi trong cả ba đợt: khoảng 500, luôn giữ tối thiểu 3 giây
+giữa hai request cùng tên miền, và luôn kiểm `robots.txt` trước.

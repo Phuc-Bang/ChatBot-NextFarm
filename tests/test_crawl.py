@@ -298,3 +298,33 @@ def test_script_khong_chua_so_lieu_nong_hoc():
             assert not re.search(r"\d+([.,]\d+)?\s*(-|den|to)\s*\d", doan), (
                 "Nghi ngo co so lieu nong hoc hard-code gan '" + tu_khoa + "': " + doan
             )
+
+
+# ----------------------------------------------------------------------
+# Gop manifest khi chay mot phan
+# ----------------------------------------------------------------------
+def test_gop_manifest_giu_ban_ghi_cu():
+    """Chay --only khong duoc xoa bang chung cua cac nguon khac.
+
+    Loi nay da xay ra that: mot lan chay --only hai nguon da ghi de manifest
+    va xoa 80 ban ghi truoc do.
+    """
+    cu = [{"id": "a", "status": "ok"}, {"id": "b", "status": "failed"}]
+    moi = [{"id": "c", "status": "ok"}]
+    gop = crawl.gop_manifest(cu, moi)
+    assert {r["id"] for r in gop} == {"a", "b", "c"}
+
+
+def test_gop_manifest_ban_ghi_moi_thay_ban_cu_cung_id():
+    cu = [{"id": "a", "status": "failed"}, {"id": "b", "status": "ok"}]
+    moi = [{"id": "a", "status": "ok"}]
+    gop = crawl.gop_manifest(cu, moi)
+    theo_id = {r["id"]: r for r in gop}
+    assert len(gop) == 2
+    assert theo_id["a"]["status"] == "ok"      # ban moi thang
+    assert theo_id["b"]["status"] == "ok"      # ban cu con nguyen
+
+
+def test_gop_manifest_khong_co_ban_cu():
+    moi = [{"id": "a", "status": "ok"}]
+    assert crawl.gop_manifest([], moi) == moi

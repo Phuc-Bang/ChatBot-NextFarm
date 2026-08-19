@@ -1,2489 +1,754 @@
 {
-  "discovered_at": "2026-08-19T12:40:40.994437+00:00",
+  "discovered_at": "2026-08-19T15:44:35.462341+00:00",
   "seeds": [
     {
-      "seed_id": "ninhbinh_kht",
+      "seed_id": "phanbon_luong_thuc",
       "status": "ok",
-      "found": 13,
-      "new": 13
+      "found": 48,
+      "new": 48
     },
     {
-      "seed_id": "hatinh_khcn",
+      "seed_id": "phanbon_thuc_pham",
       "status": "ok",
-      "found": 179,
-      "new": 179
+      "found": 50,
+      "new": 49
     },
     {
-      "seed_id": "quangtri_khkt",
+      "seed_id": "phanbon_ki_thuat",
       "status": "ok",
-      "found": 31,
-      "new": 31
-    },
-    {
-      "seed_id": "laichau_tailieu",
-      "status": "ok",
-      "found": 0,
-      "new": 0
-    },
-    {
-      "seed_id": "lamdong_ki_thuat_trong_rau",
-      "status": "failed",
-      "error": "HTTP 404"
-    },
-    {
-      "seed_id": "lamdong_ttbvtv_quy_trinh",
-      "status": "failed",
-      "error": "TooManyRedirects: Exceeded 30 redirects."
-    },
-    {
-      "seed_id": "ninhbinh_gntt_khuyennong",
-      "status": "failed",
-      "error": "HTTP 404"
-    },
-    {
-      "seed_id": "khuyennongvn_sitemap",
-      "status": "ok",
-      "found": 43,
-      "new": 43
+      "found": 52,
+      "new": 51
     }
   ],
   "candidates": [
     {
-      "url": "https://khuyennong.ninhbinh.gov.vn/trong-trot/ninh-binh-danh-gia-trien-vong-giong-lua-lai-chat-luong-bac-xuyen-88-1032.html",
-      "anchor": "Ninh Bình đánh giá triển vọng giống lúa lai chất lượng Bắc Xuyên 88",
-      "crop_guess": "lua",
-      "seed_id": "ninhbinh_kht",
-      "publisher": "Khuyen nong Ninh Binh",
-      "region_hint": "dong_bang_song_hong",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.ninhbinh.gov.vn/trong-trot/kiem-tra-tien-do-thuc-hien-du-an-khuyen-nong-trung-uong-tai-ninh-binh-1030.html",
-      "anchor": "KIỂM TRA TIẾN ĐỘ THỰC HIỆN  DỰ ÁN KHUYẾN NÔNG TRUNG ƯƠNG TẠI NINH BÌNH",
-      "crop_guess": null,
-      "seed_id": "ninhbinh_kht",
-      "publisher": "Khuyen nong Ninh Binh",
-      "region_hint": "dong_bang_song_hong",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.ninhbinh.gov.vn/trong-trot/thu-nghiem-trong-ot-chuong-va-ot-palermo-tai-ninh-binh-998.html",
-      "anchor": "Thử nghiệm trồng ớt chuông và ớt Palermo tại Ninh Bình",
-      "crop_guess": null,
-      "seed_id": "ninhbinh_kht",
-      "publisher": "Khuyen nong Ninh Binh",
-      "region_hint": "dong_bang_song_hong",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.ninhbinh.gov.vn/trong-trot/khac-phuc-anh-huong-mua-bao-do-hoan-luu-cua-con-bao-so-5-kajiki-doi-voi-lua-va-cay-rau-mau-tren-dia-ban-tinh-ninh-binh-940.html",
-      "anchor": "Khắc phục ảnh hưởng mưa bão do hoàn lưu cuả cơn bão số 5 (Kajiki) đối với lúa và cây rau màu trên địa bàn tỉnh Ninh Bình",
-      "crop_guess": "lua",
-      "seed_id": "ninhbinh_kht",
-      "publisher": "Khuyen nong Ninh Binh",
-      "region_hint": "dong_bang_song_hong",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.ninhbinh.gov.vn/trong-trot/giong-dau-xanh-moi-dx23-giai-phap-trong-phat-trien-nong-nghiep-ben-vung-tai-ninh-binh-938.html",
-      "anchor": "Giống đậu xanh mới ĐX23: Giải pháp trong phát triển nông nghiệp bền vững tại Ninh Bình",
-      "crop_guess": null,
-      "seed_id": "ninhbinh_kht",
-      "publisher": "Khuyen nong Ninh Binh",
-      "region_hint": "dong_bang_song_hong",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.ninhbinh.gov.vn/chan-nuoi/huong-dan-phong-chong-benh-dai-tren-vat-nuoi-1027.html",
-      "anchor": "Hướng dẫn phòng chống bệnh dại trên vật nuôi",
-      "crop_guess": null,
-      "seed_id": "ninhbinh_kht",
-      "publisher": "Khuyen nong Ninh Binh",
-      "region_hint": "dong_bang_song_hong",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.ninhbinh.gov.vn/chan-nuoi/ninh-binh-tap-huan-ky-thuat-chan-nuoi-lon-thit-an-toan-sinh-hoc-gan-voi-lien-ket-tieu-thu-san-pham-981.html",
-      "anchor": "Ninh Bình: Tập huấn kỹ thuật chăn nuôi lợn thịt an toàn sinh học, gắn với liên kết tiêu thụ sản phẩm",
-      "crop_guess": null,
-      "seed_id": "ninhbinh_kht",
-      "publisher": "Khuyen nong Ninh Binh",
-      "region_hint": "dong_bang_song_hong",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.ninhbinh.gov.vn/chan-nuoi/vai-tro-cua-thao-duoc-trong-chan-lon-972.html",
-      "anchor": "VAI TRÒ CỦA THẢO DƯỢC TRONG CHĂN LỢN",
-      "crop_guess": null,
-      "seed_id": "ninhbinh_kht",
-      "publisher": "Khuyen nong Ninh Binh",
-      "region_hint": "dong_bang_song_hong",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.ninhbinh.gov.vn/thuy-san/cham-soc-bao-ve-thuy-san-mua-mua-bao-916.html",
-      "anchor": "Chăm sóc bảo vệ thủy sản mùa mưa bão",
-      "crop_guess": null,
-      "seed_id": "ninhbinh_kht",
-      "publisher": "Khuyen nong Ninh Binh",
-      "region_hint": "dong_bang_song_hong",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.ninhbinh.gov.vn/van-ban/chitietvb-1142.html",
-      "anchor": "Nghị quyết Quy định nguyên tắc, phạm vi, định mức hỗ trợ và việc sử dụng kinh phí hỗ trợ sản xuất, bảo vệ đất trồng lúa trên địa bàn tỉnh Ninh Bình",
-      "crop_guess": "lua",
-      "seed_id": "ninhbinh_kht",
-      "publisher": "Khuyen nong Ninh Binh",
-      "region_hint": "dong_bang_song_hong",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.ninhbinh.gov.vn/chuyen-doi-so/chuyen-doi-so-dong-luc-quan-trong-phat-trien-luc-luong-san-xuat-hoan-thien-quan-he-san-xuat-dua-dat-nuoc-buoc-vao-ky-nguyen-moi-842.html",
-      "anchor": "CHUYỂN ĐỔI SỐ - ĐỘNG LỰC QUAN TRỌNG PHÁT TRIỂN LỰC LƯỢNG SẢN XUẤT, HOÀN THIỆN QUAN HỆ SẢN XUẤT ĐƯA ĐẤT NƯỚC BƯỚC VÀO KỶ NGUYÊN MỚI",
-      "crop_guess": null,
-      "seed_id": "ninhbinh_kht",
-      "publisher": "Khuyen nong Ninh Binh",
-      "region_hint": "dong_bang_song_hong",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.ninhbinh.gov.vn/chuyen-doi-so/chuyen-doi-so-trong-linh-vuc-nong-nghiep-840.html",
-      "anchor": "Chuyển đổi số trong lĩnh vực nông nghiệp",
-      "crop_guess": null,
-      "seed_id": "ninhbinh_kht",
-      "publisher": "Khuyen nong Ninh Binh",
-      "region_hint": "dong_bang_song_hong",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.ninhbinh.gov.vn/public/userfiles/files/2020/06/thong-tu-02-2020-tt-bkhdt-phan-loai-khu-vuc-the-che-ap-dung-trong-thong-ke-1.pdf",
-      "anchor": "thong-tu-02-2020-tt-bkhdt-phan-loai-khu-vuc-the-che-ap-dung-trong-thong-ke",
-      "crop_guess": null,
-      "seed_id": "ninhbinh_kht",
-      "publisher": "Khuyen nong Ninh Binh",
-      "region_hint": "dong_bang_song_hong",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/trong-nho-mau-don-tren-vung-doi-mai-hoa-trien-vong-moi-cho-nong-dan-122446.html",
-      "anchor": "Trồng nho mẫu đơn trên vùng đồi Mai Hoa - triển vọng mới cho nông dân",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/trong-lac-trai-vu-giai-phap-chuyen-doi-cay-trong-hieu-qua-trong-vu-he-thu-122429.html",
-      "anchor": "Trồng lạc trái vụ – Giải pháp chuyển đổi cây trồng hiệu quả trong vụ hè thu",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ung-dung-cong-nghe-cao-trong-lan-ho-diep-giai-phap-xanh-thich-ung-bien-doi-khi-hau-tai-ha-tinh-122417.html",
-      "anchor": "Ứng dụng công nghệ cao trồng lan hồ điệp: Giải pháp xanh thích ứng biến đổi khí hậu tại Hà Tĩnh",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/nguoi-dan-ha-tinh-tich-cuc-ra-dong-cham-soc-cay-dau-xanh-vu-he-thu-122414.html",
-      "anchor": "Người dân Hà Tĩnh tích cực ra đồng chăm sóc cây đậu xanh  vụ Hè thu",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/trong-thanh-long-ruot-do-huong-di-moi-cua-nong-dan-xa-son-giang-122413.html",
-      "anchor": "Trồng Thanh Long ruột đỏ – Hướng đi mới của nông dân xã Sơn Giang",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/tap-huan-ky-thuat-khai-thac-nhung-huou-bang-phuong-phap-moi-122323.html",
-      "anchor": "Tập huấn kỹ thuật khai thác nhung hươu bằng phương pháp mới",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/phat-trien-kinh-te-tu-nghe-trong-nam-122246.html",
-      "anchor": "Phát triển kinh tế từ nghề trồng nấm",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/san-xuat-nong-nghiep-noi-khong-voi-hoa-chat-la-xu-huong-tat-yeu-122241.html",
-      "anchor": "Sản xuất nông nghiệp nói không với hóa chất là xu hướng tất yếu",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/kiem-soat-tot-moi-truong-yeu-to-thanh-bai-trong-nuoi-tom-122077.html",
-      "anchor": "Kiểm soát tốt môi trường: Yếu tố thành bại trong nuôi tôm",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ha-tinh-tang-cuong-quan-ly-chi-dao-san-xuat-tom-nuoc-lo-122069.html",
-      "anchor": "Hà Tĩnh: Tăng cường quản lý, chỉ đạo sản xuất tôm nước lợ (17/05/2024)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ha-tinh-chu-trong-phat-trien-dien-tich-san-xuat-rau-tap-trung-rau-an-toan-122068.html",
-      "anchor": "Hà Tĩnh chú trọng phát triển diện tích sản xuất rau tập trung, rau an toàn (15/05/2024)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/huong-son-dua-cay-dau-tuong-rau-vao-trong-thu-nghiem-122009.html",
-      "anchor": "Hương Sơn đưa cây đậu tương rau vào trồng thử nghiệm (23/03/2024)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cham-soc-buoi-phuc-trach-giai-doan-truoc-khi-thu-hoach-qua-121817.html",
-      "anchor": "Chăm sóc bưởi Phúc Trạch giai đoạn trước khi thu hoạch quả (31/07/2023)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ha-tinh-ap-dung-cong-nghe-san-xuat-muoi-sach-theo-phuong-phap-trai-bat-o-ket-tinh-121784.html",
-      "anchor": "Hà Tĩnh: Áp dụng công nghệ sản xuất muối sạch theo phương pháp trải bạt ô kết tinh (26/06/2023)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Tin-trong-tinh/ha-tinh-tap-trung-xay-dung-nong-thon-moi-giai-doan-2026-2030-gan-voi-phat-trien-chuong-trinh-ocop-122527.html",
-      "anchor": "Hà Tĩnh tập trung xây dựng nông thôn mới giai đoạn 2026 - 2030 gắn với phát triển Chương trình OCOP",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Tin-tuc-nong-thon-moi/buoc-chuyen-manh-me-trong-xay-dung-ntm-o-ha-tinh-122473.html",
-      "anchor": "Bước chuyển mạnh mẽ trong xây dựng NTM ở Hà Tĩnh",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/laws/detail/Thong-tu-huong-dan-thuc-hien-tieu-chi-nong-thon-moi-giai-doan-2026-2030-207/",
-      "anchor": "Hướng dẫn số 52/2026/TT-BTC",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/laws/detail/Bo-Quoc-phong-ban-hanh-van-ban-so-3132-HD-BQP-huong-dan-Bo-tieu-chi-quoc-gia-ve-xay-dung-NTMi-giai-doan-2026-2030-206/",
-      "anchor": "Hướng dấn số 3132/HD-BQP",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ha-tinh-tap-huan-ky-thuat-cat-nhung-huou-dam-bao-phuc-loi-dong-vat-121757.html",
-      "anchor": "Hà Tĩnh tập huấn kỹ thuật cắt nhung hươu đảm bảo phúc lợi động vật",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/lan-dau-co-so-tay-huong-dan-chan-nuoi-huou-an-toan-dich-benh-121515.html",
-      "anchor": "Lần đầu có sổ tay hướng dẫn chăn nuôi hươu an toàn dịch bệnh",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/phong-chong-khang-khang-sinh-trong-nong-nghiep-121139.html",
-      "anchor": "Phòng, chống kháng kháng sinh trong nông nghiệp (25/10/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/quan-ly-chat-viec-cap-va-su-dung-ma-so-vung-trong-121084.html",
-      "anchor": "Quản lý chặt việc cấp và sử dụng mã số vùng trồng (22/10/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/nha-kinh-hoan-thanh-muc-tieu-kep-trong-nong-nghiep-ben-vung-120985.html",
-      "anchor": "Nhà kính hoàn thành mục tiêu kép trong nông nghiệp bền vững (16/10/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/siet-chat-quan-ly-ma-so-vung-trong-ma-so-co-so-dong-goi-thanh-long-120867.html",
-      "anchor": "Siết chặt quản lý mã số vùng trồng, mã số cơ sở đóng gói thanh long",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/long-an-trien-khai-chuong-trinh-ho-tro-gia-giong-xay-dung-mo-hinh-ung-dung-cong-nghe-tien-tien-trong-san-xuat-lua-120833.html",
-      "anchor": "Long An: Triển khai chương trình hỗ trợ giá giống, xây dựng mô hình ứng dụng công nghệ tiên tiến trong sản xuất lúa",
-      "crop_guess": "lua",
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/thuc-hien-cac-bien-phap-ky-thuat-khoi-phuc-san-xuat-phong-chong-dich-benh-cho-thuy-san-nuoi-sau-mua-bao-120829.html",
-      "anchor": "Thực hiện các biện pháp kỹ thuật khôi phục sản xuất, phòng chống dịch bệnh cho thủy sản nuôi sau mưa bão",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/bien-phap-giam-mui-hoi-trong-chan-nuoi-120770.html",
-      "anchor": "Biện pháp giảm mùi hôi trong chăn nuôi",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/nguoi-dan-mien-trung-ap-dung-khoa-hoc-ky-thuat-vao-san-xuat-nong-nghiep-120554.html",
-      "anchor": "Người dân miền Trung áp dụng khoa học kỹ thuật vào sản xuất nông nghiệp (30/09/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/nhung-sang-kien-huu-ich-trong-nganh-cao-su-120553.html",
-      "anchor": "Những sáng kiến hữu ích trong ngành cao su (30/09/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/mcfas-thay-the-khang-sinh-trong-nuoi-heo-120262.html",
-      "anchor": "MCFAs, thay thế kháng sinh trong nuôi heo",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ung-dung-cay-trong-cnsh-giai-phap-can-luu-tam-120227.html",
-      "anchor": "Ứng dụng cây trồng CNSH: Giải pháp cần lưu tâm",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/su-dung-thao-duoc-huong-di-ben-vung-trong-chan-nuoi-120171.html",
-      "anchor": "Sử dụng thảo dược, hướng đi bền vững trong chăn nuôi",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/phan-bon-sinh-hoc-cho-san-xuat-nong-nghiep-tot-hon-119691.html",
-      "anchor": "Phân bón sinh học cho sản xuất nông nghiệp tốt hơn (28/08/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/mach-nuoc-phong-tru-dich-hai-tren-lua-he-thu-o-ha-tinh-119321.html",
-      "anchor": "“Mách nước” phòng trừ dịch hại trên lúa hè thu ở Hà Tĩnh (17/08/2021)",
-      "crop_guess": "lua",
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/nguyen-nhan-tac-hai-va-bien-phap-xu-ly-phen-trong-ao-nuoi-tom-nguyen-nhan-tac-hai-va-bien-phap-xu-ly-phen-trong-ao-nuoi-tom-119069.html",
-      "anchor": "Nguyên nhân, tác hại và biện pháp xử lý phèn trong ao nuôi tôm  Nguyên nhân, tác hại và biện pháp xử lý phèn trong ao nuôi tôm (09/08/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/enzyme-trong-thuc-an-gia-cam-119017.html",
-      "anchor": "Enzyme trong thức ăn gia cầm",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/soi-sinh-hoc-giai-phap-san-xuat-thuc-an-chan-nuoi-moi-118775.html",
-      "anchor": "Sợi sinh học, giải pháp sản xuất thức ăn chăn nuôi mới",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/tam-lam-mat-trong-chan-nuoi-117564.html",
-      "anchor": "Tấm làm mát trong chăn nuôi (02/07/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ung-dung-cong-nghe-cao-trong-san-xuat-nong-nghiep-117149.html",
-      "anchor": "Ứng dụng công nghệ cao trong sản xuất nông nghiệp (26/06/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ao-ha-nhiet-cho-nhan-vien-y-te-trong-mua-dich-117146.html",
-      "anchor": "Áo hạ nhiệt cho nhân viên y tế trong mùa dịch (26/06/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/kim-ham-qua-trinh-oxy-hoa-trong-thuc-an-116808.html",
-      "anchor": "Kìm hãm quá trình ôxy hóa trong thức ăn",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/tai-sao-nam-2021-la-nam-chuyen-doi-ky-thuat-so-trong-thuong-mai-dien-tu-116741.html",
-      "anchor": "Tại sao năm 2021 là năm chuyển đổi kỹ thuật số trong thương mại điện tử?",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/hai-phong-trong-thu-nghiem-thanh-cong-lua-j02-116562.html",
-      "anchor": "Hải Phòng: Trồng thử nghiệm thành công lúa J02",
-      "crop_guess": "lua",
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/su-dung-bay-dinh-mau-phong-tru-sau-hai-tren-rau-115997.html",
-      "anchor": "Sử dụng bẫy dính màu phòng trừ sâu hại trên rau (11/06/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/dua-san-pham-cong-nghiep-ho-tro-viet-nam-tham-gia-chuoi-san-xuat-nhat-ban-115945.html",
-      "anchor": "Đưa sản phẩm công nghiệp hỗ trợ Việt Nam tham gia chuỗi sản xuất Nhật Bản (10/06/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/lam-the-nao-de-thu-gom-chat-thai-trong-nuoi-trong-thuy-san-115852.html",
-      "anchor": "Làm thế nào để thu gom chất thải trong nuôi trồng thủy sản? (09/06/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/5-xu-huong-chuyen-doi-ky-thuat-so-hang-dau-trong-nong-nghiep-115519.html",
-      "anchor": "5 xu hướng chuyển đổi kỹ thuật số hàng đầu trong nông nghiệp (04/06/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/trong-khoai-lang-giong-moi-nong-dan-nghi-xuan-thu-ve-gan-100-trieu-dong-ha-115494.html",
-      "anchor": "Trồng khoai lang giống mới, nông dân Nghi Xuân thu về gần 100 triệu đồng/ha",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/co-the-su-dung-vi-tao-de-cai-thien-chat-luong-nuoc-trong-trang-trai-nuoi-ca-115355.html",
-      "anchor": "Có thể sử dụng vi tảo để cải thiện chất lượng nước trong trang trại nuôi cá?",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/day-manh-ung-dung-co-gioi-hoa-trong-san-xuat-nong-nghiep-115331.html",
-      "anchor": "Đẩy mạnh ứng dụng cơ giới hóa trong sản xuất nông nghiệp",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/quan-ly-tot-ao-nuoi-tom-trong-mua-nang-nong-115258.html",
-      "anchor": "Quản lý tốt ao nuôi tôm trong mùa nắng nóng",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/hue-phat-trien-vung-san-xuat-lua-chat-luong-cao-loi-nhuan-tang-them-10-15-115080.html",
-      "anchor": "Huế: Phát triển vùng sản xuất lúa chất lượng cao lợi nhuận tăng thêm 10-15%",
-      "crop_guess": "lua",
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/khoi-dong-du-an-nghien-cuu-xay-dung-he-thong-thong-tin-quan-ly-nuoi-trong-thuy-san-115071.html",
-      "anchor": "Khởi động Dự án nghiên cứu xây dựng hệ thống thông tin quản lý nuôi trồng thủy sản",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cong-cu-ky-thuat-so-chinh-xac-giup-nong-dan-trong-lua-nepal-tang-nang-suat-lua-115069.html",
-      "anchor": "Công cụ kỹ thuật số chính xác giúp nông dân trồng lúa Nepal tăng năng suất lúa (30/05/2021)",
-      "crop_guess": "lua",
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/nhung-con-mua-vang-giup-nong-dan-day-nhanh-tien-do-san-xuat-he-thu-115013.html",
-      "anchor": "Những cơn “mưa vàng” giúp nông dân đẩy nhanh tiến độ sản xuất hè thu (28/05/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/mot-so-van-de-can-thuc-hien-tot-trong-san-xuat-lua-vu-he-thu-2021-115012.html",
-      "anchor": "Một số vấn đề cần thực hiện tốt trong sản xuất lúa vụ Hè thu 2021 (28/05/2021)",
-      "crop_guess": "lua",
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/dung-vi-khuan-loai-bo-vi-nhua-trong-moi-truong-114739.html",
-      "anchor": "Dùng vi khuẩn loại bỏ vi nhựa trong môi trường (24/05/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cac-giai-phap-thuc-day-so-hoa-trong-linh-vuc-bat-dong-san-114721.html",
-      "anchor": "Các giải pháp thúc đẩy số hóa trong lĩnh vực bất động sản (24/05/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/dua-giong-lua-st24-ngon-nhat-nhi-the-gioi-ve-trong-ruong-nha-nong-dan-ha-tinh-duoc-mua-boi-thu-114211.html",
-      "anchor": "Đưa giống lúa ST24 ngon nhất nhì thế giới về trồng ruộng nhà, nông dân Hà Tĩnh được mùa bội thu",
-      "crop_guess": "lua",
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ung-dung-khoa-hoc-ky-thuat-trong-phat-trien-san-xuat-ven-do-114008.html",
-      "anchor": "Ứng dụng khoa học kỹ thuật trong phát triển sản xuất ven đô",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/doan-thanh-nien-tien-phong-trong-viec-chuyen-doi-so-113950.html",
-      "anchor": "Đoàn thanh niên tiên phong trong việc chuyển đổi số",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/day-manh-ung-dung-cong-nghe-4-0-trong-phat-trien-nong-nghiep-113790.html",
-      "anchor": "Đẩy mạnh ứng dụng công nghệ 4.0 trong phát triển nông nghiệp",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/mo-hinh-san-xuat-tom-su-giam-chi-phi-an-toan-bang-che-pham-sinh-hoc-113724.html",
-      "anchor": "Mô hình sản xuất tôm sú giảm chi phí, an toàn bằng chế phẩm sinh học (08/05/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/buoc-tien-moi-trong-ngoai-khoa-thu-y-cua-hoc-vien-nong-nghiep-viet-nam-113598.html",
-      "anchor": "Bước tiến mới trong Ngoại khoa Thú y của Học viện Nông nghiệp Việt Nam (06/05/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/nhung-giong-lua-chat-luong-thich-hop-san-xuat-2-vu-cua-vinaseed-113596.html",
-      "anchor": "Những giống lúa chất lượng thích hợp sản xuất 2 vụ của Vinaseed (06/05/2021)",
-      "crop_guess": "lua",
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/thuc-day-qua-trinh-chuyen-doi-so-trong-nong-nghiep-113279.html",
-      "anchor": "Thúc đẩy quá trình chuyển đổi số trong nông nghiệp (29/04/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cong-nghe-phat-hien-virus-sars-cov-2-trong-5-phut-112811.html",
-      "anchor": "Công nghệ phát hiện virus SARS-CoV-2 trong 5 phút",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/chu-dong-ung-dung-khoa-hoc-ky-thuat-trong-chan-nuoi-112646.html",
-      "anchor": "Chủ động ứng dụng khoa học kỹ thuật trong chăn nuôi",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/tang-cuong-quan-ly-san-xuat-thuy-san-trong-thoi-diem-giao-mua-thoi-tiet-dien-bien-phuc-tap-112100.html",
-      "anchor": "Tăng cường quản lý sản xuất thủy sản trong thời điểm giao mùa, thời tiết diễn biến phức tạp. (09/04/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/tang-cuong-cac-bien-phap-ky-thuat-nuoi-truoc-nhung-bien-dong-bat-loi-cua-thoi-tiet-phat-trien-ben-vung-nghe-nuoi-ngao-111955.html",
-      "anchor": "Tăng cường các biện pháp kỹ thuật nuôi trước những biến động bất lợi của thời tiết, phát triển bền vững nghề nuôi Ngao (07/04/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ky-thuat-cham-bon-cay-buoi-sau-thu-hoach-bang-phan-da-yeu-to-van-dien-111667.html",
-      "anchor": "Kỹ thuật chăm bón cây bưởi sau thu hoạch bằng phân đa yếu tố Văn Điển",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/lam-chu-cong-nghe-loi-de-chay-dua-trong-cach-mang-4-0-111636.html",
-      "anchor": "Làm chủ công nghệ lõi để chạy đua trong cách mạng 4.0",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/bayer-dau-tu-lon-co-them-430-cay-trong-lai-moi-111461.html",
-      "anchor": "Bayer đầu tư lớn, có thêm 430 cây trồng lai mới",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ha-tinh-nghien-cuu-thanh-cong-che-pham-sinh-hoc-tru-sau-hai-tren-cay-trong-111347.html",
-      "anchor": "Hà Tĩnh nghiên cứu thành công chế phẩm sinh học trừ sâu hại trên cây trồng",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/so-hoa-du-lich-tang-kha-nang-song-sot-trong-khung-hoang-110915.html",
-      "anchor": "Số hóa du lịch: Tăng khả năng ‘sống sót’ trong khủng hoảng (18/03/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/san-xuat-cay-trong-can-ap-dung-tuoi-tiet-kiem-toi-uu-tren-ca-ba-mat-110639.html",
-      "anchor": "Sản xuất cây trồng cạn áp dụng tưới tiết kiệm: Tối ưu trên cả ba mặt (14/03/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/khac-phuc-yeu-to-dinh-duong-han-che-tang-suc-khoe-dat-trong-110163.html",
-      "anchor": "Khắc phục yếu tố dinh dưỡng hạn chế tăng sức khỏe đất trồng",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/nghe-an-chi-thi-ung-dung-tien-bo-ky-thuat-vu-lua-xuan-2021-110162.html",
-      "anchor": "Nghệ An chỉ thị ứng dụng tiến bộ kỹ thuật vụ lúa xuân 2021",
-      "crop_guess": "lua",
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/nhung-nguyen-nhan-chinh-gay-benh-chet-cham-trong-trong-trot-110032.html",
-      "anchor": "Những nguyên nhân chính gây 'bệnh chết chậm' trong trồng trọt",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/mot-so-luu-y-trong-ky-thuat-canh-tac-chanh-o-vung-dat-phen-109729.html",
-      "anchor": "Một số lưu ý trong kỹ thuật canh tác chanh ở vùng đất phèn (26/02/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ky-thuat-chan-nuoi-lon-an-toan-sinh-hoc-theo-huong-huu-co-109527.html",
-      "anchor": "Kỹ thuật chăn nuôi lợn an toàn sinh học theo hướng hữu cơ (23/02/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/su-dung-che-pham-sinh-hoc-trong-nuoi-tom-vung-kho-khan-109495.html",
-      "anchor": "Sử dụng chế phẩm sinh học trong nuôi tôm vùng khó khăn (23/02/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/nhung-luu-y-trong-cong-tac-tai-dan-vat-nuoi-sau-tet-nguyen-dan-109425.html",
-      "anchor": "Những lưu ý trong công tác tái đàn vật nuôi sau Tết Nguyên đán (22/02/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/kon-tum-ung-dung-cong-nghe-cao-trong-chan-nuoi-huong-di-nhieu-trien-vong-109364.html",
-      "anchor": "Kon Tum: Ứng dụng công nghệ cao trong chăn nuôi - Hướng đi nhiều triển vọng (20/02/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/phuong-phap-tiep-can-dia-phuong-can-thiet-de-giai-quyet-phat-thai-trong-nganh-chan-nuoi-109345.html",
-      "anchor": "Phương pháp tiếp cận địa phương cần thiết để giải quyết phát thải trong ngành chăn nuôi (20/02/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/phong-tru-co-dai-cho-lua-gieo-sa-vu-dong-xuan-109014.html",
-      "anchor": "Phòng trừ cỏ dại cho lúa gieo sạ vụ Đông Xuân",
-      "crop_guess": "lua",
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cai-thien-hoat-dong-san-xuat-thit-gia-cam-khong-khang-sinh-108914.html",
-      "anchor": "Cải thiện hoạt động sản xuất thịt gia cầm không kháng sinh",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/hieu-qua-cong-nghe-biofloc-trong-nuoi-tom-nuoc-lo-108286.html",
-      "anchor": "Hiệu quả công nghệ Biofloc trong nuôi tôm nước lợ",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/so-luong-con-trung-giam-nghiem-trong-108195.html",
-      "anchor": "Số lượng côn trùng giảm nghiêm trọng",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/danh-gia-rui-ro-trong-trang-trai-chan-nuoi-gia-cam-108029.html",
-      "anchor": "Đánh giá rủi ro trong trang trại chăn nuôi gia cầm (17/01/2021)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/huong-dan-su-dung-thuoc-tru-co-tren-cay-trong-vu-xuan-2021-107173.html",
-      "anchor": "Hướng dẫn sử dụng thuốc trừ cỏ trên cây trồng vụ Xuân 2021",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/toa-dam-ky-thuat-xu-ly-cay-buoi-thanh-tra-bi-anh-huong-do-mua-lu-106921.html",
-      "anchor": "Tọa đàm \"Kỹ thuật xử lý cây bưởi thanh trà bị ảnh hưởng do mưa lũ\"",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/mavin-ung-dung-phan-mem-quan-ly-san-xuat-trong-cac-trai-heo-106916.html",
-      "anchor": "Mavin ứng dụng phần mềm Quản lý sản xuất trong các trại heo",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cay-lua-bang-may-giai-phap-san-xuat-lua-thich-ung-voi-dieu-kien-bien-doi-khi-hau-106269.html",
-      "anchor": "Cấy lúa bằng máy - Giải pháp sản xuất lúa thích ứng với điều kiện biến đổi khí hậu (18/12/2020)",
-      "crop_guess": "lua",
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/thuc-trang-dat-san-xuat-nong-nghiep-dang-rat-dang-bao-dong-105582.html",
-      "anchor": "Thực trạng đất sản xuất nông nghiệp đang rất đáng báo động (07/12/2020)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ttknqg-hoi-thao-gioi-thieu-tien-bo-ky-thuat-linh-vuc-chan-nuoi-104782.html",
-      "anchor": "TTKNQG: Hội thảo “Giới thiệu tiến bộ kỹ thuật lĩnh vực chăn nuôi” (26/11/2020)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/dua-ung-dung-khoa-hoc-cong-nghe-vao-san-xuat-va-doi-song-104163.html",
-      "anchor": "Đưa ứng dụng khoa học công nghệ vào sản xuất và đời sống",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/pho-bien-tien-bo-ky-thuat-moi-trong-linh-vuc-thuy-san-104029.html",
-      "anchor": "Phổ biến tiến bộ kỹ thuật mới trong lĩnh vực thủy sản",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cham-soc-cay-an-qua-sau-mua-lu-103830.html",
-      "anchor": "Chăm sóc cây ăn quả sau mưa lũ (13/11/2020)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/tai-tao-dat-bun-bang-canh-tac-uot-103776.html",
-      "anchor": "Tái tạo đất bùn bằng canh tác ướt (13/11/2020)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/nong-nghiep-co-the-khien-bien-doi-khi-hau-tram-trong-hon-103716.html",
-      "anchor": "Nông nghiệp có thể khiến biến đổi khí hậu trầm trọng hơn (12/11/2020)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cong-ty-tnhh-long-hai-ung-dung-cong-nghe-cao-trong-san-xuat-nam-an-103664.html",
-      "anchor": "Công ty TNHH Long Hải: Ứng dụng công nghệ cao trong sản xuất nấm ăn (11/11/2020)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ky-thuat-cham-soc-trau-bo-103655.html",
-      "anchor": "Kỹ thuật chăm sóc trâu, bò (11/11/2020)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/xu-huong-ung-dung-cong-nghe-sinh-hoc-trong-chan-nuoi-103654.html",
-      "anchor": "Xu hướng ứng dụng công nghệ sinh học trong chăn nuôi (11/11/2020)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/dien-dan-khuyen-nong-a-nong-nghiep-chu-de-giai-phap-phong-chong-han-man-va-lien-ket-san-xuat-tieu-thu-trai-cay-gan-voi-truy-xuat-nguon-goc-vung-dbscl-103510.html",
-      "anchor": "Diễn đàn Khuyến nông @ Nông nghiệp chủ đề: “Giải pháp phòng chống hạn, mặn và liên kết sản xuất, tiêu thụ trái cây gắn với truy xuất nguồn gốc vùng ĐBSCL” (09/11/2020)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/nam-2021-viet-nam-se-co-vacxin-dich-ta-lon-chau-phi-san-xuat-trong-nuoc-103507.html",
-      "anchor": "Năm 2021, Việt Nam sẽ có vacxin Dịch tả lợn Châu Phi sản xuất trong nước (09/11/2020)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/dich-benh-cay-trong-nguy-co-tu-suy-thoai-dat-103006.html",
-      "anchor": "Dịch bệnh cây trồng, nguy cơ từ suy thoái đất",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/san-xuat-thanh-cong-vacxin-phong-benh-phu-dau-va-pho-thuong-han-lon-102566.html",
-      "anchor": "Sản xuất thành công vacxin phòng bệnh phù đầu và phó thương hàn lợn",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/huong-dan-mot-so-noi-dung-cap-bach-khoi-phuc-khu-dan-cu-vuon-ho-sau-lu-102367.html",
-      "anchor": "Hướng dẫn một số nội dung cấp bách khôi phục Khu dân cư, vườn hộ sau lũ (25/10/2020)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ung-dung-nong-nghiep-cong-nghe-cao-trong-san-xuat-lua-102217.html",
-      "anchor": "Ứng dụng nông nghiệp công nghệ cao trong sản xuất lúa (23/10/2020)",
-      "crop_guess": "lua",
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ung-dung-cong-nghe-4-0-trong-san-xuat-nong-nghiep-dat-hieu-qua-cao-100640.html",
-      "anchor": "Ứng dụng công nghệ 4.0 trong sản xuất nông nghiệp đạt hiệu quả cao",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/vai-tro-cua-tieu-chuan-trong-xu-the-phat-trien-do-thi-thong-minh-100039.html",
-      "anchor": "Vai trò của tiêu chuẩn trong xu thế phát triển đô thị thông minh",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/thay-doi-tu-duy-san-xuat-vu-dong-99858.html",
-      "anchor": "Thay đổi tư duy sản xuất vụ đông",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ra-mat-he-thong-can-do-3d-lon-trong-15-giay-99621.html",
-      "anchor": "Ra mắt hệ thống cân đo 3D lợn trong 15 giây",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/tap-trung-cham-soc-cay-cam-thoi-ky-nuoi-qua-non-99118.html",
-      "anchor": "Tập trung chăm sóc cây cam thời kỳ nuôi quả non (30/08/2020)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/thuc-hien-dang-ky-nuoi-trong-thuy-san-long-be-doi-tuong-thuy-san-nuoi-chu-luc-theo-quy-dinh-cua-luat-thuy-san-2017-98915.html",
-      "anchor": "Thực hiện Đăng ký nuôi trồng thuỷ sản lồng bè, đối tượng thuỷ sản nuôi chủ lực theo quy định của Luật Thủy sản 2017 (26/08/2020)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/phong-tru-sau-benh-hai-trong-san-xuat-rau-huu-co-phong-tru-sau-benh-hai-trong-san-xuat-rau-huu-co-97300.html",
-      "anchor": "Phòng trừ sâu bệnh hại trong sản xuất rau hữu cơ Phòng trừ sâu bệnh hại trong sản xuất rau hữu cơ (24/07/2020)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/san-xuat-thit-ga-nho-cong-nghe-in-3d-97100.html",
-      "anchor": "Sản xuất thịt gà nhờ công nghệ in 3D (20/07/2020)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/trien-vong-cay-trong-cong-nghe-sinh-hoc-97050.html",
-      "anchor": "Triển vọng cây trồng công nghệ sinh học (19/07/2020)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/tiem-nang-san-xuat-dien-tu-thuc-vat-95526.html",
-      "anchor": "Tiềm năng sản xuất điện từ thực vật",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/phong-tru-sau-benh-hai-trong-san-xuat-rau-huu-co-95522.html",
-      "anchor": "Phòng trừ sâu bệnh hại trong sản xuất rau hữu cơ",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cong-nghe-moi-giup-loai-bo-chat-doc-hai-trong-nuoc-95052.html",
-      "anchor": "Công nghệ mới giúp loại bỏ chất độc hại trong nước",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/tang-cuong-cac-bien-phap-phong-chong-nang-nong-trong-nuoi-trong-thuy-san-94538.html",
-      "anchor": "Tăng cường các biện pháp phòng chống nắng nóng trong nuôi trồng thủy sản (31/05/2020)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/huong-dan-xac-minh-chu-ky-dien-tu-chu-ky-so-93760.html",
-      "anchor": "Hướng dẫn xác minh chữ ký điện tử, chữ ký số (16/05/2020)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ung-pho-nang-nong-nguoi-trong-cam-ha-tinh-ap-dung-cong-nghe-tuoi-tu-dong-93657.html",
-      "anchor": "Ứng phó nắng nóng, người trồng cam Hà Tĩnh áp dụng công nghệ tưới tự động (14/05/2020)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/dua-chuot-nhat-ban-trong-nha-luoi-chat-luong-cao-nang-suat-vuot-troi-92361.html",
-      "anchor": "Dưa chuột Nhật Bản trồng nhà lưới, chất lượng cao, năng suất vượt trội",
-      "crop_guess": "dua_chuot",
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cac-doi-tac-chuoi-cung-ung-toan-cau-su-dung-blockchain-de-giao-dich-an-toan-trong-dai-dich-covid-19-92323.html",
-      "anchor": "Các đối tác chuỗi cung ứng toàn cầu sử dụng blockchain để giao dịch an toàn trong đại dịch COVID-19",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/nguoi-dan-ha-tinh-khoac-ao-cho-buoi-dac-san-phong-tru-sau-benh-92115.html",
-      "anchor": "Người dân Hà Tĩnh “khoác áo” cho bưởi đặc sản phòng trừ sâu bệnh",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ung-dung-dien-thoai-thong-minh-tuoi-phun-cho-cay-trong-91800.html",
-      "anchor": "Ứng dụng điện thoại thông minh tưới phun cho cây trồng (09/04/2020)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/nang-cao-nang-luc-quan-trac-khi-tuong-thuy-van-chuyen-dung-trong-linh-vuc-thuy-loi-91646.html",
-      "anchor": "Nâng cao năng lực quan trắc khí tượng thủy văn chuyên dùng trong lĩnh vực thủy lợi (06/04/2020)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cham-soc-lua-xuan-o-mien-bac-thich-ung-thoi-tiet-bat-thuong-91604.html",
-      "anchor": "Chăm sóc lúa Xuân ở miền Bắc thích ứng thời tiết bất thường (06/04/2020)",
-      "crop_guess": "lua",
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ung-dung-cong-nghe-cao-trong-san-xuat-ca-tra-giong-91133.html",
-      "anchor": "Ứng dụng công nghệ cao trong sản xuất cá tra giống (25/11/2018)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/TP-HCM-ung-dung-cong-nghe-sinh-hoc-de-nang-cao-nang-suat-va-chat-luong-trong-nong-nghiep-90933.html",
-      "anchor": "TP.HCM ứng dụng công nghệ sinh học để nâng cao năng suất và chất lượng trong nông nghiệp",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Binh-Thuan-day-manh-ung-dung-dung-cong-nghe-cao-vao-san-xuat-nong-nghiep-90910.html",
-      "anchor": "Bình Thuận đẩy mạnh ứng dụng dụng công nghệ cao vào sản xuất nông nghiệp",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Song-khoe-thu-kha-tien-nho-trong-ca-chua-VietGAP-trai-sai-phat-hon-90754.html",
-      "anchor": "Sống khỏe, thu khá tiền nhờ trồng cà chua VietGAP trái sai \"phát hờn\"",
-      "crop_guess": "ca_chua",
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Trong-muop-dang-tren-dat-cat-cho-hieu-qua-cao-90525.html",
-      "anchor": "Trồng mướp đắng trên đất cát cho hiệu quả cao",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Su-dung-vi-sinh-huu-ich-trong-thuc-an-chan-nuoi-90175.html",
-      "anchor": "Sử dụng vi sinh hữu ích trong thức ăn chăn nuôi",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Lo-thuc-pham-khong-an-toan-dan-pho-dua-nhau-trong-rau-sach-thoi-4-0-89982.html",
-      "anchor": "Lo thực phẩm không an toàn, dân phố đua nhau trồng rau sạch thời 4.0 (30/10/2018)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Biet-them-ve-canh-tac-nong-nghiep-trong-moi-truong-co-kiem-soat-CEA-89939.html",
-      "anchor": "Biết thêm về canh tác nông nghiệp trong môi trường có kiểm soát (CEA) (29/10/2018)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Huong-dan-cham-soc-cay-an-qua-co-mui-89889.html",
-      "anchor": "Hướng dẫn chăm sóc cây ăn quả có múi (29/10/2018)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ben-Tre-Trien-khai-mo-hinh-san-xuat-giong-ga-tau-lai-noi-F2-89436.html",
-      "anchor": "Bến Tre: Triển khai mô hình sản xuất giống gà tàu lai nòi F2",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Bi-quyet-trong-quyt-duong-khong-thuoc-sau-nang-suat-50-tan-ha-89080.html",
-      "anchor": "Bí quyết trồng quýt đường không thuốc sâu, năng suất 50 tấn/ha (15/10/2018)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ky-thuat-nuoi-tom-cang-xanh-toan-duc-tai-Kien-Giang-88945.html",
-      "anchor": "Kỹ thuật nuôi tôm càng xanh toàn đực tại Kiên Giang (13/10/2018)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ky-thuat-xay-dung-he-thong-be-thu-phan-va-san-xuat-phan-huu-co-87636.html",
-      "anchor": "Kỹ thuật xây dựng hệ thống bể thu phân và sản xuất phân hữu cơ",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Xay-dung-mang-luoi-thien-dich-cho-cay-trong-87409.html",
-      "anchor": "Xây dựng mạng lưới thiên địch cho cây trồng",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ung-dung-tien-bo-ky-thuat-trong-san-xuat-cay-an-qua-co-mui-Ky-1-87340.html",
-      "anchor": "Ứng dụng tiến bộ kỹ thuật trong sản xuất cây ăn quả có múi (Kỳ 1)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/San-xuat-phu-gia-thuc-an-tu-CO2-86897.html",
-      "anchor": "Sản xuất phụ gia thức ăn từ CO2",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Robot-trong-chan-nuoi-gia-cam-hien-dai-86896.html",
-      "anchor": "Robot trong chăn nuôi gia cầm hiện đại",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Giai-phap-canh-tac-nong-nghiep-tu-dong-86727.html",
-      "anchor": "Giải pháp canh tác nông nghiệp tự động (05/09/2018)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ung-dung-khoa-hoc-cong-nghe-trong-viec-giam-nhe-rui-ro-thien-tai-86529.html",
-      "anchor": "Ứng dụng khoa học công nghệ trong việc giảm nhẹ rủi ro thiên tai (02/09/2018)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ap-dung-ky-thuat-hien-dai-phan-tich-thuoc-BVTV-tren-nong-san-86394.html",
-      "anchor": "Áp dụng kỹ thuật hiện đại phân tích thuốc BVTV trên nông sản (30/08/2018)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ung-dung-khoa-hoc-cong-nghe-trong-phong-chong-rui-ro-thien-tai-86356.html",
-      "anchor": "Ứng dụng khoa học công nghệ trong phòng chống rủi ro thiên tai (30/08/2018)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Cong-nghe-dac-thu-kiem-soat-tuyen-trung-khi-chuyen-doi-trong-bong-sang-dau-tuong-86354.html",
-      "anchor": "Công nghệ đặc thù kiểm soát tuyến trùng khi chuyển đổi trồng bông sang đậu tương (30/08/2018)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Thuong-Loc-ung-dung-khoa-hoc-ky-thuat-cho-cam-chat-luong-cao-86249.html",
-      "anchor": "Thượng Lộc ứng dụng khoa học kỹ thuật cho cam chất lượng cao",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/GFS-san-sang-thuc-hien-cuoc-cach-mang-trong-nong-nghiep-huu-co-cong-nghe-cao-86058.html",
-      "anchor": "GFS sẵn sàng thực hiện cuộc cách mạng trong nông nghiệp hữu cơ công nghệ cao",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/O-An-Do-viec-thay-doi-cay-trong-co-the-giup-tiet-kiem-nuoc-va-cai-thien-dinh-duong-85326.html",
-      "anchor": "Ở Ấn Độ, việc thay đổi cây trồng có thể giúp tiết kiệm nước và cải thiện dinh dưỡng",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Nong-dan-Hung-Yen-da-dung-cong-nghe-Nano-cham-soc-nhan-85284.html",
-      "anchor": "Nông dân Hưng Yên đã dùng công nghệ Nano chăm sóc nhãn",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Chi-duoc-su-dung-khang-sinh-trong-chan-nuoi-khi-co-ke-don-cua-bac-si-thu-y-85268.html",
-      "anchor": "Chỉ được sử dụng kháng sinh trong chăn nuôi khi có kê đơn của bác sĩ thú y (12/08/2018)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Lam-giau-khac-nguoi-Trong-ca-na-Thai-cay-thap-te-trai-quanh-nam-85229.html",
-      "anchor": "Những vấn đề cần quan tâm trong phát triển cây ăn quả (11/08/2018)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/eGarden-Mo-hinh-Uber-trong-nong-nghiep-84647.html",
-      "anchor": "eGarden: Mô hình “Uber” trong nông nghiệp (03/08/2018)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Kham-pha-cong-nghe-canh-tac-thong-minh-ben-trong-VinEco-Nam-Hoi-An-84387.html",
-      "anchor": "Khám phá công nghệ canh tác thông minh bên trong VinEco Nam Hội An",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Su-dung-thuoc-phong-tru-sau-handmade-An-toan-tiet-kiem-hieu-qua-84296.html",
-      "anchor": "Sử dụng thuốc phòng trừ sâu “handmade”: An toàn, tiết kiệm, hiệu quả",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Thanh-phan-can-luu-y-trong-nuoi-ga-thit-84225.html",
-      "anchor": "Thành phần cần lưu ý trong nuôi gà thịt",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Dam-go-sinh-hoc-Biffaen-phong-tru-tuyen-trung-hai-ca-phe-84161.html",
-      "anchor": "Dấm gỗ sinh học Biffaen phòng trừ tuyến trùng hại cà phê",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Phytogenic-va-moi-lien-he-trong-dinh-duong-gia-cam-84137.html",
-      "anchor": "“Phytogenic” và mối liên hệ trong dinh dưỡng gia cầm",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Thay-doi-thoi-quen-canh-tac-bang-ung-dung-khoa-hoc-cong-nghe-84136.html",
-      "anchor": "Thay đổi thói quen canh tác bằng ứng dụng khoa học công nghệ",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ky-thuat-san-xuat-che-pham-thao-moc-tru-sau-benh-84097.html",
-      "anchor": "Kỹ thuật sản xuất chế phẩm thảo mộc trừ sâu bệnh",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Thuc-day-phat-trien-co-gioi-hoa-trong-san-xuat-nong-nghiep-83958.html",
-      "anchor": "Thúc đẩy phát triển cơ giới hóa trong sản xuất nông nghiệp (23/07/2018)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Trong-nam-thoi-IoT-83796.html",
-      "anchor": "Trồng nấm thời IoT (21/07/2018)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Mot-so-bien-phap-ky-thuat-phong-ngua-thiet-hai-va-khac-phuc-hau-qua-do-bao-lu-gay-ra-cho-thuy-san-nuoi-83663.html",
-      "anchor": "Một số biện pháp kỹ thuật phòng ngừa thiệt hại và khắc phục hậu quả do bão lũ gây ra cho thuỷ sản nuôi. (18/07/2018)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Pho-bien-ky-thuat-vo-beo-bo-83621.html",
-      "anchor": "Phổ biến kỹ thuật vỗ béo bò (17/07/2018)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/San-xuat-giong-cua-bien-Day-manh-pho-bien-cong-nghe-83493.html",
-      "anchor": "Sản xuất giống cua biển: Đẩy mạnh phổ biến công nghệ",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Chu-trong-NNCNC-Be-do-phuc-vu-phat-trien-do-thi-va-du-lich-83151.html",
-      "anchor": "Chú trọng NNCNC: “Bệ đỡ” phục vụ phát triển đô thị và du lịch",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Su-dung-den-LED-cho-vuon-trong-hoa-cuc-Da-Lat-Giam-dang-ke-tieu-thu-dien-83041.html",
-      "anchor": "Sử dụng đèn LED cho vườn trồng hoa cúc Đà Lạt: Giảm đáng kể tiêu thụ điện",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Chu-dong-bao-ve-cay-trong-vat-nuoi-truoc-nang-nong-keo-dai-82746.html",
-      "anchor": "Chủ động bảo vệ cây trồng, vật nuôi trước nắng nóng kéo dài (04/07/2018)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Cach-xu-ly-phe-phu-pham-trong-nam-lam-gia-the-huu-co-82744.html",
-      "anchor": "Cách xử lý phế phụ phẩm trồng nấm làm giá thể hữu cơ (04/07/2018)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Day-manh-canh-tac-lua-theo-SRI-IPM-82361.html",
-      "anchor": "Đẩy mạnh canh tác lúa theo SRI, IPM (28/06/2018)",
-      "crop_guess": "lua",
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ESCO-Tiet-kiem-dien-trong-nuoi-trong-thuy-san-82330.html",
-      "anchor": "ESCO: Tiết kiệm điện trong nuôi trồng thủy sản (28/06/2018)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Quan-ly-khang-sinh-trong-thuc-an-chan-nuoi-thuy-san-tai-Viet-Nam-va-bai-hoc-quan-ly-khang-sinh-cua-Phap-82317.html",
-      "anchor": "Quản lý kháng sinh trong thức ăn chăn nuôi, thủy sản tại Việt Nam và bài học quản lý kháng sinh của Pháp (28/06/2018)",
-      "crop_guess": null,
-      "seed_id": "hatinh_khcn",
-      "publisher": "NTM Ha Tinh",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/nhen-do-hai-san-va-bien-phap-phong-tru-hieu-qua-1306.html",
-      "anchor": "NHỆN ĐỎ HẠI SẮN VÀ BIỆN PHÁP PHÒNG TRỪ HIỆU QUẢ",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/huong-dan-quy-trinh-ky-thuat-trong-ngo-sinh-khoi-tren-dat-lua-chuyen-doi-1305.html",
-      "anchor": "HƯỚNG DẪN QUY TRÌNH KỸ THUẬT TRỒNG NGÔ SINH KHỐI TRÊN ĐẤT LÚA CHUYỂN ĐỔI",
-      "crop_guess": "lua",
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/hieu-qua-cay-muop-dang-tren-dat-cat-1293.html",
-      "anchor": "HIỆU QUẢ CÂY MƯỚP ĐẮNG TRÊN ĐẤT CÁT",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/ban-tin-dich-vu-khi-hau-nong-nghiep-thang-5-2026-1289.html",
-      "anchor": "Bản tin dịch vụ khí hậu Nông nghiệp tháng 5/2026",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/huong-dan-phong-tru-dich-hai-lua-giai-doan-truoc-trong-va-sau-tro-1285.html",
-      "anchor": "HƯỚNG DẪN PHÒNG TRỪ DỊCH HẠI LÚA GIAI ĐOẠN TRƯỚC, TRONG VÀ SAU TRỔ",
-      "crop_guess": "lua",
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/chuan-bi-dieu-kien-chan-nuoi-cho-vu-san-xuat-moi-1261.html",
-      "anchor": "Chuẩn bị điều kiện chăn nuôi cho vụ sản xuất mới",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/huong-dan-su-dung-thuoc-tru-co-an-toan-trong-vu-dong-xuan-2025-2026-1260.html",
-      "anchor": "HƯỚNG DẪN SỬ DỤNG THUỐC TRỪ CỎ AN TOÀN TRONG VỤ ĐÔNG XUÂN 2025-2026",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/to-roi-1246.html",
-      "anchor": "Tăng cường khả năng chống chịu cho các hộ sản xuất nông nghiệp nhỏ dễ bị tổn thương trước tác động của biến đổi khí hậu thông qua các giải pháp thích ứng dựa vào thiên nhiên có trách nhiệm giới (NbSA) tại Hà Tĩnh và Quảng Trị",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/day-manh-cong-tac-phap-che-trong-hoat-dong-lam-nghiep-nham-bao-ve-rung-ben-vung-1239.html",
-      "anchor": "Đẩy mạnh công tác pháp chế trong hoạt động lâm nghiệp nhằm bảo vệ rừng bền vững",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/nguon-luc-don-bay-cho-cong-tac-quan-ly-bao-ve-rung-o-dakrong-1237.html",
-      "anchor": "Nguồn lực “đòn bẩy” cho công tác quản lý, bảo vệ rừng ở Đakrông",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/xay-dung-chi-dan-dia-ly-cho-nong-san-dia-phuong-1236.html",
-      "anchor": "Xây dựng chỉ dẫn địa lý cho nông sản địa phương",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/phien-cho-khuyen-nong-noi-ket-noi-va-quang-ba-san-pham-nong-nghiep-dia-phuong-1235.html",
-      "anchor": "“Phiên chợ khuyến nông” - nơi kết nối và quảng bá sản phẩm nông nghiệp địa phương",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/giai-phap-phat-trien-ben-vung-cay-ca-phe-quang-tri-1234.html",
-      "anchor": "Giải pháp phát triển bền vững cây cà phê Quảng Trị",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/tang-cuong-tuyen-truyen-chong-khai-thac-iuu-1231.html",
-      "anchor": "Tăng cường tuyên truyền chống khai thác IUU",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/phat-trien-ho-tieu-huu-co-co-hoi-va-thach-thuc-1230.html",
-      "anchor": "Phát triển hồ tiêu hữu cơ CƠ HỘI VÀ THÁCH THỨC",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/ung-dung-che-pham-sinh-hoc-de-xu-ly-cac-vung-dat-bi-boi-lap-sau-bao-lu-1226.html",
-      "anchor": "Ứng dụng chế phẩm sinh học để xử lý các vùng đất bị bồi lấp sau bão lũ",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/huong-dan-bien-phap-phong-tru-tong-hop-benh-kham-la-san-nien-vu-2026-1225.html",
-      "anchor": "Hướng dẫn biện pháp phòng trừ tổng hợp bệnh khảm lá sắn niên vụ 2026",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/chu-dong-ung-pho-voi-mua-mua-bao-trong-nuoi-trong-thuy-san-nam-2025-1224.html",
-      "anchor": "Chủ động ứng phó với mùa mưa, bão trong nuôi trồng thủy sản năm 2025",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/tinh-quang-tri-day-manh-phat-trien-ca-phe-chat-luong-1106.html",
-      "anchor": "TỈNH QUẢNG TRỊ ĐẨY MẠNH PHÁT TRIỂN CÀ PHÊ CHẤT LƯỢNG",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/nvlaws/Cong-van/Huong-dan-xay-dung-du-toan-ngan-sach-nha-nuoc-nam-2027-3855/",
-      "anchor": "Hướng dẫn xây dựng dự toán ngân sách nhà nước năm 2027",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/nvlaws/Thong-bao/THONG-BAO-Tinh-hinh-san-xuat-va-sinh-vat-gay-hai-cay-trong-Tu-ngay-20-5-27-5-2026-3853/",
-      "anchor": "THÔNG BÁO Tình hình sản xuất và sinh vật gây hại cây trồng (Từ ngày 20/5 - 27/5/2026)",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/nvlaws/Quyet-dinh/QUYET-DINH-Ban-hanh-cac-dinh-muc-kinh-te-ky-thuat-khuyen-nong-3844/",
-      "anchor": "QUYẾT ĐỊNH Ban hành các định mức kinh tế kỹ thuật khuyến nông",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/tin-tuc-su-kien/danh-gia-mo-hinh-chuyen-doi-dat-lua-kem-hieu-qua-sang-trong-ngo-sinh-khoi-1323.html",
-      "anchor": "Đánh giá mô hình chuyển đổi đất lúa kém hiệu quả sang trồng ngô sinh khối",
-      "crop_guess": "lua",
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/",
-      "anchor": "Thông tin KH-KT",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/tai-lieu-khuyen-nong/giai-phap-xanh-trong-xu-ly-rom-ra-sau-thu-hoach-tren-dong-ruong-1296.html",
-      "anchor": "Giải pháp “xanh” trong xử lý rơm rạ sau thu hoạch trên đồng ruộng",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/tai-lieu-khuyen-nong/nang-cao-hieu-qua-nuoi-trong-thuy-san-1294.html",
-      "anchor": "Nâng cao hiệu quả nuôi trồng thủy sản",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/chuyen-doi-so/ung-dung-cong-nghe-trong-quan-ly-bao-ve-rung-1229.html",
-      "anchor": "Ứng dụng công nghệ trong quản lý, bảo vệ rừng",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/chu-truong-chinh-sach/nhung-diem-moi-quan-trong-cua-luat-so-146-2025-qh15-trong-linh-vuc-nong-nghiep-va-moi-truong-1259.html",
-      "anchor": "Những điểm mới quan trọng của Luật số 146/2025/QH15 trong lĩnh vực nông nghiệp và môi trường",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/chu-truong-chinh-sach/huong-dan-xay-dung-ban-tu-cong-bo-san-pham-doi-voi-co-so-san-xuat-kinh-doanh-thuc-pham-nong-lam-thuy-san-1166.html",
-      "anchor": "Hướng dẫn xây dựng bản tự công bố sản phẩm đối với cơ sở sản xuất, kinh doanh thực phẩm nông lâm thủy sản",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/nha-nong-can-biet/huong-dan-su-dung-thuoc-tru-co-an-toan-trong-vu-dong-xuan-2025-2026-1250.html",
-      "anchor": "HƯỚNG DẪN SỬ DỤNG THUỐC TRỪ CỎ AN TOÀN TRONG VỤ ĐÔNG XUÂN 2025-2026",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennong.quangtri.gov.vn/nha-nong-can-biet/nhung-viec-can-lam-trong-thang-7-2025-1144.html",
-      "anchor": "NHỮNG VIỆC CẦN LÀM TRONG THÁNG 7/2025",
-      "crop_guess": null,
-      "seed_id": "quangtri_khkt",
-      "publisher": "Trung tam Khuyen nong Quang Tri",
-      "region_hint": "bac_trung_bo",
-      "source_tier": 1
-    },
-    {
-      "url": "https://khuyennongvn.gov.vn/thong-tin-thi-truong/thi-truong-trong-nuoc/dong-thap-hoi-thao-lien-ket-san-xuat-tieu-thu-lua-chat-luong-cao-huong-den-phat-trien-xanh-va-ben-vung-32373.html",
-      "anchor": "thong tin thi truong thi truong trong nuoc dong thap hoi thao lien ket san xuat tieu thu lua chat luong cao huong den phat trien xanh va ben vung 32373.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-cong-nghiep/",
+      "anchor": "Kỹ thuật bón phân cây công nghiệp",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/can-tho-hoi-thao-dau-bo-mo-hinh-canh-tac-lua-thong-minh-phat-thai-thap-32371.html",
-      "anchor": "hoat dong khuyen nong chuyen giao tbkt can tho hoi thao dau bo mo hinh canh tac lua thong minh phat thai thap 32371.html",
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-hoa-cay-canh/",
+      "anchor": "Kỹ thuật bón phân cây hoa, cây cảnh",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/",
+      "anchor": "Kỹ thuật bón phân câythực phẩm",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-an-qua/",
+      "anchor": "Kỹ thuật bón phân cây ăn quả",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/quy-trinh-kiem-nghiem-khao-nghiem-phan-bon/",
+      "anchor": "Quy trình khảo nghiệm",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/quy-trinh-kiem-nghiem/",
+      "anchor": "Quy trình kiểm nghiệm",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/huong-dan-su-dung-cong-cu-phoi-tron-phan-bon/",
+      "anchor": "Hướng dẫn sử dụng công cụ phối trộn phân bón",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/kien-nghi-dua-cay-chuoi-ra-khoi-danh-muc-cay-trong-chinh/",
+      "anchor": "Kiến nghị đưa cây chuối ra khỏi danh mục cây trồng chính",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/kiem-nghiem-vien-trung-tam-khao-kiem-nghiem-phan-bon-quoc-gia-tich-cuc-phat-huy-nghe-phan-lap-luu-tru-va-nuoi-cay-nam-co-ich-de-ung-dung-trong-chuoi-nong-nghiep-tuan-hoan-huu-co-va-chuyen-giao-toi-c/",
+      "anchor": "Kiểm nghiệm viên Trung tâm Khảo kiểm nghiệm Phân bón Quốc gia tích cực phát huy nghề, phân lập, lưu trữ và nuôi cấy nấm có ích để ứng dụng trong chuỗi nông nghiệp tuần hoàn hữu cơ và chuyển giao tới các Doanh nghiệp ứng dụng công nghệ cao!",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-cay-ngo-vu-dong-de-dat-hieu-qua-cao/",
+      "anchor": "Kỹ thuật bón phân cho cây ngô vụ đông để đạt hiệu quả cao",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/mot-so-luu-y-khi-bon-phan-cho-cay-trong/",
+      "anchor": "Một số lưu ý khi bón phân cho cây trồng",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/giam-that-thoat-luong-dam-trong-canh-tac-lua/",
+      "anchor": "Giảm thất thoát lượng đạm trong canh tác lúa",
       "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/hai-phong-so-ket-du-an-tuoi-uot-kho-xen-ke-awd-thuc-day-san-xuat-lua-giam-phat-thai-32370.html",
-      "anchor": "hoat dong khuyen nong chuyen giao tbkt hai phong so ket du an tuoi uot kho xen ke awd thuc day san xuat lua giam phat thai 32370.html",
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-lua-ngan-ngay/",
+      "anchor": "Kỹ thuật bón phân cho lúa ngắn ngày",
       "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/thien-tai-dich-hai/phong-tru-sau-cuon-la-nho-lua-6-va-mot-so-sinh-vat-gay-hai-cuoi-vu-tren-lua-vu-mua-tai-cac-tinh-thanh-pho-phia-bac-32369.html",
-      "anchor": "thien tai dich hai phong tru sau cuon la nho lua 6 va mot so sinh vat gay hai cuoi vu tren lua vu mua tai cac tinh thanh pho phia bac 32369.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/trong-thanh-cong-sam-han-quoc-theo-huong-huu-co-tai-vinh-phuc/",
+      "anchor": "Trồng thành công sâm Hàn Quốc theo hướng hữu cơ tại Vĩnh Phúc",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/1-trieu-hecta-chuyen-canh-lua-chat-luong-cao/de-an-1-trieu-hecta-lua-chat-luong-cao-ra-soat-quy-hoach-chuan-hoa-ky-thuat-xay-dung-thuong-hieu-hat-gao-xanh-32367.html",
-      "anchor": "1 trieu hecta chuyen canh lua chat luong cao de an 1 trieu hecta lua chat luong cao ra soat quy hoach chuan hoa ky thuat xay dung thuong hieu hat gao xanh 32367",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/trung-tam-khao-kiem-nghiem-phan-bon-quoc-gia-hop-tac-lien-ket-binh-xuyen-hightech-chuyen-giao-cac-giai-phap-ky-thuat-cong-nghe-ung-dung-vi-sinh-trong-san-xuat-phan-bon-huu-co-chan-nuoi-thuy-san/",
+      "anchor": "Trung tâm Khảo kiểm nghiệm Phân bón Quốc gia hợp tác liên kết Bình Xuyên – Hightech chuyển giao các giải pháp kỹ thuật, công nghệ ứng dụng vi sinh trong sản xuất phân bón hữu cơ, chăn nuôi, thuỷ sản, môi trường, cảu tạo đất, trồng Nhân sâm, Wasabi tại Vĩnh phúc",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/thien-tai-dich-hai/ha-tinh-chu-dong-chay-lut-thu-hoach-som-lua-he-thu-o-vung-ngoai-de-duc-tho-32350.html",
-      "anchor": "thien tai dich hai ha tinh chu dong chay lut thu hoach som lua he thu o vung ngoai de duc tho 32350.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/cong-ty-tnhh-nong-lam-nghiep-ung-dung-cong-nghe-cao-binh-xuyen-ap-dung-cong-nghe-ai-vao-viec-trong-nhan-sam-han-quoc/",
+      "anchor": "Công ty TNHH Nông Lâm Nghiệp Ứng Dụng Công nghệ cao Bình Xuyên áp dụng công nghệ AI vào việc trồng nhân sâm Hàn Quốc",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/nghe-an-hieu-qua-mo-hinh-chuyen-doi-trong-rau-ram-tren-dat-lua-vu-he-thu-2026-32349.html",
-      "anchor": "hoat dong khuyen nong chuyen giao tbkt nghe an hieu qua mo hinh chuyen doi trong rau ram tren dat lua vu he thu 2026 32349.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/doan-cong-tac-cua-han-quoc-tham-mo-hinh-nong-nghiep-cong-nghe-cao-do-trung-tam-khao-kiem-nghiem-phan-bon-quoc-gia-chuyen-giao-cong-nghe-trong-nhan-sam-han-quoc-cho-cong-ty-tnhh-nong-lam-nghiep-ung-dun/",
+      "anchor": "Đoàn công tác của Hàn Quốc thăm mô hình nông nghiệp Công nghệ cao do Trung tâm Khảo kiểm nghiệm phân bón Quốc gia chuyển giao công nghệ trồng nhân sâm Hàn Quốc cho công ty TNHH Nông Lâm Nghiệp ứng dụng Công Nghệ Cao Bình Xuyên tại huyện Bình Xuyên tỉnh Vĩnh Phúc",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/du-an-trvc-thuc-day-san-xuat-lua-phat-thai-thap-tai-cac-hop-tac-xa-o-an-giang-32313.html",
-      "anchor": "hoat dong khuyen nong chuyen giao tbkt du an trvc thuc day san xuat lua phat thai thap tai cac hop tac xa o an giang 32313.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/quyet-dinh-3745-qd-tttv-khcn-ngay-27-10-2025-cua-cuc-trong-trot-va-bao-ve-thuc-vat-ve-viec-uy-quyen-thuc-hien-kiem-tra-nha-nuoc-chat-luong-phan-bon-nhap-khau/",
+      "anchor": "Quyết định 3745/QĐ-TTTV-KHCN ngày 27/10/2025 của Cục Trồng trọt và Bảo vệ thực vật, về việc ủy quyền thực hiện kiểm tra nhà nước chất lượng phân bón nhập khẩu",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/1-trieu-hecta-chuyen-canh-lua-chat-luong-cao/thuy-loi-thong-minh-dieu-kien-de-de-an-1-trieu-ha-lua-phat-huy-hieu-qua-32286.html",
-      "anchor": "1 trieu hecta chuyen canh lua chat luong cao thuy loi thong minh dieu kien de de an 1 trieu ha lua phat huy hieu qua 32286.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/nghi-dinh-31-2023-nd-cp-ngay-9-6-2023-quy-dinh-xu-phat-vi-pham-hanh-chinh-ve-trong-trot/",
+      "anchor": "Nghị định 31/2023/NĐ-CP ngày 9/6/2023, quy định xử phạt vi phạm hành chính về Trồng trọt",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/khuyen-nong-can-tho-dong-hanh-nhan-rong-mo-hinh-canh-tac-lua-thong-minh-giam-phat-thai-32277.html",
-      "anchor": "hoat dong khuyen nong chuyen giao tbkt khuyen nong can tho dong hanh nhan rong mo hinh canh tac lua thong minh giam phat thai 32277.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/luat-trong-trot-so-31-2018-qh14-ngay-22-12-2018/",
+      "anchor": "Luật Trồng trọt số 31/2018/QH14 ngày 22/12/2018",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/thien-tai-dich-hai/ha-tinh-khan-truong-trien-khai-dong-bo-giai-phap-phong-tru-dich-hai-tren-lua-he-thu-32255.html",
-      "anchor": "thien tai dich hai ha tinh khan truong trien khai dong bo giai phap phong tru dich hai tren lua he thu 32255.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/chuong-trinh-nganh-nong-nghiep/tai-co-cau-nganh-nong-nghiep/hai-phong-chuyen-doi-dat-lua-kem-hieu-qua-sang-san-xuat-cay-an-qua-gia-tri-cao-32239.html",
-      "anchor": "chuong trinh nganh nong nghiep tai co cau nganh nong nghiep hai phong chuyen doi dat lua kem hieu qua sang san xuat cay an qua gia tri cao 32239.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/",
+      "anchor": "Kỹ thuật bón phân cây lương thực",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/thong-tin-huan-luyen/dong-thap-thanh-lap-ban-chi-dao-thuc-hien-de-an-1-trieu-hec-ta-chuyen-canh-lua-chat-luong-cao-xa-tam-nong-32238.html",
-      "anchor": "hoat dong khuyen nong thong tin huan luyen dong thap thanh lap ban chi dao thuc hien de an 1 trieu hec ta chuyen canh lua chat luong cao xa tam nong 32238.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/2/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/thong-tin-huan-luyen/hai-phong-xay-dung-doi-ngu-giang-vien-nguon-thuc-day-canh-tac-lua-ben-vung-giam-phat-thai-khi-nha-kinh-32221.html",
-      "anchor": "hoat dong khuyen nong thong tin huan luyen hai phong xay dung doi ngu giang vien nguon thuc day canh tac lua ben vung giam phat thai khi nha kinh 32221.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/su-dung-phan-bon-huu-co-trong-san-xuat-nong-nghiep-ben-vung/",
+      "anchor": "SỬ DỤNG PHÂN BÓN HỮU CƠ TRONG SẢN XUẤT NÔNG NGHIỆP BỀN VỮNG",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/thong-tin-huan-luyen/dong-thap-toa-dam-giai-phap-trien-khai-de-an-1-trieu-hec-ta-lua-chat-luong-cao-phat-thai-thap-gan-voi-tang-truong-xanh-32215.html",
-      "anchor": "hoat dong khuyen nong thong tin huan luyen dong thap toa dam giai phap trien khai de an 1 trieu hec ta lua chat luong cao phat thai thap gan voi tang truong xan",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-cay-cao-su-dat-hieu-qua-cao/",
+      "anchor": "Kỹ thuật bón phân cho cây cao su đạt hiệu quả cao",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/ca-mau-hieu-qua-mo-hinh-lua-huu-co-tom-32206.html",
-      "anchor": "hoat dong khuyen nong chuyen giao tbkt ca mau hieu qua mo hinh lua huu co tom 32206.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-cham-soc-tang-nang-suat-chat-luong-dieu/",
+      "anchor": "KỸ THUẬT CHĂM SÓC TĂNG NĂNG SUẤT – CHẤT LƯỢNG ĐIỀU",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/khoa-hoc-cong-nghe/khcn-nuoc-ngoai/ca-chua-bi-mo-loi-khoi-nghiep-xanh-cho-nong-dan-tre-zambia-32189.html",
-      "anchor": "khoa hoc cong nghe khcn nuoc ngoai ca chua bi mo loi khoi nghiep xanh cho nong dan tre zambia 32189.html",
-      "crop_guess": "ca_chua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/phan-huu-co-voi-cay-trong/",
+      "anchor": "Phân hữu cơ với cây trồng",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/chuong-trinh-nganh-nong-nghiep/tai-co-cau-nganh-nong-nghiep/chuyen-doi-so-va-quan-ly-phat-thai-nen-tang-phat-trien-vung-lua-chat-luong-cao-phat-thai-thap-32188.html",
-      "anchor": "chuong trinh nganh nong nghiep tai co cau nganh nong nghiep chuyen doi so va quan ly phat thai nen tang phat trien vung lua chat luong cao phat thai thap 32188.",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-cay-che/",
+      "anchor": "Kỹ thuật bón phân cho cây chè",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/thong-tin-huan-luyen/hai-phong-ngay-hoi-lua-ruoi-huu-co-va-xuc-tien-thuong-mai-san-pham-nong-nghiep-san-pham-ocop-nam-2026-32173.html",
-      "anchor": "hoat dong khuyen nong thong tin huan luyen hai phong ngay hoi lua ruoi huu co va xuc tien thuong mai san pham nong nghiep san pham ocop nam 2026 32173.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/ba-le-hoang-diep-thao-viet-nam-khong-chi-co-san-luong-robusta-dung-top-the-gioi-ma-con-mang-trong-minh-mot-di-san-van-hoa-ca-phe-sau-sac-du-suc-dinh-vi-da-lat-nhu-trai-tim-ca-phe-toan-cau/",
+      "anchor": "Bà Lê Hoàng Diệp Thảo: Việt Nam không chỉ có sản lượng Robusta đứng top thế giới, mà còn mang trong mình một di sản văn hóa cà phê sâu sắc, đủ sức định vị Đà Lạt như “trái tim cà phê toàn cầu”",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/thong-tin-huan-luyen/vinh-long-hoi-thao-chuyen-giao-cong-nghe-san-xuat-lua-ben-vung-va-chu-dong-truyen-thong-phong-tranh-han-xam-nhap-man-32156.html",
-      "anchor": "hoat dong khuyen nong thong tin huan luyen vinh long hoi thao chuyen giao cong nghe san xuat lua ben vung va chu dong truyen thong phong tranh han xam nhap man ",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/thanh-hoa-bat-giam-doc-cong-ty-san-xuat-phan-bon-gia/",
+      "anchor": "Thanh Hóa bắt Giám đốc Công ty sản xuất phân bón giả",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/chuong-trinh-nganh-nong-nghiep/tai-co-cau-nganh-nong-nghiep/dong-thap-san-xuat-lua-sinh-thai-gop-phan-thuc-hien-de-an-bao-ton-seu-dau-do-32150.html",
-      "anchor": "chuong trinh nganh nong nghiep tai co cau nganh nong nghiep dong thap san xuat lua sinh thai gop phan thuc hien de an bao ton seu dau do 32150.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/xu-phat-92-don-vi-kinh-doanh-nhap-khau-san-xuat-phan-bon-kem-chat-luong/",
+      "anchor": "Xử phạt 92 đơn vị kinh doanh, nhập khẩu, sản xuất phân bón kém chất lượng",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/chuong-trinh-nganh-nong-nghiep/tai-co-cau-nganh-nong-nghiep/dat-san-kem-hieu-qua-khoi-sac-nho-dua-chuot-huu-co-32108.html",
-      "anchor": "chuong trinh nganh nong nghiep tai co cau nganh nong nghiep dat san kem hieu qua khoi sac nho dua chuot huu co 32108.html",
-      "crop_guess": "dua_chuot",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/viet-nam-con-mat-can-doi-trong-su-dung-phan-bon/",
+      "anchor": "Việt Nam còn mất cân đối trong sử dụng phân bón",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/nghe-an-khao-nghiem-giong-lua-syn12-va-syn8-tai-mot-xa-mien-nui-dac-biet-kho-khan-32102.html",
-      "anchor": "hoat dong khuyen nong chuyen giao tbkt nghe an khao nghiem giong lua syn12 va syn8 tai mot xa mien nui dac biet kho khan 32102.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/tai-thiet-nganh-hang-phan-bon-bang-quy-trinh-va-du-lieu-sach/",
+      "anchor": "Tái thiết ngành hàng phân bón bằng quy trình và dữ liệu sạch",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/1-trieu-hecta-chuyen-canh-lua-chat-luong-cao/kien-dinh-muc-tieu-va-doi-moi-phuong-thuc-thuc-hien-de-an-mot-trieu-hec-ta-lua-chat-luong-cao-32135.html",
-      "anchor": "1 trieu hecta chuyen canh lua chat luong cao kien dinh muc tieu va doi moi phuong thuc thuc hien de an mot trieu hec ta lua chat luong cao 32135.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/trung-tam-khao-kiem-nghiem-phan-bon-quoc-gia-chuyen-giao-cong-nghe-ung-dung-vi-sinh-vat-vao-san-xuat-nong-nghiep-huu-co/",
+      "anchor": "Trung Tâm Khảo kiểm nghiệm phân bón Quốc gia chuyển giao công nghệ, ứng dụng vi sinh vật vào sản xuất nông nghiệp hữu cơ",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/ma-khay-may-cay-mo-huong-san-xuat-lua-hieu-qua-giam-phat-thai-32082.html",
-      "anchor": "hoat dong khuyen nong chuyen giao tbkt ma khay may cay mo huong san xuat lua hieu qua giam phat thai 32082.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/trung-tam-quoc-gia-hop-tac-voi-han-quoc-nghien-cuu-vi-sinh/",
+      "anchor": "Trung tâm Khảo kiểm nghiệm Phân bón Quốc gia hợp tác liên kết với Công ty ECOBIZINET Hàn Quốc, Công ty TNHHUDNLN CNC Bình Xuyên – Bĩnh phúc nghiên cứu, sản xuất, ứng dụng và chuyển giao các sản phẩm Vi sinh trên lĩnh vực Phân bón, cải tạo đất, Thuỷ sản, chăn nuôi, Môi trường, Rác thải…theo chuỗi giá trị tuần hoàn hữu cơ… Ts Trần Văn Thanh 0909111840. Phụ trách phòng kiểm nghiệm 0979682055",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/anh-dep-khuyen-nong/quang-tri-khan-truong-thu-hoach-lua-vu-dong-xuan-32078.html",
-      "anchor": "anh dep khuyen nong quang tri khan truong thu hoach lua vu dong xuan 32078.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/3/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/lien-ket-san-xuat-ca-chua-boxer-huong-di-ben-vung-cho-dong-bao-dan-toc-thieu-so-lam-dong-32072.html",
-      "anchor": "hoat dong khuyen nong chuyen giao tbkt lien ket san xuat ca chua boxer huong di ben vung cho dong bao dan toc thieu so lam dong 32072.html",
-      "crop_guess": "ca_chua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/4/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/anh-dep-khuyen-nong/nong-dan-ha-tinh-xuyen-le-thu-hoach-lua-xuan-32064.html",
-      "anchor": "anh dep khuyen nong nong dan ha tinh xuyen le thu hoach lua xuan 32064.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/5/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/chuong-trinh-nganh-nong-nghiep/tai-co-cau-nganh-nong-nghiep/dak-lak-buoc-dot-pha-tu-chuyen-doi-kep-trong-lien-ket-chuoi-gia-tri-lua-gao-ea-sup-tren-nen-tang-so-noi-vung-bien-gioi-32044.html",
-      "anchor": "chuong trinh nganh nong nghiep tai co cau nganh nong nghiep dak lak buoc dot pha tu chuyen doi kep trong lien ket chuoi gia tri lua gao ea sup tren nen tang so ",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/6/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/guong-san-xuat-gioi/nguoi-giu-lua-lang-nghe-lam-banh-da-vung-cat-ngan-32038.html",
-      "anchor": "guong san xuat gioi nguoi giu lua lang nghe lam banh da vung cat ngan 32038.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/7/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/gia-lai-mo-hinh-canh-tac-lua-huu-co-nang-cao-gia-tri-kinh-te-va-bao-ve-moi-truong-32035.html",
-      "anchor": "hoat dong khuyen nong chuyen giao tbkt gia lai mo hinh canh tac lua huu co nang cao gia tri kinh te va bao ve moi truong 32035.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/8/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/vinh-long-mo-hinh-canh-tac-lua-ben-vung-bayer-forward-farming-tang-nang-suat-giam-chi-phi-huong-toi-phat-thai-thap-32034.html",
-      "anchor": "hoat dong khuyen nong chuyen giao tbkt vinh long mo hinh canh tac lua ben vung bayer forward farming tang nang suat giam chi phi huong toi phat thai thap 32034.",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/9/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/chuong-trinh-nganh-nong-nghiep/tai-co-cau-nganh-nong-nghiep/hai-phong-mo-rong-mo-hinh-san-xuat-lua-giam-phat-thai-huong-toi-nong-nghiep-xanh-ben-vung-32003.html",
-      "anchor": "chuong trinh nganh nong nghiep tai co cau nganh nong nghiep hai phong mo rong mo hinh san xuat lua giam phat thai huong toi nong nghiep xanh ben vung 32003.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/10/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/thien-tai-dich-hai/nong-dan-lao-cai-chu-dong-canh-dong-kiem-soat-sau-benh-tren-lua-31979.html",
-      "anchor": "thien tai dich hai nong dan lao cai chu dong canh dong kiem soat sau benh tren lua 31979.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/11/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/an-giang-ung-dung-cong-nghe-cao-uu-tien-su-dung-phan-huu-co-vao-canh-tac-lua-cho-nhieu-loi-ich-31976.html",
-      "anchor": "hoat dong khuyen nong chuyen giao tbkt an giang ung dung cong nghe cao uu tien su dung phan huu co vao canh tac lua cho nhieu loi ich 31976.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/12/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/thu-vien-khuyen-nong/thu-vien-sach-kn/canh-tac-lua-va-ca-phe-giam-nhe-tac-dong-den-bien-doi-khi-hau-31971.html",
-      "anchor": "thu vien khuyen nong thu vien sach kn canh tac lua va ca phe giam nhe tac dong den bien doi khi hau 31971.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/13/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/guong-san-xuat-gioi/trong-dua-chuot-huu-co-trong-nha-mang-cho-hieu-qua-kinh-te-cao-31956.html",
-      "anchor": "guong san xuat gioi trong dua chuot huu co trong nha mang cho hieu qua kinh te cao 31956.html",
-      "crop_guess": "dua_chuot",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/14/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/thien-tai-dich-hai/tuyen-quang-tang-cuong-phong-tru-benh-dao-on-bao-ve-lua-vu-xuan-2026-31951.html",
-      "anchor": "thien tai dich hai tuyen quang tang cuong phong tru benh dao on bao ve lua vu xuan 2026 31951.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/15/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/thong-tin-huan-luyen/ngay-hoi-nong-dan-trong-lua-dbscl-nam-2026-31928.html",
-      "anchor": "hoat dong khuyen nong thong tin huan luyen ngay hoi nong dan trong lua dbscl nam 2026 31928.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-cay-dong-rieng/",
+      "anchor": "Kỹ thuật bón phân cho cây dong riềng",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/thong-tin-huan-luyen/lao-cai-soi-noi-hoi-thi-cay-lua-ky-vong-mot-vu-mua-thang-loi-31922.html",
-      "anchor": "hoat dong khuyen nong thong tin huan luyen lao cai soi noi hoi thi cay lua ky vong mot vu mua thang loi 31922.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/tu-trong-rau-sach-tai-gia-can-chuan-bi-gi-de-dam-bao-an-toan/",
+      "anchor": "Tự trồng rau sạch tại gia: Cần chuẩn bị gì để đảm bảo an toàn?",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/1-trieu-hecta-chuyen-canh-lua-chat-luong-cao/an-giang-canh-dong-lon-dap-ung-vung-nguyen-lieu-31909.html",
-      "anchor": "1 trieu hecta chuyen canh lua chat luong cao an giang canh dong lon dap ung vung nguyen lieu 31909.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/cach-lam-dat-va-bon-phan-cho-rau-trong-thung-xop/",
+      "anchor": "Cách làm đất và bón phân cho rau trong thùng xốp",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/1-trieu-hecta-chuyen-canh-lua-chat-luong-cao/an-giang-gan-5-nghin-nong-dan-tham-du-trien-khai-quy-trinh-san-xuat-lua-chat-luong-cao-phat-thai-thap-31842.html",
-      "anchor": "1 trieu hecta chuyen canh lua chat luong cao an giang gan 5 nghin nong dan tham du trien khai quy trinh san xuat lua chat luong cao phat thai thap 31842.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/cach-bon-phan-cho-rau-trong-tai-nha/",
+      "anchor": "Cách bón phân cho rau trồng tại nhà",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
     },
     {
-      "url": "https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/gia-lai-tham-canh-lua-huu-co-tang-chat-luong-tang-loi-nhuan-31790.html",
-      "anchor": "hoat dong khuyen nong chuyen giao tbkt gia lai tham canh lua huu co tang chat luong tang loi nhuan 31790.html",
-      "crop_guess": "lua",
-      "seed_id": "khuyennongvn_sitemap",
-      "publisher": "Trung tam Khuyen nong Quoc gia",
+      "url": "https://phanbonquocgia.gov.vn/cach-bon-phan-cho-mo-hinh-trong-nho-sach/",
+      "anchor": "Cách bón phân cho mô hình trồng nho sạch",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
       "region_hint": "toan_quoc",
-      "source_tier": 1,
-      "from_sitemap": true
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/2/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/3/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/4/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/5/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/6/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/7/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/8/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/9/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/10/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/11/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/12/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/13/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/14/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/15/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/cham-soc-bon-phan-cho-ca-phe-trong-mua-mua/",
+      "anchor": "Chăm sóc, bón phân cho cà phê trong mùa mưa",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/quy-trinh-bon-phan-cho-cay-ca-phe-giai-doan-kinh-doanh/",
+      "anchor": "Quy trình bón phân cho cây cà phê giai đoạn kinh doanh",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-hieu-qua-cho-cay-ca-phe/",
+      "anchor": "Kỹ thuật bón phân hiệu quả cho cây cà phê",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/phan-bon-nao-phu-hop-tho-nhuong-cay-trong-tay-nguyen/",
+      "anchor": "Phân Bón Nào Phù Hợp Thổ Nhưỡng, Cây Trồng Tây Nguyên?",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-cay-canh-hoa-canh/",
+      "anchor": "Kỹ thuật bón phân cho cây cảnh, hoa cảnh",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/huong-dan-cach-cham-soc-hoa-dao-sau-tet/",
+      "anchor": "Hướng dẫn cách chăm sóc hoa đào sau Tết",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-trong-hoa-oai-huong/",
+      "anchor": "Kỹ thuật trồng hoa oải hương",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-trong-hoa-ly-trong-vuon-nha/",
+      "anchor": "Kỹ thuật trồng hoa ly trong vườn nhà",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/cach-cham-soc-va-bon-phan-cho-cay-mai-vang-tung-thang/",
+      "anchor": "Cách chăm sóc và bón phân cho cây mai vàng từng tháng",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-cay-vai-trong-thoi-gian-ra-qua/",
+      "anchor": "Kỹ thuật bón phân cho cây Vải trong thời gian ra quả",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-cay-nhan/",
+      "anchor": "Kỹ thuật bón phân cho cây nhãn",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-quyt-sau-thu-hoach/",
+      "anchor": "Kỹ thuật bón phân cho quýt sau thu hoạch",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-canh-tac-thanh-long-theo-huong-ben-vung/",
+      "anchor": "Kỹ thuật canh tác thanh long theo hướng bền vững",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
     }
   ]
 }

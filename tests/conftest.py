@@ -9,7 +9,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 CRAWLER = ROOT / "crawler"
+EVALUATION = ROOT / "evaluation"
 
-for path in (str(ROOT), str(CRAWLER)):
+for path in (str(ROOT), str(CRAWLER), str(EVALUATION)):
     if path not in sys.path:
         sys.path.insert(0, path)

@@ -242,6 +242,18 @@ def crawl_one(src: dict, session: requests.Session, robots: RobotsCache,
     return record
 
 
+def gop_manifest(cu: list[dict], moi: list[dict]) -> list[dict]:
+    """Gop ket qua lan chay moi vao manifest cu.
+
+    Chay mot phan (--only / --limit) ma ghi de ca manifest se xoa bang chung
+    cua nhung nguon khong nam trong lan chay nay - tuc la mat du lieu that ma
+    khong ai biet. Loi nay da xay ra that mot lan trong qua trinh phat trien:
+    mot lan chay --only hai nguon da xoa 80 ban ghi truoc do.
+    """
+    moi_ids = {r["id"] for r in moi}
+    return [r for r in cu if r["id"] not in moi_ids] + moi
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description="Tai tai lieu tu sources.yaml")
     ap.add_argument("--only", nargs="*", help="Chi tai cac source_id nay")
@@ -268,11 +280,20 @@ def main() -> None:
 
     records = [crawl_one(src, session, robots, throttle) for src in sources]
 
+    cu: list[dict] = []
+    if MANIFEST.exists() and (args.only or args.limit):
+        try:
+            cu = json.loads(MANIFEST.read_text(encoding="utf-8")).get("records", [])
+        except (json.JSONDecodeError, OSError):
+            cu = []
+
+    gop = gop_manifest(cu, records)
+
     MANIFEST.write_text(
         json.dumps(
             {"crawled_at": datetime.now(timezone.utc).isoformat(),
              "user_agent": UA,
-             "records": records},
+             "records": gop},
             ensure_ascii=False, indent=2),
         encoding="utf-8")
 

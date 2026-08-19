@@ -1,5 +1,5 @@
 {
-  "crawled_at": "2026-08-19T15:32:10.802521+00:00",
+  "crawled_at": "2026-08-19T15:46:39.581732+00:00",
   "user_agent": "NextFarmBot/0.2 (nghien cuu hoc thuat; lien he: chua dien)",
   "records": [
     {
@@ -1279,6 +1279,44 @@
       "http_status": 200,
       "doc_type": "html",
       "text_length": 61
+    },
+    {
+      "id": "lua__giam_that_thoat_luong_dam_trong",
+      "crop": "lua",
+      "region": "toan_quoc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "source_tier": 1,
+      "url": "https://phanbonquocgia.gov.vn/giam-that-thoat-luong-dam-trong-canh-tac-lua/",
+      "discovered_from": "phanbon_luong_thuc",
+      "discovered_anchor": "Giảm thất thoát lượng đạm trong canh tác lúa",
+      "fetched_at": "2026-08-19T15:46:35.717857+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "doc_type": "html",
+      "title": "Giảm thất thoát lượng đạm trong canh tác lúa - TRUNG TÂM KHẢO KIỂM NGHIỆM PHÂN BÓN QUỐC GIA",
+      "text_length": 5524,
+      "sha256": "1fb89465cf2fbae7a41d4958a6b8f397be269d7464dc194b45b6c68e30ab087a",
+      "raw_file": "data/raw/lua__giam_that_thoat_luong_dam_trong.html",
+      "text_file": "data/text/lua__giam_that_thoat_luong_dam_trong.txt"
+    },
+    {
+      "id": "lua__ky_thuat_bon_phan_cho_lua",
+      "crop": "lua",
+      "region": "toan_quoc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "source_tier": 1,
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-lua-ngan-ngay/",
+      "discovered_from": "phanbon_luong_thuc",
+      "discovered_anchor": "Kỹ thuật bón phân cho lúa ngắn ngày",
+      "fetched_at": "2026-08-19T15:46:36.600686+00:00",
+      "status": "ok",
+      "http_status": 200,
+      "doc_type": "html",
+      "title": "Kỹ thuật bón phân cho lúa ngắn ngày - TRUNG TÂM KHẢO KIỂM NGHIỆM PHÂN BÓN QUỐC GIA",
+      "text_length": 9867,
+      "sha256": "5721e1cfcf68bc78aa20c2393ca091a2bab32e2f2878aef3f8d9dd0ee527b1dd",
+      "raw_file": "data/raw/lua__ky_thuat_bon_phan_cho_lua.html",
+      "text_file": "data/text/lua__ky_thuat_bon_phan_cho_lua.txt"
     }
   ]
 }

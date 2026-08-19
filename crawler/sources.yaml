@@ -662,3 +662,19 @@ sources:
   url: https://khuyennongvn.gov.vn/hoat-dong-khuyen-nong/chuyen-giao-tbkt/gia-lai-tham-canh-lua-huu-co-tang-chat-luong-tang-loi-nhuan-31790.html
   discovered_from: khuyennongvn_sitemap
   discovered_anchor: hoat dong khuyen nong chuyen giao tbkt gia lai tham canh lua huu co tang chat luong tang loi nhuan 31790.html
+- id: lua__giam_that_thoat_luong_dam_trong
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khao kiem nghiem Phan bon Quoc gia
+  source_tier: 1
+  url: https://phanbonquocgia.gov.vn/giam-that-thoat-luong-dam-trong-canh-tac-lua/
+  discovered_from: phanbon_luong_thuc
+  discovered_anchor: Giảm thất thoát lượng đạm trong canh tác lúa
+- id: lua__ky_thuat_bon_phan_cho_lua
+  crop: lua
+  region: toan_quoc
+  publisher: Trung tam Khao kiem nghiem Phan bon Quoc gia
+  source_tier: 1
+  url: https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-lua-ngan-ngay/
+  discovered_from: phanbon_luong_thuc
+  discovered_anchor: Kỹ thuật bón phân cho lúa ngắn ngày
