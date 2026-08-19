@@ -1,0 +1,143 @@
+# Cây trồng NGOÀI phạm vi PoC — dùng cho Scope Check (quy chuẩn v2.0 §12)
+#
+# VAI TRÒ CỦA FILE NÀY RẤT HẸP — ĐỌC KỸ TRƯỚC KHI SỬA
+#
+# File này KHÔNG quyết định câu hỏi có được trả lời hay không.
+# Quyết định đó chỉ dựa vào một điều: có nhận ra cây TRONG phạm vi
+# (lúa / cà chua / dưa chuột) hay không.
+#
+#     nhận ra cây trong phạm vi      → đi tiếp
+#     không nhận ra cây trong phạm vi → KHÔNG trả lời, dù thế nào
+#
+# File này chỉ làm cho CÂU TỪ CHỐI cụ thể hơn: thay vì "em chưa rõ anh/chị
+# hỏi cây gì", nói được "em chưa có tài liệu về cà phê".
+#
+# VÌ SAO PHẢI THIẾT KẾ NHƯ VẬY
+#
+# Danh sách cây trồng ở Việt Nam không bao giờ liệt kê hết được. Nếu quyết
+# định "có trả lời không" phụ thuộc vào danh sách này, thì mỗi cây thiếu
+# trong danh sách là một lỗ rò: bot gặp cây lạ, không thấy trong danh sách
+# cấm, rồi trả lời bằng kiến thức nền của LLM — đúng thứ §12 cấm.
+#
+# Thiết kế hiện tại làm cho việc thiếu sót ở đây trở nên vô hại: thiếu một
+# cây chỉ làm câu từ chối chung chung hơn, không làm lọt câu trả lời.
+#
+# Trạng thái: [ASM] — danh sách do người viết tay, chưa đối chiếu với log
+# hội thoại thật của NextFarm.
+
+crops:
+  # --- Cây công nghiệp ---
+  - canonical: cà phê
+    variants: [cafe, ca phe]
+  - canonical: hồ tiêu
+    variants: [tiêu, cây tiêu]
+  - canonical: điều
+    variants: [hạt điều]
+  - canonical: cao su
+    variants: []
+  - canonical: chè
+    variants: [trà, cây chè]
+  - canonical: mía
+    variants: []
+  - canonical: bông
+    variants: [bông vải]
+
+  # --- Cây ăn quả ---
+  - canonical: thanh long
+    variants: []
+  - canonical: sầu riêng
+    variants: []
+  - canonical: xoài
+    variants: []
+  - canonical: nhãn
+    variants: []
+  - canonical: vải
+    variants: [vải thiều]
+  - canonical: cam
+    variants: [cam sành]
+  - canonical: bưởi
+    variants: [bưởi da xanh]
+  - canonical: chuối
+    variants: []
+  - canonical: dứa
+    variants: [thơm, khóm]
+  - canonical: dưa hấu
+    variants: []
+    note: >-
+      CẨN TRỌNG: "dưa hấu" và "dưa lưới" KHÁC "dưa chuột". Ba cây khác nhau,
+      kỹ thuật khác nhau. Nhận nhầm sang dưa chuột là trả lời sai cây.
+  - canonical: dưa lưới
+    variants: [dưa vàng]
+  - canonical: mít
+    variants: []
+  - canonical: bơ
+    variants: []
+  - canonical: chanh leo
+    variants: [chanh dây]
+  - canonical: na
+    variants: [mãng cầu]
+  - canonical: ổi
+    variants: []
+  - canonical: táo
+    variants: []
+  - canonical: nho
+    variants: []
+
+  # --- Rau màu và cây lương thực khác ---
+  - canonical: ngô
+    variants: [bắp, cây ngô]
+  - canonical: khoai lang
+    variants: []
+  - canonical: khoai tây
+    variants: []
+  - canonical: sắn
+    variants: [khoai mì]
+  - canonical: đậu tương
+    variants: [đậu nành]
+  - canonical: lạc
+    variants: [đậu phộng]
+  - canonical: rau cải
+    variants: [cải xanh, cải ngọt, cải thìa]
+  - canonical: bắp cải
+    variants: []
+  - canonical: su hào
+    variants: []
+  - canonical: cà rốt
+    variants: []
+  - canonical: hành
+    variants: [hành lá, hành tím]
+  - canonical: tỏi
+    variants: []
+  - canonical: ớt
+    variants: [ớt chuông, ớt ngọt]
+  - canonical: bí đỏ
+    variants: [bí ngô]
+  - canonical: bí xanh
+    variants: [bí đao]
+  - canonical: mướp
+    variants: []
+  - canonical: đậu đũa
+    variants: []
+  - canonical: rau muống
+    variants: []
+  - canonical: xà lách
+    variants: []
+  - canonical: cà tím
+    variants: []
+    note: >-
+      CẨN TRỌNG: "cà tím", "cà pháo", "cà bát" KHÁC "cà chua". Khớp trọn từ
+      là bắt buộc ở đây — khớp chuỗi con sẽ nhận nhầm mọi loại cà.
+  - canonical: cà pháo
+    variants: [cà bát]
+
+  # --- Cây khác ---
+  - canonical: hoa hồng
+    variants: []
+  - canonical: hoa cúc
+    variants: []
+  - canonical: lan
+    variants: [hoa lan, lan hồ điệp]
+  - canonical: nấm
+    variants: [nấm rơm, nấm sò]
+  - canonical: dược liệu
+    variants: []

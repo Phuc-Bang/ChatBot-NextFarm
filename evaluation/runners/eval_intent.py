@@ -5,6 +5,10 @@ eval_intent.py - Do lop rule cua Intent Router tren tap kiem thu da dong bang.
     python evaluation/runners/eval_intent.py
     python evaluation/runners/eval_intent.py --sai      # chi in case sai
 
+File nay do RIENG lop rule cua router, de biet tang nao hong khi co loi.
+Muon con so cua ca tang tu choi (router + Scope Check) thi chay
+evaluation/runners/eval_tu_choi.py.
+
 DO CAI GI
 
 Router co hai kieu sai, va chung KHONG cung muc nghiem trong (muc 11.4):

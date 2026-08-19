@@ -151,7 +151,7 @@ Bộ 32 câu hỏi nông học ngoài tập kiểm thử ở §4 là một bư�
 
 ---
 
-## 8. Còn lại của P8
+## 8. Còn lại của P8 *(xem bản cập nhật ở §11)*
 
 | Việc | Trạng thái |
 |---|---|
@@ -164,3 +164,121 @@ Bộ 32 câu hỏi nông học ngoài tập kiểm thử ở §4 là một bư�
 | Đường risk–coverage (§30.4) | ⛔ cần C1/C2 |
 
 Quy tắc thiên lệch an toàn (§11.4 — không chắc thì nghiêng về từ chối) **chưa được áp dụng ở đâu cả**. Nó không áp được ở lớp rule: nếu cứ không khớp luật là từ chối thì bot sẽ từ chối gần như mọi câu hỏi nông học thật. Nó thuộc về lớp LLM, nơi có độ tin cậy thật để so với ngưỡng.
+
+---
+
+## 9. Scope Check và số đo của cả tầng từ chối
+
+Làm tiếp Scope Check (§12) nên giờ đo được **toàn bộ phần chạy được khi chưa có model**:
+
+```
+câu hỏi → chuẩn hoá → Intent Router (lớp rule) → Scope Check
+```
+
+Lệnh: `python evaluation/runners/eval_tu_choi.py`
+
+| | Số case | |
+|---|---:|---|
+| **Case phải bị chặn** | 78 | |
+| — chặn đúng loại | **75** | |
+| — chặn an toàn nhưng khác loại | 3 | vẫn từ chối, mẫu kém cụ thể hơn |
+| — **đi tiếp được** | **0** | ← `tu_choi_thieu` |
+| **Case phải đi tiếp** | 14 | |
+| — đi tiếp đúng | **11** | |
+| — **bị chặn oan** | **0** | ← `tu_choi_thua` |
+| — bị hỏi lại (chưa rõ cây) | 3 | hỏi lại là hành vi đúng khi thật sự không rõ |
+
+Theo nhóm: `garden_data` 22/22 · `product_feature` 18/18 · `device_control` 14/14 · `out_of_scope` 20/22 · `adversarial` 12/16.
+
+Hai tầng bù cho nhau: `adv_016` — câu gây sức ép mà router bỏ lọt — bị Scope Check chặn lại, vì câu đó không nhắc cây nào trong phạm vi.
+
+### 9.1. Danh sách cây ngoài phạm vi **không** tham gia quyết định
+
+Cách làm trực quan là liệt kê cây ngoài phạm vi rồi thấy cây nào trong danh sách thì từ chối. Cách đó có một lỗ rò không bao giờ vá được: danh sách cây trồng ở Việt Nam không liệt kê hết được. Bot gặp một cây lạ, không thấy trong danh sách cấm, rồi trả lời bằng kiến thức nền của LLM — đúng thứ §12 cấm.
+
+Thiết kế hiện tại đảo ngược:
+
+```
+nhận ra cây TRONG phạm vi (lúa / cà chua / dưa chuột)  → đi tiếp
+không nhận ra                                          → KHÔNG trả lời, dù thế nào
+```
+
+Danh sách cây ngoài phạm vi chỉ làm **câu từ chối cụ thể hơn** — *"em chưa có tài liệu về cà phê"* thay vì *"em chưa rõ anh/chị hỏi cây gì"*. Thiếu một cây trong danh sách chỉ làm lời văn chung chung hơn, không bao giờ làm lọt câu trả lời.
+
+Ba case "chặn an toàn nhưng khác loại" ở bảng trên chính là điều này đang chạy: hỏi về cây điều, xoài, nhãn — chưa nhận ra tên cây nên bot hỏi lại thay vì nói đích danh. Vẫn không trả lời.
+
+`test_thieu_cay_trong_danh_sach_van_khong_lot` canh giữ tính chất này bằng một cây có thật nhưng cố ý không có trong danh sách.
+
+---
+
+## 10. DEC-031 sâu hơn tôi tưởng — và cách giải cuối cùng
+
+Mục 4 báo cáo va chạm ở mức từ khoá router. Scope Check có từ điển 55 cây nên va chạm dày hơn hẳn, và lộ ra hai tầng vấn đề khác nhau.
+
+### 10.1. Va chạm do **bỏ dấu**
+
+| Câu hỏi thật | Bị nhận nhầm thành |
+|---|---|
+| vườn **tôi** trồng cà chua | cây **tỏi** |
+| tưới **nhỏ** giọt | **nho** |
+| bị ngộ độc phèn (`bi ngo`) | **bí ngô** |
+| cây ưa **bóng** | **bông** |
+| mấy **lần** một ngày | hoa **lan** |
+| **dưa** hấu | **dứa** |
+
+32/55 tên cây chỉ có một âm tiết, và phần lớn đâm vào một từ thông dụng.
+
+### 10.2. Cách giải: dùng dấu khi người dùng có gõ dấu
+
+Bỏ dấu là bắt buộc để chịu được câu hỏi không dấu (§14.3). Nhưng **phần lớn người dùng có gõ dấu** — thông tin phân biệt vẫn còn nguyên, chỉ là ta đã tự vứt nó đi trước khi khớp.
+
+`app/core/text.py::khop_cum()` giữ lại:
+
+```
+câu hỏi có dấu    → khớp trên bản CÓ DẤU
+câu hỏi không dấu → khớp trên bản bỏ dấu
+```
+
+Người gõ không dấu vẫn được phục vụ, chỉ là chịu rủi ro va chạm cao hơn — và đó là rủi ro của chính cách gõ, không phải của hệ thống.
+
+**Một chi tiết dễ làm sai:** quyết định phải dựa vào **câu hỏi** có dấu hay không, **không** dựa vào từ cần tìm. Nhiều tên cây vốn không mang dấu nào (`lan`, `na`, `cam`, `nho`). Bản đầu tôi viết điều kiện là *"cả hai phía đều có dấu"*, và những tên đó luôn rơi về nhánh bỏ dấu — làm `lan` khớp trong *"**lần** trước anh bảo độ ẩm 70%"*.
+
+### 10.3. Hai lưới còn lại
+
+Khớp có dấu không giải hết được:
+
+**Đồng âm thật.** `điều` (cây điều) và `điều` trong *"điều kiện thời tiết"* viết giống hệt nhau. Chỉ từ lân cận phân biệt được → bảng `DONG_AM_CO_DAU`, ghi cả từ đứng **trước** lẫn **sau**. Cần cả hai: `lan` bị vô hiệu bởi từ đứng sau (*lan rộng*) và bởi từ đứng trước (*bò lan* — cách bò của dây dưa chuột).
+
+**Câu không dấu.** Không còn thông tin dấu thanh, nên tên cây một âm tiết phải có **từ chỉ loại** đứng ngay trước (*cây, quả, củ, hoa, rau, trồng, giống*) mới được tính.
+
+`vườn` và `ruộng` **cố ý không** nằm trong danh sách từ chỉ loại, dù chúng đứng trước tên cây rất tự nhiên. Lý do: *"vườn tôi"* phổ biến hơn *"vườn tỏi"* rất nhiều lần, và nhầm theo hướng đó làm từ chối oan một câu hỏi về cà chua.
+
+### 10.4. Cái giá, và vì sao nó rẻ
+
+Quy tắc từ chỉ loại làm *"ngô trồng thế nào"* (không dấu) không nhận ra `ngô`, rồi rơi vào nhánh hỏi lại. **Bot vẫn không trả lời** — chỉ là hỏi lại chung chung thay vì nói đích danh *"em chưa có tài liệu về ngô"*.
+
+Cái giá rẻ như vậy là **hệ quả trực tiếp của thiết kế §9.1**. Vì danh sách cây ngoài phạm vi không tham gia quyết định, mọi sai sót của nó đều chỉ ảnh hưởng tới lời văn. Nếu thiết kế ngược lại, đúng quy tắc thận trọng này sẽ trở thành lỗ rò.
+
+### 10.5. Cách phát hiện — không đo được bằng tập kiểm thử hiện có
+
+Cả 8 lỗi ở §10.1 đều **sai theo hướng từ chối oan**, mà tập kiểm thử v1 có 78/92 case là *phải bị chặn*. Nó gần như mù với hướng sai này.
+
+Chúng chỉ lộ ra khi chạy **32 câu hỏi nông học thật viết riêng, không lấy từ tập kiểm thử**. Bộ 32 câu này nay nằm trong `tests/test_intent.py` như lưới an toàn thường trực, và chạy qua **cả** chuỗi router + Scope Check: hiện 0/32 bị chặn oan.
+
+> **Quy tắc rút ra, áp cho mọi thành phần khớp từ khoá về sau:** mỗi bộ luật chặn phải có kèm một bộ câu hỏi hợp lệ ngoài tập kiểm thử. Tập kiểm thử đo được cái *lọt*; chỉ bộ này đo được cái *chặn oan*.
+
+---
+
+## 11. Cập nhật: còn lại của tầng từ chối
+
+| Việc | Trạng thái |
+|---|---|
+| Chuẩn hoá tiếng Việt bốn lớp (§13) | ✅ |
+| Intent Router — lớp rule (§11) | ✅ |
+| Bốn mẫu từ chối (§11.5) | ✅ |
+| Scope Check (§12) | ✅ |
+| Intent Router — lớp LLM few-shot | ⛔ chờ chốt model (DEC-015) |
+| Ngưỡng độ tin cậy §11.4 | ⛔ chỉ đo được khi có lớp LLM |
+| Retrieval (§14) | ☐ keyword làm được ngay; vector chờ model |
+| Grounding Validator ba tầng (§18) | ☐ chưa làm |
+| Đường risk–coverage (§30.4) | ⛔ cần C1/C2 |

@@ -43,7 +43,9 @@ import yaml
 BASE = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(BASE))
 
-from app.core.text import bo_dau, chuan_hoa_nfc, gon_khoang_trang  # noqa: E402
+from app.core.text import (  # noqa: E402
+    bo_dau, chuan_hoa_nfc, gon_khoang_trang, khop_cum,
+)
 
 LEXICON = BASE / "knowledge" / "lexicon"
 
@@ -241,10 +243,12 @@ def mo_rong_truy_van(s: str) -> list[str]:
     return ra
 
 
+# Viet CO DAU: khop_cum() dung ban co dau khi cau hoi co dau, nho vay
+# "vai lua" khong bi nhan la "lua" va "ca tim" khong bi nhan la "ca chua".
 CAY_TRONG = {
-    "lua": ["lua", "cay lua", "gieo sa", "cay ma"],
-    "ca_chua": ["ca chua"],
-    "dua_chuot": ["dua chuot", "dua leo"],
+    "lua": ["lúa", "cây lúa", "gieo sạ", "cây mạ"],
+    "ca_chua": ["cà chua"],
+    "dua_chuot": ["dưa chuột", "dưa leo"],
 }
 
 
@@ -256,13 +260,10 @@ def phat_hien_cay(cau: CauHoi) -> list[str]:
     khong hoi cay nao ca. Ep ve mot gia tri o day chinh la doan - viec quyet
     dinh co phai lam ro hay khong thuoc ve lop 4, xem can_lam_ro().
     """
-    kd = cau.khong_dau
     ra = []
     for crop, dang in CAY_TRONG.items():
-        for d in dang:
-            if re.search(r"(?<!\w)" + re.escape(d) + r"(?!\w)", kd):
-                ra.append(crop)
-                break
+        if any(khop_cum(cau.chuan, cau.khong_dau, d) for d in dang):
+            ra.append(crop)
     return ra
 
 

@@ -60,3 +60,41 @@ def chuan_hoa_nfc(text: str) -> str:
     thi so sanh chuoi va khop tu dien deu truot ma khong bao loi.
     """
     return unicodedata.normalize("NFC", text)
+
+
+def co_dau(s: str) -> bool:
+    """Chuoi co mang dau tieng Viet khong."""
+    return bo_dau(s) != s.lower()
+
+
+def khop_cum(chuan: str, khong_dau: str, cum: str) -> bool:
+    """Khop mot cum tu, CO DAU khi cau hoi co dau.
+
+    VI SAO KHONG KHOP THANG TREN BAN BO DAU
+
+    Bo dau la thu bat buoc de chiu duoc cau hoi khong dau (muc 14.3), nhung
+    no xoa mat dau thanh - va dau thanh la thu phan biet nhieu cap tu:
+
+        "bi ngo doc phen"  <- "bi ngo" o day la "bi ngo", khong phai "bi ngo"
+        "vai lua"          <- "lua" o day la "lua", khong phai "lua"
+        "vuon toi"         <- "toi" o day la "toi", khong phai "toi"
+
+    Khop tron tu khong cuu duoc nhung truong hop nay vi tieng Viet viet roi
+    tung am tiet: moi am tiet deu la mot "tu tron" (DEC-031, muc 13.4).
+
+    Nhung phan lon nguoi dung CO go dau. Khi ho go dau, thong tin phan biet
+    van con nguyen - chi la ta da tu vut no di truoc khi khop. Ham nay giu
+    lai: co dau thi khop tren ban co dau, khong dau moi khop tren ban bo dau.
+
+    Nguoi go khong dau van duoc phuc vu, chi la chiu rui ro va cham cao hon -
+    va do la rui ro cua chinh cach go, khong phai cua he thong.
+    """
+    # Quyet dinh dua vao CAU HOI co dau hay khong, KHONG dua vao tu can tim.
+    # Nhieu ten cay von khong co dau ("lan", "na", "cam", "nho"); neu doi ca
+    # hai phia deu co dau thi nhung tu do luon roi ve nhanh bo dau, va "lan"
+    # se khop trong "LAN truoc anh bao...".
+    if co_dau(chuan):
+        ban, muc = chuan, cum.lower()
+    else:
+        ban, muc = khong_dau, bo_dau(cum)
+    return re.search(r"(?<!\w)" + re.escape(muc) + r"(?!\w)", ban) is not None
