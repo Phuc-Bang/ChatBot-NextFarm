@@ -1,0 +1,277 @@
+{
+  "discovered_at": "2026-08-19T12:04:49.268796+00:00",
+  "seeds": [
+    {
+      "seed_id": "ninhbinh_kht",
+      "status": "ok",
+      "found": 10,
+      "new": 10
+    },
+    {
+      "seed_id": "hatinh_khcn",
+      "status": "ok",
+      "found": 18,
+      "new": 18
+    },
+    {
+      "seed_id": "laichau_tailieu",
+      "status": "ok",
+      "found": 0,
+      "new": 0
+    }
+  ],
+  "candidates": [
+    {
+      "url": "https://khuyennong.ninhbinh.gov.vn/trong-trot/ninh-binh-danh-gia-trien-vong-giong-lua-lai-chat-luong-bac-xuyen-88-1032.html",
+      "anchor": "Ninh Bình đánh giá triển vọng giống lúa lai chất lượng Bắc Xuyên 88",
+      "crop_guess": "lua",
+      "seed_id": "ninhbinh_kht",
+      "publisher": "Khuyen nong Ninh Binh",
+      "region_hint": "dong_bang_song_hong",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.ninhbinh.gov.vn/trong-trot/kiem-tra-tien-do-thuc-hien-du-an-khuyen-nong-trung-uong-tai-ninh-binh-1030.html",
+      "anchor": "KIỂM TRA TIẾN ĐỘ THỰC HIỆN  DỰ ÁN KHUYẾN NÔNG TRUNG ƯƠNG TẠI NINH BÌNH",
+      "crop_guess": null,
+      "seed_id": "ninhbinh_kht",
+      "publisher": "Khuyen nong Ninh Binh",
+      "region_hint": "dong_bang_song_hong",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.ninhbinh.gov.vn/trong-trot/thu-nghiem-trong-ot-chuong-va-ot-palermo-tai-ninh-binh-998.html",
+      "anchor": "Thử nghiệm trồng ớt chuông và ớt Palermo tại Ninh Bình",
+      "crop_guess": null,
+      "seed_id": "ninhbinh_kht",
+      "publisher": "Khuyen nong Ninh Binh",
+      "region_hint": "dong_bang_song_hong",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.ninhbinh.gov.vn/trong-trot/khac-phuc-anh-huong-mua-bao-do-hoan-luu-cua-con-bao-so-5-kajiki-doi-voi-lua-va-cay-rau-mau-tren-dia-ban-tinh-ninh-binh-940.html",
+      "anchor": "Khắc phục ảnh hưởng mưa bão do hoàn lưu cuả cơn bão số 5 (Kajiki) đối với lúa và cây rau màu trên địa bàn tỉnh Ninh Bình",
+      "crop_guess": "lua",
+      "seed_id": "ninhbinh_kht",
+      "publisher": "Khuyen nong Ninh Binh",
+      "region_hint": "dong_bang_song_hong",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.ninhbinh.gov.vn/trong-trot/giong-dau-xanh-moi-dx23-giai-phap-trong-phat-trien-nong-nghiep-ben-vung-tai-ninh-binh-938.html",
+      "anchor": "Giống đậu xanh mới ĐX23: Giải pháp trong phát triển nông nghiệp bền vững tại Ninh Bình",
+      "crop_guess": null,
+      "seed_id": "ninhbinh_kht",
+      "publisher": "Khuyen nong Ninh Binh",
+      "region_hint": "dong_bang_song_hong",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.ninhbinh.gov.vn/chan-nuoi/huong-dan-phong-chong-benh-dai-tren-vat-nuoi-1027.html",
+      "anchor": "Hướng dẫn phòng chống bệnh dại trên vật nuôi",
+      "crop_guess": null,
+      "seed_id": "ninhbinh_kht",
+      "publisher": "Khuyen nong Ninh Binh",
+      "region_hint": "dong_bang_song_hong",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.ninhbinh.gov.vn/chan-nuoi/ninh-binh-tap-huan-ky-thuat-chan-nuoi-lon-thit-an-toan-sinh-hoc-gan-voi-lien-ket-tieu-thu-san-pham-981.html",
+      "anchor": "Ninh Bình: Tập huấn kỹ thuật chăn nuôi lợn thịt an toàn sinh học, gắn với liên kết tiêu thụ sản phẩm",
+      "crop_guess": null,
+      "seed_id": "ninhbinh_kht",
+      "publisher": "Khuyen nong Ninh Binh",
+      "region_hint": "dong_bang_song_hong",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.ninhbinh.gov.vn/chan-nuoi/vai-tro-cua-thao-duoc-trong-chan-lon-972.html",
+      "anchor": "VAI TRÒ CỦA THẢO DƯỢC TRONG CHĂN LỢN",
+      "crop_guess": null,
+      "seed_id": "ninhbinh_kht",
+      "publisher": "Khuyen nong Ninh Binh",
+      "region_hint": "dong_bang_song_hong",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.ninhbinh.gov.vn/thuy-san/cham-soc-bao-ve-thuy-san-mua-mua-bao-916.html",
+      "anchor": "Chăm sóc bảo vệ thủy sản mùa mưa bão",
+      "crop_guess": null,
+      "seed_id": "ninhbinh_kht",
+      "publisher": "Khuyen nong Ninh Binh",
+      "region_hint": "dong_bang_song_hong",
+      "source_tier": 1
+    },
+    {
+      "url": "https://khuyennong.ninhbinh.gov.vn/van-ban/chitietvb-1142.html",
+      "anchor": "Nghị quyết Quy định nguyên tắc, phạm vi, định mức hỗ trợ và việc sử dụng kinh phí hỗ trợ sản xuất, bảo vệ đất trồng lúa trên địa bàn tỉnh Ninh Bình",
+      "crop_guess": "lua",
+      "seed_id": "ninhbinh_kht",
+      "publisher": "Khuyen nong Ninh Binh",
+      "region_hint": "dong_bang_song_hong",
+      "source_tier": 1
+    },
+    {
+      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/trong-nho-mau-don-tren-vung-doi-mai-hoa-trien-vong-moi-cho-nong-dan-122446.html",
+      "anchor": "Trồng nho mẫu đơn trên vùng đồi Mai Hoa - triển vọng mới cho nông dân",
+      "crop_guess": null,
+      "seed_id": "hatinh_khcn",
+      "publisher": "NTM Ha Tinh",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/trong-lac-trai-vu-giai-phap-chuyen-doi-cay-trong-hieu-qua-trong-vu-he-thu-122429.html",
+      "anchor": "Trồng lạc trái vụ – Giải pháp chuyển đổi cây trồng hiệu quả trong vụ hè thu",
+      "crop_guess": null,
+      "seed_id": "hatinh_khcn",
+      "publisher": "NTM Ha Tinh",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ung-dung-cong-nghe-cao-trong-lan-ho-diep-giai-phap-xanh-thich-ung-bien-doi-khi-hau-tai-ha-tinh-122417.html",
+      "anchor": "Ứng dụng công nghệ cao trồng lan hồ điệp: Giải pháp xanh thích ứng biến đổi khí hậu tại Hà Tĩnh",
+      "crop_guess": null,
+      "seed_id": "hatinh_khcn",
+      "publisher": "NTM Ha Tinh",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/nguoi-dan-ha-tinh-tich-cuc-ra-dong-cham-soc-cay-dau-xanh-vu-he-thu-122414.html",
+      "anchor": "Người dân Hà Tĩnh tích cực ra đồng chăm sóc cây đậu xanh  vụ Hè thu",
+      "crop_guess": null,
+      "seed_id": "hatinh_khcn",
+      "publisher": "NTM Ha Tinh",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/trong-thanh-long-ruot-do-huong-di-moi-cua-nong-dan-xa-son-giang-122413.html",
+      "anchor": "Trồng Thanh Long ruột đỏ – Hướng đi mới của nông dân xã Sơn Giang",
+      "crop_guess": null,
+      "seed_id": "hatinh_khcn",
+      "publisher": "NTM Ha Tinh",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/tap-huan-ky-thuat-khai-thac-nhung-huou-bang-phuong-phap-moi-122323.html",
+      "anchor": "Tập huấn kỹ thuật khai thác nhung hươu bằng phương pháp mới",
+      "crop_guess": null,
+      "seed_id": "hatinh_khcn",
+      "publisher": "NTM Ha Tinh",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/phat-trien-kinh-te-tu-nghe-trong-nam-122246.html",
+      "anchor": "Phát triển kinh tế từ nghề trồng nấm",
+      "crop_guess": null,
+      "seed_id": "hatinh_khcn",
+      "publisher": "NTM Ha Tinh",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/san-xuat-nong-nghiep-noi-khong-voi-hoa-chat-la-xu-huong-tat-yeu-122241.html",
+      "anchor": "Sản xuất nông nghiệp nói không với hóa chất là xu hướng tất yếu",
+      "crop_guess": null,
+      "seed_id": "hatinh_khcn",
+      "publisher": "NTM Ha Tinh",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/kiem-soat-tot-moi-truong-yeu-to-thanh-bai-trong-nuoi-tom-122077.html",
+      "anchor": "Kiểm soát tốt môi trường: Yếu tố thành bại trong nuôi tôm",
+      "crop_guess": null,
+      "seed_id": "hatinh_khcn",
+      "publisher": "NTM Ha Tinh",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ha-tinh-tang-cuong-quan-ly-chi-dao-san-xuat-tom-nuoc-lo-122069.html",
+      "anchor": "Hà Tĩnh: Tăng cường quản lý, chỉ đạo sản xuất tôm nước lợ (17/05/2024)",
+      "crop_guess": null,
+      "seed_id": "hatinh_khcn",
+      "publisher": "NTM Ha Tinh",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ha-tinh-chu-trong-phat-trien-dien-tich-san-xuat-rau-tap-trung-rau-an-toan-122068.html",
+      "anchor": "Hà Tĩnh chú trọng phát triển diện tích sản xuất rau tập trung, rau an toàn (15/05/2024)",
+      "crop_guess": null,
+      "seed_id": "hatinh_khcn",
+      "publisher": "NTM Ha Tinh",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/huong-son-dua-cay-dau-tuong-rau-vao-trong-thu-nghiem-122009.html",
+      "anchor": "Hương Sơn đưa cây đậu tương rau vào trồng thử nghiệm (23/03/2024)",
+      "crop_guess": null,
+      "seed_id": "hatinh_khcn",
+      "publisher": "NTM Ha Tinh",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cham-soc-buoi-phuc-trach-giai-doan-truoc-khi-thu-hoach-qua-121817.html",
+      "anchor": "Chăm sóc bưởi Phúc Trạch giai đoạn trước khi thu hoạch quả (31/07/2023)",
+      "crop_guess": null,
+      "seed_id": "hatinh_khcn",
+      "publisher": "NTM Ha Tinh",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ha-tinh-ap-dung-cong-nghe-san-xuat-muoi-sach-theo-phuong-phap-trai-bat-o-ket-tinh-121784.html",
+      "anchor": "Hà Tĩnh: Áp dụng công nghệ sản xuất muối sạch theo phương pháp trải bạt ô kết tinh (26/06/2023)",
+      "crop_guess": null,
+      "seed_id": "hatinh_khcn",
+      "publisher": "NTM Ha Tinh",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://nongthonmoi.hatinh.gov.vn/Tin-trong-tinh/ha-tinh-tap-trung-xay-dung-nong-thon-moi-giai-doan-2026-2030-gan-voi-phat-trien-chuong-trinh-ocop-122527.html",
+      "anchor": "Hà Tĩnh tập trung xây dựng nông thôn mới giai đoạn 2026 - 2030 gắn với phát triển Chương trình OCOP",
+      "crop_guess": null,
+      "seed_id": "hatinh_khcn",
+      "publisher": "NTM Ha Tinh",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://nongthonmoi.hatinh.gov.vn/Tin-tuc-nong-thon-moi/buoc-chuyen-manh-me-trong-xay-dung-ntm-o-ha-tinh-122473.html",
+      "anchor": "Bước chuyển mạnh mẽ trong xây dựng NTM ở Hà Tĩnh",
+      "crop_guess": null,
+      "seed_id": "hatinh_khcn",
+      "publisher": "NTM Ha Tinh",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://nongthonmoi.hatinh.gov.vn/laws/detail/Thong-tu-huong-dan-thuc-hien-tieu-chi-nong-thon-moi-giai-doan-2026-2030-207/",
+      "anchor": "Hướng dẫn số 52/2026/TT-BTC",
+      "crop_guess": null,
+      "seed_id": "hatinh_khcn",
+      "publisher": "NTM Ha Tinh",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    },
+    {
+      "url": "https://nongthonmoi.hatinh.gov.vn/laws/detail/Bo-Quoc-phong-ban-hanh-van-ban-so-3132-HD-BQP-huong-dan-Bo-tieu-chi-quoc-gia-ve-xay-dung-NTMi-giai-doan-2026-2030-206/",
+      "anchor": "Hướng dấn số 3132/HD-BQP",
+      "crop_guess": null,
+      "seed_id": "hatinh_khcn",
+      "publisher": "NTM Ha Tinh",
+      "region_hint": "bac_trung_bo",
+      "source_tier": 1
+    }
+  ]
+}

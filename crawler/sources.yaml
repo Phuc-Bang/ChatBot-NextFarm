@@ -1,0 +1,72 @@
+# Danh sách nguồn tài liệu — CHỈ chứa URL và metadata.
+#
+# TUYỆT ĐỐI KHÔNG chứa số liệu nông học. Mọi con số phải đến từ tài liệu
+# tải về, không phải từ file này. (Quy chuẩn v2.0 mục 23.1, nguyên tắc 1)
+#
+# Muốn thêm nguồn thì thêm vào đây, KHÔNG sửa code.
+#
+# Trường bắt buộc: id, crop, region, publisher, url, source_tier
+#   crop        : lua | ca_chua | dua_chuot
+#   region      : dong_bang_song_hong | bac_trung_bo | tay_nguyen
+#                 | trung_du_mien_nui | dong_bang_song_cuu_long
+#                 | duyen_hai_nam_trung_bo | dong_nam_bo | toan_quoc
+#   source_tier : 1 (cơ quan nhà nước, viện, trường, khuyến nông)
+#                 2 (tổ chức chuyên ngành, doanh nghiệp có tài liệu kỹ thuật)
+#   Tier 3 (blog, forum, nội dung SEO) BỊ CẤM ở PoC này — mục 22.1
+#
+# Mục tiêu quy mô (ASM-07): 50–80 tài liệu, mỗi cây ≥ 3 vùng miền.
+# Danh sách hiện tại là 7 nguồn kế thừa từ CRAWLER_GUIDE — chưa đạt mục tiêu,
+# đang mở rộng bằng crawler/discover.py.
+
+sources:
+  # ---------------- Cà chua ----------------
+  - id: hanoi_ca_chua
+    crop: ca_chua
+    region: dong_bang_song_hong
+    publisher: So NN&MT Ha Noi
+    source_tier: 1
+    url: https://sonnptnt.hanoi.gov.vn/cat172/2039/Ky-thuat-trong-cay-ca-chua
+
+  - id: lamdong_ca_chua
+    crop: ca_chua
+    region: tay_nguyen
+    publisher: Khuyen nong Lam Dong
+    source_tier: 1
+    url: http://khuyennong.lamdong.gov.vn/ky-thuat-trong-trot/ki-thuat-trong-rau/290-quy-trinh-k-thu-t-tr-ng-cay-ca-chua
+
+  # ---------------- Dưa chuột ----------------
+  - id: ninhbinh_dua_chuot_dong
+    crop: dua_chuot
+    region: dong_bang_song_hong
+    publisher: Khuyen nong Ninh Binh
+    source_tier: 1
+    url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/ky-thuat-trong-va-cham-soc-dua-chuot-vu-dong-781.html
+
+  - id: ninhbinh_dua_chuot_quytrinh
+    crop: dua_chuot
+    region: dong_bang_song_hong
+    publisher: Khuyen nong Ninh Binh
+    source_tier: 1
+    url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/quy-trinh-san-xuat-dua-chuot-792.html
+
+  - id: hatinh_dua_chuot_vietgap
+    crop: dua_chuot
+    region: bac_trung_bo
+    publisher: NTM Ha Tinh
+    source_tier: 1
+    url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ky-thuat-trong-dua-chuot-theo-huong-tieu-chuan-VietGAP-7401.html
+
+  - id: laichau_dua_chuot_xuanhe
+    crop: dua_chuot
+    region: trung_du_mien_nui
+    publisher: So NN&MT Lai Chau
+    source_tier: 1
+    url: https://sonnmt.laichau.gov.vn/thu-vien/tai-lieu/ky-thuat-trong-va-cham-soc-cay-dua-chuot-vu-xuan-he.html
+
+  # ---------------- Lúa ----------------
+  - id: gso_lua_dong_xuan_2024
+    crop: lua
+    region: toan_quoc
+    publisher: Tong cuc Thong ke
+    source_tier: 1
+    url: https://www.gso.gov.vn/tin-tuc-thong-ke/2024/07/ket-qua-san-xuat-vu-dong-xuan-nam-2024/
