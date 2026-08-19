@@ -1,0 +1,26 @@
+# Ha tang PoC Bai toan A - xem docs/NEXTFARM_PROBLEM_A_STANDARD_v2.0.md muc 12, 14
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: nextfarm-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-nextfarm}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-nextfarm}
+      POSTGRES_DB: ${POSTGRES_DB:-nextfarm}
+      # Collation C de hanh vi sap xep on dinh giua cac may
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8"
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # Script trong thu muc nay chi chay LAN DAU khi volume con rong
+      - ./db/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-nextfarm} -d ${POSTGRES_DB:-nextfarm}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  pgdata:
