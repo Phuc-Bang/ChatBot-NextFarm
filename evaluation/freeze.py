@@ -47,6 +47,11 @@ KHOA_HOP_LE = {
     "case_id", "question", "context_turns", "expected_behavior",
     "expected_abstain_type", "expected_facts", "must_not_contain_number",
     "must_not_claim_action", "source_of_truth", "note", "crop", "tags",
+    # case_id cua case goc, cho cac nhom sinh bang bien doi (no_diacritic,
+    # typo, paraphrase). Co truong nay thi do duoc dieu thuc su can do:
+    # hanh vi co GIU NGUYEN so voi case goc hay khong - thay vi so voi mot
+    # ky vong chep tay, vi chep tay se troi.
+    "derived_from",
 }
 KHOA_BAT_BUOC = {"case_id", "question", "expected_behavior"}
 

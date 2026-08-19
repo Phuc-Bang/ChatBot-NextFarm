@@ -67,7 +67,8 @@ def co_dau(s: str) -> bool:
     return bo_dau(s) != s.lower()
 
 
-def khop_cum(chuan: str, khong_dau: str, cum: str) -> bool:
+def khop_cum(chuan: str, khong_dau: str, cum: str,
+              co_dau_goc: bool | None = None) -> bool:
     """Khop mot cum tu, CO DAU khi cau hoi co dau.
 
     VI SAO KHONG KHOP THANG TREN BAN BO DAU
@@ -93,7 +94,12 @@ def khop_cum(chuan: str, khong_dau: str, cum: str) -> bool:
     # Nhieu ten cay von khong co dau ("lan", "na", "cam", "nho"); neu doi ca
     # hai phia deu co dau thi nhung tu do luon roi ve nhanh bo dau, va "lan"
     # se khop trong "LAN truoc anh bao...".
-    if co_dau(chuan):
+    #
+    # co_dau_goc phai la dau cua cau hoi NGUOI DUNG GO, khong phai cua ban da
+    # chuan hoa. Lop 2 co the THEM dau vao cau: "bao nhieu kg" -> "bao nhieu
+    # khong" bien mot cau khong dau thanh co dau, roi tu do "dua chuot" khong
+    # con khop voi "dua chuot" nua. Lan lam hong nay khong bao loi mot tieng.
+    if co_dau_goc if co_dau_goc is not None else co_dau(chuan):
         ban, muc = chuan, cum.lower()
     else:
         ban, muc = khong_dau, bo_dau(cum)

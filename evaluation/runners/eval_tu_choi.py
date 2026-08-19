@@ -160,6 +160,26 @@ def chay(chi_tiet: bool = False) -> dict:
         print("  " + g.ljust(18) + str(ok) + "/" + str(tong))
     print()
 
+    # --- Nhom sinh bang bien doi: do HANH VI CO GIU NGUYEN khong ---
+    theo_id = {c["case_id"]: (ra, m) for c, ra, _, _, m in kq}
+    dan_xuat = [(c, ra) for c, ra, _, _, _ in kq if c.get("derived_from")]
+    if dan_xuat:
+        lech = [(c, ra, theo_id[c["derived_from"]][0]) for c, ra in dan_xuat
+                if c["derived_from"] in theo_id
+                and ra != theo_id[c["derived_from"]][0]]
+        print("Nhom sinh bang bien doi - hanh vi co giu nguyen so voi case goc")
+        print("  tong case dan xuat            : " + str(len(dan_xuat)))
+        print("  giu nguyen hanh vi            : " + str(len(dan_xuat) - len(lech)))
+        print("  DOI HANH VI                   : " + str(len(lech)))
+        print()
+        if lech:
+            print("--- BIEN DANG LAM DOI HANH VI ---")
+            for c, ra, goc_ra in lech:
+                print("  " + c["case_id"] + " (tu " + c["derived_from"] + "): "
+                      + goc_ra + " -> " + ra)
+                print("      " + c["question"])
+            print()
+
     for ten, ds in (("DI TIEP DUOC (nghiem trong)", thieu), ("BI CHAN OAN", thua)):
         if ds:
             print("--- " + ten + " ---")

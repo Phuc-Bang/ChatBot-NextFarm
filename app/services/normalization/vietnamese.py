@@ -44,7 +44,7 @@ BASE = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(BASE))
 
 from app.core.text import (  # noqa: E402
-    bo_dau, chuan_hoa_nfc, gon_khoang_trang, khop_cum,
+    bo_dau, chuan_hoa_nfc, co_dau, gon_khoang_trang, khop_cum,
 )
 
 LEXICON = BASE / "knowledge" / "lexicon"
@@ -59,6 +59,13 @@ KY_HIEU_HOA_HOC = {
 
 CO_SO = re.compile(r"\d")
 
+# Tu chi luong dung ngay truoc "kg". "bao nhieu kg dam" khong bao gio co
+# nghia "bao nhieu khong dam" - du khong co chu so nao ben canh.
+TU_CHI_LUONG = {
+    "bao", "nhieu", "may", "khoang", "chung", "gan", "tren", "duoi",
+    "tu", "den", "toi", "moi", "ca", "tong", "trung", "binh",
+}
+
 
 @dataclass
 class CauHoi:
@@ -67,6 +74,12 @@ class CauHoi:
     goc: str
     chuan: str
     khong_dau: str
+
+    # Nguoi dung CO go dau hay khong. Do tren ban GOC, truoc moi phep bien
+    # doi, vi lop 2 co the them dau vao cau ("kg" -> "khong") va lam mat dau
+    # vet cua cach go that.
+    goc_co_dau: bool = True
+
     mo_rong: list[str] = field(default_factory=list)
     da_thay: list[tuple[str, str, str]] = field(default_factory=list)
     canh_bao: list[str] = field(default_factory=list)
@@ -145,6 +158,13 @@ def _duoc_phep_thay(short: str, kd: str, dau: int, cuoi: int) -> tuple[bool, str
     if short == "kg":
         if CO_SO.search(truoc[-6:]) or CO_SO.search(sau[:6]):
             return False, "kg dung canh so -> la ki-lo-gam, khong phai 'khong'"
+        # "bao nhieu kg", "may kg", "khoang kg" - dung sau tu chi luong thi
+        # chac chan la don vi, du khong co chu so nao ben canh.
+        tu_truoc = re.findall(r"\w+", truoc)[-2:]
+        if any(t in TU_CHI_LUONG for t in tu_truoc):
+            return False, "kg dung sau tu chi luong -> la ki-lo-gam"
+        if sau.lstrip().startswith("/"):
+            return False, "kg di voi don vi chia (kg/ha) -> la ki-lo-gam"
 
     # Chi nhung viet tat MA BAN THAN no cung la ky hieu hoa hoc moi bi soi
     # ngu canh. Ap quy tac nay cho moi viet tat ngan la chan nham: "bn" trong
@@ -214,6 +234,7 @@ def chuan_hoa(text: str) -> CauHoi:
         goc=goc,
         chuan=s,
         khong_dau=bo_dau(s),
+        goc_co_dau=co_dau(gon_khoang_trang(chuan_hoa_nfc(goc))),
         mo_rong=mo_rong_truy_van(s),
         da_thay=dau_vet,
         canh_bao=canh_bao,
@@ -262,7 +283,8 @@ def phat_hien_cay(cau: CauHoi) -> list[str]:
     """
     ra = []
     for crop, dang in CAY_TRONG.items():
-        if any(khop_cum(cau.chuan, cau.khong_dau, d) for d in dang):
+        if any(khop_cum(cau.chuan, cau.khong_dau, d, cau.goc_co_dau)
+               for d in dang):
             ra.append(crop)
     return ra
 

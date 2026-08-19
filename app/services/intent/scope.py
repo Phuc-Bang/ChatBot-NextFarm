@@ -156,14 +156,14 @@ def tim_cay_ngoai_pham_vi(cau: CauHoi) -> list[str]:
     ra = []
     for canon, variants in CAY_NGOAI:
         for dang in [canon] + variants:
-            if not khop_cum(cau.chuan, cau.khong_dau, dang):
+            if not khop_cum(cau.chuan, cau.khong_dau, dang, cau.goc_co_dau):
                 continue
             if len(bo_dau(dang).split()) > 1:
                 ra.append(canon)
                 break
 
             # Ten mot am tiet. Hai duong xu ly khac han nhau:
-            if co_dau(cau.chuan):
+            if cau.goc_co_dau:
                 # Cau hoi co dau -> khop_cum() da khop tren ban co dau, chi
                 # con lo dong am that su ("dieu kien" vs "cay dieu").
                 m = re.search(r"(?<!\w)" + re.escape(dang.lower()) + r"(?!\w)",
