@@ -1,0 +1,27 @@
+# Trang chuyên mục dùng làm điểm xuất phát cho discover.py.
+#
+# Chỉ đưa vào đây những domain đã CHỨNG MINH được là tải được thật
+# (xem data/manifest.json). Không đoán tên miền của các tỉnh khác —
+# đoán URL là một dạng bịa đặt.
+#
+# region ở đây là GỢI Ý cho người duyệt, không phải kết luận: một trang
+# khuyến nông tỉnh vẫn có thể đăng lại tài liệu của vùng khác.
+
+seeds:
+  - id: ninhbinh_kht
+    publisher: Khuyen nong Ninh Binh
+    region: dong_bang_song_hong
+    source_tier: 1
+    url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/
+
+  - id: hatinh_khcn
+    publisher: NTM Ha Tinh
+    region: bac_trung_bo
+    source_tier: 1
+    url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/
+
+  - id: laichau_tailieu
+    publisher: So NN&MT Lai Chau
+    region: trung_du_mien_nui
+    source_tier: 1
+    url: https://sonnmt.laichau.gov.vn/thu-vien/tai-lieu/
