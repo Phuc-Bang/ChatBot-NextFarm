@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NextFarm – Bài toán A | Technical Specification</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="eyebrow">NEXTFARM · TECHNICAL DOCUMENTATION</div>
+    <h1>Bài toán A — Bot trả lời sai / bịa đặt</h1>
+    <p class="subtitle">Technical Specification & Project Agreement v1.0</p>
+  </div>
+  <div class="badges"><span class="badge green">REQUIREMENT LOCKED</span><span class="badge blue">POC</span><span class="badge amber">TIẾNG VIỆT</span></div>
+</header>
+<div class="layout">
+<aside class="sidebar">
+  <input id="search" placeholder="🔎 Tìm trong tài liệu...">
+  <nav>
+    <a href="#summary">Tổng quan</a>
+    <a href="#scope">Phạm vi</a>
+    <a href="#decisions">Quyết định</a>
+    <a href="#knowledge">Knowledge Pipeline</a>
+    <a href="#source">Source Governance</a>
+    <a href="#rag">RAG Architecture</a>
+    <a href="#safety">Anti-Hallucination</a>
+    <a href="#finetune">Fine-tuning</a>
+    <a href="#evaluation">Evaluation</a>
+    <a href="#risks">Rủi ro</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#open">Open Questions</a>
+    <a href="#final">Final Architecture</a>
+  </nav>
+</aside>
+<main class="content">
+<section id="summary" class="hero">
+  <div class="status">🟢 LOCKED v1.0</div>
+  <h2>Không xây một chatbot “biết nhiều”. Xây một chatbot <em>biết khi nào mình có đủ căn cứ.</em></h2>
+  <p>Trọng tâm của Bài toán A là kiểm soát hallucination bằng knowledge có nguồn gốc rõ ràng, RAG, evidence grounding, citation, abstention và evaluation.</p>
+  <div class="principles">
+    <div><b>01</b><span>LLM không phải nguồn sự thật.</span></div>
+    <div><b>02</b><span>Raw web data không phải ground truth.</span></div>
+    <div><b>03</b><span>Không đủ evidence → không đoán.</span></div>
+    <div><b>04</b><span>Chất lượng phải được đo bằng evaluation.</span></div>
+  </div>
+</section>
+
+<section id="scope">
+<h2>1. Phạm vi đã chốt</h2>
+<div class="crop-grid">
+  <article><span class="crop">🌾</span><h3>Lúa</h3><p>Được hỗ trợ trong PoC.</p></article>
+  <article><span class="crop">🍅</span><h3>Cà chua</h3><p>Được hỗ trợ trong PoC.</p></article>
+  <article><span class="crop">🥒</span><h3>Dưa chuột</h3><p>Được hỗ trợ trong PoC.</p></article>
+</div>
+<div class="callout warning"><b>Scope boundary:</b> Câu hỏi về cây ngoài 3 cây trên không được trả lời bằng kiến thức nền của LLM như thể nó nằm trong knowledge base.</div>
+</section>
+
+<section id="decisions">
+<h2>2. Decision Board</h2>
+<div class="cards">
+  <article class="decision locked"><span>LOCKED</span><h3>PostgreSQL + pgvector</h3><p>Một database vừa lưu metadata/provenance/review/evaluation vừa hỗ trợ vector search.</p></article>
+  <article class="decision locked"><span>LOCKED</span><h3>RAG là core</h3><p>Knowledge factual đến từ retrieval và evidence, không đến từ trí nhớ của LLM.</p></article>
+  <article class="decision locked"><span>LOCKED</span><h3>Human Verification</h3><p>Candidate knowledge mặc định chưa được phép index. Chỉ knowledge đã duyệt mới vào KB chính thức.</p></article>
+  <article class="decision locked"><span>LOCKED</span><h3>Hybrid Retrieval</h3><p>Kết hợp semantic vector search và keyword search, sau đó rerank.</p></article>
+  <article class="decision locked"><span>LOCKED</span><h3>LoRA / QLoRA</h3><p>Fine-tuning open-source LLM. Model cụ thể chưa chọn, phải benchmark trước.</p></article>
+  <article class="decision locked"><span>LOCKED</span><h3>Abstention</h3><p>Không đủ evidence thì nói không đủ dữ liệu thay vì bịa câu trả lời.</p></article>
+</div>
+</section>
+
+<section id="knowledge">
+<h2>3. Knowledge Ingestion Pipeline</h2>
+<p>Đây là nền móng. Nếu dữ liệu đầu vào sai, RAG có thể tạo ra một câu trả lời rất mượt nhưng vẫn sai.</p>
+<div class="dark-diagram">
+  <div>🌐 WEB SOURCES</div><i>→</i><div>🕷 CRAWLER</div><i>→</i><div>📦 RAW DATA</div><i>→</i><div>🧹 EXTRACTION</div><i>→</i><div>🔎 VALIDATION</div><i>→</i><div>👤 HUMAN REVIEW</div><i>→</i><div>✅ APPROVED</div><i>→</i><div>🧩 CHUNK</div><i>→</i><div>🧠 EMBEDDING</div><i>→</i><div>🗄 pgvector</div>
+</div>
+<div class="callout"><b>Knowledge Integrity Principle:</b> Không tự động đưa mọi dữ liệu crawl vào vector database.</div>
+</section>
+
+<section id="source">
+<h2>4. Source Governance</h2>
+<div class="tier-grid">
+  <article><span class="tier t1">TIER 1</span><h3>Authoritative</h3><p>Cơ quan nhà nước, viện nghiên cứu, trường đại học, khuyến nông, tài liệu kỹ thuật chính thức.</p></article>
+  <article><span class="tier t2">TIER 2</span><h3>Professional</h3><p>Tổ chức chuyên ngành, doanh nghiệp nông nghiệp và tài liệu kỹ thuật có nguồn rõ.</p></article>
+  <article><span class="tier t3">TIER 3</span><h3>Low-trust</h3><p>Blog, forum, nội dung SEO, nguồn không rõ tác giả. Không mặc định là ground truth.</p></article>
+</div>
+<p class="muted">Tier chỉ là một phần. Cần xem authority + freshness + region + crop relevance + content quality + human verification.</p>
+</section>
+
+<section id="rag">
+<h2>5. RAG & Retrieval</h2>
+<div class="dark-panel">
+<pre>
+User Query
+    │
+    ▼
+Query Processing
+    │
+    ▼
+Scope Check
+    │
+    ▼
+┌───────────────┐
+│ Hybrid Search │
+│ Vector + Text │
+└───────┬───────┘
+        ▼
+     Reranker
+        ▼
+   Evidence Pack
+        ▼
+       LLM
+        ▼
+ Grounding Check
+   ┌────┴────┐
+   ▼         ▼
+Answer     Abstain
+</pre>
+</div>
+<div class="two-col">
+<div><h3>Query Processing</h3><p>Xử lý tiếng Việt có dấu/không dấu, viết tắt, lỗi chính tả và thuật ngữ nông nghiệp ở mức phù hợp.</p></div>
+<div><h3>Hybrid Retrieval</h3><p>Vector search phù hợp semantic similarity; keyword search hữu ích với tên bệnh, thuật ngữ, số liệu và cụm từ chính xác.</p></div>
+</div>
+</section>
+
+<section id="safety">
+<h2>6. Anti-Hallucination & Safety</h2>
+<div class="flow">
+  <div class="node">Question</div><div>↓</div><div class="node">Evidence</div><div>↓</div>
+  <div class="branch"><div class="good"><b>Evidence đủ</b><br>Answer + Source</div><div class="bad"><b>Evidence thiếu / yếu</b><br>Abstain / Clarify</div></div>
+</div>
+<h3>High-risk agricultural questions</h3>
+<p>Nếu đủ evidence: cung cấp thông tin tham khảo, nguồn và cảnh báo phù hợp. Nếu không đủ evidence: không tự suy đoán, đặc biệt với thuốc, liều lượng hoặc quy trình có rủi ro.</p>
+</section>
+
+<section id="finetune">
+<h2>7. Fine-tuning</h2>
+<div class="callout info"><b>Đã chốt:</b> Open-source LLM + LoRA/QLoRA. Model cụ thể chưa được chọn.</div>
+<div class="dark-panel">
+<pre>
+Candidate Models
+      ↓
+Vietnamese Benchmark
+      ↓
+RAG Benchmark
+      ↓
+Latency / Cost / Safety
+      ↓
+Select Winner
+      ↓
+LoRA / QLoRA
+</pre>
+</div>
+<p>Fine-tuning được xem là lớp cải thiện behavior, instruction following, tiếng Việt và abstention. Nó không thay thế RAG và evidence grounding.</p>
+<h3>Dataset</h3>
+<ul><li>Verified knowledge</li><li>Human-written QA</li><li>Validated synthetic QA</li><li>Hallucination / abstention cases</li></ul>
+</section>
+
+<section id="evaluation">
+<h2>8. Evaluation</h2>
+<p>Không đánh giá bằng vài câu demo. Phải so sánh các cấu hình để chứng minh tác động của từng thành phần.</p>
+<div class="experiment">
+<div>BASELINE<br><small>LLM</small></div><span>→</span><div>RAG<br><small>Retrieval</small></div><span>→</span><div>GUARDRAIL<br><small>Grounding + Abstain</small></div><span>→</span><div>FINE-TUNED<br><small>LoRA/QLoRA</small></div>
+</div>
+<div class="metric-grid">
+  <div><b>Recall@K</b><span>Evidence đúng có được retrieve?</span></div>
+  <div><b>Correctness</b><span>Answer có đúng?</span></div>
+  <div><b>Groundedness</b><span>Claim có evidence hỗ trợ?</span></div>
+  <div><b>Hallucination Rate</b><span>Tỷ lệ factual claim không được hỗ trợ.</span></div>
+  <div><b>Abstention Accuracy</b><span>Bot có biết từ chối đúng lúc?</span></div>
+  <div><b>Citation Accuracy</b><span>Source có thực sự hỗ trợ answer?</span></div>
+  <div><b>Scope Compliance</b><span>Có trả lời ngoài 3 cây không?</span></div>
+  <div><b>Unsupported Claim Rate</b><span>Unsupported claims / total factual claims.</span></div>
+</div>
+<div class="callout warning"><b>Không tự điền số liệu.</b> Benchmark và threshold sẽ được xác định sau khi có evaluation dataset và các thông tin chính thức cần từ NextFarm.</div>
+</section>
+
+<section id="risks">
+<h2>9. Điểm mạnh & rủi ro</h2>
+<div class="two-col">
+<div><h3>Điểm mạnh</h3><ul><li>Scope rõ</li><li>Knowledge có provenance</li><li>Human verification</li><li>RAG grounding</li><li>Abstention</li><li>Evaluation định lượng</li><li>PostgreSQL + pgvector đơn giản cho PoC</li><li>Có đường mở rộng</li></ul></div>
+<div><h3>Rủi ro</h3><ul><li>Crawler thu dữ liệu kém</li><li>Retrieval sai</li><li>LLM vẫn hallucinate</li><li>Synthetic data nhiễu</li><li>Fine-tuning overfit</li><li>Scope creep</li><li>Thiếu dữ liệu nội bộ NextFarm</li></ul></div>
+</div>
+</section>
+
+<section id="roadmap">
+<h2>10. Roadmap</h2>
+<ol class="roadmap">
+<li><b>Requirement</b><span>Khóa scope, decisions, open questions</span></li>
+<li><b>Knowledge</b><span>Source registry → crawler → extraction → review</span></li>
+<li><b>Knowledge DB</b><span>PostgreSQL → chunking → embedding → pgvector</span></li>
+<li><b>Retrieval</b><span>Normalization → hybrid retrieval → reranker</span></li>
+<li><b>RAG</b><span>Evidence → citation → abstention → grounding</span></li>
+<li><b>Evaluation</b><span>Dataset → baseline → metrics → comparison</span></li>
+<li><b>Fine-tuning</b><span>Benchmark model → LoRA/QLoRA → compare</span></li>
+<li><b>UI/API</b><span>Chatbot → source display → logging</span></li>
+<li><b>Review</b><span>Security → quality → documentation → demo</span></li>
+</ol>
+</section>
+
+<section id="open">
+<h2>11. Open Questions – Không được tự bịa</h2>
+<div class="open-list">
+<div>🔴 Model hiện tại của NextFarm</div><div>🔴 Provider hiện tại</div><div>🔴 Lượng hội thoại/tháng</div><div>🔴 Chi phí API</div><div>🔴 Latency target</div><div>🔴 Data nội bộ</div><div>🔴 Nguồn chính thức bắt buộc ưu tiên</div><div>🔴 Người review knowledge</div><div>🔴 Ngưỡng chuyên gia</div><div>🔴 Privacy / retention</div><div>🔴 Deployment requirements</div>
+</div>
+</section>
+
+<section id="final" class="final">
+<h2>12. Final Architecture</h2>
+<div class="dark-panel large"><pre>
+                         USER
+                           │
+                           ▼
+                    ┌──────────────┐
+                    │   FastAPI    │
+                    └──────┬───────┘
+                           ▼
+                  Query Processing
+                           ▼
+                      Scope Check
+                           ▼
+                   Hybrid Retrieval
+                           ▼
+                       Reranker
+                           ▼
+                     Evidence Pack
+                           ▼
+                 Fine-tuned / Base LLM
+                           ▼
+                   Grounding Check
+                    ┌──────┴──────┐
+                    ▼             ▼
+                Supported     Unsupported
+                    ▼             ▼
+             Answer + Source    Abstain
+
+Knowledge:
+Web → Crawl → Raw → Extract → Validate → Human Approve
+     → Chunk → Embed → PostgreSQL + pgvector → RAG
+</pre></div>
+<div class="final-statement">
+<h3>Project Agreement</h3>
+<p><strong>Chúng ta xây một chatbot tư vấn nông nghiệp tiếng Việt cho 3 cây lúa, cà chua và dưa chuột, sử dụng knowledge base có provenance và human verification, RAG với hybrid retrieval, evidence grounding, citation, abstention và evaluation; fine-tuning bằng open-source LLM + LoRA/QLoRA là lớp cải thiện behavior, không thay thế knowledge grounding.</strong></p>
+</div>
+</section>
+</main>
+</div>
+<footer>NextFarm · Problem A · Technical Specification v1.0 · Tài liệu tiếng Việt · Các thông tin chưa xác định được đánh dấu OPEN.</footer>
+<script src="js/app.js"></script>
+</body>
+</html>

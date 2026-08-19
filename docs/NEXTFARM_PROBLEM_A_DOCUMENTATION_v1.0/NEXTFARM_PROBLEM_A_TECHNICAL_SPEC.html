@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NextFarm – Bài toán A | Technical Specification</title>
+<style>
+:root{--bg:#f5f7f5;--card:#fff;--text:#17201b;--muted:#657169;--line:#dce4de;--green:#1e7a4d;--green2:#e6f4ec;--blue:#2d5f93;--blue2:#eaf2fb;--amber:#9a6b12;--amber2:#fff5dc;--red:#a33b35;--dark:#111827;--dark2:#1b2637;--shadow:0 8px 28px rgba(22,45,31,.07)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.65}.topbar{padding:42px 6vw 34px;background:#fff;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:30px;align-items:end}.eyebrow{font-size:12px;letter-spacing:.16em;color:var(--green);font-weight:800}.topbar h1{margin:8px 0 3px;font-size:clamp(28px,4vw,48px);line-height:1.12}.subtitle{margin:0;color:var(--muted);font-size:17px}.badges{display:flex;gap:8px;flex-wrap:wrap}.badge{padding:7px 11px;border-radius:999px;font-size:11px;font-weight:800}.green{background:var(--green2);color:var(--green)}.blue{background:var(--blue2);color:var(--blue)}.amber{background:var(--amber2);color:var(--amber)}.layout{display:grid;grid-template-columns:260px minmax(0,1fr);max-width:1500px;margin:auto}.sidebar{position:sticky;top:0;height:100vh;padding:28px 18px;border-right:1px solid var(--line);background:#fafcfb}.sidebar input{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;margin-bottom:18px}.sidebar nav{display:flex;flex-direction:column;gap:4px}.sidebar a{text-decoration:none;color:#4f5c54;padding:8px 10px;border-radius:8px;font-size:14px}.sidebar a:hover{background:var(--green2);color:var(--green)}.content{padding:40px clamp(22px,5vw,75px);max-width:1100px;width:100%}section{scroll-margin-top:25px;margin-bottom:70px}h2{font-size:30px;line-height:1.2;margin:0 0 18px}h3{line-height:1.25;margin-top:25px}p{max-width:850px}.hero{padding:38px;border:1px solid var(--line);background:#fff;border-radius:20px;box-shadow:var(--shadow)}.hero h2{font-size:36px;max-width:850px}.hero em{color:var(--green);font-style:normal}.status{display:inline-block;padding:6px 10px;background:var(--green2);color:var(--green);border-radius:8px;font-size:12px;font-weight:800}.principles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px}.principles div{border:1px solid var(--line);padding:16px;border-radius:13px;background:#fbfdfb}.principles b{display:block;color:var(--green);font-size:22px}.crop-grid,.cards,.tier-grid,.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.crop-grid article,.decision,.tier-grid article,.metric-grid div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow)}.crop{font-size:34px}.decision{border-top:4px solid var(--green)}.decision span{font-size:10px;font-weight:900;color:var(--green);letter-spacing:.08em}.decision h3{margin:8px 0}.tier{display:inline-block;font-size:11px;font-weight:900;padding:5px 8px;border-radius:6px}.t1{background:var(--green2);color:var(--green)}.t2{background:var(--blue2);color:var(--blue)}.t3{background:#f1eeee;color:var(--red)}.muted{color:var(--muted)}.callout{padding:18px 20px;border-radius:12px;background:var(--green2);border-left:4px solid var(--green);margin:22px 0}.callout.warning{background:var(--amber2);border-color:var(--amber)}.callout.info{background:var(--blue2);border-color:var(--blue)}.dark-diagram,.dark-panel{background:var(--dark);color:#dce7e2;border-radius:16px;padding:25px;box-shadow:0 14px 30px rgba(0,0,0,.15);overflow:auto}.dark-diagram{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:12px;font-weight:800}.dark-diagram div{padding:10px 12px;background:var(--dark2);border:1px solid #314155;border-radius:9px}.dark-diagram i{color:#7ad5a5;font-style:normal}.dark-panel pre{margin:0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:14px;line-height:1.65}.large pre{font-size:13px}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}.two-col>div{background:#fff;border:1px solid var(--line);padding:20px;border-radius:14px}.flow{text-align:center;padding:20px}.node{display:inline-block;background:#fff;border:1px solid var(--line);padding:12px 22px;border-radius:10px;font-weight:800}.branch{display:flex;justify-content:center;gap:18px;margin-top:15px}.good,.bad{padding:16px 25px;border-radius:12px}.good{background:var(--green2);color:var(--green)}.bad{background:#fae9e7;color:var(--red)}.experiment{display:flex;align-items:center;gap:14px;justify-content:center;flex-wrap:wrap;margin:25px 0}.experiment div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:17px 22px;text-align:center;font-weight:800;box-shadow:var(--shadow)}.experiment small{font-weight:500;color:var(--muted)}.metric-grid{grid-template-columns:repeat(4,1fr)}.metric-grid div{display:flex;flex-direction:column}.metric-grid span{font-size:13px;color:var(--muted);margin-top:5px}.roadmap{counter-reset:step;list-style:none;padding:0}.roadmap li{counter-increment:step;display:grid;grid-template-columns:210px 1fr;gap:20px;padding:16px;border-bottom:1px solid var(--line)}.roadmap li b:before{content:counter(step,decimal-leading-zero) "  ";color:var(--green)}.open-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}.open-list div{background:#fff;border:1px solid #ecd2cf;color:#7f302b;padding:13px 15px;border-radius:10px}.final{background:#eaf3ed;padding:32px;border-radius:20px}.final-statement{margin-top:20px;background:#fff;border:1px solid var(--line);border-radius:15px;padding:24px}.final-statement p{font-size:18px}footer{text-align:center;padding:35px;color:var(--muted);font-size:12px;border-top:1px solid var(--line)}@media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line)}.sidebar nav{display:grid;grid-template-columns:repeat(2,1fr)}.principles,.crop-grid,.cards,.tier-grid,.metric-grid{grid-template-columns:1fr 1fr}.topbar{display:block}.badges{margin-top:18px}}@media(max-width:600px){.principles,.crop-grid,.cards,.tier-grid,.metric-grid,.two-col,.open-list{grid-template-columns:1fr}.roadmap li{grid-template-columns:1fr}.content{padding:25px 16px}.hero{padding:24px}.hero h2{font-size:28px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="eyebrow">NEXTFARM · TECHNICAL DOCUMENTATION</div>
+    <h1>Bài toán A — Bot trả lời sai / bịa đặt</h1>
+    <p class="subtitle">Technical Specification & Project Agreement v1.0</p>
+  </div>
+  <div class="badges"><span class="badge green">REQUIREMENT LOCKED</span><span class="badge blue">POC</span><span class="badge amber">TIẾNG VIỆT</span></div>
+</header>
+<div class="layout">
+<aside class="sidebar">
+  <input id="search" placeholder="🔎 Tìm trong tài liệu...">
+  <nav>
+    <a href="#summary">Tổng quan</a>
+    <a href="#scope">Phạm vi</a>
+    <a href="#decisions">Quyết định</a>
+    <a href="#knowledge">Knowledge Pipeline</a>
+    <a href="#source">Source Governance</a>
+    <a href="#rag">RAG Architecture</a>
+    <a href="#safety">Anti-Hallucination</a>
+    <a href="#finetune">Fine-tuning</a>
+    <a href="#evaluation">Evaluation</a>
+    <a href="#risks">Rủi ro</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#open">Open Questions</a>
+    <a href="#final">Final Architecture</a>
+  </nav>
+</aside>
+<main class="content">
+<section id="summary" class="hero">
+  <div class="status">🟢 LOCKED v1.0</div>
+  <h2>Không xây một chatbot “biết nhiều”. Xây một chatbot <em>biết khi nào mình có đủ căn cứ.</em></h2>
+  <p>Trọng tâm của Bài toán A là kiểm soát hallucination bằng knowledge có nguồn gốc rõ ràng, RAG, evidence grounding, citation, abstention và evaluation.</p>
+  <div class="principles">
+    <div><b>01</b><span>LLM không phải nguồn sự thật.</span></div>
+    <div><b>02</b><span>Raw web data không phải ground truth.</span></div>
+    <div><b>03</b><span>Không đủ evidence → không đoán.</span></div>
+    <div><b>04</b><span>Chất lượng phải được đo bằng evaluation.</span></div>
+  </div>
+</section>
+
+<section id="scope">
+<h2>1. Phạm vi đã chốt</h2>
+<div class="crop-grid">
+  <article><span class="crop">🌾</span><h3>Lúa</h3><p>Được hỗ trợ trong PoC.</p></article>
+  <article><span class="crop">🍅</span><h3>Cà chua</h3><p>Được hỗ trợ trong PoC.</p></article>
+  <article><span class="crop">🥒</span><h3>Dưa chuột</h3><p>Được hỗ trợ trong PoC.</p></article>
+</div>
+<div class="callout warning"><b>Scope boundary:</b> Câu hỏi về cây ngoài 3 cây trên không được trả lời bằng kiến thức nền của LLM như thể nó nằm trong knowledge base.</div>
+</section>
+
+<section id="decisions">
+<h2>2. Decision Board</h2>
+<div class="cards">
+  <article class="decision locked"><span>LOCKED</span><h3>PostgreSQL + pgvector</h3><p>Một database vừa lưu metadata/provenance/review/evaluation vừa hỗ trợ vector search.</p></article>
+  <article class="decision locked"><span>LOCKED</span><h3>RAG là core</h3><p>Knowledge factual đến từ retrieval và evidence, không đến từ trí nhớ của LLM.</p></article>
+  <article class="decision locked"><span>LOCKED</span><h3>Human Verification</h3><p>Candidate knowledge mặc định chưa được phép index. Chỉ knowledge đã duyệt mới vào KB chính thức.</p></article>
+  <article class="decision locked"><span>LOCKED</span><h3>Hybrid Retrieval</h3><p>Kết hợp semantic vector search và keyword search, sau đó rerank.</p></article>
+  <article class="decision locked"><span>LOCKED</span><h3>LoRA / QLoRA</h3><p>Fine-tuning open-source LLM. Model cụ thể chưa chọn, phải benchmark trước.</p></article>
+  <article class="decision locked"><span>LOCKED</span><h3>Abstention</h3><p>Không đủ evidence thì nói không đủ dữ liệu thay vì bịa câu trả lời.</p></article>
+</div>
+</section>
+
+<section id="knowledge">
+<h2>3. Knowledge Ingestion Pipeline</h2>
+<p>Đây là nền móng. Nếu dữ liệu đầu vào sai, RAG có thể tạo ra một câu trả lời rất mượt nhưng vẫn sai.</p>
+<div class="dark-diagram">
+  <div>🌐 WEB SOURCES</div><i>→</i><div>🕷 CRAWLER</div><i>→</i><div>📦 RAW DATA</div><i>→</i><div>🧹 EXTRACTION</div><i>→</i><div>🔎 VALIDATION</div><i>→</i><div>👤 HUMAN REVIEW</div><i>→</i><div>✅ APPROVED</div><i>→</i><div>🧩 CHUNK</div><i>→</i><div>🧠 EMBEDDING</div><i>→</i><div>🗄 pgvector</div>
+</div>
+<div class="callout"><b>Knowledge Integrity Principle:</b> Không tự động đưa mọi dữ liệu crawl vào vector database.</div>
+</section>
+
+<section id="source">
+<h2>4. Source Governance</h2>
+<div class="tier-grid">
+  <article><span class="tier t1">TIER 1</span><h3>Authoritative</h3><p>Cơ quan nhà nước, viện nghiên cứu, trường đại học, khuyến nông, tài liệu kỹ thuật chính thức.</p></article>
+  <article><span class="tier t2">TIER 2</span><h3>Professional</h3><p>Tổ chức chuyên ngành, doanh nghiệp nông nghiệp và tài liệu kỹ thuật có nguồn rõ.</p></article>
+  <article><span class="tier t3">TIER 3</span><h3>Low-trust</h3><p>Blog, forum, nội dung SEO, nguồn không rõ tác giả. Không mặc định là ground truth.</p></article>
+</div>
+<p class="muted">Tier chỉ là một phần. Cần xem authority + freshness + region + crop relevance + content quality + human verification.</p>
+</section>
+
+<section id="rag">
+<h2>5. RAG & Retrieval</h2>
+<div class="dark-panel">
+<pre>
+User Query
+    │
+    ▼
+Query Processing
+    │
+    ▼
+Scope Check
+    │
+    ▼
+┌───────────────┐
+│ Hybrid Search │
+│ Vector + Text │
+└───────┬───────┘
+        ▼
+     Reranker
+        ▼
+   Evidence Pack
+        ▼
+       LLM
+        ▼
+ Grounding Check
+   ┌────┴────┐
+   ▼         ▼
+Answer     Abstain
+</pre>
+</div>
+<div class="two-col">
+<div><h3>Query Processing</h3><p>Xử lý tiếng Việt có dấu/không dấu, viết tắt, lỗi chính tả và thuật ngữ nông nghiệp ở mức phù hợp.</p></div>
+<div><h3>Hybrid Retrieval</h3><p>Vector search phù hợp semantic similarity; keyword search hữu ích với tên bệnh, thuật ngữ, số liệu và cụm từ chính xác.</p></div>
+</div>
+</section>
+
+<section id="safety">
+<h2>6. Anti-Hallucination & Safety</h2>
+<div class="flow">
+  <div class="node">Question</div><div>↓</div><div class="node">Evidence</div><div>↓</div>
+  <div class="branch"><div class="good"><b>Evidence đủ</b><br>Answer + Source</div><div class="bad"><b>Evidence thiếu / yếu</b><br>Abstain / Clarify</div></div>
+</div>
+<h3>High-risk agricultural questions</h3>
+<p>Nếu đủ evidence: cung cấp thông tin tham khảo, nguồn và cảnh báo phù hợp. Nếu không đủ evidence: không tự suy đoán, đặc biệt với thuốc, liều lượng hoặc quy trình có rủi ro.</p>
+</section>
+
+<section id="finetune">
+<h2>7. Fine-tuning</h2>
+<div class="callout info"><b>Đã chốt:</b> Open-source LLM + LoRA/QLoRA. Model cụ thể chưa được chọn.</div>
+<div class="dark-panel">
+<pre>
+Candidate Models
+      ↓
+Vietnamese Benchmark
+      ↓
+RAG Benchmark
+      ↓
+Latency / Cost / Safety
+      ↓
+Select Winner
+      ↓
+LoRA / QLoRA
+</pre>
+</div>
+<p>Fine-tuning được xem là lớp cải thiện behavior, instruction following, tiếng Việt và abstention. Nó không thay thế RAG và evidence grounding.</p>
+<h3>Dataset</h3>
+<ul><li>Verified knowledge</li><li>Human-written QA</li><li>Validated synthetic QA</li><li>Hallucination / abstention cases</li></ul>
+</section>
+
+<section id="evaluation">
+<h2>8. Evaluation</h2>
+<p>Không đánh giá bằng vài câu demo. Phải so sánh các cấu hình để chứng minh tác động của từng thành phần.</p>
+<div class="experiment">
+<div>BASELINE<br><small>LLM</small></div><span>→</span><div>RAG<br><small>Retrieval</small></div><span>→</span><div>GUARDRAIL<br><small>Grounding + Abstain</small></div><span>→</span><div>FINE-TUNED<br><small>LoRA/QLoRA</small></div>
+</div>
+<div class="metric-grid">
+  <div><b>Recall@K</b><span>Evidence đúng có được retrieve?</span></div>
+  <div><b>Correctness</b><span>Answer có đúng?</span></div>
+  <div><b>Groundedness</b><span>Claim có evidence hỗ trợ?</span></div>
+  <div><b>Hallucination Rate</b><span>Tỷ lệ factual claim không được hỗ trợ.</span></div>
+  <div><b>Abstention Accuracy</b><span>Bot có biết từ chối đúng lúc?</span></div>
+  <div><b>Citation Accuracy</b><span>Source có thực sự hỗ trợ answer?</span></div>
+  <div><b>Scope Compliance</b><span>Có trả lời ngoài 3 cây không?</span></div>
+  <div><b>Unsupported Claim Rate</b><span>Unsupported claims / total factual claims.</span></div>
+</div>
+<div class="callout warning"><b>Không tự điền số liệu.</b> Benchmark và threshold sẽ được xác định sau khi có evaluation dataset và các thông tin chính thức cần từ NextFarm.</div>
+</section>
+
+<section id="risks">
+<h2>9. Điểm mạnh & rủi ro</h2>
+<div class="two-col">
+<div><h3>Điểm mạnh</h3><ul><li>Scope rõ</li><li>Knowledge có provenance</li><li>Human verification</li><li>RAG grounding</li><li>Abstention</li><li>Evaluation định lượng</li><li>PostgreSQL + pgvector đơn giản cho PoC</li><li>Có đường mở rộng</li></ul></div>
+<div><h3>Rủi ro</h3><ul><li>Crawler thu dữ liệu kém</li><li>Retrieval sai</li><li>LLM vẫn hallucinate</li><li>Synthetic data nhiễu</li><li>Fine-tuning overfit</li><li>Scope creep</li><li>Thiếu dữ liệu nội bộ NextFarm</li></ul></div>
+</div>
+</section>
+
+<section id="roadmap">
+<h2>10. Roadmap</h2>
+<ol class="roadmap">
+<li><b>Requirement</b><span>Khóa scope, decisions, open questions</span></li>
+<li><b>Knowledge</b><span>Source registry → crawler → extraction → review</span></li>
+<li><b>Knowledge DB</b><span>PostgreSQL → chunking → embedding → pgvector</span></li>
+<li><b>Retrieval</b><span>Normalization → hybrid retrieval → reranker</span></li>
+<li><b>RAG</b><span>Evidence → citation → abstention → grounding</span></li>
+<li><b>Evaluation</b><span>Dataset → baseline → metrics → comparison</span></li>
+<li><b>Fine-tuning</b><span>Benchmark model → LoRA/QLoRA → compare</span></li>
+<li><b>UI/API</b><span>Chatbot → source display → logging</span></li>
+<li><b>Review</b><span>Security → quality → documentation → demo</span></li>
+</ol>
+</section>
+
+<section id="open">
+<h2>11. Open Questions – Không được tự bịa</h2>
+<div class="open-list">
+<div>🔴 Model hiện tại của NextFarm</div><div>🔴 Provider hiện tại</div><div>🔴 Lượng hội thoại/tháng</div><div>🔴 Chi phí API</div><div>🔴 Latency target</div><div>🔴 Data nội bộ</div><div>🔴 Nguồn chính thức bắt buộc ưu tiên</div><div>🔴 Người review knowledge</div><div>🔴 Ngưỡng chuyên gia</div><div>🔴 Privacy / retention</div><div>🔴 Deployment requirements</div>
+</div>
+</section>
+
+<section id="final" class="final">
+<h2>12. Final Architecture</h2>
+<div class="dark-panel large"><pre>
+                         USER
+                           │
+                           ▼
+                    ┌──────────────┐
+                    │   FastAPI    │
+                    └──────┬───────┘
+                           ▼
+                  Query Processing
+                           ▼
+                      Scope Check
+                           ▼
+                   Hybrid Retrieval
+                           ▼
+                       Reranker
+                           ▼
+                     Evidence Pack
+                           ▼
+                 Fine-tuned / Base LLM
+                           ▼
+                   Grounding Check
+                    ┌──────┴──────┐
+                    ▼             ▼
+                Supported     Unsupported
+                    ▼             ▼
+             Answer + Source    Abstain
+
+Knowledge:
+Web → Crawl → Raw → Extract → Validate → Human Approve
+     → Chunk → Embed → PostgreSQL + pgvector → RAG
+</pre></div>
+<div class="final-statement">
+<h3>Project Agreement</h3>
+<p><strong>Chúng ta xây một chatbot tư vấn nông nghiệp tiếng Việt cho 3 cây lúa, cà chua và dưa chuột, sử dụng knowledge base có provenance và human verification, RAG với hybrid retrieval, evidence grounding, citation, abstention và evaluation; fine-tuning bằng open-source LLM + LoRA/QLoRA là lớp cải thiện behavior, không thay thế knowledge grounding.</strong></p>
+</div>
+</section>
+</main>
+</div>
+<footer>NextFarm · Problem A · Technical Specification v1.0 · Tài liệu tiếng Việt · Các thông tin chưa xác định được đánh dấu OPEN.</footer>
+<script>
+const search = document.getElementById('search');
+const sections = [...document.querySelectorAll('main section')];
+search.addEventListener('input', () => {
+  const q = search.value.trim().toLowerCase();
+  sections.forEach(s => {
+    const hit = !q || s.innerText.toLowerCase().includes(q);
+    s.style.display = hit ? '' : 'none';
+  });
+});
+</script>
+</body>
+</html>

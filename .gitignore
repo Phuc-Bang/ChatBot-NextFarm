@@ -1,0 +1,21 @@
+# Crawler — bang chung tho, khong commit (CRAWLER_GUIDE muc 2)
+crawler/data/raw/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# DB / model artifacts
+*.sqlite
+*.db
+models/
+checkpoints/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
