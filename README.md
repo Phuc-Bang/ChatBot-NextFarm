@@ -73,19 +73,34 @@ Chi tiết đầy đủ ở [quy chuẩn v2.0](docs/NEXTFARM_PROBLEM_A_STANDARD_
 
 | Phase | Nội dung | Trạng thái |
 |---|---|---|
-| P0 | Nền móng repo, hạ tầng Postgres | 🔄 đang làm |
-| P1 | Crawler (HTML + PDF, robots.txt) | ☐ |
-| P2 | Duyệt tri thức (2 luồng: tài liệu + số liệu) | ☐ |
-| P3 | Tập kiểm thử — **đóng băng** | ☐ |
-| P4 | Đo baseline C0 (LLM trần) | ☐ |
-| P5 | Cơ sở dữ liệu tri thức | ☐ |
-| P6 | Truy xuất lai | ☐ |
+| P0 | Nền móng repo, hạ tầng Postgres | ✅ xong |
+| P1 | Crawler (HTML + PDF, robots.txt, sitemap, phân trang) | ✅ xong — 31 tài liệu |
+| P2 | Duyệt tri thức (2 luồng) | 🔧 công cụ xong, **chờ người duyệt** |
+| P3 | Tập kiểm thử — **đóng băng** | 🔄 5/13 nhóm, 92 case |
+| P4 | Đo baseline C0 (LLM trần) | ⛔ chờ khoá API hoặc model cục bộ |
+| P5 | Cơ sở dữ liệu tri thức | ✅ xong — lược đồ, chunking, nạp dữ liệu |
+| P6 | Truy xuất lai | ⛔ chờ chọn embedding model |
 | P7 | RAG (C1) | ☐ |
 | P8 | Guardrail (C2) — cấu hình sản phẩm | ☐ |
 | P9 | Báo cáo so sánh | ☐ |
 | P10 | API + giao diện | ☐ |
 | P11 | Tài liệu giao hàng | ☐ |
 | P12 | Fine-tuning (tuỳ chọn, có điều kiện) | ☐ |
+
+### Số liệu hiện tại
+
+| | |
+|---|---|
+| Tài liệu crawl được | 31 (lúa 22 · dưa chuột 5 · cà chua 4) |
+| Chunk | 292 (rủi ro cao 44 · cần cảnh báo 93) |
+| Chunk **index được** | **0** — chưa tài liệu nào được duyệt |
+| Câu ứng viên số liệu | 193 (12 rủi ro cao) |
+| Case kiểm thử | 92 / 5 nhóm |
+| Test tự động | 96 xanh |
+
+> Con số **0 chunk index được** là hành vi đúng, không phải lỗi: DEC-005 quy
+> định không duyệt thì không vào kho tri thức. Cổng chặn là view
+> `indexable_chunk`, được cài ở tầng dữ liệu chứ không phải ở lời hứa.
 
 ---
 
