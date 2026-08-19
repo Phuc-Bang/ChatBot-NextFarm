@@ -34,6 +34,9 @@ from pathlib import Path
 
 import yaml
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import signals  # noqa: E402
+
 BASE = Path(__file__).resolve().parent
 ROOT = BASE.parent.parent
 MANIFEST = ROOT / "crawler" / "data" / "manifest.json"
@@ -87,6 +90,18 @@ def duyet_mot(rec: dict, reviewer: str) -> dict:
           + "  tier=" + str(rec.get("source_tier")))
     print("  Do dai    : " + str(rec.get("text_length")) + " ky tu ("
           + str(rec.get("doc_type")) + ")")
+
+    # Tin hieu do duoc - de nguoi duyet quyet dinh nhanh hon, KHONG phai de
+    # may tu quyet. Xem signals.py.
+    th = signals.do(text, rec.get("url", ""))
+    print("  Tin hieu  : " + th.tom_tat())
+    if th.tu_ky_thuat:
+        print("     tu ky thuat: " + ", ".join(th.tu_ky_thuat))
+    if th.tu_tin_tuc:
+        print("     tu tin tuc : " + ", ".join(th.tu_tin_tuc))
+    for cb in signals.canh_bao(th, rec.get("crop")):
+        print("  [!] " + cb)
+
     print("-" * 74)
     print(text[:900].replace("\n", " ")[:900])
     print("-" * 74)
@@ -167,9 +182,53 @@ def in_tinh_hinh(records: list[dict], reviews: dict[str, dict]) -> None:
             print("  " + d["document_id"].ljust(30) + str(d.get("reject_reason")))
 
 
+def in_triage(records: list[dict], reviews: dict[str, dict]) -> None:
+    """Bang tong quan tin hieu cua moi tai lieu, sap xep de doc luot.
+
+    Muc dich: nhin mot lan la biet nen bat dau duyet tu dau, va tai lieu nao
+    gan nhu chac chan la tin hoat dong. Van KHONG tu duyet ho.
+    """
+    hang = []
+    for rec in records:
+        path = TEXT / (rec["id"] + ".txt")
+        if not path.exists():
+            continue
+        th = signals.do(path.read_text(encoding="utf-8"), rec.get("url", ""))
+        hang.append((th.dem_ky_thuat - th.dem_tin_tuc, rec, th))
+
+    hang.sort(key=lambda x: -x[0])
+
+    print("Sap xep theo (tu ky thuat - tu tin tuc), giam dan.")
+    print("Cot 'cay' la so lan ten cay khai bao xuat hien trong van ban.")
+    print()
+    print("  " + "id".ljust(38) + "cay".rjust(5) + "kt".rjust(6) + "tin".rjust(6)
+          + "  " + "trang thai")
+    print("  " + "-" * 74)
+    for _, rec, th in hang:
+        cid = rec["id"]
+        trang_thai = ""
+        if cid in reviews:
+            trang_thai = "DA DUYET" if reviews[cid].get("approved") else "da loai"
+        n_cay = th.dem_ten_cay.get(rec.get("crop"), 0)
+        canh = " <-- xem ky" if th.dem_tin_tuc > th.dem_ky_thuat or n_cay == 0 else ""
+        print("  " + cid[:36].ljust(38) + str(n_cay).rjust(5)
+              + str(th.dem_ky_thuat).rjust(6) + str(th.dem_tin_tuc).rjust(6)
+              + "  " + trang_thai.ljust(9) + canh)
+
+    nghi_ngo = sum(1 for _, rec, th in hang
+                   if th.dem_tin_tuc > th.dem_ky_thuat
+                   or th.dem_ten_cay.get(rec.get("crop"), 0) == 0)
+    print()
+    print("  " + str(nghi_ngo) + "/" + str(len(hang)) + " tai lieu co tin hieu "
+          "dang ngo. Day la SO DO, khong phai ket luan - cong duyet van la cong "
+          "cua nguoi.")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description="Duyet tai lieu theo checklist 5 cau")
     ap.add_argument("--status", action="store_true", help="Chi xem tinh hinh")
+    ap.add_argument("--triage", action="store_true",
+                    help="Bang tin hieu cua moi tai lieu, khong hoi gi")
     ap.add_argument("--limit", type=int, help="Duyet toi da N tai lieu roi dung")
     ap.add_argument("--reviewer", default="", help="Ten nguoi duyet")
     args = ap.parse_args()
@@ -183,6 +242,10 @@ def main() -> None:
 
     if args.status:
         in_tinh_hinh(records, reviews)
+        return
+
+    if args.triage:
+        in_triage(records, reviews)
         return
 
     reviewer = args.reviewer or input("Ten nguoi duyet: ").strip() or "khong ro"
