@@ -2,6 +2,8 @@
 
 Tài liệu này thuộc dự án ChatBot-NextFarm, phục vụ **Bài toán A — chống bịa đặt**.
 
+> **ℹ️ Trạng thái:** nội dung tài liệu này đã được **hợp nhất vào** [`NEXTFARM_PROBLEM_A_STANDARD_v2.0.md`](NEXTFARM_PROBLEM_A_STANDARD_v2.0.md) (Phần IV). Code mẫu ở đây vẫn dùng được làm điểm khởi đầu, nhưng khi có mâu thuẫn thì **quy chuẩn v2.0 thắng**. Hai điểm đã đổi so với bản gốc: đơn vị duyệt (mục 6 bên dưới) và bổ sung bắt buộc về PDF, `robots.txt`, quy mô nguồn (quy chuẩn v2.0 mục 23.2).
+
 ---
 
 ## 0. Nguyên tắc bắt buộc của crawler này
@@ -45,7 +47,7 @@ git status
 Nếu chưa clone repo:
 
 ```bash
-git clone https://github.com/lanmmmmai/ChatBot-NextFarm.git
+git clone https://github.com/Phuc-Bang/ChatBot-NextFarm.git
 cd ChatBot-NextFarm
 git checkout -b feature/data-crawler
 ```
@@ -375,7 +377,13 @@ Chạy:
 python extract.py
 ```
 
-Mở `data/candidates.json`, đọc từng câu, đổi `verified` thành `true` cho câu đúng và bỏ câu sai. **Chỉ những dòng `verified: true` mới được nạp vào vector DB.** Đây chính là "quy trình kiểm duyệt" mà đề bài NextFarm yêu cầu ở mục 4 (Bài toán A).
+Mở `data/candidates.json`, đọc từng câu, đổi `verified` thành `true` cho câu đúng và bỏ câu sai. Đây chính là "quy trình kiểm duyệt" mà đề bài NextFarm yêu cầu ở mục 4 (Bài toán A).
+
+> **⚠️ Đã sửa ở quy chuẩn v2.0 (DEC-020, mục 24).** Bản gốc của tài liệu này viết *"Chỉ những dòng `verified: true` mới được nạp vào vector DB"*. Câu đó mâu thuẫn với mô hình dữ liệu `Source → Document → Chunk → Embedding`, và nếu làm đúng nguyên văn thì kho tri thức chỉ còn các câu rời rạc chứa số — mất hết phần thời vụ, chọn giống, làm đất, sâu bệnh. Quy tắc hiện hành là:
+>
+> **Chỉ chunk thuộc tài liệu có `approved = true` mới được nạp vào vector DB. Bảng `verified_facts` là hàng rào kiểm số liệu và nguồn ground truth cho evaluation — không phải nguồn cho retrieval.**
+>
+> Nói cách khác có **hai luồng duyệt tách rời**: luồng retrieval duyệt ở mức *tài liệu*, luồng fact duyệt ở mức *câu*. Xem mục 24 của `docs/NEXTFARM_PROBLEM_A_STANDARD_v2.0.md`.
 
 ---
 

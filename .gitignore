@@ -8,11 +8,11 @@ __pycache__/
 venv/
 .env
 
-# DB / model artifacts
+# DB / model artifacts (chi o thu muc goc - KHONG anh huong app/models/)
 *.sqlite
 *.db
-models/
-checkpoints/
+/models/
+/checkpoints/
 
 # OS / editor
 .DS_Store
