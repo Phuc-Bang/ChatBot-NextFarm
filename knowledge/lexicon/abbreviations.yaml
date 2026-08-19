@@ -1,0 +1,86 @@
+# Từ điển viết tắt — LỚP 2 của xử lý tiếng Việt (quy chuẩn v2.0 §13.2)
+#
+# NGUYÊN TẮC:
+#   - File này do NGƯỜI viết tay, đưa vào version control.
+#   - TUYỆT ĐỐI KHÔNG để LLM tự sinh từ điển này rồi dùng luôn. Đó là đường
+#     bịa đặt đi thẳng vào lớp hiểu câu hỏi.
+#   - Chỉ dùng để chuẩn hoá HÌNH THỨC câu hỏi, không được suy diễn NỘI DUNG.
+#
+# CÁCH BỔ SUNG:
+#   Mỗi lần chạy eval thấy một câu bị hiểu sai vì từ lạ → thêm vào đây →
+#   chạy lại eval. Không thêm theo cảm tính.
+#
+# GIỚI HẠN HIỆN TẠI:
+#   Danh sách này là viết tắt phổ thông trong tiếng Việt trên mạng, CHƯA
+#   được đối chiếu với log hội thoại thật của NextFarm. Đây là mục số 7
+#   trong danh sách "NextFarm cần chuẩn bị" (§37.6) — log hội thoại thật đã
+#   ẩn danh là thứ có giá trị cao nhất để hoàn thiện file này.
+#   Trạng thái: [ASM] — giả định của đội, chờ dữ liệu thật.
+
+abbreviations:
+  # --- Nghi vấn ---
+  - short: bn
+    full: bao nhiêu
+  - short: ntn
+    full: như thế nào
+  - short: vs
+    full: với
+  - short: sao
+    full: sao          # giữ nguyên, chỉ liệt kê để không bị chuẩn hoá nhầm
+
+  # --- Thường gặp ---
+  - short: dc
+    full: được
+  - short: đc
+    full: được
+  - short: k
+    full: không
+  - short: ko
+    full: không
+  - short: kg
+    full: không
+    note: >-
+      NGUY HIỂM: "kg" cũng là ki-lô-gam. Chỉ thay khi KHÔNG đứng cạnh số.
+      Quy tắc này phải được cài trong code, không nằm ở đây.
+  - short: nhiu
+    full: nhiêu
+  - short: r
+    full: rồi
+  - short: z
+    full: vậy
+  - short: j
+    full: gì
+  - short: ji
+    full: gì
+  - short: m
+    full: mình
+  - short: mn
+    full: mọi người
+  - short: ae
+    full: anh em
+  - short: cx
+    full: cũng
+  - short: nx
+    full: nữa
+  - short: hqua
+    full: hôm qua
+  - short: hnay
+    full: hôm nay
+
+  # --- Nông nghiệp ---
+  - short: pb
+    full: phân bón
+  - short: bvtv
+    full: bảo vệ thực vật
+  - short: thuoc bvtv
+    full: thuốc bảo vệ thực vật
+  - short: nn
+    full: nông nghiệp
+  - short: sx
+    full: sản xuất
+  - short: kt
+    full: kỹ thuật
+  - short: đx
+    full: đông xuân
+  - short: ht
+    full: hè thu

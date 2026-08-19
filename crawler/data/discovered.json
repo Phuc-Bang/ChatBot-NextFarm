@@ -1,0 +1,754 @@
+{
+  "discovered_at": "2026-08-19T15:44:35.462341+00:00",
+  "seeds": [
+    {
+      "seed_id": "phanbon_luong_thuc",
+      "status": "ok",
+      "found": 48,
+      "new": 48
+    },
+    {
+      "seed_id": "phanbon_thuc_pham",
+      "status": "ok",
+      "found": 50,
+      "new": 49
+    },
+    {
+      "seed_id": "phanbon_ki_thuat",
+      "status": "ok",
+      "found": 52,
+      "new": 51
+    }
+  ],
+  "candidates": [
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-cong-nghiep/",
+      "anchor": "Kỹ thuật bón phân cây công nghiệp",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-hoa-cay-canh/",
+      "anchor": "Kỹ thuật bón phân cây hoa, cây cảnh",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/",
+      "anchor": "Kỹ thuật bón phân câythực phẩm",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-an-qua/",
+      "anchor": "Kỹ thuật bón phân cây ăn quả",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/quy-trinh-kiem-nghiem-khao-nghiem-phan-bon/",
+      "anchor": "Quy trình khảo nghiệm",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/quy-trinh-kiem-nghiem/",
+      "anchor": "Quy trình kiểm nghiệm",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/huong-dan-su-dung-cong-cu-phoi-tron-phan-bon/",
+      "anchor": "Hướng dẫn sử dụng công cụ phối trộn phân bón",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/kien-nghi-dua-cay-chuoi-ra-khoi-danh-muc-cay-trong-chinh/",
+      "anchor": "Kiến nghị đưa cây chuối ra khỏi danh mục cây trồng chính",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/kiem-nghiem-vien-trung-tam-khao-kiem-nghiem-phan-bon-quoc-gia-tich-cuc-phat-huy-nghe-phan-lap-luu-tru-va-nuoi-cay-nam-co-ich-de-ung-dung-trong-chuoi-nong-nghiep-tuan-hoan-huu-co-va-chuyen-giao-toi-c/",
+      "anchor": "Kiểm nghiệm viên Trung tâm Khảo kiểm nghiệm Phân bón Quốc gia tích cực phát huy nghề, phân lập, lưu trữ và nuôi cấy nấm có ích để ứng dụng trong chuỗi nông nghiệp tuần hoàn hữu cơ và chuyển giao tới các Doanh nghiệp ứng dụng công nghệ cao!",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-cay-ngo-vu-dong-de-dat-hieu-qua-cao/",
+      "anchor": "Kỹ thuật bón phân cho cây ngô vụ đông để đạt hiệu quả cao",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/mot-so-luu-y-khi-bon-phan-cho-cay-trong/",
+      "anchor": "Một số lưu ý khi bón phân cho cây trồng",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/giam-that-thoat-luong-dam-trong-canh-tac-lua/",
+      "anchor": "Giảm thất thoát lượng đạm trong canh tác lúa",
+      "crop_guess": "lua",
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-lua-ngan-ngay/",
+      "anchor": "Kỹ thuật bón phân cho lúa ngắn ngày",
+      "crop_guess": "lua",
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/trong-thanh-cong-sam-han-quoc-theo-huong-huu-co-tai-vinh-phuc/",
+      "anchor": "Trồng thành công sâm Hàn Quốc theo hướng hữu cơ tại Vĩnh Phúc",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/trung-tam-khao-kiem-nghiem-phan-bon-quoc-gia-hop-tac-lien-ket-binh-xuyen-hightech-chuyen-giao-cac-giai-phap-ky-thuat-cong-nghe-ung-dung-vi-sinh-trong-san-xuat-phan-bon-huu-co-chan-nuoi-thuy-san/",
+      "anchor": "Trung tâm Khảo kiểm nghiệm Phân bón Quốc gia hợp tác liên kết Bình Xuyên – Hightech chuyển giao các giải pháp kỹ thuật, công nghệ ứng dụng vi sinh trong sản xuất phân bón hữu cơ, chăn nuôi, thuỷ sản, môi trường, cảu tạo đất, trồng Nhân sâm, Wasabi tại Vĩnh phúc",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/cong-ty-tnhh-nong-lam-nghiep-ung-dung-cong-nghe-cao-binh-xuyen-ap-dung-cong-nghe-ai-vao-viec-trong-nhan-sam-han-quoc/",
+      "anchor": "Công ty TNHH Nông Lâm Nghiệp Ứng Dụng Công nghệ cao Bình Xuyên áp dụng công nghệ AI vào việc trồng nhân sâm Hàn Quốc",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/doan-cong-tac-cua-han-quoc-tham-mo-hinh-nong-nghiep-cong-nghe-cao-do-trung-tam-khao-kiem-nghiem-phan-bon-quoc-gia-chuyen-giao-cong-nghe-trong-nhan-sam-han-quoc-cho-cong-ty-tnhh-nong-lam-nghiep-ung-dun/",
+      "anchor": "Đoàn công tác của Hàn Quốc thăm mô hình nông nghiệp Công nghệ cao do Trung tâm Khảo kiểm nghiệm phân bón Quốc gia chuyển giao công nghệ trồng nhân sâm Hàn Quốc cho công ty TNHH Nông Lâm Nghiệp ứng dụng Công Nghệ Cao Bình Xuyên tại huyện Bình Xuyên tỉnh Vĩnh Phúc",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/quyet-dinh-3745-qd-tttv-khcn-ngay-27-10-2025-cua-cuc-trong-trot-va-bao-ve-thuc-vat-ve-viec-uy-quyen-thuc-hien-kiem-tra-nha-nuoc-chat-luong-phan-bon-nhap-khau/",
+      "anchor": "Quyết định 3745/QĐ-TTTV-KHCN ngày 27/10/2025 của Cục Trồng trọt và Bảo vệ thực vật, về việc ủy quyền thực hiện kiểm tra nhà nước chất lượng phân bón nhập khẩu",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/nghi-dinh-31-2023-nd-cp-ngay-9-6-2023-quy-dinh-xu-phat-vi-pham-hanh-chinh-ve-trong-trot/",
+      "anchor": "Nghị định 31/2023/NĐ-CP ngày 9/6/2023, quy định xử phạt vi phạm hành chính về Trồng trọt",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/luat-trong-trot-so-31-2018-qh14-ngay-22-12-2018/",
+      "anchor": "Luật Trồng trọt số 31/2018/QH14 ngày 22/12/2018",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/",
+      "anchor": "Kỹ thuật bón phân cây lương thực",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/2/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/su-dung-phan-bon-huu-co-trong-san-xuat-nong-nghiep-ben-vung/",
+      "anchor": "SỬ DỤNG PHÂN BÓN HỮU CƠ TRONG SẢN XUẤT NÔNG NGHIỆP BỀN VỮNG",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-cay-cao-su-dat-hieu-qua-cao/",
+      "anchor": "Kỹ thuật bón phân cho cây cao su đạt hiệu quả cao",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-cham-soc-tang-nang-suat-chat-luong-dieu/",
+      "anchor": "KỸ THUẬT CHĂM SÓC TĂNG NĂNG SUẤT – CHẤT LƯỢNG ĐIỀU",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/phan-huu-co-voi-cay-trong/",
+      "anchor": "Phân hữu cơ với cây trồng",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-cay-che/",
+      "anchor": "Kỹ thuật bón phân cho cây chè",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ba-le-hoang-diep-thao-viet-nam-khong-chi-co-san-luong-robusta-dung-top-the-gioi-ma-con-mang-trong-minh-mot-di-san-van-hoa-ca-phe-sau-sac-du-suc-dinh-vi-da-lat-nhu-trai-tim-ca-phe-toan-cau/",
+      "anchor": "Bà Lê Hoàng Diệp Thảo: Việt Nam không chỉ có sản lượng Robusta đứng top thế giới, mà còn mang trong mình một di sản văn hóa cà phê sâu sắc, đủ sức định vị Đà Lạt như “trái tim cà phê toàn cầu”",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/thanh-hoa-bat-giam-doc-cong-ty-san-xuat-phan-bon-gia/",
+      "anchor": "Thanh Hóa bắt Giám đốc Công ty sản xuất phân bón giả",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/xu-phat-92-don-vi-kinh-doanh-nhap-khau-san-xuat-phan-bon-kem-chat-luong/",
+      "anchor": "Xử phạt 92 đơn vị kinh doanh, nhập khẩu, sản xuất phân bón kém chất lượng",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/viet-nam-con-mat-can-doi-trong-su-dung-phan-bon/",
+      "anchor": "Việt Nam còn mất cân đối trong sử dụng phân bón",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/tai-thiet-nganh-hang-phan-bon-bang-quy-trinh-va-du-lieu-sach/",
+      "anchor": "Tái thiết ngành hàng phân bón bằng quy trình và dữ liệu sạch",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/trung-tam-khao-kiem-nghiem-phan-bon-quoc-gia-chuyen-giao-cong-nghe-ung-dung-vi-sinh-vat-vao-san-xuat-nong-nghiep-huu-co/",
+      "anchor": "Trung Tâm Khảo kiểm nghiệm phân bón Quốc gia chuyển giao công nghệ, ứng dụng vi sinh vật vào sản xuất nông nghiệp hữu cơ",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/trung-tam-quoc-gia-hop-tac-voi-han-quoc-nghien-cuu-vi-sinh/",
+      "anchor": "Trung tâm Khảo kiểm nghiệm Phân bón Quốc gia hợp tác liên kết với Công ty ECOBIZINET Hàn Quốc, Công ty TNHHUDNLN CNC Bình Xuyên – Bĩnh phúc nghiên cứu, sản xuất, ứng dụng và chuyển giao các sản phẩm Vi sinh trên lĩnh vực Phân bón, cải tạo đất, Thuỷ sản, chăn nuôi, Môi trường, Rác thải…theo chuỗi giá trị tuần hoàn hữu cơ… Ts Trần Văn Thanh 0909111840. Phụ trách phòng kiểm nghiệm 0979682055",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/3/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/4/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/5/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/6/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/7/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/8/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/9/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/10/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/11/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/12/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/13/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/14/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cay-luong-thuc/page/15/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_luong_thuc",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-cay-dong-rieng/",
+      "anchor": "Kỹ thuật bón phân cho cây dong riềng",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/tu-trong-rau-sach-tai-gia-can-chuan-bi-gi-de-dam-bao-an-toan/",
+      "anchor": "Tự trồng rau sạch tại gia: Cần chuẩn bị gì để đảm bảo an toàn?",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/cach-lam-dat-va-bon-phan-cho-rau-trong-thung-xop/",
+      "anchor": "Cách làm đất và bón phân cho rau trong thùng xốp",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/cach-bon-phan-cho-rau-trong-tai-nha/",
+      "anchor": "Cách bón phân cho rau trồng tại nhà",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/cach-bon-phan-cho-mo-hinh-trong-nho-sach/",
+      "anchor": "Cách bón phân cho mô hình trồng nho sạch",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/2/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/3/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/4/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/5/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/6/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/7/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/8/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/9/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/10/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/11/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/12/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/13/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/14/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-caythuc-pham/page/15/phanbonquocgia.mard.gov.vn",
+      "anchor": "phanbonquocgia.mard.gov.vn",
+      "crop_guess": null,
+      "seed_id": "phanbon_thuc_pham",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/cham-soc-bon-phan-cho-ca-phe-trong-mua-mua/",
+      "anchor": "Chăm sóc, bón phân cho cà phê trong mùa mưa",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/quy-trinh-bon-phan-cho-cay-ca-phe-giai-doan-kinh-doanh/",
+      "anchor": "Quy trình bón phân cho cây cà phê giai đoạn kinh doanh",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-hieu-qua-cho-cay-ca-phe/",
+      "anchor": "Kỹ thuật bón phân hiệu quả cho cây cà phê",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/phan-bon-nao-phu-hop-tho-nhuong-cay-trong-tay-nguyen/",
+      "anchor": "Phân Bón Nào Phù Hợp Thổ Nhưỡng, Cây Trồng Tây Nguyên?",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-cay-canh-hoa-canh/",
+      "anchor": "Kỹ thuật bón phân cho cây cảnh, hoa cảnh",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/huong-dan-cach-cham-soc-hoa-dao-sau-tet/",
+      "anchor": "Hướng dẫn cách chăm sóc hoa đào sau Tết",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-trong-hoa-oai-huong/",
+      "anchor": "Kỹ thuật trồng hoa oải hương",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-trong-hoa-ly-trong-vuon-nha/",
+      "anchor": "Kỹ thuật trồng hoa ly trong vườn nhà",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/cach-cham-soc-va-bon-phan-cho-cay-mai-vang-tung-thang/",
+      "anchor": "Cách chăm sóc và bón phân cho cây mai vàng từng tháng",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-cay-vai-trong-thoi-gian-ra-qua/",
+      "anchor": "Kỹ thuật bón phân cho cây Vải trong thời gian ra quả",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-cay-nhan/",
+      "anchor": "Kỹ thuật bón phân cho cây nhãn",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-quyt-sau-thu-hoach/",
+      "anchor": "Kỹ thuật bón phân cho quýt sau thu hoạch",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    },
+    {
+      "url": "https://phanbonquocgia.gov.vn/ky-thuat-canh-tac-thanh-long-theo-huong-ben-vung/",
+      "anchor": "Kỹ thuật canh tác thanh long theo hướng bền vững",
+      "crop_guess": null,
+      "seed_id": "phanbon_ki_thuat",
+      "publisher": "Trung tam Khao kiem nghiem Phan bon Quoc gia",
+      "region_hint": "toan_quoc",
+      "source_tier": 1
+    }
+  ]
+}

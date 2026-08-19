@@ -280,7 +280,7 @@ Intent Router ở §11 chính là mối nối giữa hai giai đoạn: giai đo�
 | **ASM-04** | API dữ liệu vườn (IoT Service) | **Không có** trong PoC giai đoạn 1 | Bài toán B để phase sau | Nếu có sớm → nhánh `garden_data` chuyển từ abstain sang tool-call |
 | **ASM-05** | Người duyệt knowledge | **1 người** = chính người thực hiện | Đội 1 người | Ràng buộc lớn nhất của dự án. Mọi thiết kế phải giữ khối lượng duyệt ≤ ~10 giờ tổng (§27.4) |
 | **ASM-06** | Phần cứng | Có 1 GPU, dung lượng VRAM **chưa xác định** | Người thực hiện xác nhận có GPU | Quyết định model chỉ chốt được **sau khi đo VRAM thật** — ghi `[TODO]` ở DEC-015 |
-| **ASM-07** | Quy mô KB mục tiêu | **50–80 tài liệu** Tier 1/Tier 2, phủ đều 3 cây | 7 nguồn của CRAWLER_GUIDE quá ít để Recall@K có ý nghĩa thống kê | Nếu crawl được ít hơn → thu hẹp phạm vi câu hỏi bot được phép trả lời, ghi rõ trong báo cáo |
+| **ASM-07** | Quy mô KB mục tiêu | ~~50–80 tài liệu~~ → **đã đo: 31 tài liệu** (lúa 22 · dưa chuột 5 · cà chua 4) | 7 nguồn của CRAWLER_GUIDE quá ít để Recall@K có ý nghĩa thống kê | **ĐÃ XẢY RA.** Web công khai Tier 1 không có sẵn 50–80 tài liệu truy cập được cho đúng 3 cây này. Đã thử đủ 4 hướng mở rộng, kết quả bão hoà ở 31. Giữ nguyên chuẩn nguồn, ghi rõ giới hạn — xem `docs/reports/P1_crawl_report.md` §3 |
 | **ASM-08** | Quy mô eval set | **250–350 case**, phân bổ theo §29.2 | Đủ để mỗi nhóm có ~20–30 case, sai số chấp nhận được ở mức PoC | Ít hơn thì chênh lệch giữa các cấu hình không đáng tin |
 | **ASM-09** | Thời hạn | **Không có deadline cứng** | Người thực hiện xác nhận | Thứ tự cắt giảm khi thiếu thời gian: fine-tuning → UI đẹp → mở rộng nguồn. **Không bao giờ cắt eval set** |
 | **ASM-10** | Hình thức hợp tác | Đề xuất **làm PoC** (đề bài mục 6.3) | Phù hợp năng lực 1 người và trạng thái hiện tại | Người thực hiện tự quyết khi trả lời NextFarm |
@@ -835,14 +835,29 @@ Vi phạm bất kỳ điểm nào → crawler trở thành nguồn hallucination
 
 7 nguồn trong `CRAWLER_GUIDE` là mẫu nhỏ và **lệch** (4 dưa chuột, 2 cà chua, 1 lúa). Với 7 nguồn thì Recall@K gần như vô nghĩa — không đủ candidate để việc xếp hạng có ý nghĩa.
 
-Mục tiêu PoC:
+Mục tiêu PoC ban đầu và **kết quả đo được** (cập nhật 19/08/2026):
 
-| Cây | Số tài liệu mục tiêu | Yêu cầu vùng miền |
-|---|---|---|
-| Lúa | 18–28 | ≥ 3 vùng khác nhau |
-| Cà chua | 16–26 | ≥ 3 vùng |
-| Dưa chuột | 16–26 | ≥ 3 vùng |
-| **Tổng** | **50–80** | |
+| Cây | Mục tiêu ban đầu | **Thực đạt** | Vùng miền thực đạt |
+|---|---|---|---|
+| Lúa | 18–28 | **22** ✅ | 3 |
+| Cà chua | 16–26 | **4** ❌ | 4 |
+| Dưa chuột | 16–26 | **5** ❌ | 3 |
+| **Tổng** | **50–80** | **31** | |
+
+> **Mục tiêu 50–80 không đạt được và sẽ không đạt được bằng cách crawl thêm.**
+> Đã thử đủ bốn hướng (phân trang kho lưu trữ, sitemap, tìm kiếm trên site, bổ
+> sung tên miền), kết quả bão hoà ở 31 tài liệu. Nguyên nhân lớn nhất: 43 tài
+> liệu của Trung tâm Khuyến nông Quốc gia nằm sau JavaScript; toàn bộ đường dẫn
+> Lâm Đồng — nguồn cà chua tốt nhất — đã chết. Chi tiết ở
+> `docs/reports/P1_crawl_report.md`.
+>
+> **Quyết định: giữ nguyên chuẩn nguồn Tier 1/2, ghi rõ giới hạn trong báo cáo
+> gửi NextFarm.** Không hạ chuẩn xuống Tier 3 để lấy số lượng. Kích thước thật
+> của kho tri thức quyết định phạm vi câu hỏi bot được phép trả lời, chứ không
+> phải ngược lại.
+>
+> Bổ sung vào §37.6 nhóm 2: **tài liệu kỹ thuật nội bộ của NextFarm cho ba cây
+> này** là cách bù khoảng trống nhanh và đáng tin hơn mọi phương án crawl.
 
 Yêu cầu phủ vùng miền là bắt buộc — nó phục vụ trực tiếp việc chống hiện tượng **A3** (khuyến nghị không phù hợp vùng miền). Một KB chỉ có tài liệu đồng bằng sông Hồng thì không thể trả lời đúng cho Tây Nguyên, và bot phải biết điều đó.
 

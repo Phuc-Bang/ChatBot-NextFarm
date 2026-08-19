@@ -1,0 +1,54 @@
+# Từ khoá nội dung rủi ro cao — quy chuẩn v2.0 §19 case C4 và §24.4
+#
+# TÁC DỤNG (hai chỗ, đều là hàng rào an toàn, không phải bộ lọc nội dung):
+#
+#   1. Lúc chunking: chunk trúng từ khoá ở đây bị đánh cờ is_high_risk và
+#      phải DUYỆT LẺ TỪNG CHUNK, không được duyệt gộp theo tài liệu (§24.4).
+#   2. Lúc trả lời: câu trả lời trúng nhóm này bắt buộc phải qua Grounding
+#      Validator tầng 2, và bắt buộc kèm cảnh báo. Thiếu evidence → abstain
+#      tuyệt đối, không có ngoại lệ.
+#
+# NGUYÊN TẮC: thà đánh cờ thừa còn hơn bỏ sót. Đánh cờ thừa chỉ tốn thêm thời
+# gian duyệt; bỏ sót thì bot có thể đưa liều lượng thuốc sai cho nông dân.
+#
+# File này KHÔNG chứa tên hoạt chất cụ thể hay liều lượng — chỉ chứa từ khoá
+# nhận diện chủ đề. Mọi con số vẫn phải đến từ tài liệu đã crawl.
+
+high_risk_terms:
+  # --- Thuốc và hoá chất ---
+  - thuốc
+  - thuốc bảo vệ thực vật
+  - thuốc BVTV
+  - thuốc trừ sâu
+  - thuốc trừ bệnh
+  - thuốc trừ cỏ
+  - thuốc diệt cỏ
+  - hoạt chất
+  - chế phẩm
+  - hoá chất
+  - vôi bột
+
+  # --- Liều lượng và cách dùng ---
+  - liều lượng
+  - nồng độ
+  - pha loãng
+  - phun
+  - phun thuốc
+  - lần phun
+  - thời gian cách ly
+  - cách ly
+  - dư lượng
+  - ngộ độc
+
+  # --- Cụm chỉ dẫn định lượng nguy hiểm nếu sai ---
+  - ml/lít
+  - g/lít
+  - cc/bình
+  - gói/bình
+
+  # --- Sinh vật gây hại (câu hỏi thường dẫn tới hỏi thuốc) ---
+  - sâu bệnh
+  - dịch hại
+  - phòng trừ
+  - trừ sâu
+  - trừ bệnh
