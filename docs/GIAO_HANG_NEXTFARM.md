@@ -57,7 +57,7 @@ Câu hỏi của nông dân
    ↓
 ⑥ LLM                         đầu ra JSON, mỗi câu gắn chunk_id
    ↓
-⑦ Grounding Validator         cấu trúc → số liệu → [ngữ nghĩa: chưa làm]
+⑦ Grounding Validator         cấu trúc → số liệu → ngữ nghĩa
    ├── đạt        →  Trả lời + nguồn bấm về được URL gốc
    └── không đạt  →  TỪ CHỐI
 ```
@@ -85,9 +85,9 @@ Test tự động chứng minh điều này: khi model **khai là có đủ căn
 **3. Không duyệt thì không vào kho.** Cổng chặn là view `indexable_chunk` ở tầng cơ sở dữ liệu, không phải lời hứa trong code:
 
 ```
-292 chunk crawl được  →  161 chunk vào được kho
-                          131 chunk bị chặn (13 tài liệu bị loại
-                          + 44 chunk rủi ro cao chưa duyệt lẻ)
+292 chunk crawl được  →  185 chunk vào được kho
+                          107 chunk bị chặn (13/31 tài liệu bị loại
+                          + 20/44 chunk rủi ro cao chưa duyệt lẻ)
 ```
 
 ---
@@ -239,7 +239,7 @@ Lưu ý: **giá API thay đổi**. Trong một lần tra cứu duy nhất đã t
 
 | Dữ liệu | Có rời hạ tầng không | Đi đâu |
 |---|---|---|
-| Kho tri thức (161 chunk) | **KHÔNG** | — (embedding chạy local) |
+| Kho tri thức (185 chunk) | **KHÔNG** | — (embedding chạy local) |
 | Câu hỏi → tìm kiếm | **KHÔNG** | — (cả 3 kênh chạy local) |
 | Câu hỏi + Evidence Pack | **Có** | Google (Gemini API) — chỉ chặng viết câu trả lời |
 | **Dữ liệu vườn / cảm biến** | **KHÔNG** | — PoC **không truy cập** |
@@ -262,11 +262,11 @@ Quy trình duyệt kiểm **chứng cứ** (nguồn có thật không, tier mấ
 **2. Con số trong báo cáo không phải tỷ lệ chính xác của hệ thống.**
 Người viết tập kiểm thử và người xây hệ thống là một, nên câu hỏi "sạch" hơn thực tế. Các con số dùng để **so sánh C0/C1/C2 với nhau**. Tỷ lệ chính xác thật chỉ đến từ bộ câu hỏi do **chuyên gia NextFarm chấm**.
 
-**3. Kho tri thức mới có 161 chunk.**
-`answer_rate` 13,1% chủ yếu do kho nhỏ: 33/46 ca từ chối là vì không có tài liệu. Kho lớn lên thì tỷ lệ này lên theo, **cơ chế chống bịa không đổi**.
+**3. Kho tri thức mới có 185 chunk.**
+`answer_rate` thấp chủ yếu do kho nhỏ: 52/193 ca từ chối là vì không có tài liệu. Kho lớn lên thì tỷ lệ này lên theo, **cơ chế chống bịa không đổi**. Còn 20/44 chunk rủi ro cao chưa duyệt lẻ — duyệt xong sẽ mở thêm một phần.
 
-**4. Grounding Validator mới có tầng 1 và 2.**
-Tầng 3 (kiểm ngữ nghĩa) chưa làm. `numeric_hallucination = 0` bảo đảm về **số liệu**, chưa bảo đảm về **diễn giải**.
+**4. Grounding Validator có đủ ba tầng, nhưng tầng 3 chỉ ở mức quy tắc.**
+Tầng 3 bắt hai kiểu lỗi đo được trên C2 thật: xác nhận thẩm quyền không có trong bằng chứng, và trả lời không dính tới câu đang hỏi. Nó **không** phải NLI đầy đủ — một diễn giải sai tinh vi mà vẫn dùng đúng số, đúng chủ đề thì chưa bắt được. LLM-judge có sẵn nhưng chưa bật vì chưa đo được chi phí và độ trễ. Chi tiết: [`docs/reports/P8_grounding_tang3.md`](reports/P8_grounding_tang3.md)
 
 **5. Chưa kết nối dữ liệu vườn.** Tiêu chí ≥95% thuộc Bài toán B.
 

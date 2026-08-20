@@ -246,7 +246,7 @@ Intent Router ở §11 chính là mối nối giữa hai giai đoạn: giai đo�
 | DEC-012 | High-risk | Evidence + caution; thiếu evidence → abstain | LOCKED |
 | DEC-013 | Fine-tuning | ~~Có~~ → **có điều kiện** | **SỬA ở DEC-024** |
 | DEC-014 | Fine-tuning method | LoRA/QLoRA | LOCKED |
-| DEC-015 | Model | **ĐÃ CHỐT 2026-08-20 bằng số đo.** Sinh câu trả lời: `gemini-3.1-flash-lite` (API — GPU 4GB đo được là không đủ, 32,3s/câu). Embedding: `halong_embedding` **chạy local** (hybrid MRR 0.687 > keyword 0.576 > vector đơn 0.432). Reranker: vẫn `[TODO]` | [P6_retrieval_tuning.md](reports/P6_retrieval_tuning.md) |
+| DEC-015 | Model | **ĐÃ CHỐT 2026-08-20 bằng số đo.** Sinh câu trả lời: `gemini-3.1-flash-lite` (API — GPU 4GB đo được là không đủ, 32,3s/câu). Embedding: `halong_embedding` **chạy local** (hybrid MRR **0.572** > keyword 0.451 > vector đơn 0.351 — đo lại 2026-08-20 trên kho 185 chunk / 22 case; số cũ 0.687/0.576/0.432 đo trên kho 161 chunk / 15 case, **không dùng lẫn hai bảng**). Reranker: vẫn `[TODO]` | [P6_retrieval_tuning.md](reports/P6_retrieval_tuning.md) |
 | DEC-016 | Dataset FT | Verified + human QA + validated synthetic + abstention | LOCKED |
 | DEC-017 | Evaluation | Bắt buộc | LOCKED |
 | DEC-018 | IoT | Phase sau | DEFERRED |
@@ -258,7 +258,7 @@ Intent Router ở §11 chính là mối nối giữa hai giai đoạn: giai đo�
 | **DEC-019** | **Intent Router** | Bắt buộc, 4 nhánh, đặt **trước** Scope Check | Phủ đủ 4/4 hiện tượng đề bài; là chỗ cắm cho Bài toán B (§11) |
 | **DEC-020** | **Đơn vị duyệt** | **Hai luồng tách rời:** retrieval duyệt ở mức *document*, fact duyệt ở mức *câu* | Gỡ mâu thuẫn CRAWLER_GUIDE §6 ↔ SPEC §11; giữ được ngữ cảnh mà vẫn có hàng rào số liệu (§24) |
 | **DEC-021** | **Keyword search** | `simple` + `unaccent` + `pg_trgm`, kèm cột `text_unaccent` có index | PostgreSQL không có config FTS tiếng Việt; giải luôn bài toán truy vấn không dấu (§14) |
-| **DEC-022** | **Grounding Validator** | 3 tầng: cấu trúc → số liệu (deterministic) → ngữ nghĩa | Tầng 2 chặn được A1/A3 mà không tốn model (§18) |
+| **DEC-022** | **Grounding Validator** | 3 tầng: cấu trúc → số liệu → ngữ nghĩa. **Đã làm đủ ba 2026-08-20**; cả ba đều deterministic, LLM-judge có sẵn nhưng không bật mặc định | Tầng 2 chặn được A1/A3 mà không tốn model; tầng 3 chặn thêm 2 ca với 0 báo động giả (§18) |
 | **DEC-023** | **Eval set** | Xây và **đóng băng trước** khi tối ưu retrieval/prompt. Có hash, có version. | Không đóng băng thì mọi con số cải thiện đều vô nghĩa (§28) |
 | **DEC-024** | **Fine-tuning** | **Có điều kiện.** Chỉ chạy khi đã đủ 4 điều kiện ở §33.1. Nằm **ngoài** đường găng của DoD. | ROI thấp nhất so với tiêu chí nghiệm thu #2; không được để nó chặn việc giao hàng |
 | **DEC-025** | **Metric** | Mọi metric báo cáo theo **cặp** `answer_rate` × `accuracy_when_answered`; tách false-answer / over-abstention | Chặn việc "từ chối tất" ăn điểm 0% hallucination (§30) |
@@ -720,11 +720,26 @@ Với mỗi con số xuất hiện trong câu trả lời:
 
 Vì sao tầng này quan trọng: **bịa số là hình thức bịa nguy hiểm nhất trong nông nghiệp** (liều lượng, nồng độ, ngưỡng), và nó lại là hình thức **dễ bắt nhất bằng máy** — không cần NLI, không cần model, chỉ cần so chuỗi và so khoảng. Bỏ tầng này là bỏ phí lớp phòng thủ tốt nhất.
 
-### 18.3. Tầng 3 — Kiểm ngữ nghĩa (đắt, chạy có chọn lọc)
+### 18.3. Tầng 3 — Kiểm ngữ nghĩa
 
-Với những câu không chứa số (khuyến nghị kỹ thuật, mô tả triệu chứng):
-- Dùng model NLI/entailment hoặc LLM-as-judge với prompt hẹp: *"câu này có được đoạn evidence này ủng hộ không: có / không / không xác định"*
-- **Chỉ chạy** cho câu high-risk hoặc khi tầng 1–2 không kết luận được — để giữ ngân sách latency
+> **ĐÃ LÀM 2026-08-20** — [`app/services/grounding/ngu_nghia.py`](../app/services/grounding/ngu_nghia.py) · báo cáo: [P8_grounding_tang3.md](reports/P8_grounding_tang3.md)
+
+Cách làm khác dự kiến ban đầu, và lý do là số đo. Dự kiến cũ là *"dùng NLI hoặc LLM-as-judge, chỉ chạy cho câu high-risk"*. Thực tế khi phân tích **222 case C2 đã chạy**, hai lỗ hổng lọt qua tầng 2 đều **bắt được bằng quy tắc**, không cần model:
+
+| Kiểm | Bắt gì | Ca thật |
+|---|---|---|
+| Xác nhận thẩm quyền | Bot đáp "Có," xác nhận một quy định của cơ quan nhà nước mà bằng chứng không nhắc tới | `adv_006` |
+| Câu hỏi đủ nội dung | Câu hỏi còn ≤1 từ có nghĩa → không thể trả lời, phải hỏi lại | `ie_022` |
+
+Cả hai **deterministic, không gọi mạng**, nên chạy cho **mọi** câu trả lời chứ không chỉ high-risk — giữ nguyên ngân sách latency §21.
+
+**LLM-judge vẫn có** (`kiem_bang_llm`) nhưng **không bật mặc định**: nó tốn thêm một lượt gọi, nằm trên đường latency, và tạo thêm một phụ thuộc vào quota API.
+
+**Ngưỡng chọn bằng số đo.** Trên cả 222 case, đúng 2 case có câu hỏi ≤1 từ nội dung và **cả hai đều mong đợi `abstain`**. Một quy tắc rộng hơn (bắt cụm *"đại khái / khoảng chừng"*) đã thử và **đã bỏ**: 10 case khớp nhưng 9 mong đợi `answer` — nó sẽ chặn 9 câu đúng để bắt 1 câu sai.
+
+**Kết quả:** chặn thêm 2 ca trên 29 ca có trả lời, **0 báo động giả**.
+
+**Còn hạn chế:** tầng 3 không phải NLI đầy đủ. Diễn giải sai tinh vi mà vẫn dùng đúng số, đúng chủ đề thì chưa bắt được.
 
 ### 18.4. Kết quả và hành động
 
