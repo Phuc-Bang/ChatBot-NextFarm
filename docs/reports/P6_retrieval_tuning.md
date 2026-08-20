@@ -95,7 +95,7 @@ Chạy **local**, không gọi API. Ba lý do:
 - **Người viết câu hỏi và người xây hệ thống là một.** Câu hỏi trong `known_answer` sinh từ chính bảng fact nên dùng từ ngữ gần tài liệu. Câu hỏi thật của nông dân sẽ khó hơn.
 - **`bge-m3` chưa đo được.** Cần 2,3 GB tải về, ổ C: chỉ còn 6,4 GB (đầy 97%). Đây là ứng viên còn bỏ ngỏ — nó có cả dense lẫn sparse trong một model, về lý thuyết hợp với bài toán này.
 - **Chưa đo reranker.** `RERANKER_MODEL` vẫn để trống.
-- **Chưa chốt các `[TODO]` khác:** `TOP_K_MOI_KENH=20`, `K_RRF=60`, `NGUONG_TRIGRAM=0.3` vẫn là giá trị mặc định, chưa quét tham số.
+- ~~**Chưa chốt các `[TODO]` khác**~~ — **đã chốt 2026-08-20** bằng quét 72 tổ hợp, xem mục cuối tài liệu này. `TOP_K_MOI_KENH=20`, `K_RRF=60`, `NGUONG_TRIGRAM` đổi 0.3 → **0.2**.
 
 ## 6. Việc mở khoá thêm số đo
 
