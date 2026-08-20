@@ -747,8 +747,21 @@ Cả hai **deterministic, không gọi mạng**, nên chạy cho **mọi** câu 
 |---|---|
 | Mọi câu qua cả 3 tầng | Trả lời + nguồn |
 | Một số câu bị loại, phần còn lại vẫn trả lời được | Trả lời phần còn lại + nguồn |
-| Loại quá `[TODO]`% nội dung, hoặc câu cốt lõi bị loại | **Abstain** |
+| Bất kỳ câu nào không qua bất kỳ tầng nào | **Abstain toàn bộ** — xem ghi chú dưới |
 | Câu high-risk không qua tầng 2 | **Abstain, không có ngoại lệ** |
+
+> **PoC làm chặt hơn bảng này.** Bảng trên cho phép "trả lời phần còn lại"
+> khi một số câu bị loại. Bản cài đặt hiện tại (`sinh_cau_tra_loi.py`) **không
+> làm vậy**: chỉ cần một lỗi grounding ở bất kỳ tầng nào là từ chối **toàn
+> bộ** câu trả lời với lý do `grounding_khong_dat`.
+>
+> Chọn thế vì cắt bớt câu rồi trả phần còn lại đòi phải biết câu nào là "cốt
+> lõi" — mà xác định điều đó cần hiểu ngữ nghĩa, tức lại là một chỗ có thể
+> sai. Từ chối hẳn thì đắt hơn về `answer_rate` nhưng không bao giờ trả về
+> một câu trả lời **đúng một nửa**, và với nông dân thì nửa đúng nguy hiểm
+> hơn không trả lời.
+>
+> Ngưỡng `[TODO]`% cũ bỏ đi vì nó mô tả một cơ chế không tồn tại trong mã.
 
 Mọi lần chặn phải được **ghi log kèm lý do** — đây chính là dữ liệu để báo cáo "hệ thống đã chặn N ca bịa", một con số rất mạnh khi trình bày với NextFarm.
 
@@ -834,7 +847,14 @@ source_score = authority        (tier)
              + content_quality  (tài liệu kỹ thuật hay tin tức)
              + human_verified   (đã qua duyệt chưa)
 ```
-Trọng số cụ thể: `[TODO]` — chốt sau khi có dữ liệu thật.
+**CHƯA CÀI ĐẶT trong PoC.** Không có `source_score` nào trong mã
+(`grep -rn "source_score" app/` trả về rỗng). Xếp hạng hiện tại dùng RRF của
+ba kênh truy xuất, cộng lọc `crop` bắt buộc và cộng điểm khi `region` khớp —
+xem [P6_retrieval_tuning.md](reports/P6_retrieval_tuning.md).
+
+Ghi ở đây là **thiết kế mong muốn**, không phải thứ đang chạy. Trọng số cụ
+thể chỉ chốt được khi có log hội thoại thật của NextFarm (mục 7 ở §37.6) —
+không có dữ liệu thật thì mọi trọng số đều là bịa.
 
 ### 22.3. Metadata tối thiểu của mỗi nguồn
 

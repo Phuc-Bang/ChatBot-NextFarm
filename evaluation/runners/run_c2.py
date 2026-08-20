@@ -133,6 +133,11 @@ def main() -> int:
                 "expected_abstain_type": case.get("expected_abstain_type"),
                 "answer": r.tra_loi, "da_tu_choi": r.da_tu_choi,
                 "ly_do": r.ly_do_tu_choi, "intent": r.intent,
+                # Do tin cay cua Intent Router. Can cho duong
+                # risk-coverage (muc 30.4) va cho nguong o muc 11.4:
+                # "khi do tin cay duoi nguong X thi nghieng ve TU CHOI"
+                # - khong luu no thi khong bao gio chot duoc X.
+                "intent_do_tin_cay": r.intent_do_tin_cay,
                 "nguon": [n.chunk_id for n in r.nguon],
                 # Diem RRF cua tung chunk lay ra. Can cho duong risk-coverage
                 # (muc 30.4): khong co diem thi khong co truc tau de quet, va

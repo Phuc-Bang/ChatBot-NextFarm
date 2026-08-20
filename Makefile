@@ -1,7 +1,7 @@
 # ChatBot-NextFarm — Bài toán A
 # Quy chuẩn: docs/NEXTFARM_PROBLEM_A_STANDARD_v2.0.md
 
-.PHONY: help up down logs psql check-ext install install-crawler crawl extract ingest smoke eval-tu-choi c0 c1 c2 recall phieu-cham serve test clean
+.PHONY: help up down logs psql check-ext install install-crawler crawl extract ingest smoke eval-tu-choi c0 c1 c2 recall rerank risk-coverage tang3 phieu-cham serve test clean
 
 help:
 	@echo "Các lệnh có sẵn:"
@@ -22,6 +22,9 @@ help:
 	@echo "  make c0              - Baseline: LLM trần (P4)"
 	@echo "  make c1              - RAG, không guardrail (P7)"
 	@echo "  make c2              - RAG + guardrail — cấu hình sản phẩm (P8)"
+	@echo "  make rerank          - Đo đóng góp riêng của reranker (bật/tắt)"
+	@echo "  make tang3           - Đo Grounding tầng 3 trên kết quả C2 đã có"
+	@echo "  make risk-coverage   - Đường risk–coverage, chốt ngưỡng (mục 30.4)"
 	@echo "  make phieu-cham      - Sinh phiếu chấm cho chuyên gia (mục 32)"
 	@echo ""
 	@echo "  make serve           - Chạy API + hai trang giao diện"
@@ -83,6 +86,17 @@ c1:
 
 c2:
 	python evaluation/runners/run_c2.py --nghi 1.5
+
+rerank:
+	python evaluation/runners/eval_rerank.py
+
+# Chay duoc KHONG can quota: tang 3 mac dinh thuan quy tac.
+tang3:
+	python evaluation/runners/c2_them_tang3.py
+
+# Can chay lai C2 truoc, de co truong diem_cao_nhat va intent_do_tin_cay.
+risk-coverage:
+	python evaluation/runners/risk_coverage.py
 
 phieu-cham:
 	python evaluation/tools/sinh_phieu_cham.py
