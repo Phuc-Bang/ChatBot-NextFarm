@@ -253,16 +253,28 @@ Dấu hiệu nhận ra: **một tham số không đổi kết quả một chút 
 
 ### Chi phí đo — một chi tiết hạ tầng đáng ghi
 
-Bản quét đầu chạy mãi không xong. Nguyên nhân đo được: mỗi lần mở kết nối
-Postgres qua Docker Desktop trên Windows tốn **~3,2 giây** (140,6s cho 44
-truy vấn). Với 3 kênh × 22 case × 72 tổ hợp = **4.752 lần mở kết nối** thì
-không bao giờ chạy xong.
+Bản quét đầu chạy mãi không xong. Lúc đó tôi đo được "mỗi lần mở kết nối tốn
+~3,2 giây" và kết luận đó là chi phí của Docker Desktop trên Windows.
 
-Dùng chung **một** kết nối cho cả lần quét: **340 giây** cho toàn bộ 72 tổ hợp.
+**Kết luận đó sai.** Nguyên nhân thật tìm ra sau, khi truy một sự cố khác:
 
-Chi tiết này không ảnh hưởng tới sản phẩm (`pipeline.py` mở một kết nối mỗi
-lượt hỏi, không phải mỗi kênh), nhưng ảnh hưởng tới **mọi công cụ đo** — ghi
-lại để lần sau không mất buổi.
+```
+127.0.0.1   kết nối trong  0,01s
+localhost   kết nối trong 10,05s
+```
+
+`localhost` phân giải ra cả IPv6 lẫn IPv4; libpq thử IPv6 trước; Docker chỉ
+bind IPv4 → mọi kết nối chờ hết timeout rồi mới đi đường đúng. Chi tiết đầy
+đủ: [P10_su_co_treo_api.md](P10_su_co_treo_api.md).
+
+Sau khi đổi `localhost` → `127.0.0.1`, kết nối tốn **0,01s**. Toàn bộ bộ test
+chạy trong **15 giây** thay vì treo.
+
+Việc dùng chung một kết nối cho cả lần quét vẫn là cách làm đúng (72 tổ hợp
+trong 340s), nhưng nó chỉ **che** vấn đề chứ không sửa.
+
+> Bài học: một con số đo được (~3,2s) vẫn có thể dẫn tới kết luận sai về
+> **nguyên nhân**. Đo đúng mà quy sai nguyên nhân thì vẫn là suy đoán.
 
 ### Bảng chính thức sau khi chốt tham số
 
