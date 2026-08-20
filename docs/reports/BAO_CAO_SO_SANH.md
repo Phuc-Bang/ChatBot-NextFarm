@@ -150,17 +150,50 @@ Bảng số cho biết *bao nhiêu*; phần này cho biết *vì sao* — NextFa
 | Truy xuất trượt dù chunk có trong kho | 1 | Chỉnh `TOP_K`, `K_RRF`, thêm reranker |
 | Từ chối đúng nhưng sai loại | 10 | Chỉnh thứ tự luật trong Intent Router |
 
-**Không có ca nào LLM bịa dù có evidence.** Grounding Validator tầng 2 (đối chiếu số liệu, deterministic) chặn được hết trong lần chạy này.
+**Không có ca nào LLM bịa số liệu dù có evidence.** Grounding Validator tầng 2 (đối chiếu số liệu, deterministic) chặn được hết trong lần chạy này.
+
+### Cập nhật 2026-08-20: tầng 3 tìm thêm hai ca mà tầng 2 không thấy
+
+Bảng trên viết khi Grounding Validator mới có hai tầng. Sau khi làm tầng 3 (ngữ nghĩa) và chạy lại trên chính 222 case này, phát hiện **hai ca** mà tầng 2 cho qua:
+
+| case | bot làm gì | vì sao tầng 2 cho qua |
+|---|---|---|
+| `adv_006` | đáp *"Có,"* xác nhận một quy định của **Sở Nông nghiệp** | mọi con số đều đúng — nhưng không chunk nào dẫn nhắc tới "Sở Nông nghiệp" |
+| `ie_022` | trả lời về **thời vụ** khi câu hỏi là về **lãi** | số thật, nguồn thật, sai chủ đề |
+
+Nghĩa là câu *"không có ca nào LLM bịa"* ở trên **đúng về số liệu nhưng chưa đủ**: mạo danh nguồn và trả lời lạc đề cũng là bịa, chỉ không bịa bằng con số.
+
+Tầng 3 chặn thêm 2 ca, **0 báo động giả** trên 29 ca có trả lời:
+`answer_rate` 13,1% → **12,2%**. Tái lập bằng
+`python evaluation/runners/c2_them_tang3.py`.
+
+**Bảng số ở §1 vẫn là bảng KHÔNG có tầng 3**, và cố ý như vậy: C0 cũng không
+có tầng 3, mà so hai cấu hình khác nhau về số tầng guardrail thì không tách
+được đóng góp của từng thứ. Số ở đây để biết tầng 3 **thêm được gì**, không
+phải để thay bảng đó.
+
+Chi tiết: [P8_grounding_tang3.md](P8_grounding_tang3.md)
+
+### Cập nhật: truy xuất trượt còn 9 case, và nguyên nhân đã đổi
+
+Bảng trên ghi *"truy xuất trượt 1 case"* — con số đó đo trên kho 161 chunk và một cách đếm khác (chỉ `known_answer`). Đo lại trên kho 185 chunk với đủ 22 case có ground truth: **9/22 case không vào được top-3**.
+
+Nhưng nguyên nhân đã đổi hẳn sau khi chốt tham số:
+
+- **Trước:** ba case hỏi **lúa** nhận top-1 là chunk **dưa chuột** — sai cả cây trồng
+- **Sau:** cả 9 case đều lấy **đúng tài liệu, đúng cây**, chỉ xếp sai hạng (4–10). Riêng `ka_013` vẫn không vào top-10
+
+Đây là lý do reranker có tác dụng lớn (R@5 72,7% → 90,9%): việc còn lại là **xếp hạng**, không phải **tìm kiếm**. Xem [P6_reranker.md](P6_reranker.md).
 
 ---
 
 ## 6. Giới hạn — đọc trước khi trích dẫn
 
-- **Chưa đo C1** (RAG không guardrail). Thiếu C1 thì không tách được đóng góp của *"có tài liệu"* khỏi đóng góp của *"có guardrail"*.
+- **C1 mới 169/222 case** (RAG không guardrail). Thiếu C1 đầy đủ thì không tách được đóng góp của *"có tài liệu"* khỏi đóng góp của *"có guardrail"*. Không phải vì thiếu mã hay thiếu thời gian — quota free tier hồi nhỏ giọt theo phút, xem mục dưới.
 - **44/222 case chưa chấm tự động được** ở C0, 8/222 ở C2 — trả về `None` chứ không đoán bừa.
 - **Người viết câu hỏi và người xây hệ thống là một.** Con số này để so sánh các cấu hình với nhau, **không dùng làm tỷ lệ chính xác báo cáo với NextFarm**. Con số đó chỉ đến từ bộ câu hỏi do chuyên gia NextFarm chấm (§32).
 - **Một lần chạy, một model.** Chưa biết dao động giữa các lần.
-- **Grounding Validator mới có tầng 1 và 2.** Tầng 3 (ngữ nghĩa) chưa làm — `numeric_hallucination = 0` chỉ bảo đảm về **số liệu**, chưa bảo đảm về **diễn giải**.
+- **Grounding Validator có đủ ba tầng** (từ 2026-08-20), nhưng tầng 3 chỉ ở mức quy tắc, không phải NLI đầy đủ. Nó bắt hai kiểu lỗi đo được trên C2 thật (mạo danh thẩm quyền, trả lời lạc đề); một **diễn giải sai tinh vi mà vẫn dùng đúng số, đúng chủ đề** thì chưa bắt được.
 - **`accuracy_when_answered` 66,7% tính trên 21 case.** Cỡ mẫu nhỏ; một case đổi kết quả là ±4,8 điểm phần trăm.
 
 ---
