@@ -246,7 +246,7 @@ Intent Router ở §11 chính là mối nối giữa hai giai đoạn: giai đo�
 | DEC-012 | High-risk | Evidence + caution; thiếu evidence → abstain | LOCKED |
 | DEC-013 | Fine-tuning | ~~Có~~ → **có điều kiện** | **SỬA ở DEC-024** |
 | DEC-014 | Fine-tuning method | LoRA/QLoRA | LOCKED |
-| DEC-015 | Model | **ĐÃ CHỐT 2026-08-20 bằng số đo.** Sinh câu trả lời: `gemini-3.1-flash-lite` (API — GPU 4GB đo được là không đủ, 32,3s/câu). Embedding: `halong_embedding` **chạy local** (hybrid MRR **0.572** > keyword 0.451 > vector đơn 0.351 — đo lại 2026-08-20 trên kho 185 chunk / 22 case; số cũ 0.687/0.576/0.432 đo trên kho 161 chunk / 15 case, **không dùng lẫn hai bảng**). Reranker: vẫn `[TODO]` | [P6_retrieval_tuning.md](reports/P6_retrieval_tuning.md) |
+| DEC-015 | Model | **ĐÃ CHỐT 2026-08-20 bằng số đo.** Sinh câu trả lời: `gemini-3.1-flash-lite` (API — GPU 4GB đo được là không đủ, 32,3s/câu). Embedding: `halong_embedding` **chạy local** (hybrid MRR **0.572** > keyword 0.451 > vector đơn 0.351 — đo lại 2026-08-20 trên kho 185 chunk / 22 case; số cũ 0.687/0.576/0.432 đo trên kho 161 chunk / 15 case, **không dùng lẫn hai bảng**). Reranker: **đã đo 2026-08-20** — `itdainb/PhoRanker`, `top_k_rerank=12`. Nâng R@5 72,7% → 90,9% nhưng tốn +2.362 ms trên CPU nên **mặc định TẮT**; bật bằng `RERANKER_MODEL` khi NextFarm nới ngưỡng độ trễ hoặc có GPU đủ lớn ([P6_reranker.md](reports/P6_reranker.md)) | [P6_retrieval_tuning.md](reports/P6_retrieval_tuning.md) |
 | DEC-016 | Dataset FT | Verified + human QA + validated synthetic + abstention | LOCKED |
 | DEC-017 | Evaluation | Bắt buộc | LOCKED |
 | DEC-018 | IoT | Phase sau | DEFERRED |
@@ -597,9 +597,9 @@ Và **ưu tiên cộng điểm** cho chunk có `region` khớp vùng người d�
 
 | Tham số | Giá trị | Trạng thái |
 |---|---|---|
-| Số chunk lấy ra mỗi kênh (top-K) | `[TODO]` — chốt sau khi đo Recall@K | |
-| Trọng số hợp nhất RRF | `[TODO]` | |
-| Số chunk đưa vào Evidence Pack sau rerank | `[TODO]` — cân với ngân sách latency §21 | |
+| Số chunk lấy ra mỗi kênh (top-K) | **20** — chốt 2026-08-20, quét 72 tổ hợp; từ 20 trở lên bão hoà | ✅ |
+| Trọng số hợp nhất RRF (`K_RRF`) | **60** — chốt 2026-08-20; chênh 0,003 giữa 10/30/60 là nhiễu | ✅ |
+| Số chunk đưa vào Evidence Pack sau rerank | **5** (`top_k`), rerank từ **12** ứng viên — chốt 2026-08-20; N=3/N=5 làm chất lượng TỆ ĐI | ✅ |
 | Ngưỡng điểm tối thiểu để không abstain | `[TODO]` — chốt bằng đường risk–coverage §30.4 | |
 
 **Không được tự đặt các con số này rồi ghi vào tài liệu như đã chốt.** Chúng phải đến từ số đo.

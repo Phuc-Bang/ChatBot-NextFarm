@@ -162,6 +162,19 @@ Cộng thêm: máy chủ chạy FastAPI + PostgreSQL (`[EXT]` — tuỳ hạ t�
 
 Muốn self-host thì cần đầu tư GPU lớn hơn, và chi phí đó là `[EXT]`. **Điểm hoà vốn chỉ tính được khi biết giá GPU NextFarm định mua.**
 
+### Nhưng có một lý do CỤ THỂ khác để cân nhắc GPU
+
+Khác với "self-host model sinh" (đã bác ở trên), việc này đo được và có ích ngay: **reranker**.
+
+| | không reranker | có reranker |
+|---|---:|---:|
+| Tìm đúng tài liệu trong 5 kết quả đầu | 72,7% | **90,9%** |
+| Thêm vào mỗi lượt hỏi | 0 ms | **+2.362 ms** |
+
+Cải thiện lớn, nhưng 2,4 giây đó là vì cross-encoder đang chạy **CPU** — GPU 4 GB hiện tại đã bị model embedding chiếm. Trên GPU đủ lớn nó nhanh hơn nhiều lần.
+
+Hiện **mặc định TẮT** vì phá ngưỡng `ASM-01` (p50 ≤ 5 giây) — mà ngưỡng đó là giả định của đội, chưa được NextFarm xác nhận. Nếu NextFarm chấp nhận ~5,5 giây thay vì 5, bật được ngay bằng một dòng cấu hình. Chi tiết: [`docs/reports/P6_reranker.md`](reports/P6_reranker.md)
+
 Lưu ý: **giá API thay đổi**. Trong một lần tra cứu duy nhất đã thấy `gemini-1.5-flash`, `text-embedding-004` và `gemini-2.0-flash-lite` đều đã bị Google tắt hẳn. Mọi con số trên gắn với ngày tra 2026-08-20.
 
 ---
