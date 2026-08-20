@@ -19,6 +19,10 @@ ca hai dat truoc truy xuat.
 
 from __future__ import annotations
 
+# sentence_transformers PHAI nap truoc psycopg - xem eval_retrieval.py.
+# Nap sai thu tu lam tien trinh segfault im lang (exit 139).
+import sentence_transformers  # noqa: F401
+
 import time
 from dataclasses import dataclass, field
 

@@ -104,3 +104,70 @@ Chạy **local**, không gọi API. Ba lý do:
 | Duyệt 44 chunk rủi ro cao | 7 case đang bị chặn → 22 case đo được |
 | Duyệt tiếp 76 câu ứng viên | Thêm fact → thêm case `known_answer` |
 | Dọn ổ C: lấy ~3 GB | Đo được `bge-m3` |
+
+---
+
+## Đo lại ngày 2026-08-20 — sau khi kho tri thức được cắt lại
+
+Số ở các mục trên đo trên kho **161 chunk / 15 case**. Kho hiện tại có
+**292 chunk (185 index được) / 22 case** có `source_of_truth`. Cùng một
+đoạn mã, cùng một model, nhưng đầu vào đã khác — nên phải ghi lại số mới
+thay vì để số cũ đứng tên cho một cấu hình không còn tồn tại.
+
+| model | R@1 | R@3 | R@5 | R@10 | MRR |
+|---|---:|---:|---:|---:|---:|
+| hybrid(halong) | 45.5 | 59.1 | 68.2 | 81.8 | **0.572** |
+| keyword | 31.8 | 50.0 | 59.1 | 68.2 | 0.451 |
+| halong (vector đơn) | 13.6 | 45.5 | 63.6 | 86.4 | 0.351 |
+
+**Kết luận chọn model không đổi.** Thứ hạng giữ nguyên, và hiện tượng đã
+mô tả ở DEC-015 vẫn đúng: vector đơn *tìm đúng, xếp sai* — R@10 cao nhất
+(86.4%) nhưng R@1 thấp nhất (13.6%); hợp nhất RRF đưa R@1 từ 13.6% lên
+45.5%. Cái đổi là **con số tuyệt đối**: MRR hybrid 0.687 → 0.572.
+
+Không được dùng lẫn hai bảng. Bảng cũ đo trên kho cũ.
+
+### Một sai lệch của phép đo, không phải của sản phẩm
+
+`eval_retrieval.py` gọi `tim_kiem()` **không truyền `crop`**, trong khi
+`app/services/pipeline.py:142` — đường chạy thật — **có truyền**. Nghĩa là
+bảng trên đang đo một cấu hình *kém hơn sản phẩm thật*.
+
+Đo hai chiều trên cùng 22 case, cùng hybrid(halong):
+
+| | R@1 | R@3 | R@5 | MRR |
+|---|---:|---:|---:|---:|
+| không lọc crop (như eval đang chạy) | 40.9 | 54.5 | 68.2 | 0.521 |
+| có lọc crop (như pipeline thật) | 36.4 | **59.1** | **72.7** | **0.531** |
+
+Lọc `crop` nâng R@3 và R@5 khoảng 4,5 điểm nhưng **hạ R@1**. Đây không phải
+bản sửa cho các case trượt — ghi lại đúng như đo được, không tô thêm.
+
+### Vì sao `ka_015` trượt — chẩn đoán cũ đã SAI
+
+Báo cáo trước ghi *"chunk có trong kho mà truy xuất xếp hạng kém"*. Sai.
+Kiểm lại thì `source_of_truth` của `ka_015` là
+`lua__cham_soc_lua_xuan_o_mien#14`, mà tài liệu đó chỉ có **12 chunk**.
+
+Nguyên nhân: `source_of_truth` **không phải `chunk_id`**. Nó là
+`source_id#sentence_index` — số thứ tự câu trong `crawler/data/candidates.json`.
+Hai không gian định danh trùng nhau về hình dạng (`tên_tài_liệu#số`) nên
+không ai nhận ra. Toàn bộ **22/22** case đều "trỏ tới chunk không tồn tại"
+nếu đem so trực tiếp.
+
+`eval_retrieval.py` **không** so định danh — nó tra `fact` theo
+`(document_id, sentence_index)` rồi đối chiếu **bằng nội dung câu** để tìm
+chunk chứa câu đó. Vì vậy phép đo Recall vẫn đúng, và dựng được ground
+truth cho **22/22** case. Nhưng bất kỳ đoạn mã nào sau này đem
+`source_of_truth` so thẳng với `chunk_id` sẽ nhận 0 và **im lặng**.
+
+> **Không đổi tên trường trong tập kiểm thử đã đóng băng** (DEC-023). Chỗ
+> cần sửa là tài liệu và bất kỳ chỗ nào hiểu nhầm nó, không phải dữ liệu.
+
+### 10/22 case chưa vào được top-3
+
+`ka_002 ka_003 ka_004 ka_012 ka_013 ka_015 ka_016 pa_002 pa_005 pa_006`
+
+Bốn trong số đó (`ka_015 ka_016 pa_006` hỏi **lúa**, `ka_012` hỏi **dưa
+chuột**) nhận top-1 là chunk của **cây khác**. Lọc `crop` xử lý được một
+phần, nhưng như bảng trên cho thấy, không xử lý hết. `[TODO]` còn mở.

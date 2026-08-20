@@ -175,3 +175,40 @@ Trên cùng một tập kiểm thử đã đóng băng và cùng một model, th
 - độ trễ p95 **11.451 ms → 8.084 ms** (vào trong ngân sách)
 
 Cái giá phải trả là `answer_rate` **97,7% → 13,1%**, trong đó phần lớn không phải do hệ thống mà do **kho tri thức mới có 161 chunk**. Kho lớn lên thì tỷ lệ này lên theo, và **cơ chế chống bịa không đổi**.
+
+---
+
+## Giới hạn free tier — đo được ngày 2026-08-20
+
+Không phải ghi chú vận hành. Đây là con số đầu vào cho mô hình chi phí §37.5.
+
+**Hạn mức theo TỪNG MODEL, không theo API key.** Xác lập bằng thí nghiệm:
+khi `gemini-3.1-flash-lite` trả 429, một **API key hoàn toàn mới** vẫn nhận
+429 trên đúng model đó, trong khi cùng key ấy gọi `gemini-3.6-flash` và
+`gemini-3.5-flash-lite` thì thành công. `models.list` trả về 50 model bình
+thường — tức key hợp lệ, chỉ là hạn mức đã cạn.
+
+| model | trạng thái lúc đo |
+|---|---|
+| `gemini-3.1-flash-lite` | 429 — cạn hạn mức ngày |
+| `gemini-3.6-flash` | gọi được |
+| `gemini-3.5-flash-lite` | gọi được |
+
+**Hệ quả:** cấp thêm key **không** mở thêm hạn mức. Muốn tăng thông lượng
+phải trả phí hoặc đổi model — mà đổi model giữa chừng thì bảng C0/C1/C2 trộn
+hai model, so sánh mất nghĩa.
+
+Khối lượng thực tế chạy được trong một ngày trước khi cạn: C0 đầy đủ (222
+case) + C2 đầy đủ (222 case) + C1 167/222 case, cộng các lần thử — khoảng
+**700–800 lượt gọi**.
+
+Với NextFarm: free tier **không đủ** để đo trọn ba cấu hình trong một ngày.
+Chạy sản phẩm thật thì phải tính chi phí trả phí theo §37.5.
+
+## Trạng thái C1 tại thời điểm này
+
+**167/222 case** thành công, 12 case lỗi 429, 43 case chưa chạy. Kết quả
+lưu sau **từng case** nên chạy lại `make c1` sẽ bỏ qua phần đã có.
+
+Chưa đủ để lên bảng ba cấu hình. Bảng C0 và C2 không bị ảnh hưởng — cả hai
+đã đo trọn 222 case và đã commit.
