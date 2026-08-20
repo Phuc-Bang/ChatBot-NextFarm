@@ -120,12 +120,18 @@ Test tự động chứng minh điều này: khi model **khai là có đủ căn
 ### 4. Cam kết Hỗ trợ Kỹ thuật & Tối ưu Chi phí Vận hành
 * Đảm bảo hệ thống vận hành ổn định, tối ưu hoá chi phí API LLM.
 
-> **Hai điều trong mục này là CAM KẾT, chưa phải hiện trạng** — ghi rõ để không ai đọc nhầm:
-> 
+> **Một điều trong mục này là CAM KẾT, chưa phải hiện trạng:**
+>
 > - **Mức SLA** cần NextFarm nêu yêu cầu rồi hai bên chốt. PoC chạy cục bộ, chưa có số đo uptime nào để hứa một con số.
-> - **Prompt caching** chưa cài đặt (`grep` trong `app/services/llm/` không có). Nó khả thi và đáng làm — Evidence Pack chiếm phần lớn `Ti` = 702 token/lượt — nhưng mức tiết kiệm chỉ nói được sau khi đo.
-> 
-> Đã có và đã đo: **chỉ gọi model khi có bằng chứng** (141/222 ca bị chặn trước khi chạm model, 0 token) và **embedding chạy local** (chi phí biên bằng 0).
+>
+> **Đã có và đã đo:**
+>
+> - **Chỉ gọi model khi có bằng chứng** — 141/222 ca bị chặn trước khi chạm model, tốn **0 token**. Đây là khoản tiết kiệm lớn nhất và nó đã nằm sẵn trong `Ti` = 702.
+> - **Embedding chạy local** — chi phí biên bằng 0, kho tri thức không rời máy.
+>
+> - **Prompt caching: KHÔNG áp dụng được cho kiến trúc này.** Đã đo và đã thử 2026-08-21, không phải "chưa làm". Trên các lượt *có* gọi model, prompt trung bình 1.704 token, tách ra: mẫu prompt cố định **175 token (10,3%)**, Evidence Pack + câu hỏi **1.529 token (89,7%)**. Chỉ phần cố định cache được, và Gemini từ chối thẳng: `Cached content is too small. total_token_count=175, min_total_token_count=1024`. Muốn dùng được thì phải cache cả Evidence Pack — nhưng nó đổi theo từng câu hỏi, nên không có gì để tái dùng. Đây là hệ quả trực tiếp của việc RAG lấy chunk khác nhau cho câu hỏi khác nhau, không phải thiếu sót cài đặt.
+>
+> Ba điều trên nói cùng một chuyện: chi phí ở kiến trúc này được cắt bằng **không gọi model**, không phải bằng làm cho lượt gọi rẻ đi.
 
 ---
 
@@ -162,12 +168,28 @@ Chi phí LLM/tháng = C × T × (Ti × Pi + To × Po)
 |---|---|---|---|
 | Số hội thoại/tháng | `C` | `[EXT]` | NextFarm |
 | Số lượt/hội thoại | `T` | `[EXT]` | NextFarm |
-| Token vào/lượt | `Ti` | **702** | **Đo được** ở PoC |
+| Token vào/lượt | `Ti` | **702** | **Đo được** ở PoC — xem ghi chú dưới |
 | Token ra/lượt | `To` | **41** | **Đo được** ở PoC |
 | Đơn giá vào | `Pi` | $0,25 / 1 triệu | Bảng giá Google, tra 2026-08-20 |
 | Đơn giá ra | `Po` | $1,50 / 1 triệu | như trên |
 
 **Chi phí mỗi lượt hỏi ≈ $0,000238** (~6 đồng).
+
+> **`Ti` = 702 là trung bình trên MỌI lượt, không phải trên lượt có gọi model.**
+> Đo trên 222 lượt của C2: chỉ **81 lượt (36,5%)** thật sự chạm tới model,
+> 141 lượt còn lại bị Intent Router hoặc Scope Check chặn trước và tốn
+> **0 token**. Trung bình trên lượt *có gọi* là **1.925 token vào / 112 ra**.
+>
+> Cả hai con số đều đúng, và phải dùng đúng chỗ:
+>
+> | dùng để | lấy số nào |
+> |---|---|
+> | ước lượng hoá đơn tháng | **702 / 41** (trung bình mọi lượt) |
+> | ước lượng lợi ích prompt caching | **1.925 / 112** (chỉ lượt có gọi) |
+>
+> Con số 702 đã bao gồm sẵn khoản tiết kiệm lớn nhất của hệ thống: **63,5%
+> số lượt không tốn một token nào**. Đó là hiệu quả của guardrail, đo được
+> trực tiếp thành tiền.
 
 Ví dụ minh hoạ — *các mức tải này là ví dụ, không phải số của NextFarm*:
 
