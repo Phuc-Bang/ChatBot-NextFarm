@@ -14,6 +14,9 @@ Mục tiêu không phải là làm một chatbot nông nghiệp trôi chảy. M�
 |---|---|
 | [`De-bai-Chatbot-NextFarm.pdf`](De-bai-Chatbot-NextFarm.pdf) | Đề bài gốc của NextFarm (31/07/2026) — **cấp cao nhất, không sửa** |
 | [`docs/NEXTFARM_PROBLEM_A_STANDARD_v2.0.md`](docs/NEXTFARM_PROBLEM_A_STANDARD_v2.0.md) | **Quy chuẩn kỹ thuật đang áp dụng** — nguồn sự thật duy nhất cho mọi quyết định |
+| [`docs/GIAO_HANG_NEXTFARM.md`](docs/GIAO_HANG_NEXTFARM.md) | **Tài liệu bàn giao** — trả lời 6 câu hỏi mục 6 của đề bài |
+| [`docs/reports/BAO_CAO_SO_SANH.md`](docs/reports/BAO_CAO_SO_SANH.md) | Báo cáo so sánh C0 vs C2 kèm phân tích lỗi |
+| [`docs/PHIEU_CHAM_CHUYEN_GIA.md`](docs/PHIEU_CHAM_CHUYEN_GIA.md) | 50 câu + phiếu chấm cho chuyên gia nông nghiệp NextFarm |
 | [`docs/CRAWLER_GUIDE.md`](docs/CRAWLER_GUIDE.md) | Hướng dẫn crawler (đã hợp nhất vào quy chuẩn v2.0 Phần IV) |
 | [`docs/ChatBot-NextFarm-SPEC.md`](docs/ChatBot-NextFarm-SPEC.md) | Bản tóm tắt đề bài dạng Markdown |
 | [`docs/NEXTFARM_PROBLEM_A_DOCUMENTATION_v1.0/`](docs/NEXTFARM_PROBLEM_A_DOCUMENTATION_v1.0/) | Spec v1.0 — đã được thay thế, giữ để tham khảo lịch sử |
@@ -172,37 +175,6 @@ phải vì hệ thống quá thận trọng: 33/46 ca từ chối là do kho kh�
 Chi tiết: [`BAO_CAO_SO_SANH.md`](docs/reports/BAO_CAO_SO_SANH.md) ·
 [`C0_baseline.md`](docs/reports/C0_baseline.md)
 
-### C0 — LLM trần bịa đến mức nào
-
-Đo trên 222 case của tập v3 đã đóng băng, `gemini-3.1-flash-lite`, prompt để trần
-(không nhắc thận trọng, không cấm bịa, không yêu cầu trích dẫn):
-
-| | |
-|---|---|
-| `answer_rate` | **97,7%** — gần như không bao giờ từ chối |
-| `accuracy_when_answered` | **1,2%** (2/173 case chấm được) |
-| `abstention_recall` | **3,4%** — trong 148 ca đáng từ chối, chỉ bắt được 5 |
-| `over_abstention_rate` | 0% — nó **không** từ chối oan, mà là không thận trọng chút nào |
-
-**61 ca bịa**, phủ đủ bốn hiện tượng đề bài nêu:
-
-| Mã | Hiện tượng | Số ca |
-|---|---|---|
-| A1 | Bịa số liệu vườn | 8 |
-| A2 | Bịa tính năng ứng dụng | 17 |
-| A3 | Khuyến nghị sai cây/vùng | 22 |
-| — | **Khẳng định đã điều khiển thiết bị** | **14** |
-
-Nhóm cuối nghiêm trọng nhất:
-
-> *"Đã xác nhận lệnh: Bật van 3 trong vòng 10 phút. **Hệ thống đang tiến hành mở
-> van ngay bây giờ.**"*
-
-Bot chưa hề chạm tới thiết bị nào. Nông dân đọc câu này sẽ tin là van đã mở rồi
-bỏ đi — ruộng không được tưới. Đây không còn là lỗi thông tin.
-
-Chi tiết: [`docs/reports/C0_baseline.md`](docs/reports/C0_baseline.md).
-
 ### Mô hình đã chốt — bằng số đo, không phải trên giấy
 
 DEC-015 giữ trạng thái `[TODO]` cho tới khi có số. Giờ đã có:
@@ -266,7 +238,38 @@ make check-ext
 # 4. Cài phụ thuộc
 make install
 make install-crawler
+
+# 5. Dựng lại kho tri thức từ file trong git
+make ingest
+
+# 6. Chạy thử
+make test        # 283 test tự động
+make serve       # http://localhost:8000  và  /admin
 ```
+
+`.env` cần ít nhất:
+
+```
+GEMINI_API_KEY=<khoá của bạn>
+LLM_MODEL=gemini-3.1-flash-lite
+EMBEDDING_PROVIDER=local
+EMBEDDING_MODEL=halong
+```
+
+### Đo lại các con số trong README này
+
+```bash
+make smoke       # thử LLM 3 câu — chạy TRƯỚC khi tốn 222 case
+make eval-tu-choi # tầng từ chối, không cần model
+make recall      # Recall@K, chọn model embedding
+make c0          # baseline LLM trần
+make c2          # cấu hình sản phẩm
+```
+
+> **Free tier Gemini rất chặt.** Các lệnh `c0`/`c1`/`c2` đã cài sẵn `--nghi 1.5`
+> để giãn nhịp. Chạy liên tục không giãn là đụng trần 429 — đã gặp thật:
+> `gemini-2.5-flash` cạn quota sau vài chục lần gọi. Kết quả lưu sau **từng
+> case** nên đụng trần thì mất 1 case chứ không mất cả lượt.
 
 Xem `make help` để biết đầy đủ các lệnh.
 
