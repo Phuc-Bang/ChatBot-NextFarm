@@ -126,6 +126,12 @@ def main() -> int:
                 "answer": r.tra_loi, "da_tu_choi": r.da_tu_choi,
                 "ly_do": r.ly_do_tu_choi, "intent": r.intent,
                 "nguon": [n.chunk_id for n in r.nguon],
+                # Diem RRF cua tung chunk lay ra. Can cho duong risk-coverage
+                # (muc 30.4): khong co diem thi khong co truc tau de quet, va
+                # nguong tu choi se phai chot bang cam tinh.
+                "diem_nguon": [getattr(n, "diem", None) for n in r.nguon],
+                "diem_cao_nhat": (max((getattr(n, "diem", 0.0) or 0.0)
+                                      for n in r.nguon) if r.nguon else None),
                 "token_vao": r.token_vao, "token_ra": r.token_ra,
                 "latency_ms": r.latency_ms, "loi": r.loi,
             }, ensure_ascii=False) + "\n")

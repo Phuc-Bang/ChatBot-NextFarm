@@ -149,6 +149,10 @@ def main() -> int:
                 "question": case["question"],
                 "expected_behavior": case["expected_behavior"],
                 "answer": tl, "nguon": [c.chunk_id for c in chunks],
+                # Xem chu thich cung ten o run_c2.py - can cho muc 30.4.
+                "diem_nguon": [getattr(c, "diem", None) for c in chunks],
+                "diem_cao_nhat": (max((getattr(c, "diem", 0.0) or 0.0)
+                                      for c in chunks) if chunks else None),
                 "token_vao": tv, "token_ra": tr_,
                 "latency_ms": {"truy_xuat": t_tx, "llm": t_llm},
                 "loi": loi,
