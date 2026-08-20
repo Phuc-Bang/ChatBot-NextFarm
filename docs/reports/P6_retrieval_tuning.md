@@ -317,3 +317,71 @@ phải tìm kiếm.**
 - **Reranker chưa thử.** `RERANKER_MODEL` để trống. Với R@10 95.5% mà R@1
   50%, đây là hạng mục có tiềm năng cao nhất.
 - Số chunk vào Evidence Pack (`top_k=5` ở `pipeline.py`) chưa quét riêng.
+
+---
+
+## Phụ lục — Mở rộng truy vấn bằng từ địa phương: ĐÃ THỬ, ĐÃ BỎ
+
+Ngày đo: 2026-08-21
+
+### Lỗi phát hiện được
+
+`mo_rong_truy_van()` (`app/services/normalization/vietnamese.py:244`) tính từ
+đồng nghĩa địa phương và lưu vào `CauHoi.mo_rong`. Nhưng `grep -n "mo_rong"`
+trên toàn bộ `app/services/retrieval/`, `pipeline.py`, `rag/` **không ra một
+kết quả nào**. Cả từ điển `local_terms.yaml` không có tác dụng gì lên kết quả
+truy xuất.
+
+Tác động đo được — hai câu cùng nghĩa, kho 185 chunk:
+
+```
+"dưa leo trồng vụ nào ở miền Nam"     -> 32 chunk, hạng 1 ninhbinh_dua_chuot_quytrinh#2
+"dưa chuột trồng vụ nào ở miền Nam"   -> 29 chunk, hạng 1 ninhbinh_dua_chuot_dong#2
+```
+
+Bản "dưa leo" trượt hẳn chunk hạng 1 của bản kia. Lỗi thật, có thật.
+
+### Ba cách sửa, cả ba đều làm TỆ ĐI
+
+Nối `mo_rong` vào truy vấn, đo trên 22 case có ground truth:
+
+| cấu hình | R@1 | R@3 | R@5 | R@10 | MRR |
+|---|---:|---:|---:|---:|---:|
+| **không mở rộng (giữ nguyên)** | **50.0** | 59.1 | **77.3** | 95.5 | **0.621** |
+| mở rộng cả FTS lẫn trigram | 45.5 | 59.1 | 72.7 | 95.5 | 0.589 |
+| chỉ mở rộng FTS | 45.5 | 59.1 | 77.3 | 95.5 | 0.587 |
+| chỉ mở rộng trigram | 40.9 | 59.1 | 72.7 | 95.5 | 0.555 |
+
+R@10 **không đổi** ở cả bốn cấu hình (95.5%). Mở rộng không giúp tìm thêm
+chunk nào — nó chỉ làm **xếp hạng tệ đi**.
+
+### Vì sao
+
+`tsquery_or()` nối các từ bằng **OR** (xem chú thích trong `keyword.py`: đổi
+AND thành OR là quyết định có chủ đích). Mỗi từ thêm vào kéo thêm chunk ứng
+viên và làm loãng `ts_rank`. Với trigram còn tệ hơn: `word_similarity()` đo
+độ khớp trên chuỗi truy vấn, nối dài chuỗi ra thì mọi điểm số đều tụt.
+
+Nói cách khác: **mở rộng truy vấn giúp câu hỏi dùng từ địa phương, nhưng
+phạt mọi câu hỏi dùng từ chuẩn** — và 22 case ground truth phần lớn dùng từ
+chuẩn.
+
+### Kết luận và điều kiện xét lại
+
+Giữ nguyên, **không mở rộng**. `mo_rong` vẫn được tính và vẫn nằm trong
+`CauHoi` — nó không gây hại, và có thể dùng lại nếu:
+
+1. Có tập ground truth riêng cho câu hỏi dùng từ địa phương (hiện `local_terms`
+   trong tập v3 **không có** `source_of_truth`, nên không đo được nhóm này)
+2. Mở rộng **có điều kiện**: chỉ khi từ chuẩn *không* xuất hiện trong câu hỏi
+3. Hoặc mở rộng ở **kênh vector** thay vì kênh từ khoá — vector không bị phạt
+   vì độ dài truy vấn theo cùng cách
+
+Cách 2 là hướng đáng thử nhất và chưa thử, vì nó nhắm đúng ca `dưa leo` mà
+không đụng tới câu hỏi dùng từ chuẩn.
+
+### Điều đáng ghi lại về phương pháp
+
+Bản sửa này **đúng về mặt logic** (từ điển có mà không dùng là lỗi), sửa xong
+**chạy đúng** (hai câu cùng nghĩa cho kết quả giống hệt nhau), và vẫn phải bỏ
+vì số đo nói không. Một ca thuận lợi không phải bằng chứng.

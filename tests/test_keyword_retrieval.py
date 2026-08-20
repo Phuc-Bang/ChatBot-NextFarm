@@ -325,3 +325,36 @@ def test_ca_chua_khong_bi_tu_dung_an_mat():
     """Truong hop cu the da tung xay ra: "chua" (chua) lam moi cau hoi ve ca
     chua mat luon tu khoa chinh."""
     assert "chua" in kw.tsquery_or("ca chua can dat ph bao nhieu").split(" | ")
+
+
+def test_mo_rong_khong_duoc_noi_vao_truy_van_tu_khoa():
+    """`CauHoi.mo_rong` KHONG duoc dua vao FTS hay trigram. Da do, da bo.
+
+    Nhin ma nguon thi day trong nhu mot lo hong: mo_rong_truy_van() tinh tu
+    dong nghia dia phuong roi khong cho nao dung. Sua lai "cho dung" la phan
+    xa tu nhien - va no lam truy xuat TE DI.
+
+    Do tren 22 case co ground truth, kho 185 chunk (2026-08-21):
+
+        khong mo rong (giu nguyen)   MRR 0.621   R@1 50.0
+        mo rong ca hai kenh          MRR 0.589   R@1 45.5
+        chi mo rong FTS              MRR 0.587   R@1 45.5
+        chi mo rong trigram          MRR 0.555   R@1 40.9
+
+    R@10 khong doi (95.5) o ca bon: mo rong khong tim them chunk nao, no chi
+    lam XEP HANG te di. Ly do: tsquery_or noi bang OR nen moi tu them vao
+    keo them ung vien va lam loang ts_rank; word_similarity thi tut diem khi
+    chuoi truy van dai ra.
+
+    Bang day du va ba dieu kien de xet lai: docs/reports/P6_retrieval_tuning.md
+    """
+    import inspect
+
+    from app.services.retrieval import keyword
+
+    for ham in (keyword.tim_fts, keyword.tim_trigram):
+        src = chr(10).join(d.split("#", 1)[0]
+                           for d in inspect.getsource(ham).splitlines())
+        assert "mo_rong" not in src, (
+            ham.__name__ + " dang noi mo_rong vao truy van - da do va da bo, "
+            "xem P6_retrieval_tuning.md phu luc")
