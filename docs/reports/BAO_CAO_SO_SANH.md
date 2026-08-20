@@ -212,3 +212,26 @@ lưu sau **từng case** nên chạy lại `make c1` sẽ bỏ qua phần đã c
 
 Chưa đủ để lên bảng ba cấu hình. Bảng C0 và C2 không bị ảnh hưởng — cả hai
 đã đo trọn 222 case và đã commit.
+
+---
+
+## Đường risk–coverage — CHƯA DỰNG ĐƯỢC, và vì sao
+
+§30.4 của quy chuẩn yêu cầu chốt ngưỡng từ chối bằng đường risk–coverage:
+quét ngưỡng τ, vẽ quan hệ giữa *tỷ lệ trả lời* và *tỷ lệ trả lời sai*, chọn
+điểm coverage cao nhất mà `false_answer_rate ≈ 0`.
+
+**Chưa dựng được.** Kết quả C2 đã lưu (222 case) không có trường điểm tin cậy
+— chỉ có `da_tu_choi`, `ly_do`, `latency_ms`, `token_vao/ra`, `nguon`. Không
+có điểm thì không có trục τ để quét.
+
+Muốn dựng thì phải ghi lại điểm truy xuất cho từng case, tức **chạy lại C2**
+— cần quota API, hiện đã cạn (xem mục trên).
+
+> Không vẽ một đường cong từ dữ liệu không có. Ngưỡng hiện tại đến từ hành vi
+> nhị phân của Grounding Validator (đạt / không đạt), không phải từ một τ
+> chọn bằng cảm tính — nhưng đó **không** phải thứ §30.4 yêu cầu, và ghi ở
+> đây để không ai tưởng đã làm.
+
+**Việc cần làm khi có quota:** thêm `diem_retrieval` vào bản ghi kết quả của
+`run_c2.py`, chạy lại 222 case, rồi mới quét τ.
