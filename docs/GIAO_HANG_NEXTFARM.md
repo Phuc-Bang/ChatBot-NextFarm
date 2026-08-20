@@ -35,7 +35,7 @@ Chi tiết: [`docs/reports/BAO_CAO_SO_SANH.md`](reports/BAO_CAO_SO_SANH.md)
 * **Truy xuất lai tối ưu cho tiếng Việt (Hybrid Retrieval)**: Kết hợp mô hình embedding ngữ nghĩa `Halong Embedding` (local) với Full-Text Search và Trigram (RRF ranking), giải quyết triệt để bài toán câu hỏi không dấu, phương ngữ địa phương và viết tắt nông học mà không cần gọi LLM đoán dấu (tiết kiệm chi phí và triệt tiêu nguồn phát sinh ảo giác A4).
 
 ### 2. Hệ thống Guardrail tất định chặn sớm (Early Deterministic Guardrails)
-* **Chặn sớm không tốn token**: Tách bạch bộ định tuyến ý định (*Intent Router*) và kiểm tra phạm vi (*Scope Check*) độc lập trước khi chạm vào CSDL hay gọi mô hình ngôn ngữ. **141/222 ca kiểm thử được xử lý trong <10ms và tiêu thụ đúng 0 token**.
+* **Chặn sớm không tốn token**: Tách bạch bộ định tuyến ý định (*Intent Router*) và kiểm tra phạm vi (*Scope Check*) độc lập trước khi chạm vào CSDL hay gọi mô hình ngôn ngữ. **141/222 ca kiểm thử được xử lý trong dưới 16ms (p95 = 13ms, trung vị 6ms) và tiêu thụ đúng 0 token**.
 * **Bộ kiểm chứng căn cứ 3 tầng (Grounding Validator)**: Đối chiếu cấu trúc, trích xuất toàn bộ số liệu trong câu trả lời để so khớp tất định với Evidence Pack. Nếu model tự ý suy diễn hoặc bịa số liệu $\rightarrow$ lập tức chuyển sang từ chối an toàn.
 
 ### 3. Phương pháp luận phát triển hướng đánh giá (Evaluation-Driven Development)
@@ -88,7 +88,7 @@ Test tự động chứng minh điều này: khi model **khai là có đủ căn
 | Truy xuất | 220 ms | 81 |
 | Gọi model | 4.805 ms | 81 |
 
-**141/222 case bị chặn trước khi chạm cơ sở dữ liệu.** Câu *"bật van 3 trong 10 phút"* tốn **6 ms** và **0 token**.
+**141/222 case bị chặn trước khi chạm cơ sở dữ liệu.** Nhóm `device_control` (14 case) có trung vị **1 ms**, chậm nhất 8 ms — và **0 token**.
 
 **3. Không duyệt thì không vào kho.** Cổng chặn là view `indexable_chunk` ở tầng cơ sở dữ liệu, không phải lời hứa trong code:
 
@@ -106,19 +106,26 @@ Test tự động chứng minh điều này: khi model **khai là có đủ căn
 
 ### 1. Triển khai và Đóng gói Production (Giai đoạn 1.5)
 * Đóng gói toàn bộ hệ thống (FastAPI, PostgreSQL + pgvector, local embedding) thành Docker Compose / Kubernetes manifest chuẩn enterprise.
-* Tích hợp pipeline CI/CD kiểm thử tự động với bộ 289 unit tests và bộ runner đánh giá chất lượng RAG trước mỗi bản release.
+* Tích hợp pipeline CI/CD kiểm thử tự động với bộ 310 unit tests và bộ runner đánh giá chất lượng RAG trước mỗi bản release.
 * Cấu hình dashboard giám sát token, chi phí và tỷ lệ từ chối theo thời gian thực (đã có sẵn tại `/admin`).
 
 ### 2. Mở rộng Kho tri thức sang các Cây trồng Chủ lực tiếp theo (Giai đoạn 2)
 * Mở rộng hạ tầng crawler và công cụ kiểm duyệt bán tự động cho các cây ăn trái và cây công nghiệp giá trị cao của NextFarm: Sầu riêng, Xoài, Bơ, Cà phê, Hồ tiêu.
-* Nâng dung lượng kho tri thức lên 2.000+ chunks chuẩn khuyến nông, tinh chỉnh chỉ mục HNSW của pgvector để duy trì độ trễ truy xuất <50ms.
+* Nâng dung lượng kho tri thức lên 2.000+ chunks chuẩn khuyến nông. **Ở quy mô đó mới chuyển sang chỉ mục HNSW của pgvector** — hiện PoC cố ý *chưa* dùng nó: với 185 chunk, quét toàn bộ bằng numpy trong RAM nhanh tương đương mà không phải giữ đồng bộ thêm một chỉ mục nữa (xem chú thích đầu [`vector.py`](../app/services/retrieval/vector.py)). Ngưỡng chuyển đổi là vài chục nghìn chunk.
 
 ### 3. Tích hợp Dữ liệu Cảm biến Vườn & Điều khiển Thiết bị An toàn (Giai đoạn 3)
 * Kết nối an toàn với hệ thống IoT của NextFarm: chuyển hướng các câu hỏi nhóm `garden_data` sang truy vấn API telemetry thực tế (có xác thực phân quyền nông hộ).
 * Thiết lập rào chắn bảo vệ 2 lớp (Human-Confirmation + Safety Thresholds) cho lệnh điều khiển thiết bị (`device_control`), đảm bảo AI chỉ đóng vai trò soạn thảo lệnh, quyền bấm xác nhận tưới/bật van luôn thuộc về nông dân.
 
 ### 4. Cam kết Hỗ trợ Kỹ thuật & Tối ưu Chi phí Vận hành
-* Đảm bảo hệ thống vận hành ổn định với SLA 99.9%, tối ưu hóa chi phí API LLM (chỉ gọi model khi có bằng chứng, tận dụng prompt caching và local embedding).
+* Đảm bảo hệ thống vận hành ổn định, tối ưu hoá chi phí API LLM.
+
+> **Hai điều trong mục này là CAM KẾT, chưa phải hiện trạng** — ghi rõ để không ai đọc nhầm:
+> 
+> - **Mức SLA** cần NextFarm nêu yêu cầu rồi hai bên chốt. PoC chạy cục bộ, chưa có số đo uptime nào để hứa một con số.
+> - **Prompt caching** chưa cài đặt (`grep` trong `app/services/llm/` không có). Nó khả thi và đáng làm — Evidence Pack chiếm phần lớn `Ti` = 702 token/lượt — nhưng mức tiết kiệm chỉ nói được sau khi đo.
+> 
+> Đã có và đã đo: **chỉ gọi model khi có bằng chứng** (141/222 ca bị chặn trước khi chạm model, 0 token) và **embedding chạy local** (chi phí biên bằng 0).
 
 ---
 
