@@ -289,18 +289,44 @@ Tầng 3 bắt hai kiểu lỗi đo được trên C2 thật: xác nhận thẩm
 
 ---
 
+## Việc NextFarm làm được ngay: chấm 50 câu hỏi thật
+
+[`docs/PHIEU_CHAM_CHUYEN_GIA.md`](PHIEU_CHAM_CHUYEN_GIA.md) — **50 câu**, sinh
+thẳng từ lần chạy C2 thật, không viết tay:
+
+- **29 câu hệ thống trả lời** — chấm nội dung
+- **21 câu hệ thống từ chối** — chấm *"từ chối như vậy có đúng không"*
+
+Mỗi câu in kèm **nguyên văn đoạn tài liệu** hệ thống đã dẫn và **URL gốc**, để
+chuyên gia kiểm được cả hai: nội dung có đúng không, và **nguồn có thật sự nói
+điều đó không**. Chấm 5 tiêu chí, thang 1–5.
+
+> Đây là thứ duy nhất cho ra **tỷ lệ chính xác thật**. Mọi con số trong báo cáo
+> so sánh đều do đội tự chấm, nên chỉ dùng để so C0/C1/C2 với nhau — xem phần
+> Giới hạn.
+
+Sinh lại bất cứ lúc nào: `make phieu-cham`
+
+---
+
 ## Cách kiểm chứng — chạy lại toàn bộ
 
 ```bash
 make up          # PostgreSQL 16 + pgvector
 make check-ext   # xác nhận 3 extension: vector, unaccent, pg_trgm
 make ingest      # dựng lại toàn bộ kho tri thức từ file trong git
-make test        # 283 test tự động
+make test        # 310 test tự động
 
 make smoke       # thử LLM 3 câu — chạy TRƯỚC khi tốn 222 case
 make recall      # đo Recall@K, chọn model embedding
 make c0          # baseline: LLM trần
+make c1          # RAG, không guardrail
 make c2          # cấu hình sản phẩm
+
+make rerank         # đóng góp riêng của reranker (bật/tắt)
+make tang3          # Grounding tầng 3 — KHÔNG cần quota API
+make risk-coverage  # chốt ngưỡng từ chối bằng số, không bằng cảm tính
+make phieu-cham     # sinh phiếu chấm cho chuyên gia
 
 make serve       # http://localhost:8000  và  /admin
 ```
