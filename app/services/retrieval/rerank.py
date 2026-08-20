@@ -38,14 +38,37 @@ from app.services.retrieval.keyword import ChunkTraVe
 
 _MODEL = None
 _TEN_DANG_NAP: str | None = None
+_SO_LAN_LOI = 0          # xem chu thich trong xep_lai()
 
 
 def _nap(ten_model: str):
+    """Nap cross-encoder. CHAY CPU, khong chay GPU.
+
+    Do duoc: GPU cua may nay chi co 4 GB. Model embedding (~300M) da chiem
+    cho o do. Nap them cross-encoder len cung GPU thi vo:
+
+        RuntimeError: CUDA error: device-side assert triggered
+
+    Loi nay bao o mot loi goi API khac voi cho gay ra no (CUDA bao bat dong
+    bo), nen no rat kho truy. Ep CPU la cach chac chan.
+
+    Ghi de duoc bang RERANKER_DEVICE neu may khac co GPU du lon.
+    """
     global _MODEL, _TEN_DANG_NAP
     if _MODEL is not None and _TEN_DANG_NAP == ten_model:
         return _MODEL
     from sentence_transformers import CrossEncoder
-    _MODEL = CrossEncoder(ten_model, max_length=512)
+
+    from app.core.config import lay
+    device = (lay("RERANKER_DEVICE") or "cpu").strip() or "cpu"
+    # max_length=256, KHONG phai 512. PhoRanker khai
+    # max_position_embeddings = 258 trong config.json; dat 512 thi vo:
+    #     index 258 is out of bounds for dimension 1 with size 258
+    # Loi nay bi ham xep_lai() nuot (dung theo thiet ke - khong duoc sap cau
+    # tra loi), nen no hien ra thanh "reranker khong cai thien gi" thay vi
+    # thanh mot loi. Da va phai that: lan do dau cho "chenh lech +0.000" o
+    # ca 22 case.
+    _MODEL = CrossEncoder(ten_model, max_length=256, device=device)
     _TEN_DANG_NAP = ten_model
     return _MODEL
 
@@ -75,6 +98,14 @@ def xep_lai(cau, chunks: list[ChunkTraVe], top_k: int = 5,
         m = _nap(ten)
         diem = m.predict([(cau_hoi, c.text) for c in chunks])
     except Exception as e:                                 # noqa: BLE001
+        # Nuot loi la DUNG (khong duoc sap cau tra loi), nhung phai DEM.
+        #
+        # Da va phai that: reranker loi o ca 22 case, moi lan deu tra ve thu
+        # tu cu, va ket qua do hien ra thanh "chenh lech +0.000" - trong nhu
+        # mot ket luan ("reranker khong giup gi") chu khong nhu mot loi. Bo
+        # dem nay de bat cu ai doc ket qua cung thay ngay.
+        global _SO_LAN_LOI
+        _SO_LAN_LOI += 1
         print("  (canh bao: khong rerank duoc - " + str(e)[:120] + ")")
         return chunks[:top_k]
 
@@ -85,3 +116,13 @@ def xep_lai(cau, chunks: list[ChunkTraVe], top_k: int = 5,
         c.diem_rrf = c.diem
         c.diem = float(d)
     return sorted(chunks, key=lambda c: c.diem, reverse=True)[:top_k]
+
+
+def so_lan_loi() -> int:
+    """So lan rerank that bai va phai lui ve thu tu cu.
+
+    Cong cu do PHAI goi ham nay va bao ra. Mot bang so "reranker khong cai
+    thien gi" khi thuc ra no chua chay lan nao la mot ket luan sai, va no
+    trong y het mot ket luan dung.
+    """
+    return _SO_LAN_LOI

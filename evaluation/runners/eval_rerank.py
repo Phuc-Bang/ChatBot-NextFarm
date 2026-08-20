@@ -95,6 +95,8 @@ def main() -> int:
     import freeze
     version = a.version or freeze.phien_ban_dang_dung()
 
+    from app.services.retrieval import rerank
+
     m = _nap_eval()
     cases = m.nap_case_co_nguon(version)
     with ket_noi() as con:
@@ -111,6 +113,14 @@ def main() -> int:
             ket.append((ten, r))
             print("%-12s R@1 %5.1f  R@3 %5.1f  R@5 %5.1f  MRR %.3f  %6.1f ms/cau"
                   % (ten, r[0], r[1], r[2], r[3], r[4]))
+
+        # Bao so lan rerank that bai. Neu no > 0 thi bang tren KHONG do
+        # duoc dong gop cua reranker - no do chinh cau hinh TAT hai lan.
+        n_loi = rerank.so_lan_loi()
+        if n_loi:
+            print()
+            print("!!! rerank THAT BAI " + str(n_loi) + " lan - moi lan lui")
+            print("!!! ve thu tu cu. Bang tren KHONG do duoc reranker.")
 
         print()
         (_, a0), (_, a1) = ket
