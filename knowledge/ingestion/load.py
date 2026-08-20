@@ -44,6 +44,8 @@ TEXT = ROOT / "crawler" / "data" / "text"
 DOC_REVIEW = ROOT / "knowledge" / "review" / "documents.yaml"
 FACT_REVIEW = ROOT / "knowledge" / "review" / "facts.yaml"
 
+CHUNK_REVIEW = ROOT / "knowledge" / "review" / "chunks.yaml"
+
 DEFAULT_DSN = "postgresql://nextfarm:nextfarm@localhost:15432/nextfarm"
 CAY_HOP_LE = {"lua", "ca_chua", "dua_chuot"}
 
@@ -69,6 +71,8 @@ def doc_yaml(path: Path, khoa: str) -> dict:
     muc = data.get(khoa) or []
     if khoa == "documents":
         return {d["document_id"]: d for d in muc}
+    if khoa == "chunks":
+        return {c["chunk_id"]: c for c in muc}
     return {f["fact_key"]: f for f in muc}
 
 
@@ -77,6 +81,7 @@ def nap(conn, rebuild: bool) -> dict[str, int]:
     ban_ghi = [r for r in manifest["records"] if r.get("status") == "ok"]
     duyet_doc = doc_yaml(DOC_REVIEW, "documents")
     duyet_fact = doc_yaml(FACT_REVIEW, "facts")
+    duyet_chunk = doc_yaml(CHUNK_REVIEW, "chunks")
     tu_khoa_rui_ro, tu_khoa_canh_bao = chunker.tai_tu_khoa_rui_ro()
 
     dem = {"source": 0, "document": 0, "chunk": 0, "chunk_rui_ro": 0,
@@ -142,19 +147,25 @@ def nap(conn, rebuild: bool) -> dict[str, int]:
             cur.execute("DELETE FROM chunk WHERE document_id = %s", (rec["id"],))
             for c in chunker.cat(path.read_text(encoding="utf-8"),
                                  tu_khoa_rui_ro, tu_khoa_canh_bao):
-                # Chunk rui ro cao nap vao voi approved=false, cho duyet le
-                # tung chunk (muc 24.4). Rang buoc trong luoc do se chan neu ai
-                # do co dat approved=true ma chua duyet.
+                cid = rec["id"] + "#" + str(c.ordinal)
+                cr = duyet_chunk.get(cid, {})
+                if c.is_high_risk:
+                    reviewed_hr = bool(cr.get("approved") is not None)
+                    approved_chunk = bool(cr.get("approved", False))
+                else:
+                    reviewed_hr = False
+                    approved_chunk = True
+
                 cur.execute(
                     "INSERT INTO chunk (chunk_id, document_id, ordinal, text, "
                     "text_unaccent, token_count, section_title, crop, region, "
                     "is_high_risk, needs_caution, reviewed_high_risk, approved) "
-                    "VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,FALSE,%s)",
-                    (rec["id"] + "#" + str(c.ordinal), rec["id"], c.ordinal,
+                    "VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+                    (cid, rec["id"], c.ordinal,
                      c.text, c.text_unaccent, len(c.text.split()),
                      c.section_title, dr.get("crop") or crop,
                      dr.get("region") or rec.get("region"),
-                     c.is_high_risk, c.needs_caution, not c.is_high_risk))
+                     c.is_high_risk, c.needs_caution, reviewed_hr, approved_chunk))
                 dem["chunk"] += 1
                 if c.is_high_risk:
                     dem["chunk_rui_ro"] += 1
