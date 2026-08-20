@@ -608,9 +608,9 @@ Và **ưu tiên cộng điểm** cho chunk có `region` khớp vùng người d�
 
 Retrieval ban đầu lấy nhiều candidate, phần lớn là nhiễu. Reranker (cross-encoder) xếp lại theo mức độ **thực sự trả lời được câu hỏi**, không chỉ theo độ giống nhau.
 
-- Model cụ thể: `[TODO]` — chọn sau benchmark, ưu tiên model chạy được trên GPU sẵn có (ASM-06)
-- Phải đo riêng đóng góp của reranker (bật/tắt) trong báo cáo so sánh
-- Nếu vượt ngân sách latency (§21) → phương án dự phòng là bỏ cross-encoder, dùng rerank bằng điểm lai + lọc metadata
+- Model cụ thể: **`itdainb/PhoRanker`** (540 MB, tiếng Việt) — chốt 2026-08-20 bằng số đo. Chạy **CPU**: GPU 4 GB đã bị model embedding chiếm, nạp thêm cross-encoder lên cùng GPU thì vỡ với `CUDA error: device-side assert triggered`
+- Đóng góp đo riêng được (bật/tắt), `python evaluation/runners/eval_rerank.py`: R@5 **72,7% → 90,9%**, MRR 0,562 → 0,605, chi phí **+2.362 ms** với `top_k_rerank=12`
+- **Đã dùng đúng phương án dự phòng mà mục này nêu.** Reranker vượt ngân sách §21 nên **mặc định TẮT**; hệ thống chạy bằng RRF của ba kênh + lọc `crop` + cộng điểm vùng. Bật bằng `RERANKER_MODEL` khi NextFarm nới ngưỡng độ trễ hoặc có GPU đủ lớn — [P6_reranker.md](reports/P6_reranker.md)data
 
 ## 16. Evidence Pack
 
@@ -1088,9 +1088,9 @@ Giữ nguyên từ v1.0 — để đổi backend (Qdrant/Milvus) sau này mà kh
 | Hạng mục | Quyết định | Trạng thái |
 |---|---|---|
 | Chiến lược chunk | Theo **cấu trúc tài liệu** (heading/mục) trước, cắt theo độ dài sau. Giữ `section_title` vào chunk để không mất ngữ cảnh | `[DEC]` |
-| Kích thước chunk | `[TODO]` — chốt sau khi đo Recall@K | |
-| Overlap | `[TODO]` | |
-| Embedding model | `[TODO]` — phải là model hỗ trợ tiếng Việt tốt, chọn sau benchmark, ưu tiên chạy được trên GPU sẵn có (ASM-06) | |
+| Kích thước chunk | **1.200 ký tự** mục tiêu, tối đa 2.200, tối thiểu 120 (`knowledge/chunking/chunker.py`). Cắt theo heading trước, độ dài sau | ✅ |
+| Overlap | **150 ký tự** | ✅ |
+| Embedding model | **`contextboxai/halong_embedding`** (768 chiều), chạy local — chốt bằng số đo, xem DEC-015 | ✅ |
 | Lưu `model_name`/`model_version` | **Bắt buộc** — đổi model là phải re-embed toàn bộ, không có version thì không biết cái nào cũ | `[DEC]` |
 
 **Nguyên tắc chunking:** không cắt ngang một bảng số liệu, không cắt ngang một danh sách bước kỹ thuật. Thà chunk dài hơn còn hơn chunk mất nửa quy trình.
@@ -1600,7 +1600,7 @@ Gợi ý cách trả lời trung thực: nêu đúng những gì đã làm đư�
 | Eval set cho dữ liệu vườn + đo tiêu chí ≥95% | 4–5 | Cần môi trường thử nghiệm có dữ liệu thật |
 | | **≈ 17–24 ngày công** | **Không bắt đầu được nếu thiếu §37.6** |
 
-**Nguồn lực:** 1 người; 1 GPU (VRAM `[TODO]`); 1 máy chủ nhỏ chạy PostgreSQL; chi phí LLM theo §37.5.
+**Nguồn lực:** 1 người; 1 GPU **RTX 2050, 4 GB VRAM** (đo 2026-08-20 — đủ cho encoder embedding, KHÔNG đủ cho model sinh, và không đủ để chạy đồng thời embedding + cross-encoder); 1 máy chủ nhỏ chạy PostgreSQL; chi phí LLM theo §37.5.
 
 ### 37.5. Câu 5 — chi phí vận hành hằng tháng
 
