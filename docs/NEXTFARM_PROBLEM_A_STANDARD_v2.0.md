@@ -246,7 +246,7 @@ Intent Router ở §11 chính là mối nối giữa hai giai đoạn: giai đo�
 | DEC-012 | High-risk | Evidence + caution; thiếu evidence → abstain | LOCKED |
 | DEC-013 | Fine-tuning | ~~Có~~ → **có điều kiện** | **SỬA ở DEC-024** |
 | DEC-014 | Fine-tuning method | LoRA/QLoRA | LOCKED |
-| DEC-015 | Model | Chưa chọn; benchmark trước | `[TODO]` |
+| DEC-015 | Model | **ĐÃ CHỐT 2026-08-20 bằng số đo.** Sinh câu trả lời: `gemini-3.1-flash-lite` (API — GPU 4GB đo được là không đủ, 32,3s/câu). Embedding: `halong_embedding` **chạy local** (hybrid MRR 0.687 > keyword 0.576 > vector đơn 0.432). Reranker: vẫn `[TODO]` | [P6_retrieval_tuning.md](reports/P6_retrieval_tuning.md) |
 | DEC-016 | Dataset FT | Verified + human QA + validated synthetic + abstention | LOCKED |
 | DEC-017 | Evaluation | Bắt buộc | LOCKED |
 | DEC-018 | IoT | Phase sau | DEFERRED |
@@ -268,6 +268,7 @@ Intent Router ở §11 chính là mối nối giữa hai giai đoạn: giai đo�
 | **DEC-029** | **Vai trò reviewer** | Reviewer = chính người thực hiện. Reviewer kiểm **chứng cứ**, không kiểm **chân lý nông học**. | Solo, không có chuyên gia nông nghiệp. Tiêu chí duyệt phải là thứ kiểm được (§27) |
 | **DEC-030** | **Tài liệu chuẩn** | Tài liệu này là nguồn sự thật duy nhất; v1.0 và CRAWLER_GUIDE thành tài liệu tham khảo | Tránh tình trạng hai tài liệu mô tả hai hệ thống |
 | **DEC-031** | **Va chạm do bỏ dấu** | Khớp trọn từ trên bản bỏ dấu phải kèm bảng ngoại lệ có ghi lý do, và mỗi thành phần khớp từ khoá phải có bộ câu hỏi thật ngoài tập kiểm thử làm lưới an toàn | Bỏ dấu xoá dấu thanh, nên `bật`/`bắt`, `giờ`/`gió`, `van`/`vẫn` thành cùng một chuỗi. Đo được ở P8 §13.4 |
+| **DEC-032** | **Embedding chạy local** | Embedding và cả ba kênh truy xuất chạy trên hạ tầng của mình, KHÔNG gọi API. Chỉ chặng sinh câu trả lời gửi Evidence Pack ra ngoài | Embedding phải chạy qua toàn bộ kho tri thức VÀ mọi câu hỏi người dùng — gọi API nghĩa là cả hai rời hạ tầng. Chạy local đổi được bản kê §38 và không tốn quota. Đo được: 3ms mỗi câu hỏi trên CPU |
 
 ## 9. Sổ giả định — `[ASM]`
 
@@ -280,7 +281,7 @@ Intent Router ở §11 chính là mối nối giữa hai giai đoạn: giai đo�
 | **ASM-03** | Tài liệu hướng dẫn sử dụng app NextFarm | **Không có** trong PoC | Chưa được cung cấp | Nếu NextFarm cấp tài liệu → nạp vào KB như một domain thứ tư, **không đổi kiến trúc**, nhánh `product_feature` chuyển từ abstain sang RAG |
 | **ASM-04** | API dữ liệu vườn (IoT Service) | **Không có** trong PoC giai đoạn 1 | Bài toán B để phase sau | Nếu có sớm → nhánh `garden_data` chuyển từ abstain sang tool-call |
 | **ASM-05** | Người duyệt knowledge | **1 người** = chính người thực hiện | Đội 1 người | Ràng buộc lớn nhất của dự án. Mọi thiết kế phải giữ khối lượng duyệt ≤ ~10 giờ tổng (§27.4) |
-| **ASM-06** | Phần cứng | Có 1 GPU, dung lượng VRAM **chưa xác định** | Người thực hiện xác nhận có GPU | Quyết định model chỉ chốt được **sau khi đo VRAM thật** — ghi `[TODO]` ở DEC-015 |
+| **ASM-06** | Phần cứng | ~~chưa xác định~~ → **ĐÃ ĐO 2026-08-20: RTX 2050 4GB, i5-11400H, 16GB RAM** | `nvidia-smi` + chạy thử `qwen3:4b` | **Không đủ để self-host model sinh câu trả lời**: GPU sập (CUDA error), CPU chạy được nhưng 11,4 token/giây → 32,3s một câu hỏi RAG, quá ASM-01 sáu lần. Hệ quả: DEC-024 (fine-tuning) **không khả thi**; §37.5 phải ghi self-host cần NextFarm đầu tư GPU mới (`[EXT]`) |
 | **ASM-07** | Quy mô KB mục tiêu | ~~50–80 tài liệu~~ → **đã đo: 31 tài liệu** (lúa 22 · dưa chuột 5 · cà chua 4) | 7 nguồn của CRAWLER_GUIDE quá ít để Recall@K có ý nghĩa thống kê | **ĐÃ XẢY RA.** Web công khai Tier 1 không có sẵn 50–80 tài liệu truy cập được cho đúng 3 cây này. Đã thử đủ 4 hướng mở rộng, kết quả bão hoà ở 31. Giữ nguyên chuẩn nguồn, ghi rõ giới hạn — xem `docs/reports/P1_crawl_report.md` §3 |
 | **ASM-08** | Quy mô eval set | **250–350 case**, phân bổ theo §29.2 | Đủ để mỗi nhóm có ~20–30 case, sai số chấp nhận được ở mức PoC | Ít hơn thì chênh lệch giữa các cấu hình không đáng tin |
 | **ASM-09** | Thời hạn | **Không có deadline cứng** | Người thực hiện xác nhận | Thứ tự cắt giảm khi thiếu thời gian: fine-tuning → UI đẹp → mở rộng nguồn. **Không bao giờ cắt eval set** |
