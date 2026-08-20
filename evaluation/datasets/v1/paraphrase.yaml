@@ -1,0 +1,145 @@
+group: paraphrase
+version: v1
+cases:
+- case_id: para_001
+  derived_from: ka_001
+  question: độ chua của đất trồng dưa leo bao nhiêu thì cây phát triển tốt nhất
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: pH 6,5 - 7,5
+  note: 'Paraphrase: độ chua của đất = pH, dưa leo = dưa chuột'
+- case_id: para_002
+  derived_from: ka_002
+  question: trồng một héc dưa chuột vụ thu đông thì mua bao nhiêu gam giống
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: 850 - 900 g/ha
+  note: 'Paraphrase: một héc = 1 ha, gam giống = lượng hạt giống'
+- case_id: para_003
+  derived_from: ka_003
+  question: thời điểm xuống giống dưa chuột đông ở các tỉnh phía Bắc là tháng mấy
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: tháng 8 đến tháng 11
+  note: 'Paraphrase: xuống giống = gieo trồng'
+- case_id: para_004
+  derived_from: ka_004
+  question: quy trình VietGAP dưa leo ở Hà Tĩnh khuyến cáo trồng bao nhiêu vạn gốc một ha
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: 3,0 - 3,5 vạn cây/ha (30.000 - 35.000 cây/ha)
+  note: 'Paraphrase: vạn gốc = 10.000 cây'
+- case_id: para_005
+  derived_from: ka_005
+  question: dựng giàn cho dưa leo cao tầm mấy mét và nên cắm cọc thế nào
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: giàn chữ A cao 1,8 - 2m
+  note: 'Paraphrase: dựng giàn = làm giàn'
+- case_id: para_006
+  derived_from: ka_008
+  question: giá thể xơ dừa trồng cà chua bi trong nhà màng cần kiểm soát pH và độ dẫn điện EC ở mức nào
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: pH 5,5 - 6,5; EC 1,5 - 2,5 mS/cm
+  note: 'Paraphrase: độ dẫn điện = EC'
+- case_id: para_007
+  derived_from: ka_010
+  question: đợt bón phân thúc trước lúc cà chua trổ hoa thì dùng lượng NPK bao nhiêu một sào 1000m2
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: 20 kg Better NPK 12-12-17-9+TE
+  note: 'Paraphrase: trước lúc trổ hoa = trước khi ra hoa'
+- case_id: para_008
+  derived_from: ka_011
+  question: lúc cà chua đang nuôi quả thì bao lâu tưới phân thúc một lần và liều lượng thế nào
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: 10 ngày/lần, 4 kg NPK 12-12-17-9+TE / 1000m2
+  note: 'Paraphrase: đang nuôi quả = nuôi trái'
+- case_id: para_009
+  derived_from: ka_012
+  question: cách trộn giá thể xơ dừa và trấu hun để vô bầu trồng cà chua VietGAP
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: xơ dừa, trấu hun, phân hữu cơ tỷ lệ 1:1:1
+  note: 'Paraphrase: vô bầu = trồng trong bầu'
+- case_id: para_010
+  derived_from: ka_013
+  question: cây giống cà chua con mấy lá thật và cao bao nhiêu phân thì đem cấy vào bầu được
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: 5 - 6 lá thật, cao 11 - 12 cm, 17-18 ngày tuổi
+  note: 'Paraphrase: phân = cm, đem cấy = chuyển cây ươm'
+- case_id: para_011
+  derived_from: ka_017
+  question: trời lạnh dưới bao nhiêu độ thì phải ngừng xịt thuốc diệt cỏ cho ruộng lúa sạ
+  crop: lua
+  expected_behavior: answer
+  expected_facts: dưới 18 độ C
+  must_have_caution: true
+  note: 'Paraphrase: xịt thuốc diệt cỏ = phun thuốc trừ cỏ'
+- case_id: para_012
+  derived_from: ka_018
+  question: sau khi gieo sạ lúa mấy ngày thì bắt đầu phun thuốc trừ cỏ tiền nảy mầm
+  crop: lua
+  expected_behavior: answer
+  expected_facts: 1 - 3 ngày sau gieo sạ
+  note: 'Paraphrase: sau khi gieo sạ mấy ngày'
+- case_id: para_013
+  derived_from: ka_019
+  question: thời tiết vụ xuân rét đậm dưới 15 độ thì có nên rải phân đạm urê cho lúa không
+  crop: lua
+  expected_behavior: answer
+  expected_facts: không bón phân đạm khi trời rét dưới 15 độ C
+  note: 'Paraphrase: rải phân đạm urê = bón đạm'
+- case_id: para_014
+  derived_from: ka_020
+  question: lúa cấy vụ xuân lúc vừa bén rễ xanh lại thì giữ nước ngập khoảng mấy phân
+  crop: lua
+  expected_behavior: answer
+  expected_facts: 2 - 3 cm (mực nước nông)
+  note: 'Paraphrase: mấy phân = mấy cm'
+- case_id: para_015
+  derived_from: ka_021
+  question: khoảng mấy ngày sau cấy lúa xuân thì tiến hành bón đạm đón đẻ nhánh
+  crop: lua
+  expected_behavior: answer
+  expected_facts: sau cấy 7 - 10 ngày
+  note: 'Paraphrase: bón đạm đón đẻ nhánh = bón thúc đẻ nhánh'
+- case_id: para_016
+  derived_from: ka_022
+  question: sử dụng máy cấy lúa thì cài đặt mật độ bao nhiêu khóm trên 1 mét vuông
+  crop: lua
+  expected_behavior: answer
+  expected_facts: 60 - 70 khóm/m2 hoặc 80 - 90 khóm/m2
+  note: 'Paraphrase: sử dụng máy cấy lúa = cấy lúa bằng máy'
+- case_id: para_017
+  derived_from: ka_024
+  question: mô hình thâm canh lúa cải tiến SRI thì khoảng cách và mật độ cấy khóm thế nào
+  crop: lua
+  expected_behavior: answer
+  expected_facts: 30 - 40 khóm/m2 (khoảng cách 20x20cm hoặc 25x25cm)
+  note: 'Paraphrase: thâm canh lúa cải tiến = SRI'
+- case_id: para_018
+  derived_from: ka_025
+  question: theo phương pháp SRI thì cấy mạ mấy lá và mỗi bụi cấy mấy cây dảnh
+  crop: lua
+  expected_behavior: answer
+  expected_facts: mạ non 2 - 2,5 lá, cấy 1 dảnh/khóm
+  note: 'Paraphrase: mỗi bụi cấy mấy cây = mấy dảnh một khóm'
+- case_id: para_019
+  derived_from: ka_026
+  question: lúc lúa sắp trổ đòng thì canh thời điểm nào phun ngừa cháy cổ bông tốt nhất
+  crop: lua
+  expected_behavior: answer
+  expected_facts: trước trổ 5-7 ngày và sau khi trổ đều
+  must_have_caution: true
+  note: 'Paraphrase: cháy cổ bông = đạo ôn cổ bông'
+- case_id: para_020
+  derived_from: ka_028
+  question: đối với các giống lúa ngắn ngày thì phân super lân bón hết vào lúc nào
+  crop: lua
+  expected_behavior: answer
+  expected_facts: bón lót toàn bộ lượng lân
+  note: 'Paraphrase: super lân = phân lân'

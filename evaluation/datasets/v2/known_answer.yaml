@@ -1,0 +1,257 @@
+group: known_answer
+version: v2
+cases:
+- case_id: ka_001
+  question: đất trồng dưa chuột cần có độ pH trong khoảng bao nhiêu
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: pH từ 6,5 - 7,5
+  source_of_truth: ninhbinh_dua_chuot_quytrinh#18
+  note: Fact xác nhận từ ninhbinh_dua_chuot_quytrinh#18
+- case_id: ka_002
+  question: vụ thu đông dưa chuột ở Ninh Bình trồng vào tháng mấy
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: tháng 8 - tháng 11
+  source_of_truth: ninhbinh_dua_chuot_dong#13
+  note: Fact xác nhận từ ninhbinh_dua_chuot_dong#13
+- case_id: ka_003
+  question: đất trồng dưa chuột có độ pH dưới bao nhiêu thì bắt buộc phải bón thêm vôi
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: dưới 5
+  source_of_truth: ninhbinh_dua_chuot_dong#16
+  note: Fact xác nhận từ ninhbinh_dua_chuot_dong#16
+- case_id: ka_004
+  question: khi làm đất trồng dưa chuột vụ đông ở Ninh Bình thì lên luống rộng và cao bao nhiêu
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: luống rộng 1 - 1,2m, cao 20 - 25cm, rãnh 30 cm
+  source_of_truth: ninhbinh_dua_chuot_dong#19
+  note: Fact xác nhận từ ninhbinh_dua_chuot_dong#19
+- case_id: ka_005
+  question: màng phủ nilon trồng dưa chuột đục lỗ có đường kính bao nhiêu cm
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: 12 - 15 cm
+  source_of_truth: ninhbinh_dua_chuot_dong#22
+  note: Fact xác nhận từ ninhbinh_dua_chuot_dong#22
+- case_id: ka_006
+  question: chăm sóc cây con dưa chuột trong vườn ươm thì tưới nước mỗi ngày mấy lần
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: 1 - 2 lần/ngày
+  source_of_truth: ninhbinh_dua_chuot_dong#32
+  note: Fact xác nhận từ ninhbinh_dua_chuot_dong#32
+- case_id: ka_007
+  question: khi độ ẩm đất trồng dưa chuột thấp hơn bao nhiêu phần trăm thì cần phải tưới nước
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: thấp hơn 70% (tưới để đạt độ ẩm 85-90%)
+  source_of_truth: ninhbinh_dua_chuot_dong#45
+  note: Fact xác nhận từ ninhbinh_dua_chuot_dong#45
+- case_id: ka_008
+  question: lượng phân đạm bón thúc lần 1 cho dưa chuột sau trồng 10 ngày là bao nhiêu cho 1 sào Bắc Bộ
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: 2 kg đạm/sào
+  source_of_truth: ninhbinh_dua_chuot_dong#56
+  note: Fact xác nhận từ ninhbinh_dua_chuot_dong#56
+- case_id: ka_009
+  question: bón thúc lần 2 cho dưa chuột sau trồng 20 ngày với lượng đạm và kali bao nhiêu cho 1 sào Bắc
+    Bộ
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: 4 kg đạm + 2 kg kali/sào
+  source_of_truth: ninhbinh_dua_chuot_dong#57
+  note: Fact xác nhận từ ninhbinh_dua_chuot_dong#57
+- case_id: ka_010
+  question: bón thúc lần 3 cho dưa chuột sau trồng 40 ngày với lượng đạm và kali bao nhiêu cho 1 sào Bắc
+    Bộ
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: 4 kg đạm + 4 kg kali/sào
+  source_of_truth: ninhbinh_dua_chuot_dong#58
+  note: Fact xác nhận từ ninhbinh_dua_chuot_dong#58
+- case_id: ka_011
+  question: vụ hè thu dưa chuột ở Ninh Bình trồng vào tháng mấy
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: tháng 4 đến tháng 7
+  source_of_truth: ninhbinh_dua_chuot_quytrinh#14
+  note: Fact xác nhận từ ninhbinh_dua_chuot_quytrinh#14
+- case_id: ka_012
+  question: mật độ trồng dưa chuột giống lai F1 theo quy trình Ninh Bình là bao nhiêu cây một hecta
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: 30.000 - 35.000 cây/ha
+  source_of_truth: ninhbinh_dua_chuot_quytrinh#29
+  note: Fact xác nhận từ ninhbinh_dua_chuot_quytrinh#29
+- case_id: ka_013
+  question: độ pH đất thịt nhẹ trồng dưa chuột theo tiêu chuẩn VietGAP ở Hà Tĩnh là bao nhiêu
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: 6 - 6,5
+  source_of_truth: hatinh_dua_chuot_vietgap#42
+  note: Fact xác nhận từ hatinh_dua_chuot_vietgap#42
+- case_id: ka_014
+  question: quy cách lên luống trồng dưa chuột VietGAP ở Hà Tĩnh rộng và cao bao nhiêu
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: rộng 1,2 - 1,5 m, cao 25 - 30 cm, rãnh rộng 30 - 35 cm
+  source_of_truth: hatinh_dua_chuot_vietgap#47
+  note: Fact xác nhận từ hatinh_dua_chuot_vietgap#47
+- case_id: ka_015
+  question: khoảng cách cây cách cây của giống dưa chuột ăn tươi trong vụ xuân và vụ đông theo VietGAP
+    Hà Tĩnh
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: 'vụ xuân: 40 - 45 cm; vụ đông: 30 - 35 cm'
+  source_of_truth: hatinh_dua_chuot_vietgap#59
+  note: Fact xác nhận từ hatinh_dua_chuot_vietgap#59
+- case_id: ka_016
+  question: khoảng cách cây cách cây của giống dưa chuột bao tử trong vụ đông và vụ xuân theo VietGAP
+    Hà Tĩnh
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: 'vụ đông: 60 cm; vụ xuân: 70 cm'
+  source_of_truth: hatinh_dua_chuot_vietgap#61
+  note: Fact xác nhận từ hatinh_dua_chuot_vietgap#61
+- case_id: ka_017
+  question: thời gian từ sau khi gieo đến lúc bắt đầu thu hoạch dưa chuột vụ xuân và vụ đông là bao nhiêu
+    ngày
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: 'vụ xuân: 40 - 45 ngày; vụ đông: 30 - 35 ngày'
+  source_of_truth: hatinh_dua_chuot_vietgap#132
+  note: Fact xác nhận từ hatinh_dua_chuot_vietgap#132
+- case_id: ka_018
+  question: năng suất trung bình của dưa chuột ăn tươi theo quy trình VietGAP là bao nhiêu tấn một hecta
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: 35 tấn/ha
+  source_of_truth: hatinh_dua_chuot_vietgap#137
+  note: Fact xác nhận từ hatinh_dua_chuot_vietgap#137
+- case_id: ka_019
+  question: độ pH trung bình của đất trồng cà chua là bao nhiêu
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: 6 - 6.5
+  source_of_truth: ninhbinh_gntt_ca_chua#15
+  note: Fact xác nhận từ ninhbinh_gntt_ca_chua#15
+- case_id: ka_020
+  question: vụ đông xuân cà chua ở Ninh Bình gieo và thu hoạch vào tháng mấy
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: gieo tháng 10-11, thu hoạch tháng 1-2
+  source_of_truth: ninhbinh_gntt_ca_chua#18
+  note: Fact xác nhận từ ninhbinh_gntt_ca_chua#18
+- case_id: ka_021
+  question: vụ hè thu cà chua ở Ninh Bình gieo vào tháng mấy và thu hoạch tháng mấy
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: gieo tháng 6-7, thu hoạch tháng 9-10
+  source_of_truth: ninhbinh_gntt_ca_chua#20
+  note: Fact xác nhận từ ninhbinh_gntt_ca_chua#20
+- case_id: ka_022
+  question: ngâm hạt giống cà chua trước khi gieo trong nước có nhiệt độ bao nhiêu độ C và ngâm trong
+    bao lâu
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: nhiệt độ 40-50 độ C trong khoảng 3 giờ
+  source_of_truth: ninhbinh_gntt_ca_chua#33
+  note: Fact xác nhận từ ninhbinh_gntt_ca_chua#33
+- case_id: ka_023
+  question: liều lượng phân bón thúc lần 1 cho cà chua sau khi trồng 10-15 ngày theo quy trình Ninh Bình
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: 7kg ure + 7kg kali + 5kg NPK
+  source_of_truth: ninhbinh_gntt_ca_chua#62
+  note: Fact xác nhận từ ninhbinh_gntt_ca_chua#62
+- case_id: ka_024
+  question: thời điểm và liều lượng bón thúc lần 2 cho cà chua theo hướng dẫn Ninh Bình
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: '22-25 ngày sau khi trồng (lúc hoa có nụ): 7kg ure + 7kg kali + 5kg NPK'
+  source_of_truth: ninhbinh_gntt_ca_chua#64
+  note: Fact xác nhận từ ninhbinh_gntt_ca_chua#64
+- case_id: ka_025
+  question: khoảng cách hàng cách hàng và cây cách cây khi trồng cà chua ngoài đất theo hướng dẫn Phân
+    bón Quốc gia
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: hàng cách hàng 80cm, cây cách cây 60cm (hoặc 40cm)
+  source_of_truth: phanbonquocgia_ca_chua#46
+  note: Fact xác nhận từ phanbonquocgia_ca_chua#46
+- case_id: ka_026
+  question: trước khi cà chua ra hoa bón thúc lượng phân NPK và KNO3 bao nhiêu cho 1000m2
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: 20 kg Better NPK 12-12-17-9+TE + phun 200g KNO3/16 lít nước/1000 m2
+  source_of_truth: phanbonquocgia_ca_chua#75
+  note: Fact xác nhận từ phanbonquocgia_ca_chua#75
+- case_id: ka_027
+  question: giai đoạn nuôi quả cà chua bón thúc NPK định kỳ mấy ngày một lần và lượng bón bao nhiêu
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: 10 ngày/lần, 4 kg Better NPK 12-12-17-9+TE/1000m2
+  source_of_truth: phanbonquocgia_ca_chua#76
+  note: Fact xác nhận từ phanbonquocgia_ca_chua#76
+- case_id: ka_028
+  question: mật độ trồng cà chua trong nhà kính tại Mộc Châu và khoảng cách các bầu giá thể là bao nhiêu
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: hơn 3.200 cây/1.000m2, khoảng cách bầu 40cm
+  source_of_truth: ca_chua__song_khoe_thu_kha_tien_nho#19
+  note: Fact xác nhận từ ca_chua__song_khoe_thu_kha_tien_nho#19
+- case_id: ka_029
+  question: nhiệt độ ngoài trời xuống dưới bao nhiêu độ C thì không được phun thuốc trừ cỏ cho lúa
+  crop: lua
+  expected_behavior: answer
+  expected_facts: dưới 18 độ C
+  source_of_truth: lua__phong_tru_co_dai_cho_lua#36
+  note: Fact xác nhận từ lua__phong_tru_co_dai_cho_lua#36
+  must_have_caution: true
+- case_id: ka_030
+  question: để đạt năng suất 5 tấn thóc một hecta một vụ cây lúa cần hút bao nhiêu kg đạm, lân và kali
+  crop: lua
+  expected_behavior: answer
+  expected_facts: 'Đạm (N): 110kg, lân (P2O5): 34kg, Kaly (K2O): 156kg'
+  source_of_truth: lua__cham_soc_lua_xuan_o_mien#14
+  note: Fact xác nhận từ lua__cham_soc_lua_xuan_o_mien#14
+- case_id: ka_031
+  question: lượng phân NPK Văn Điển bón lót và bón thúc cho lúa vụ xuân ở miền Bắc trung bình mỗi sào
+    là bao nhiêu
+  crop: lua
+  expected_behavior: answer
+  expected_facts: trên dưới 15kg bón lót và trên dưới 10kg bón thúc cho 1 sào Bắc Bộ
+  source_of_truth: lua__cham_soc_lua_xuan_o_mien#71
+  note: Fact xác nhận từ lua__cham_soc_lua_xuan_o_mien#71
+- case_id: ka_032
+  question: năng suất lúa sạch bệnh tại mô hình SRI ở Hưng Thắng đạt bình quân bao nhiêu tạ một sào
+  crop: lua
+  expected_behavior: answer
+  expected_facts: hơn 3 tạ/sào
+  source_of_truth: lua__day_manh_canh_tac_lua_theo#24
+  note: Fact xác nhận từ lua__day_manh_canh_tac_lua_theo#24
+- case_id: ka_033
+  question: bệnh đạo ôn cổ bông hại lúa do nấm phát sinh mạnh trong điều kiện nhiệt độ bao nhiêu
+  crop: lua
+  expected_behavior: answer
+  expected_facts: nhiệt độ từ 20 – 28 độ C
+  source_of_truth: lua__huong_dan_phong_tru_dich_hai#25
+  note: Fact xác nhận từ lua__huong_dan_phong_tru_dich_hai#25
+- case_id: ka_034
+  question: ở nhiệt độ 30 độ C trên đất thịt trung tính phân đạm urê bón cho lúa phân giải trong bao lâu
+  crop: lua
+  expected_behavior: answer
+  expected_facts: trong 2 – 3 ngày
+  source_of_truth: lua__giam_that_thoat_luong_dam_trong#21
+  note: Fact xác nhận từ lua__giam_that_thoat_luong_dam_trong#21
+- case_id: ka_035
+  question: phân đạm bón cho lúa ngắn ngày có thể chia làm mấy đợt và vào những giai đoạn nào
+  crop: lua
+  expected_behavior: answer
+  expected_facts: '3 đợt: đợt 1 (7-10 ngày sau sạ), đợt 2 (18-25 ngày sau sạ) và đón đòng'
+  source_of_truth: lua__ky_thuat_bon_phan_cho_lua#82
+  note: Fact xác nhận từ lua__ky_thuat_bon_phan_cho_lua#82

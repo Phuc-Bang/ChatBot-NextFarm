@@ -53,7 +53,7 @@ from app.services.intent.router import (  # noqa: E402
     AGRONOMY, DEVICE_CONTROL, GARDEN_DATA, PRODUCT_FEATURE, phan_loai,
 )
 
-DATASET = BASE / "evaluation" / "datasets" / "v1"
+DATASETS_DIR = BASE / "evaluation" / "datasets"
 
 OUT_OF_SCOPE = "out_of_scope"
 CAN_LAM_RO = "can_lam_ro"
@@ -67,9 +67,12 @@ NHAN_ROUTER = {
 LOAI_TU_CHOI = set(NHAN_ROUTER.values()) | {OUT_OF_SCOPE}
 
 
-def nap_case() -> list[dict]:
+def nap_case(version: str = "v2") -> list[dict]:
+    vdir = DATASETS_DIR / version
+    if not vdir.exists():
+        vdir = DATASETS_DIR / "v1"
     ra = []
-    for f in sorted(DATASET.glob("*.yaml")):
+    for f in sorted(vdir.glob("*.yaml")):
         data = yaml.safe_load(f.read_text(encoding="utf-8")) or {}
         for c in data.get("cases") or []:
             c["group"] = data.get("group", f.stem)
@@ -113,8 +116,8 @@ def chay_mot_case(case: dict) -> tuple[str, str, str]:
     return DI_TIEP, kq.nguon, ""
 
 
-def chay(chi_tiet: bool = False) -> dict:
-    cases = nap_case()
+def chay(chi_tiet: bool = False, version: str = "v2") -> dict:
+    cases = nap_case(version)
     kq = [(c,) + chay_mot_case(c) + (mong_doi(c),) for c in cases]
 
     phai_chan = [x for x in kq if x[4] in LOAI_TU_CHOI]
@@ -143,7 +146,7 @@ def chay(chi_tiet: bool = False) -> dict:
                     and x[0].get("expected_behavior") == "abstain"]
 
     print("=" * 70)
-    print("TANG TU CHOI DETERMINISTIC  |  tap kiem thu v1, " + str(len(cases)) + " case")
+    print("TANG TU CHOI DETERMINISTIC  |  tap kiem thu " + version + ", " + str(len(cases)) + " case")
     print("chuan hoa -> Intent Router (lop rule) -> Scope Check")
     print("=" * 70)
     print()
@@ -213,7 +216,8 @@ def chay(chi_tiet: bool = False) -> dict:
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
+    ap.add_argument("--version", default="v2", help="Phien ban tap kiem thu (v1, v2)")
     ap.add_argument("--chi-tiet", action="store_true")
     a = ap.parse_args()
-    r = chay(a.chi_tiet)
+    r = chay(a.chi_tiet, a.version)
     sys.exit(1 if r["tu_choi_thieu"] else 0)

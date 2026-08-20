@@ -203,6 +203,7 @@ NGOAI_LE = {
     "dong": ["xuan", "bang", "bao", "ruong"],            # vu dong xuan
     "mo": ["hinh", "ta", "dat"],                         # mo hinh, mo ta
     "tuoi": ["cay", "tho"],                              # tuoi cay (tuoi doi)
+    "cai dat": ["mat", "do", "khoang", "cach", "may", "khom"],  # cai dat mat do may cay
 }
 
 

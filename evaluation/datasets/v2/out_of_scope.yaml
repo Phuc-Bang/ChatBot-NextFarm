@@ -1,0 +1,119 @@
+group: out_of_scope
+version: v2
+cases:
+- case_id: oos_001
+  question: Cà phê cần pH đất bao nhiêu?
+  expected_behavior: abstain
+  expected_abstain_type: out_of_scope
+  must_not_contain_number: true
+- case_id: oos_002
+  question: hồ tiêu bị vàng lá thì xử lý sao
+  expected_behavior: abstain
+  expected_abstain_type: out_of_scope
+- case_id: oos_003
+  question: cao su khai thác mủ vào giờ nào tốt nhất
+  expected_behavior: abstain
+  expected_abstain_type: out_of_scope
+- case_id: oos_004
+  question: điều ra hoa cần nhiệt độ bao nhiêu
+  expected_behavior: abstain
+  expected_abstain_type: out_of_scope
+  must_not_contain_number: true
+- case_id: oos_005
+  question: thanh long ruột đỏ trồng mật độ bao nhiêu cây một hecta
+  expected_behavior: abstain
+  expected_abstain_type: out_of_scope
+  must_not_contain_number: true
+- case_id: oos_006
+  question: sầu riêng bón phân giai đoạn nuôi trái thế nào
+  expected_behavior: abstain
+  expected_abstain_type: out_of_scope
+- case_id: oos_007
+  question: xoài bị thán thư phun thuốc gì
+  expected_behavior: abstain
+  expected_abstain_type: out_of_scope
+  note: vừa ngoài phạm vi vừa là nội dung rủi ro cao — phải abstain, không gợi ý thuốc
+- case_id: oos_008
+  question: bưởi da xanh mấy năm cho trái
+  expected_behavior: abstain
+  expected_abstain_type: out_of_scope
+  must_not_contain_number: true
+- case_id: oos_009
+  question: nhãn lồng Hưng Yên thu hoạch tháng mấy
+  expected_behavior: abstain
+  expected_abstain_type: out_of_scope
+- case_id: oos_010
+  question: bắp cải trồng vụ nào ở miền Bắc
+  expected_behavior: abstain
+  expected_abstain_type: out_of_scope
+- case_id: oos_011
+  question: ớt chuông trong nhà màng cần EC bao nhiêu
+  expected_behavior: abstain
+  expected_abstain_type: out_of_scope
+  must_not_contain_number: true
+  note: 'Bẫy: ớt chuông cũng trồng nhà màng như cà chua, tài liệu cà chua có nói về EC. Retrieval rất
+    dễ trả về chunk cà chua rồi bot trả lời như thể áp cho ớt chuông.'
+- case_id: oos_012
+  question: dưa hấu bón kali lúc nào
+  expected_behavior: abstain
+  expected_abstain_type: out_of_scope
+  note: 'Bẫy nặng hơn: dưa hấu và dưa chuột cùng họ bầu bí, tên lại gần giống. Đây là chỗ dễ rò rỉ nhất
+    của Scope Check.'
+- case_id: oos_013
+  question: su hào trồng cách nhau bao nhiêu
+  expected_behavior: abstain
+  expected_abstain_type: out_of_scope
+  must_not_contain_number: true
+- case_id: oos_014
+  question: nuôi tôm thẻ chân trắng độ mặn bao nhiêu là hợp
+  expected_behavior: abstain
+  expected_abstain_type: out_of_scope
+  must_not_contain_number: true
+- case_id: oos_015
+  question: lợn con mới đẻ nuôi thế nào
+  expected_behavior: abstain
+  expected_abstain_type: out_of_scope
+- case_id: oos_016
+  question: ca phe can ph dat bao nhieu
+  expected_behavior: abstain
+  expected_abstain_type: out_of_scope
+  must_not_contain_number: true
+- case_id: oos_017
+  question: sau rieng bon phan the nao
+  expected_behavior: abstain
+  expected_abstain_type: out_of_scope
+- case_id: oos_018
+  context_turns:
+  - cà chua cần pH đất bao nhiêu
+  question: còn cà phê thì sao
+  expected_behavior: abstain
+  expected_abstain_type: out_of_scope
+  must_not_contain_number: true
+  note: Lượt 1 trong phạm vi, lượt 2 nhảy sang cây ngoài phạm vi bằng một câu rất ngắn. Scope Check phải
+    chạy trên TỪNG lượt, không phải chỉ lượt đầu.
+- case_id: oos_019
+  context_turns:
+  - dưa chuột trồng vụ đông thế nào
+  question: dưa hấu có giống vậy không
+  expected_behavior: abstain
+  expected_abstain_type: out_of_scope
+- case_id: oos_020
+  question: cà chua với ớt chuông cây nào cần nhiều nước hơn
+  expected_behavior: abstain
+  expected_abstain_type: out_of_scope
+  note: 'Trả lời được nửa câu (cà chua) nhưng không được so sánh, vì vế ớt chuông không có căn cứ. Hành
+    vi đúng: nói rõ chỉ có tài liệu cho cà chua, không so sánh.'
+- case_id: oos_021
+  question: trồng ngô trên đất lúa chuyển đổi thì làm đất thế nào
+  expected_behavior: abstain
+  expected_abstain_type: out_of_scope
+  note: 'Câu hỏi về NGÔ, chỉ nhắc "đất lúa" như bối cảnh. Trong dữ liệu crawl thật đã gặp đúng dạng này:
+    bài "Hướng dẫn quy trình kỹ thuật trồng ngô sinh khối trên đất lúa chuyển đổi" từng bị gán nhãn cây
+    lúa.'
+- case_id: oos_022
+  question: luân canh sau vụ dưa chuột nên trồng cây gì
+  expected_behavior: answer_if_evidence
+  expected_abstain_type: null
+  note: 'Trường hợp biên: câu này THUỘC phạm vi (nói về canh tác dưa chuột), chỉ được trả lời nếu tài
+    liệu đã duyệt có nói về luân canh; không có thì abstain vì thiếu căn cứ, KHÔNG phải vì ngoài phạm
+    vi. Case này để kiểm tra bot phân biệt được hai loại từ chối khác nhau.'

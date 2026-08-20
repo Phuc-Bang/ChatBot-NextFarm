@@ -18,34 +18,37 @@ import yaml
 
 import freeze
 
-VERSION = "v1"
-VDIR = freeze.DATASETS / VERSION
-MANIFEST = VDIR / "manifest.json"
+VERSIONS = sorted([d.name for d in freeze.DATASETS.iterdir() if d.is_dir() and list(d.glob("*.yaml"))])
 
 
-def files():
-    return freeze.thu_thap(VDIR)
+@pytest.fixture(params=VERSIONS)
+def version_dir(request):
+    return freeze.DATASETS / request.param
+
+
+def files(vdir: Path):
+    return freeze.thu_thap(vdir)
 
 
 # ----------------------------------------------------------------------
 # Luoc do
 # ----------------------------------------------------------------------
-def test_co_file_nhom():
-    assert files(), "khong tim thay file nhom nao trong " + str(VDIR)
+def test_co_file_nhom(version_dir):
+    assert files(version_dir), "khong tim thay file nhom nao trong " + str(version_dir)
 
 
-def test_luoc_do_hop_le():
+def test_luoc_do_hop_le(version_dir):
     da_thay: dict[str, str] = {}
     loi = []
-    for f in files():
+    for f in files(version_dir):
         loi.extend(freeze.kiem_tra_file(f, da_thay))
-    assert not loi, "Tap kiem thu sai luoc do:\n  " + "\n  ".join(loi)
+    assert not loi, f"Tap kiem thu {version_dir.name} sai luoc do:\n  " + "\n  ".join(loi)
 
 
-def test_case_id_khong_trung():
+def test_case_id_khong_trung(version_dir):
     """Trung case_id se lam ket qua eval bi ghi de len nhau ma khong bao loi."""
     thay: dict[str, str] = {}
-    for f in files():
+    for f in files(version_dir):
         data = yaml.safe_load(f.read_text(encoding="utf-8"))
         for c in data["cases"]:
             cid = c["case_id"]
@@ -54,20 +57,20 @@ def test_case_id_khong_trung():
             thay[cid] = f.name
 
 
-def test_ba_nhom_do_hien_tuong_A1_A2_phai_ton_tai():
+def test_ba_nhom_do_hien_tuong_A1_A2_phai_ton_tai(version_dir):
     """Ba nhom nay do truc tiep hai hien tuong de bai neu.
 
     Khong co chung thi khong co so lieu chung minh cho 2 trong 4 hien tuong,
     va do chinh la lo hong cua spec v1.0.
     """
-    ten = {f.stem for f in files()}
+    ten = {f.stem for f in files(version_dir)}
     for nhom in ("garden_data", "product_feature", "device_control"):
         assert nhom in ten, "thieu nhom bat buoc: " + nhom
 
 
-def test_moi_case_abstain_deu_ghi_ro_ly_do():
+def test_moi_case_abstain_deu_ghi_ro_ly_do(version_dir):
     """Tu choi dung nhung noi sai ly do van la trai nghiem te (muc 30.5)."""
-    for f in files():
+    for f in files(version_dir):
         data = yaml.safe_load(f.read_text(encoding="utf-8"))
         for c in data["cases"]:
             if c["expected_behavior"] == "abstain":
@@ -75,31 +78,31 @@ def test_moi_case_abstain_deu_ghi_ro_ly_do():
                     f.name + " / " + c["case_id"] + ": abstain thieu ly do hop le")
 
 
-def test_nhom_garden_data_cam_chua_so():
+def test_nhom_garden_data_cam_chua_so(version_dir):
     """Bot tra loi mot con so cho cau hoi so lieu vuon = bia so lieu vuon.
 
     Ngoai le duy nhat la case nguoi dung TU cung cap so, khi do viec nhac lai
     nguong tham khao co nguon la hop le.
     """
-    data = yaml.safe_load((VDIR / "garden_data.yaml").read_text(encoding="utf-8"))
+    data = yaml.safe_load((version_dir / "garden_data.yaml").read_text(encoding="utf-8"))
     cam = [c for c in data["cases"] if c.get("must_not_contain_number")]
     assert len(cam) >= len(data["cases"]) - 2, (
         "gan nhu moi case garden_data phai dat must_not_contain_number")
 
 
-def test_co_case_hoi_tiep_noi_chuyen_ngu_canh():
+def test_co_case_hoi_tiep_noi_chuyen_ngu_canh(version_dir):
     """Bay kho nhat: lượt truoc la nong hoc, lượt sau la so lieu vuon.
 
     Day chinh la lo hong ma Scope Check theo cay trong cua v1.0 cho lot.
     """
-    data = yaml.safe_load((VDIR / "garden_data.yaml").read_text(encoding="utf-8"))
+    data = yaml.safe_load((version_dir / "garden_data.yaml").read_text(encoding="utf-8"))
     co_ngu_canh = [c for c in data["cases"] if c.get("context_turns")]
     assert len(co_ngu_canh) >= 3, "can it nhat 3 case hoi tiep noi trong garden_data"
 
 
-def test_nhom_device_control_cam_khang_dinh_da_thuc_hien():
+def test_nhom_device_control_cam_khang_dinh_da_thuc_hien(version_dir):
     """Loi nguy hiem nhat cua nhom nay la bia MOT HANH DONG DA XAY RA."""
-    data = yaml.safe_load((VDIR / "device_control.yaml").read_text(encoding="utf-8"))
+    data = yaml.safe_load((version_dir / "device_control.yaml").read_text(encoding="utf-8"))
     for c in data["cases"]:
         assert c.get("must_not_claim_action") is True, (
             c["case_id"] + ": thieu must_not_claim_action")
@@ -108,12 +111,13 @@ def test_nhom_device_control_cam_khang_dinh_da_thuc_hien():
 # ----------------------------------------------------------------------
 # Dong bang
 # ----------------------------------------------------------------------
-@pytest.mark.skipif(not MANIFEST.exists(),
-                    reason="tap kiem thu chua dong bang (chua co manifest.json)")
-def test_hash_khop_manifest():
+def test_hash_khop_manifest(version_dir):
     """Sua file sau khi dong bang -> test nay do."""
-    cu = json.loads(MANIFEST.read_text(encoding="utf-8"))
-    hien_tai = {f.name: freeze.bam_file(f) for f in files()}
+    manifest_path = version_dir / "manifest.json"
+    if not manifest_path.exists():
+        pytest.skip(f"tap kiem thu {version_dir.name} chua dong bang")
+    cu = json.loads(manifest_path.read_text(encoding="utf-8"))
+    hien_tai = {f.name: freeze.bam_file(f) for f in files(version_dir)}
 
     thieu = set(cu["files"]) - set(hien_tai)
     assert not thieu, "file da bi xoa sau khi dong bang: " + ", ".join(sorted(thieu))
@@ -129,9 +133,14 @@ def test_hash_khop_manifest():
         + "\nMuon doi -> tao phien ban moi va chay lai toan bo cau hinh cu.")
 
 
-@pytest.mark.skipif(not MANIFEST.exists(), reason="chua dong bang")
-def test_so_case_khop_manifest():
-    cu = json.loads(MANIFEST.read_text(encoding="utf-8"))
+def test_so_case_khop_manifest(version_dir):
+    manifest_path = version_dir / "manifest.json"
+    if not manifest_path.exists():
+        pytest.skip(f"tap kiem thu {version_dir.name} chua dong bang")
+    cu = json.loads(manifest_path.read_text(encoding="utf-8"))
     tong = sum(len(yaml.safe_load(f.read_text(encoding="utf-8"))["cases"])
-               for f in files())
+               for f in files(version_dir))
     assert tong == cu["total_cases"]
+
+
+

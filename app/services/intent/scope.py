@@ -126,18 +126,25 @@ DONG_AM_CO_DAU = {
     "lạc": ([], ["hậu", "quan", "đề", "lối", "điệu"]),
     "vải": ([], ["địa", "bạt", "phủ", "che"]),
     "cam": ([], ["kết", "chịu", "đoan"]),
-    "hành": ([], ["động", "chính", "vi", "trình", "nghề"]),
-    "bông": ([], ["lúa", "hoa", "gòn"]),
+    "hành": (["tiến", "ban", "thực", "thi", "lữ", "chấp", "đồng", "vận", "phát"],
+             ["động", "chính", "vi", "trình", "nghề", "khách", "hạ", "lý", "quân", "tỏi"]),
+    "bông": (["cổ", "bắp", "trổ", "nhánh", "nụ", "hoa", "gòn", "cháy", "đạo"],
+             ["lúa", "mạ", "hoa", "gòn", "cho", "của", "thì"]),
     # "Bắc thơm", "gạo thơm", "lúa thơm" la ten giong lua, khong phai dua
     "thơm": (["bắc", "gạo", "lúa", "nếp", "mùi", "hoa"],
              ["ngon", "mùi", "quá", "hơn", "số"]),
     # "một khóm", "khóm lúa" la bui cay, khong phai dua
-    "khóm": (["một", "mỗi", "từng", "các", "những"], ["lúa", "mạ"]),
+    "khóm": (["mật", "độ", "cấy", "trồng", "bụi", "dảnh", "một", "mỗi", "từng",
+              "các", "những", "nhiêu", "số", "khối", "khoảng", "cách", "bao",
+              "30-40", "60-70", "60-80", "80-90"],
+             ["lúa", "mạ", "trên", "/", "m2", "vuông", "nào", "gạo", "thế", "là", "hay"]),
     "tiêu": ([], ["chuẩn", "thụ", "diệt", "hao", "chí", "đề", "biểu", "cực"]),
     "lan": (["bò", "leo", "mọc"], ["rộng", "truyền", "toả", "tỏa", "nhanh"]),
     "nho": ([], ["nhỏ"]),
     "bơ": ([], ["vơ", "phờ"]),
     "na": (["hàng"], []),
+    "nấm": (["do", "bệnh", "diệt", "trừ", "thuốc", "bào", "tử", "nhiễm", "kháng"],
+            ["bệnh", "gây", "hại", "đối", "kháng", "pyricularia", "phytophthora", "fusarium", "trắng", "phấn", "mốc", "phát"]),
 }
 
 

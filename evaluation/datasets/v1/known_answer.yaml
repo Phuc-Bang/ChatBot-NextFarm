@@ -1,0 +1,215 @@
+group: known_answer
+version: v1
+cases:
+- case_id: ka_001
+  question: đất trồng dưa chuột cần độ pH khoảng bao nhiêu là phù hợp
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: pH từ 6,5 đến 7,5
+  source_of_truth: ninhbinh_dua_chuot_quytrinh#18
+  note: Độ pH đất chuẩn cho dưa chuột
+- case_id: ka_002
+  question: lượng hạt giống dưa chuột cần gieo cho 1 hecta vụ đông là bao nhiêu
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: 850 - 900 g/ha
+  source_of_truth: ninhbinh_dua_chuot_dong
+  note: Lượng hạt giống dưa chuột vụ đông
+- case_id: ka_003
+  question: vụ đông dưa chuột thường được trồng vào tháng mấy ở miền Bắc
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: từ tháng 8 đến tháng 11
+  source_of_truth: ninhbinh_dua_chuot_dong
+  note: Thời vụ trồng dưa chuột vụ đông
+- case_id: ka_004
+  question: mật độ trồng dưa chuột theo tiêu chuẩn VietGAP ở Hà Tĩnh là bao nhiêu cây một hecta
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: 30.000 - 35.000 cây/ha
+  source_of_truth: hatinh_dua_chuot_vietgap
+  note: Mật độ trồng dưa chuột VietGAP
+- case_id: ka_005
+  question: làm giàn cho dưa chuột nên làm kiểu gì và chiều cao giàn bao nhiêu
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: giàn chữ A, chiều cao từ 1,8m đến 2m
+  source_of_truth: hatinh_dua_chuot_vietgap
+  note: Kỹ thuật làm giàn dưa chuột
+- case_id: ka_006
+  question: thời vụ trồng dưa chuột vụ xuân hè ở Lai Châu gieo vào tháng mấy
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: tháng 2 đến tháng 4
+  source_of_truth: laichau_dua_chuot_xuanhe
+  note: Thời vụ dưa chuột xuân hè vùng trung du miền núi
+- case_id: ka_007
+  question: trồng dưa chuột Nhật Bản trong nhà lưới thì mật độ khoảng bao nhiêu cây cho 1000m2
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: 2.200 - 2.500 cây/1000m2
+  source_of_truth: dua_chuot__dua_chuot_nhat_ban_trong_nha
+  note: Mật độ trồng dưa chuột nhà màng
+- case_id: ka_008
+  question: cà chua bi trồng trong nhà màng tại TP.HCM yêu cầu độ pH và EC của giá thể bao nhiêu
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: pH 5,5 - 6,5; EC 1,5 - 2,5 mS/cm
+  source_of_truth: hcm_dost_ca_chua_bi
+  note: Chỉ số pH và EC giá thể cà chua bi
+- case_id: ka_009
+  question: mật độ trồng cà chua bi trong nhà màng giá thể là bao nhiêu cây cho 1000 mét vuông
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: 2.500 - 2.800 cây/1000m2
+  source_of_truth: hcm_dost_ca_chua_bi
+  note: Mật độ trồng cà chua bi giá thể
+- case_id: ka_010
+  question: bón thúc cho cà chua trước khi ra hoa với lượng phân NPK bao nhiêu cho 1000m2
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: 20 kg Better NPK 12-12-17-9+TE
+  source_of_truth: phanbonquocgia_ca_chua#75
+  note: Liều lượng bón thúc NPK trước ra hoa
+- case_id: ka_011
+  question: giai đoạn nuôi trái cà chua bón thúc NPK định kỳ mấy ngày một lần và lượng bón bao nhiêu
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: 10 ngày/lần, liều lượng 4 kg Better NPK 12-12-17-9+TE / 1000m2
+  source_of_truth: phanbonquocgia_ca_chua#76
+  note: Định kỳ bón thúc nuôi trái cà chua
+- case_id: ka_012
+  question: giá thể trồng cà chua VietGAP trong bầu ở Mộc Châu phối trộn theo tỷ lệ nào
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: xơ dừa, trấu hun, phân hữu cơ theo tỷ lệ 1:1:1
+  source_of_truth: ca_chua__song_khoe_thu_kha_tien_nho
+  note: Thành phần và tỷ lệ giá thể bầu trồng cà chua
+- case_id: ka_013
+  question: tiêu chuẩn cây giống cà chua con khi đưa ra trồng vào bầu giá thể ở Mộc Châu
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: 17 - 18 ngày sau ươm, cây có 5 - 6 lá thật, chiều cao 11 - 12 cm
+  source_of_truth: ca_chua__song_khoe_thu_kha_tien_nho
+  note: Tiêu chuẩn cây con cà chua trước khi trồng
+- case_id: ka_014
+  question: khi trồng cà chua bầu giá thể thì cắm que tưới nhỏ giọt cách gốc bao nhiêu cm
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: cách gốc 3 cm
+  source_of_truth: ca_chua__song_khoe_thu_kha_tien_nho
+  note: Khoảng cách cắm que tưới nhỏ giọt
+- case_id: ka_015
+  question: mật độ trồng cà chua chính vụ ở Ninh Bình là bao nhiêu cây một hecta
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: 28.000 - 32.000 cây/ha
+  source_of_truth: ninhbinh_gntt_ca_chua
+  note: Mật độ trồng cà chua chính vụ
+- case_id: ka_016
+  question: thời vụ gieo trồng cà chua chính vụ ở đồng bằng sông Hồng vào tháng mấy
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: tháng 9 đến tháng 10
+  source_of_truth: ninhbinh_gntt_ca_chua
+  note: Thời vụ cà chua chính vụ
+- case_id: ka_017
+  question: khi nhiệt độ ngoài trời xuống dưới bao nhiêu độ C thì không được phun thuốc trừ cỏ cho lúa
+  crop: lua
+  expected_behavior: answer
+  expected_facts: dưới 18 độ C
+  source_of_truth: lua__phong_tru_co_dai_cho_lua#36
+  must_have_caution: true
+  note: Ngưỡng nhiệt độ an toàn phun thuốc cỏ lúa
+- case_id: ka_018
+  question: thuốc trừ cỏ tiền nảy mầm cho lúa gieo sạ nên phun trong khoảng thời gian nào sau sạ
+  crop: lua
+  expected_behavior: answer
+  expected_facts: 1 đến 3 ngày sau khi gieo sạ
+  source_of_truth: lua__phong_tru_co_dai_cho_lua
+  note: Thời điểm phun thuốc cỏ tiền nảy mầm
+- case_id: ka_019
+  question: chăm sóc lúa xuân ở miền Bắc khi nhiệt độ dưới 15 độ C thì có được bón đạm không
+  crop: lua
+  expected_behavior: answer
+  expected_facts: không bón phân đạm khi nhiệt độ dưới 15 độ C
+  source_of_truth: lua__cham_soc_lua_xuan_o_mien
+  note: Quy tắc không bón đạm khi trời rét hại
+- case_id: ka_020
+  question: giai đoạn lúa xuân hồi xanh bén rễ ở miền Bắc cần duy trì mực nước ruộng bao nhiêu cm
+  crop: lua
+  expected_behavior: answer
+  expected_facts: giữ mực nước nông từ 2 đến 3 cm
+  source_of_truth: lua__cham_soc_lua_xuan_o_mien
+  note: Mực nước ruộng giai đoạn lúa bén rễ hồi xanh
+- case_id: ka_021
+  question: thời điểm bón thúc đẻ nhánh cho lúa cấy vụ xuân là sau khi cấy bao nhiêu ngày
+  crop: lua
+  expected_behavior: answer
+  expected_facts: sau cấy từ 7 đến 10 ngày (khi lúa bén rễ hồi xanh)
+  source_of_truth: lua__cham_soc_lua_xuan_o_mien
+  note: Thời điểm bón thúc đẻ nhánh lúa cấy
+- case_id: ka_022
+  question: mật độ cấy lúa bằng máy thông thường là bao nhiêu khóm trên một mét vuông
+  crop: lua
+  expected_behavior: answer
+  expected_facts: 60 - 70 khóm/m2 hoặc 80 - 90 khóm/m2 tùy loại đất
+  source_of_truth: lua__cay_lua_bang_may_giai_phap
+  note: Mật độ cấy máy
+- case_id: ka_023
+  question: độ sâu cấy mạ khay bằng máy bao nhiêu cm là thích hợp
+  crop: lua
+  expected_behavior: answer
+  expected_facts: cấy nông từ 1,5 đến 2 cm
+  source_of_truth: lua__cay_lua_bang_may_giai_phap
+  note: Độ sâu cấy mạ bằng máy
+- case_id: ka_024
+  question: trong kỹ thuật canh tác lúa cải tiến SRI mật độ cấy thưa khoảng bao nhiêu khóm một mét vuông
+  crop: lua
+  expected_behavior: answer
+  expected_facts: 30 - 40 khóm/m2 (khoảng cách 20x20cm hoặc 25x25cm)
+  source_of_truth: lua__day_manh_canh_tac_lua_theo
+  note: Mật độ cấy SRI
+- case_id: ka_025
+  question: kỹ thuật SRI quy định cấy mạ non mấy lá và cấy mấy dảnh một khóm
+  crop: lua
+  expected_behavior: answer
+  expected_facts: mạ non 2 - 2,5 lá, cấy 1 dảnh/khóm
+  source_of_truth: lua__day_manh_canh_tac_lua_theo
+  note: Quy cách mạ và số dảnh cấy SRI
+- case_id: ka_026
+  question: phòng trừ bệnh đạo ôn cổ bông cho lúa thì thời điểm phun thuốc hiệu quả nhất là khi nào
+  crop: lua
+  expected_behavior: answer
+  expected_facts: phun trước khi lúa trổ 5-7 ngày và phun lại lần 2 khi lúa trổ đều
+  source_of_truth: lua__huong_dan_phong_tru_dich_hai
+  must_have_caution: true
+  note: Thời điểm phòng trừ đạo ôn cổ bông
+- case_id: ka_027
+  question: nguyên tắc bón đạm để giảm thất thoát bốc hơi trong canh tác lúa là gì
+  crop: lua
+  expected_behavior: answer
+  expected_facts: chia đạm bón nhiều lần và bón vùi sâu vào đất
+  source_of_truth: lua__giam_that_thoat_luong_dam_trong
+  note: Nguyên tắc bón đạm chống thất thoát
+- case_id: ka_028
+  question: kỹ thuật bón phân cho lúa ngắn ngày thì phân lân được bón vào giai đoạn nào
+  crop: lua
+  expected_behavior: answer
+  expected_facts: bón lót toàn bộ lượng phân lân
+  source_of_truth: lua__ky_thuat_bon_phan_cho_lua
+  note: Giai đoạn bón lân cho lúa ngắn ngày
+- case_id: ka_029
+  question: tỷ lệ phân đạm bón lót và bón thúc đẻ nhánh cho lúa ngắn ngày là bao nhiêu phần trăm
+  crop: lua
+  expected_behavior: answer
+  expected_facts: bón lót 30-40% đạm, bón thúc đẻ nhánh 40-50% đạm
+  source_of_truth: lua__ky_thuat_bon_phan_cho_lua
+  note: Tỷ lệ phân đạm các đợt bón cho lúa
+- case_id: ka_030
+  question: khi ruộng lúa bị ngập úng sau mưa bão việc đầu tiên cần làm để cứu lúa là gì
+  crop: lua
+  expected_behavior: answer
+  expected_facts: khẩn trương tiêu úng, tháo cạn nước để lộ ngọn lúa càng sớm càng tốt
+  source_of_truth: lua__khac_phuc_anh_huong_mua_bao
+  note: Biện pháp cấp bách xử lý ngập úng lúa sau bão

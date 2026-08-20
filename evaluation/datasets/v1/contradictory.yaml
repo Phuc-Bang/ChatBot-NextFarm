@@ -1,0 +1,58 @@
+group: contradictory
+version: v1
+cases:
+- case_id: ct_001
+  question: mật độ cấy lúa là 30-40 khóm/m2 hay 60-80 khóm/m2, số nào mới đúng
+  crop: lua
+  expected_behavior: answer
+  note: 'Mâu thuẫn giữa 2 phương pháp: canh tác cải tiến SRI (30-40 khóm/m2) và cấy máy thông thường (60-80
+    khóm/m2). Bot phải nêu rõ cả 2 phương pháp.'
+- case_id: ct_002
+  question: mật độ trồng cà chua là 3.200 cây/1000m2 hay 28.000 cây/ha
+  crop: ca_chua
+  expected_behavior: answer
+  note: Mâu thuẫn giữa trồng bầu giá thể trong nhà màng (3.200 cây/1000m2 = 32.000 cây/ha) và trồng ngoài
+    ruộng truyền thống (28.000 - 32.000 cây/ha).
+- case_id: ct_003
+  question: trồng dưa chuột ở miền Bắc thì gieo vào tháng 2 hay tháng 8
+  crop: dua_chuot
+  expected_behavior: answer
+  note: 'Mâu thuẫn giữa 2 thời vụ: vụ xuân hè (tháng 2-4) và vụ thu đông (tháng 8-11).'
+- case_id: ct_004
+  question: cấy lúa thì cấy 1 dảnh hay cấy 3-4 dảnh một khóm
+  crop: lua
+  expected_behavior: answer
+  note: Mâu thuẫn giữa kỹ thuật SRI (1 dảnh mạ non) và tập quán cấy truyền thống/cấy máy (nhiều dảnh).
+- case_id: ct_005
+  question: trồng cà chua nên dùng đất thịt nhẹ hay dùng giá thể xơ dừa trấu hun
+  crop: ca_chua
+  expected_behavior: answer
+  note: Mâu thuẫn giữa canh tác đất truyền thống và canh tác không dùng đất (giá thể nhà màng công nghệ
+    cao).
+- case_id: ct_006
+  question: ruộng lúa nên giữ ngập nước liên tục hay tưới ướt khô xen kẽ
+  crop: lua
+  expected_behavior: answer
+  note: Mâu thuẫn giữa tập quán ngập nước liên tục và kỹ thuật tưới tiết kiệm nước AWD/SRI.
+- case_id: ct_007
+  question: độ pH đất trồng cà chua là 5,5-6,5 hay 6,5-7,0
+  crop: ca_chua
+  expected_behavior: answer
+  note: Khác biệt giữa chỉ số giá thể nhà màng TP.HCM (5,5 - 6,5) và đất thịt tự nhiên.
+- case_id: ct_008
+  question: dưa chuột gieo hạt trực tiếp hay ươm cây con trong khay bầu
+  crop: dua_chuot
+  expected_behavior: answer
+  note: Tài liệu Ninh Bình nêu gieo trực tiếp hoặc làm bầu ươm tùy điều kiện thời tiết vụ đông.
+- case_id: ct_009
+  question: bón phân cho lúa nên bón thúc đẻ nhánh sớm hay đợi lúa đẻ nhánh rộ mới bón
+  crop: lua
+  expected_behavior: answer
+  note: 'Khuyến cáo kỹ thuật: bón sớm khi bén rễ hồi xanh (7-10 ngày sau cấy) để kích thích đẻ nhánh hữu
+    hiệu.'
+- case_id: ct_010
+  question: mật độ trồng dưa chuột là 30.000 cây/ha hay 2.500 cây/1000m2
+  crop: dua_chuot
+  expected_behavior: answer
+  note: Khác biệt giữa trồng VietGAP ngoài đồng ruộng (30.000 - 35.000 cây/ha) và trồng dưa Nhật nhà lưới
+    (2.200 - 2.500 cây/1000m2).

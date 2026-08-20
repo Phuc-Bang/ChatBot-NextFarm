@@ -1,0 +1,2457 @@
+facts:
+- fact_key: ninhbinh_dua_chuot_dong#10
+  source_id: ninhbinh_dua_chuot_dong
+  sentence_index: 10
+  sentence: 1.Giống và thời vụ
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: thoi_vu
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/ky-thuat-trong-va-cham-soc-dua-chuot-vu-dong-781.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: tiêu đề mục hoặc không có khoảng thời gian/tháng cụ thể
+- fact_key: ninhbinh_dua_chuot_dong#13
+  source_id: ninhbinh_dua_chuot_dong
+  sentence_index: 13
+  sentence: '- Vụ Thu Đông: trồng từ tháng 8 - tháng 11'
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: thoi_vu
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/ky-thuat-trong-va-cham-soc-dua-chuot-vu-dong-781.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 8.0
+  value_max: 11.0
+  unit: tháng
+  stage: thời vụ gieo trồng
+  note: Thời vụ gieo trồng từ tháng 8 đến tháng 11
+- fact_key: ninhbinh_dua_chuot_dong#15
+  source_id: ninhbinh_dua_chuot_dong
+  sentence_index: 15
+  sentence: '- Chọn đất: Đất có thành phần cơ giới nhẹ như cát pha, đất thịt nhẹ thoát nước tốt, đất có tầng canh tác dày,
+    tơi xốp, giầu hữu cơ, pH từ 6,5-7,5.'
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: ph
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/ky-thuat-trong-va-cham-soc-dua-chuot-vu-dong-781.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 6.5
+  value_max: 7.5
+  unit: pH
+  stage: chuẩn bị đất
+  note: 'Độ pH đất thích hợp cho dua_chuot: 6.5 - 7.5'
+- fact_key: ninhbinh_dua_chuot_dong#16
+  source_id: ninhbinh_dua_chuot_dong
+  sentence_index: 16
+  sentence: Đất trồng không quá phèn, mặn (kiềm), nếu độ pH dưới 5 thì phải bón thêm vôi.
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: ph
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/ky-thuat-trong-va-cham-soc-dua-chuot-vu-dong-781.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: null
+  value_max: 5.0
+  unit: pH
+  stage: xử lý đất chua
+  note: Nếu độ pH dưới 5.0 thì phải bón thêm vôi
+- fact_key: ninhbinh_dua_chuot_dong#19
+  source_id: ninhbinh_dua_chuot_dong
+  sentence_index: 19
+  sentence: Lên luống rộng 1 - 1,2m, luống cao 20 - 25cm, rãnh 30 cm thoát nước tốt.
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: khoang_cach
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/ky-thuat-trong-va-cham-soc-dua-chuot-vu-dong-781.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 1.0
+  value_max: 1.2
+  unit: m
+  stage: làm đất lên luống
+  note: Lên luống rộng 1.0 - 1.2m, cao 20 - 25cm
+- fact_key: ninhbinh_dua_chuot_dong#22
+  source_id: ninhbinh_dua_chuot_dong
+  sentence_index: 22
+  sentence: Màng phủ nilon đục lỗ theo mật độ trồng cây, đường kính lỗ từ 12 – 15 cm để sau trồng dưa.
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: mat_do_gieo
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/ky-thuat-trong-va-cham-soc-dua-chuot-vu-dong-781.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 12.0
+  value_max: 15.0
+  unit: cm
+  stage: chuẩn bị màng phủ
+  note: 'Đường kính lỗ màng phủ đục sẵn: 12.0 - 15.0 cm'
+- fact_key: ninhbinh_dua_chuot_dong#32
+  source_id: ninhbinh_dua_chuot_dong
+  sentence_index: 32
+  sentence: '- Chăm sóc cây con: một ngày tưới 1 – 2  lần tùy vào độ ẩm của cây.'
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: do_am
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/ky-thuat-trong-va-cham-soc-dua-chuot-vu-dong-781.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 1.0
+  value_max: 2.0
+  unit: lần/ngày
+  stage: chăm sóc cây con
+  note: Tưới cây con 1.0 - 2.0 lần/ngày tùy độ ẩm
+- fact_key: ninhbinh_dua_chuot_dong#36
+  source_id: ninhbinh_dua_chuot_dong
+  sentence_index: 36
+  sentence: 'Mật độ, khoảng cách trồng: hàng x hàng 60 - 70cm;'
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: mat_do_gieo
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/ky-thuat-trong-va-cham-soc-dua-chuot-vu-dong-781.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: không trích xuất được mật độ cây hoặc hạt giống cụ thể
+- fact_key: ninhbinh_dua_chuot_dong#45
+  source_id: ninhbinh_dua_chuot_dong
+  sentence_index: 45
+  sentence: Nếu độ ẩm đất thấp hơn 70% cần tiến hành tưới cho dưa chuột để đảm bảo đất có độ ẩm 85-90%.
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: do_am
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/ky-thuat-trong-va-cham-soc-dua-chuot-vu-dong-781.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 85.0
+  value_max: 90.0
+  unit: '%'
+  stage: chăm sóc / tưới nước
+  note: Duy trì độ ẩm đất từ 85.0% - 90.0%
+- fact_key: ninhbinh_dua_chuot_dong#51
+  source_id: ninhbinh_dua_chuot_dong
+  sentence_index: 51
+  sentence: '- Phân bón: Lượng phân bón cho 1 sào Bắc bộ (360 m'
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: luong_phan
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/ky-thuat-trong-va-cham-soc-dua-chuot-vu-dong-781.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: ninhbinh_dua_chuot_dong#54
+  source_id: ninhbinh_dua_chuot_dong
+  sentence_index: 54
+  sentence: '+ Bón lót: Toàn bộ phân  hữu cơ vi sinh  và phân lân supe + 20 kg lân supe+ 2kg ure +4 kg KCl.'
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: luong_phan
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/ky-thuat-trong-va-cham-soc-dua-chuot-vu-dong-781.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 20.0
+  value_max: null
+  unit: kg
+  stage: bón phân
+  note: 'Liều lượng phân bón: + Bón lót: Toàn bộ phân  hữu cơ vi sinh  và phân lân supe + 20 kg lân supe+ 2kg ure +4 kg KCl.'
+- fact_key: ninhbinh_dua_chuot_dong#56
+  source_id: ninhbinh_dua_chuot_dong
+  sentence_index: 56
+  sentence: '+ Bón thúc lần 1 (sau trồng 10 ngày): Bón 2 kg đạm'
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: luong_phan
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/ky-thuat-trong-va-cham-soc-dua-chuot-vu-dong-781.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 2.0
+  value_max: 2.0
+  unit: kg/sào
+  stage: bón thúc lần 1
+  note: 'Bón thúc lần 1: 2.0 kg đạm'
+- fact_key: ninhbinh_dua_chuot_dong#57
+  source_id: ninhbinh_dua_chuot_dong
+  sentence_index: 57
+  sentence: + Bón thúc lần 2 ( sau trồng 20 ngày):  Bón + 4 kg đạm + 2 kg kali
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: luong_phan
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/ky-thuat-trong-va-cham-soc-dua-chuot-vu-dong-781.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 4.0
+  value_max: null
+  unit: kg
+  stage: bón phân
+  note: 'Liều lượng phân bón: + Bón thúc lần 2 ( sau trồng 20 ngày):  Bón + 4 kg đạm + 2 kg kali'
+- fact_key: ninhbinh_dua_chuot_dong#58
+  source_id: ninhbinh_dua_chuot_dong
+  sentence_index: 58
+  sentence: '+ Bón thúc lần 3 ( sau trồng 40 ngày): Bón 4 kg đạm + 4 kg kali'
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: luong_phan
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/ky-thuat-trong-va-cham-soc-dua-chuot-vu-dong-781.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 4.0
+  value_max: null
+  unit: kg
+  stage: bón phân
+  note: 'Liều lượng phân bón: + Bón thúc lần 3 ( sau trồng 40 ngày): Bón 4 kg đạm + 4 kg kali'
+- fact_key: ninhbinh_dua_chuot_dong#72
+  source_id: ninhbinh_dua_chuot_dong
+  sentence_index: 72
+  sentence: Một số lưu ý trong sản xuất vụ đông năm 2025
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: thoi_vu
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/ky-thuat-trong-va-cham-soc-dua-chuot-vu-dong-781.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: loại do là tiêu đề tin tức, footer, số liệu hành chính hoặc thống kê diện tích tỉnh
+- fact_key: ninhbinh_dua_chuot_quytrinh#13
+  source_id: ninhbinh_dua_chuot_quytrinh
+  sentence_index: 13
+  sentence: '+ Vụ Đông Xuân (thời vụ trồng từ tháng 11 năm trước đến tháng 2 năm sau): Sử dụng các nhóm giống nếp, lai nếp
+    như nếp số 1, nếp địa phương, nếp lai, ...'
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: thoi_vu
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/quy-trinh-san-xuat-dua-chuot-792.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: tiêu đề mục hoặc không có khoảng thời gian/tháng cụ thể
+- fact_key: ninhbinh_dua_chuot_quytrinh#14
+  source_id: ninhbinh_dua_chuot_quytrinh
+  sentence_index: 14
+  sentence: '+ Vụ Hè Thu (trồng từ tháng 4 đến tháng 7): Sử dụng các nhóm giống chịu nhiệt như Hoa Sen 118, VL 103, Tre Việt
+    108, TV109, TV110, Kichi, ...'
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: thoi_vu
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/quy-trinh-san-xuat-dua-chuot-792.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 4.0
+  value_max: 7.0
+  unit: tháng
+  stage: thời vụ gieo trồng
+  note: Thời vụ gieo trồng từ tháng 4 đến tháng 7
+- fact_key: ninhbinh_dua_chuot_quytrinh#15
+  source_id: ninhbinh_dua_chuot_quytrinh
+  sentence_index: 15
+  sentence: '+ Vụ Thu Đông (trồng từ tháng 8 - tháng 11): chủ yếu sử dụng các nhóm giống ưa mát như HTM 178, PC1, PC4, Sakura,
+    Dưa chuột Tre Việt, Kichi,....'
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: thoi_vu
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/quy-trinh-san-xuat-dua-chuot-792.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 8.0
+  value_max: 11.0
+  unit: tháng
+  stage: thời vụ gieo trồng
+  note: Thời vụ gieo trồng từ tháng 8 đến tháng 11
+- fact_key: ninhbinh_dua_chuot_quytrinh#18
+  source_id: ninhbinh_dua_chuot_quytrinh
+  sentence_index: 18
+  sentence: Dưa chuột yêu cầu đất nghiêm khắc do bộ rễ yếu và sức hấp thụ của rễ kém, nếu gặp hạn hay úng hoặc nồng độ phân
+    cao, bộ rễ dưa dễ bị vàng khô, vì thế nên trồng dưa trên đất có thành phần cơ giới nhẹ như cát pha, đất thịt nhẹ thoát
+    nước tốt, có nhiều chất hữu cơ, pH từ 6,5-7,5.
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: ph
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/quy-trinh-san-xuat-dua-chuot-792.html
+  high_risk: true
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 6.5
+  value_max: 7.5
+  unit: pH
+  stage: chuẩn bị đất
+  note: Độ pH đất thích hợp cho dưa chuột từ 6,5 - 7,5
+- fact_key: ninhbinh_dua_chuot_quytrinh#19
+  source_id: ninhbinh_dua_chuot_quytrinh
+  sentence_index: 19
+  sentence: Đất trồng không quá phèn, mặn (kiềm), nếu độ pH dưới 5 thì phải bón thêm vôi.
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: ph
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/quy-trinh-san-xuat-dua-chuot-792.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: null
+  value_max: 5.0
+  unit: pH
+  stage: xử lý đất chua
+  note: Nếu độ pH dưới 5.0 thì phải bón thêm vôi
+- fact_key: ninhbinh_dua_chuot_quytrinh#21
+  source_id: ninhbinh_dua_chuot_quytrinh
+  sentence_index: 21
+  sentence: Đất trồng dưa chuột phải cày bừa kỹ cho tơi xốp, làm sạch cỏ, trồng vào mùa mưa phải lên luống cao 20 - 25cm và
+    đào rãnh thoát nước tốt.
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: khoang_cach
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/quy-trinh-san-xuat-dua-chuot-792.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 25.0
+  value_max: null
+  unit: cm
+  stage: làm đất
+  note: 'Quy cách khoảng cách/kích thước luống: Đất trồng dưa chuột phải cày bừa kỹ cho tơi xốp, làm sạch cỏ, trồng vào mùa
+    mưa phải lên luống cao 20 - 25cm và đào rãnh thoát nước tốt.'
+- fact_key: ninhbinh_dua_chuot_quytrinh#27
+  source_id: ninhbinh_dua_chuot_quytrinh
+  sentence_index: 27
+  sentence: '- Kỹ thuật trồng, mật độ, khoảng cách trồng: Các giống lai F1 thường trồng hàng x hàng 60cm;'
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: mat_do_gieo
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/quy-trinh-san-xuat-dua-chuot-792.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: không trích xuất được mật độ cây hoặc hạt giống cụ thể
+- fact_key: ninhbinh_dua_chuot_quytrinh#29
+  source_id: ninhbinh_dua_chuot_quytrinh
+  sentence_index: 29
+  sentence: Mật độ trồng 30.000 - 35.000 cây/ha.
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: mat_do_gieo
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/quy-trinh-san-xuat-dua-chuot-792.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 30000.0
+  value_max: 35000.0
+  unit: cây/ha
+  stage: trồng cây
+  note: 'Mật độ trồng: 30,000 - 35,000 cây/ha'
+- fact_key: ninhbinh_dua_chuot_quytrinh#34
+  source_id: ninhbinh_dua_chuot_quytrinh
+  sentence_index: 34
+  sentence: Nếu độ ẩm đất thấp hơn 70% cần tiến hành tưới cho dưa chuột để đảm bảo đất có độ ẩm 85-90%.
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: do_am
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/quy-trinh-san-xuat-dua-chuot-792.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 85.0
+  value_max: 90.0
+  unit: '%'
+  stage: chăm sóc / tưới nước
+  note: Duy trì độ ẩm đất từ 85.0% - 90.0%
+- fact_key: ninhbinh_dua_chuot_quytrinh#37
+  source_id: ninhbinh_dua_chuot_quytrinh
+  sentence_index: 37
+  sentence: '- Làm giàn: Sau khi bón thúc lần 2 có thể tiến hành làm giàn, dùng cọc dài khoảng 2,5m, cắm hình chữ A sau đó
+    phủ lưới nilon có mắt lưới rộng 20cm lên dàn để cho dưa leo.'
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: luong_phan
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/quy-trinh-san-xuat-dua-chuot-792.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: ninhbinh_dua_chuot_quytrinh#42
+  source_id: ninhbinh_dua_chuot_quytrinh
+  sentence_index: 42
+  sentence: '- Phân bón: Lượng phân bón cho 1 sào Bắc bộ (360 m'
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: luong_phan
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/quy-trinh-san-xuat-dua-chuot-792.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: ninhbinh_dua_chuot_quytrinh#95
+  source_id: ninhbinh_dua_chuot_quytrinh
+  sentence_index: 95
+  sentence: Một số lưu ý trong sản xuất vụ đông năm 2025
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  metric: thoi_vu
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/quy-trinh-san-xuat-dua-chuot-792.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: loại do là tiêu đề tin tức, footer, số liệu hành chính hoặc thống kê diện tích tỉnh
+- fact_key: hatinh_dua_chuot_vietgap#16
+  source_id: hatinh_dua_chuot_vietgap
+  sentence_index: 16
+  sentence: '- Vụ xuân: gieo từ cuối tháng 1 đến cuối tháng 2 dương lịch.'
+  crop: dua_chuot
+  region: bac_trung_bo
+  metric: thoi_vu
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ky-thuat-trong-dua-chuot-theo-huong-tieu-chuan-VietGAP-7401.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: tiêu đề mục hoặc không có khoảng thời gian/tháng cụ thể
+- fact_key: hatinh_dua_chuot_vietgap#17
+  source_id: hatinh_dua_chuot_vietgap
+  sentence_index: 17
+  sentence: '- Vụ đông: gieo từ đầu tháng 9 đến cuối tháng 10.'
+  crop: dua_chuot
+  region: bac_trung_bo
+  metric: thoi_vu
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ky-thuat-trong-dua-chuot-theo-huong-tieu-chuan-VietGAP-7401.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: tiêu đề mục hoặc không có khoảng thời gian/tháng cụ thể
+- fact_key: hatinh_dua_chuot_vietgap#19
+  source_id: hatinh_dua_chuot_vietgap
+  sentence_index: 19
+  sentence: Nếu bà con trồng dưa chuột xen giữa 2 vụ lúa thì nên làm bầu để tranh thủ được thời vụ.
+  crop: dua_chuot
+  region: bac_trung_bo
+  metric: thoi_vu
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ky-thuat-trong-dua-chuot-theo-huong-tieu-chuan-VietGAP-7401.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: tiêu đề mục hoặc không có khoảng thời gian/tháng cụ thể
+- fact_key: hatinh_dua_chuot_vietgap#42
+  source_id: hatinh_dua_chuot_vietgap
+  sentence_index: 42
+  sentence: Đất thịt nhẹ hoặc cát pha có độ pH từ 6- 6,5.
+  crop: dua_chuot
+  region: bac_trung_bo
+  metric: ph
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ky-thuat-trong-dua-chuot-theo-huong-tieu-chuan-VietGAP-7401.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 6.0
+  value_max: 6.5
+  unit: pH
+  stage: chuẩn bị đất
+  note: 'Độ pH đất thích hợp: 6.0 - 6.5'
+- fact_key: hatinh_dua_chuot_vietgap#43
+  source_id: hatinh_dua_chuot_vietgap
+  sentence_index: 43
+  sentence: 'Nếu pH thấp hơn thì dùng vôi bột để tăng pH.- Ngoài ra, đất phải được xác định hàm lượng một số kim loại nặng
+    trước khi sản xuất và trong quá trình sản xuất đảm bảo không vượt quá ngưỡng cho phép  như: hàm lượng asen không vượt
+    quá 12mg/kg đất khô, kẽm 200, đồng 50…'
+  crop: dua_chuot
+  region: bac_trung_bo
+  metric: ph
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ky-thuat-trong-dua-chuot-theo-huong-tieu-chuan-VietGAP-7401.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: không trích xuất được ngưỡng pH cụ thể
+- fact_key: hatinh_dua_chuot_vietgap#47
+  source_id: hatinh_dua_chuot_vietgap
+  sentence_index: 47
+  sentence: '- Sau khi làm đất tiến hành lên luống:  Luống dưa rộng 1,2 m – 1,5 m, cao 25 – 30 cm.'
+  crop: dua_chuot
+  region: bac_trung_bo
+  metric: khoang_cach
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ky-thuat-trong-dua-chuot-theo-huong-tieu-chuan-VietGAP-7401.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 1.2
+  value_max: null
+  unit: m
+  stage: làm đất
+  note: 'Quy cách khoảng cách/kích thước luống: - Sau khi làm đất tiến hành lên luống:  Luống dưa rộng 1,2 m – 1,5 m, cao 25
+    – 30 cm.'
+- fact_key: hatinh_dua_chuot_vietgap#49
+  source_id: hatinh_dua_chuot_vietgap
+  sentence_index: 49
+  sentence: - Sau khi lên luống, rạch 1 hàng nhỏ ở giữa luống và tiến hành bót lót.
+  crop: dua_chuot
+  region: bac_trung_bo
+  metric: khoang_cach
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ky-thuat-trong-dua-chuot-theo-huong-tieu-chuan-VietGAP-7401.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: mô tả chung, không có số đo khoảng cách cụ thể
+- fact_key: hatinh_dua_chuot_vietgap#50
+  source_id: hatinh_dua_chuot_vietgap
+  sentence_index: 50
+  sentence: Bà con chú ý phân bón lót phải là phân hữu cơ đã ủ hoai mục…Bón 1 lượt phân hữu cơ rồi bón lân lên trên, sau đó
+    phủ một lớp đất mỏng lên mặt luống.
+  crop: dua_chuot
+  region: bac_trung_bo
+  metric: khoang_cach
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ky-thuat-trong-dua-chuot-theo-huong-tieu-chuan-VietGAP-7401.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: mô tả chung, không có số đo khoảng cách cụ thể
+- fact_key: hatinh_dua_chuot_vietgap#52
+  source_id: hatinh_dua_chuot_vietgap
+  sentence_index: 52
+  sentence: Màng phủ đã khoét sẵn các lỗ đường kính từ 10 – 12 cm tương đương với khoảng cách trồng dưa.
+  crop: dua_chuot
+  region: bac_trung_bo
+  metric: mat_do_gieo
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ky-thuat-trong-dua-chuot-theo-huong-tieu-chuan-VietGAP-7401.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: không trích xuất được mật độ cây hoặc hạt giống cụ thể
+- fact_key: hatinh_dua_chuot_vietgap#59
+  source_id: hatinh_dua_chuot_vietgap
+  sentence_index: 59
+  sentence: + Giống dưa chuột quả nhỏ và dưa chuột ăn tươi: Cây cách cây 40 - 45 cm trong vụ xuân và 30 – 35cm trong vụ đông.
+  crop: dua_chuot
+  region: bac_trung_bo
+  metric: khoang_cach
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ky-thuat-trong-dua-chuot-theo-huong-tieu-chuan-VietGAP-7401.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 30.0
+  value_max: 45.0
+  unit: cm
+  stage: trồng cây
+  note: 'Khoảng cách cây cách cây: vụ xuân 40-45cm, vụ đông 30-35cm'
+- fact_key: hatinh_dua_chuot_vietgap#60
+  source_id: hatinh_dua_chuot_vietgap
+  sentence_index: 60
+  sentence: 'Mật độ: 30.000 - 33.000 cây/ha;'
+  crop: dua_chuot
+  region: bac_trung_bo
+  metric: mat_do_gieo
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ky-thuat-trong-dua-chuot-theo-huong-tieu-chuan-VietGAP-7401.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: không trích xuất được mật độ cây hoặc hạt giống cụ thể
+- fact_key: hatinh_dua_chuot_vietgap#61
+  source_id: hatinh_dua_chuot_vietgap
+  sentence_index: 61
+  sentence: '+ Giống dưa chuột bao tử: Cây cách cây: 60cm trong vụ đông và 70cm trong vụ xuân.'
+  crop: dua_chuot
+  region: bac_trung_bo
+  metric: khoang_cach
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ky-thuat-trong-dua-chuot-theo-huong-tieu-chuan-VietGAP-7401.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 60.0
+  value_max: 70.0
+  unit: cm
+  stage: trồng dưa bao tử
+  note: Dưa bao tử cây cách cây 60cm vụ đông, 70cm vụ xuân
+- fact_key: hatinh_dua_chuot_vietgap#62
+  source_id: hatinh_dua_chuot_vietgap
+  sentence_index: 62
+  sentence: Mật độ: 25.000 - 28.000 cây/ha.
+  crop: dua_chuot
+  region: bac_trung_bo
+  metric: mat_do_gieo
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ky-thuat-trong-dua-chuot-theo-huong-tieu-chuan-VietGAP-7401.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: không trích xuất được mật độ cây hoặc hạt giống cụ thể
+- fact_key: hatinh_dua_chuot_vietgap#74
+  source_id: hatinh_dua_chuot_vietgap
+  sentence_index: 74
+  sentence: '- Kết hợp giữa tưới nước với bón thúc ở 3 thời kỳ:'
+  crop: dua_chuot
+  region: bac_trung_bo
+  metric: luong_phan
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ky-thuat-trong-dua-chuot-theo-huong-tieu-chuan-VietGAP-7401.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: hatinh_dua_chuot_vietgap#113
+  source_id: hatinh_dua_chuot_vietgap
+  sentence_index: 113
+  sentence: - Bón kết hợp với vun xới nhẹ, nhặt cỏ dại…Nếu không có phân chuồng hoai mục, có thể sử dụng phân hữu cơ sinh
+    học với lượng 3.000 - 3.500 kg/ha.
+  crop: dua_chuot
+  region: bac_trung_bo
+  metric: luong_phan
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ky-thuat-trong-dua-chuot-theo-huong-tieu-chuan-VietGAP-7401.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: hatinh_dua_chuot_vietgap#132
+  source_id: hatinh_dua_chuot_vietgap
+  sentence_index: 132
+  sentence: '- Vụ xuân sau gieo khoảng 40- 45 ngày,  vụ đông sau gieo 30 – 35 ngày là bắt đầu thu hoạch.'
+  crop: dua_chuot
+  region: bac_trung_bo
+  metric: thoi_vu
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ky-thuat-trong-dua-chuot-theo-huong-tieu-chuan-VietGAP-7401.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 40.0
+  value_max: 45.0
+  unit: ngày sau gieo
+  stage: thời gian sinh trưởng / thu hoạch
+  note: 'Thời gian bắt đầu thu hoạch: 40 - 45 ngày sau gieo'
+- fact_key: hatinh_dua_chuot_vietgap#137
+  source_id: hatinh_dua_chuot_vietgap
+  sentence_index: 137
+  sentence: '- Trên 1 ha diện tích, tùy thuộc vào giống và từng thời vụ nếu chăm sóc tốt theo đúng quy trình thì thông thường
+    dưa chuột ăn tươi năng suất trung bình 35 tấn/ha.'
+  crop: dua_chuot
+  region: bac_trung_bo
+  metric: nang_suat
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ky-thuat-trong-dua-chuot-theo-huong-tieu-chuan-VietGAP-7401.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 35.0
+  value_max: null
+  unit: tấn/ha
+  stage: thu hoạch
+  note: Năng suất dưa chuột ăn tươi trung bình 35.0 tấn/ha
+- fact_key: hatinh_dua_chuot_vietgap#169
+  source_id: hatinh_dua_chuot_vietgap
+  sentence_index: 169
+  sentence: Phú Thọ phấn đấu trồng 10.000 ha ngô vụ đông
+  crop: dua_chuot
+  region: bac_trung_bo
+  metric: thoi_vu
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ky-thuat-trong-dua-chuot-theo-huong-tieu-chuan-VietGAP-7401.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: loại do là tiêu đề tin tức, footer, số liệu hành chính hoặc thống kê diện tích tỉnh
+- fact_key: laichau_dua_chuot_xuanhe#72
+  source_id: laichau_dua_chuot_xuanhe
+  sentence_index: 72
+  sentence: Cày bừa kỹ, lên luống cao 25
+  crop: dua_chuot
+  region: trung_du_mien_nui
+  metric: khoang_cach
+  url: https://sonnmt.laichau.gov.vn/thu-vien/tai-lieu/ky-thuat-trong-va-cham-soc-cay-dua-chuot-vu-xuan-he.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: mô tả chung, không có số đo khoảng cách cụ thể
+- fact_key: laichau_dua_chuot_xuanhe#85
+  source_id: laichau_dua_chuot_xuanhe
+  sentence_index: 85
+  sentence: 10 tấn/ha.
+  crop: dua_chuot
+  region: trung_du_mien_nui
+  metric: nang_suat
+  url: https://sonnmt.laichau.gov.vn/thu-vien/tai-lieu/ky-thuat-trong-va-cham-soc-cay-dua-chuot-vu-xuan-he.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: mô tả chung hoặc đoạn văn không có số liệu năng suất chuẩn
+- fact_key: laichau_dua_chuot_xuanhe#86
+  source_id: laichau_dua_chuot_xuanhe
+  sentence_index: 86
+  sentence: 'Lân: 300kg/ha.'
+  crop: dua_chuot
+  region: trung_du_mien_nui
+  metric: luong_phan
+  url: https://sonnmt.laichau.gov.vn/thu-vien/tai-lieu/ky-thuat-trong-va-cham-soc-cay-dua-chuot-vu-xuan-he.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: laichau_dua_chuot_xuanhe#87
+  source_id: laichau_dua_chuot_xuanhe
+  sentence_index: 87
+  sentence: 'Vôi bột (nếu đất chua): 50 kg/ha.'
+  crop: dua_chuot
+  region: trung_du_mien_nui
+  metric: luong_phan
+  url: https://sonnmt.laichau.gov.vn/thu-vien/tai-lieu/ky-thuat-trong-va-cham-soc-cay-dua-chuot-vu-xuan-he.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: laichau_dua_chuot_xuanhe#97
+  source_id: laichau_dua_chuot_xuanhe
+  sentence_index: 97
+  sentence: Cây cách cây 30 cm, hàng cách hàng 60 cm.
+  crop: dua_chuot
+  region: trung_du_mien_nui
+  metric: khoang_cach
+  url: https://sonnmt.laichau.gov.vn/thu-vien/tai-lieu/ky-thuat-trong-va-cham-soc-cay-dua-chuot-vu-xuan-he.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 30.0
+  value_max: 60.0
+  unit: cm
+  stage: mật độ trồng
+  note: Cây cách cây 30.0cm, hàng cách hàng 60.0cm
+- fact_key: laichau_dua_chuot_xuanhe#109
+  source_id: laichau_dua_chuot_xuanhe
+  sentence_index: 109
+  sentence: Bón thúc lần 1
+  crop: dua_chuot
+  region: trung_du_mien_nui
+  metric: luong_phan
+  url: https://sonnmt.laichau.gov.vn/thu-vien/tai-lieu/ky-thuat-trong-va-cham-soc-cay-dua-chuot-vu-xuan-he.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: null
+  value_max: null
+  unit: quy trình bón
+  stage: thời điểm và phương pháp bón
+  note: 'Hướng dẫn phân bón: Bón thúc lần 1'
+- fact_key: laichau_dua_chuot_xuanhe#112
+  source_id: laichau_dua_chuot_xuanhe
+  sentence_index: 112
+  sentence: '15 ngày sau gieo): 100 kg NPK (16-16-8) + 50 kg đạm urê.'
+  crop: dua_chuot
+  region: trung_du_mien_nui
+  metric: luong_phan
+  url: https://sonnmt.laichau.gov.vn/thu-vien/tai-lieu/ky-thuat-trong-va-cham-soc-cay-dua-chuot-vu-xuan-he.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 100.0
+  value_max: null
+  unit: kg
+  stage: bón phân
+  note: 'Liều lượng phân bón: 15 ngày sau gieo): 100 kg NPK (16-16-8) + 50 kg đạm urê.'
+- fact_key: laichau_dua_chuot_xuanhe#113
+  source_id: laichau_dua_chuot_xuanhe
+  sentence_index: 113
+  sentence: Bón thúc lần 2
+  crop: dua_chuot
+  region: trung_du_mien_nui
+  metric: luong_phan
+  url: https://sonnmt.laichau.gov.vn/thu-vien/tai-lieu/ky-thuat-trong-va-cham-soc-cay-dua-chuot-vu-xuan-he.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: null
+  value_max: null
+  unit: quy trình bón
+  stage: thời điểm và phương pháp bón
+  note: 'Hướng dẫn phân bón: Bón thúc lần 2'
+- fact_key: laichau_dua_chuot_xuanhe#114
+  source_id: laichau_dua_chuot_xuanhe
+  sentence_index: 114
+  sentence: '(ra hoa): 150 kg NPK (12'
+  crop: dua_chuot
+  region: trung_du_mien_nui
+  metric: luong_phan
+  url: https://sonnmt.laichau.gov.vn/thu-vien/tai-lieu/ky-thuat-trong-va-cham-soc-cay-dua-chuot-vu-xuan-he.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 150.0
+  value_max: null
+  unit: kg
+  stage: bón phân
+  note: 'Liều lượng phân bón: (ra hoa): 150 kg NPK (12'
+- fact_key: laichau_dua_chuot_xuanhe#118
+  source_id: laichau_dua_chuot_xuanhe
+  sentence_index: 118
+  sentence: 17) + 30 kg kali.
+  crop: dua_chuot
+  region: trung_du_mien_nui
+  metric: luong_phan
+  url: https://sonnmt.laichau.gov.vn/thu-vien/tai-lieu/ky-thuat-trong-va-cham-soc-cay-dua-chuot-vu-xuan-he.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 30.0
+  value_max: null
+  unit: kg
+  stage: bón phân
+  note: 'Liều lượng phân bón: 17) + 30 kg kali.'
+- fact_key: laichau_dua_chuot_xuanhe#119
+  source_id: laichau_dua_chuot_xuanhe
+  sentence_index: 119
+  sentence: Bón thúc lần 3
+  crop: dua_chuot
+  region: trung_du_mien_nui
+  metric: luong_phan
+  url: https://sonnmt.laichau.gov.vn/thu-vien/tai-lieu/ky-thuat-trong-va-cham-soc-cay-dua-chuot-vu-xuan-he.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: null
+  value_max: null
+  unit: quy trình bón
+  stage: thời điểm và phương pháp bón
+  note: 'Hướng dẫn phân bón: Bón thúc lần 3'
+- fact_key: laichau_dua_chuot_xuanhe#120
+  source_id: laichau_dua_chuot_xuanhe
+  sentence_index: 120
+  sentence: '(đậu quả): 100 kg kali'
+  crop: dua_chuot
+  region: trung_du_mien_nui
+  metric: luong_phan
+  url: https://sonnmt.laichau.gov.vn/thu-vien/tai-lieu/ky-thuat-trong-va-cham-soc-cay-dua-chuot-vu-xuan-he.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 100.0
+  value_max: null
+  unit: kg
+  stage: bón phân
+  note: 'Liều lượng phân bón: (đậu quả): 100 kg kali'
+- fact_key: laichau_dua_chuot_xuanhe#148
+  source_id: laichau_dua_chuot_xuanhe
+  sentence_index: 148
+  sentence: Nơi thoáng mát, nhiệt độ 10
+  crop: dua_chuot
+  region: trung_du_mien_nui
+  metric: nhiet_do
+  url: https://sonnmt.laichau.gov.vn/thu-vien/tai-lieu/ky-thuat-trong-va-cham-soc-cay-dua-chuot-vu-xuan-he.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu không chứa ngưỡng nhiệt độ kỹ thuật nông học trực tiếp
+- fact_key: ninhbinh_gntt_ca_chua#15
+  source_id: ninhbinh_gntt_ca_chua
+  sentence_index: 15
+  sentence: Độ ph trung bình của đất trồng cà chua khoảng 6-6.5, nếu đất chua hơn phải bón thêm vôi.
+  crop: ca_chua
+  region: dong_bang_song_hong
+  metric: ph
+  url: https://gntt.ninhbinh.gov.vn/khuyen-nong/ky-thuat-trong-cay-ca-chua-458.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 6.0
+  value_max: 6.5
+  unit: pH
+  stage: chuẩn bị đất
+  note: 'Độ pH đất thích hợp: 6.0 - 6.5'
+- fact_key: ninhbinh_gntt_ca_chua#18
+  source_id: ninhbinh_gntt_ca_chua
+  sentence_index: 18
+  sentence: 'Vụ đông xuân: Gieo khoảng tháng 10-11 dương lịch và thu hoạch vào tháng 1-2'
+  crop: ca_chua
+  region: dong_bang_song_hong
+  metric: thoi_vu
+  url: https://gntt.ninhbinh.gov.vn/khuyen-nong/ky-thuat-trong-cay-ca-chua-458.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 10.0
+  value_max: 11.0
+  unit: tháng
+  stage: thời vụ gieo trồng
+  note: Thời vụ gieo trồng từ tháng 10 đến tháng 11
+- fact_key: ninhbinh_gntt_ca_chua#19
+  source_id: ninhbinh_gntt_ca_chua
+  sentence_index: 19
+  sentence: 'Vụ xuân hè: Gieo khoảng tháng 12-1 dương lịch và thu hoạch vào tháng 3-4'
+  crop: ca_chua
+  region: dong_bang_song_hong
+  metric: thoi_vu
+  url: https://gntt.ninhbinh.gov.vn/khuyen-nong/ky-thuat-trong-cay-ca-chua-458.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: null
+  value_max: null
+  unit: thời vụ vắt năm
+  stage: thời vụ gieo trồng
+  note: Thời vụ gieo trồng từ tháng 12 năm trước đến tháng 1 năm sau
+- fact_key: ninhbinh_gntt_ca_chua#20
+  source_id: ninhbinh_gntt_ca_chua
+  sentence_index: 20
+  sentence: 'Vụ hè thu: Gieo khoảng tháng 6-7 dương lịch và thu hoạch vào tháng 9-10'
+  crop: ca_chua
+  region: dong_bang_song_hong
+  metric: thoi_vu
+  url: https://gntt.ninhbinh.gov.vn/khuyen-nong/ky-thuat-trong-cay-ca-chua-458.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 6.0
+  value_max: 7.0
+  unit: tháng
+  stage: thời vụ gieo trồng
+  note: Thời vụ gieo trồng từ tháng 6 đến tháng 7
+- fact_key: ninhbinh_gntt_ca_chua#33
+  source_id: ninhbinh_gntt_ca_chua
+  sentence_index: 33
+  sentence: Trước khi gieo nên ngâm hạt trong nước có nhiệt độ 40-50 độ C trong khoảng 3 giờ, sau đó cho hạt vào túi vải bọc
+    giấy.
+  crop: ca_chua
+  region: dong_bang_song_hong
+  metric: nhiet_do
+  url: https://gntt.ninhbinh.gov.vn/khuyen-nong/ky-thuat-trong-cay-ca-chua-458.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 40.0
+  value_max: 50.0
+  unit: độ C
+  stage: ngâm ủ hạt giống
+  note: Ngâm hạt giống trong nước ấm 40.0 - 50.0 độ C khoảng 3 giờ
+- fact_key: ninhbinh_gntt_ca_chua#54
+  source_id: ninhbinh_gntt_ca_chua
+  sentence_index: 54
+  sentence: '* Lượng phân bón: Sử dụng cho khoảng 1ha cà chua'
+  crop: ca_chua
+  region: dong_bang_song_hong
+  metric: luong_phan
+  url: https://gntt.ninhbinh.gov.vn/khuyen-nong/ky-thuat-trong-cay-ca-chua-458.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: ninhbinh_gntt_ca_chua#58
+  source_id: ninhbinh_gntt_ca_chua
+  sentence_index: 58
+  sentence: 'Ure: 30kg, NPK 16-16-8: 25kg, sulphat kali: 30kg, supe lân: 40kg.'
+  crop: ca_chua
+  region: dong_bang_song_hong
+  metric: luong_phan
+  url: https://gntt.ninhbinh.gov.vn/khuyen-nong/ky-thuat-trong-cay-ca-chua-458.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: ninhbinh_gntt_ca_chua#60
+  source_id: ninhbinh_gntt_ca_chua
+  sentence_index: 60
+  sentence: 'Bón lót: Toàn bộ phân hữu cơ + toàn bộ phân hữu cơ sinh học + toàn bộ phân vi lượng + toàn bộ phân supe lân +
+    5kg NPK 16-16-8'
+  crop: ca_chua
+  region: dong_bang_song_hong
+  metric: luong_phan
+  url: https://gntt.ninhbinh.gov.vn/khuyen-nong/ky-thuat-trong-cay-ca-chua-458.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 5.0
+  value_max: null
+  unit: kg
+  stage: bón phân
+  note: 'Liều lượng phân bón: Bón lót: Toàn bộ phân hữu cơ + toàn bộ phân hữu cơ sinh học + toàn bộ phân vi lượng + toàn bộ
+    phân supe lân + 5kg NPK 16-16-8'
+- fact_key: ninhbinh_gntt_ca_chua#61
+  source_id: ninhbinh_gntt_ca_chua
+  sentence_index: 61
+  sentence: 'Bón thúc: 4 lần bón thúc:'
+  crop: ca_chua
+  region: dong_bang_song_hong
+  metric: luong_phan
+  url: https://gntt.ninhbinh.gov.vn/khuyen-nong/ky-thuat-trong-cay-ca-chua-458.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: null
+  value_max: null
+  unit: quy trình bón
+  stage: thời điểm và phương pháp bón
+  note: 'Hướng dẫn phân bón: Bón thúc: 4 lần bón thúc:'
+- fact_key: ninhbinh_gntt_ca_chua#62
+  source_id: ninhbinh_gntt_ca_chua
+  sentence_index: 62
+  sentence: '-  Bón thúc lần 1: (10-15 ngày sau khi trồng): 7kg ure + 7kg kali + 5kg NPK.'
+  crop: ca_chua
+  region: dong_bang_song_hong
+  metric: luong_phan
+  url: https://gntt.ninhbinh.gov.vn/khuyen-nong/ky-thuat-trong-cay-ca-chua-458.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 7.0
+  value_max: null
+  unit: kg
+  stage: bón phân
+  note: 'Liều lượng phân bón: -  Bón thúc lần 1: (10-15 ngày sau khi trồng): 7kg ure + 7kg kali + 5kg NPK.'
+- fact_key: ninhbinh_gntt_ca_chua#64
+  source_id: ninhbinh_gntt_ca_chua
+  sentence_index: 64
+  sentence: '- Bón thúc lần 2: (22-25 ngày sau khi trồng, lúc hoa đang có nụ): 7kg ure + 7kg kali + 5kg NPK.'
+  crop: ca_chua
+  region: dong_bang_song_hong
+  metric: luong_phan
+  url: https://gntt.ninhbinh.gov.vn/khuyen-nong/ky-thuat-trong-cay-ca-chua-458.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 7.0
+  value_max: null
+  unit: kg
+  stage: bón phân
+  note: 'Liều lượng phân bón: - Bón thúc lần 2: (22-25 ngày sau khi trồng, lúc hoa đang có nụ): 7kg ure + 7kg kali + 5kg NPK.'
+- fact_key: ninhbinh_gntt_ca_chua#66
+  source_id: ninhbinh_gntt_ca_chua
+  sentence_index: 66
+  sentence: '- Bón thúc lần 3: (Lúc này hoa đã nở rộ ): 7kg ure + 7kg kali + 5kg NPK.'
+  crop: ca_chua
+  region: dong_bang_song_hong
+  metric: luong_phan
+  url: https://gntt.ninhbinh.gov.vn/khuyen-nong/ky-thuat-trong-cay-ca-chua-458.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 7.0
+  value_max: null
+  unit: kg
+  stage: bón phân
+  note: 'Liều lượng phân bón: - Bón thúc lần 3: (Lúc này hoa đã nở rộ ): 7kg ure + 7kg kali + 5kg NPK.'
+- fact_key: ninhbinh_gntt_ca_chua#67
+  source_id: ninhbinh_gntt_ca_chua
+  sentence_index: 67
+  sentence: '- Bón thúc lần 4: (Sau lần thu hoạch trái đầu tiên): 7kg ure + 7kg kali+ 5kg NPK.'
+  crop: ca_chua
+  region: dong_bang_song_hong
+  metric: luong_phan
+  url: https://gntt.ninhbinh.gov.vn/khuyen-nong/ky-thuat-trong-cay-ca-chua-458.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 7.0
+  value_max: null
+  unit: kg
+  stage: bón phân
+  note: 'Liều lượng phân bón: - Bón thúc lần 4: (Sau lần thu hoạch trái đầu tiên): 7kg ure + 7kg kali+ 5kg NPK.'
+- fact_key: phanbonquocgia_ca_chua#19
+  source_id: phanbonquocgia_ca_chua
+  sentence_index: 19
+  sentence: Đất có pH = 6.0-6.5, đất chua hơn phải bón thêm vôi.
+  crop: ca_chua
+  region: toan_quoc
+  metric: ph
+  url: https://phanbonquocgia.gov.vn/ky-thuat-trong-va-bon-phan-cho-cay-ca-chua/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 6.0
+  value_max: 6.5
+  unit: pH
+  stage: chuẩn bị đất
+  note: 'Độ pH đất thích hợp cho ca_chua: 6.0 - 6.5'
+- fact_key: phanbonquocgia_ca_chua#21
+  source_id: phanbonquocgia_ca_chua
+  sentence_index: 21
+  sentence: '– Vụ Đông Xuân: Gieo tháng 10 – 11 dương lịch, thu hoạch vào tháng 1 – 2'
+  crop: ca_chua
+  region: toan_quoc
+  metric: thoi_vu
+  url: https://phanbonquocgia.gov.vn/ky-thuat-trong-va-bon-phan-cho-cay-ca-chua/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 10.0
+  value_max: 11.0
+  unit: tháng
+  stage: thời vụ gieo trồng
+  note: Thời vụ gieo trồng từ tháng 10 đến tháng 11
+- fact_key: phanbonquocgia_ca_chua#22
+  source_id: phanbonquocgia_ca_chua
+  sentence_index: 22
+  sentence: '– Vụ Xuân Hè: Gieo tháng 12 – 1 dương lịch thu hoạch vào 3 – 4 dương lịch.'
+  crop: ca_chua
+  region: toan_quoc
+  metric: thoi_vu
+  url: https://phanbonquocgia.gov.vn/ky-thuat-trong-va-bon-phan-cho-cay-ca-chua/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: null
+  value_max: null
+  unit: thời vụ vắt năm
+  stage: thời vụ gieo trồng
+  note: Thời vụ gieo trồng từ tháng 12 năm trước đến tháng 1 năm sau
+- fact_key: phanbonquocgia_ca_chua#23
+  source_id: phanbonquocgia_ca_chua
+  sentence_index: 23
+  sentence: '– Vụ Hè Thu: Gieo tháng 6 – 7 dương lịch thu hoạch vào tháng 9 – 10 dương lịch.'
+  crop: ca_chua
+  region: toan_quoc
+  metric: thoi_vu
+  url: https://phanbonquocgia.gov.vn/ky-thuat-trong-va-bon-phan-cho-cay-ca-chua/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 6.0
+  value_max: 7.0
+  unit: tháng
+  stage: thời vụ gieo trồng
+  note: Thời vụ gieo trồng từ tháng 6 đến tháng 7
+- fact_key: phanbonquocgia_ca_chua#38
+  source_id: phanbonquocgia_ca_chua
+  sentence_index: 38
+  sentence: Sau khi gieo hạt đều trên mặt đất, rải 1 lớp tro mỏng, trên phủ một lớp rơm mỏng và tưới nước để có đủ độ ẩm.
+  crop: ca_chua
+  region: toan_quoc
+  metric: do_am
+  url: https://phanbonquocgia.gov.vn/ky-thuat-trong-va-bon-phan-cho-cay-ca-chua/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: mô tả định tính, không có con số ngưỡng độ ẩm cụ thể
+- fact_key: phanbonquocgia_ca_chua#46
+  source_id: phanbonquocgia_ca_chua
+  sentence_index: 46
+  sentence: + Hàng cách hàng 80cm, cây cách cây 60cm, hoặc có thể là cây cách cây 40cm.
+  crop: ca_chua
+  region: toan_quoc
+  metric: khoang_cach
+  url: https://phanbonquocgia.gov.vn/ky-thuat-trong-va-bon-phan-cho-cay-ca-chua/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 60.0
+  value_max: 80.0
+  unit: cm
+  stage: mật độ trồng
+  note: Hàng cách hàng 80.0cm, cây cách cây 60.0cm
+- fact_key: phanbonquocgia_ca_chua#71
+  source_id: phanbonquocgia_ca_chua
+  sentence_index: 71
+  sentence: – Bón lót::  Đầu tiên bón toàn bộ lượng Phân hữu cơ sinh học Hiếu Giang Better HG 01 trước khi cày.
+  crop: ca_chua
+  region: toan_quoc
+  metric: luong_phan
+  url: https://phanbonquocgia.gov.vn/ky-thuat-trong-va-bon-phan-cho-cay-ca-chua/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: null
+  value_max: null
+  unit: quy trình bón
+  stage: thời điểm và phương pháp bón
+  note: 'Hướng dẫn phân bón: – Bón lót::  Đầu tiên bón toàn bộ lượng Phân hữu cơ sinh học Hiếu Giang Better HG 01 trước khi
+    cày.'
+- fact_key: phanbonquocgia_ca_chua#72
+  source_id: phanbonquocgia_ca_chua
+  sentence_index: 72
+  sentence: – Bón rải 50 kg Better NPK 16-12-8+11TE vào đất trước khi lên luống và lắp đất lại.
+  crop: ca_chua
+  region: toan_quoc
+  metric: khoang_cach
+  url: https://phanbonquocgia.gov.vn/ky-thuat-trong-va-bon-phan-cho-cay-ca-chua/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: mô tả chung, không có số đo khoảng cách cụ thể
+- fact_key: phanbonquocgia_ca_chua#74
+  source_id: phanbonquocgia_ca_chua
+  sentence_index: 74
+  sentence: Sau khi cây con được trồng 10-15 ngày dùng 10 kg  Better NPK 16-12-8-11+TE pha loãng vào nước để tưới..
+  crop: ca_chua
+  region: toan_quoc
+  metric: luong_phan
+  url: https://phanbonquocgia.gov.vn/ky-thuat-trong-va-bon-phan-cho-cay-ca-chua/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: phanbonquocgia_ca_chua#75
+  source_id: phanbonquocgia_ca_chua
+  sentence_index: 75
+  sentence: 'Trước khi ra hoa: bón thúc 20 kg Better NPK  12-12-17-9+TE có thể bón rải quanh vùng rễ cây phát triển + phun
+    bổ sung Better KNO3  liều lượng 200g/16 lít nước/1000 m2 để kích thích ra hoa..'
+  crop: ca_chua
+  region: toan_quoc
+  metric: luong_phan
+  url: https://phanbonquocgia.gov.vn/ky-thuat-trong-va-bon-phan-cho-cay-ca-chua/
+  high_risk: true
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 20.0
+  value_max: 20.0
+  unit: kg NPK/1000m2
+  stage: trước khi ra hoa
+  note: Bón thúc 20 kg NPK 12-12-17-9+TE + 200g KNO3/16L/1000m2 trước khi ra hoa
+- fact_key: phanbonquocgia_ca_chua#76
+  source_id: phanbonquocgia_ca_chua
+  sentence_index: 76
+  sentence: 'Sau khi cây ra hoa cho tới kết thúc giai đoạn thu hoạch tùy vào khả năng phát triển của cây có thể bón thúc 10
+    ngày/lần, liều lượng cho 1 lần bón: 4 kg Better NPK  12-12-17-9+TE pha loãng vào nước để tưới.'
+  crop: ca_chua
+  region: toan_quoc
+  metric: luong_phan
+  url: https://phanbonquocgia.gov.vn/ky-thuat-trong-va-bon-phan-cho-cay-ca-chua/
+  high_risk: true
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 4.0
+  value_max: 4.0
+  unit: kg NPK/1000m2/10 ngày
+  stage: sau khi ra hoa đến kết thúc thu hoạch
+  note: Bón thúc 4 kg NPK 12-12-17-9+TE định kỳ 10 ngày/lần
+- fact_key: lua__khac_phuc_anh_huong_mua_bao#15
+  source_id: lua__khac_phuc_anh_huong_mua_bao
+  sentence_index: 15
+  sentence: Vụ mùa 2025, toàn tỉnh gieo trồng 127.310 ha lúa và 15.460 ha rau màu hè thu.
+  crop: lua
+  region: dong_bang_song_hong
+  metric: thoi_vu
+  url: https://khuyennong.ninhbinh.gov.vn/trong-trot/khac-phuc-anh-huong-mua-bao-do-hoan-luu-cua-con-bao-so-5-kajiki-doi-voi-lua-va-cay-rau-mau-tren-dia-ban-tinh-ninh-binh-940.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: loại do là tiêu đề tin tức, footer, số liệu hành chính hoặc thống kê diện tích tỉnh
+- fact_key: lua__khac_phuc_anh_huong_mua_bao#31
+  source_id: lua__khac_phuc_anh_huong_mua_bao
+  sentence_index: 31
+  sentence: Đổ ngã còn làm khó thu hoạch, giảm năng suất từ 20–50%.
+  crop: lua
+  region: dong_bang_song_hong
+  metric: nang_suat
+  url: https://khuyennong.ninhbinh.gov.vn/trong-trot/khac-phuc-anh-huong-mua-bao-do-hoan-luu-cua-con-bao-so-5-kajiki-doi-voi-lua-va-cay-rau-mau-tren-dia-ban-tinh-ninh-binh-940.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 20.0
+  value_max: 50.0
+  unit: '%'
+  stage: thiệt hại do đổ ngã
+  note: Mưa bão gây đổ ngã làm giảm năng suất lúa 20.0% - 50.0%
+- fact_key: lua__khac_phuc_anh_huong_mua_bao#113
+  source_id: lua__khac_phuc_anh_huong_mua_bao
+  sentence_index: 113
+  sentence: Một số lưu ý chăm sóc lúa vụ mùa năm 2025
+  crop: lua
+  region: dong_bang_song_hong
+  metric: thoi_vu
+  url: https://khuyennong.ninhbinh.gov.vn/trong-trot/khac-phuc-anh-huong-mua-bao-do-hoan-luu-cua-con-bao-so-5-kajiki-doi-voi-lua-va-cay-rau-mau-tren-dia-ban-tinh-ninh-binh-940.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: loại do là tiêu đề tin tức, footer, số liệu hành chính hoặc thống kê diện tích tỉnh
+- fact_key: lua__mach_nuoc_phong_tru_dich_hai#9
+  source_id: lua__mach_nuoc_phong_tru_dich_hai
+  sentence_index: 9
+  sentence: Theo báo cáo của Trung tâm Ứng dụng KHKT và Bảo vệ cây trồng vật nuôi các huyện, thành phố, thị xã và kết quả
+    điều tra của Chi cục Trồng trọt và Bảo vệ thực vật đến ngày 29/7/2021, sâu cuốn lá nhỏ lứa 2 phát sinh gây hại mật độ
+    trung bình 5-7 con/m
+  crop: lua
+  region: bac_trung_bo
+  metric: mat_do_gieo
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/mach-nuoc-phong-tru-dich-hai-tren-lua-he-thu-o-ha-tinh-119321.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: loại do là tiêu đề tin tức, footer, số liệu hành chính hoặc thống kê diện tích tỉnh
+- fact_key: lua__mach_nuoc_phong_tru_dich_hai#14
+  source_id: lua__mach_nuoc_phong_tru_dich_hai
+  sentence_index: 14
+  sentence: rầy nâu, rầy lưng trắng mật độ phổ biến 100 - 300 con/m
+  crop: lua
+  region: bac_trung_bo
+  metric: mat_do_gieo
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/mach-nuoc-phong-tru-dich-hai-tren-lua-he-thu-o-ha-tinh-119321.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 100.0
+  value_max: 300.0
+  unit: con/m2
+  stage: ngưỡng mật độ dịch hại
+  note: 'Mật độ sâu bệnh dịch hại điều tra: 100.0 - 300.0 con/m2'
+- fact_key: lua__mach_nuoc_phong_tru_dich_hai#16
+  source_id: lua__mach_nuoc_phong_tru_dich_hai
+  sentence_index: 16
+  sentence: ', cục bộ dạng ổ ở Đức Thọ mật độ 700 - 1.000 con/m'
+  crop: lua
+  region: bac_trung_bo
+  metric: mat_do_gieo
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/mach-nuoc-phong-tru-dich-hai-tren-lua-he-thu-o-ha-tinh-119321.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 700.0
+  value_max: 1000.0
+  unit: con/m2
+  stage: ngưỡng mật độ dịch hại
+  note: 'Mật độ sâu bệnh dịch hại điều tra: 700.0 - 1000.0 con/m2'
+- fact_key: lua__phong_tru_co_dai_cho_lua#16
+  source_id: lua__phong_tru_co_dai_cho_lua
+  sentence_index: 16
+  sentence: Sản phẩm thuốc trừ cỏ Bebu 30 WP và Pataxim 55 EC ngày càng nhiều nông dân sử dụng.
+  crop: lua
+  region: bac_trung_bo
+  metric: ec
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/phong-tru-co-dai-cho-lua-gieo-sa-vu-dong-xuan-109014.html
+  high_risk: true
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: loại do 'EC' là dạng thuốc trừ cỏ (nhũ dầu), không phải chỉ số EC dinh dưỡng
+- fact_key: lua__phong_tru_co_dai_cho_lua#29
+  source_id: lua__phong_tru_co_dai_cho_lua
+  sentence_index: 29
+  sentence: Thuốc trừ cỏ Pataxim 55 EC
+  crop: lua
+  region: bac_trung_bo
+  metric: ec
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/phong-tru-co-dai-cho-lua-gieo-sa-vu-dong-xuan-109014.html
+  high_risk: true
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: loại do 'EC' là dạng thuốc trừ cỏ (nhũ dầu), không phải chỉ số EC dinh dưỡng
+- fact_key: lua__phong_tru_co_dai_cho_lua#36
+  source_id: lua__phong_tru_co_dai_cho_lua
+  sentence_index: 36
+  sentence: Không phun thuốc trừ cỏ khi trời sắp mưa, gió to hoặc khi nhiệt độ ngoài trời xuống dưới 18 độ C.
+  crop: lua
+  region: bac_trung_bo
+  metric: nhiet_do
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/phong-tru-co-dai-cho-lua-gieo-sa-vu-dong-xuan-109014.html
+  high_risk: true
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 18.0
+  value_max: null
+  unit: độ C
+  stage: phun thuốc trừ cỏ
+  note: Không phun thuốc trừ cỏ khi nhiệt độ ngoài trời xuống dưới 18 độ C
+- fact_key: lua__cay_lua_bang_may_giai_phap#9
+  source_id: lua__cay_lua_bang_may_giai_phap
+  sentence_index: 9
+  sentence: 'Hai đặc tính nổi trội đó là: (1) Khả năng chống đổ, ngã giai đoạn trổ – chín (chủ yếu vụ Hè Thu
+    và Thu Đông) và (2) Khả năng phòng, chống hạn, mặn (cuối vụ đông xuân) hàng năm.'
+  crop: lua
+  region: bac_trung_bo
+  metric: thoi_vu
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cay-lua-bang-may-giai-phap-san-xuat-lua-thich-ung-voi-dieu-kien-bien-doi-khi-hau-106269.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: tiêu đề mục hoặc không có khoảng thời gian/tháng cụ thể
+- fact_key: lua__cay_lua_bang_may_giai_phap#17
+  source_id: lua__cay_lua_bang_may_giai_phap
+  sentence_index: 17
+  sentence: Thứ nhất, chúng ta biết, thời gian sinh trưởng của lúa cấy ngắn hơn so với lúa sạ từ 5 – 7 ngày
+    (trong vụ Đông Xuân và Hè Thu).
+  crop: lua
+  region: bac_trung_bo
+  metric: thoi_vu
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cay-lua-bang-may-giai-phap-san-xuat-lua-thich-ung-voi-dieu-kien-bien-doi-khi-hau-106269.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: tiêu đề mục hoặc không có khoảng thời gian/tháng cụ thể
+- fact_key: lua__cay_lua_bang_may_giai_phap#19
+  source_id: lua__cay_lua_bang_may_giai_phap
+  sentence_index: 19
+  sentence: Thứ hai, thường những ngày đầu vụ Đông Xuân hàng năm vẫn còn những cơn mưa cuối mùa, thậm chí những
+    ngày mưa lớn, kéo dài, rất dễ làm trôi giống, chết giống, đặc biệt những năm được dự báo xảy ra hạn,
+    mặn cuối vụ phải đẩy sớm lịch thời vụ (như vụ Đông Xuân 2019 – 2020 và 2020 – 2021).
+  crop: lua
+  region: bac_trung_bo
+  metric: thoi_vu
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cay-lua-bang-may-giai-phap-san-xuat-lua-thich-ung-voi-dieu-kien-bien-doi-khi-hau-106269.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: tiêu đề mục hoặc không có khoảng thời gian/tháng cụ thể
+- fact_key: lua__cay_lua_bang_may_giai_phap#29
+  source_id: lua__cay_lua_bang_may_giai_phap
+  sentence_index: 29
+  sentence: Hướng dẫn sử dụng thuốc trừ cỏ trên cây trồng vụ Xuân 2021
+  crop: lua
+  region: bac_trung_bo
+  metric: thoi_vu
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cay-lua-bang-may-giai-phap-san-xuat-lua-thich-ung-voi-dieu-kien-bien-doi-khi-hau-106269.html
+  high_risk: true
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: loại do là dòng tin liên quan ở chân trang, không có số liệu
+- fact_key: lua__cay_lua_bang_may_giai_phap#37
+  source_id: lua__cay_lua_bang_may_giai_phap
+  sentence_index: 37
+  sentence: Nhiệt độ xuống 10 độ C, nông dân vùng cao Hà Tĩnh lo giữ ấm cho đàn vật nuôi
+  crop: lua
+  region: bac_trung_bo
+  metric: nhiet_do
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cay-lua-bang-may-giai-phap-san-xuat-lua-thich-ung-voi-dieu-kien-bien-doi-khi-hau-106269.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: loại do là tiêu đề tin tức, footer, số liệu hành chính hoặc thống kê diện tích tỉnh
+- fact_key: dua_chuot__dua_chuot_nhat_ban_trong_nha#14
+  source_id: dua_chuot__dua_chuot_nhat_ban_trong_nha
+  sentence_index: 14
+  sentence: Nhờ vậy, dưa chuột phát triển tốt, theo tính toán cho năng suất trung bình hơn 2kg/1 cây.
+  crop: dua_chuot
+  region: bac_trung_bo
+  metric: nang_suat
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/dua-chuot-nhat-ban-trong-nha-luoi-chat-luong-cao-nang-suat-vuot-troi-92361.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 2.0
+  value_max: null
+  unit: kg/cây
+  stage: thu hoạch
+  note: Năng suất dưa chuột trung bình hơn 2.0 kg/cây
+- fact_key: lua__cham_soc_lua_xuan_o_mien#14
+  source_id: lua__cham_soc_lua_xuan_o_mien
+  sentence_index: 14
+  sentence: 'Theo nghiên cứu, để có cây lúa khỏe, năng suất 5 tấn thóc/ha/vụ, lượng các chất dinh dưỡng chủ yếu cây lúa cần
+    hút từ đất và phân bón là: Đạm (N): 110kg, lưu huỳnh (S): 5 kg, lân (P2O5): 34kg, Mangan (Mn): 2 kg, Kaly(K2O): 156kg,
+    kẽm (Zn): 200g, Magie (MgO): 23kg, sắt (Fe): 3,2kg, Canxi (CaO): 20kg, Bo(B): 150g, Silic (Si): 440kg, nhôm (Cl): 25g.'
+  crop: lua
+  region: bac_trung_bo
+  metric: nang_suat
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cham-soc-lua-xuan-o-mien-bac-thich-ung-thoi-tiet-bat-thuong-91604.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 5.0
+  value_max: null
+  unit: tấn thóc/ha/vụ
+  stage: thu hoạch lúa
+  note: 'Năng suất mục tiêu cây lúa khỏe: 5.0 tấn thóc/ha/vụ'
+- fact_key: lua__cham_soc_lua_xuan_o_mien#15
+  source_id: lua__cham_soc_lua_xuan_o_mien
+  sentence_index: 15
+  sentence: Nếu chúng ta gọi dinh dưỡng đạm, lân, kaly là 3 chất đa lượng với cây trồng thì với cây lúa Si là dinh dưỡng “siêu
+    đa lượng” vì cây lúa nhu cầu dinh dưỡng Si rất nhiều, gấp trên 4 lần lượng đạm.
+  crop: lua
+  region: bac_trung_bo
+  metric: luong_phan
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cham-soc-lua-xuan-o-mien-bac-thich-ung-thoi-tiet-bat-thuong-91604.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: lua__cham_soc_lua_xuan_o_mien#21
+  source_id: lua__cham_soc_lua_xuan_o_mien
+  sentence_index: 21
+  sentence: 'Căn cứ đặc tính này, Công ty Cổ phần Phân lân nung chảy Văn Điển sản xuất phân chuyên bón thúc cho lúa với nhiều
+    loại công thức khác nhau như: Phân đa yếu tố NPK (16:5:17) có hàm lượng N: 16%, P2O5: 5%, K2O: 17%, Mg: 5%, SiO2: 7%,
+    CaO: 8%, S: 2%,…;'
+  crop: lua
+  region: bac_trung_bo
+  metric: luong_phan
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cham-soc-lua-xuan-o-mien-bac-thich-ung-thoi-tiet-bat-thuong-91604.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: lua__cham_soc_lua_xuan_o_mien#22
+  source_id: lua__cham_soc_lua_xuan_o_mien
+  sentence_index: 22
+  sentence: 'Loại NPK 12:5:10 có hàm lượng N: 12%, P2O5: 5%, K2O: 10%, Mg: 2%, SiO2: 4%, CaO: 5%...'
+  crop: lua
+  region: bac_trung_bo
+  metric: luong_phan
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cham-soc-lua-xuan-o-mien-bac-thich-ung-thoi-tiet-bat-thuong-91604.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: lua__cham_soc_lua_xuan_o_mien#23
+  source_id: lua__cham_soc_lua_xuan_o_mien
+  sentence_index: 23
+  sentence: Hiện nay, nhiều nơi bà con sử dụng công thức NPK 14:6:8+TE hoặc 13:3:10+TE.
+  crop: lua
+  region: bac_trung_bo
+  metric: luong_phan
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cham-soc-lua-xuan-o-mien-bac-thich-ung-thoi-tiet-bat-thuong-91604.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: lua__cham_soc_lua_xuan_o_mien#27
+  source_id: lua__cham_soc_lua_xuan_o_mien
+  sentence_index: 27
+  sentence: Vụ xuân năm 2020 để hạn chế sâu bệnh hại bà con nông dân cần bón phân cho lúa Xuân cân đối, đầy đủ, hợp lý.
+  crop: lua
+  region: bac_trung_bo
+  metric: thoi_vu
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cham-soc-lua-xuan-o-mien-bac-thich-ung-thoi-tiet-bat-thuong-91604.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: tiêu đề mục hoặc không có khoảng thời gian/tháng cụ thể
+- fact_key: lua__cham_soc_lua_xuan_o_mien#42
+  source_id: lua__cham_soc_lua_xuan_o_mien
+  sentence_index: 42
+  sentence: Với lúa gieo thẳng bón thúc lần đầu khi cây lúa 2,5 lá tuổi, lúc này có thể bón 1-2 kg urê nhằm kích thích đẻ
+    nhánh.
+  crop: lua
+  region: bac_trung_bo
+  metric: luong_phan
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cham-soc-lua-xuan-o-mien-bac-thich-ung-thoi-tiet-bat-thuong-91604.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: lua__cham_soc_lua_xuan_o_mien#43
+  source_id: lua__cham_soc_lua_xuan_o_mien
+  sentence_index: 43
+  sentence: Sau khoảng 5-7ngày tập trung bón phân chuyên bón thúc Lúa 2 hoặc các loại phân bón thúc khác.
+  crop: lua
+  region: bac_trung_bo
+  metric: luong_phan
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cham-soc-lua-xuan-o-mien-bac-thich-ung-thoi-tiet-bat-thuong-91604.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: lua__cham_soc_lua_xuan_o_mien#45
+  source_id: lua__cham_soc_lua_xuan_o_mien
+  sentence_index: 45
+  sentence: Vụ Xuân năm nay thời tiết ấm nhiều nên cần bón rải phân bón thúc làm 2 hoặc 3 lần để kéo dài thời gian sinh trưởng,
+    tức là kéo dài thời gian tích lũy dinh dưỡng, tạo điều kiện cho năng suất và chất lượng thóc gạo cao hơn.
+  crop: lua
+  region: bac_trung_bo
+  metric: nang_suat
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cham-soc-lua-xuan-o-mien-bac-thich-ung-thoi-tiet-bat-thuong-91604.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: mô tả chung hoặc đoạn văn không có số liệu năng suất chuẩn
+- fact_key: lua__cham_soc_lua_xuan_o_mien#49
+  source_id: lua__cham_soc_lua_xuan_o_mien
+  sentence_index: 49
+  sentence: Sử dụng phân chuyên bón thúc lúa (lúa 2) giúp cây lúa đẻ nhánh vừa phải, nhưng đạt tỷ lệ nhánh hữu hiệu cao, tạo
+    ruộng lúa thoáng gốc nhưng nhiều bông, ít sâu bệnh và cho hệ số kinh tế cao.
+  crop: lua
+  region: bac_trung_bo
+  metric: luong_phan
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cham-soc-lua-xuan-o-mien-bac-thich-ung-thoi-tiet-bat-thuong-91604.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: lua__cham_soc_lua_xuan_o_mien#51
+  source_id: lua__cham_soc_lua_xuan_o_mien
+  sentence_index: 51
+  sentence: Từ lâu, nông dân các tỉnh đồng bằng sông Hồng và các tỉnh trung du, miền núi phía Bắc đã dùng phân đa yếu tố NPK
+    văn Điển, loại chuyên bón lót cho lúa NPK 6:11:2, 10:10:5 hoặc loại chuyên bón thúc NPK 16:5:17 loại phân phối trộn dạng
+    thô, nay thay thế bằng công thức 6:11:3 và 16:5:17 phân trộn dạng hạt, không có gai, không có dằm nhưng chất lượng vẫn
+    giữ nguyên thậm chí còn tăng thêm.
+  crop: lua
+  region: bac_trung_bo
+  metric: luong_phan
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cham-soc-lua-xuan-o-mien-bac-thich-ung-thoi-tiet-bat-thuong-91604.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: lua__cham_soc_lua_xuan_o_mien#56
+  source_id: lua__cham_soc_lua_xuan_o_mien
+  sentence_index: 56
+  sentence: Ngoài ra còn các dòng sản phẩm mới như ĐYT NPK Văn Điển 10:7:3 +TE chuyên bón lót và ĐYT NPK Văn Điển 13:3:10
+    chuyên bón thúc hoặc lúa I, lúa II dạng viên nén....
+  crop: lua
+  region: bac_trung_bo
+  metric: luong_phan
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cham-soc-lua-xuan-o-mien-bac-thich-ung-thoi-tiet-bat-thuong-91604.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: lua__cham_soc_lua_xuan_o_mien#57
+  source_id: lua__cham_soc_lua_xuan_o_mien
+  sentence_index: 57
+  sentence: Các sản phẩm phân bón mới chất lượng đảm bảo, dễ sử dụng, nông dân cũng chỉ bón lót sâu và bón thúc sớm 1-2 lần
+    tùy thời tiết, lượng bón có thê giảm bớt tùy chân ruộng và giống lúa.
+  crop: lua
+  region: bac_trung_bo
+  metric: luong_phan
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cham-soc-lua-xuan-o-mien-bac-thich-ung-thoi-tiet-bat-thuong-91604.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: lua__cham_soc_lua_xuan_o_mien#58
+  source_id: lua__cham_soc_lua_xuan_o_mien
+  sentence_index: 58
+  sentence: 'Phân ĐYT NPK Văn Điển chuyên bón lót cho lúa có nhiều loại công thức khác nhau như: ĐYT NPK 6:11:3 trong đó hàm
+    lượng N: 6%, P2O5: 11%, K2O: 3%, S: 2%, MgO: 10%, CaO: 20%, SiO: 15%, ngoài ra còn nhiều  chất vi lượng Fe, B, Mn, Zn,
+    Co, Cu, Mo…'
+  crop: lua
+  region: bac_trung_bo
+  metric: luong_phan
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cham-soc-lua-xuan-o-mien-bac-thich-ung-thoi-tiet-bat-thuong-91604.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: lua__cham_soc_lua_xuan_o_mien#59
+  source_id: lua__cham_soc_lua_xuan_o_mien
+  sentence_index: 59
+  sentence: Hoặc bà con nông dân có thể sử dụng phân ĐYT NPK Văn Điển 5:10:3 có tổng các chất dinh dưỡng NPK và các chất trung
+    lượng trên 58%.
+  crop: lua
+  region: bac_trung_bo
+  metric: luong_phan
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cham-soc-lua-xuan-o-mien-bac-thich-ung-thoi-tiet-bat-thuong-91604.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: lua__cham_soc_lua_xuan_o_mien#60
+  source_id: lua__cham_soc_lua_xuan_o_mien
+  sentence_index: 60
+  sentence: Hiện nay, được bổ sung phân chuyên dùng Lúa 1 chuyên bón lót cho lúa công thức ĐYT NPK Văn Điển 8:8:4+TE hoặc
+    10:7:3…
+  crop: lua
+  region: bac_trung_bo
+  metric: luong_phan
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cham-soc-lua-xuan-o-mien-bac-thich-ung-thoi-tiet-bat-thuong-91604.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: lua__cham_soc_lua_xuan_o_mien#69
+  source_id: lua__cham_soc_lua_xuan_o_mien
+  sentence_index: 69
+  sentence: Vụ Xuân 2020 có thể nóng hơn, nhiều diện tích có thể thiếu nước, theo kinh nghiệm các lão nông năm nay khá “tốn
+    phân”.
+  crop: lua
+  region: bac_trung_bo
+  metric: thoi_vu
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cham-soc-lua-xuan-o-mien-bac-thich-ung-thoi-tiet-bat-thuong-91604.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: tiêu đề mục hoặc không có khoảng thời gian/tháng cụ thể
+- fact_key: lua__cham_soc_lua_xuan_o_mien#71
+  source_id: lua__cham_soc_lua_xuan_o_mien
+  sentence_index: 71
+  sentence: Trung bình mỗi sào Bắc bộ cần chủ động khoảng trên dưới 15kg phân ĐYT NPK Văn Điển chuyên bón lót và khoảng trên
+    dưới 10kg phân ĐYT NPK Văn Điển chuyên bón thúc lúa.
+  crop: lua
+  region: bac_trung_bo
+  metric: luong_phan
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cham-soc-lua-xuan-o-mien-bac-thich-ung-thoi-tiet-bat-thuong-91604.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 10.0
+  value_max: 15.0
+  unit: kg/sào Bắc Bộ
+  stage: bón lót và bón thúc
+  note: Lượng phân NPK bón lót ~15.0kg/sào, bón thúc ~10.0kg/sào
+- fact_key: ca_chua__song_khoe_thu_kha_tien_nho#19
+  source_id: ca_chua__song_khoe_thu_kha_tien_nho
+  sentence_index: 19
+  sentence: Mật độ trồng hơn 3.200 cây/1.000m2 sàn nhà kính, khoảng cách của các bầu giá thể là 40cm.
+  crop: ca_chua
+  region: bac_trung_bo
+  metric: mat_do_gieo
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Song-khoe-thu-kha-tien-nho-trong-ca-chua-VietGAP-trai-sai-phat-hon-90754.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 3200.0
+  value_max: 3200.0
+  unit: cây/1000m2
+  stage: trồng nhà màng
+  note: 'Mật độ trồng cà chua nhà màng: hơn 3,200 cây/1000m2'
+- fact_key: lua__day_manh_canh_tac_lua_theo#20
+  source_id: lua__day_manh_canh_tac_lua_theo
+  sentence_index: 20
+  sentence: giảm được nhiều chi phí SX như giảm được 10kg thóc giống, 37 kg đạm ure/ha..., nhưng lại giúp năng suất tăng từ
+    10 -15%.
+  crop: lua
+  region: bac_trung_bo
+  metric: nang_suat
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Day-manh-canh-tac-lua-theo-SRI-IPM-82361.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: mô tả chung hoặc đoạn văn không có số liệu năng suất chuẩn
+- fact_key: lua__day_manh_canh_tac_lua_theo#24
+  source_id: lua__day_manh_canh_tac_lua_theo
+  sentence_index: 24
+  sentence: Đây cũng là năm mà lúa sạch bệnh, năng suất tại mô hình ở xã Hưng Thắng cao nhất từ trước tới nay với bình quân
+    hơn 3 tạ/sào.
+  crop: lua
+  region: bac_trung_bo
+  metric: nang_suat
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Day-manh-canh-tac-lua-theo-SRI-IPM-82361.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 3.0
+  value_max: null
+  unit: tạ/sào
+  stage: thu hoạch lúa SRI
+  note: Năng suất lúa canh tác SRI bình quân hơn 3.0 tạ/sào
+- fact_key: lua__huong_dan_phong_tru_dich_hai#10
+  source_id: lua__huong_dan_phong_tru_dich_hai
+  sentence_index: 10
+  sentence: Vụ Đông xuân 2025 -2026, toàn tỉnh gieo cấy trên 54.890 ha lúa, hiện các trà lúa đang giai đoạn làm đòng, trà
+    sớm ôm đòng - trổ.
+  crop: lua
+  region: bac_trung_bo
+  metric: thoi_vu
+  url: https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/huong-dan-phong-tru-dich-hai-lua-giai-doan-truoc-trong-va-sau-tro-1285.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: loại do là tiêu đề tin tức, footer, số liệu hành chính hoặc thống kê diện tích tỉnh
+- fact_key: lua__huong_dan_phong_tru_dich_hai#25
+  source_id: lua__huong_dan_phong_tru_dich_hai
+  sentence_index: 25
+  sentence: Nguyên nhân do nấm Pyricularia oryzea gây ra trong điều kiện nhiệt độ từ 20 – 28
+  crop: lua
+  region: bac_trung_bo
+  metric: nhiet_do
+  url: https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/huong-dan-phong-tru-dich-hai-lua-giai-doan-truoc-trong-va-sau-tro-1285.html
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 20.0
+  value_max: 28.0
+  unit: độ C
+  stage: phát sinh bệnh đạo ôn
+  note: Bệnh đạo ôn cổ bông phát sinh mạnh trong điều kiện nhiệt độ 20.0 - 28.0 độ C
+- fact_key: lua__huong_dan_phong_tru_dich_hai#137
+  source_id: lua__huong_dan_phong_tru_dich_hai
+  sentence_index: 137
+  sentence: HƯỚNG DẪN SỬ DỤNG THUỐC TRỪ CỎ AN TOÀN TRONG VỤ ĐÔNG XUÂN 2025-2026
+  crop: lua
+  region: bac_trung_bo
+  metric: thoi_vu
+  url: https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/huong-dan-phong-tru-dich-hai-lua-giai-doan-truoc-trong-va-sau-tro-1285.html
+  high_risk: true
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: loại do là dòng tin liên quan ở chân trang, không có số liệu
+- fact_key: lua__giam_that_thoat_luong_dam_trong#16
+  source_id: lua__giam_that_thoat_luong_dam_trong
+  sentence_index: 16
+  sentence: 'Hiệu quả sử dụng lượng phân đạm của lúa thường rất thấp, chỉ khoảng 35 – 40%, có thể nâng cao hiệu quả sử dụng
+    đạm lên tới 45- 50% bằng các biện pháp :'
+  crop: lua
+  region: toan_quoc
+  metric: luong_phan
+  url: https://phanbonquocgia.gov.vn/giam-that-thoat-luong-dam-trong-canh-tac-lua/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: lua__giam_that_thoat_luong_dam_trong#17
+  source_id: lua__giam_that_thoat_luong_dam_trong
+  sentence_index: 17
+  sentence: '1/ Bón đúng các thời kỳ cây lúa có nhu cầu đạm cao: Đây là các thời kỳ cây hút chất dinh dưỡng mạnh nhất, lúc
+    này cần kịp thời bón phân đáp ứng nhu cầu của cây để đạt năng suất tối hảo nhất, các thời kỳ đó là: Bén rễ, nẩy chồi,
+    làm đòng , sau khi lúa trổ.'
+  crop: lua
+  region: toan_quoc
+  metric: nang_suat
+  url: https://phanbonquocgia.gov.vn/giam-that-thoat-luong-dam-trong-canh-tac-lua/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: mô tả chung hoặc đoạn văn không có số liệu năng suất chuẩn
+- fact_key: lua__giam_that_thoat_luong_dam_trong#18
+  source_id: lua__giam_that_thoat_luong_dam_trong
+  sentence_index: 18
+  sentence: '2/ Hạn chế sự thất thoát đạm: Phân đạm đang sử dụng rộng rãi hiện nay là phân Urê, thuộc nhóm amôn rất dễ tan.'
+  crop: lua
+  region: toan_quoc
+  metric: luong_phan
+  url: https://phanbonquocgia.gov.vn/giam-that-thoat-luong-dam-trong-canh-tac-lua/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: lua__giam_that_thoat_luong_dam_trong#21
+  source_id: lua__giam_that_thoat_luong_dam_trong
+  sentence_index: 21
+  sentence: Sự phân giải nhanh hay chậm tùy thuộc tính chất đất, độ pH đất, nhiệt độ, độ ẩm… Ở đất thịt, trung tính, nhiệt
+    độ 30ºC sự phân giải chỉ trong 2 – 3 ngày trong khi đó ở đất cát phải mất đến 7-8 ngày .
+  crop: lua
+  region: toan_quoc
+  metric: nhiet_do
+  url: https://phanbonquocgia.gov.vn/giam-that-thoat-luong-dam-trong-canh-tac-lua/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 30.0
+  value_max: null
+  unit: độ C
+  stage: phân giải phân bón
+  note: Ở nhiệt độ 30 độ C, phân đạm urê phân giải trong 2-3 ngày trên đất thịt
+- fact_key: lua__giam_that_thoat_luong_dam_trong#27
+  source_id: lua__giam_that_thoat_luong_dam_trong
+  sentence_index: 27
+  sentence: – Trên đất thịt pha cát như ở một số vùng tại 2 huyện Tri Tôn và Tịnh Biên, lượng phân trong một vụ nên chia nhiều
+    lần bón để tránh sự rửa trôi.
+  crop: lua
+  region: toan_quoc
+  metric: luong_phan
+  url: https://phanbonquocgia.gov.vn/giam-that-thoat-luong-dam-trong-canh-tac-lua/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: lua__ky_thuat_bon_phan_cho_lua#27
+  source_id: lua__ky_thuat_bon_phan_cho_lua
+  sentence_index: 27
+  sentence: 'Thông thường bón giai đoạn thúc 1 (giai đoạn mạ): 7-10 ngày, chủ yếu bón đạm.'
+  crop: lua
+  region: toan_quoc
+  metric: luong_phan
+  url: https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-lua-ngan-ngay/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: lua__ky_thuat_bon_phan_cho_lua#28
+  source_id: lua__ky_thuat_bon_phan_cho_lua
+  sentence_index: 28
+  sentence: 'Giai đoạn đẻ nhánh (18-25 ngày): đạm và lân.'
+  crop: lua
+  region: toan_quoc
+  metric: luong_phan
+  url: https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-lua-ngan-ngay/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: lua__ky_thuat_bon_phan_cho_lua#45
+  source_id: lua__ky_thuat_bon_phan_cho_lua
+  sentence_index: 45
+  sentence: 'Vụ Đông Xuân: Có thể áp dụng công thức: 90–100 N – 40-60 P2O5 – 30-40 K2O.'
+  crop: lua
+  region: toan_quoc
+  metric: thoi_vu
+  url: https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-lua-ngan-ngay/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: tiêu đề mục hoặc không có khoảng thời gian/tháng cụ thể
+- fact_key: lua__ky_thuat_bon_phan_cho_lua#46
+  source_id: lua__ky_thuat_bon_phan_cho_lua
+  sentence_index: 46
+  sentence: 'Vụ Hè Thu: Có thể áp dụng công thức: 80-90 N – 50-60 P2O5 – 30-40 K2O.'
+  crop: lua
+  region: toan_quoc
+  metric: thoi_vu
+  url: https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-lua-ngan-ngay/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: tiêu đề mục hoặc không có khoảng thời gian/tháng cụ thể
+- fact_key: lua__ky_thuat_bon_phan_cho_lua#54
+  source_id: lua__ky_thuat_bon_phan_cho_lua
+  sentence_index: 54
+  sentence: '– Phân Lân Văn Điển – Ninh Bình: 15-17%, tức 100kg phân chứa 15-17kg P2O5 (lân) nguyên chất.'
+  crop: lua
+  region: toan_quoc
+  metric: luong_phan
+  url: https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-lua-ngan-ngay/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: lua__ky_thuat_bon_phan_cho_lua#55
+  source_id: lua__ky_thuat_bon_phan_cho_lua
+  sentence_index: 55
+  sentence: '– Phân Lân Super Phosphate Long Thành: Chứa 17-20kg P2O5 trong 100kg phân.'
+  crop: lua
+  region: toan_quoc
+  metric: luong_phan
+  url: https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-lua-ngan-ngay/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: lua__ky_thuat_bon_phan_cho_lua#56
+  source_id: lua__ky_thuat_bon_phan_cho_lua
+  sentence_index: 56
+  sentence: '– Phân Clorur Kali: Thông thường chứa 60 K2O, cũng có loại 30 K2O (cần tính toán kỹ, đôi khi dễ nhầm lẫn vì hàm
+    lượng chỉ 50% phân 60 K2O).'
+  crop: lua
+  region: toan_quoc
+  metric: luong_phan
+  url: https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-lua-ngan-ngay/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: lua__ky_thuat_bon_phan_cho_lua#59
+  source_id: lua__ky_thuat_bon_phan_cho_lua
+  sentence_index: 59
+  sentence: 'NPK: 16-16-8 : Trong 100kg phân chứa 16kg N, 16kg P2O5 và 8kg K2O.'
+  crop: lua
+  region: toan_quoc
+  metric: luong_phan
+  url: https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-lua-ngan-ngay/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: lua__ky_thuat_bon_phan_cho_lua#60
+  source_id: lua__ky_thuat_bon_phan_cho_lua
+  sentence_index: 60
+  sentence: 'NPK: 20-20-15 : Trong 100kg phân chứa 20kg N, 20kg P2O5 và 15kg K2O.'
+  crop: lua
+  region: toan_quoc
+  metric: luong_phan
+  url: https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-lua-ngan-ngay/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: lua__ky_thuat_bon_phan_cho_lua#73
+  source_id: lua__ky_thuat_bon_phan_cho_lua
+  sentence_index: 73
+  sentence: '100kg DAP (2 bao): Đã cung cấp đủ 46kg P2O5 theo yêu cầu, đạm cung cấp 18kg nguyên chất, theo công thức cần bón
+    90N-18N sẽ cần bổ sung 72N.'
+  crop: lua
+  region: toan_quoc
+  metric: luong_phan
+  url: https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-lua-ngan-ngay/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: lua__ky_thuat_bon_phan_cho_lua#74
+  source_id: lua__ky_thuat_bon_phan_cho_lua
+  sentence_index: 74
+  sentence: Trong 100kg Urê đã có 46kg N, vậy nếu cần 72kg N thì cần khoảng 150-160kg Urê và cần thêm 50-70kg Clorur Kali.
+  crop: lua
+  region: toan_quoc
+  metric: luong_phan
+  url: https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-lua-ngan-ngay/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 70.0
+  value_max: null
+  unit: kg
+  stage: bón phân
+  note: 'Liều lượng phân bón: Trong 100kg Urê đã có 46kg N, vậy nếu cần 72kg N thì cần khoảng 150-160kg Urê và cần thêm 50-70kg
+    Clorur Kali.'
+- fact_key: lua__ky_thuat_bon_phan_cho_lua#75
+  source_id: lua__ky_thuat_bon_phan_cho_lua
+  sentence_index: 75
+  sentence: 'Ví dụ 2: Sử dụng NPK 20-20-15'
+  crop: lua
+  region: toan_quoc
+  metric: luong_phan
+  url: https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-lua-ngan-ngay/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể
+- fact_key: lua__ky_thuat_bon_phan_cho_lua#76
+  source_id: lua__ky_thuat_bon_phan_cho_lua
+  sentence_index: 76
+  sentence: 100kg NPK đáp ứng 20P2O5 và 15K2O, cần 200kg NPK đáp ứng 40P2O5 , 30K2O và 40N đảm bảo gần đủ lân và kali, nhu
+    cầu 90N, đã có 40N, phải bổ sung 90N-40N = 50N.
+  crop: lua
+  region: toan_quoc
+  metric: luong_phan
+  url: https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-lua-ngan-ngay/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 100.0
+  value_max: null
+  unit: kg
+  stage: bón phân
+  note: 'Liều lượng phân bón: 100kg NPK đáp ứng 20P2O5 và 15K2O, cần 200kg NPK đáp ứng 40P2O5 , 30K2O và 40N đảm bảo gần đủ
+    lân và kali, nhu cầu 90N, đã có 40N, phải bổ sung 90N-40N = 50N.'
+- fact_key: lua__ky_thuat_bon_phan_cho_lua#82
+  source_id: lua__ky_thuat_bon_phan_cho_lua
+  sentence_index: 82
+  sentence: 'Phân đạm có thể bón 3 đợt: 7-10 ngày sau sạ (giai đoạn mạ), 18-25 ngày sau sạ (giai đoạn đẻ nhánh) và đón đòng.'
+  crop: lua
+  region: toan_quoc
+  metric: luong_phan
+  url: https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-lua-ngan-ngay/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: true
+  value_min: 3.0
+  value_max: null
+  unit: đợt bón
+  stage: các đợt bón đạm cho lúa
+  note: 'Bón đạm chia làm 3.0 đợt: đợt 1 (7-10 ngày), đợt 2 (18-25 ngày) và đón đòng'
+- fact_key: lua__ky_thuat_bon_phan_cho_lua#83
+  source_id: lua__ky_thuat_bon_phan_cho_lua
+  sentence_index: 83
+  sentence: Phân lân nên bón sớm, bón lót hoặc thúc 1.
+  crop: lua
+  region: toan_quoc
+  metric: luong_phan
+  url: https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-lua-ngan-ngay/
+  high_risk: false
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:36:19.123315+00:00'
+  verified: false
+  value_min: null
+  value_max: null
+  unit: null
+  stage: null
+  note: câu giới thiệu hoặc không có liều lượng định lượng cụ thể

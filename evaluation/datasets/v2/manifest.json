@@ -1,0 +1,36 @@
+{
+  "version": "v2",
+  "frozen_at": "2026-08-20T05:37:10.740250+00:00",
+  "total_cases": 280,
+  "groups": {
+    "adversarial": 16,
+    "contradictory": 10,
+    "device_control": 14,
+    "garden_data": 22,
+    "high_risk": 18,
+    "insufficient_evidence": 22,
+    "known_answer": 35,
+    "local_terms": 17,
+    "no_diacritic": 28,
+    "out_of_scope": 22,
+    "paraphrase": 35,
+    "product_feature": 18,
+    "typo": 23
+  },
+  "files": {
+    "adversarial.yaml": "d9c7953eb5c8308aa3f48ef89be46bcb8ac88fc895eb608e3b1e1a4e2eb126cd",
+    "contradictory.yaml": "736619e100721859350e5d57c9f034368c9dba02e6d59747d70243fe5178557b",
+    "device_control.yaml": "7d8bac8863b3dfae09b060035272db8d534c9e8aafdf73f74b4f322bc88c5701",
+    "garden_data.yaml": "7b69b511bcf08364350f434d5a232e1f5c410f28e80c173f8a3685c20cdcfd76",
+    "high_risk.yaml": "afbbacfc49e7bd10243fff4c0ba264c142434a24687f2e122ca2ccfec12b5eac",
+    "insufficient_evidence.yaml": "7827e0e8c38c0964962444472ae8881b5797938ccbffc1accd4fa5b9b1efccbe",
+    "known_answer.yaml": "2aeb966b96dcc74c4bf45ac5ecdf9b254b6c1beda6ccd50c5c46cdf33fe9481d",
+    "local_terms.yaml": "942c3e3ac8c5e5a16c3ff482b3f44cb7cc2460ce14f5cb730b973fcba8fa0dcd",
+    "no_diacritic.yaml": "c15317cdbb383e84d3fe07a5ce03c5f38ad46542f7a1366f8e052445efd2ae8f",
+    "out_of_scope.yaml": "69dfbbd1e7f491544786743db3c25f70f939bcc82ed0c5c90f3d2cf942501278",
+    "paraphrase.yaml": "102cb5392ae25417e78307ac4a42e22bc8c74088998d3c4959e7adfb3069482d",
+    "product_feature.yaml": "a51004768071dc17ff462bddd0dc49b153137ff743f7048cb2950c0406168c42",
+    "typo.yaml": "33debbfcf410059180b26f6f54725d76492b18677f5a62f990662bc49bd740d5"
+  },
+  "combined_sha256": "2e28e1bded9ed32d28c2f9d115bcfaa76cff59cc72cfc3eb17ff3df51dcd947c"
+}
