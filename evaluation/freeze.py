@@ -25,6 +25,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -121,6 +122,31 @@ def kiem_tra_file(path: Path, da_thay_id: dict[str, str]) -> list[str]:
 
 def bam_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def phien_ban_dang_dung() -> str:
+    """Phien ban tap kiem thu DANG DUNG de do - phien ban da dong bang moi nhat.
+
+    DEC-023 cam sua tap kiem thu tai cho, nen mot loi phat hien ra sau khi
+    dong bang chi sua duoc bang cach cat phien ban moi. Cac phien ban cu
+    KHONG bi xoa: chung la bang chung cua quy trinh (muc 27.2) va la thu cho
+    NextFarm thay VI SAO quy chuan cam dung LLM sinh dap an.
+
+    Hau qua: phien ban cu van con loi da biet trong do, va do la co y. Moi
+    kiem tra chat luong vi vay phai chay tren phien ban dang dung, khong phai
+    tren toan bo thu muc datasets/.
+    """
+    # Sap theo SO, khong theo ten: sap theo ten thi v10 dung truoc v2 va
+    # he thong se lang le do tren mot tap kiem thu cu.
+    def khoa(ten: str):
+        so = re.match(r"v(\d+)$", ten)
+        return (0, int(so.group(1))) if so else (1, 0, ten)
+
+    co = sorted((d.name for d in DATASETS.iterdir()
+                 if d.is_dir() and (d / "manifest.json").exists()), key=khoa)
+    if not co:
+        raise SystemExit("Chua co phien ban nao duoc dong bang")
+    return co[-1]
 
 
 def thu_thap(version_dir: Path) -> list[Path]:

@@ -39,6 +39,7 @@ from __future__ import annotations
 
 import argparse
 import itertools
+import re
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -51,7 +52,8 @@ sys.path.insert(0, str(BASE))
 from app.core.db import ket_noi  # noqa: E402
 
 V1 = BASE / "evaluation" / "datasets" / "v1"
-V2 = BASE / "evaluation" / "datasets" / "v2"
+V2 = BASE / "evaluation" / "datasets" / "v2"   # gan lai theo --version trong main()
+PHIEN_BAN = "v2"
 
 # Muoi nhom nay khong co van de gi - be nguyen tu v1 sang.
 BE_NGUYEN = [
@@ -182,6 +184,55 @@ def nhan_dung_khong(f: dict) -> bool:
     return not any(x in st for x in STAGE_LAC_DE)
 
 
+def _con_so(s) -> set[str]:
+    """Moi con so trong chuoi, chuan hoa dau phan cach.
+
+    30.000 va 30000 la MOT so; 6.5 va 6,5 la MOT so; nhung 6 va 6.0 cung
+    phai coi la mot, neu khong thi kiem tra se bao dong gia.
+    """
+    ra: set[str] = set()
+    for x in re.findall(r"\d[\d.,]*", str(s or "")):
+        x = x.rstrip(".,")
+        if re.fullmatch(r"\d{1,3}(?:[.,]\d{3})+", x):      # 30.000 -> 30000
+            x = re.sub(r"[.,]", "", x)
+        else:
+            x = x.replace(",", ".")
+        try:
+            ra.add(("%g" % float(x)))                        # 6.0 -> 6
+        except ValueError:
+            ra.add(x)
+    return ra
+
+
+def so_khong_truy_duoc(f: dict, dap_an_str: str) -> set[str]:
+    """Con so xuat hien trong dap an nhung KHONG co trong nguon.
+
+    VI SAO CAN HAM NAY
+
+    Sinh case tu bang fact chan duoc viec BIA CA CAU TRA LOI, nhung khong tu
+    dong chan duoc viec mot con so len tren dap an qua truong `unit` ma nguoi
+    duyet go tay. Do la ca that:
+
+        cau goc : "... lieu luong cho 1 lan bon: 4 kg Better NPK ... pha
+                   loang vao nuoc de tuoi."
+        unit go : "kg NPK/1000m2/10 ngay"
+
+    Cau goc khong he neu dien tich. Chuoi "/1000m2" duoc suy tu cau LIEN KE
+    noi ve san pham KHAC (Better KNO3 200g/16 lit nuoc/1000 m2) o giai doan
+    KHAC. Suy dien nhu vay la dung mot phep noi suy de tao ra con so moi -
+    dung thu ma quy chuan cam (muc 23.1, DEC-020).
+
+    Neu de lot, dap an "4 kg NPK/1000m2/10 ngay" tro thanh GROUND TRUTH. Luc
+    do he thong tra loi DUNG theo tai lieu se bi cham la SAI, va con so bao
+    cao cho NextFarm se do nham chieu.
+
+    Nguon hop le gom cau nguyen van VA truong value_min/value_max - hai
+    truong do nguoi duyet chep tu chinh cau do nen van la trich dan.
+    """
+    nguon = _con_so(f["sentence"]) | _con_so(f.get("value_min"))         | _con_so(f.get("value_max"))
+    return _con_so(dap_an_str) - nguon
+
+
 def _lam_ro(f: dict) -> str:
     """Phan lam cho cau hoi tro nen DUY NHAT.
 
@@ -248,6 +299,7 @@ def sinh_known_answer(facts: list[dict]) -> list[dict]:
         nhom[_cau_hoi_goc(f, cay, mau)].append(f)
 
     ra: list[dict] = []
+    bo_vi_so: list[tuple] = []
     da_sinh: set[str] = set()
     da_nguon: set[str] = set()
     i = 0
@@ -267,6 +319,14 @@ def sinh_known_answer(facts: list[dict]) -> list[dict]:
         nguon = f["document_id"] + "#" + str(f["sentence_index"])
         if nguon in da_nguon:
             continue          # cung mot fact hoi hai kieu -> do la paraphrase
+        da = dap_an(f)
+        lac = so_khong_truy_duoc(f, da)
+        if lac:
+            # Con so trong dap an khong co trong nguon -> khong sinh case.
+            # Thua mot case con hon co mot dap an chuan bi sai.
+            bo_vi_so.append((f["document_id"] + "#" + str(f["sentence_index"]),
+                             da, sorted(lac)))
+            continue
         da_sinh.add(q)
         da_nguon.add(nguon)
         i += 1
@@ -275,7 +335,7 @@ def sinh_known_answer(facts: list[dict]) -> list[dict]:
             "question": q,
             "crop": f["crop"],
             "expected_behavior": "answer",
-            "expected_facts": dap_an(f),
+            "expected_facts": da,
             "source_of_truth": f["document_id"] + "#" + str(f["sentence_index"]),
         }
         if f["high_risk"]:
@@ -283,6 +343,13 @@ def sinh_known_answer(facts: list[dict]) -> list[dict]:
         c["note"] = ("Sinh tu fact da duyet. Nguyen van: "
                      + " ".join(f["sentence"].split())[:180])
         ra.append(c)
+
+    if bo_vi_so:
+        print()
+        print("BO " + str(len(bo_vi_so)) + " case: dap an chua con so KHONG "
+              "co trong nguon")
+        for k, d, s in bo_vi_so:
+            print("  " + k + "  dap an '" + d + "'  so la: " + ", ".join(s))
     return ra
 
 
@@ -444,7 +511,7 @@ DAU = {
 def ghi(ten: str, cases: list[dict]) -> None:
     V2.mkdir(parents=True, exist_ok=True)
     noi_dung = DAU.get(ten, "") + "\n" + yaml.safe_dump(
-        {"group": ten, "version": "v2", "cases": cases},
+        {"group": ten, "version": PHIEN_BAN, "cases": cases},
         allow_unicode=True, sort_keys=False, width=100)
     (V2 / (ten + ".yaml")).write_text(noi_dung, encoding="utf-8")
 
@@ -452,7 +519,15 @@ def ghi(ten: str, cases: list[dict]) -> None:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--ghi", action="store_true")
+    ap.add_argument("--version", default="v2",
+                    help="Thu muc phien ban se ghi ra (DEC-023: khong sua "
+                         "tai cho, tao phien ban moi)")
     a = ap.parse_args()
+
+    global V2, PHIEN_BAN
+    PHIEN_BAN = a.version
+    V2 = BASE / "evaluation" / "datasets" / PHIEN_BAN
+    print("Ghi ra phien ban:", PHIEN_BAN)
 
     facts = nap_fact()
     print("Fact da xac nhan, co gia tri so:", len(facts))
@@ -485,7 +560,8 @@ def main() -> None:
         V2.mkdir(parents=True, exist_ok=True)
         for ten in BE_NGUYEN:
             src = V1 / (ten + ".yaml")
-            t = src.read_text(encoding="utf-8").replace("version: v1", "version: v2")
+            t = src.read_text(encoding="utf-8").replace(
+                "version: v1", "version: " + PHIEN_BAN)
             (V2 / (ten + ".yaml")).write_text(t, encoding="utf-8")
         print("  da be nguyen", len(BE_NGUYEN), "nhom tu v1")
     else:

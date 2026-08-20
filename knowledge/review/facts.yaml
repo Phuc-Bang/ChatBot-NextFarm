@@ -1411,9 +1411,12 @@ facts:
   verified: true
   value_min: 4.0
   value_max: 4.0
-  unit: kg NPK/1000m2/10 ngày
+  unit: kg NPK/10 ngày
   stage: sau khi ra hoa đến kết thúc thu hoạch
-  note: Bón thúc 4 kg NPK 12-12-17-9+TE định kỳ 10 ngày/lần
+  note: 'Bón thúc 4 kg NPK 12-12-17-9+TE định kỳ 10 ngày/lần. [SUA] Don vi truoc day ghi
+    kg NPK/1000m2/10 ngay; cau goc KHONG neu dien tich nao. Chuoi /1000m2 duoc suy tu cau
+    LIEN KE noi ve san pham KHAC (Better KNO3 200g/16 lit nuoc/1000 m2) o giai doan KHAC.
+    Do la suy dien chu khong phai trich dan -> da bo phan /1000m2.'
 - fact_key: lua__khac_phuc_anh_huong_mua_bao#15
   source_id: lua__khac_phuc_anh_huong_mua_bao
   sentence_index: 15

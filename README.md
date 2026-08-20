@@ -75,8 +75,8 @@ Chi tiết đầy đủ ở [quy chuẩn v2.0](docs/NEXTFARM_PROBLEM_A_STANDARD_
 |---|---|---|
 | P0 | Nền móng repo, hạ tầng Postgres | ✅ xong |
 | P1 | Crawler (HTML + PDF, robots.txt, sitemap, phân trang) | ✅ xong — 31 tài liệu |
-| P2 | Duyệt tri thức (2 luồng) | 🔧 công cụ xong, **chờ người duyệt** |
-| P3 | Tập kiểm thử — **đóng băng** | 🔄 10/13 nhóm, 200 case — chưa đóng băng |
+| P2 | Duyệt tri thức (2 luồng) | 🔄 18/31 tài liệu duyệt, 65/141 số liệu xác nhận |
+| P3 | Tập kiểm thử — **đóng băng** | ✅ v3 đóng băng — 12 nhóm, 222 case |
 | P4 | Đo baseline C0 (LLM trần) | ⛔ chờ khoá API hoặc model cục bộ |
 | P5 | Cơ sở dữ liệu tri thức | ✅ xong — lược đồ, chunking, nạp dữ liệu |
 | P6 | Truy xuất lai | 🔄 chuẩn hoá + từ khoá xong; vector chờ model |
@@ -93,14 +93,15 @@ Chi tiết đầy đủ ở [quy chuẩn v2.0](docs/NEXTFARM_PROBLEM_A_STANDARD_
 |---|---|
 | Tài liệu crawl được | 31 (lúa 22 · dưa chuột 5 · cà chua 4) |
 | Chunk | 292 (rủi ro cao 44 · cần cảnh báo 93) |
-| Chunk **index được** | **0** — chưa tài liệu nào được duyệt |
-| Câu ứng viên số liệu | 193 (12 rủi ro cao) |
-| Case kiểm thử | 200 / 10 nhóm (chưa đóng băng) |
-| Test tự động | 217 xanh |
+| Chunk **index được** | **161** (18 tài liệu đã duyệt) |
+| Câu ứng viên số liệu | 193 — **65 fact đã xác nhận** |
+| Case kiểm thử | **222 / 12 nhóm — v3 đã đóng băng** |
+| Test tự động | **248 xanh** |
 
-> Con số **0 chunk index được** là hành vi đúng, không phải lỗi: DEC-005 quy
-> định không duyệt thì không vào kho tri thức. Cổng chặn là view
-> `indexable_chunk`, được cài ở tầng dữ liệu chứ không phải ở lời hứa.
+> **161 / 292 chunk** vào được kho tri thức. 131 chunk còn lại thuộc 13 tài
+> liệu bị loại ở luồng 1 và **cố tình** nằm ngoài: DEC-005 quy định không
+> duyệt thì không vào kho. Cổng chặn là view `indexable_chunk`, cài ở tầng
+> dữ liệu chứ không phải ở lời hứa.
 
 ### Tầng từ chối — đo được ngay, không cần model
 
@@ -111,15 +112,15 @@ gọi model nào, nên đo được ngay hôm nay:
 python evaluation/runners/eval_tu_choi.py
 ```
 
-| Trên 200 case của tập kiểm thử v1 | |
+| Trên 222 case của tập kiểm thử **v3** | |
 |---|---|
 | Case phải bị chặn | 124 |
 | — chặn đúng loại | **118** |
 | — chặn an toàn nhưng kém cụ thể | 6 |
 | — **lọt sang nhánh trả lời** | **0** |
-| Case phải đi tiếp | 76 |
+| Case phải đi tiếp | 98 |
 | — **bị chặn oan** | **0** |
-| Câu hỏi biến dạng giữ nguyên hành vi | 48/51 (3 case đổi đều theo hướng *an toàn hơn*) |
+| Câu hỏi biến dạng giữ nguyên hành vi | 54/57 (3 case đổi đều theo hướng *an toàn hơn*) |
 
 Con số này **cao hơn con số trên câu hỏi thật**, vì người viết luật và người
 viết tập kiểm thử là một. Nó dùng để biết tầng từ chối có chạy đúng không,
@@ -174,5 +175,10 @@ Ghi ở đây để không ai hiểu nhầm về phạm vi:
 - **Chưa có tài liệu sản phẩm NextFarm**, nên câu hỏi về tính năng app luôn bị từ chối.
 - Một số ngưỡng trong quy chuẩn là **giả định của đội** (`[ASM]`), chờ NextFarm xác nhận — xem §9.
 - **Intent Router mới có lớp rule.** Lớp LLM few-shot (§11.3) chưa làm được vì chưa chốt model (DEC-015). Khi không luật nào khớp, router trả về `nguồn = "mac_dinh"` với độ tin cậy 0 — đó là *"lớp rule không biết"*, không phải *"câu này là nông học"*.
-- **Tập kiểm thử chưa đóng băng.** Còn ba nhóm (`known_answer`, `paraphrase`, `contradictory`) phụ thuộc vào số liệu đã duyệt ở P2. Đóng băng khi đủ 13 nhóm.
+- **Tập kiểm thử có ba phiên bản, bản đang dùng là `v3`.** DEC-023 cấm sửa tại chỗ, nên mỗi lỗi phát hiện sau khi đóng băng đều phải cắt phiên bản mới; bản cũ giữ nguyên làm bằng chứng.
+  - `v1` — 30 case `known_answer`, trong đó **9 case đáp án do LLM sinh, không có tài liệu chống lưng**. Giữ lại vì đây là ví dụ cụ thể nhất cho việc *vì sao quy chuẩn cấm dùng LLM sinh đáp án chuẩn*.
+  - `v2` — sinh thẳng từ bảng fact đã duyệt nên hết bịa cả câu, nhưng còn **một đơn vị suy diễn**: `4 kg NPK/1000m2/10 ngày` trong khi câu gốc chỉ nói *"liều lượng cho 1 lần bón: 4 kg Better NPK … pha loãng vào nước để tưới"* — không nêu diện tích nào. Chuỗi `/1000m2` được suy từ câu **liền kề** nói về **sản phẩm khác** (Better KNO3 `200g/16 lít nước/1000 m2`) ở **giai đoạn khác**.
+  - `v3` — đã sửa fact đó và thêm hàng rào: mọi con số trong `expected_facts` bị đối chiếu với câu nguyên văn, lệch là không sinh case.
+- **Nhóm `contradictory` chưa có.** Cả ba cặp bị đánh dấu mâu thuẫn đều là **mâu thuẫn giả** — hai tài liệu nói về hai vụ khác nhau (đông xuân tháng 10–11 vs hè thu tháng 6–7) chứ không hề trái nhau. Trường `stage` ghi *"thời vụ gieo trồng"* cho cả hai nên máy không tách được. Sinh một nhóm "mâu thuẫn" toàn mâu thuẫn giả cũng là bịa, chỉ là bịa kiểu khác.
+- **`known_answer` chỉ có 16 case** vì mỗi case phải truy được về một fact đã duyệt. Con số này tăng khi duyệt thêm số liệu, không tăng bằng cách viết thêm câu hỏi.
 - **Bỏ dấu làm sập khớp trọn từ** (DEC-031, §13.4). Tiếng Việt viết rời từng âm tiết nên `bật`/`bắt`, `giờ`/`gió`, `van`/`vẫn`, `tôi`/`tỏi` thành cùng một chuỗi sau khi bỏ dấu. Đã xử lý bằng khớp có dấu khi người dùng gõ dấu, cộng bảng ngoại lệ — nhưng đây là rủi ro thường trực cho mọi thành phần khớp từ khoá về sau.

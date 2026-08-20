@@ -47,6 +47,10 @@ import yaml
 BASE = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(BASE))
 
+sys.path.insert(0, str(BASE / "evaluation"))
+
+import freeze  # noqa: E402
+
 from app.services.abstention import templates as tpl  # noqa: E402
 from app.services.intent import scope  # noqa: E402
 from app.services.intent.router import (  # noqa: E402
@@ -67,10 +71,17 @@ NHAN_ROUTER = {
 LOAI_TU_CHOI = set(NHAN_ROUTER.values()) | {OUT_OF_SCOPE}
 
 
-def nap_case(version: str = "v2") -> list[dict]:
+def nap_case(version: str | None = None) -> list[dict]:
+    """Nap case. Khong truyen version -> lay phien ban dang dung.
+
+    KHONG tu dong lui ve phien ban khac khi thu muc khong ton tai: lui lang
+    le se cho ra mot bang so trong nhu that nhung do tren tap kiem thu khac
+    voi tap ghi tren tieu de bao cao. Tha bao loi.
+    """
+    version = version or freeze.phien_ban_dang_dung()
     vdir = DATASETS_DIR / version
     if not vdir.exists():
-        vdir = DATASETS_DIR / "v1"
+        raise SystemExit("Khong co tap kiem thu " + version)
     ra = []
     for f in sorted(vdir.glob("*.yaml")):
         data = yaml.safe_load(f.read_text(encoding="utf-8")) or {}
@@ -116,7 +127,8 @@ def chay_mot_case(case: dict) -> tuple[str, str, str]:
     return DI_TIEP, kq.nguon, ""
 
 
-def chay(chi_tiet: bool = False, version: str = "v2") -> dict:
+def chay(chi_tiet: bool = False, version: str | None = None) -> dict:
+    version = version or freeze.phien_ban_dang_dung()
     cases = nap_case(version)
     kq = [(c,) + chay_mot_case(c) + (mong_doi(c),) for c in cases]
 
@@ -216,7 +228,8 @@ def chay(chi_tiet: bool = False, version: str = "v2") -> dict:
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--version", default="v2", help="Phien ban tap kiem thu (v1, v2)")
+    ap.add_argument("--version", default=None,
+                    help="Phien ban tap kiem thu. Mac dinh: ban dong bang moi nhat")
     ap.add_argument("--chi-tiet", action="store_true")
     a = ap.parse_args()
     r = chay(a.chi_tiet, a.version)

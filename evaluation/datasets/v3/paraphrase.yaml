@@ -1,0 +1,60 @@
+# Nhóm paraphrase — cùng câu hỏi, cách diễn đạt khác
+#
+# Đo đúng một thứ: hỏi cách khác có ra cùng đáp án không. Kỳ vọng của mỗi
+# case BẰNG ĐÚNG kỳ vọng của case known_answer gốc, và `source_of_truth`
+# giữ nguyên — trường `derived_from` cho phép đối chiếu tự động.
+#
+# Phép diễn đạt lại chỉ đổi HÌNH THỨC câu hỏi ("bao nhiêu" → "khoảng chừng
+# nào"), không đổi nội dung hỏi. Đổi nội dung thì không còn là paraphrase.
+
+group: paraphrase
+version: v3
+cases:
+- case_id: pa_001
+  derived_from: ka_001
+  question: khoảng cách trồng cà chua là khoảng chừng nào
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: 60 - 80 cm
+  source_of_truth: phanbonquocgia_ca_chua#46
+  note: Dien dat lai cua ka_001. Ky vong phai GIONG HET case goc.
+- case_id: pa_002
+  derived_from: ka_004
+  question: bón phân cho cà chua với lượng khoảng chừng nào, sau khi ra hoa đến kết thúc thu hoạch
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: 4 kg NPK/10 ngày
+  source_of_truth: phanbonquocgia_ca_chua#76
+  note: Dien dat lai cua ka_004. Ky vong phai GIONG HET case goc.
+- case_id: pa_003
+  derived_from: ka_007
+  question: đất trồng cà chua cần độ pH khoảng chừng nào khi chuẩn bị đất
+  crop: ca_chua
+  expected_behavior: answer
+  expected_facts: 6 - 6,5 pH
+  source_of_truth: ninhbinh_gntt_ca_chua#15
+  note: Dien dat lai cua ka_007. Ky vong phai GIONG HET case goc.
+- case_id: pa_004
+  derived_from: ka_010
+  question: dưa chuột cần độ ẩm đất khoảng khoảng chừng nào là phù hợp khi chăm sóc / tưới nước
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: 85 - 90 %
+  source_of_truth: ninhbinh_dua_chuot_quytrinh#34
+  note: Dien dat lai cua ka_010. Ky vong phai GIONG HET case goc.
+- case_id: pa_005
+  derived_from: ka_013
+  question: mật độ gieo trồng dưa chuột là khoảng chừng nào
+  crop: dua_chuot
+  expected_behavior: answer
+  expected_facts: 30000 - 35000 cây/ha
+  source_of_truth: ninhbinh_dua_chuot_quytrinh#29
+  note: Dien dat lai cua ka_013. Ky vong phai GIONG HET case goc.
+- case_id: pa_006
+  derived_from: ka_016
+  question: lúa cho năng suất khoảng chừng nào khi thu hoạch lúa SRI
+  crop: lua
+  expected_behavior: answer
+  expected_facts: 3 tạ/sào
+  source_of_truth: lua__day_manh_canh_tac_lua_theo#24
+  note: Dien dat lai cua ka_016. Ky vong phai GIONG HET case goc.

@@ -11,6 +11,7 @@ Test o day chia hai loai:
 """
 
 import json
+import sys
 from pathlib import Path
 
 import pytest
@@ -28,6 +29,22 @@ def version_dir(request):
 
 def files(vdir: Path):
     return freeze.thu_thap(vdir)
+
+
+# Dung chung ham voi bo sinh case, khong chep lai logic: chep lai thi hai ben
+# troi nhau, va luc do test se xanh trong khi du lieu da sai.
+sys.path.insert(0, str(freeze.BASE / "tools"))
+from sinh_v2 import _con_so  # noqa: E402
+
+FACTS_YAML = freeze.BASE.parent / "knowledge" / "review" / "facts.yaml"
+
+
+def _fact_da_duyet() -> dict:
+    if not FACTS_YAML.exists():
+        return {}
+    d = yaml.safe_load(FACTS_YAML.read_text(encoding="utf-8")) or {}
+    return {f["fact_key"]: f for f in (d.get("facts") or [])
+            if f.get("verified")}
 
 
 # ----------------------------------------------------------------------
@@ -144,3 +161,67 @@ def test_so_case_khop_manifest(version_dir):
 
 
 
+
+
+# ----------------------------------------------------------------------
+# Dap an phai truy nguoc duoc ve fact da duyet
+# ----------------------------------------------------------------------
+
+def test_moi_dap_an_deu_truy_duoc_ve_fact_da_duyet():
+    """Moi con so trong `expected_facts` phai co that trong nguon.
+
+    VI SAO TEST NAY QUAN TRONG HON VE NGOAI CUA NO
+
+    Tap kiem thu la thuoc do. Mot con so bia trong dap an chuan khong lam
+    he thong tra loi sai - no lam PHEP DO sai chieu: he thong tra loi DUNG
+    theo tai lieu se bi cham la SAI, va bao cao gui NextFarm se noi nguoc
+    voi su that.
+
+    Da xay ra hai lan, hai kieu khac nhau:
+
+      v1  9/30 dap an do LLM sinh, khong co fact chong lung -> bo han
+      v2  don vi "kg NPK/1000m2/10 ngay" trong khi cau goc chi noi "4 kg
+          Better NPK ... pha loang vao nuoc de tuoi". Chuoi /1000m2 duoc
+          suy tu cau LIEN KE noi ve san pham KHAC o giai doan KHAC.
+
+    Ca hai deu lot qua vong doc bang mat. Chi co doi chieu tung con so voi
+    cau nguyen van moi bat duoc.
+
+    Nguon hop le = cau nguyen van + value_min/value_max, vi hai truong sau
+    do nguoi duyet chep tu chinh cau do nen van la trich dan.
+    """
+    facts = _fact_da_duyet()
+    if not facts:
+        pytest.skip("chua co facts.yaml")
+
+    # CHI kiem phien ban DANG DUNG.
+    #
+    # Cac phien ban cu CO loi da biet trong do va do la co y: DEC-023 cam sua
+    # tai cho nen loi phat hien sau khi dong bang chi sua duoc bang phien ban
+    # moi, con ban cu giu nguyen lam bang chung. Bat test chay tren ca thu muc
+    # datasets/ se lam suite do vinh vien, ma mot suite do vinh vien thi khong
+    # ai con doc no nua.
+    vdir = freeze.DATASETS / freeze.phien_ban_dang_dung()
+
+    loi = []
+    for f in files(vdir):
+        d = yaml.safe_load(f.read_text(encoding="utf-8")) or {}
+        for c in d.get("cases") or []:
+            ef = c.get("expected_facts")
+            sot = c.get("source_of_truth")
+            if not ef:
+                continue
+            if not sot:
+                loi.append(c["case_id"] + ": co dap an nhung khong ghi nguon")
+                continue
+            if sot not in facts:
+                loi.append(c["case_id"] + ": nguon '" + sot
+                           + "' khong co trong facts.yaml")
+                continue
+            lac = _con_so(ef) - (_con_so(facts[sot]["sentence"])
+                                 | _con_so(facts[sot].get("value_min"))
+                                 | _con_so(facts[sot].get("value_max")))
+            if lac:
+                loi.append(c["case_id"] + ": so " + ", ".join(sorted(lac))
+                           + " khong co trong nguon " + sot)
+    assert not loi, "\n".join(loi)
