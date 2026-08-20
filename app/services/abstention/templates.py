@@ -119,6 +119,22 @@ def out_of_scope(cay_khac: str | None = None) -> str:
             "nói sai ạ.")
 
 
+def insufficient_evidence(cay: str | None = None) -> str:
+    """Tu choi vi kho tri thuc khong co du can cu (muc 19, case C1).
+
+    KHAC HAN out_of_scope: o day cau hoi DUNG pham vi, chi la kho chua co
+    tai lieu. Noi nham hai loai nay lam nguoi dung hieu sai ve he thong -
+    mot ben la "khong bao gio ho tro", mot ben la "chua co, se co".
+
+    Do la ly do abstain_type_accuracy la mot chi so rieng (muc 30.5).
+    """
+    ve = " về " + cay if cay else ""
+    return ("Trong kho tài liệu của em chưa có căn cứ" + ve + " để trả lời "
+            "chắc chắn câu này. Em không đoán khi không có tài liệu ạ. "
+            "Anh/chị thử hỏi cách khác hoặc hỏi ý kiến cán bộ khuyến nông "
+            "địa phương giúp em nhé.")
+
+
 def theo_nhan(nhan: str, **kw) -> str:
     """Chon mau theo nhan cua Intent Router.
 

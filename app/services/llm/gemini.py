@@ -59,6 +59,8 @@ class GeminiClient:
                  thinking_budget: int = 0, timeout_giay: int = 120):
         self.ten_model = model or os.environ.get("LLM_MODEL", "gemini-2.5-flash")
         self.thinking_budget = thinking_budget
+        # Bat len khi model tra ve 400 vi khong nhan thinking_config.
+        self._bo_thinking = False
         self.timeout_giay = timeout_giay
 
         key = api_key or os.environ.get("GEMINI_API_KEY") or \
@@ -73,13 +75,28 @@ class GeminiClient:
         self._client = genai.Client(api_key=key)
 
     # ------------------------------------------------------------------
-    def _config(self, json_mode: bool, max_token_ra: int | None):
+    def _config(self, json_mode: bool, max_token_ra: int | None,
+                bo_thinking: bool = False):
+        """Cau hinh mot lan goi.
+
+        `bo_thinking` bo han truong thinking_config. Can co vi KHONG PHAI
+        model nao cung nhan thinking_budget=0 - do tren key that:
+
+            gemini-2.5-flash        thinking_budget=0  -> OK
+            gemini-3.6-flash        thinking_budget=0  -> 400 INVALID_ARGUMENT
+            gemini-3.5-flash-lite   thinking_budget=0  -> 400 INVALID_ARGUMENT
+
+        Ho 3.x moi khong cho tat suy nghi bang cach nay. Gap 400 thi tu bo
+        truong do va goi lai (xem sinh()), thay vi coi nhu that bai - vi
+        nguyen nhan la KHONG TUONG THICH THAM SO chu khong phai loi noi dung.
+        """
         from google.genai import types
         kw = {}
-        # thinking_budget=0 phai truyen TUONG MINH. Bo trong la Gemini tu
-        # quyet dinh, va no se bat suy nghi.
-        kw["thinking_config"] = types.ThinkingConfig(
-            thinking_budget=self.thinking_budget)
+        if not bo_thinking:
+            # thinking_budget=0 phai truyen TUONG MINH. Bo trong la Gemini tu
+            # quyet dinh, va no se bat suy nghi.
+            kw["thinking_config"] = types.ThinkingConfig(
+                thinking_budget=self.thinking_budget)
         if json_mode:
             kw["response_mime_type"] = "application/json"
         if max_token_ra:
@@ -101,7 +118,7 @@ class GeminiClient:
     # ------------------------------------------------------------------
     def sinh(self, prompt: str, *, json_mode: bool = False,
              max_token_ra: int | None = None) -> KetQuaLLM:
-        cfg = self._config(json_mode, max_token_ra)
+        cfg = self._config(json_mode, max_token_ra, self._bo_thinking)
         loi_cuoi = ""
 
         for lan in range(SO_LAN_THU):
@@ -112,6 +129,23 @@ class GeminiClient:
             except Exception as e:                        # noqa: BLE001
                 ma = self._ma_loi(e)
                 loi_cuoi = type(e).__name__ + ": " + str(e)[:300]
+
+                # 400 khi dang dat thinking_config -> thu lai MOT lan khong co
+                # truong do.
+                #
+                # Khong loc theo chu "thinking" trong thong bao: Google tra ve
+                # dung mot cau "Request contains an invalid argument." khong
+                # noi truong nao sai. Doi chieu theo chu se khong bao gio khop.
+                #
+                # Chi thu DUNG MOT LAN va nho ket qua, nen neu 400 den tu
+                # nguyen nhan khac thi lan goi lai cung 400 va loi that duoc
+                # bao cao binh thuong - khong che giau duoc gi.
+                if "400" in str(e) and not self._bo_thinking:
+                    self._bo_thinking = True
+                    cfg = self._config(json_mode, max_token_ra, True)
+                    print("  (model nay khong nhan thinking_budget - da bo)")
+                    continue
+
                 if ma in MA_THU_LAI and lan < SO_LAN_THU - 1:
                     # Lui theo cap so nhan + nhieu ngau nhien, tranh nhieu
                     # tien trinh cung dap lai mot luc.
