@@ -1,7 +1,7 @@
 # ChatBot-NextFarm — Bài toán A
 # Quy chuẩn: docs/NEXTFARM_PROBLEM_A_STANDARD_v2.0.md
 
-.PHONY: help up down logs psql check-ext install install-crawler crawl extract ingest smoke eval-tu-choi c0 c1 c2 recall rerank risk-coverage tang3 phieu-cham serve test clean
+.PHONY: help up down logs psql check-ext install install-crawler crawl extract ingest duyet-chunk duyet-chunk-status smoke eval-tu-choi c0 c1 c2 recall rerank risk-coverage tang3 phieu-cham serve test clean
 
 help:
 	@echo "Các lệnh có sẵn:"
@@ -65,6 +65,14 @@ extract:
 
 ingest:
 	python knowledge/ingestion/load.py
+
+# Luồng 3 của DEC-020: duyệt lẻ chunk rủi ro cao (thuốc BVTV, liều lượng).
+# Hỏi từng cái một, không có đường tắt duyệt hàng loạt.
+duyet-chunk:
+	python knowledge/review/review_chunks.py --limit 10
+
+duyet-chunk-status:
+	python knowledge/review/review_chunks.py --status
 
 # Chạy cái này TRƯỚC khi tốn 222 case: gemini-1.5-flash đã bị Google tắt hẳn,
 # phát hiện ở câu thứ 1 tốn 3 giây, phát hiện ở câu 200 tốn cả buổi.
