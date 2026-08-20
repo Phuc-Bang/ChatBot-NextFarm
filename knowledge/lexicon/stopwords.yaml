@@ -1,0 +1,143 @@
+# Từ dừng tiếng Việt — dùng cho kênh FTS (quy chuẩn v2.0 §14.2)
+#
+# VÌ SAO FILE NÀY PHẢI TỒN TẠI
+#
+# PostgreSQL không có cấu hình full-text search cho tiếng Việt, nên hệ thống
+# dùng config 'simple'. `simple` KHÔNG có danh sách từ dừng cho bất kỳ ngôn
+# ngữ nào — nó tách token rồi giữ nguyên tất cả.
+#
+# Hệ quả đo được trên kho thật (161 chunk):
+#
+#     câu hỏi "ca chua can dat ph bao nhieu"
+#     → plainto_tsquery('simple', ...) sinh ra:
+#         'ca' & 'chua' & 'can' & 'dat' & 'ph' & 'bao' & 'nhieu'
+#     → chunk phải chứa ĐỦ CẢ BẢY từ, kể cả "bao", "nhieu", "can"
+#     → 0 kết quả
+#
+# Trong khi cùng câu đó bỏ từ dừng rồi nối bằng OR cho 82 chunk ứng viên.
+#
+# Kênh FTS vì vậy gần như chết hoàn toàn trước khi có file này: mọi kết quả
+# đều đến từ kênh trigram, và RRF hợp nhất hai kênh trở thành hợp nhất một
+# kênh với một kênh rỗng.
+#
+# NGUYÊN TẮC CHỌN TỪ
+#
+# Chỉ đưa vào đây từ CHỨC NĂNG — từ để hỏi, đại từ, liên từ, trợ từ. Tuyệt
+# đối không đưa từ mang nội dung nông học vào, kể cả khi nó xuất hiện dày
+# đặc: "nước", "đất", "cây", "phân" xuất hiện ở hầu hết tài liệu nhưng chúng
+# là thứ người dùng đang hỏi.
+#
+# Ranh giới cần cẩn thận: "bao nhiêu" là từ để hỏi nên loại được, nhưng
+# "bao" trong "bao bì", "bao lâu" thì không. Vì lọc theo TỪNG TỪ nên "bao"
+# vẫn bị loại — chấp nhận được ở kênh FTS vì kênh trigram vẫn giữ nguyên
+# toàn bộ câu hỏi và bù lại phần này.
+#
+# BẢY TỪ ĐÃ PHẢI GỠ RA — DEC-031 lại một lần nữa
+#
+# Kênh FTS khớp trên bản BỎ DẤU, nên một từ dừng bị loại sẽ kéo theo mọi từ
+# nông học trùng với nó sau khi bỏ dấu:
+#
+#     chưa → chua   ăn mất "cà CHUA"        (mọi câu hỏi về cà chua)
+#     làm  → lam    ăn mất "LÀM giàn"
+#     sau  → sau    ăn mất "SÂU bệnh"
+#     do   → do     ăn mất "ĐỘ ẩm"
+#     mà   → ma     ăn mất "cây MẠ"
+#     lắm  → lam    ăn mất "LÀM giàn"
+#     đó   → do     ăn mất "ĐỘ ẩm"
+#
+# Bảy từ này đã được gỡ khỏi danh sách. Mất chúng chỉ làm truy vấn FTS rộng
+# hơn một chút — ts_rank vẫn xếp hạng được. Giữ chúng lại thì cả một nhóm câu
+# hỏi trả về rỗng, lặng lẽ.
+#
+# tests/test_keyword_retrieval.py::test_stopword_khong_an_mat_tu_nong_hoc
+# canh giữ điều này: mọi từ thêm vào đây về sau đều bị đối chiếu tự động với
+# từ vựng nông học.
+#
+# Trạng thái: [ASM] — danh sách người viết tay, chưa đối chiếu với log hội
+# thoại thật của NextFarm.
+
+stopwords:
+  # --- Từ để hỏi ---
+  - bao
+  - nhiêu
+  - gì
+  - nào
+  - sao
+  - đâu
+  - mấy
+  - thế
+  - ạ
+  - vậy
+  - hả
+
+  # --- Đại từ và xưng hô ---
+  - tôi
+  - mình
+  - em
+  - anh
+  - chị
+  - bác
+  - cháu
+  - ông
+  - bà
+  - ai
+  - nó
+
+  # --- Liên từ, giới từ ---
+  - và
+  - với
+  - hoặc
+  - hay
+  - nhưng
+  - thì
+  - nếu
+  - vì
+  - nên
+  - của
+  - cho
+  - từ
+  - đến
+  - trong
+  - ngoài
+  - trên
+  - dưới
+  - về
+  - theo
+  - bằng
+  - tại
+
+  # --- Trợ từ, phó từ ---
+  - là
+  - có
+  - không
+  - được
+  - phải
+  - cần
+  - nên
+  - đã
+  - đang
+  - sẽ
+  - rồi
+  - còn
+  - cũng
+  - đều
+  - rất
+  - quá
+  - hơn
+  - nhất
+  - chỉ
+  - vẫn
+  - lại
+  - nữa
+  - thêm
+  - một
+  - các
+  - những
+  - này
+  - kia
+  - ấy
+  - khi
+  - lúc
+  - trước
+  - giờ
+  - như

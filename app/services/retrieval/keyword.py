@@ -40,6 +40,7 @@ gi bao loi. test_khong_doc_thang_bang_chunk canh giu dieu do.
 
 from __future__ import annotations
 
+import re
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -49,8 +50,47 @@ sys.path.insert(0, str(BASE))
 
 from contextlib import contextmanager  # noqa: E402
 
+import yaml  # noqa: E402
+
 from app.core.db import ket_noi  # noqa: E402
+from app.core.text import bo_dau  # noqa: E402
 from app.services.normalization.vietnamese import CauHoi  # noqa: E402
+
+STOPWORDS_FILE = BASE / "knowledge" / "lexicon" / "stopwords.yaml"
+
+
+def _nap_stopwords() -> set[str]:
+    if not STOPWORDS_FILE.exists():
+        return set()
+    d = yaml.safe_load(STOPWORDS_FILE.read_text(encoding="utf-8")) or {}
+    return {bo_dau(str(t)) for t in (d.get("stopwords") or [])}
+
+
+STOPWORDS = _nap_stopwords()
+
+
+def tsquery_or(khong_dau: str) -> str:
+    """Sinh chuoi tsquery dang OR, da bo tu dung.
+
+    VI SAO KHONG DUNG plainto_tsquery
+
+    plainto_tsquery noi MOI token bang AND. Config 'simple' lai khong co danh
+    sach tu dung cho ngon ngu nao, nen no giu ca "bao", "nhieu", "can". Ket
+    qua do tren kho that (161 chunk):
+
+        "ca chua can dat ph bao nhieu"
+          -> 'ca' & 'chua' & 'can' & 'dat' & 'ph' & 'bao' & 'nhieu'
+          -> 0 chunk
+
+    Cung cau do bo tu dung roi noi bang OR: 82 chunk ung vien.
+
+    Doi AND thanh OR khong lam ket qua loang, vi viec PHAN BIET la cua
+    ts_rank va cua RRF - khong phai cua bo loc. Bo loc AND bien mot tu thua
+    trong cau hoi thanh mot dieu kien bat buoc, va do la cach chac chan nhat
+    de khong tra ve gi ca.
+    """
+    tu = [t for t in re.findall(r"\w+", khong_dau) if t not in STOPWORDS]
+    return " | ".join(dict.fromkeys(tu))
 
 
 @contextmanager
@@ -117,15 +157,19 @@ def _loc_cay(crop: str | None) -> tuple[str, list]:
 def tim_fts(cau: CauHoi, crop: str | None = None,
             top_k: int = TOP_K_MOI_KENH, conn=None) -> list[ChunkTraVe]:
     """Kenh 1 - full-text search cau hinh 'simple' tren ban bo dau."""
+    truy_van = tsquery_or(cau.khong_dau)
+    if not truy_van:
+        return []          # cau hoi toan tu dung - khong con gi de tim
+
     loc, tham = _loc_cay(crop)
     sql = (
         "SELECT" + COT + ", ts_rank(to_tsvector('simple', c.text_unaccent), q) AS r "
-        "FROM indexable_chunk c, plainto_tsquery('simple', %s) q "
+        "FROM indexable_chunk c, to_tsquery('simple', %s) q "
         "WHERE to_tsvector('simple', c.text_unaccent) @@ q" + loc + " "
         "ORDER BY r DESC LIMIT %s"
     )
     with _conn(conn) as c, c.cursor() as cur:
-        cur.execute(sql, [cau.khong_dau] + tham + [top_k])
+        cur.execute(sql, [truy_van] + tham + [top_k])
         return [_thanh_chunk(r) for r in cur.fetchall()]
 
 

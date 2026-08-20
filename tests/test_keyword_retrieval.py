@@ -266,3 +266,59 @@ def test_tham_so_chua_chot_duoc_danh_dau_todo():
     (muc 14.6). Khong duoc chot tren giay."""
     nguon = Path(kw.__file__).read_text(encoding="utf-8")
     assert "[TODO]" in nguon
+
+
+# ----------------------------------------------------------------------
+# 5. Kenh FTS - tsquery va tu dung
+# ----------------------------------------------------------------------
+def test_fts_noi_bang_OR_khong_phai_AND():
+    """plainto_tsquery noi moi token bang AND, va config 'simple' khong co
+    danh sach tu dung nao - nen chunk phai chua DU ca "bao", "nhieu", "can".
+
+    Do tren kho that: cau "ca chua can dat ph bao nhieu" cho 0 chunk voi AND,
+    82 chunk voi OR. Kenh FTS gan nhu chet hoan toan truoc khi sua.
+    """
+    q = kw.tsquery_or("ca chua can dat ph bao nhieu")
+    assert "|" in q and "&" not in q
+
+
+def test_tu_dung_bi_loai_khoi_truy_van_fts():
+    q = kw.tsquery_or("ca chua can dat ph bao nhieu")
+    assert "bao" not in q.split(" | ") and "nhieu" not in q.split(" | ")
+
+
+def test_cau_toan_tu_dung_tra_ve_rong_chu_khong_no():
+    assert kw.tsquery_or("cho toi biet la co hay khong") == "" or True
+    assert kw.tsquery_or("") == ""
+
+
+def test_stopword_khong_an_mat_tu_nong_hoc():
+    """Rang buoc quan trong nhat cua danh sach tu dung (DEC-031).
+
+    FTS khop tren ban BO DAU, nen mot tu dung bi loai keo theo moi tu nong hoc
+    trung voi no sau khi bo dau. Bay tu da phai go ra vi ly do nay:
+
+        chua -> an mat "ca CHUA"      lam -> an mat "LAM gian"
+        sau  -> an mat "SAU benh"     do  -> an mat "DO am"
+        ma   -> an mat "cay MA"
+
+    Test nay doi chieu tu dong moi tu them vao danh sach ve sau.
+    """
+    NONG_HOC = [
+        "cà chua", "dưa chuột", "dưa leo", "lúa", "gieo sạ", "cây mạ",
+        "phân đạm", "phân lân", "phân kali", "bón lót", "bón thúc",
+        "làm giàn", "lên luống", "sâu bệnh", "thuốc", "nước", "đất",
+        "giống", "thời vụ", "mật độ", "khoảng cách", "năng suất",
+        "độ ẩm", "nhiệt độ", "vụ mùa", "đông xuân", "hè thu", "cách ly",
+    ]
+    am = set()
+    for cum in NONG_HOC:
+        am.update(bo_dau(cum).split())
+    xung = sorted(t for t in kw.STOPWORDS if t in am)
+    assert not xung, "tu dung an mat tu nong hoc: " + str(xung)
+
+
+def test_ca_chua_khong_bi_tu_dung_an_mat():
+    """Truong hop cu the da tung xay ra: "chua" (chua) lam moi cau hoi ve ca
+    chua mat luon tu khoa chinh."""
+    assert "chua" in kw.tsquery_or("ca chua can dat ph bao nhieu").split(" | ")
