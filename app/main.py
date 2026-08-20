@@ -29,7 +29,7 @@ import time
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-from fastapi import FastAPI
+from fastapi import BackgroundTasks, FastAPI
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
@@ -68,16 +68,22 @@ class CauHoiVao(BaseModel):
 
 
 @app.post("/api/chat")
-def chat(v: CauHoiVao):
+def chat(v: CauHoiVao, nen: BackgroundTasks):
     from app.services.pipeline import tra_loi_cau_hoi
-    from app.core.nhat_ky import ghi_query_log
 
     r = tra_loi_cau_hoi(v.cau_hoi, v.context_turns or None)
-    try:
-        ghi_query_log(r)
-    except Exception as e:                                 # noqa: BLE001
-        # Loi ghi log KHONG duoc lam hong cau tra loi cho nguoi dung.
-        print("khong ghi duoc query_log: " + str(e)[:150])
+
+    # Ghi log chay NEN, khong nam tren duong tra loi.
+    #
+    # Da va phai that: ghi_query_log() treo o psycopg.connect() lam MOI
+    # request /api/chat khong bao gio tra ve, du cau tra loi da san sang tu
+    # 0,01s. Cau "bat van 3 trong 10 phut" dang le ton 6ms va 0 token.
+    # try/except cu khong cuu duoc vi TREO KHONG PHAI EXCEPTION.
+    #
+    # Hai lop bao ve, can ca hai:
+    #   1. ket_noi() nay luon co connect_timeout (app/core/db.py)
+    #   2. ghi log khong con chan cau tra loi (dong duoi)
+    nen.add_task(_ghi_log_an_toan, r)
 
     return {
         "tra_loi": r.tra_loi,
@@ -96,6 +102,16 @@ def chat(v: CauHoiVao):
         "latency_ms": r.latency_ms,
         "tong_latency_ms": r.tong_latency_ms,
     }
+
+
+def _ghi_log_an_toan(r) -> None:
+    """Ghi query_log, nuot moi loi. Chay nen nen khong ai doi ket qua."""
+    from app.core.nhat_ky import ghi_query_log
+    try:
+        ghi_query_log(r)
+    except Exception as e:                                 # noqa: BLE001
+        # Im lang o day la mat du lieu chan bia - phai in ra.
+        print("khong ghi duoc query_log: " + str(e)[:150])
 
 
 @app.get("/api/health")

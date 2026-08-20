@@ -21,7 +21,7 @@ import pytest
 psycopg = pytest.importorskip("psycopg")
 
 DSN = os.environ.get(
-    "DATABASE_URL", "postgresql://nextfarm:nextfarm@localhost:15432/nextfarm"
+    "DATABASE_URL", "postgresql://nextfarm:nextfarm@127.0.0.1:15432/nextfarm"
 ).replace("postgresql+psycopg://", "postgresql://")
 
 
@@ -40,7 +40,9 @@ pytestmark = pytest.mark.skipif(
 @pytest.fixture()
 def conn():
     """Moi test chay trong mot transaction roi rollback - khong ban DB that."""
-    with psycopg.connect(DSN) as c:
+    # Xem chu thich cung ten o test_keyword_retrieval.py.
+    with psycopg.connect(DSN, connect_timeout=15,
+                         options="-c statement_timeout=30000") as c:
         c.autocommit = False
         yield c
         c.rollback()

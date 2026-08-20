@@ -31,7 +31,7 @@ from app.services.normalization.vietnamese import chuan_hoa  # noqa: E402
 from app.services.retrieval import keyword as kw  # noqa: E402
 
 DSN = os.environ.get(
-    "DATABASE_URL", "postgresql://nextfarm:nextfarm@localhost:15432/nextfarm"
+    "DATABASE_URL", "postgresql://nextfarm:nextfarm@127.0.0.1:15432/nextfarm"
 ).replace("postgresql+psycopg://", "postgresql://")
 
 
@@ -50,7 +50,10 @@ pytestmark = pytest.mark.skipif(
 @pytest.fixture()
 def conn():
     """Transaction roi rollback - khong ban DB that."""
-    with psycopg.connect(DSN) as c:
+    # LUON co connect_timeout. Khong co no, mot su co DB lam pytest treo
+    # vinh vien thay vi bao loi - da va phai that (P10_su_co_treo_api.md).
+    with psycopg.connect(DSN, connect_timeout=15,
+                         options="-c statement_timeout=30000") as c:
         c.autocommit = False
         yield c
         c.rollback()

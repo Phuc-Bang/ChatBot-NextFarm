@@ -31,7 +31,7 @@ from pathlib import Path
 BASE = Path(__file__).resolve().parent
 MIGRATIONS = BASE / "migrations"
 
-DEFAULT_DSN = "postgresql://nextfarm:nextfarm@localhost:15432/nextfarm"
+DEFAULT_DSN = "postgresql://nextfarm:nextfarm@127.0.0.1:15432/nextfarm"
 
 BANG_THEO_DOI = """
 CREATE TABLE IF NOT EXISTS schema_migration (
@@ -72,7 +72,8 @@ def main() -> None:
     if not files:
         sys.exit("Khong co file migration nao trong " + str(MIGRATIONS))
 
-    with psycopg.connect(dsn()) as conn:
+    # connect_timeout: khong de mot su co DB thanh treo im lang.
+    with psycopg.connect(dsn(), connect_timeout=15) as conn:
         with conn.cursor() as cur:
             cur.execute(BANG_THEO_DOI)
             conn.commit()
