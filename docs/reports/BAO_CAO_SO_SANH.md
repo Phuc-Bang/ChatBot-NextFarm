@@ -205,6 +205,18 @@ case) + C2 đầy đủ (222 case) + C1 167/222 case, cộng các lần thử �
 Với NextFarm: free tier **không đủ** để đo trọn ba cấu hình trong một ngày.
 Chạy sản phẩm thật thì phải tính chi phí trả phí theo §37.5.
 
+### Cập nhật 2026-08-20 (chiều): quota hồi nhỏ giọt, không cấp lại theo ngày
+
+Thử lại sau vài giờ thì gọi được. Nhưng chạy tiếp C1 chỉ thêm được **2 case
+thành công** trước khi 429 trở lại.
+
+Nghĩa là hạn mức hồi theo **phút** (RPM) chứ không phải được cấp lại nguyên
+một khối theo ngày. Với đợt đo 222 case cần chạy liên tục, đây là khác biệt
+lớn: không thể "đợi tới sáng mai rồi chạy một lượt".
+
+**Với NextFarm:** free tier không dùng được cho một đợt đo nghiêm túc, chứ
+không chỉ là "chậm hơn". Muốn đo lại toàn bộ ba cấu hình thì phải trả phí.
+
 ## Trạng thái C1 tại thời điểm này
 
 **167/222 case** thành công, 12 case lỗi 429, 43 case chưa chạy. Kết quả
