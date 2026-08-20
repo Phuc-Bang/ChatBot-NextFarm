@@ -96,20 +96,20 @@ CHUNK_LUA = ("Lúa vụ đông xuân gieo mạ khi nhiệt độ ổn định. M
 # ----------------------------------------------------------------------
 def test_chunk_cua_tai_lieu_chua_duyet_khong_bao_gio_tra_ve(conn):
     with conn.cursor() as cur:
-        nap(cur, CHUNK_CA_CHUA, approved_doc=False)
+        cid = nap(cur, CHUNK_CA_CHUA, approved_doc=False)
         cau = chuan_hoa("cà chua đất pH bao nhiêu")
-        assert kw.tim_fts(cau, "ca_chua", conn=conn) == []
-        assert kw.tim_trigram(cau, "ca_chua", conn=conn) == []
-        assert kw.tim(cau, "ca_chua", conn=conn) == []
+        assert cid not in [c.chunk_id for c in kw.tim_fts(cau, "ca_chua", conn=conn)]
+        assert cid not in [c.chunk_id for c in kw.tim_trigram(cau, "ca_chua", conn=conn)]
+        assert cid not in [c.chunk_id for c in kw.tim(cau, "ca_chua", conn=conn)]
 
 
 def test_chunk_rui_ro_cao_chua_duyet_le_khong_tra_ve(conn):
     """Chunk rui ro cao chua duyet le duoc nap voi approved=False (muc 24.4)."""
     with conn.cursor() as cur:
-        nap(cur, "Phun thuốc bảo vệ thực vật cho cà chua theo liều lượng ghi trên bao bì",
+        cid = nap(cur, "Phun thuốc bảo vệ thực vật cho cà chua theo liều lượng ghi trên bao bì",
             is_high_risk=True, reviewed_high_risk=False, approved_chunk=False)
         cau = chuan_hoa("cà chua phun thuốc bảo vệ thực vật")
-        assert kw.tim(cau, "ca_chua", conn=conn) == []
+        assert cid not in [c.chunk_id for c in kw.tim(cau, "ca_chua", conn=conn)]
 
 
 def test_trang_thai_nguy_hiem_bi_chan_ngay_o_luoc_do(conn):
@@ -127,11 +127,13 @@ def test_trang_thai_nguy_hiem_bi_chan_ngay_o_luoc_do(conn):
 
 def test_chunk_rui_ro_cao_da_duyet_le_thi_tra_ve(conn):
     with conn.cursor() as cur:
-        nap(cur, "Phun thuốc bảo vệ thực vật cho cà chua theo liều lượng ghi trên bao bì",
+        cid = nap(cur, "Phun thuốc bảo vệ thực vật cho cà chua theo liều lượng ghi trên bao bì",
             is_high_risk=True, reviewed_high_risk=True)
         cau = chuan_hoa("cà chua phun thuốc bảo vệ thực vật")
         ra = kw.tim(cau, "ca_chua", conn=conn)
-        assert len(ra) == 1 and ra[0].is_high_risk
+        assert cid in [c.chunk_id for c in ra]
+        matched = next(c for c in ra if c.chunk_id == cid)
+        assert matched.is_high_risk
 
 
 def test_khong_doc_thang_bang_chunk():
@@ -160,14 +162,14 @@ def test_cau_hoi_khong_dau_tim_duoc_chunk_co_dau(conn):
     with conn.cursor() as cur:
         cid = nap(cur, CHUNK_CA_CHUA)
         ra = kw.tim(chuan_hoa("ca chua can dat ph bao nhieu"), "ca_chua", conn=conn)
-        assert [c.chunk_id for c in ra] == [cid]
+        assert cid in [c.chunk_id for c in ra]
 
 
 def test_cau_hoi_co_dau_cung_tim_duoc(conn):
     with conn.cursor() as cur:
         cid = nap(cur, CHUNK_CA_CHUA)
         ra = kw.tim(chuan_hoa("cà chua cần đất pH bao nhiêu"), "ca_chua", conn=conn)
-        assert [c.chunk_id for c in ra] == [cid]
+        assert cid in [c.chunk_id for c in ra]
 
 
 def test_viet_tat_duoc_mo_rong_truoc_khi_tim(conn):

@@ -41,6 +41,21 @@ import yaml
 BASE = Path(__file__).resolve().parent
 ROOT = BASE.parent.parent
 CANDIDATES = ROOT / "crawler" / "data" / "candidates.json"
+DOCUMENTS = ROOT / "knowledge" / "review" / "documents.yaml"
+
+
+def tai_lieu_da_duyet() -> set[str] | None:
+    """document_id cua cac tai lieu da duyet o luong 1 (DEC-020).
+
+    Tra ve None neu chua duyet tai lieu nao - luc do khong loc gi ca, vi loc
+    theo mot tap rong se lam moi cau bien mat va nguoi dung tuong la het viec.
+    """
+    if not DOCUMENTS.exists():
+        return None
+    data = yaml.safe_load(DOCUMENTS.read_text(encoding="utf-8")) or {}
+    ds = data.get("documents") or []
+    duyet = {d["document_id"] for d in ds if d.get("approved")}
+    return duyet or None
 OUT = BASE / "facts.yaml"
 
 
@@ -131,10 +146,23 @@ def in_tinh_hinh(cands: list[dict], facts: dict[str, dict]) -> None:
     loai = [f for f in facts.values() if f.get("verified") is False]
     chua = [c for c in cands if khoa(c) not in facts]
 
+    # Con so phai khop voi khoi luong viec THAT SU phai lam. Bao "193 chua
+    # duyet" trong khi chi 141 cau can duyet la lam nguoi duyet uoc luong sai
+    # thoi gian ngay tu dau.
+    da_duyet_tl = tai_lieu_da_duyet()
+    if da_duyet_tl is not None:
+        trong = [c for c in chua if c.get("source_id") in da_duyet_tl]
+        ngoai = len(chua) - len(trong)
+    else:
+        trong, ngoai = chua, 0
+
     print("Cau ung vien        : " + str(len(cands)))
     print("  da xac nhan       : " + str(len(duyet)))
     print("  da loai           : " + str(len(loai)))
-    print("  chua duyet        : " + str(len(chua)))
+    print("  CAN DUYET         : " + str(len(trong)))
+    if ngoai:
+        print("  bo qua            : " + str(ngoai)
+              + "   (thuoc tai lieu da bi loai o luong 1)")
 
     if duyet:
         theo: dict[str, int] = {}
@@ -145,9 +173,10 @@ def in_tinh_hinh(cands: list[dict], facts: dict[str, dict]) -> None:
         for k, n in sorted(theo.items()):
             print("  " + k.ljust(28) + str(n))
 
-    rui_ro = [c for c in cands if c.get("high_risk") and khoa(c) not in facts]
+    rui_ro = [c for c in trong if c.get("high_risk")]
     if rui_ro:
-        print("\nCon " + str(len(rui_ro)) + " cau rui ro cao chua duyet.")
+        print("\nTrong do " + str(len(rui_ro)) + " cau rui ro cao "
+              "(--high-risk de duyet rieng nhom nay truoc).")
 
 
 def main() -> None:
@@ -158,6 +187,8 @@ def main() -> None:
     ap.add_argument("--crop", nargs="*", help="Chi duyet cac cay nay")
     ap.add_argument("--high-risk", action="store_true", help="Chi duyet cau rui ro cao")
     ap.add_argument("--reviewer", default="", help="Ten nguoi duyet")
+    ap.add_argument("--tat-ca", action="store_true",
+                    help="Duyet ca cau thuoc tai lieu DA BI LOAI (mac dinh bo qua)")
     args = ap.parse_args()
 
     if not CANDIDATES.exists():
@@ -171,6 +202,25 @@ def main() -> None:
         return
 
     chon = [c for c in cands if khoa(c) not in facts]
+
+    # Bo qua cau thuoc tai lieu da bi loai o luong 1.
+    #
+    # Tai lieu bi loai thi khong chunk nao cua no vao duoc kho tri thuc, nen
+    # mot fact trich tu do khong bao gio dung de kiem so hay lam ground truth
+    # duoc - duyet no la cong bo di. Do tren du lieu that: 52/193 cau ung vien
+    # thuoc 13 tai lieu bi loai, tuc hon mot phan tu thoi gian duyet.
+    #
+    # Van giu duong --tat-ca de xem lai duoc, vi tai lieu bi loai la BANG
+    # CHUNG cua quy trinh duyet (muc 27.2) chu khong phai rac.
+    duyet = tai_lieu_da_duyet()
+    if duyet is not None and not args.tat_ca:
+        truoc = len(chon)
+        chon = [c for c in chon if c.get("source_id") in duyet]
+        bo = truoc - len(chon)
+        if bo:
+            print("Bo qua " + str(bo) + " cau thuoc tai lieu da bi loai "
+                  "(them --tat-ca neu muon xem).")
+
     if args.metric:
         chon = [c for c in chon if c["metric"] in set(args.metric)]
     if args.crop:

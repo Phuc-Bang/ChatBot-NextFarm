@@ -1,0 +1,267 @@
+documents:
+- document_id: ca_chua__song_khoe_thu_kha_tien_nho
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Song-khoe-thu-kha-tien-nho-trong-ca-chua-VietGAP-trai-sai-phat-hon-90754.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:07:17.187000+00:00'
+  source_tier: 1
+  crop: ca_chua
+  region: trung_du_mien_nui
+  published_at: '2018-11-16'
+  approved: true
+- document_id: dua_chuot__dua_chuot_nhat_ban_trong_nha
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/dua-chuot-nhat-ban-trong-nha-luoi-chat-luong-cao-nang-suat-vuot-troi-92361.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:07:17.187000+00:00'
+  source_tier: 1
+  crop: dua_chuot
+  region: bac_trung_bo
+  published_at: null
+  approved: true
+- document_id: hatinh_dua_chuot_vietgap
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Ky-thuat-trong-dua-chuot-theo-huong-tieu-chuan-VietGAP-7401.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T04:57:53.492600+00:00'
+  source_tier: 1
+  crop: dua_chuot
+  region: bac_trung_bo
+  published_at: '2026-08-19'
+  approved: true
+- document_id: hcm_dost_ca_chua_bi
+  url: https://dost.hochiminhcity.gov.vn/mo-hinh-ung-dung-trong-nong-nghiep/quy-trinh-ky-thuat-trong-ca-chua-bi-solanum-lycopersicum-l/
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T04:59:44.270220+00:00'
+  source_tier: 1
+  crop: ca_chua
+  region: dong_nam_bo
+  published_at: null
+  approved: true
+- document_id: laichau_dua_chuot_xuanhe
+  url: https://sonnmt.laichau.gov.vn/thu-vien/tai-lieu/ky-thuat-trong-va-cham-soc-cay-dua-chuot-vu-xuan-he.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T04:58:41.950769+00:00'
+  source_tier: 1
+  crop: dua_chuot
+  region: trung_du_mien_nui
+  published_at: null
+  approved: true
+- document_id: lua__cay_lua_bang_may_giai_phap
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cay-lua-bang-may-giai-phap-san-xuat-lua-thich-ung-voi-dieu-kien-bien-doi-khi-hau-106269.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:07:17.187000+00:00'
+  source_tier: 1
+  crop: lua
+  region: bac_trung_bo
+  published_at: null
+  approved: true
+- document_id: lua__cham_soc_lua_xuan_o_mien
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cham-soc-lua-xuan-o-mien-bac-thich-ung-thoi-tiet-bat-thuong-91604.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:07:17.187000+00:00'
+  source_tier: 1
+  crop: lua
+  region: dong_bang_song_hong
+  published_at: '2020-04-06'
+  approved: true
+- document_id: lua__chitietvb_1142
+  url: https://khuyennong.ninhbinh.gov.vn/van-ban/chitietvb-1142.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:07:17.187000+00:00'
+  source_tier: 1
+  crop: lua
+  approved: false
+  reject_reason: khong phai tai lieu ky thuat canh tac (nghi quyet chinh sach)
+- document_id: lua__cong_cu_ky_thuat_so_chinh
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/cong-cu-ky-thuat-so-chinh-xac-giup-nong-dan-trong-lua-nepal-tang-nang-suat-lua-115069.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:07:17.187000+00:00'
+  source_tier: 1
+  crop: lua
+  approved: false
+  reject_reason: khong phai tai lieu ky thuat canh tac (tin nong nghiep quoc te Nepal)
+- document_id: lua__danh_gia_mo_hinh_chuyen_doi
+  url: https://khuyennong.quangtri.gov.vn/tin-tuc-su-kien/danh-gia-mo-hinh-chuyen-doi-dat-lua-kem-hieu-qua-sang-trong-ngo-sinh-khoi-1323.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:07:17.187000+00:00'
+  source_tier: 1
+  crop: lua
+  approved: false
+  reject_reason: sai cay trong (ngo sinh khoi)
+- document_id: lua__day_manh_canh_tac_lua_theo
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/Day-manh-canh-tac-lua-theo-SRI-IPM-82361.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:07:17.187000+00:00'
+  source_tier: 1
+  crop: lua
+  region: bac_trung_bo
+  published_at: null
+  approved: true
+- document_id: lua__dua_giong_lua_st24_ngon_nhat
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/dua-giong-lua-st24-ngon-nhat-nhi-the-gioi-ve-trong-ruong-nha-nong-dan-ha-tinh-duoc-mua-boi-thu-114211.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:07:17.187000+00:00'
+  source_tier: 1
+  crop: lua
+  approved: false
+  reject_reason: khong phai tai lieu ky thuat canh tac (phong su mo hinh)
+- document_id: lua__giam_that_thoat_luong_dam_trong
+  url: https://phanbonquocgia.gov.vn/giam-that-thoat-luong-dam-trong-canh-tac-lua/
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:07:17.187000+00:00'
+  source_tier: 1
+  crop: lua
+  region: toan_quoc
+  published_at: null
+  approved: true
+- document_id: lua__hai_phong_trong_thu_nghiem_thanh
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/hai-phong-trong-thu-nghiem-thanh-cong-lua-j02-116562.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:07:17.187000+00:00'
+  source_tier: 1
+  crop: lua
+  approved: false
+  reject_reason: khong phai tai lieu ky thuat canh tac (tin thu nghiem giong)
+- document_id: lua__hue_phat_trien_vung_san_xuat
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/hue-phat-trien-vung-san-xuat-lua-chat-luong-cao-loi-nhuan-tang-them-10-15-115080.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:07:17.187000+00:00'
+  source_tier: 1
+  crop: lua
+  approved: false
+  reject_reason: khong phai tai lieu ky thuat canh tac (tin phong trao)
+- document_id: lua__huong_dan_phong_tru_dich_hai
+  url: https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/huong-dan-phong-tru-dich-hai-lua-giai-doan-truoc-trong-va-sau-tro-1285.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:07:17.187000+00:00'
+  source_tier: 1
+  crop: lua
+  region: bac_trung_bo
+  published_at: '2026-04-15'
+  approved: true
+- document_id: lua__huong_dan_quy_trinh_ky_thuat
+  url: https://khuyennong.quangtri.gov.vn/thong-tin-khoa-hoc-ky-thuat/huong-dan-quy-trinh-ky-thuat-trong-ngo-sinh-khoi-tren-dat-lua-chuyen-doi-1305.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:07:17.187000+00:00'
+  source_tier: 1
+  crop: lua
+  approved: false
+  reject_reason: sai cay trong (ngo sinh khoi)
+- document_id: lua__khac_phuc_anh_huong_mua_bao
+  url: https://khuyennong.ninhbinh.gov.vn/trong-trot/khac-phuc-anh-huong-mua-bao-do-hoan-luu-cua-con-bao-so-5-kajiki-doi-voi-lua-va-cay-rau-mau-tren-dia-ban-tinh-ninh-binh-940.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:03:27.631159+00:00'
+  source_tier: 1
+  crop: lua
+  region: dong_bang_song_hong
+  published_at: '2025-08-26'
+  approved: true
+- document_id: lua__ky_thuat_bon_phan_cho_lua
+  url: https://phanbonquocgia.gov.vn/ky-thuat-bon-phan-cho-lua-ngan-ngay/
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:07:17.187000+00:00'
+  source_tier: 1
+  crop: lua
+  region: toan_quoc
+  published_at: null
+  approved: true
+- document_id: lua__long_an_trien_khai_chuong_trinh
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/long-an-trien-khai-chuong-trinh-ho-tro-gia-giong-xay-dung-mo-hinh-ung-dung-cong-nghe-tien-tien-trong-san-xuat-lua-120833.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:07:17.187000+00:00'
+  source_tier: 1
+  crop: lua
+  approved: false
+  reject_reason: khong phai tai lieu ky thuat canh tac (tin tuc trien khai)
+- document_id: lua__mach_nuoc_phong_tru_dich_hai
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/mach-nuoc-phong-tru-dich-hai-tren-lua-he-thu-o-ha-tinh-119321.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:07:17.187000+00:00'
+  source_tier: 1
+  crop: lua
+  region: bac_trung_bo
+  published_at: null
+  approved: true
+- document_id: lua__nghe_an_chi_thi_ung_dung
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/nghe-an-chi-thi-ung-dung-tien-bo-ky-thuat-vu-lua-xuan-2021-110162.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:07:17.187000+00:00'
+  source_tier: 1
+  crop: lua
+  approved: false
+  reject_reason: khong phai tai lieu ky thuat canh tac (van ban chi dao hanh chinh)
+- document_id: lua__nhung_giong_lua_chat_luong_thich
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/nhung-giong-lua-chat-luong-thich-hop-san-xuat-2-vu-cua-vinaseed-113596.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:07:17.187000+00:00'
+  source_tier: 1
+  crop: lua
+  approved: false
+  reject_reason: khong phai tai lieu ky thuat canh tac (gioi thieu giong thuong mai Vinaseed)
+- document_id: lua__ninh_binh_danh_gia_trien_vong
+  url: https://khuyennong.ninhbinh.gov.vn/trong-trot/ninh-binh-danh-gia-trien-vong-giong-lua-lai-chat-luong-bac-xuyen-88-1032.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:02:56.864578+00:00'
+  source_tier: 2
+  crop: lua
+  approved: false
+  reject_reason: khong phai tai lieu ky thuat canh tac
+- document_id: lua__phong_tru_co_dai_cho_lua
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/phong-tru-co-dai-cho-lua-gieo-sa-vu-dong-xuan-109014.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:07:17.187000+00:00'
+  source_tier: 1
+  crop: lua
+  region: bac_trung_bo
+  published_at: null
+  approved: true
+- document_id: lua__ung_dung_nong_nghiep_cong_nghe
+  url: https://nongthonmoi.hatinh.gov.vn/Khoa-hoc-cong-nghe/ung-dung-nong-nghiep-cong-nghe-cao-trong-san-xuat-lua-102217.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:07:17.187000+00:00'
+  source_tier: 1
+  crop: lua
+  approved: false
+  reject_reason: khong phai tai lieu ky thuat canh tac (bai viet chung chung)
+- document_id: ninhbinh_dua_chuot_dong
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/ky-thuat-trong-va-cham-soc-dua-chuot-vu-dong-781.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T04:54:05.522130+00:00'
+  source_tier: 1
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  published_at: '2023-09-20'
+  approved: true
+- document_id: ninhbinh_dua_chuot_quytrinh
+  url: https://khuyennong.ninhbinh.gov.vn/khoa-hoc-ky-thuat/quy-trinh-san-xuat-dua-chuot-792.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T04:56:59.386527+00:00'
+  source_tier: 1
+  crop: dua_chuot
+  region: dong_bang_song_hong
+  published_at: '2023-10-19'
+  approved: true
+- document_id: ninhbinh_gntt_ca_chua
+  url: https://gntt.ninhbinh.gov.vn/khuyen-nong/ky-thuat-trong-cay-ca-chua-458.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T04:59:19.135829+00:00'
+  source_tier: 1
+  crop: ca_chua
+  region: dong_bang_song_hong
+  published_at: '2020-12-12'
+  approved: true
+- document_id: phanbonquocgia_ca_chua
+  url: https://phanbonquocgia.gov.vn/ky-thuat-trong-va-bon-phan-cho-cay-ca-chua/
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:00:15.499170+00:00'
+  source_tier: 1
+  crop: ca_chua
+  region: toan_quoc
+  published_at: null
+  approved: true
+- document_id: quangtri_lua_ngap_kho_xen_ke
+  url: https://khuyennong.quangtri.gov.vn/tin-hoat-dong-nganh/trien-khai-thi-diem-mo-hinh-tuoi-ngap-kho-xen-ke-trong-canh-tac-lua-thich-ung-voi-bien-doi-khi-hau-1104.html
+  reviewer: Phúc Bằng
+  reviewed_at: '2026-08-20T05:01:45.646926+00:00'
+  source_tier: 2
+  crop: lua
+  approved: false
+  reject_reason: khong phai tai lieu ky thuat canh tac
