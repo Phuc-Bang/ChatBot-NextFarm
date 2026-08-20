@@ -238,7 +238,25 @@ def cong_diem_vung(ds: list[ChunkTraVe], region: str | None,
     nhat noi ve dieu nguoi dung hoi. Loc bo se bien "khong dung vung" thanh
     "khong co gi de tra loi".
 
-    [TODO] he_so phai den tu so do, chua chot (muc 14.6).
+    KHONG DO DUOC he_so TREN TAP HIEN CO - do 2026-08-21
+
+    Chunk trong kho CO vung:
+
+        dong_bang_song_hong  65      trung_du_mien_nui  18
+        bac_trung_bo         64      dong_nam_bo         5
+        toan_quoc            33
+
+    Nhung 0/222 case trong tap v3 khai truong `region`. Khong co case nao
+    khai vung thi moi gia tri he_so deu cho ket qua Y HET NHAU - khong phai
+    "chua do", ma la KHONG CO TIN HIEU de do.
+
+    Giu 0.1 lam gia tri lam viec ([ASM]), khong phai gia tri da chot. Muon
+    chot phai them nhom case khai vung, va DEC-023 cam sua tap v3 tai cho ->
+    phai sinh tap v4. Chua lam vi chua co bang chung nhom nay dang ke.
+
+    Dieu can noi voi NextFarm: he thong CO co che uu tien vung (chong hien
+    tuong A3 - khuyen nghi sai vung mien), nhung MUC uu tien chua duoc kiem
+    chung bang so do.
     """
     if not region:
         return ds

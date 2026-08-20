@@ -608,6 +608,10 @@ Và **ưu tiên cộng điểm** cho chunk có `region` khớp vùng người d�
 | Số chunk lấy ra mỗi kênh (top-K) | **20** — chốt 2026-08-20, quét 72 tổ hợp; từ 20 trở lên bão hoà | ✅ |
 | Trọng số hợp nhất RRF (`K_RRF`) | **60** — chốt 2026-08-20; chênh 0,003 giữa 10/30/60 là nhiễu | ✅ |
 | Số chunk đưa vào Evidence Pack sau rerank | **5** (`top_k`), rerank từ **12** ứng viên — chốt 2026-08-20; N=3/N=5 làm chất lượng TỆ ĐI | ✅ |
+| Ngưỡng trigram (`NGUONG_TRIGRAM`) | **0,2** — chốt 2026-08-20; 0,4 làm MRR tụt 0,562 → 0,492 | ✅ |
+| Reranker | **BẬT** — `itdainb/PhoRanker` trên GPU, chốt 2026-08-21. R@5 72,7 → 90,9, chi phí +459 ms | ✅ |
+| Mở rộng truy vấn bằng từ địa phương | **KHÔNG dùng** — đã thử 2026-08-21, cả ba cách đều làm MRR tụt (0,621 → 0,555–0,589) | ✅ |
+| Hệ số cộng điểm vùng (`he_so`) | **0,1** `[ASM]` — **không đo được**: 0/222 case tập v3 khai `region`, mọi giá trị cho kết quả y hệt. Chốt được thì phải sinh tập v4 | ⚠️ |
 | Ngưỡng điểm tối thiểu để không abstain | `[TODO]` — **công cụ đã có** (`make risk-coverage`), chờ chạy lại C2 để có trường `diem_cao_nhat`. Chặn bởi quota, không phải thiếu mã | ⏳ |
 
 **Không được tự đặt các con số này rồi ghi vào tài liệu như đã chốt.** Chúng phải đến từ số đo.

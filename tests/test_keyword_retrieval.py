@@ -13,6 +13,7 @@ doan dau" sup do, va he thong buoc phai quay lai cach doan dau - tuc la bia.
 Test can PostgreSQL dang chay: make up && python db/migrate.py
 """
 
+import inspect
 import os
 import re
 import sys
@@ -264,11 +265,25 @@ def test_rrf_uu_tien_chunk_hai_kenh_cung_tra_ve():
     assert set(ra[0].kenh) == {"fts", "trigram"}
 
 
-def test_tham_so_chua_chot_duoc_danh_dau_todo():
-    """Top-K, trong so RRF, nguong deu la [TODO] cho den khi do Recall@K
-    (muc 14.6). Khong duoc chot tren giay."""
-    nguon = Path(kw.__file__).read_text(encoding="utf-8")
-    assert "[TODO]" in nguon
+def test_tham_so_chua_chot_phai_noi_ro_vi_sao():
+    """Tham so chua chot khong duoc de tran - phai ghi ro chua chot VI SAO.
+
+    Ban dau test nay chi doi chuoi "[TODO]" co mat trong file. Ba tham so
+    TOP_K_MOI_KENH / K_RRF / NGUONG_TRIGRAM da chot bang so do 2026-08-20
+    (quet 72 to hop), nen phep kiem do het y nghia.
+
+    Con lai mot tham so chua chot that: he_so cua cong_diem_vung(). No khong
+    phai "chua do" ma la KHONG DO DUOC - 0/222 case trong tap v3 khai truong
+    region, nen moi gia tri he_so deu cho ket qua y het nhau.
+
+    Phan biet hai thu do la quan trong: "chua do" thi cu do la xong, "khong
+    do duoc" thi phai sinh tap v4 (DEC-023 cam sua v3 tai cho).
+    """
+    src = inspect.getsource(kw.cong_diem_vung)
+    assert "he_so" in src
+    assert "KHONG DO DUOC" in src or "[TODO]" in src, (
+        "he_so van chua chot bang so do - phai ghi ro trang thai va vi sao, "
+        "khong duoc de mot con so tran khong ai biet no tu dau ra")
 
 
 # ----------------------------------------------------------------------
