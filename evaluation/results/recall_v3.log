@@ -1,0 +1,41 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Tap kiem thu v3 | 22 case co source_of_truth
+  do duoc                 : 15
+  KHONG do duoc (bi chan) : 7
+      Chunk nguon la noi dung RUI RO CAO chua duyet le nen
+      DEC-005 chan khoi kho truy xuat. Khong he thong nao tim
+      ra duoc - day la hanh vi DUNG, khong phai loi retrieval.
+      Duyet 44 chunk rui ro cao se mo lai cac case nay.
+Kho tri thuc: 161 chunk index duoc
+
+Dang do keyword (FTS + trigram) ...
+Dang do halong ...
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 8787.35it/s]
+D:\NextFarm\app\services\embedding\local.py:63: FutureWarning: The `get_sentence_embedding_dimension` method has been renamed to `get_embedding_dimension`.
+  self.so_chieu = self._m.get_sentence_embedding_dimension()
+Dang do e5-small ...
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 7631.17it/s]
+D:\NextFarm\app\services\embedding\local.py:63: FutureWarning: The `get_sentence_embedding_dimension` method has been renamed to `get_embedding_dimension`.
+  self.so_chieu = self._m.get_sentence_embedding_dimension()
+Dang do hybrid(halong) ...
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 8214.41it/s]
+D:\NextFarm\app\services\embedding\local.py:63: FutureWarning: The `get_sentence_embedding_dimension` method has been renamed to `get_embedding_dimension`.
+  self.so_chieu = self._m.get_sentence_embedding_dimension()
+Dang do hybrid(e5-small) ...
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 8794.76it/s]
+D:\NextFarm\app\services\embedding\local.py:63: FutureWarning: The `get_sentence_embedding_dimension` method has been renamed to `get_embedding_dimension`.
+  self.so_chieu = self._m.get_sentence_embedding_dimension()
+
+==============================================================================
+RECALL@K  |  15 case co ground truth  |  161 chunk
+==============================================================================
+model              chieu     R@1     R@3     R@5    R@10     MRR   nap(s)   kho(s)  hoi(ms)
+------------------------------------------------------------------------------
+hybrid(halong)       768    60.0    73.3    73.3    80.0   0.687      0.0      0.0       97
+keyword                0    46.7    60.0    73.3    80.0   0.576      0.0      0.0       93
+hybrid(e5-small)     384    40.0    66.7    66.7    73.3   0.559      0.0      0.0       83
+halong               768    13.3    80.0    80.0    86.7   0.432      8.8      6.7        3
+e5-small             384    20.0    60.0    73.3    80.0   0.388      9.4      1.3        1
+
+hoi(ms) = thoi gian embed MOT cau hoi - day la phan nam tren
+duong latency moi luot (ngan sach ASM-01: p50 <= 5s tong).
