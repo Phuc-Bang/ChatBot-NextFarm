@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quản trị — ChatBot NextFarm</title>
+<style>
+/* ==========================================================================
+   Trang quan tri. KHAC HAN trang chat ve muc dich va ve mat nhin.
+
+   TRANG NAY DE LAM GI
+
+   Khong phai de theo doi chi phi. No la BANG CHUNG TRUC QUAN cho tieu chi
+   nghiem thu #2 cua de bai. Khi demo, cau "he thong da chan N cau hoi so
+   lieu vuon" noi bang loi thi yeu; mo bang log ra, loc theo ly do tu choi,
+   cho ho doc tung cau - do moi la thuyet phuc.
+
+   Vi vay nut "Chi xem ca da chan" la nut quan trong nhat trang nay.
+
+   CANH BAO BAO MAT
+   Trang nay hien TOAN BO cau hoi nguoi dung. Dang chay LOCAL nen chua co
+   dang nhap. Neu deploy ra ngoai thi BAT BUOC them khoa cho /admin va
+   /api/admin/*.
+   ========================================================================== */
+:root{
+  --nen:#F8FAFC; --the:#FFFFFF; --chu:#0F172A; --chu-mo:#64748B;
+  --vien:#E2E8F0; --xanh:#1E40AF; --xanh-nhat:#EFF6FF;
+  --vang:#B45309; --vang-nen:#FFFBEB;
+  --luc:#15803D; --luc-nen:#F0FDF4; --do:#DC2626;
+  --r:10px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --nen:#0B1120; --the:#111827; --chu:#E2E8F0; --chu-mo:#94A3B8;
+    --vien:#1E293B; --xanh:#60A5FA; --xanh-nhat:#111E36;
+    --vang:#FCD34D; --vang-nen:#251C0C;
+    --luc:#4ADE80; --luc-nen:#0F2318; --do:#FCA5A5;
+  }
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--nen);color:var(--chu);
+  font:400 14px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+/* So lieu dung chu deu de cot khong nhay khi cap nhat */
+.so{font-variant-numeric:tabular-nums}
+header{
+  background:var(--the);border-bottom:1px solid var(--vien);
+  padding:15px 24px;display:flex;align-items:center;
+  justify-content:space-between;gap:16px;flex-wrap:wrap;
+}
+h1{font-size:16px;margin:0;font-weight:650;letter-spacing:-.01em}
+.hd-phu{font-size:12.5px;color:var(--chu-mo);margin-top:2px}
+.hd-nut{display:flex;gap:8px;align-items:center}
+a.lien-ket{
+  color:var(--xanh);text-decoration:none;font-size:13.5px;font-weight:500;
+  padding:7px 13px;border:1px solid var(--vien);border-radius:8px;
+}
+a.lien-ket:hover{background:var(--xanh-nhat)}
+main{max-width:1240px;margin:0 auto;padding:22px 24px 60px}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;
+   color:var(--chu-mo);margin:30px 0 12px;font-weight:650}
+h2:first-child{margin-top:0}
+
+/* --- The chi so --- */
+.luoi{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(178px,1fr))}
+.the{background:var(--the);border:1px solid var(--vien);
+     border-radius:var(--r);padding:15px 17px}
+.the-nhan{font-size:12.5px;color:var(--chu-mo);margin-bottom:5px}
+.the-so{font-size:27px;font-weight:660;letter-spacing:-.02em;line-height:1.15}
+.the-phu{font-size:12px;color:var(--chu-mo);margin-top:4px}
+.the.nhan-manh{border-color:var(--luc);background:var(--luc-nen)}
+.the.canh-bao{border-color:var(--vang);background:var(--vang-nen)}
+
+/* --- Bang --- */
+.hop{background:var(--the);border:1px solid var(--vien);
+     border-radius:var(--r);overflow:hidden}
+.hop-dau{padding:13px 17px;border-bottom:1px solid var(--vien);
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  flex-wrap:wrap}
+.hop-ten{font-weight:620;font-size:14px}
+.cuon{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{
+  text-align:left;padding:10px 14px;font-size:11.5px;font-weight:650;
+  text-transform:uppercase;letter-spacing:.04em;color:var(--chu-mo);
+  border-bottom:1px solid var(--vien);white-space:nowrap;
+  position:sticky;top:0;background:var(--the);
+}
+td{padding:11px 14px;border-bottom:1px solid var(--vien);vertical-align:top}
+tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--nen)}
+.cot-hoi{max-width:330px}
+.cot-dap{max-width:400px;color:var(--chu-mo);font-size:13px}
+
+/* Chip: KHONG chi dua vao mau (WCAG) - moi chip co chu ro nghia */
+.chip{
+  display:inline-block;padding:3px 9px;border-radius:999px;
+  font-size:11.5px;font-weight:600;white-space:nowrap;
+  border:1px solid transparent;
+}
+.chip.chan{background:var(--vang-nen);color:var(--vang);border-color:var(--vang)}
+.chip.tra{background:var(--luc-nen);color:var(--luc);border-color:var(--luc)}
+.nut{
+  background:var(--the);border:1px solid var(--vien);color:var(--chu);
+  border-radius:8px;padding:7px 13px;font:inherit;font-size:13px;
+  cursor:pointer;min-height:36px;
+}
+.nut:hover{border-color:var(--xanh)}
+.nut[aria-pressed="true"]{background:var(--xanh);color:#fff;border-color:var(--xanh)}
+.nut:focus-visible{outline:2px solid var(--xanh);outline-offset:2px}
+
+/* --- Thanh ty le --- */
+.hang-ty-le{display:flex;align-items:center;gap:11px;padding:8px 0}
+.hang-ten{min-width:180px;font-size:13.5px}
+.thanh{flex:1;height:9px;background:var(--nen);border-radius:5px;
+       overflow:hidden;border:1px solid var(--vien)}
+.thanh i{display:block;height:100%;background:var(--xanh)}
+.hang-so{min-width:52px;text-align:right;font-size:13px;color:var(--chu-mo)}
+
+.trong{padding:34px;text-align:center;color:var(--chu-mo);font-size:14px}
+.luu-y{
+  background:var(--vang-nen);border:1px solid var(--vang);
+  border-radius:var(--r);padding:13px 16px;font-size:13px;margin-top:26px;
+}
+.luu-y b{color:var(--vang)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (max-width:640px){
+  main{padding:16px 14px 50px}
+  .cot-dap{display:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Bảng quản trị</h1>
+    <div class="hd-phu" id="hd-phu">Đang tải…</div>
+  </div>
+  <div class="hd-nut">
+    <button class="nut" id="nut-tai">Tải lại</button>
+    <a class="lien-ket" href="/">Trang chat</a>
+  </div>
+</header>
+
+<main>
+  <h2>Kho tri thức</h2>
+  <div class="luoi" id="the-kho"></div>
+
+  <h2>Hoạt động</h2>
+  <div class="luoi" id="the-hd"></div>
+
+  <h2>Độ trễ theo từng chặng</h2>
+  <div class="hop"><div style="padding:15px 17px" id="chang"></div></div>
+
+  <h2>Lý do từ chối</h2>
+  <div class="hop"><div style="padding:15px 17px" id="ly-do"></div></div>
+
+  <h2>Nhật ký truy vấn</h2>
+  <div class="hop">
+    <div class="hop-dau">
+      <span class="hop-ten" id="nk-ten">Gần đây nhất</span>
+      <button class="nut" id="nut-loc" aria-pressed="false">
+        Chỉ xem ca đã chặn
+      </button>
+    </div>
+    <div class="cuon"><table>
+      <thead><tr>
+        <th>Thời điểm</th><th>Câu hỏi</th><th>Kết quả</th>
+        <th>Ý định</th><th>Trả lời</th><th>Độ trễ</th><th>Token</th>
+      </tr></thead>
+      <tbody id="nk-than"><tr><td colspan="7" class="trong">Đang tải…</td></tr></tbody>
+    </table></div>
+  </div>
+
+  <div class="luu-y">
+    <b>Lưu ý.</b> Trang này hiển thị toàn bộ câu hỏi người dùng và chưa có
+    đăng nhập vì đang chạy trên máy cục bộ. Nếu triển khai ra ngoài, bắt buộc
+    phải thêm khoá cho <code>/admin</code> và <code>/api/admin/*</code>.
+    Chi phí ước tính theo bảng giá tra ngày <span id="ngay-gia">—</span>;
+    giá nhà cung cấp thay đổi theo thời gian.
+  </div>
+</main>
+
+<script>
+const esc = s => String(s ?? "").replace(/[&<>"']/g,
+  c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const n0 = x => (x ?? 0).toLocaleString("vi-VN");
+
+const NHAN_LY_DO = {
+  garden_data:"Hỏi số liệu vườn", product_feature:"Hỏi tính năng app",
+  device_control:"Ra lệnh thiết bị", out_of_scope:"Ngoài phạm vi",
+  insufficient_evidence:"Chưa đủ căn cứ", grounding_khong_dat:"Không đạt kiểm chứng",
+  can_lam_ro:"Cần làm rõ", loi_he_thong:"Lỗi hệ thống",
+  loi_dinh_dang:"Lỗi định dạng",
+};
+let chiTuChoi = false;
+
+function the(nhan, so, phu, kieu){
+  return '<div class="the ' + (kieu||"") + '">'
+    + '<div class="the-nhan">' + esc(nhan) + '</div>'
+    + '<div class="the-so so">' + so + '</div>'
+    + (phu ? '<div class="the-phu">' + esc(phu) + '</div>' : "")
+    + '</div>';
+}
+
+function veTyLe(el, ds, lay_ten, lay_so){
+  if (!ds || !ds.length){ el.innerHTML = '<div class="trong">Chưa có dữ liệu</div>'; return; }
+  const max = Math.max(...ds.map(lay_so), 1);
+  el.innerHTML = ds.map(d =>
+    '<div class="hang-ty-le"><div class="hang-ten">' + esc(lay_ten(d)) + '</div>'
+    + '<div class="thanh"><i style="width:' + (lay_so(d)/max*100).toFixed(1) + '%"></i></div>'
+    + '<div class="hang-so so">' + n0(lay_so(d)) + '</div></div>').join("");
+}
+
+async function tai(){
+  try {
+    const [kho, tq, nk] = await Promise.all([
+      fetch("/api/admin/kho_tri_thuc").then(r=>r.json()),
+      fetch("/api/admin/tong_quan").then(r=>r.json()),
+      fetch("/api/admin/nhat_ky?limit=100&chi_tu_choi=" + chiTuChoi).then(r=>r.json()),
+    ]);
+
+    document.getElementById("hd-phu").textContent =
+      "Model " + (tq.model || "—") + " · embedding " + "halong";
+    document.getElementById("ngay-gia").textContent = tq.ngay_tra_gia || "—";
+
+    // --- Kho tri thuc ---
+    // Chenh lech chunk_tong vs chunk_index_duoc la con so quan trong nhat:
+    // no cho thay DEC-005 dang chan THAT, khong phai loi hua.
+    document.getElementById("the-kho").innerHTML =
+        the("Tài liệu đã duyệt", n0(kho.tai_lieu_da_duyet) + " / " + n0(kho.tai_lieu_tong))
+      + the("Chunk vào được kho", n0(kho.chunk_index_duoc), "trên " + n0(kho.chunk_tong) + " chunk", "nhan-manh")
+      + the("Chunk bị chặn", n0(kho.chunk_bi_chan), "chưa duyệt lẻ", "canh-bao")
+      + the("Chunk rủi ro cao", n0(kho.chunk_rui_ro_cao), "cần duyệt riêng")
+      + the("Số liệu đã xác nhận", n0(kho.fact_da_duyet) + " / " + n0(kho.fact_tong));
+
+    // --- Hoat dong ---
+    const tien = tq.chi_phi_usd == null ? "—" : "$" + tq.chi_phi_usd.toFixed(4);
+    document.getElementById("the-hd").innerHTML =
+        the("Tổng lượt hỏi", n0(tq.tong_luot))
+      + the("Đã chặn / từ chối", n0(tq.so_tu_choi), tq.ty_le_tu_choi + "% tổng lượt", "canh-bao")
+      + the("Độ trễ p50", n0(tq.latency_p50_ms) + " ms", "ngân sách 5.000 ms")
+      + the("Độ trễ p95", n0(tq.latency_p95_ms) + " ms", "ngân sách 10.000 ms")
+      + the("Token vào / lượt", n0(tq.Ti_trung_binh), "Ti của mô hình chi phí")
+      + the("Token ra / lượt", n0(tq.To_trung_binh), "To của mô hình chi phí")
+      + the("Chi phí ước tính", tien, "toàn bộ lượt đã ghi");
+
+    veTyLe(document.getElementById("chang"), tq.theo_chang,
+           d => ({chuan_hoa:"Chuẩn hoá",intent:"Intent Router",scope:"Scope Check",
+                  truy_xuat:"Truy xuất",llm:"Gọi model"}[d.chang] || d.chang),
+           d => d.trung_binh_ms);
+    veTyLe(document.getElementById("ly-do"), tq.theo_ly_do,
+           d => NHAN_LY_DO[d.ly_do] || d.ly_do, d => d.so_luot);
+
+    // --- Nhat ky ---
+    const tb = document.getElementById("nk-than");
+    document.getElementById("nk-ten").textContent =
+      chiTuChoi ? "Chỉ các ca đã chặn (" + nk.length + ")"
+                : "Gần đây nhất (" + nk.length + ")";
+    if (!nk.length){
+      tb.innerHTML = '<tr><td colspan="7" class="trong">'
+        + (chiTuChoi ? "Chưa có ca nào bị chặn."
+                     : "Chưa có lượt hỏi nào. Thử vào trang chat và đặt câu hỏi.")
+        + '</td></tr>';
+      return;
+    }
+    tb.innerHTML = nk.map(r => {
+      const t = r.thoi_diem ? new Date(r.thoi_diem)
+        .toLocaleString("vi-VN",{day:"2-digit",month:"2-digit",
+                                 hour:"2-digit",minute:"2-digit"}) : "—";
+      const tong = r.latency_ms
+        ? Object.values(r.latency_ms).reduce((a,b)=>a+(+b||0),0) : null;
+      const chip = r.da_tu_choi
+        ? '<span class="chip chan">' + esc(NHAN_LY_DO[r.ly_do] || "Đã chặn") + '</span>'
+        : '<span class="chip tra">Đã trả lời</span>';
+      return "<tr><td class='so' style='white-space:nowrap'>" + t + "</td>"
+        + "<td class='cot-hoi'>" + esc(r.cau_hoi) + "</td>"
+        + "<td>" + chip + "</td>"
+        + "<td>" + esc(r.intent || "—") + "</td>"
+        + "<td class='cot-dap'>" + esc((r.tra_loi||"").slice(0,150)) + "</td>"
+        + "<td class='so'>" + (tong==null ? "—" : n0(tong)+" ms") + "</td>"
+        + "<td class='so'>" + n0(r.token_vao) + " / " + n0(r.token_ra) + "</td></tr>";
+    }).join("");
+  } catch(e){
+    document.getElementById("hd-phu").textContent =
+      "Không kết nối được máy chủ";
+  }
+}
+
+document.getElementById("nut-tai").onclick = tai;
+document.getElementById("nut-loc").onclick = function(){
+  chiTuChoi = !chiTuChoi;
+  this.setAttribute("aria-pressed", String(chiTuChoi));
+  this.textContent = chiTuChoi ? "Xem tất cả" : "Chỉ xem ca đã chặn";
+  tai();
+};
+tai();
+</script>
+</body>
+</html>

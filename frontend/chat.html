@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trợ lý nông nghiệp NextFarm</title>
+<style>
+/* ==========================================================================
+   Trang chat cho nong dan.
+
+   BA QUYET DINH THIET KE, DEU CO LY DO:
+
+   1. CHU 17px, KHONG PHAI 14px. Nguoi dung la nong dan, nhieu nguoi lon
+      tuoi, doc tren dien thoai giua troi nang. 16px la nguong toi thieu de
+      iOS khong tu phong to khi bam vao o nhap.
+
+   2. TU CHOI PHAI TRONG KHAC HAN TRA LOI. Neu hai loai giong nhau thi nguoi
+      dung doc luot se tuong bot da tra loi. Toan bo gia tri cua he thong nay
+      nam o cho "biet tu choi", nen viec tu choi phai NHIN THAY DUOC.
+
+   3. NGUON LUON HIEN, KHONG GIAU SAU NUT BAM. Muc dich cua PoC la truy
+      nguoc duoc; giau nguon di la lam hong dieu do.
+   ========================================================================== */
+:root{
+  --xanh:#15803D; --xanh-dam:#166534; --xanh-nhat:#F0FDF4;
+  --nen:#FFFFFF; --chu:#0F172A; --chu-mo:#475569;
+  --vien:#E2E8F0; --mo:#F8FAFC;
+  --vang:#B45309; --vang-nen:#FFFBEB; --vang-vien:#FDE68A;
+  --do:#B91C1C;
+  --r:12px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --xanh:#4ADE80; --xanh-dam:#86EFAC; --xanh-nhat:#14261A;
+    --nen:#0B1120; --chu:#E2E8F0; --chu-mo:#94A3B8;
+    --vien:#1E293B; --mo:#111827;
+    --vang:#FCD34D; --vang-nen:#2A2010; --vang-vien:#78350F;
+    --do:#FCA5A5;
+  }
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--nen); color:var(--chu);
+  font:400 17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  -webkit-text-size-adjust:100%;
+}
+header{
+  position:sticky; top:0; z-index:10;
+  background:var(--nen); border-bottom:1px solid var(--vien);
+  padding:14px 20px; display:flex; align-items:center; gap:12px;
+}
+.logo{
+  width:34px;height:34px;border-radius:9px;background:var(--xanh);
+  display:grid;place-items:center;flex:none;
+}
+.logo svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2}
+h1{font-size:17px;margin:0;font-weight:650;letter-spacing:-.01em}
+.sub{font-size:13px;color:var(--chu-mo);margin-top:1px}
+main{max-width:760px;margin:0 auto;padding:20px 16px 190px}
+
+/* --- Loi chao --- */
+.chao{
+  background:var(--xanh-nhat); border:1px solid var(--vien);
+  border-radius:var(--r); padding:18px 20px; margin-bottom:22px;
+}
+.chao h2{margin:0 0 8px;font-size:17px;font-weight:650}
+.chao p{margin:0 0 12px;color:var(--chu-mo);font-size:15px}
+.goi-y{display:flex;flex-wrap:wrap;gap:8px}
+.goi-y button{
+  background:var(--nen);border:1px solid var(--vien);color:var(--chu);
+  border-radius:999px;padding:9px 15px;font-size:14.5px;cursor:pointer;
+  font-family:inherit;transition:border-color .18s,background .18s;
+  min-height:40px;
+}
+.goi-y button:hover{border-color:var(--xanh);background:var(--xanh-nhat)}
+.goi-y button:focus-visible{outline:2px solid var(--xanh);outline-offset:2px}
+
+/* --- Tin nhan --- */
+.luot{margin-bottom:22px}
+.hoi{
+  background:var(--xanh);color:#fff;padding:12px 17px;
+  border-radius:var(--r) var(--r) 3px var(--r);
+  max-width:82%;margin-left:auto;width:fit-content;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .hoi{color:#052e16;font-weight:500}
+}
+.dap{
+  margin-top:12px;padding:15px 18px;border-radius:var(--r);
+  background:var(--mo);border:1px solid var(--vien);
+}
+/* Tu choi: nen vang + vien trai day. Khac han o mat nhin. */
+.dap.tuchoi{
+  background:var(--vang-nen);border-color:var(--vang-vien);
+  border-left:4px solid var(--vang);
+}
+.nhan{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12.5px;font-weight:600;letter-spacing:.02em;
+  text-transform:uppercase;margin-bottom:9px;
+}
+.nhan.tuchoi{color:var(--vang)}
+.nhan.tra-loi{color:var(--xanh)}
+.nhan svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2}
+.noi-dung{white-space:pre-wrap}
+
+/* --- Nguon --- */
+.nguon{margin-top:15px;padding-top:13px;border-top:1px solid var(--vien)}
+.nguon-tieu-de{
+  font-size:12.5px;font-weight:600;color:var(--chu-mo);
+  text-transform:uppercase;letter-spacing:.03em;margin-bottom:9px;
+}
+.nguon-item{
+  display:block;padding:11px 13px;border:1px solid var(--vien);
+  border-radius:9px;margin-bottom:7px;text-decoration:none;color:inherit;
+  background:var(--nen);transition:border-color .18s;
+}
+.nguon-item:hover{border-color:var(--xanh)}
+.nguon-item:focus-visible{outline:2px solid var(--xanh);outline-offset:1px}
+.nguon-ten{font-size:14.5px;font-weight:600;margin-bottom:3px}
+.nguon-meta{font-size:12.5px;color:var(--chu-mo)}
+.nguon-trich{
+  font-size:13.5px;color:var(--chu-mo);margin-top:7px;
+  padding-left:10px;border-left:2px solid var(--vien);line-height:1.5;
+}
+
+/* --- O nhap --- */
+.thanh{
+  position:fixed;left:0;right:0;bottom:0;background:var(--nen);
+  border-top:1px solid var(--vien);padding:13px 16px;
+}
+.thanh-trong{max-width:760px;margin:0 auto;display:flex;gap:10px}
+textarea{
+  flex:1;font:inherit;font-size:17px;padding:13px 15px;resize:none;
+  border:1px solid var(--vien);border-radius:var(--r);
+  background:var(--nen);color:var(--chu);min-height:52px;max-height:150px;
+}
+textarea:focus{outline:2px solid var(--xanh);outline-offset:-1px;
+  border-color:transparent}
+button.gui{
+  background:var(--xanh);color:#fff;border:0;border-radius:var(--r);
+  padding:0 22px;font:inherit;font-weight:600;cursor:pointer;
+  min-width:56px;min-height:52px;
+}
+button.gui:hover:not(:disabled){background:var(--xanh-dam)}
+button.gui:disabled{opacity:.45;cursor:not-allowed}
+button.gui:focus-visible{outline:2px solid var(--chu);outline-offset:2px}
+.ghi-chu{
+  max-width:760px;margin:9px auto 0;font-size:12.5px;
+  color:var(--chu-mo);text-align:center;
+}
+.ghi-chu a{color:var(--chu-mo)}
+
+/* --- Dang cho --- */
+.cho{display:flex;gap:5px;padding:6px 0}
+.cho i{
+  width:8px;height:8px;border-radius:50%;background:var(--chu-mo);
+  animation:nhay 1.3s infinite;
+}
+.cho i:nth-child(2){animation-delay:.16s}
+.cho i:nth-child(3){animation-delay:.32s}
+@keyframes nhay{0%,60%,100%{opacity:.25}30%{opacity:1}}
+@media (prefers-reduced-motion:reduce){
+  .cho i{animation:none;opacity:.5}
+  *{transition:none!important}
+}
+.loi{color:var(--do);font-size:14.5px}
+@media (max-width:520px){
+  main{padding:16px 12px 190px}
+  .hoi{max-width:92%}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><path d="M12 21V9M12 9C12 6 9 3 5 3c0 4 3 6 7 6M12 9c0-3 3-6 7-6 0 4-3 6-7 6"/></svg>
+  </div>
+  <div>
+    <h1>Trợ lý nông nghiệp</h1>
+    <div class="sub">Lúa · Cà chua · Dưa chuột</div>
+  </div>
+</header>
+
+<main>
+  <div class="chao" id="chao">
+    <h2>Xin chào!</h2>
+    <p>Em trả lời dựa trên tài liệu kỹ thuật từ các Sở Nông nghiệp và trung tâm
+       khuyến nông. Câu nào không có trong tài liệu thì em nói không biết,
+       chứ không đoán ạ.</p>
+    <div class="goi-y" id="goi-y"></div>
+  </div>
+  <div id="hoi-thoai"></div>
+</main>
+
+<div class="thanh">
+  <div class="thanh-trong">
+    <textarea id="o-nhap" rows="1" placeholder="Nhập câu hỏi của bạn…"
+              aria-label="Câu hỏi"></textarea>
+    <button class="gui" id="nut-gui" aria-label="Gửi câu hỏi">Gửi</button>
+  </div>
+  <div class="ghi-chu">
+    Thông tin mang tính tham khảo · <a href="/admin">Trang quản trị</a>
+  </div>
+</div>
+
+<script>
+const GOI_Y = [
+  "Cà chua cần độ pH bao nhiêu?",
+  "Dưa chuột cần độ ẩm đất bao nhiêu?",
+  "Lúa bón bao nhiêu kg đạm một hecta?",
+];
+
+// Ly do tu choi -> nhan tieng Viet. Bon loai nay PHAI phan biet duoc voi
+// nhau: "chua co tai lieu" khac han "khong bao gio ho tro", va nguoi dung
+// can hieu dung minh dang gap loai nao.
+const NHAN_LY_DO = {
+  garden_data:           "Không truy cập dữ liệu vườn",
+  product_feature:       "Không có tài liệu về ứng dụng",
+  device_control:        "Không điều khiển thiết bị",
+  out_of_scope:          "Ngoài phạm vi hỗ trợ",
+  insufficient_evidence: "Chưa đủ căn cứ trong tài liệu",
+  grounding_khong_dat:   "Chưa đủ căn cứ chắc chắn",
+  can_lam_ro:            "Cần làm rõ thêm",
+  loi_he_thong:          "Hệ thống bận",
+  loi_dinh_dang:         "Chưa tạo được câu trả lời",
+};
+
+const ICON_CANH = '<svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>';
+const ICON_OK   = '<svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>';
+
+const $hoiThoai = document.getElementById("hoi-thoai");
+const $nhap = document.getElementById("o-nhap");
+const $gui  = document.getElementById("nut-gui");
+const $chao = document.getElementById("chao");
+let dangGui = false;
+let nguQuanh = [];          // context_turns cho cau hoi tiep noi
+
+const esc = s => String(s ?? "").replace(/[&<>"']/g,
+  c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+GOI_Y.forEach(t => {
+  const b = document.createElement("button");
+  b.textContent = t;
+  b.onclick = () => { $nhap.value = t; gui(); };
+  document.getElementById("goi-y").appendChild(b);
+});
+
+$nhap.addEventListener("input", () => {
+  $nhap.style.height = "auto";
+  $nhap.style.height = Math.min($nhap.scrollHeight, 150) + "px";
+});
+$nhap.addEventListener("keydown", e => {
+  if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); gui(); }
+});
+$gui.onclick = gui;
+
+function veNguon(ds){
+  if (!ds || !ds.length) return "";
+  return '<div class="nguon"><div class="nguon-tieu-de">Nguồn ('
+    + ds.length + ')</div>'
+    + ds.map(n => '<a class="nguon-item" href="' + esc(n.url)
+        + '" target="_blank" rel="noopener">'
+        + '<div class="nguon-ten">' + esc(n.tieu_de || n.chunk_id) + '</div>'
+        + '<div class="nguon-meta">' + esc(n.co_quan || "")
+        + (n.tier ? " · Tier " + n.tier : "") + '</div>'
+        + '<div class="nguon-trich">' + esc(n.trich) + '</div></a>').join("")
+    + '</div>';
+}
+
+async function gui(){
+  const q = $nhap.value.trim();
+  if (!q || dangGui) return;
+  dangGui = true; $gui.disabled = true;
+  $chao.style.display = "none";
+  $nhap.value = ""; $nhap.style.height = "auto";
+
+  const luot = document.createElement("div");
+  luot.className = "luot";
+  luot.innerHTML = '<div class="hoi">' + esc(q) + '</div>'
+    + '<div class="dap"><div class="cho"><i></i><i></i><i></i></div></div>';
+  $hoiThoai.appendChild(luot);
+  luot.scrollIntoView({behavior:"smooth", block:"start"});
+
+  const $dap = luot.querySelector(".dap");
+  try {
+    const res = await fetch("/api/chat", {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({cau_hoi:q, context_turns:nguQuanh.slice(-4)})
+    });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const d = await res.json();
+
+    const nhan = d.da_tu_choi
+      ? '<div class="nhan tuchoi">' + ICON_CANH + " "
+        + esc(NHAN_LY_DO[d.ly_do_tu_choi] || "Không trả lời được") + "</div>"
+      : '<div class="nhan tra-loi">' + ICON_OK + " Có căn cứ tài liệu</div>";
+
+    $dap.className = "dap" + (d.da_tu_choi ? " tuchoi" : "");
+    $dap.innerHTML = nhan
+      + '<div class="noi-dung">' + esc(d.tra_loi) + "</div>"
+      + veNguon(d.nguon);
+
+    nguQuanh.push(q);
+  } catch (e) {
+    $dap.innerHTML = '<div class="loi">Không kết nối được máy chủ. '
+      + 'Bạn thử lại sau ít phút nhé.</div>';
+  } finally {
+    dangGui = false; $gui.disabled = false; $nhap.focus();
+  }
+}
+</script>
+</body>
+</html>
