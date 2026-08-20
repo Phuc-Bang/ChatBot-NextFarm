@@ -38,7 +38,7 @@ from app.services.retrieval.vector import tim_vector
 def tim_kiem(cau, crop: str | None = None, region: str | None = None,
              top_k: int = 5, top_k_kenh: int = TOP_K_MOI_KENH,
              dung_vector: bool = True, conn=None,
-             top_k_rerank: int = 20) -> list[ChunkTraVe]:
+             top_k_rerank: int = 12) -> list[ChunkTraVe]:
     """Tim top_k chunk lien quan nhat.
 
     `dung_vector=False` de do rieng dong gop cua vector, hoac de chay khi
@@ -67,10 +67,17 @@ def tim_kiem(cau, crop: str | None = None, region: str | None = None,
 
     # Rerank: chi chay khi RERANKER_MODEL duoc dat (mac dinh TAT).
     #
-    # Dua cho no NHIEU hon top_k de no con gi de xep lai. Lay dung top_k roi
-    # rerank la vo nghia: thu tu doi nhung tap hop khong doi, ma R@1 thap
-    # trong khi R@10 cao (50% vs 95,5%) nghia la chunk dung THUONG nam ngoai
-    # top_k. Xem app/services/retrieval/rerank.py.
+    # top_k_rerank = 12: CHOT BANG SO DO, quet N tren 22 case.
+    #
+    #   N=3   MRR 0.455   1.011 ms   <- TE HON ca khi TAT
+    #   N=5   MRR 0.477   1.105 ms   <- van te hon khi TAT (0.562)
+    #   N=8   MRR 0.575   1.630 ms
+    #   N=12  MRR 0.605   2.362 ms   <- diem ngot
+    #   N=20  MRR 0.605   4.208 ms   <- cung chat luong, gap doi thoi gian
+    #
+    # N nho lam TE DI chu khong phai "it cai thien hon": rerank it chunk thi
+    # doi thu tu ma khong doi tap hop, trong khi chunk dung thuong nam ngoai
+    # top_k (R@1 50% nhung R@10 95,5%). Xem docs/reports/P6_reranker.md.
     from app.services.retrieval import rerank
     if rerank.co_bat():
         return rerank.xep_lai(cau, gop[:top_k_rerank], top_k=top_k)

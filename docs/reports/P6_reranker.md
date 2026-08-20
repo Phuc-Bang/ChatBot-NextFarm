@@ -52,6 +52,38 @@ Nguyên nhân: cross-encoder chạy **CPU**. GPU 4 GB của máy này đã bị 
 embedding chiếm; nạp thêm cross-encoder lên cùng GPU thì vỡ với
 `CUDA error: device-side assert triggered`.
 
+## Chốt `top_k_rerank = 12` bằng số đo
+
+Đưa cho reranker bao nhiêu chunk? Quét N trên cùng 22 case:
+
+| N | R@1 | R@3 | R@5 | MRR | ms/câu |
+|---:|---:|---:|---:|---:|---:|
+| TẮT | 40,9 | 59,1 | 72,7 | 0,562 | 0 |
+| 3 | 31,8 | 59,1 | 59,1 | **0,455** | 1.011 |
+| 5 | 31,8 | 63,6 | 72,7 | **0,477** | 1.105 |
+| 8 | 40,9 | 68,2 | 86,4 | 0,575 | 1.630 |
+| **12** | **45,5** | **72,7** | **90,9** | **0,605** | **2.362** |
+| 20 | 45,5 | 72,7 | 90,9 | 0,605 | 3.915 |
+
+Hai điều đọc được:
+
+**N nhỏ làm TỆ ĐI, không phải "ít cải thiện hơn".** N=3 cho MRR 0,455 và
+N=5 cho 0,477 — đều **thấp hơn** khi tắt hẳn (0,562). Lý do: rerank ít chunk
+thì đổi thứ tự mà **không đổi tập hợp**, trong khi chunk đúng thường nằm
+ngoài top-k (R@1 50% nhưng R@10 95,5%). Reranker khi đó chỉ xáo lại một tập
+đã thiếu chunk đúng.
+
+**N=12 cho đúng chất lượng của N=20 với 60% thời gian** (2.362 ms so với
+3.915 ms). Chốt 12.
+
+> Con số ms dao động theo tải máy — lần đo trước cho N=20 là 4.208 ms, lần
+> này 3.915 ms. Thứ hạng và các chỉ số chất lượng thì ổn định. Đọc bảng này
+> theo **xu hướng**, đừng đọc theo mili-giây tuyệt đối.
+
+Với N=12, tổng một lượt hỏi ước tính: 220 ms truy xuất + 2.362 ms rerank +
+~2.600 ms gọi model ≈ **5,2 giây** — vẫn nhỉnh hơn `ASM-01` (p50 ≤ 5s) nhưng
+sát ngưỡng, khác hẳn 7 giây của N=20.
+
 ## Ba lỗi đã va phải, lỗi thứ ba đáng ngại nhất
 
 **1. `max_length=512`** — PhoRanker khai `max_position_embeddings = 258`
@@ -83,14 +115,15 @@ trông như một lỗi. Suýt nữa nó vào báo cáo.
 
 ## Khuyến nghị
 
-**Mặc định TẮT** (`RERANKER_MODEL` để trống). Lý do: 4,2 giây phá ngân sách
-`ASM-01`, và ngân sách đó là `[ASM]` — giả định của đội, chưa được NextFarm
-xác nhận.
+**Mặc định TẮT** (`RERANKER_MODEL` để trống). Với `top_k_rerank=12` thì tổng
+một lượt ước tính ~5,2 giây — vẫn nhỉnh hơn `ASM-01` (p50 ≤ 5s), dù sát
+ngưỡng. Và `ASM-01` là `[ASM]` — giả định của đội, chưa được NextFarm xác
+nhận.
 
 Bật khi có một trong hai:
 
-1. **NextFarm nới ngưỡng độ trễ.** Nếu chấp nhận ~7 giây mỗi câu, bật ngay —
-   R@5 90,9% là cải thiện lớn.
+1. **NextFarm nới ngưỡng độ trễ.** Chỉ cần chấp nhận ~5,5 giây thay vì 5 —
+   R@5 từ 72,7% lên 90,9% là cải thiện lớn cho một khoảng nới rất nhỏ.
 2. **Có GPU đủ lớn.** Cross-encoder trên GPU nhanh hơn CPU nhiều lần. Đây là
    một lý do cụ thể để NextFarm cân nhắc đầu tư GPU, và khác với lý do
    "self-host model sinh" đã bị bác ở §37.5.
