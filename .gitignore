@@ -22,3 +22,6 @@ Thumbs.db
 
 # Log tam cua cac lan chay discover/crawl
 docs/reports/_*.log
+
+# Cache model HuggingFace - dat o o D vi o C day 99%, xem app/__init__.py
+.cache/

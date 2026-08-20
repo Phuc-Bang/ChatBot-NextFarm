@@ -37,7 +37,8 @@ from app.services.retrieval.vector import tim_vector
 
 def tim_kiem(cau, crop: str | None = None, region: str | None = None,
              top_k: int = 5, top_k_kenh: int = TOP_K_MOI_KENH,
-             dung_vector: bool = True, conn=None) -> list[ChunkTraVe]:
+             dung_vector: bool = True, conn=None,
+             top_k_rerank: int = 20) -> list[ChunkTraVe]:
     """Tim top_k chunk lien quan nhat.
 
     `dung_vector=False` de do rieng dong gop cua vector, hoac de chay khi
@@ -63,4 +64,14 @@ def tim_kiem(cau, crop: str | None = None, region: str | None = None,
     gop = hop_nhat_rrf(*kenh)
     if region:
         gop = cong_diem_vung(gop, region)
+
+    # Rerank: chi chay khi RERANKER_MODEL duoc dat (mac dinh TAT).
+    #
+    # Dua cho no NHIEU hon top_k de no con gi de xep lai. Lay dung top_k roi
+    # rerank la vo nghia: thu tu doi nhung tap hop khong doi, ma R@1 thap
+    # trong khi R@10 cao (50% vs 95,5%) nghia la chunk dung THUONG nam ngoai
+    # top_k. Xem app/services/retrieval/rerank.py.
+    from app.services.retrieval import rerank
+    if rerank.co_bat():
+        return rerank.xep_lai(cau, gop[:top_k_rerank], top_k=top_k)
     return gop[:top_k]

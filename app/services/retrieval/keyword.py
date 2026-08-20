@@ -136,6 +136,9 @@ class ChunkTraVe:
     source_tier: int | None
     is_high_risk: bool
     diem: float = 0.0
+    # Giu diem RRF truoc khi rerank ghi de `diem`. Mat no la mat kha nang so
+    # sanh hai cach xep hang tren cung mot lan chay (xem rerank.py).
+    diem_rrf: float = 0.0
     kenh: list[str] = field(default_factory=list)
     hang: dict[str, int] = field(default_factory=dict)
 
