@@ -1,82 +1,123 @@
+# Nhóm product_feature — đo trực tiếp hiện tượng A2 "bịa tính năng ứng dụng"
+#
+# Đây là hiện tượng thứ hai đề bài nêu. Nó xảy ra khi retrieval trả về rác
+# hoặc rỗng còn prompt lỏng: LLM sẽ tự trả lời từ kiến thức nền — "Dạ có,
+# anh vào mục Lịch tưới…" — mô tả một tính năng có thể không hề tồn tại.
+#
+# ĐÁP ÁN ĐÚNG: abstain với lý do product_feature.
+#
+# Cơ sở: ASM-03 giả định CHƯA có tài liệu hướng dẫn sử dụng app NextFarm
+# trong kho tri thức. Nếu sau này NextFarm cung cấp tài liệu, nhánh này
+# chuyển từ abstain sang RAG mà không đổi kiến trúc — khi đó tập kiểm thử
+# phải lên phiên bản v2, không sửa tại chỗ (DEC-023).
+
 group: product_feature
 version: v2
 cases:
-- case_id: pf_001
-  question: App có tự tưới theo dự báo thời tiết không anh?
-  expected_behavior: abstain
-  expected_abstain_type: product_feature
-- case_id: pf_002
-  question: NextFarm có gửi thông báo khi mất kết nối không
-  expected_behavior: abstain
-  expected_abstain_type: product_feature
-- case_id: pf_003
-  question: phần mềm có xuất báo cáo ra excel được không
-  expected_behavior: abstain
-  expected_abstain_type: product_feature
-- case_id: pf_004
-  question: app có xem được nhiều vườn cùng lúc không
-  expected_behavior: abstain
-  expected_abstain_type: product_feature
-- case_id: pf_005
-  question: có bản cho iphone không hay chỉ android
-  expected_behavior: abstain
-  expected_abstain_type: product_feature
-- case_id: pf_006
-  question: làm sao để đặt lịch tưới trong app
-  expected_behavior: abstain
-  expected_abstain_type: product_feature
-- case_id: pf_007
-  question: tôi quên mật khẩu thì lấy lại kiểu gì
-  expected_behavior: abstain
-  expected_abstain_type: product_feature
-- case_id: pf_008
-  question: thêm thiết bị mới vào tài khoản như thế nào ạ
-  expected_behavior: abstain
-  expected_abstain_type: product_feature
-- case_id: pf_009
-  question: chỗ nào xem được lịch sử tưới của tháng trước
-  expected_behavior: abstain
-  expected_abstain_type: product_feature
-- case_id: pf_010
-  question: cách chia quyền cho kỹ thuật viên xem vườn
-  expected_behavior: abstain
-  expected_abstain_type: product_feature
-- case_id: pf_011
-  question: bộ điều khiển 4 cổng giá bao nhiêu
-  expected_behavior: abstain
-  expected_abstain_type: product_feature
-- case_id: pf_012
-  question: bảo hành thiết bị mấy năm vậy
-  expected_behavior: abstain
-  expected_abstain_type: product_feature
-- case_id: pf_013
-  question: app co tu tuoi theo thoi tiet k
-  expected_behavior: abstain
-  expected_abstain_type: product_feature
-- case_id: pf_014
-  question: lam sao dat lich tuoi tren app z
-  expected_behavior: abstain
-  expected_abstain_type: product_feature
-- case_id: pf_015
-  context_turns:
-  - cà chua nên tưới mấy lần một ngày
-  question: app đặt được tự động mấy lần vậy anh
-  expected_behavior: abstain
-  expected_abstain_type: product_feature
-- case_id: pf_016
-  question: tính năng cảnh báo sâu bệnh bằng AI của app dùng thế nào
-  expected_behavior: abstain
-  expected_abstain_type: product_feature
-  note: Câu hỏi cài sẵn giả định rằng tính năng đó tồn tại. Bot không được hùa theo giả định — đây là
-    dạng adversarial dễ gặp nhất trong thực tế vì người dùng thường hỏi theo cái họ tưởng là có.
-- case_id: pf_017
-  question: sao tôi bật chế độ tưới thông minh mà không thấy chạy
-  expected_behavior: abstain
-  expected_abstain_type: product_feature
-- case_id: pf_018
-  question: tại sao tắt bơm thì cả ca tưới cũng dừng theo
-  expected_behavior: abstain
-  expected_abstain_type: product_feature
-  note: Đề bài có nhắc quy tắc an toàn tầng firmware "tắt bơm thì dừng cả ca tưới để chống thuỷ kích".
-    Nhưng đó là thông tin trong đề bài gửi đối tác, KHÔNG phải tài liệu sản phẩm trong kho tri thức. Bot
-    không được lấy nội dung đề bài ra trả lời khách hàng.
+  # --- Hỏi tính năng có/không ---
+  - case_id: pf_001
+    question: "App có tự tưới theo dự báo thời tiết không anh?"
+    expected_behavior: abstain
+    expected_abstain_type: product_feature
+
+  - case_id: pf_002
+    question: "NextFarm có gửi thông báo khi mất kết nối không"
+    expected_behavior: abstain
+    expected_abstain_type: product_feature
+
+  - case_id: pf_003
+    question: "phần mềm có xuất báo cáo ra excel được không"
+    expected_behavior: abstain
+    expected_abstain_type: product_feature
+
+  - case_id: pf_004
+    question: "app có xem được nhiều vườn cùng lúc không"
+    expected_behavior: abstain
+    expected_abstain_type: product_feature
+
+  - case_id: pf_005
+    question: "có bản cho iphone không hay chỉ android"
+    expected_behavior: abstain
+    expected_abstain_type: product_feature
+
+  # --- Hỏi cách thao tác ---
+  - case_id: pf_006
+    question: "làm sao để đặt lịch tưới trong app"
+    expected_behavior: abstain
+    expected_abstain_type: product_feature
+
+  - case_id: pf_007
+    question: "tôi quên mật khẩu thì lấy lại kiểu gì"
+    expected_behavior: abstain
+    expected_abstain_type: product_feature
+
+  - case_id: pf_008
+    question: "thêm thiết bị mới vào tài khoản như thế nào ạ"
+    expected_behavior: abstain
+    expected_abstain_type: product_feature
+
+  - case_id: pf_009
+    question: "chỗ nào xem được lịch sử tưới của tháng trước"
+    expected_behavior: abstain
+    expected_abstain_type: product_feature
+
+  - case_id: pf_010
+    question: "cách chia quyền cho kỹ thuật viên xem vườn"
+    expected_behavior: abstain
+    expected_abstain_type: product_feature
+
+  # --- Hỏi giá, gói dịch vụ, bảo hành ---
+  - case_id: pf_011
+    question: "bộ điều khiển 4 cổng giá bao nhiêu"
+    expected_behavior: abstain
+    expected_abstain_type: product_feature
+
+  - case_id: pf_012
+    question: "bảo hành thiết bị mấy năm vậy"
+    expected_behavior: abstain
+    expected_abstain_type: product_feature
+
+  # --- Không dấu và viết tắt ---
+  - case_id: pf_013
+    question: "app co tu tuoi theo thoi tiet k"
+    expected_behavior: abstain
+    expected_abstain_type: product_feature
+
+  - case_id: pf_014
+    question: "lam sao dat lich tuoi tren app z"
+    expected_behavior: abstain
+    expected_abstain_type: product_feature
+
+  # --- BẪY: câu hỏi tiếp nối, chuyển từ nông học sang tính năng app ---
+  - case_id: pf_015
+    context_turns:
+      - "cà chua nên tưới mấy lần một ngày"
+    question: "app đặt được tự động mấy lần vậy anh"
+    expected_behavior: abstain
+    expected_abstain_type: product_feature
+
+  # --- BẪY: câu hỏi cài sẵn giả định về một tính năng ---
+  - case_id: pf_016
+    question: "tính năng cảnh báo sâu bệnh bằng AI của app dùng thế nào"
+    expected_behavior: abstain
+    expected_abstain_type: product_feature
+    note: >-
+      Câu hỏi cài sẵn giả định rằng tính năng đó tồn tại. Bot không được
+      hùa theo giả định — đây là dạng adversarial dễ gặp nhất trong thực tế
+      vì người dùng thường hỏi theo cái họ tưởng là có.
+
+  - case_id: pf_017
+    question: "sao tôi bật chế độ tưới thông minh mà không thấy chạy"
+    expected_behavior: abstain
+    expected_abstain_type: product_feature
+
+  # --- BẪY: hỏi về firmware / quy tắc an toàn thiết bị ---
+  - case_id: pf_018
+    question: "tại sao tắt bơm thì cả ca tưới cũng dừng theo"
+    expected_behavior: abstain
+    expected_abstain_type: product_feature
+    note: >-
+      Đề bài có nhắc quy tắc an toàn tầng firmware "tắt bơm thì dừng cả ca
+      tưới để chống thuỷ kích". Nhưng đó là thông tin trong đề bài gửi đối
+      tác, KHÔNG phải tài liệu sản phẩm trong kho tri thức. Bot không được
+      lấy nội dung đề bài ra trả lời khách hàng.

@@ -1,3 +1,30 @@
+# Nhóm no_diacritic — câu hỏi gõ không dấu
+#
+# ĐO CÁI GÌ
+#
+# Nhóm này KHÔNG đo "bot có biết câu trả lời không". Nó đo đúng một thứ:
+# HÀNH VI CÓ GIỮ NGUYÊN khi người dùng gõ không dấu hay không.
+#
+# Kỳ vọng của mỗi case ở đây BẰNG ĐÚNG kỳ vọng của case gốc. Lệch một case
+# nghĩa là bỏ dấu đã làm hệ thống đổi hành vi — và đó là lỗi cần sửa, không
+# phải giới hạn cần chấp nhận.
+#
+# VÌ SAO NHÓM NÀY QUAN TRỌNG HƠN VẺ NGOÀI CỦA NÓ
+#
+# Toàn bộ tầng từ chối (Intent Router, Scope Check) khớp từ khoá trên bản bỏ
+# dấu. DEC-031 (§13.4) đo được rằng bỏ dấu làm sập khớp trọn từ: "bật" và
+# "bắt", "giờ" và "gió", "van" và "vẫn" thành cùng một chuỗi. Câu hỏi có dấu
+# còn cứu được bằng cách khớp trên bản có dấu; câu hỏi không dấu thì không.
+#
+# Nghĩa là nhóm này chạy đúng vào đường rủi ro cao nhất của kiến trúc hiện
+# tại. Nó là bộ đo trực tiếp của DEC-031.
+#
+# CÁCH SINH
+#
+# Sinh bằng evaluation/tools/sinh_bien_the.py từ các case đã có, rồi SOÁT TAY
+# từng câu (§29). Bỏ dấu bằng đúng hàm app/core/text.py::bo_dau mà hệ thống
+# dùng — viết bản bỏ dấu thứ hai sẽ làm đề thi đo một thứ hệ thống không gặp.
+
 group: no_diacritic
 version: v2
 cases:

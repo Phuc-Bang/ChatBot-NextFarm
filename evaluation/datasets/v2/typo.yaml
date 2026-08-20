@@ -1,3 +1,33 @@
+# Nhóm typo — câu hỏi có lỗi gõ
+#
+# ĐO CÁI GÌ
+#
+# Giống no_diacritic: đo HÀNH VI CÓ GIỮ NGUYÊN khi câu hỏi có lỗi gõ hay
+# không. Kỳ vọng mỗi case bằng đúng kỳ vọng case gốc.
+#
+# XỬ LÝ LỖI CHÍNH TẢ Ở ĐÂU
+#
+# §13.2 lớp 3 chốt rõ: xử lý ở tầng retrieval bằng pg_trgm, KHÔNG bằng cách
+# bảo LLM "đoán xem người dùng định viết gì". Đoán là đường bịa đi thẳng vào
+# lớp hiểu câu hỏi — câu "bon dam cho lua bao nhieu" có thể bị viết lại thành
+# "bón đạm cho lúa giai đoạn đẻ nhánh bao nhiêu kg/ha", và từ đó mọi thứ phía
+# sau đều lệch mà không ai biết.
+#
+# Nhóm này vì vậy cũng là bộ đo gián tiếp cho ràng buộc đó.
+#
+# BỐN KIỂU GÕ SAI
+#
+#   lặp chữ cuối    nhieu  -> nhieuu     giữ phím trên điện thoại
+#   thiếu một chữ   khong  -> khng       gõ nhanh, sót nguyên âm
+#   đổi chỗ hai chữ chua   -> cuha       gõ nhanh, đảo thứ tự
+#   sót telex       ca     -> caf        gõ telex nhưng dấu không ăn
+#
+# Kiểu thứ tư là lỗi riêng của tiếng Việt, không có trong tiếng Anh.
+#
+# MỘT LỖI MỖI CÂU, không phải nhiều: câu hỏi thật hiếm khi sai ba chỗ cùng
+# lúc, và sai nhiều quá thì đề thi đo một thứ khác hẳn — khả năng đọc văn bản
+# hỏng, chứ không phải chịu lỗi gõ.
+
 group: typo
 version: v2
 cases:

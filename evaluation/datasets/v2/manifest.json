@@ -1,36 +1,34 @@
 {
   "version": "v2",
-  "frozen_at": "2026-08-20T05:37:10.740250+00:00",
-  "total_cases": 280,
+  "frozen_at": "2026-08-20T05:55:13.266214+00:00",
+  "total_cases": 222,
   "groups": {
     "adversarial": 16,
-    "contradictory": 10,
     "device_control": 14,
     "garden_data": 22,
     "high_risk": 18,
     "insufficient_evidence": 22,
-    "known_answer": 35,
+    "known_answer": 16,
     "local_terms": 17,
     "no_diacritic": 28,
     "out_of_scope": 22,
-    "paraphrase": 35,
+    "paraphrase": 6,
     "product_feature": 18,
     "typo": 23
   },
   "files": {
-    "adversarial.yaml": "d9c7953eb5c8308aa3f48ef89be46bcb8ac88fc895eb608e3b1e1a4e2eb126cd",
-    "contradictory.yaml": "736619e100721859350e5d57c9f034368c9dba02e6d59747d70243fe5178557b",
-    "device_control.yaml": "7d8bac8863b3dfae09b060035272db8d534c9e8aafdf73f74b4f322bc88c5701",
-    "garden_data.yaml": "7b69b511bcf08364350f434d5a232e1f5c410f28e80c173f8a3685c20cdcfd76",
-    "high_risk.yaml": "afbbacfc49e7bd10243fff4c0ba264c142434a24687f2e122ca2ccfec12b5eac",
-    "insufficient_evidence.yaml": "7827e0e8c38c0964962444472ae8881b5797938ccbffc1accd4fa5b9b1efccbe",
-    "known_answer.yaml": "2aeb966b96dcc74c4bf45ac5ecdf9b254b6c1beda6ccd50c5c46cdf33fe9481d",
-    "local_terms.yaml": "942c3e3ac8c5e5a16c3ff482b3f44cb7cc2460ce14f5cb730b973fcba8fa0dcd",
-    "no_diacritic.yaml": "c15317cdbb383e84d3fe07a5ce03c5f38ad46542f7a1366f8e052445efd2ae8f",
-    "out_of_scope.yaml": "69dfbbd1e7f491544786743db3c25f70f939bcc82ed0c5c90f3d2cf942501278",
-    "paraphrase.yaml": "102cb5392ae25417e78307ac4a42e22bc8c74088998d3c4959e7adfb3069482d",
-    "product_feature.yaml": "a51004768071dc17ff462bddd0dc49b153137ff743f7048cb2950c0406168c42",
-    "typo.yaml": "33debbfcf410059180b26f6f54725d76492b18677f5a62f990662bc49bd740d5"
+    "adversarial.yaml": "6c3845455517da7f31cc6f9abf9d416879d6d802b79f19ad213c6ca42396f3e3",
+    "device_control.yaml": "815943feccea7737e59ed457b8aa7622968665df1fbec5addd91f8be9bb951a3",
+    "garden_data.yaml": "38a5527a07e52dcf569f19f98a4fe381d0ebba8370964f133eb0c09a3c6613e6",
+    "high_risk.yaml": "e8cb56749137450384801c1424556c0a325dc5fe07ab70c7d7900bed014c46a0",
+    "insufficient_evidence.yaml": "087530df1542a4db9d0bfc8e1f1d6e237a332b6e5fd7bad374388b23d97dd9d0",
+    "known_answer.yaml": "8f8076b4abcc1c8b92ee55eb44b6c41405b409ff69f9366c3ba17e8f53717765",
+    "local_terms.yaml": "3b076b046481b08ec556e69bf7e0995b17ed85117c45a9b673a62bcdf4ec2981",
+    "no_diacritic.yaml": "f199dc4cb48592984e6c0b13889d6b95ae9a300551f65c326d7b239a54057d7c",
+    "out_of_scope.yaml": "83225a72cf27a1ac4ce5ae6c4386b21217ac22b743045d346f01b53c90fbe400",
+    "paraphrase.yaml": "8fc68de1bd11c3fe8a7ace8b07118ce0e5f1c813bf4d9f8eca59e04c5493dba5",
+    "product_feature.yaml": "c80bbef0b324c5bc7a311327c0c0ea12a31b67389ad5b251a7dbec145c23baf9",
+    "typo.yaml": "b78c998a12bad7019c74a5cfce670a6cf32a36d958792901fa0c044b3baeebbf"
   },
-  "combined_sha256": "2e28e1bded9ed32d28c2f9d115bcfaa76cff59cc72cfc3eb17ff3df51dcd947c"
+  "combined_sha256": "cc95c4b4f3f7040a4148b3734e759c50f8293b5b819371c72f1361d28c93c2c5"
 }
