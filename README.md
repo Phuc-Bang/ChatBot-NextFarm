@@ -82,12 +82,12 @@ Chi tiết đầy đủ ở [quy chuẩn v2.0](docs/NEXTFARM_PROBLEM_A_STANDARD_
 | P3 | Tập kiểm thử — **đóng băng** | ✅ v3 đóng băng — 12 nhóm, 222 case |
 | P4 | Đo baseline C0 (LLM trần) | ✅ đo xong trên 222 case |
 | P5 | Cơ sở dữ liệu tri thức | ✅ xong — lược đồ, chunking, nạp dữ liệu |
-| P6 | Truy xuất lai | ✅ hybrid RRF ba kênh — MRR 0.687 |
-| P7 | RAG (C1) | 🔄 chuỗi chạy được, chưa đo đủ 222 case |
-| P8 | Guardrail (C2) | ✅ đo xong — 5/5 chỉ số chống bịa bằng 0 |
-| P9 | Báo cáo so sánh | ✅ C0 vs C2 kèm phân tích lỗi |
+| P6 | Truy xuất lai | ✅ hybrid RRF ba kênh — MRR **0,620**, R@10 95,5% · tham số chốt bằng quét 72 tổ hợp · reranker đã đo |
+| P7 | RAG (C1) | 🔄 **169/222 case** — chặn bởi quota free tier, không phải thiếu mã |
+| P8 | Guardrail (C2) | ✅ đo xong — 5/5 chỉ số chống bịa bằng 0 · Grounding **đủ ba tầng** |
+| P9 | Báo cáo so sánh | ✅ C0 vs C2 kèm phân tích lỗi — thiếu cột C1 vì quota |
 | P10 | API + giao diện | ✅ API + hai trang tiếng Việt |
-| P11 | Tài liệu giao hàng | ☐ |
+| P11 | Tài liệu giao hàng | ✅ [GIAO_HANG_NEXTFARM.md](docs/GIAO_HANG_NEXTFARM.md) + [phiếu chấm 50 câu](docs/PHIEU_CHAM_CHUYEN_GIA.md) · còn 2 mục `[NGƯỜI THỰC HIỆN TỰ VIẾT]` |
 | P12 | Fine-tuning (tuỳ chọn) | ⛔ **không khả thi** — GPU 4GB, xem §Giới hạn |
 
 ### Số liệu hiện tại
@@ -96,15 +96,15 @@ Chi tiết đầy đủ ở [quy chuẩn v2.0](docs/NEXTFARM_PROBLEM_A_STANDARD_
 |---|---|
 | Tài liệu crawl được | 31 (lúa 22 · dưa chuột 5 · cà chua 4) |
 | Chunk | 292 (rủi ro cao 44 · cần cảnh báo 93) |
-| Chunk **index được** | **161** (18 tài liệu đã duyệt) |
+| Chunk **index được** | **185** (18 tài liệu đã duyệt · 31/44 chunk rủi ro cao đã duyệt lẻ) |
 | Câu ứng viên số liệu | 193 — **65 fact đã xác nhận** |
 | Case kiểm thử | **222 / 12 nhóm — v3 đã đóng băng** |
-| Test tự động | **283 xanh** |
+| Test tự động | **310 xanh** |
 
-> **161 / 292 chunk** vào được kho tri thức. 131 chunk còn lại thuộc 13 tài
-> liệu bị loại ở luồng 1 và **cố tình** nằm ngoài: DEC-005 quy định không
-> duyệt thì không vào kho. Cổng chặn là view `indexable_chunk`, cài ở tầng
-> dữ liệu chứ không phải ở lời hứa.
+> **185 / 292 chunk** vào được kho tri thức. 107 chunk còn lại thuộc 13 tài
+> liệu bị loại ở luồng 1, cộng 13 chunk rủi ro cao chưa duyệt lẻ — tất cả
+> **cố tình** nằm ngoài: DEC-005 quy định không duyệt thì không vào kho. Cổng
+> chặn là view `indexable_chunk`, cài ở tầng dữ liệu chứ không phải ở lời hứa.
 
 ### Tầng từ chối — đo được ngay, không cần model
 
@@ -169,7 +169,7 @@ chạm cơ sở dữ liệu hay gọi model. Câu trên bị chặn ở **6 ms**
 | p50 | 2.621 ms | **11 ms** | ≤ 5.000 ms |
 | p95 | 11.451 ms | **8.084 ms** | ≤ 10.000 ms |
 
-`answer_rate` tụt xuống 13,1% chủ yếu vì **kho tri thức mới có 161 chunk**, không
+`answer_rate` tụt xuống 13,1% chủ yếu vì **kho tri thức mới có 185 chunk**, không
 phải vì hệ thống quá thận trọng: 33/46 ca từ chối là do kho không có tài liệu.
 
 Chi tiết: [`BAO_CAO_SO_SANH.md`](docs/reports/BAO_CAO_SO_SANH.md) ·
@@ -182,27 +182,33 @@ DEC-015 giữ trạng thái `[TODO]` cho tới khi có số. Giờ đã có:
 | | Chốt | Vì sao |
 |---|---|---|
 | **Sinh câu trả lời** | `gemini-3.1-flash-lite` (API) | GPU 4GB không chạy nổi — xem dưới |
-| **Embedding** | `halong_embedding` (**local**) | MRR 0.687 khi hợp nhất, cao nhất trong 5 cấu hình đo |
-| **Reranker** | chưa chốt | chưa đo |
+| **Embedding** | `halong_embedding` (**local**) | MRR 0,620 khi hợp nhất, cao nhất trong các cấu hình đo |
+| **Reranker** | `itdainb/PhoRanker` — **mặc định TẮT** | R@5 72,7% → 90,9% nhưng tốn +2,4 giây trên CPU |
 
-**Truy xuất lai đo trên 15 case có ground truth, 161 chunk:**
+**Truy xuất lai đo trên 22 case có ground truth, 185 chunk:**
 
-| Cấu hình | R@1 | R@3 | MRR |
-|---|---|---|---|
-| **hybrid(halong)** | **60,0%** | 73,3% | **0,687** |
-| chỉ từ khoá | 46,7% | 60,0% | 0,576 |
-| chỉ vector | 13,3% | **80,0%** | 0,432 |
+| Cấu hình | R@1 | R@5 | R@10 | MRR |
+|---|---|---|---|---|
+| **hybrid(halong)** | **50,0%** | **77,3%** | **95,5%** | **0,620** |
+| chỉ từ khoá | 36,4% | 68,2% | 86,4% | 0,500 |
+| chỉ vector | 13,6% | 63,6% | 86,4% | 0,351 |
 
-Vector một mình kém nhất về MRR — nhưng R@3 của nó cao nhất bảng: nó **tìm đúng**
-chunk, chỉ **xếp sai** vị trí. Hợp nhất với từ khoá thì R@1 nhảy **13,3% → 60%**.
-Chi tiết: [`docs/reports/P6_retrieval_tuning.md`](docs/reports/P6_retrieval_tuning.md).
+Vector một mình kém nhất về MRR — nhưng R@10 của nó ngang bảng: nó **tìm đúng**
+chunk, chỉ **xếp sai** vị trí. Hợp nhất với từ khoá thì R@1 nhảy **13,6% → 50%**.
+
+**R@10 = 95,5%** nghĩa là hầu như mọi câu hỏi đều tìm được chunk đúng trong 10
+kết quả đầu — việc còn lại là **xếp hạng**, không phải tìm kiếm. Đó là chỗ
+reranker có tác dụng, và cũng là lý do cụ thể để cân nhắc GPU.
+
+Chi tiết: [`docs/reports/P6_retrieval_tuning.md`](docs/reports/P6_retrieval_tuning.md)
+· [`P6_reranker.md`](docs/reports/P6_reranker.md)
 
 ### Kho tri thức không rời máy
 
 Embedding chạy **local**, nên bản kê luồng dữ liệu (§38) đổi hẳn:
 
 ```
-Kho tri thức (161 chunk)   → KHÔNG rời máy    (embedding local)
+Kho tri thức (185 chunk)   → KHÔNG rời máy    (embedding local)
 Câu hỏi → tìm kiếm          → KHÔNG rời máy    (embedding + trigram + FTS local)
 Câu hỏi + Evidence Pack     → Google Gemini    (chỉ chặng viết câu trả lời)
 Dữ liệu vườn / định danh    → KHÔNG có         (PoC không truy cập)
@@ -243,7 +249,7 @@ make install-crawler
 make ingest
 
 # 6. Chạy thử
-make test        # 283 test tự động
+make test        # 310 test tự động
 make serve       # http://localhost:8000  và  /admin
 ```
 
