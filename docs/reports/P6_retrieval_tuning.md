@@ -283,6 +283,23 @@ quả đầu. Phần còn thiếu là **xếp hạng**, không phải tìm kiế
 Kết luận chọn model **vẫn không đổi** qua cả ba lần đo: hybrid > keyword >
 vector đơn, và vector đơn *tìm đúng, xếp sai*.
 
+### Case còn trượt top-3: 10 → 9
+
+Sau khi chốt tham số, số case không vào được top-3 giảm từ 10 xuống 9. Nhưng
+thay đổi đáng kể hơn con số đó là **lỗi "lạc cây" đã hết**:
+
+| case | trước (top-1) | sau (top-1) |
+|---|---|---|
+| `ka_015` (hỏi lúa) | `hatinh_dua_chuot_vietgap#16` | `lua__khac_phuc_anh_huong_mua_bao#3` |
+| `pa_006` (hỏi lúa) | `hatinh_dua_chuot_vietgap#16` | `lua__khac_phuc_anh_huong_mua_bao#3` |
+| `ka_012` (hỏi dưa chuột) | `lua__ky_thuat_bon_phan_cho_lua#4` | `hatinh_dua_chuot_vietgap#13` |
+
+Chín case còn lại đều lấy **đúng tài liệu, đúng cây**, chỉ xếp sai thứ hạng
+(hạng 4–10). Một case duy nhất — `ka_013` — vẫn không tìm ra trong top-10.
+
+Đây là bằng chứng cho nhận định ở trên: **vấn đề còn lại là xếp hạng, không
+phải tìm kiếm.**
+
 ### Còn lại
 
 - **Reranker chưa thử.** `RERANKER_MODEL` để trống. Với R@10 95.5% mà R@1
