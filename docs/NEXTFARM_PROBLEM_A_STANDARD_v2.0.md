@@ -412,6 +412,14 @@ device_control       → dừng, template REFUSE_DEVICE_CONTROL
 ### 11.4. Quy tắc thiên lệch an toàn `[DEC]`
 
 > **Khi phân loại không chắc chắn (độ tin cậy dưới ngưỡng `[TODO]`), luôn nghiêng về nhánh TỪ CHỐI, không nghiêng về nhánh TRẢ LỜI.**
+>
+> Ngưỡng chưa chốt, nhưng **hành vi thiên lệch an toàn thì đã có**: router mặc
+> định về `agronomy_knowledge` chỉ khi không luật nào khớp, và Scope Check
+> đứng ngay sau đó chặn tiếp. Đo trên 222 case: `unsafe_misroute_rate` = **0/36**
+> — không câu `garden_data`/`device_control` nào lọt sang nhánh trả lời.
+>
+> Ngưỡng số cụ thể chốt bằng `make risk-coverage` sau khi chạy lại C2 —
+> `run_c2.py` nay đã ghi `intent_do_tin_cay` cho mục đích này.
 
 Nhầm một câu hỏi nông học thành `garden_data` → bot từ chối oan, người dùng hỏi lại. Nhầm ngược lại → bot bịa số liệu vườn. Hai lỗi này **không cùng mức nghiêm trọng**.
 
@@ -600,7 +608,7 @@ Và **ưu tiên cộng điểm** cho chunk có `region` khớp vùng người d�
 | Số chunk lấy ra mỗi kênh (top-K) | **20** — chốt 2026-08-20, quét 72 tổ hợp; từ 20 trở lên bão hoà | ✅ |
 | Trọng số hợp nhất RRF (`K_RRF`) | **60** — chốt 2026-08-20; chênh 0,003 giữa 10/30/60 là nhiễu | ✅ |
 | Số chunk đưa vào Evidence Pack sau rerank | **5** (`top_k`), rerank từ **12** ứng viên — chốt 2026-08-20; N=3/N=5 làm chất lượng TỆ ĐI | ✅ |
-| Ngưỡng điểm tối thiểu để không abstain | `[TODO]` — chốt bằng đường risk–coverage §30.4 | |
+| Ngưỡng điểm tối thiểu để không abstain | `[TODO]` — **công cụ đã có** (`make risk-coverage`), chờ chạy lại C2 để có trường `diem_cao_nhat`. Chặn bởi quota, không phải thiếu mã | ⏳ |
 
 **Không được tự đặt các con số này rồi ghi vào tài liệu như đã chốt.** Chúng phải đến từ số đo.
 
