@@ -148,3 +148,49 @@ Ba lần trong phân tích này, một con số "khớp đẹp" dẫn tới kế
 
 Cả ba đều bị bác bởi cùng một loại thao tác: **đếm cái thật sự có trong kho**
 (`ml/` xuất hiện 0 lần), thay vì đếm cái *liên quan tới* câu hỏi.
+
+---
+
+## Phụ lục — 9 ca `local_terms` sau khi bật reranker (2026-08-21)
+
+Bật reranker đổi thứ hạng ở **6/9 ca**:
+
+| ca | chunk hạng 1 khi TẮT | chunk hạng 1 khi BẬT |
+|---|---|---|
+| `lt_003` | `hatinh_dua_chuot_vietgap#6` | `ninhbinh_dua_chuot_quytrinh#7` |
+| `lt_004` | `lua__cay_lua_bang_may#3` | `lua__phong_tru_co_dai#4` |
+| `lt_007` | `ninhbinh_gntt_ca_chua#11` | `ninhbinh_dua_chuot_dong#3` |
+| `lt_009` | `lua__phong_tru_dich_hai#5` | `lua__cham_soc_lua_xuan#3` |
+| `lt_010` | `lua__phong_tru_dich_hai#4` | `lua__phong_tru_dich_hai#7` |
+| `lt_011` | `ninhbinh_dua_chuot_quytrinh#2` | `lua__ky_thuat_bon_phan#3` |
+
+**Chunk đổi không có nghĩa câu trả lời tốt hơn.** Điều đó chỉ biết sau khi
+chạy lại C2 với LLM — đang chờ quota.
+
+### Một cái bẫy đo lường gặp ở đây
+
+Lần đo đầu dùng `tim_kiem(..., top_k_rerank=0)` để "tắt" reranker, và nó cho
+kết quả **0 chunk ở cả 9 ca**. Nhìn như truy xuất hỏng hoàn toàn.
+
+Thật ra `top_k_rerank` không phải công tắc — nó là *số chunk đưa vào
+reranker*. Khi `RERANKER_MODEL` đã đặt trong `.env`, `rerank.co_bat()` trả
+true và `gop[:0]` cho danh sách rỗng. Tắt đúng cách là đặt
+`RERANKER_MODEL=""`.
+
+Dấu hiệu nhận ra: **một kết quả "hỏng hoàn toàn và đồng đều"** — 0 chunk ở
+*mọi* ca — gần như luôn là lỗi đo, không phải lỗi hệ thống. Hệ thống hỏng
+thật thường hỏng không đều.
+
+### `lt_007` — lại là chuyện kho thiếu
+
+`"cấy mạ mấy dảnh một khóm"` hỏi về **lúa**, nhưng cả hai cấu hình đều lấy
+chunk cà chua hoặc dưa chuột. Đếm trong kho:
+
+| từ | số chunk |
+|---|---:|
+| `dảnh` | 24 |
+| **`khóm`** | **0** |
+
+Kho không có khái niệm "khóm" — cùng loại nguyên nhân với nhóm `high_risk`
+ở §4.2. Reranker không cứu được, và không nên kỳ vọng nó cứu: nó xếp lại
+những gì tìm được, không tạo ra nội dung không tồn tại.
