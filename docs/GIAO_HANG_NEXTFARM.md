@@ -279,17 +279,22 @@ Tầng 3 (kiểm ngữ nghĩa) chưa làm. `numeric_hallucination = 0` bảo đ�
 ## Cách kiểm chứng — chạy lại toàn bộ
 
 ```bash
-make up                              # PostgreSQL + pgvector
-make ingest                          # dựng lại kho từ file trong git
-pytest tests/ -q                     # 283 test
+make up          # PostgreSQL 16 + pgvector
+make check-ext   # xác nhận 3 extension: vector, unaccent, pg_trgm
+make ingest      # dựng lại toàn bộ kho tri thức từ file trong git
+make test        # 283 test tự động
 
-python evaluation/runners/run_c0.py  # baseline
-python evaluation/runners/run_c2.py  # cấu hình sản phẩm
+make smoke       # thử LLM 3 câu — chạy TRƯỚC khi tốn 222 case
+make recall      # đo Recall@K, chọn model embedding
+make c0          # baseline: LLM trần
+make c2          # cấu hình sản phẩm
 
-python -m uvicorn app.main:app --port 8000
-#   http://localhost:8000        trang chat
-#   http://localhost:8000/admin  trang quản trị
+make serve       # http://localhost:8000  và  /admin
 ```
+
+`make ingest` dựng lại được toàn bộ cơ sở dữ liệu từ các file YAML/JSON trong
+git — **mất database không mất công duyệt**, và kiểm chứng viên tái lập được
+mọi con số trong tài liệu này.
 
 Kịch bản demo:
 

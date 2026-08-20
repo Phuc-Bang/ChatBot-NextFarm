@@ -1,7 +1,7 @@
 # ChatBot-NextFarm — Bài toán A
 # Quy chuẩn: docs/NEXTFARM_PROBLEM_A_STANDARD_v2.0.md
 
-.PHONY: help up down logs psql check-ext install install-crawler crawl extract test clean
+.PHONY: help up down logs psql check-ext install install-crawler crawl extract ingest smoke eval-tu-choi c0 c1 c2 recall phieu-cham serve test clean
 
 help:
 	@echo "Các lệnh có sẵn:"
@@ -14,6 +14,17 @@ help:
 	@echo "  make install-crawler - Cài phụ thuộc cho crawler"
 	@echo "  make crawl           - Chạy crawler (P1)"
 	@echo "  make extract         - Trích câu chứa số liệu (P2)"
+	@echo "  make ingest          - Dựng lại kho tri thức từ file trong git (P5)"
+	@echo ""
+	@echo "  make smoke           - Thử LLM 3 câu TRƯỚC khi chạy 222 case"
+	@echo "  make eval-tu-choi    - Đo tầng từ chối (không cần model)"
+	@echo "  make recall          - Đo Recall@K, chọn model embedding (P6)"
+	@echo "  make c0              - Baseline: LLM trần (P4)"
+	@echo "  make c1              - RAG, không guardrail (P7)"
+	@echo "  make c2              - RAG + guardrail — cấu hình sản phẩm (P8)"
+	@echo "  make phieu-cham      - Sinh phiếu chấm cho chuyên gia (mục 32)"
+	@echo ""
+	@echo "  make serve           - Chạy API + hai trang giao diện"
 	@echo "  make test            - Chạy toàn bộ kiểm thử"
 	@echo "  make clean           - Xoá cache Python"
 
@@ -49,8 +60,40 @@ crawl:
 extract:
 	cd crawler && python extract.py
 
+ingest:
+	python knowledge/ingestion/load.py
+
+# Chạy cái này TRƯỚC khi tốn 222 case: gemini-1.5-flash đã bị Google tắt hẳn,
+# phát hiện ở câu thứ 1 tốn 3 giây, phát hiện ở câu 200 tốn cả buổi.
+smoke:
+	python scripts/smoke_llm.py
+
+eval-tu-choi:
+	python evaluation/runners/eval_tu_choi.py
+
+recall:
+	python evaluation/runners/eval_retrieval.py --models halong e5-small --hybrid halong
+
+# --nghi 1.5: free tier rất chặt, chạy liên tục là đụng trần 429.
+c0:
+	python evaluation/runners/run_c0.py --nghi 1.5
+
+c1:
+	python evaluation/runners/run_c1.py --nghi 1.5
+
+c2:
+	python evaluation/runners/run_c2.py --nghi 1.5
+
+phieu-cham:
+	python evaluation/tools/sinh_phieu_cham.py
+
+serve:
+	@echo "  http://localhost:8000        trang chat"
+	@echo "  http://localhost:8000/admin  trang quản trị"
+	python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+
 test:
-	python -m pytest tests/ -v
+	python -m pytest tests/ -q
 
 clean:
 	find . -type d -name __pycache__ -prune -exec rm -rf {} +
