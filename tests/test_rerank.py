@@ -87,3 +87,41 @@ def test_loi_thi_lui_ve_thu_tu_cu_va_DEM(monkeypatch):
 
 def test_danh_sach_rong():
     assert rerank.xep_lai(CauGia("hoi"), [], top_k=5, ten_model="gia") == []
+
+
+def test_pipeline_import_sentence_transformers_truoc():
+    """pipeline.py phai import sentence_transformers TRUOC cac module app.
+
+    Da can hai lan, ca hai deu khong bao loi ro rang:
+
+      2026-08-20  embedding: segfault khi HF_HOME dat sau luc import
+      2026-08-21  reranker : segfault khi sentence_transformers import sau
+                             cac module khac. Trieu chung tren console chi la
+                             "Segmentation fault", khong traceback, khong
+                             exception - try/except khong cuu duoc.
+
+    Lan thu hai con ton kem hon: no bi chan doan nham la "GPU 4GB het cho"
+    va reranker bi TAT suot mot ngay, mat R@5 tu 90.9 xuong 72.7.
+    """
+    import ast
+    from pathlib import Path
+
+    p = Path(__file__).resolve().parents[1] / "app" / "services" / "pipeline.py"
+    cay = ast.parse(p.read_text(encoding="utf-8"))
+
+    thu_tu = []
+    for n in ast.walk(cay):
+        if isinstance(n, ast.Import):
+            thu_tu += [(a.name, n.lineno) for a in n.names]
+        elif isinstance(n, ast.ImportFrom) and n.module:
+            thu_tu.append((n.module, n.lineno))
+
+    st = [d for t, d in thu_tu if t == "sentence_transformers"]
+    assert st, "pipeline.py khong import sentence_transformers -> se segfault"
+
+    app_mod = [d for t, d in thu_tu if t.startswith("app.")]
+    assert app_mod, "khong tim thay import app.* - test nay da mat tac dung"
+    assert min(st) < min(app_mod), (
+        "sentence_transformers phai import TRUOC moi module app.* "
+        "(dong " + str(min(st)) + " vs " + str(min(app_mod)) + ") - "
+        "nguoc lai se Segmentation fault, xem P6_reranker.md")

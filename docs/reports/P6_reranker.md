@@ -133,3 +133,98 @@ Bật bằng một dòng, không phải sửa mã:
 ```
 RERANKER_MODEL=itdainb/PhoRanker
 ```
+
+---
+
+## Cập nhật 2026-08-21 — BẬT reranker. Chẩn đoán cũ sai.
+
+### Chẩn đoán cũ sai ở đâu
+
+Báo cáo trên kết luận **TẮT** reranker vì 4.208 ms/lượt, và ghi nguyên nhân:
+
+> Nguyên nhân: cross-encoder chạy **CPU**. GPU 4 GB của máy này đã bị model
+> embedding chiếm; nạp thêm cross-encoder lên cùng GPU thì vỡ với
+> `CUDA error: device-side assert triggered`.
+
+**Sai.** Đo lại 2026-08-21:
+
+```
+nvidia-smi : 4096 MiB tổng, 1779 MiB đang dùng, 2186 MiB trống
+torch      : free 3.22 GB / total 4.00 GB
+PhoRanker  : 540 MB
+```
+
+VRAM thừa gấp sáu lần. Không hề thiếu chỗ.
+
+Nguyên nhân thật là **thứ tự import** — đúng cái bẫy đã ghi trong
+[`app/__init__.py`](../../app/__init__.py) cho model embedding, và nó áp cho
+cross-encoder y hệt:
+
+```python
+# Import sentence_transformers SAU các module khác:
+$ DEV=cuda python rr.py
+device muc tieu: cuda
+import xong
+Segmentation fault          <- sập ở đây, không phải CUDA assert
+
+# Import sentence_transformers TRƯỚC mọi thứ khác:
+$ DEV=cuda python rr2.py
+XONG 0.45s loi=0
+   ninhbinh_gntt_ca_chua#2      0.9421
+```
+
+`CUDA error: device-side assert triggered` mà báo cáo cũ ghi lại là **triệu
+chứng của lỗi `max_length=512` trên model khai `max_position_embeddings=258`**
+— lỗi đó đã sửa từ 2026-08-20 nhưng kết luận "GPU không dùng được" thì không
+ai đo lại.
+
+### Số đo mới
+
+Trên 22 case có ground truth, `evaluation/runners/eval_rerank.py`:
+
+| | CPU (báo cáo cũ) | **GPU (mới)** |
+|---|---:|---:|
+| R@1 | 45,5 | 45,5 |
+| R@3 | 72,7 | 72,7 |
+| R@5 | **90,9** | **90,9** |
+| MRR | 0,605 | 0,605 |
+| chi phí | 4.208 ms | **1.107 ms** |
+
+**Chất lượng giống hệt. Chi phí giảm 3.101 ms.**
+
+### Latency thật trên đường truy xuất
+
+Runner đo cả overhead của chính nó. Đo trên `tim_kiem()` thật, 8 câu hỏi,
+có làm nóng model trước:
+
+| | p50 | p95 | max |
+|---|---:|---:|---:|
+| không rerank | 167 ms | 187 ms | 189 ms |
+| **có rerank** | **626 ms** | **636 ms** | **642 ms** |
+
+Chi phí thật: **+459 ms**.
+
+### Ngân sách ASM-01
+
+| chặng | ms |
+|---|---:|
+| truy xuất + rerank | 626 |
+| gọi LLM | ~2.600 |
+| **tổng** | **~3.226** |
+
+Dưới `ASM-01` (p50 ≤ 5.000 ms) với biên khoảng 1,8 giây.
+
+### Quyết định
+
+**BẬT.** `RERANKER_MODEL=itdainb/PhoRanker`, `RERANKER_DEVICE=cuda`.
+
+Đổi lại **R@5 từ 72,7% lên 90,9%** — gần một phần năm số câu hỏi trước đây
+không có chunk đúng trong top-5 thì nay có.
+
+### Điều kiện phải xét lại
+
+1. **Máy triển khai không có GPU** → quay về 4.208 ms/lượt, vượt ngân sách.
+   Đây là ràng buộc phải nói với NextFarm, không phải chi tiết nội bộ.
+2. `RERANKER_DEVICE=cpu` là đường lùi an toàn, không cần sửa mã.
+3. Mọi tiến trình nạp reranker **phải** import `sentence_transformers` trước
+   các module khác, nếu không sẽ segfault. `pipeline.py:24` đã làm đúng.
