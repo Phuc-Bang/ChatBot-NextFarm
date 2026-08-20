@@ -3,311 +3,924 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Trợ lý nông nghiệp NextFarm</title>
+<title>Trợ lý Nông nghiệp Thông minh — NextFarm AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ==========================================================================
-   Trang chat cho nong dan.
-
-   BA QUYET DINH THIET KE, DEU CO LY DO:
-
-   1. CHU 17px, KHONG PHAI 14px. Nguoi dung la nong dan, nhieu nguoi lon
-      tuoi, doc tren dien thoai giua troi nang. 16px la nguong toi thieu de
-      iOS khong tu phong to khi bam vao o nhap.
-
-   2. TU CHOI PHAI TRONG KHAC HAN TRA LOI. Neu hai loai giong nhau thi nguoi
-      dung doc luot se tuong bot da tra loi. Toan bo gia tri cua he thong nay
-      nam o cho "biet tu choi", nen viec tu choi phai NHIN THAY DUOC.
-
-   3. NGUON LUON HIEN, KHONG GIAU SAU NUT BAM. Muc dich cua PoC la truy
-      nguoc duoc; giau nguon di la lam hong dieu do.
-   ========================================================================== */
-:root{
-  --xanh:#15803D; --xanh-dam:#166534; --xanh-nhat:#F0FDF4;
-  --nen:#FFFFFF; --chu:#0F172A; --chu-mo:#475569;
-  --vien:#E2E8F0; --mo:#F8FAFC;
-  --vang:#B45309; --vang-nen:#FFFBEB; --vang-vien:#FDE68A;
-  --do:#B91C1C;
-  --r:12px;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --xanh:#4ADE80; --xanh-dam:#86EFAC; --xanh-nhat:#14261A;
-    --nen:#0B1120; --chu:#E2E8F0; --chu-mo:#94A3B8;
-    --vien:#1E293B; --mo:#111827;
-    --vang:#FCD34D; --vang-nen:#2A2010; --vang-vien:#78350F;
-    --do:#FCA5A5;
-  }
-}
-*{box-sizing:border-box}
-body{
-  margin:0; background:var(--nen); color:var(--chu);
-  font:400 17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  -webkit-text-size-adjust:100%;
-}
-header{
-  position:sticky; top:0; z-index:10;
-  background:var(--nen); border-bottom:1px solid var(--vien);
-  padding:14px 20px; display:flex; align-items:center; gap:12px;
-}
-.logo{
-  width:34px;height:34px;border-radius:9px;background:var(--xanh);
-  display:grid;place-items:center;flex:none;
-}
-.logo svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2}
-h1{font-size:17px;margin:0;font-weight:650;letter-spacing:-.01em}
-.sub{font-size:13px;color:var(--chu-mo);margin-top:1px}
-main{max-width:760px;margin:0 auto;padding:20px 16px 190px}
-
-/* --- Loi chao --- */
-.chao{
-  background:var(--xanh-nhat); border:1px solid var(--vien);
-  border-radius:var(--r); padding:18px 20px; margin-bottom:22px;
-}
-.chao h2{margin:0 0 8px;font-size:17px;font-weight:650}
-.chao p{margin:0 0 12px;color:var(--chu-mo);font-size:15px}
-.goi-y{display:flex;flex-wrap:wrap;gap:8px}
-.goi-y button{
-  background:var(--nen);border:1px solid var(--vien);color:var(--chu);
-  border-radius:999px;padding:9px 15px;font-size:14.5px;cursor:pointer;
-  font-family:inherit;transition:border-color .18s,background .18s;
-  min-height:40px;
-}
-.goi-y button:hover{border-color:var(--xanh);background:var(--xanh-nhat)}
-.goi-y button:focus-visible{outline:2px solid var(--xanh);outline-offset:2px}
-
-/* --- Tin nhan --- */
-.luot{margin-bottom:22px}
-.hoi{
-  background:var(--xanh);color:#fff;padding:12px 17px;
-  border-radius:var(--r) var(--r) 3px var(--r);
-  max-width:82%;margin-left:auto;width:fit-content;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]) .hoi{color:#052e16;font-weight:500}
-}
-.dap{
-  margin-top:12px;padding:15px 18px;border-radius:var(--r);
-  background:var(--mo);border:1px solid var(--vien);
-}
-/* Tu choi: nen vang + vien trai day. Khac han o mat nhin. */
-.dap.tuchoi{
-  background:var(--vang-nen);border-color:var(--vang-vien);
-  border-left:4px solid var(--vang);
-}
-.nhan{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:12.5px;font-weight:600;letter-spacing:.02em;
-  text-transform:uppercase;margin-bottom:9px;
-}
-.nhan.tuchoi{color:var(--vang)}
-.nhan.tra-loi{color:var(--xanh)}
-.nhan svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2}
-.noi-dung{white-space:pre-wrap}
-
-/* --- Nguon --- */
-.nguon{margin-top:15px;padding-top:13px;border-top:1px solid var(--vien)}
-.nguon-tieu-de{
-  font-size:12.5px;font-weight:600;color:var(--chu-mo);
-  text-transform:uppercase;letter-spacing:.03em;margin-bottom:9px;
-}
-.nguon-item{
-  display:block;padding:11px 13px;border:1px solid var(--vien);
-  border-radius:9px;margin-bottom:7px;text-decoration:none;color:inherit;
-  background:var(--nen);transition:border-color .18s;
-}
-.nguon-item:hover{border-color:var(--xanh)}
-.nguon-item:focus-visible{outline:2px solid var(--xanh);outline-offset:1px}
-.nguon-ten{font-size:14.5px;font-weight:600;margin-bottom:3px}
-.nguon-meta{font-size:12.5px;color:var(--chu-mo)}
-.nguon-trich{
-  font-size:13.5px;color:var(--chu-mo);margin-top:7px;
-  padding-left:10px;border-left:2px solid var(--vien);line-height:1.5;
+:root {
+  --primary: #059669;
+  --primary-hover: #047857;
+  --primary-dark: #064e3b;
+  --primary-light: #ecfdf5;
+  --primary-glow: rgba(16, 185, 129, 0.15);
+  
+  --bg-page: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-subtle: #f1f5f9;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+  
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-inverse: #ffffff;
+  
+  --border: #e2e8f0;
+  --border-focus: #10b981;
+  
+  --amber: #d97706;
+  --amber-bg: #fffbeb;
+  --amber-border: #fde68a;
+  --amber-dark: #b45309;
+  
+  --emerald: #10b981;
+  --emerald-bg: #ecfdf5;
+  --emerald-border: #a7f3d0;
+  
+  --rose: #e11d48;
+  --rose-bg: #ffe4e6;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  --shadow-glow: 0 0 20px rgba(16, 185, 129, 0.2);
+  
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
 }
 
-/* --- O nhap --- */
-.thanh{
-  position:fixed;left:0;right:0;bottom:0;background:var(--nen);
-  border-top:1px solid var(--vien);padding:13px 16px;
+[data-theme="dark"] {
+  --primary: #10b981;
+  --primary-hover: #34d399;
+  --primary-dark: #064e3b;
+  --primary-light: #064e3b33;
+  --primary-glow: rgba(16, 185, 129, 0.25);
+  
+  --bg-page: #0b1120;
+  --bg-card: #131d31;
+  --bg-subtle: #1e293b;
+  --bg-glass: rgba(19, 29, 49, 0.85);
+  
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-inverse: #0b1120;
+  
+  --border: #23324d;
+  --border-focus: #34d399;
+  
+  --amber: #fbbf24;
+  --amber-bg: #2d2208;
+  --amber-border: #78350f;
+  --amber-dark: #f59e0b;
+  
+  --emerald: #34d399;
+  --emerald-bg: #063826;
+  --emerald-border: #065f46;
+  
+  --rose: #fb7185;
+  --rose-bg: #3f121d;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 25px rgba(16, 185, 129, 0.3);
 }
-.thanh-trong{max-width:760px;margin:0 auto;display:flex;gap:10px}
-textarea{
-  flex:1;font:inherit;font-size:17px;padding:13px 15px;resize:none;
-  border:1px solid var(--vien);border-radius:var(--r);
-  background:var(--nen);color:var(--chu);min-height:52px;max-height:150px;
-}
-textarea:focus{outline:2px solid var(--xanh);outline-offset:-1px;
-  border-color:transparent}
-button.gui{
-  background:var(--xanh);color:#fff;border:0;border-radius:var(--r);
-  padding:0 22px;font:inherit;font-weight:600;cursor:pointer;
-  min-width:56px;min-height:52px;
-}
-button.gui:hover:not(:disabled){background:var(--xanh-dam)}
-button.gui:disabled{opacity:.45;cursor:not-allowed}
-button.gui:focus-visible{outline:2px solid var(--chu);outline-offset:2px}
-.ghi-chu{
-  max-width:760px;margin:9px auto 0;font-size:12.5px;
-  color:var(--chu-mo);text-align:center;
-}
-.ghi-chu a{color:var(--chu-mo)}
 
-/* --- Dang cho --- */
-.cho{display:flex;gap:5px;padding:6px 0}
-.cho i{
-  width:8px;height:8px;border-radius:50%;background:var(--chu-mo);
-  animation:nhay 1.3s infinite;
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
-.cho i:nth-child(2){animation-delay:.16s}
-.cho i:nth-child(3){animation-delay:.32s}
-@keyframes nhay{0%,60%,100%{opacity:.25}30%{opacity:1}}
-@media (prefers-reduced-motion:reduce){
-  .cho i{animation:none;opacity:.5}
-  *{transition:none!important}
+
+/* Header */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: var(--bg-glass);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
 }
-.loi{color:var(--do);font-size:14.5px}
-@media (max-width:520px){
-  main{padding:16px 12px 190px}
-  .hoi{max-width:92%}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: var(--shadow-glow);
+  flex-shrink: 0;
+}
+.brand-icon svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2.2; }
+
+.brand-info h1 {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  background: var(--primary-light);
+  color: var(--primary);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--emerald-border);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.brand-info p {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  background: var(--emerald-bg);
+  border: 1px solid var(--emerald-border);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--emerald);
+  box-shadow: 0 0 8px var(--emerald);
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.2); }
+}
+
+.btn-icon {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-icon:hover {
+  background: var(--bg-subtle);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+.btn-icon svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+.btn-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.btn-nav:hover {
+  background: var(--primary-light);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+.btn-nav svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+/* Main Chat Container */
+main {
+  flex: 1;
+  max-width: 820px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px 16px 190px;
+}
+
+/* Welcome Card */
+.welcome-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  margin-bottom: 28px;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #10b981 0%, #059669 50%, #34d399 100%);
+}
+
+.welcome-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.welcome-badge-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--primary-light);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.welcome-badge-icon svg { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 2; }
+
+.welcome-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+
+.welcome-desc {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.crop-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0;
+}
+
+.crop-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  margin: 18px 0 22px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--bg-subtle);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-main);
+}
+.feature-item svg { width: 16px; height: 16px; color: var(--primary); flex-shrink: 0; }
+
+.suggestions-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.suggestions-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.suggestion-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  padding: 9px 16px;
+  border-radius: var(--radius-full);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: var(--shadow-sm);
+}
+
+.suggestion-btn:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  color: var(--primary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Chat Messages Stream */
+.dialog-turn {
+  margin-bottom: 24px;
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.user-bubble {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: #ffffff;
+  padding: 14px 20px;
+  border-radius: var(--radius-lg) var(--radius-lg) 4px var(--radius-lg);
+  max-width: 82%;
+  margin-left: auto;
+  font-size: 16px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+  word-wrap: break-word;
+}
+
+.bot-card {
+  margin-top: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+
+/* Grounded Response */
+.bot-card.grounded {
+  border-left: 4px solid var(--primary);
+}
+
+/* Abstained Response */
+.bot-card.abstained {
+  background: var(--amber-bg);
+  border-color: var(--amber-border);
+  border-left: 4px solid var(--amber);
+}
+
+.card-header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  margin-bottom: 12px;
+}
+
+.card-header-badge.grounded {
+  background: var(--emerald-bg);
+  color: var(--primary);
+  border: 1px solid var(--emerald-border);
+}
+
+.card-header-badge.abstained {
+  background: var(--amber-bg);
+  color: var(--amber-dark);
+  border: 1px solid var(--amber-border);
+}
+
+.card-header-badge svg { width: 15px; height: 15px; stroke-width: 2.2; fill: none; stroke: currentColor; }
+
+.message-text {
+  font-size: 16px;
+  line-height: 1.68;
+  color: var(--text-main);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Citations & Sources */
+.sources-container {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--border);
+}
+
+.sources-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.source-item-card {
+  display: block;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+.source-item-card:hover {
+  border-color: var(--primary);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+  transform: translateX(3px);
+}
+
+.source-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.source-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.source-tier-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  background: var(--primary-light);
+  color: var(--primary);
+  border: 1px solid var(--emerald-border);
+  white-space: nowrap;
+}
+
+.source-publisher {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.source-excerpt {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  padding-left: 10px;
+  border-left: 2px solid var(--primary);
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* Loading Dots */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 0;
+}
+
+.typing-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  animation: typingBounce 1.4s infinite ease-in-out both;
+}
+.typing-dot:nth-child(1) { animation-delay: -0.32s; }
+.typing-dot:nth-child(2) { animation-delay: -0.16s; }
+.typing-dot:nth-child(3) { animation-delay: 0s; }
+
+@keyframes typingBounce {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.3; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+/* Bottom Floating Input Bar */
+.input-floating-bar {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 40;
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border);
+  padding: 14px 16px;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.input-container-inner {
+  max-width: 820px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.input-box-wrapper {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 6px 8px 6px 16px;
+  box-shadow: var(--shadow-md);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-box-wrapper:focus-within {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+textarea#user-query {
+  flex: 1;
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1.5;
+  padding: 8px 0;
+  resize: none;
+  border: none;
+  background: transparent;
+  color: var(--text-main);
+  min-height: 38px;
+  max-height: 140px;
+  outline: none;
+}
+
+.btn-send {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-md);
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.btn-send:hover:not(:disabled) {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  transform: scale(1.04);
+  box-shadow: var(--shadow-glow);
+}
+
+.btn-send:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-send svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2.2; }
+
+.disclaimer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.disclaimer-bar a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+.disclaimer-bar a:hover { text-decoration: underline; }
+
+@media (max-width: 640px) {
+  header { padding: 10px 16px; }
+  .welcome-card { padding: 20px 16px; }
+  .user-bubble { max-width: 90%; }
+  .status-pill span { display: none; }
 }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo" aria-hidden="true">
-    <svg viewBox="0 0 24 24"><path d="M12 21V9M12 9C12 6 9 3 5 3c0 4 3 6 7 6M12 9c0-3 3-6 7-6 0 4-3 6-7 6"/></svg>
-  </div>
-  <div>
-    <h1>Trợ lý nông nghiệp</h1>
-    <div class="sub">Lúa · Cà chua · Dưa chuột</div>
+  <a href="/" class="brand">
+    <div class="brand-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 21V9M12 9C12 6 9 3 5 3c0 4 3 6 7 6M12 9c0-3 3-6 7-6 0 4-3 6-7 6"/></svg>
+    </div>
+    <div class="brand-info">
+      <h1>NextFarm AI <span class="brand-badge">Trợ lý Nông nghiệp</span></h1>
+      <p>Hệ thống RAG Khuyến nông Đa tầng C2</p>
+    </div>
+  </a>
+  <div class="header-actions">
+    <div class="status-pill" title="Hệ thống đang hoạt động với 3 tầng bảo vệ chống bịa đặt">
+      <div class="status-dot"></div>
+      <span>Bảo vệ C2</span>
+    </div>
+    <button class="btn-icon" id="btn-theme" title="Chuyển chế độ Sáng / Tối" aria-label="Toggle Theme">
+      <svg id="theme-icon-sun" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+    </button>
+    <a href="/admin" class="btn-nav" title="Mở Bảng điều khiển Quản trị">
+      <svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+      <span>Quản trị</span>
+    </a>
   </div>
 </header>
 
 <main>
-  <div class="chao" id="chao">
-    <h2>Xin chào!</h2>
-    <p>Em trả lời dựa trên tài liệu kỹ thuật từ các Sở Nông nghiệp và trung tâm
-       khuyến nông. Câu nào không có trong tài liệu thì em nói không biết,
-       chứ không đoán ạ.</p>
-    <div class="goi-y" id="goi-y"></div>
+  <div class="welcome-card" id="welcome-card">
+    <div class="welcome-header">
+      <div class="welcome-badge-icon">
+        <svg viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+      </div>
+      <div>
+        <h2 class="welcome-title">Xin chào bà con và kỹ sư NextFarm!</h2>
+        <p class="welcome-desc">
+          Tôi là trợ lý AI chuyên biệt cho nông nghiệp. Tôi tra cứu thông tin trực tiếp từ các tài liệu khuyến nông chính thống đã được kiểm duyệt. <strong>Câu nào không có trong tài liệu tôi sẽ từ chối an toàn</strong>, tuyệt đối không bịa đặt số liệu.
+        </p>
+      </div>
+    </div>
+
+    <div class="crop-tags">
+      <span class="crop-tag">🌾 Cây Lúa</span>
+      <span class="crop-tag">🍅 Cây Cà chua</span>
+      <span class="crop-tag">🥒 Cây Dưa chuột</span>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span>100% Căn cứ văn bản</span>
+      </div>
+      <div class="feature-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        <span>Chống rò rỉ & Bịa số liệu</span>
+      </div>
+      <div class="feature-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span>Minh bạch nguồn trích dẫn</span>
+      </div>
+    </div>
+
+    <div class="suggestions-title">Câu hỏi gợi ý nhanh:</div>
+    <div class="suggestions-list" id="suggestions-container"></div>
   </div>
-  <div id="hoi-thoai"></div>
+
+  <div id="dialog-stream"></div>
 </main>
 
-<div class="thanh">
-  <div class="thanh-trong">
-    <textarea id="o-nhap" rows="1" placeholder="Nhập câu hỏi của bạn…"
-              aria-label="Câu hỏi"></textarea>
-    <button class="gui" id="nut-gui" aria-label="Gửi câu hỏi">Gửi</button>
-  </div>
-  <div class="ghi-chu">
-    Thông tin mang tính tham khảo · <a href="/admin">Trang quản trị</a>
+<div class="input-floating-bar">
+  <div class="input-container-inner">
+    <div class="input-box-wrapper">
+      <textarea id="user-query" rows="1" placeholder="Nhập câu hỏi kỹ thuật trồng trọt (VD: liều lượng bón phân, độ pH, phòng trừ sâu bệnh)..." aria-label="Nội dung câu hỏi"></textarea>
+      <button class="btn-send" id="btn-submit" aria-label="Gửi câu hỏi" title="Gửi câu hỏi (Enter)">
+        <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+      </button>
+    </div>
+    <div class="disclaimer-bar">
+      <span>Trợ lý AI Nông nghiệp NextFarm · Căn cứ tài liệu khuyến nông</span>
+      <a href="/admin">Xem bảng kiểm định Quản trị &rarr;</a>
+    </div>
   </div>
 </div>
 
 <script>
-const GOI_Y = [
-  "Cà chua cần độ pH bao nhiêu?",
-  "Dưa chuột cần độ ẩm đất bao nhiêu?",
-  "Lúa bón bao nhiêu kg đạm một hecta?",
+const SUGGESTIONS = [
+  "Dưa chuột thích hợp với đất có pH khoảng bao nhiêu khi chuẩn bị đất?",
+  "Quy trình bón thúc cho cà chua chia làm mấy lần và liều lượng thế nào?",
+  "Lượng phân bón cho cà chua là bao nhiêu trước khi ra hoa?",
+  "Năng suất thu hoạch lúa SRI tại Hưng Thắng là bao nhiêu?",
+  "Độ ẩm nhà màng khu B hiện tại là bao nhiêu?",
 ];
 
-// Ly do tu choi -> nhan tieng Viet. Bon loai nay PHAI phan biet duoc voi
-// nhau: "chua co tai lieu" khac han "khong bao gio ho tro", va nguoi dung
-// can hieu dung minh dang gap loai nao.
-const NHAN_LY_DO = {
-  garden_data:           "Không truy cập dữ liệu vườn",
-  product_feature:       "Không có tài liệu về ứng dụng",
-  device_control:        "Không điều khiển thiết bị",
-  out_of_scope:          "Ngoài phạm vi hỗ trợ",
-  insufficient_evidence: "Chưa đủ căn cứ trong tài liệu",
-  grounding_khong_dat:   "Chưa đủ căn cứ chắc chắn",
-  can_lam_ro:            "Cần làm rõ thêm",
-  loi_he_thong:          "Hệ thống bận",
-  loi_dinh_dang:         "Chưa tạo được câu trả lời",
+const REASON_LABELS = {
+  garden_data:           "Chặn câu hỏi số liệu vườn (A1)",
+  product_feature:       "Chặn câu hỏi tính năng ứng dụng (A2)",
+  device_control:        "Chặn lệnh điều khiển thiết bị",
+  out_of_scope:          "Ngoài phạm vi hỗ trợ (chỉ hỗ trợ Lúa, Cà chua, Dưa chuột)",
+  insufficient_evidence: "Chưa đủ tài liệu khuyến nông trong kho",
+  grounding_khong_dat:   "Không đạt kiểm chứng căn cứ văn bản",
+  can_lam_ro:            "Cần làm rõ thêm loại cây trồng",
+  loi_he_thong:          "Hệ thống đang bận (giới hạn API rate limit)",
+  loi_dinh_dang:         "Lỗi định dạng câu trả lời",
 };
 
-const ICON_CANH = '<svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>';
-const ICON_OK   = '<svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>';
+const ICON_VERIFIED = '<svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>';
+const ICON_WARNING  = '<svg viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>';
 
-const $hoiThoai = document.getElementById("hoi-thoai");
-const $nhap = document.getElementById("o-nhap");
-const $gui  = document.getElementById("nut-gui");
-const $chao = document.getElementById("chao");
-let dangGui = false;
-let nguQuanh = [];          // context_turns cho cau hoi tiep noi
+const $dialog = document.getElementById("dialog-stream");
+const $queryInput = document.getElementById("user-query");
+const $btnSubmit = document.getElementById("btn-submit");
+const $welcomeCard = document.getElementById("welcome-card");
+let isSending = false;
+let dialogContext = [];
 
-const esc = s => String(s ?? "").replace(/[&<>"']/g,
+const escapeHtml = s => String(s ?? "").replace(/[&<>"']/g,
   c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
-GOI_Y.forEach(t => {
-  const b = document.createElement("button");
-  b.textContent = t;
-  b.onclick = () => { $nhap.value = t; gui(); };
-  document.getElementById("goi-y").appendChild(b);
+// Theme Switcher
+const $btnTheme = document.getElementById("btn-theme");
+let currentTheme = localStorage.getItem("nextfarm_theme") || 
+  (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+document.documentElement.setAttribute("data-theme", currentTheme);
+
+$btnTheme.onclick = () => {
+  currentTheme = currentTheme === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", currentTheme);
+  localStorage.setItem("nextfarm_theme", currentTheme);
+};
+
+// Render suggestions
+const $sugBox = document.getElementById("suggestions-container");
+SUGGESTIONS.forEach(text => {
+  const btn = document.createElement("button");
+  btn.className = "suggestion-btn";
+  btn.textContent = text;
+  btn.onclick = () => {
+    $queryInput.value = text;
+    sendMessage();
+  };
+  $sugBox.appendChild(btn);
 });
 
-$nhap.addEventListener("input", () => {
-  $nhap.style.height = "auto";
-  $nhap.style.height = Math.min($nhap.scrollHeight, 150) + "px";
+// Auto-expand textarea
+$queryInput.addEventListener("input", () => {
+  $queryInput.style.height = "auto";
+  $queryInput.style.height = Math.min($queryInput.scrollHeight, 140) + "px";
 });
-$nhap.addEventListener("keydown", e => {
-  if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); gui(); }
-});
-$gui.onclick = gui;
 
-function veNguon(ds){
-  if (!ds || !ds.length) return "";
-  return '<div class="nguon"><div class="nguon-tieu-de">Nguồn ('
-    + ds.length + ')</div>'
-    + ds.map(n => '<a class="nguon-item" href="' + esc(n.url)
-        + '" target="_blank" rel="noopener">'
-        + '<div class="nguon-ten">' + esc(n.tieu_de || n.chunk_id) + '</div>'
-        + '<div class="nguon-meta">' + esc(n.co_quan || "")
-        + (n.tier ? " · Tier " + n.tier : "") + '</div>'
-        + '<div class="nguon-trich">' + esc(n.trich) + '</div></a>').join("")
-    + '</div>';
+$queryInput.addEventListener("keydown", e => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+});
+
+$btnSubmit.onclick = sendMessage;
+
+function renderSourcesHtml(sources) {
+  if (!sources || !sources.length) return "";
+  return `
+    <div class="sources-container">
+      <div class="sources-header">
+        <span>Tài liệu trích dẫn kiểm chứng (${sources.length})</span>
+      </div>
+      ${sources.map(s => `
+        <a class="source-item-card" href="${escapeHtml(s.url || '#')}" target="_blank" rel="noopener noreferrer">
+          <div class="source-title-row">
+            <span class="source-title">${escapeHtml(s.tieu_de || s.chunk_id)}</span>
+            ${s.tier ? `<span class="source-tier-badge">Tier ${s.tier} Khuyến nông</span>` : ''}
+          </div>
+          <div class="source-publisher">${escapeHtml(s.co_quan || "Cơ quan Khuyến nông")}</div>
+          <div class="source-excerpt">"${escapeHtml(s.trich || "")}"</div>
+        </a>
+      `).join("")}
+    </div>
+  `;
 }
 
-async function gui(){
-  const q = $nhap.value.trim();
-  if (!q || dangGui) return;
-  dangGui = true; $gui.disabled = true;
-  $chao.style.display = "none";
-  $nhap.value = ""; $nhap.style.height = "auto";
+async function sendMessage() {
+  const query = $queryInput.value.trim();
+  if (!query || isSending) return;
 
-  const luot = document.createElement("div");
-  luot.className = "luot";
-  luot.innerHTML = '<div class="hoi">' + esc(q) + '</div>'
-    + '<div class="dap"><div class="cho"><i></i><i></i><i></i></div></div>';
-  $hoiThoai.appendChild(luot);
-  luot.scrollIntoView({behavior:"smooth", block:"start"});
+  isSending = true;
+  $btnSubmit.disabled = true;
+  $welcomeCard.style.display = "none";
+  $queryInput.value = "";
+  $queryInput.style.height = "auto";
 
-  const $dap = luot.querySelector(".dap");
+  const turnEl = document.createElement("div");
+  turnEl.className = "dialog-turn";
+  turnEl.innerHTML = `
+    <div class="user-bubble">${escapeHtml(query)}</div>
+    <div class="bot-card">
+      <div class="typing-indicator">
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+      </div>
+    </div>
+  `;
+  $dialog.appendChild(turnEl);
+  turnEl.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  const $botCard = turnEl.querySelector(".bot-card");
+
   try {
     const res = await fetch("/api/chat", {
-      method:"POST", headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({cau_hoi:q, context_turns:nguQuanh.slice(-4)})
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        cau_hoi: query,
+        context_turns: dialogContext.slice(-4)
+      })
     });
+
     if (!res.ok) throw new Error("HTTP " + res.status);
-    const d = await res.json();
+    const data = await res.json();
 
-    const nhan = d.da_tu_choi
-      ? '<div class="nhan tuchoi">' + ICON_CANH + " "
-        + esc(NHAN_LY_DO[d.ly_do_tu_choi] || "Không trả lời được") + "</div>"
-      : '<div class="nhan tra-loi">' + ICON_OK + " Có căn cứ tài liệu</div>";
+    const isAbstain = data.da_tu_choi;
+    const badgeClass = isAbstain ? "abstained" : "grounded";
+    const badgeIcon = isAbstain ? ICON_WARNING : ICON_VERIFIED;
+    const badgeText = isAbstain 
+      ? (REASON_LABELS[data.ly_do_tu_choi] || "Từ chối an toàn theo quy chuẩn")
+      : "Có căn cứ tài liệu chính thống";
 
-    $dap.className = "dap" + (d.da_tu_choi ? " tuchoi" : "");
-    $dap.innerHTML = nhan
-      + '<div class="noi-dung">' + esc(d.tra_loi) + "</div>"
-      + veNguon(d.nguon);
+    $botCard.className = `bot-card ${badgeClass}`;
+    $botCard.innerHTML = `
+      <div class="card-header-badge ${badgeClass}">
+        ${badgeIcon}
+        <span>${escapeHtml(badgeText)}</span>
+      </div>
+      <div class="message-text">${escapeHtml(data.tra_loi)}</div>
+      ${renderSourcesHtml(data.nguon)}
+    `;
 
-    nguQuanh.push(q);
-  } catch (e) {
-    $dap.innerHTML = '<div class="loi">Không kết nối được máy chủ. '
-      + 'Bạn thử lại sau ít phút nhé.</div>';
+    dialogContext.push(query);
+  } catch (err) {
+    $botCard.className = "bot-card abstained";
+    $botCard.innerHTML = `
+      <div class="card-header-badge abstained">
+        ${ICON_WARNING}
+        <span>Lỗi kết nối</span>
+      </div>
+      <div class="message-text">Không kết nối được tới máy chủ NextFarm. Bạn vui lòng thử lại sau ít giây.</div>
+    `;
   } finally {
-    dangGui = false; $gui.disabled = false; $nhap.focus();
+    isSending = false;
+    $btnSubmit.disabled = false;
+    $queryInput.focus();
   }
 }
 </script>
