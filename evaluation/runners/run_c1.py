@@ -104,6 +104,14 @@ def main() -> int:
         for d in out.read_text(encoding="utf-8").splitlines():
             if d.strip():
                 r = json.loads(d)
+                # Case tung LOI thi KHONG tinh la da chay - phai chay lai.
+                #
+                # Da va phai that: quota free tier can giua chung, 35 case
+                # nhan 429 va duoc ghi vao file kem truong `loi`. Lan chay
+                # sau doc file nay va bo qua ca 35 case do vinh vien - bang
+                # so se thieu 35 case ma khong bao gi.
+                if r.get("loi"):
+                    continue
                 da_co[r["case_id"]] = r
     elif out.exists():
         out.unlink()

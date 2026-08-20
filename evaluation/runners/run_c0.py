@@ -123,6 +123,10 @@ def main() -> int:
         for dong in out.read_text(encoding="utf-8").splitlines():
             if dong.strip():
                 r = json.loads(dong)
+                # Xem chu thich cung ten o run_c1.py: case tung LOI khong
+                # duoc tinh la da chay.
+                if r.get("loi"):
+                    continue
                 da_co[r["case_id"]] = r
     elif out.exists():
         out.unlink()
