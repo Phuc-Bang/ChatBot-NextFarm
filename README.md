@@ -77,15 +77,15 @@ Chi tiết đầy đủ ở [quy chuẩn v2.0](docs/NEXTFARM_PROBLEM_A_STANDARD_
 | P1 | Crawler (HTML + PDF, robots.txt, sitemap, phân trang) | ✅ xong — 31 tài liệu |
 | P2 | Duyệt tri thức (2 luồng) | 🔄 18/31 tài liệu duyệt, 65/141 số liệu xác nhận |
 | P3 | Tập kiểm thử — **đóng băng** | ✅ v3 đóng băng — 12 nhóm, 222 case |
-| P4 | Đo baseline C0 (LLM trần) | ⛔ chờ khoá API hoặc model cục bộ |
+| P4 | Đo baseline C0 (LLM trần) | ✅ đo xong trên 222 case |
 | P5 | Cơ sở dữ liệu tri thức | ✅ xong — lược đồ, chunking, nạp dữ liệu |
-| P6 | Truy xuất lai | 🔄 chuẩn hoá + từ khoá xong; vector chờ model |
-| P7 | RAG (C1) | ⛔ chờ model |
-| P8 | Guardrail (C2) — cấu hình sản phẩm | 🔄 Intent Router + Scope Check + mẫu từ chối xong; lớp LLM và Grounding chờ model |
+| P6 | Truy xuất lai | ✅ hybrid RRF ba kênh — MRR 0.687 |
+| P7 | RAG (C1) | 🔄 chuỗi chạy được, chưa đo đủ 222 case |
+| P8 | Guardrail (C2) | 🔄 Grounding tầng 1+2 xong; tầng 3 (ngữ nghĩa) chưa làm |
 | P9 | Báo cáo so sánh | ☐ |
-| P10 | API + giao diện | ☐ |
+| P10 | API + giao diện | ✅ API + hai trang tiếng Việt |
 | P11 | Tài liệu giao hàng | ☐ |
-| P12 | Fine-tuning (tuỳ chọn, có điều kiện) | ☐ |
+| P12 | Fine-tuning (tuỳ chọn) | ⛔ **không khả thi** — GPU 4GB, xem §Giới hạn |
 
 ### Số liệu hiện tại
 
@@ -96,7 +96,7 @@ Chi tiết đầy đủ ở [quy chuẩn v2.0](docs/NEXTFARM_PROBLEM_A_STANDARD_
 | Chunk **index được** | **161** (18 tài liệu đã duyệt) |
 | Câu ứng viên số liệu | 193 — **65 fact đã xác nhận** |
 | Case kiểm thử | **222 / 12 nhóm — v3 đã đóng băng** |
-| Test tự động | **248 xanh** |
+| Test tự động | **283 xanh** |
 
 > **161 / 292 chunk** vào được kho tri thức. 131 chunk còn lại thuộc 13 tài
 > liệu bị loại ở luồng 1 và **cố tình** nằm ngoài: DEC-005 quy định không
@@ -129,6 +129,83 @@ không dùng để báo cáo với NextFarm như tỷ lệ chính xác của h�
 Xem [`docs/reports/P8_intent_router.md`](docs/reports/P8_intent_router.md).
 
 ---
+
+### C0 — LLM trần bịa đến mức nào
+
+Đo trên 222 case của tập v3 đã đóng băng, `gemini-3.1-flash-lite`, prompt để trần
+(không nhắc thận trọng, không cấm bịa, không yêu cầu trích dẫn):
+
+| | |
+|---|---|
+| `answer_rate` | **97,7%** — gần như không bao giờ từ chối |
+| `accuracy_when_answered` | **1,2%** (2/173 case chấm được) |
+| `abstention_recall` | **3,4%** — trong 148 ca đáng từ chối, chỉ bắt được 5 |
+| `over_abstention_rate` | 0% — nó **không** từ chối oan, mà là không thận trọng chút nào |
+
+**61 ca bịa**, phủ đủ bốn hiện tượng đề bài nêu:
+
+| Mã | Hiện tượng | Số ca |
+|---|---|---|
+| A1 | Bịa số liệu vườn | 8 |
+| A2 | Bịa tính năng ứng dụng | 17 |
+| A3 | Khuyến nghị sai cây/vùng | 22 |
+| — | **Khẳng định đã điều khiển thiết bị** | **14** |
+
+Nhóm cuối nghiêm trọng nhất:
+
+> *"Đã xác nhận lệnh: Bật van 3 trong vòng 10 phút. **Hệ thống đang tiến hành mở
+> van ngay bây giờ.**"*
+
+Bot chưa hề chạm tới thiết bị nào. Nông dân đọc câu này sẽ tin là van đã mở rồi
+bỏ đi — ruộng không được tưới. Đây không còn là lỗi thông tin.
+
+Chi tiết: [`docs/reports/C0_baseline.md`](docs/reports/C0_baseline.md).
+
+### Mô hình đã chốt — bằng số đo, không phải trên giấy
+
+DEC-015 giữ trạng thái `[TODO]` cho tới khi có số. Giờ đã có:
+
+| | Chốt | Vì sao |
+|---|---|---|
+| **Sinh câu trả lời** | `gemini-3.1-flash-lite` (API) | GPU 4GB không chạy nổi — xem dưới |
+| **Embedding** | `halong_embedding` (**local**) | MRR 0.687 khi hợp nhất, cao nhất trong 5 cấu hình đo |
+| **Reranker** | chưa chốt | chưa đo |
+
+**Truy xuất lai đo trên 15 case có ground truth, 161 chunk:**
+
+| Cấu hình | R@1 | R@3 | MRR |
+|---|---|---|---|
+| **hybrid(halong)** | **60,0%** | 73,3% | **0,687** |
+| chỉ từ khoá | 46,7% | 60,0% | 0,576 |
+| chỉ vector | 13,3% | **80,0%** | 0,432 |
+
+Vector một mình kém nhất về MRR — nhưng R@3 của nó cao nhất bảng: nó **tìm đúng**
+chunk, chỉ **xếp sai** vị trí. Hợp nhất với từ khoá thì R@1 nhảy **13,3% → 60%**.
+Chi tiết: [`docs/reports/P6_retrieval_tuning.md`](docs/reports/P6_retrieval_tuning.md).
+
+### Kho tri thức không rời máy
+
+Embedding chạy **local**, nên bản kê luồng dữ liệu (§38) đổi hẳn:
+
+```
+Kho tri thức (161 chunk)   → KHÔNG rời máy    (embedding local)
+Câu hỏi → tìm kiếm          → KHÔNG rời máy    (embedding + trigram + FTS local)
+Câu hỏi + Evidence Pack     → Google Gemini    (chỉ chặng viết câu trả lời)
+Dữ liệu vườn / định danh    → KHÔNG có         (PoC không truy cập)
+```
+
+### Hai giao diện
+
+```bash
+make up && python -m uvicorn app.main:app --port 8000
+```
+
+| | |
+|---|---|
+| `/` | Trang chat cho nông dân — chữ 17px, từ chối hiển thị khác hẳn trả lời, nguồn luôn hiện |
+| `/admin` | Trang quản trị — kho tri thức, độ trễ từng chặng, chi phí, và **bộ lọc "chỉ xem ca đã chặn"** |
+
+Trang admin **chưa có đăng nhập** vì chạy cục bộ. Deploy ra ngoài thì bắt buộc thêm khoá.
 
 ## Chạy thử
 
@@ -172,7 +249,11 @@ Ghi ở đây để không ai hiểu nhầm về phạm vi:
 
 - **Chưa kết nối dữ liệu vườn.** PoC này không truy cập API IoT của NextFarm. Tiêu chí nghiệm thu "≥95% câu hỏi tra cứu số liệu vườn" thuộc Bài toán B — xem bảng ánh xạ ở §5.1 của quy chuẩn.
 - **Người duyệt tri thức không phải chuyên gia nông nghiệp.** Quy trình duyệt kiểm *chứng cứ* (nguồn, tier, cây, vùng), không kiểm *chân lý nông học*.
-- **Chưa có tài liệu sản phẩm NextFarm**, nên câu hỏi về tính năng app luôn bị từ chối.
+- **Chưa có tài liệu sản phẩm NextFarm**, nên câu hỏi về tính năng app luôn bị từ chối. C0 cho thấy đây là chỗ LLM trần bịa nhiều nhất (17/18 case).
+- **GPU 4GB không chạy được model sinh câu trả lời.** Đã đo thật: `qwen3:4b` sập trên GPU (CUDA error, 2.5GB model không đủ chỗ cho KV-cache trên 3,96GB trống); chạy CPU thì được 11,4 token/giây — một câu hỏi RAG thật mất **32,3 giây**, quá ngưỡng ASM-01 (p50 ≤ 5s) sáu lần. Vì vậy **P12 (fine-tuning) không khả thi** trên phần cứng hiện có, và §37.5 phải viết lại: phương án self-host cần NextFarm đầu tư GPU mới, và đó là con số `[EXT]`.
+- **Free tier Gemini rất chặt.** `gemini-2.5-flash` cạn quota sau vài chục lần gọi — 80/80 case đầu của C0 trả về 429. Đã đổi sang `gemini-3.1-flash-lite`. Mọi lần chạy đo lường nên dùng `--nghi` để giãn nhịp.
+- **Grounding Validator mới có tầng 1 và 2.** Tầng 3 (ngữ nghĩa, NLI/LLM-judge) chưa làm.
+- **Trang admin chưa có đăng nhập** — chạy cục bộ. Deploy ra ngoài thì bắt buộc thêm khoá.
 - Một số ngưỡng trong quy chuẩn là **giả định của đội** (`[ASM]`), chờ NextFarm xác nhận — xem §9.
 - **Intent Router mới có lớp rule.** Lớp LLM few-shot (§11.3) chưa làm được vì chưa chốt model (DEC-015). Khi không luật nào khớp, router trả về `nguồn = "mac_dinh"` với độ tin cậy 0 — đó là *"lớp rule không biết"*, không phải *"câu này là nông học"*.
 - **Tập kiểm thử có ba phiên bản, bản đang dùng là `v3`.** DEC-023 cấm sửa tại chỗ, nên mỗi lỗi phát hiện sau khi đóng băng đều phải cắt phiên bản mới; bản cũ giữ nguyên làm bằng chứng.
