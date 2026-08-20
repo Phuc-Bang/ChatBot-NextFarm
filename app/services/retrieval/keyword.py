@@ -107,12 +107,19 @@ def _conn(conn=None):
     with ket_noi() as c:
         yield c
 
-# [TODO] Ba tham so duoi day PHAI den tu so do Recall@K o P6, khong duoc chot
-# tren giay (muc 14.6). Gia tri hien tai chi de chay duoc, va bat cu bao cao
-# nao trich chung deu phai ghi ro la chua chot.
+# DA CHOT 2026-08-20 bang so do - quet 72 to hop tren 22 case co ground
+# truth, kho 185 chunk. Bang day du: docs/reports/P6_retrieval_tuning.md
+#
+#   TOP_K_MOI_KENH  10 -> 20 nang MRR 0.468 -> 0.562. Tu 20 tro len BAO HOA
+#                   (30 va 50 deu cho 0.561). Lay 20: them chunk chi ton
+#                   thoi gian ma khong duoc gi.
+#   NGUONG_TRIGRAM  0.2 -> 0.4 lam MRR TUT 0.562 -> 0.492. Nguong cang chat
+#                   cang mat chunh dung. Doi 0.3 -> 0.2.
+#   K_RRF           gan nhu khong anh huong (0.559 / 0.561 / 0.562 cho
+#                   10 / 30 / 60). Giu 60 - hang so RRF thong dung.
 TOP_K_MOI_KENH = 20
 K_RRF = 60                    # hang so RRF thong dung
-NGUONG_TRIGRAM = 0.3          # word_similarity toi thieu
+NGUONG_TRIGRAM = 0.2          # word_similarity toi thieu
 
 
 @dataclass

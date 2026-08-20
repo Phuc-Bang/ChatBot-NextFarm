@@ -179,7 +179,8 @@ def do_keyword(cases: list[dict], dap_an: dict[str, set[str]],
     ~300MB, thoi gian nap, RAM) ma khong doi lai gi. Cau "co can vector
     khong" phai tra loi bang so truoc khi cam no vao he thong.
     """
-    from app.services.normalization.vietnamese import chuan_hoa
+    from app.services.normalization.vietnamese import (
+        chuan_hoa, phat_hien_cay)
     from app.services.retrieval.keyword import (
         hop_nhat_rrf, tim_fts, tim_trigram)
 
@@ -194,8 +195,13 @@ def do_keyword(cases: list[dict], dap_an: dict[str, set[str]],
         do_duoc += 1
         t0 = time.time()
         cau = chuan_hoa(c["question"])
-        fts = tim_fts(cau, conn=con)
-        tri = tim_trigram(cau, conn=con)
+        # Phai truyen crop y het pipeline that (pipeline.py). Do khong truyen
+        # la do mot cau hinh KEM HON san pham: quet 72 to hop cho thay loc
+        # crop nang MRR 0.521 -> 0.562, chu yeu nho chan chunk cua cay khac
+        # (cau hoi ve lua nhan top-1 la chunk dua chuot).
+        crop = (phat_hien_cay(cau) or [None])[0]
+        fts = tim_fts(cau, crop, conn=con)
+        tri = tim_trigram(cau, crop, conn=con)
         gop = hop_nhat_rrf(("fts", fts), ("trigram", tri))
         t_tong += time.time() - t0
         vi_tri = next((r for r, ch in enumerate(gop, 1)
@@ -223,7 +229,8 @@ def do_hybrid(ten_model: str, cases: list[dict], dap_an: dict[str, set[str]],
     word_similarity o ba thang do khac han nhau, ep ve mot thang la tu bia
     ra mot phep quy doi khong co co so. Dung lai ham hop_nhat_rrf da co.
     """
-    from app.services.normalization.vietnamese import chuan_hoa
+    from app.services.normalization.vietnamese import (
+        chuan_hoa, phat_hien_cay)
     from app.services.retrieval.keyword import (
         ChunkTraVe, hop_nhat_rrf, tim_fts, tim_trigram)
     from app.services.embedding.local import LocalEmbedding
@@ -247,9 +254,10 @@ def do_hybrid(ten_model: str, cases: list[dict], dap_an: dict[str, set[str]],
         vec = [ChunkTraVe(ids[j], "", "", None, None, None, "", None, None,
                           None, False) for j in thu_tu]
         cau = chuan_hoa(c["question"])
+        crop = (phat_hien_cay(cau) or [None])[0]   # xem chu thich o do_keyword
         gop = hop_nhat_rrf(("vector", vec),
-                           ("fts", tim_fts(cau, conn=con)),
-                           ("trigram", tim_trigram(cau, conn=con)))
+                           ("fts", tim_fts(cau, crop, conn=con)),
+                           ("trigram", tim_trigram(cau, crop, conn=con)))
         t_tong += time.time() - t0
         vi_tri = next((r for r, ch in enumerate(gop, 1)
                        if ch.chunk_id in dung), None)

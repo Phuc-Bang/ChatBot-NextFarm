@@ -171,3 +171,95 @@ truth cho **22/22** case. Nhưng bất kỳ đoạn mã nào sau này đem
 Bốn trong số đó (`ka_015 ka_016 pa_006` hỏi **lúa**, `ka_012` hỏi **dưa
 chuột**) nhận top-1 là chunk của **cây khác**. Lọc `crop` xử lý được một
 phần, nhưng như bảng trên cho thấy, không xử lý hết. `[TODO]` còn mở.
+
+---
+
+## Chốt tham số bằng quét 72 tổ hợp — 2026-08-20
+
+Ba `[TODO]` của §14.6 (`TOP_K_MOI_KENH`, `K_RRF`, `NGUONG_TRIGRAM`) trước nay
+là giá trị mặc định "để chạy được". Nay chốt bằng số: quét đủ
+4 × 3 × 3 × 2 = **72 tổ hợp** trên 22 case có ground truth, kho 185 chunk.
+
+### Ảnh hưởng riêng của từng tham số
+
+Giữ ba tham số kia cố định, đổi một tham số:
+
+**`TOP_K_MOI_KENH` — có ảnh hưởng, bão hoà từ 20**
+
+| giá trị | R@1 | R@3 | R@5 | MRR |
+|---:|---:|---:|---:|---:|
+| 10 | 31.8 | 50.0 | 68.2 | 0.468 |
+| **20** | 40.9 | 59.1 | 72.7 | **0.562** |
+| 30 | 40.9 | 59.1 | 72.7 | 0.561 |
+| 50 | 40.9 | 59.1 | 72.7 | 0.561 |
+
+Từ 20 trở lên không được gì thêm, chỉ tốn thời gian. **Chốt 20.**
+
+**`NGUONG_TRIGRAM` — ảnh hưởng mạnh, ngưỡng càng chặt càng tệ**
+
+| giá trị | R@1 | R@3 | R@5 | MRR |
+|---:|---:|---:|---:|---:|
+| **0.2** | 40.9 | 59.1 | 72.7 | **0.562** |
+| 0.3 (cũ) | 36.4 | 59.1 | 72.7 | 0.531 |
+| 0.4 | 31.8 | 59.1 | 68.2 | 0.492 |
+
+Ngưỡng `word_similarity` cao loại mất chunk đúng. **Đổi 0.3 → 0.2.**
+
+**`K_RRF` — gần như không ảnh hưởng**
+
+| giá trị | MRR |
+|---:|---:|
+| 10 | 0.559 |
+| 30 | 0.561 |
+| 60 | 0.562 |
+
+Chênh 0.003 trên 22 case là nhiễu, không phải tín hiệu. **Giữ 60** (hằng số
+RRF thông dụng) — đổi sang giá trị khác chỉ để "có tối ưu" là tự lừa mình.
+
+**Lọc `crop` — có ảnh hưởng rõ**
+
+| | R@1 | R@3 | R@5 | MRR |
+|---|---:|---:|---:|---:|
+| có lọc | 40.9 | 59.1 | 72.7 | **0.562** |
+| không lọc | 40.9 | 54.5 | 68.2 | 0.521 |
+
+Chủ yếu nhờ chặn chunk của cây khác — trước đó câu hỏi về **lúa** nhận top-1
+là chunk **dưa chuột**.
+
+> Kết quả này **lật lại** nhận định ở mục trước ("lọc crop nâng R@3/R@5 nhưng
+> hạ R@1"). Lần đo đó chạy với `NGUONG_TRIGRAM=0.3`; ở ngưỡng 0.2 thì lọc
+> crop tốt hơn ở **mọi** chỉ số. Hai tham số tương tác với nhau, nên đo từng
+> cái một mà giữ cái kia ở giá trị cũ sẽ ra kết luận sai.
+
+### Một lỗi của phép đo phải nói ra
+
+**Lần quét đầu tiên cho kết quả sai và tôi suýt ghi nó vào báo cáo.** 72 dòng
+đó cho thấy `K_RRF` và `NGUONG_TRIGRAM` **không ảnh hưởng gì** — mọi giá trị
+đều ra MRR y hệt.
+
+Nguyên nhân: cả hai được dùng làm **giá trị mặc định của tham số hàm**:
+
+```python
+def tim_trigram(cau, crop=None, top_k=TOP_K_MOI_KENH,
+                nguong=NGUONG_TRIGRAM, conn=None): ...
+```
+
+Python cố định giá trị mặc định **lúc định nghĩa hàm**, nên gán
+`KW.NGUONG_TRIGRAM = 0.2` ở thời điểm chạy không có tác dụng gì. Bản quét sửa
+lại gọi thẳng từng kênh và truyền tham số tường minh.
+
+Dấu hiệu nhận ra: **một tham số không đổi kết quả một chút nào** thường là lỗi
+đo, không phải phát hiện.
+
+### Chi phí đo — một chi tiết hạ tầng đáng ghi
+
+Bản quét đầu chạy mãi không xong. Nguyên nhân đo được: mỗi lần mở kết nối
+Postgres qua Docker Desktop trên Windows tốn **~3,2 giây** (140,6s cho 44
+truy vấn). Với 3 kênh × 22 case × 72 tổ hợp = **4.752 lần mở kết nối** thì
+không bao giờ chạy xong.
+
+Dùng chung **một** kết nối cho cả lần quét: **340 giây** cho toàn bộ 72 tổ hợp.
+
+Chi tiết này không ảnh hưởng tới sản phẩm (`pipeline.py` mở một kết nối mỗi
+lượt hỏi, không phải mỗi kênh), nhưng ảnh hưởng tới **mọi công cụ đo** — ghi
+lại để lần sau không mất buổi.
