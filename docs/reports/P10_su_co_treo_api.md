@@ -202,3 +202,43 @@ giây — đủ rộng để không cắt nhầm việc thật, đủ chặt đ�
 > **Quy tắc rút ra cho cả dự án:** mọi lời gọi ra ngoài tiến trình cần **hai**
 > timeout — một cho lúc kết nối, một cho lúc chờ kết quả. Thiếu cái nào cũng
 > để lại một đường treo vĩnh viễn.
+
+---
+
+## Đo lại end-to-end sau khi sửa
+
+Server khởi động sạch (`Da nap model embedding trong 17.8s` — trước là 147s),
+gọi qua HTTP thật:
+
+| câu hỏi | tổng | truy xuất | LLM | kết quả |
+|---|---:|---:|---:|---|
+| bật van 3 trong 10 phút | **0,08s** | — | — | `device_control` |
+| thế giờ đang bao nhiêu (lượt 2) | **0,03s** | — | — | `garden_data` |
+| cà chua cần đất pH bao nhiêu | **2,82s** | 222ms | 2.581ms | **trả lời được** |
+| dưa chuột cần độ ẩm đất bao nhiêu | 34,42s | 216ms | 34.174ms | `loi_he_thong` |
+
+**Truy xuất 216–222ms** — khoẻ, đúng như đo được ở P6.
+
+Câu cuối 34 giây **không phải lỗi mã**. Log server:
+
+```
+[429] cho 2.8s roi thu lai (1/5)
+[429] cho 4.6s roi thu lai (2/5)
+[429] cho 8.3s roi thu lai (3/5)
+[429] cho 16.8s roi thu lai (4/5)
+```
+
+2,8 + 4,6 + 8,3 + 16,8 = đúng 32,5 giây backoff sau bốn lần 429. Quota free
+tier đã cạn (xem [BAO_CAO_SO_SANH.md](BAO_CAO_SO_SANH.md)). Hệ thống lùi và
+thử lại **đúng thiết kế**, rồi từ chối tử tế thay vì bịa.
+
+**Một chẩn đoán sai nữa cần đính chính:** lần đo trước cho `truy_xuat=30.335ms`
+và tôi định quy cho kênh vector. Sai — đó là server cũ nạp kho vector lần đầu
+ngay trong request (nó khởi động khi `.env` còn `localhost` nên lifespan nạp
+hụt). Server khởi động sạch cho 222ms.
+
+## Tầng 3 chạy đúng trên sản phẩm thật
+
+`ie_022` gọi qua HTTP với `context_turns` → bị chặn với lý do
+`grounding_khong_dat`. Đây là xác nhận trên đường chạy thật, không phải chỉ
+trên dữ liệu đã lưu.
