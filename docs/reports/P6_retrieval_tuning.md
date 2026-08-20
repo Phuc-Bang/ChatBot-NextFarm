@@ -263,3 +263,28 @@ Dùng chung **một** kết nối cho cả lần quét: **340 giây** cho toàn 
 Chi tiết này không ảnh hưởng tới sản phẩm (`pipeline.py` mở một kết nối mỗi
 lượt hỏi, không phải mỗi kênh), nhưng ảnh hưởng tới **mọi công cụ đo** — ghi
 lại để lần sau không mất buổi.
+
+### Bảng chính thức sau khi chốt tham số
+
+`TOP_K_MOI_KENH=20 · K_RRF=60 · NGUONG_TRIGRAM=0.2 · có lọc crop`
+
+| model | chiều | R@1 | R@3 | R@5 | R@10 | MRR |
+|---|---:|---:|---:|---:|---:|---:|
+| **hybrid(halong)** | 768 | **50.0** | **59.1** | **77.3** | **95.5** | **0.620** |
+| keyword | — | 36.4 | 50.0 | 68.2 | 86.4 | 0.500 |
+| halong (vector đơn) | 768 | 13.6 | 45.5 | 63.6 | 86.4 | 0.351 |
+
+So với trước khi chốt tham số (MRR 0.572 → **0.620**, R@10 81.8 → **95.5**).
+
+**R@10 = 95.5%** — hầu như mọi câu hỏi đều tìm được chunk đúng trong 10 kết
+quả đầu. Phần còn thiếu là **xếp hạng**, không phải tìm kiếm: R@1 mới 50%.
+Đó chính là chỗ một reranker sẽ có tác dụng, và cũng là `[TODO]` còn lại.
+
+Kết luận chọn model **vẫn không đổi** qua cả ba lần đo: hybrid > keyword >
+vector đơn, và vector đơn *tìm đúng, xếp sai*.
+
+### Còn lại
+
+- **Reranker chưa thử.** `RERANKER_MODEL` để trống. Với R@10 95.5% mà R@1
+  50%, đây là hạng mục có tiềm năng cao nhất.
+- Số chunk vào Evidence Pack (`top_k=5` ở `pipeline.py`) chưa quét riêng.
