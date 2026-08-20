@@ -15,10 +15,14 @@ BA TANG KIEM (muc 18)
 
   tang 1 cau truc  - chunk_id co that khong, cau co so co kem nguon khong
   tang 2 so lieu   - MOI con so trong cau tra loi phai co trong evidence
-  tang 3 ngu nghia - [CHUA LAM] can NLI hoac LLM-judge
+  tang 3 ngu nghia - xem app/services/grounding/ngu_nghia.py
 
 Tang 2 la tang quan trong nhat va no DETERMINISTIC: trich so tu cau tra loi,
 doi chieu voi so trong chunk duoc trich dan. Khong dua vao model nao.
+
+Tang 3 cung deterministic o hai phep kiem mac dinh (khong goi mang). LLM-judge
+co san nhung phai bat bang tay - no ton them mot luot goi va nam tren duong
+latency, xem muc 21.
 """
 
 from __future__ import annotations
@@ -130,8 +134,15 @@ def kiem_grounding(tra_loi: str, chunks, chunk_da_dung: list[str]) -> list[str]:
     return loi
 
 
-def sinh_va_kiem(cau_hoi: str, chunks, client=None) -> KetQuaSinh:
-    """Goi model roi kiem. Khong dat thi TU CHOI, khong tra ve cau nghi ngo."""
+def sinh_va_kiem(cau_hoi: str, chunks, client=None,
+                 context_turns: list[str] | None = None,
+                 tang3_llm: bool = False) -> KetQuaSinh:
+    """Goi model roi kiem. Khong dat thi TU CHOI, khong tra ve cau nghi ngo.
+
+    `tang3_llm=True` bat them LLM-judge - TON MOT LUOT GOI NUA, chi dung
+    cho cau rui ro cao. Hai phep kiem quy tac cua tang 3 luon chay vi
+    chung khong goi mang.
+    """
     from app.services.llm import tao_client
 
     client = client or tao_client()
@@ -168,6 +179,14 @@ def sinh_va_kiem(cau_hoi: str, chunks, client=None) -> KetQuaSinh:
     tl = (d.get("tra_loi") or "").strip()
     dung = [str(x) for x in (d.get("chunk_da_dung") or [])]
     loi = kiem_grounding(tl, chunks, dung)
+
+    # --- Tang 3: ngu nghia (muc 18.3) ---
+    # Tang 2 bao dam moi CON SO co that. No khong doc duoc y nghia, nen hai
+    # thu lot qua duoc: loi xac nhan tham quyen khong co trong bang chung
+    # (adv_006), va cau tra loi khong dinh toi cau dang hoi (ie_022).
+    from app.services.grounding.ngu_nghia import kiem_ngu_nghia
+    loi = loi + kiem_ngu_nghia(cau_hoi, tl, chunks, context_turns,
+                               dung_llm=tang3_llm, client=client)
 
     if loi:
         # CHAN. Day la con so cho cau "he thong da chan N ca bia" (muc 18).

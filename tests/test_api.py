@@ -130,7 +130,7 @@ def test_tu_choi_khi_model_khai_khong_du_can_cu():
 def test_tu_choi_khi_json_hong():
     """Khong phan tich duoc thi khong kiem duoc; khong kiem duoc thi KHONG
     duoc hien ra."""
-    r = sinh_va_kiem("hoi", CHUNKS, client=LLMGia("day khong phai JSON"))
+    r = sinh_va_kiem("ca chua can do pH bao nhieu", CHUNKS, client=LLMGia("day khong phai JSON"))
     assert r.da_tu_choi
     assert r.ly_do == "loi_dinh_dang"
 
@@ -142,7 +142,7 @@ def test_chan_khi_model_bia_so_du_khai_du_can_cu():
     """
     c = LLMGia('{"du_can_cu": true, "tra_loi": "Ca chua can pH 8.9 [c1]",'
                ' "chunk_da_dung": ["c1"]}')
-    r = sinh_va_kiem("hoi", CHUNKS, client=c)
+    r = sinh_va_kiem("ca chua can do pH bao nhieu", CHUNKS, client=c)
     assert r.da_tu_choi
     assert r.ly_do == "grounding_khong_dat"
     assert r.canh_bao_grounding
@@ -151,7 +151,7 @@ def test_chan_khi_model_bia_so_du_khai_du_can_cu():
 def test_cho_qua_khi_dat_moi_tang():
     c = LLMGia('{"du_can_cu": true, "tra_loi": "Ca chua can pH 6-6.5 [c1]",'
                ' "chunk_da_dung": ["c1"]}')
-    r = sinh_va_kiem("hoi", CHUNKS, client=c)
+    r = sinh_va_kiem("ca chua can do pH bao nhieu", CHUNKS, client=c)
     assert not r.da_tu_choi
     assert "6-6.5" in r.tra_loi
     assert r.chunk_da_dung == ["c1"]

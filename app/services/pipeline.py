@@ -167,7 +167,9 @@ def tra_loi_cau_hoi(cau_hoi: str,
 
     # ---- 5. LLM + Grounding -----------------------------------------
     from app.services.rag.sinh_cau_tra_loi import sinh_va_kiem
-    r = sinh_va_kiem(cau_hoi, chunks)
+    # context_turns phai di theo xuong tang 3: luot hai ha chuan chi doc
+    # duoc y dinh khi biet luot mot hoi gi (xem ie_022).
+    r = sinh_va_kiem(cau_hoi, chunks, context_turns=context_turns)
     dh.cham("llm")
 
     kq.tra_loi = r.tra_loi
