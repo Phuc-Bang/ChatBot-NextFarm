@@ -248,7 +248,7 @@ Lưu ý: **giá API thay đổi**. Trong một lần tra cứu duy nhất đã t
 
 | # | Tiêu chí đề bài | Thuộc bài toán | Trạng thái |
 |---|---|---|---|
-| 1 | Không bịa đặt thông tin | **A** | ✅ 61 → **0** ca bịa trên 222 case |
+| 1 | Không bịa đặt thông tin | **A** | ✅ 61 → **0** ca bịa **số liệu** trên 222 case. Grounding tầng 3 tìm thêm **2 ca** bịa kiểu khác (mạo danh nguồn, trả lời lạc đề) và chặn nốt — [P8_grounding_tang3.md](reports/P8_grounding_tang3.md) |
 | 2 | Từ chối đúng khi thiếu căn cứ | **A** | ✅ `abstention_recall` **99,3%** |
 | 3 | Trả lời đúng cây trồng / vùng miền | **A** | ✅ `out_of_scope_leak` = **0** |
 | 4 | Thời gian phản hồi vài giây | **A** | ✅ p50 11 ms · p95 8.084 ms |
@@ -267,7 +267,7 @@ Lưu ý: **giá API thay đổi**. Trong một lần tra cứu duy nhất đã t
 
 | Mã | Giả định | Căn cứ | Nếu sai thì sao |
 |---|---|---|---|
-| `ASM-01` | Độ trễ p50 ≤ 5s, p95 ≤ 10s | Đề bài nói *"vài giây"* | Chặt hơn → bỏ reranker hoặc đổi model nhỏ hơn |
+| `ASM-01` | Độ trễ p50 ≤ 5s, p95 ≤ 10s | Đề bài nói *"vài giây"* | **Đây là giả định đắt nhất trong bảng.** Nới lên ~5,5s là bật được reranker → tỉ lệ tìm đúng tài liệu trong 5 kết quả đầu **72,7% → 90,9%**. Siết chặt hơn → phải đổi model nhỏ hơn |
 | `ASM-02` | Chuyên gia chấm đạt ≥ 4/5 | Chuẩn thông thường | Điều chỉnh ngưỡng từ chối |
 | `ASM-03` | Chưa có tài liệu sản phẩm NextFarm | Chưa được cung cấp | Có tài liệu → nhánh `product_feature` trả lời được |
 | `ASM-05` | Ngân sách duyệt kho ≈ 10 giờ | Ước lượng của đội | Vượt → giảm số nguồn, không giảm chất lượng duyệt |
