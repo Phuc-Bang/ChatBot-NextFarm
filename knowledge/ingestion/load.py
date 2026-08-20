@@ -46,7 +46,10 @@ FACT_REVIEW = ROOT / "knowledge" / "review" / "facts.yaml"
 
 CHUNK_REVIEW = ROOT / "knowledge" / "review" / "chunks.yaml"
 
-DEFAULT_DSN = "postgresql://nextfarm:nextfarm@localhost:15432/nextfarm"
+# 127.0.0.1 chu KHONG PHAI localhost - xem app/core/db.py. Do duoc:
+# localhost mat 10,05s moi ket noi (libpq thu IPv6 truoc, Docker chi bind
+# IPv4), 127.0.0.1 mat 0,01s.
+DEFAULT_DSN = "postgresql://nextfarm:nextfarm@127.0.0.1:15432/nextfarm"
 CAY_HOP_LE = {"lua", "ca_chua", "dua_chuot"}
 
 
@@ -247,7 +250,10 @@ def main() -> None:
     if not MANIFEST.exists():
         sys.exit("Chua co " + str(MANIFEST) + " - chay crawler truoc")
 
-    with psycopg.connect(dsn()) as conn:
+    # connect_timeout + statement_timeout: khong de mot su co DB thanh treo
+    # im lang. Xem docs/reports/P10_su_co_treo_api.md.
+    with psycopg.connect(dsn(), connect_timeout=15,
+                         options="-c statement_timeout=120000") as conn:
         if args.status:
             in_tinh_hinh(conn)
             return
