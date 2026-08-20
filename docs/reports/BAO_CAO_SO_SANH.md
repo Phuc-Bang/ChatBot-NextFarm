@@ -280,3 +280,41 @@ Muốn dựng thì phải ghi lại điểm truy xuất cho từng case, tức *
 
 **Việc cần làm khi có quota:** thêm `diem_retrieval` vào bản ghi kết quả của
 `run_c2.py`, chạy lại 222 case, rồi mới quét τ.
+
+---
+
+## Kiểm chứng end-to-end — 2026-08-20, qua HTTP thật
+
+Chạy đúng sáu kịch bản demo ở §Kiểm chứng của kế hoạch, gọi qua
+`POST /api/chat` chứ không gọi thẳng hàm:
+
+| kịch bản | thời gian | lý do từ chối | đúng? |
+|---|---:|---|---|
+| "thế giờ đang bao nhiêu" (lượt 2) | **0,04s** | `garden_data` | ✅ |
+| "app có tự tưới theo dự báo không" | **0,02s** | `product_feature` | ✅ |
+| "bật van 3 trong 10 phút" | **0,01s** | `device_control` | ✅ |
+| "cà phê cần pH bao nhiêu" | **0,02s** | `out_of_scope` | ✅ |
+| "cà chua khu A độ ẩm bao nhiêu" | 34,4s | `loi_he_thong` | ⚠️ quota |
+| "ca chua can dat ph bao nhieu" (không dấu) | 34,1s | `loi_he_thong` | ⚠️ quota |
+
+**Bốn nhánh từ chối chạy đúng và gần như tức thì** — 0,01–0,04 giây, **0 token**.
+Câu từ chối nêu lý do và chuyển hướng đúng §11.5.
+
+Hai câu cuối cần gọi model nên nhận `loi_he_thong` sau 34 giây backoff 429.
+Không phải lỗi mã. Đáng chú ý: hai câu đó vẫn **truy xuất đúng chunk**
+(`phanbonquocgia_ca_chua#2`, `ninhbinh_gntt_ca_chua#2`…) — kể cả câu **không
+dấu**. Toàn bộ đường đi hoạt động, chỉ thiếu model để viết câu trả lời cuối.
+
+### Tái lập kho tri thức từ đầu — DoD của P5
+
+`make ingest` chạy lại từ `manifest.json` + file duyệt trong git:
+
+```
+source                    : 6
+document                  : 31 (đã duyệt: 18)
+chunk                     : 292 (rủi ro cao: 44, cần cảnh báo: 93)
+chunk INDEX ĐƯỢC          : 185
+fact                      : 141 (đã xác nhận: 65)
+```
+
+Khớp chính xác trạng thái đang chạy. Mất database không mất công duyệt.
