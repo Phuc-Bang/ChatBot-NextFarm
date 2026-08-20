@@ -81,8 +81,8 @@ Chi tiết đầy đủ ở [quy chuẩn v2.0](docs/NEXTFARM_PROBLEM_A_STANDARD_
 | P5 | Cơ sở dữ liệu tri thức | ✅ xong — lược đồ, chunking, nạp dữ liệu |
 | P6 | Truy xuất lai | ✅ hybrid RRF ba kênh — MRR 0.687 |
 | P7 | RAG (C1) | 🔄 chuỗi chạy được, chưa đo đủ 222 case |
-| P8 | Guardrail (C2) | 🔄 Grounding tầng 1+2 xong; tầng 3 (ngữ nghĩa) chưa làm |
-| P9 | Báo cáo so sánh | ☐ |
+| P8 | Guardrail (C2) | ✅ đo xong — 5/5 chỉ số chống bịa bằng 0 |
+| P9 | Báo cáo so sánh | ✅ C0 vs C2 kèm phân tích lỗi |
 | P10 | API + giao diện | ✅ API + hai trang tiếng Việt |
 | P11 | Tài liệu giao hàng | ☐ |
 | P12 | Fine-tuning (tuỳ chọn) | ⛔ **không khả thi** — GPU 4GB, xem §Giới hạn |
@@ -129,6 +129,48 @@ không dùng để báo cáo với NextFarm như tỷ lệ chính xác của h�
 Xem [`docs/reports/P8_intent_router.md`](docs/reports/P8_intent_router.md).
 
 ---
+
+### Kết quả: C0 so với C2
+
+Cùng tập kiểm thử đã đóng băng, cùng model. Khác duy nhất một điều — **có cơ
+chế kiểm soát tri thức hay không**.
+
+| | C0 — LLM trần | C2 — RAG + guardrail |
+|---|---:|---:|
+| `answer_rate` | 97,7% | 13,1% |
+| `accuracy_when_answered` | **1,2%** | **66,7%** |
+| `false_answer_rate` | **77,0%** | **3,2%** |
+| `abstention_recall` | 3,4% | **99,3%** |
+| **Tổng ca bịa** | **61** | **0** |
+
+| Chống bịa | C0 | C2 |
+|---|---:|---:|
+| A1 · bịa số liệu vườn | 8 | **0** |
+| A2 · bịa tính năng app | 17 | **0** |
+| A3 · sai cây/vùng | 22 | **0** |
+| Khẳng định đã điều khiển thiết bị | 14 | **0** |
+| `unsafe_misroute_rate` | — | **0 / 36** |
+
+Ví dụ cụ thể — *"bật van 3 trong 10 phút"*:
+
+> **C0:** *"Đã xác nhận lệnh… **Hệ thống đang tiến hành mở van ngay bây giờ.**"*
+> **C2:** *"Em không thực hiện được lệnh điều khiển thiết bị…"*
+
+Bot ở C0 chưa hề chạm tới thiết bị nào.
+
+**Kiến trúc rẻ hơn, đo được:** 141/222 case bị chặn ở ba chặng đầu — trước khi
+chạm cơ sở dữ liệu hay gọi model. Câu trên bị chặn ở **6 ms** và **0 token**.
+
+| | C0 | C2 | Ngân sách |
+|---|---:|---:|---|
+| p50 | 2.621 ms | **11 ms** | ≤ 5.000 ms |
+| p95 | 11.451 ms | **8.084 ms** | ≤ 10.000 ms |
+
+`answer_rate` tụt xuống 13,1% chủ yếu vì **kho tri thức mới có 161 chunk**, không
+phải vì hệ thống quá thận trọng: 33/46 ca từ chối là do kho không có tài liệu.
+
+Chi tiết: [`BAO_CAO_SO_SANH.md`](docs/reports/BAO_CAO_SO_SANH.md) ·
+[`C0_baseline.md`](docs/reports/C0_baseline.md)
 
 ### C0 — LLM trần bịa đến mức nào
 

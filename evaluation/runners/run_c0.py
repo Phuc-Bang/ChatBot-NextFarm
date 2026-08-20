@@ -199,7 +199,11 @@ def main() -> int:
             if not k.da_tra_loi:
                 c.so_tu_choi_dung += 1
                 c.theo_nhom_dung[r["group"]] += 1
-        elif not k.da_tra_loi:
+        elif not k.da_tra_loi and case["expected_behavior"] == "answer":
+            # CHI tinh la tu choi oan khi case BAT BUOC phai tra loi.
+            # `answer_if_evidence` = "tra loi NEU co bang chung", tu choi khi
+            # khong co la dung. Dinh nghia nay phai GIONG HET o run_c2.py,
+            # neu khong thi hai cau hinh khong so sanh duoc voi nhau.
             c.so_tu_choi_oan += 1
 
         # Nhom chong bia
