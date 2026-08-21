@@ -12,15 +12,23 @@ Tài liệu này trả lời 6 câu hỏi ở mục 6 của đề bài, kèm s�
 
 ## Tóm tắt kết quả
 
-Trên 222 case của tập kiểm thử đã đóng băng, cùng một model, khác nhau duy nhất ở việc **có cơ chế kiểm soát tri thức hay không**:
+Trên 222 case của tập kiểm thử đã đóng băng, cùng một model, cùng cấu hình truy xuất — **ba** cấu hình, mỗi lần thêm đúng một bậc:
 
-| | LLM trần (hiện trạng) | PoC này |
-|---|---:|---:|
-| Tổng ca bịa đặt | **61** | **0** |
-| Trả lời sai (`false_answer_rate`) | 77,0% | 3,2% |
-| Đúng khi có trả lời | 1,2% | 66,7% |
-| Bắt được ca cần từ chối | 3,4% | 99,3% |
-| Độ trễ p95 | 11.451 ms | 8.084 ms |
+| | LLM trần<br>(hiện trạng) | Chỉ thêm tài liệu<br>(RAG) | PoC này<br>(RAG + kiểm soát) |
+|---|---:|---:|---:|
+| **Tổng ca bịa đặt** | **61** | **23** | **0** |
+| Trả lời sai (`false_answer_rate`) | 77,0% | 23,0% | **0,9%** |
+| Đúng khi có trả lời | 1,2% | 23,9% | **90,9%** |
+| Bắt được ca cần từ chối | 3,4% | 69,6% | **100,0%** |
+| Độ trễ p95 | 11.451 ms | 11.895 ms | **6.185 ms** |
+| Chi phí cả lượt chạy 222 case | — | $0,1231 | **$0,0527** |
+
+> **Cột giữa là cột đáng chú ý nhất.** Cho mô hình đủ tài liệu — đúng cách làm
+> RAG thông thường — vẫn còn **23 ca bịa**: 4 ca bịa số liệu vườn, 7 ca bịa tính
+> năng app, 3 ca rò lệnh thiết bị, 9 ca nhận câu ngoài phạm vi. **RAG một mình
+> không giải quyết được bài toán NextFarm đặt ra.** Chỉ cơ chế kiểm soát mới đưa
+> về 0 — và nó còn làm chi phí giảm gần một nửa, vì 141/222 lượt bị chặn trước
+> khi chạm mô hình, tốn 0 token.
 
 Chi tiết: [`docs/reports/BAO_CAO_SO_SANH.md`](reports/BAO_CAO_SO_SANH.md)
 
@@ -40,7 +48,7 @@ Chi tiết: [`docs/reports/BAO_CAO_SO_SANH.md`](reports/BAO_CAO_SO_SANH.md)
 
 ### 3. Phương pháp luận phát triển hướng đánh giá (Evaluation-Driven Development)
 * Xây dựng bộ kiểm thử 222 test case đóng băng thuộc 12 nhóm kiểm định nghiêm ngặt, có hàng rào kiểm tra tự động `so_khong_truy_duoc()` để loại bỏ hoàn toàn các đáp án suy diễn.
-* **Kết quả đo thực tế**: Triệt tiêu **100% hiện tượng bịa đặt (từ 61 ca ở LLM trần xuống 0 ca)**, tỷ lệ nhận diện ca cần từ chối đạt **99,3%** và độ trễ p50 chỉ **11ms**.
+* **Kết quả đo thực tế**: Triệt tiêu **100% hiện tượng bịa đặt (từ 61 ca ở LLM trần xuống 0 ca)**, tỷ lệ nhận diện ca cần từ chối đạt **100,0%** và độ trễ p50 chỉ **15 ms**. Cấu hình trung gian C1 (có tài liệu, chưa có cơ chế kiểm soát) còn **23 ca bịa** — RAG một mình không giải quyết được bài toán.
 
 ---
 
@@ -271,9 +279,9 @@ Lưu ý: **giá API thay đổi**. Trong một lần tra cứu duy nhất đã t
 | # | Tiêu chí đề bài | Thuộc bài toán | Trạng thái |
 |---|---|---|---|
 | 1 | Không bịa đặt thông tin | **A** | ✅ 61 → **0** ca bịa **số liệu** trên 222 case. Grounding tầng 3 tìm thêm **2 ca** bịa kiểu khác (mạo danh nguồn, trả lời lạc đề) và chặn nốt — [P8_grounding_tang3.md](reports/P8_grounding_tang3.md) |
-| 2 | Từ chối đúng khi thiếu căn cứ | **A** | ✅ `abstention_recall` **99,3%** |
+| 2 | Từ chối đúng khi thiếu căn cứ | **A** | ✅ `abstention_recall` **100,0%** (148/148) |
 | 3 | Trả lời đúng cây trồng / vùng miền | **A** | ✅ `out_of_scope_leak` = **0** |
-| 4 | Thời gian phản hồi vài giây | **A** | ✅ p50 11 ms · p95 8.084 ms |
+| 4 | Thời gian phản hồi vài giây | **A** | ✅ p50 15 ms · p95 6.185 ms |
 | 5 | ≥95% câu hỏi tra cứu số liệu vườn | **B** | ⛔ **Ngoài phạm vi PoC này** — cần API IoT |
 
 > **Tiêu chí #5 thuộc Bài toán B.** PoC này **không truy cập dữ liệu vườn nào**.

@@ -83,9 +83,9 @@ Chi tiết đầy đủ ở [quy chuẩn v2.0](docs/NEXTFARM_PROBLEM_A_STANDARD_
 | P4 | Đo baseline C0 (LLM trần) | ✅ đo xong trên 222 case |
 | P5 | Cơ sở dữ liệu tri thức | ✅ xong — lược đồ, chunking, nạp dữ liệu |
 | P6 | Truy xuất lai | ✅ hybrid RRF ba kênh — MRR **0,620**, R@10 95,5% · tham số chốt bằng quét 72 tổ hợp · reranker đã đo |
-| P7 | RAG (C1) | 🔄 **169/222 case** — chặn bởi quota free tier, không phải thiếu mã |
+| P7 | RAG (C1) | ✅ **222/222 case** — chạy trọn 2026-08-22, không lỗi 429 |
 | P8 | Guardrail (C2) | ✅ đo xong — 5/5 chỉ số chống bịa bằng 0 · Grounding **đủ ba tầng** |
-| P9 | Báo cáo so sánh | ✅ C0 vs C2 kèm phân tích lỗi — thiếu cột C1 vì quota |
+| P9 | Báo cáo so sánh | ✅ **C0 · C1 · C2 đủ ba cột** kèm phân tích lỗi và đường risk–coverage |
 | P10 | API + giao diện | ✅ API + hai trang tiếng Việt |
 | P11 | Tài liệu giao hàng | ✅ [GIAO_HANG_NEXTFARM.md](docs/GIAO_HANG_NEXTFARM.md) + [phiếu chấm 50 câu](docs/PHIEU_CHAM_CHUYEN_GIA.md) · còn 2 mục `[NGƯỜI THỰC HIỆN TỰ VIẾT]` |
 | P12 | Fine-tuning (tuỳ chọn) | ⛔ **không khả thi** — GPU 4GB, xem §Giới hạn |
@@ -135,24 +135,29 @@ Xem [`docs/reports/P8_intent_router.md`](docs/reports/P8_intent_router.md).
 
 ### Kết quả: C0 so với C2
 
-Cùng tập kiểm thử đã đóng băng, cùng model. Khác duy nhất một điều — **có cơ
-chế kiểm soát tri thức hay không**.
+Cùng tập kiểm thử đã đóng băng, cùng model, cùng cấu hình truy xuất. Ba cấu
+hình khác nhau đúng một bậc mỗi lần: **C0** không tài liệu · **C1** có tài liệu
+· **C2** có tài liệu và có cơ chế kiểm soát.
 
-| | C0 — LLM trần | C2 — RAG + guardrail |
-|---|---:|---:|
-| `answer_rate` | 97,7% | 13,1% |
-| `accuracy_when_answered` | **1,2%** | **66,7%** |
-| `false_answer_rate` | **77,0%** | **3,2%** |
-| `abstention_recall` | 3,4% | **99,3%** |
-| **Tổng ca bịa** | **61** | **0** |
+| | C0 — LLM trần | C1 — RAG | C2 — RAG + guardrail |
+|---|---:|---:|---:|
+| `answer_rate` | 97,7% | 41,4% | 14,4% |
+| `accuracy_when_answered` | **1,2%** | 23,9% | **90,9%** |
+| `false_answer_rate` | **77,0%** | 23,0% | **0,9%** |
+| `abstention_recall` | 3,4% | 69,6% | **100,0%** |
+| **Tổng ca bịa** | **61** | **23** | **0** |
 
-| Chống bịa | C0 | C2 |
-|---|---:|---:|
-| A1 · bịa số liệu vườn | 8 | **0** |
-| A2 · bịa tính năng app | 17 | **0** |
-| A3 · sai cây/vùng | 22 | **0** |
-| Khẳng định đã điều khiển thiết bị | 14 | **0** |
-| `unsafe_misroute_rate` | — | **0 / 36** |
+| Chống bịa | C0 | C1 | C2 |
+|---|---:|---:|---:|
+| A1 · bịa số liệu vườn | 8 | 4 | **0** |
+| A2 · bịa tính năng app | 17 | 7 | **0** |
+| A3 · sai cây/vùng | 22 | 9 | **0** |
+| Khẳng định đã điều khiển thiết bị | 14 | 3 | **0** |
+| `unsafe_misroute_rate` | — | — | **0 / 36** |
+
+**Cột C1 là cột quan trọng nhất.** Cho mô hình đủ tài liệu vẫn còn **23 ca
+bịa** — RAG một mình không giải quyết được bài toán. Chỉ cơ chế kiểm soát mới
+đưa về 0.
 
 Ví dụ cụ thể — *"bật van 3 trong 10 phút"*:
 
@@ -166,10 +171,10 @@ chạm cơ sở dữ liệu hay gọi model. Câu trên bị chặn ở **6 ms**
 
 | | C0 | C2 | Ngân sách |
 |---|---:|---:|---|
-| p50 | 2.621 ms | **11 ms** | ≤ 5.000 ms |
-| p95 | 11.451 ms | **8.084 ms** | ≤ 10.000 ms |
+| p50 | 2.608 ms | **15 ms** | ≤ 5.000 ms |
+| p95 | 11.451 ms | **6.185 ms** | ≤ 10.000 ms |
 
-`answer_rate` tụt xuống 13,1% chủ yếu vì **kho tri thức mới có 185 chunk**, không
+`answer_rate` tụt xuống 14,4% chủ yếu vì **kho tri thức mới có 185 chunk**, không
 phải vì hệ thống quá thận trọng: 33/46 ca từ chối là do kho không có tài liệu.
 
 Chi tiết: [`BAO_CAO_SO_SANH.md`](docs/reports/BAO_CAO_SO_SANH.md) ·

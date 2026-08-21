@@ -413,6 +413,15 @@ device_control       → dừng, template REFUSE_DEVICE_CONTROL
 
 > **Khi phân loại không chắc chắn (độ tin cậy dưới ngưỡng `[TODO]`), luôn nghiêng về nhánh TỪ CHỐI, không nghiêng về nhánh TRẢ LỜI.**
 >
+> **Đo 2026-08-22 — vì sao ngưỡng này vẫn `[TODO]`, và nó không phải chuyện đo
+> nữa:** lớp rule hiện tại chỉ sinh `do_tin_cay` cho ba nhánh TỪ CHỐI
+> (`device_control` 0,85–0,95 · `garden_data` 0,85–0,95 · `product_feature`
+> 0,80–0,90). Nhánh `agronomy_knowledge` — nhánh duy nhất từng trả lời — luôn
+> mang `do_tin_cay = 0`, nghĩa là *"lớp rule không biết"*, không phải *"độ tin
+> cậy bằng không"*. Nên mọi τ > 0 sẽ từ chối 100% câu hỏi nông học. Chốt được
+> ngưỡng này đòi **lớp phân loại LLM few-shot (§11.3) phải xây xong trước** — đó
+> là việc xây, không phải việc đo. Xem `docs/reports/P15_risk_coverage.md` §4.
+>
 > Ngưỡng chưa chốt, nhưng **hành vi thiên lệch an toàn thì đã có**: router mặc
 > định về `agronomy_knowledge` chỉ khi không luật nào khớp, và Scope Check
 > đứng ngay sau đó chặn tiếp. Đo trên 222 case: `unsafe_misroute_rate` = **0/36**
@@ -612,7 +621,7 @@ Và **ưu tiên cộng điểm** cho chunk có `region` khớp vùng người d�
 | Reranker | **BẬT** — `itdainb/PhoRanker` trên GPU, chốt 2026-08-21. R@5 72,7 → 90,9, chi phí +459 ms | ✅ |
 | Mở rộng truy vấn bằng từ địa phương | **KHÔNG dùng** — đã thử 2026-08-21, cả ba cách đều làm MRR tụt (0,621 → 0,555–0,589) | ✅ |
 | Hệ số cộng điểm vùng (`he_so`) | **0,1** `[ASM]` — **không đo được**: 0/222 case tập v3 khai `region`, mọi giá trị cho kết quả y hệt. Chốt được thì phải sinh tập v4 | ⚠️ |
-| Ngưỡng điểm tối thiểu để không abstain | `[TODO]` — **công cụ đã có** (`make risk-coverage`), chờ chạy lại C2 để có trường `diem_cao_nhat`. Chặn bởi quota, không phải thiếu mã | ⏳ |
+| Ngưỡng điểm tối thiểu để không abstain | **KHÔNG áp ngưỡng** — chốt 2026-08-22 bằng đường risk–coverage. τ đưa risk về 0 là 0,9871, nhưng nó làm coverage sụt 38,3% → 4,9%: đổi 27 câu đúng lấy 1 câu sai. Bảng quét τ đầy đủ: `docs/reports/P15_risk_coverage.md` | ✅ |
 
 **Không được tự đặt các con số này rồi ghi vào tài liệu như đã chốt.** Chúng phải đến từ số đo.
 
@@ -1293,7 +1302,12 @@ Hai loại này **không được cộng chung thành một "tỷ lệ lỗi"**.
 
 ### 30.4. Đường risk–coverage
 
-Ngưỡng tự tin (`[TODO]` ở §14.6) không được chọn bằng cảm tính. Cách chọn:
+> **ĐÃ DỰNG 2026-08-22.** Kết quả và quyết định: `docs/reports/P15_risk_coverage.md`.
+> Kết luận là **không áp ngưỡng nào** trên điểm truy xuất — τ đưa risk về 0 làm
+> coverage sụt 38,3% → 4,9%. Trục độ tin cậy Intent Router chưa dựng được, lý do
+> ở §11.4.
+
+Ngưỡng tự tin không được chọn bằng cảm tính. Cách chọn:
 
 ```
 Với mỗi giá trị ngưỡng τ trong [0, 1]:
@@ -1426,6 +1440,11 @@ Chọn → LoRA/QLoRA
 ```
 
 `DEC-015` (model) giữ trạng thái `[TODO]` cho tới bước này. **Không chốt model trên giấy.**
+
+> **ĐÃ CHỐT 2026-08-20 bằng số đo:** `gemini-3.1-flash-lite`. Lựa chọn đầu
+> (`gemini-2.5-flash`) bị loại vì quota — 261/261 lượt gọi trả 429, bằng chứng
+> giữ ở `evaluation/results/archive/c0_v3_gemini-2.5-flash.jsonl`. Lý do đầy đủ
+> ghi trong `.env`. Ngày tắt công bố của model đã chốt: 2027-05-07.
 
 ---
 
