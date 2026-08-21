@@ -19,7 +19,7 @@
   --bg-card: #ffffff;
   --bg-card-hover: #f8fafc;
   --bg-subtle: #f1f5f9;
-  --bg-glass: rgba(255, 255, 255, 0.94);
+  --bg-glass: rgba(255, 255, 255, 0.92);
   
   --text-main: #0f172a;
   --text-muted: #64748b;
@@ -47,6 +47,8 @@
   --radius-md: 12px;
   --radius-lg: 18px;
   --radius-full: 9999px;
+  
+  --sidebar-w: 280px;
 }
 
 [data-theme="dark"] {
@@ -60,7 +62,7 @@
   --bg-card: #131d31;
   --bg-card-hover: #1a2742;
   --bg-subtle: #1e293b;
-  --bg-glass: rgba(19, 29, 49, 0.94);
+  --bg-glass: rgba(19, 29, 49, 0.92);
   
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
@@ -87,8 +89,10 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
   background-color: var(--bg-app);
   color: var(--text-main);
@@ -97,22 +101,20 @@ html, body {
   line-height: 1.6;
 }
 
-/* Fullscreen App Layout */
 .app-layout {
   display: flex;
+  flex-direction: row;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   position: relative;
 }
 
-/* ==========================================================================
-   Sidebar: History & Tools
-   ========================================================================== */
+/* Sidebar */
 .sidebar {
-  width: 280px;
-  min-width: 280px;
-  max-width: 280px;
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  max-width: var(--sidebar-w);
   height: 100%;
   background: var(--bg-sidebar);
   border-right: 1px solid var(--border);
@@ -125,7 +127,7 @@ html, body {
 }
 
 .sidebar.collapsed {
-  margin-left: -280px;
+  margin-left: calc(-1 * var(--sidebar-w));
 }
 
 .sidebar-header {
@@ -182,7 +184,6 @@ html, body {
 }
 .btn-icon-sq svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.2; }
 
-/* Sidebar Search */
 .sidebar-search {
   padding: 10px 14px 4px;
 }
@@ -217,7 +218,6 @@ html, body {
   fill: none;
 }
 
-/* Sidebar History List */
 .sidebar-history {
   flex: 1;
   overflow-y: auto;
@@ -295,7 +295,6 @@ html, body {
 }
 .btn-chat-tool svg { width: 13px; height: 13px; stroke: currentColor; fill: none; }
 
-/* Sidebar Footer */
 .sidebar-footer {
   padding: 12px 14px;
   border-top: 1px solid var(--border);
@@ -369,9 +368,7 @@ html, body {
 }
 .btn-nav-link svg { width: 13px; height: 13px; stroke: currentColor; fill: none; }
 
-/* ==========================================================================
-   Main Chat Area
-   ========================================================================== */
+/* Main View */
 .main-chat-view {
   flex: 1;
   min-width: 0;
@@ -383,7 +380,6 @@ html, body {
   background: var(--bg-app);
 }
 
-/* Chat Header */
 .chat-header {
   height: 58px;
   min-height: 58px;
@@ -436,7 +432,6 @@ html, body {
   flex-shrink: 0;
 }
 
-/* Messages Scroll Area */
 .chat-scroll-area {
   flex: 1;
   overflow-y: auto;
@@ -455,7 +450,7 @@ html, body {
   gap: 20px;
 }
 
-/* Welcome Empty Hero */
+/* Empty Hero */
 .welcome-hero-box {
   display: flex;
   flex-direction: column;
@@ -553,7 +548,7 @@ html, body {
   line-height: 1.4;
 }
 
-/* User Message */
+/* Messages */
 .msg-user-row {
   display: flex;
   justify-content: flex-end;
@@ -571,7 +566,6 @@ html, body {
   word-wrap: break-word;
 }
 
-/* Bot Message */
 .msg-bot-row {
   display: flex;
   gap: 12px;
@@ -711,7 +705,6 @@ html, body {
   font-style: italic;
 }
 
-/* Bot Actions */
 .bot-tools-row {
   display: flex;
   align-items: center;
@@ -741,7 +734,6 @@ html, body {
 }
 .btn-tool-pill svg { width: 13px; height: 13px; stroke: currentColor; fill: none; }
 
-/* Typing Wave */
 .typing-wave-bar {
   display: flex;
   align-items: center;
@@ -764,9 +756,6 @@ html, body {
   40% { transform: scale(1); opacity: 1; }
 }
 
-/* ==========================================================================
-   Bottom Input Floating Anchor
-   ========================================================================== */
 .input-floating-bottom {
   position: absolute;
   left: 0; right: 0; bottom: 0;
@@ -848,7 +837,6 @@ textarea#main-query-input {
   margin-top: 6px;
 }
 
-/* Toast */
 .toast-bar {
   position: fixed;
   bottom: 80px;
@@ -871,7 +859,6 @@ textarea#main-query-input {
   transform: translateX(-50%) translateY(0);
 }
 
-/* Mobile Overlay */
 .mobile-backdrop {
   display: none;
   position: fixed;
@@ -897,9 +884,7 @@ textarea#main-query-input {
 </style>
 </head>
 <body>
-
 <div class="app-layout">
-  <!-- Mobile Backdrop -->
   <div class="mobile-backdrop" id="mobile-backdrop"></div>
 
   <!-- Sidebar: Conversation History & Tools -->
@@ -950,7 +935,6 @@ textarea#main-query-input {
 
   <!-- Main Chat Content -->
   <main class="main-chat-view">
-    <!-- Header -->
     <header class="chat-header">
       <div class="header-left-part">
         <button class="btn-icon-sq" id="btn-toggle-sidebar" title="Mở / Đóng thanh bên">
@@ -971,7 +955,6 @@ textarea#main-query-input {
       </div>
     </header>
 
-    <!-- Scrollable Messages Area -->
     <div class="chat-scroll-area" id="chat-scroll-area">
       <div class="messages-max-container" id="messages-max-container">
         <!-- Empty State Hero -->
@@ -1013,7 +996,6 @@ textarea#main-query-input {
           </div>
         </div>
 
-        <!-- Messages Stream -->
         <div id="dialog-flow" style="display:flex; flex-direction:column; gap:20px;"></div>
       </div>
     </div>
@@ -1033,12 +1015,10 @@ textarea#main-query-input {
   </main>
 </div>
 
-<!-- Toast Notice -->
 <div class="toast-bar" id="toast-bar">Đã sao chép vào bộ nhớ tạm!</div>
-
 <script>
-const STORAGE_KEY = "nextfarm_conversations_v3";
-const ACTIVE_KEY = "nextfarm_active_id_v3";
+const STORAGE_KEY = "nextfarm_conversations_v4";
+const ACTIVE_KEY = "nextfarm_active_id_v4";
 
 const REASON_LABELS = {
   garden_data:           "Chặn số liệu cảm biến vườn (A1)",
@@ -1059,7 +1039,6 @@ let conversations = [];
 let activeId = null;
 let isBusy = false;
 
-// Elements
 const $sidebar = document.getElementById("sidebar");
 const $backdrop = document.getElementById("mobile-backdrop");
 const $chatList = document.getElementById("sidebar-chat-list");
@@ -1151,7 +1130,6 @@ function renameChat(id, e) {
   }
 }
 
-// Render Sidebar
 function renderSidebar(searchQuery = "") {
   $chatList.innerHTML = "";
   const query = searchQuery.trim().toLowerCase();
@@ -1224,7 +1202,6 @@ function renderSidebar(searchQuery = "") {
   renderGroup("Trước đó", earlierList);
 }
 
-// Render Active Chat
 function renderActiveChat() {
   const currentChat = conversations.find(c => c.id === activeId);
 
@@ -1330,7 +1307,6 @@ function renderSourcesHtml(sources) {
   `;
 }
 
-// Send Message
 async function sendMessage(textToSend) {
   const query = (textToSend || $input.value).trim();
   if (!query || isBusy) return;
@@ -1368,7 +1344,6 @@ async function sendMessage(textToSend) {
   const scrollArea = document.getElementById("chat-scroll-area");
   scrollArea.scrollTop = scrollArea.scrollHeight;
 
-  // Typing Indicator
   const typingRow = document.createElement("div");
   typingRow.className = "msg-bot-row";
   typingRow.id = "typing-temp";
@@ -1444,7 +1419,6 @@ async function sendMessage(textToSend) {
   }
 }
 
-// UI Controls
 document.getElementById("btn-new-chat").onclick = createNewChat;
 
 document.getElementById("history-search-input").addEventListener("input", e => {
@@ -1491,7 +1465,6 @@ document.getElementById("btn-toggle-sidebar").onclick = () => {
 };
 $backdrop.onclick = closeSidebar;
 
-// Clear Session
 document.getElementById("btn-clear-session").onclick = () => {
   if (!activeId) return;
   const currentChat = conversations.find(c => c.id === activeId);
@@ -1505,7 +1478,6 @@ document.getElementById("btn-clear-session").onclick = () => {
   }
 };
 
-// Export Markdown
 document.getElementById("btn-export-markdown").onclick = () => {
   const currentChat = conversations.find(c => c.id === activeId);
   if (!currentChat || !currentChat.messages.length) {
@@ -1533,7 +1505,6 @@ document.getElementById("btn-export-markdown").onclick = () => {
   showToast("Đã xuất file Markdown!");
 };
 
-// Start
 loadData();
 if (!conversations.length) {
   createNewChat();
