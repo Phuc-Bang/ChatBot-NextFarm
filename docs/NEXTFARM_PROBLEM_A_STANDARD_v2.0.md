@@ -1789,18 +1789,38 @@ TỔNG B = chi phí cố định (gần như không đổi theo tải)
 
 ### 40.2. `[TODO]` — đội tự chốt, **sau khi có số đo**. Không chốt trên giấy.
 
-1. Embedding model
-2. Reranker model
-3. LLM (DEC-015)
-4. Kích thước chunk + overlap
-5. Top-K mỗi kênh retrieval
-6. Trọng số hợp nhất RRF
-7. Số chunk vào Evidence Pack
-8. Ngưỡng tự tin để abstain (chọn từ đường risk–coverage §30.4)
-9. Ngưỡng tin cậy của Intent Router (§11.4)
-10. Tỷ lệ nội dung bị loại tối đa trước khi abstain toàn bộ (§18.4)
-11. Trọng số của `source_score` (§22.2)
-12. VRAM khả dụng thật của GPU (ASM-06)
+Trạng thái cập nhật **2026-08-22**. Mười hai mục ban đầu: **7 đã chốt bằng số
+đo**, 1 đo được, 1 chốt là *không áp dụng*, **3 còn mở** — cả ba đều mở vì
+**lý do cụ thể**, không phải vì bị bỏ quên.
+
+| # | Mục | Trạng thái | Giá trị / lý do |
+|---:|---|---|---|
+| 1 | Embedding model | **CHỐT** | `halong` chạy local — chi phí biên 0, kho không rời máy |
+| 2 | Reranker model | **CHỐT** | `itdainb/PhoRanker` trên GPU. R@5 72,7% → 90,9%; +459 ms GPU / +4.208 ms CPU. [`P6_reranker.md`](reports/P6_reranker.md) |
+| 3 | LLM (DEC-015) | **CHỐT** | `gemini-3.1-flash-lite`, chốt bằng benchmark chứ không trên giấy |
+| 4 | Kích thước chunk + overlap | **CÒN MỞ — chưa quét** | Đang dùng 1.200 ký tự mục tiêu / 2.200 tối đa / 150 chồng lấn (`chunker.py:52`). Recall@K **có** đo, nhưng đo ở đúng một kích thước này — chưa lần nào quét nhiều kích thước để so. Dấu `[TODO]` trong mã là **đúng**, không phải sót |
+| 5 | Top-K mỗi kênh | **CHỐT** | `TOP_K_MOI_KENH = 20` (`keyword.py:120`), bão hoà từ 20 — quét 72 tổ hợp, [`P6_retrieval_tuning.md`](reports/P6_retrieval_tuning.md) |
+| 6 | Trọng số hợp nhất RRF | **CHỐT** | `K_RRF = 60` (`keyword.py:121`). Quét ra **gần như không ảnh hưởng** (MRR 0,559 / 0,561 / 0,562 cho 10 / 30 / 60) nên giữ hằng số thông dụng. Cùng lần quét đó đổi `NGUONG_TRIGRAM` 0,3 → **0,2** |
+| 7 | Số chunk vào Evidence Pack | **CHỐT** | `top_k_rerank = 12` → `top_k = 5`. Quét N trên 22 case (`hybrid.py:70`) |
+| 8 | Ngưỡng tự tin để abstain | **CHỐT: KHÔNG áp ngưỡng** | Đường risk–coverage đã dựng. τ = 0,9871 đưa risk về 0 nhưng coverage sụt 38,3% → 4,9%. [`P15_risk_coverage.md`](reports/P15_risk_coverage.md) |
+| 9 | Ngưỡng tin cậy Intent Router | **CÒN MỞ — chặn bởi việc XÂY** | Nhánh `agronomy_knowledge` luôn mang `do_tin_cay = 0`, nghĩa là *"lớp rule không biết"* chứ không phải *"độ tin cậy bằng 0"* (`router.py:22`). Không có trục để quét cho tới khi có lớp LLM few-shot §11.3 |
+| 10 | Tỷ lệ nội dung bị loại tối đa (§18.4) | **KHÔNG ÁP DỤNG** | Grounding Validator chặn theo **cơ chế** (cấu trúc / số / ngữ nghĩa), không theo tỷ lệ. Không có ngưỡng tỷ lệ nào trong mã để chốt |
+| 11 | Trọng số `source_score` (§22.2) | **CÒN MỞ — KHÔNG ĐO ĐƯỢC** | `he_so = 0.1` (`keyword.py:231`). **0/222 case khai `region`**, nên mọi giá trị cho kết quả y hệt nhau. Đo được khi tập kiểm thử có case theo vùng miền |
+| 12 | VRAM thật của GPU (ASM-06) | **ĐO ĐƯỢC** | RTX 2050, **4 GB** — không đủ self-host LLM sinh (đã thử: GPU sập, CPU 11,4 token/giây) |
+
+**Ba mục còn mở chặn bởi ba thứ khác nhau, và khác biệt đó quan trọng:**
+
+- **Mục 4** chờ *một lần quét* — mã và công cụ đều sẵn, chỉ chưa chạy. Đây là
+  mục rẻ nhất trong ba mục và là việc nên làm tiếp theo nếu muốn đóng nốt §40.2.
+- **Mục 9** chờ *xây thêm* — có lớp phân loại LLM few-shot rồi thì đo được ngay.
+- **Mục 11** chờ *dữ liệu để đo* — mã đã sẵn, tập kiểm thử chưa có case nào phân
+  biệt được vùng miền. Chốt một con số lúc này là chốt trên giấy, đúng thứ §40.2
+  tồn tại để ngăn.
+
+> Một cám dỗ đã tránh khi viết bảng này: bản nháp đầu ghi mục 4 là **CHỐT**, lý
+> do *"số đã qua đo Recall@K ở P6"*. Sai. Recall@K đo **tại** kích thước đó, chứ
+> không **chọn** kích thước đó. Đo một tham số ở một giá trị không phải là chốt
+> tham số ấy — và đánh dấu nhầm sẽ xoá mất một việc chưa làm.
 
 ### 40.3. `[ASM]` — đã giả định, chờ NextFarm xác nhận
 
