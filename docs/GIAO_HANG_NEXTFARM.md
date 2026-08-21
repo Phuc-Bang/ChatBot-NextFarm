@@ -117,6 +117,23 @@ Test tự động chứng minh điều này: khi model **khai là có đủ căn
 * Tích hợp pipeline CI/CD kiểm thử tự động với bộ 323 unit tests và bộ runner đánh giá chất lượng RAG trước mỗi bản release.
 * Cấu hình dashboard giám sát token, chi phí và tỷ lệ từ chối theo thời gian thực (đã có sẵn tại `/admin`).
 
+> **`/admin` chưa có xác thực — đây là ranh giới có chủ đích của PoC, không phải sơ suất.**
+>
+> Trang `/admin` và ba endpoint `/api/admin/*` hiện **không kiểm danh tính người
+> gọi**. Hôm nay an toàn **chỉ vì một chi tiết duy nhất**: [`Makefile:115`](../Makefile)
+> chạy uvicorn với `--host 127.0.0.1`, không phải `0.0.0.0` — server chỉ nhận
+> kết nối từ chính máy đang chạy nó. Đổi một chữ trong dòng đó là mất lớp bảo vệ.
+>
+> Nếu triển khai lên máy chủ có địa chỉ công khai mà giữ nguyên hiện trạng,
+> `GET /api/admin/nhat_ky` sẽ trả về **toàn bộ nhật ký truy vấn** — câu hỏi
+> nguyên văn của người dùng, câu trả lời, số token và chi phí từng lượt — cho
+> bất kỳ ai gọi tới, không cần đăng nhập.
+>
+> **Thêm xác thực cho `/admin` và `/api/admin/*` là điều kiện tiên quyết để
+> triển khai, không phải hạng mục tuỳ chọn.** Cơ chế cụ thể (khoá tĩnh, OAuth,
+> hay chặn ở reverse proxy) chưa chốt vì phụ thuộc hạ tầng NextFarm đang dùng —
+> đội chờ NextFarm nêu yêu cầu.
+
 ### 2. Mở rộng Kho tri thức sang các Cây trồng Chủ lực tiếp theo (Giai đoạn 2)
 * Mở rộng hạ tầng crawler và công cụ kiểm duyệt bán tự động cho các cây ăn trái và cây công nghiệp giá trị cao của NextFarm: Sầu riêng, Xoài, Bơ, Cà phê, Hồ tiêu.
 * Nâng dung lượng kho tri thức lên 2.000+ chunks chuẩn khuyến nông. **Ở quy mô đó mới chuyển sang chỉ mục HNSW của pgvector** — hiện PoC cố ý *chưa* dùng nó: với 185 chunk, quét toàn bộ bằng numpy trong RAM nhanh tương đương mà không phải giữ đồng bộ thêm một chỉ mục nữa (xem chú thích đầu [`vector.py`](../app/services/retrieval/vector.py)). Ngưỡng chuyển đổi là vài chục nghìn chunk.
@@ -342,7 +359,8 @@ Tầng 3 bắt hai kiểu lỗi đo được trên C2 thật: xác nhận thẩm
 
 **5. Chưa kết nối dữ liệu vườn.** Tiêu chí ≥95% thuộc Bài toán B.
 
-**6. Trang quản trị chưa có đăng nhập** vì chạy cục bộ. Deploy ra ngoài thì bắt buộc thêm khoá.
+**6. Trang quản trị chưa có đăng nhập.**
+`/admin` và `/api/admin/*` không kiểm danh tính. Chạy cục bộ nên hiện không sao — `make serve` bind `127.0.0.1`. Nhưng cái lộ ra nếu deploy ra ngoài mà quên là **toàn bộ nhật ký truy vấn**: câu hỏi nguyên văn của người dùng, câu trả lời, token và chi phí từng lượt. Thêm xác thực là **điều kiện tiên quyết để triển khai**, không phải việc làm sau.
 
 **7. Một lần chạy, một model.** Chưa đo lặp lại nên chưa biết dao động.
 
@@ -389,6 +407,10 @@ make phieu-cham     # sinh phiếu chấm cho chuyên gia
 
 make serve       # http://localhost:8000  và  /admin
 ```
+
+> `make serve` bind `127.0.0.1` có chủ đích. `/admin` **chưa có đăng nhập**, nên
+> đây là thứ đang giữ nhật ký truy vấn khỏi mạng ngoài — xem cảnh báo ở mục
+> *Triển khai và Đóng gói Production* phía trên trước khi đổi host.
 
 `make ingest` dựng lại được toàn bộ cơ sở dữ liệu từ các file YAML/JSON trong
 git — **mất database không mất công duyệt**, và kiểm chứng viên tái lập được
