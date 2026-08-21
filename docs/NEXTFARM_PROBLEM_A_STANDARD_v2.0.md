@@ -1810,8 +1810,8 @@ Trạng thái cập nhật **2026-08-22**. Mười hai mục ban đầu: **7 đ�
 
 **Ba mục còn mở chặn bởi ba thứ khác nhau, và khác biệt đó quan trọng:**
 
-- **Mục 4** chờ *một lần quét* — mã và công cụ đều sẵn, chỉ chưa chạy. Đây là
-  mục rẻ nhất trong ba mục và là việc nên làm tiếp theo nếu muốn đóng nốt §40.2.
+- **Mục 4** chờ *một lần quét* — nhưng **không rẻ như vẻ ngoài**, xem cảnh báo
+  dưới bảng này. Đây là mục có cái giá ẩn lớn nhất trong ba mục.
 - **Mục 9** chờ *xây thêm* — có lớp phân loại LLM few-shot rồi thì đo được ngay.
 - **Mục 11** chờ *dữ liệu để đo* — mã đã sẵn, tập kiểm thử chưa có case nào phân
   biệt được vùng miền. Chốt một con số lúc này là chốt trên giấy, đúng thứ §40.2
@@ -1821,6 +1821,36 @@ Trạng thái cập nhật **2026-08-22**. Mười hai mục ban đầu: **7 đ�
 > do *"số đã qua đo Recall@K ở P6"*. Sai. Recall@K đo **tại** kích thước đó, chứ
 > không **chọn** kích thước đó. Đo một tham số ở một giá trị không phải là chốt
 > tham số ấy — và đánh dấu nhầm sẽ xoá mất một việc chưa làm.
+
+### Cảnh báo trước khi ai đó quét kích thước chunk
+
+**Quét mục 4 sẽ phá hỏng 31 quyết định duyệt của con người, một cách lặng lẽ.**
+
+`chunk_id` được dựng theo **thứ tự trong tài liệu** — [`load.py:153`](../knowledge/ingestion/load.py):
+
+```python
+cid = rec["id"] + "#" + str(c.ordinal)
+```
+
+Còn [`knowledge/review/chunks.yaml`](../knowledge/review/chunks.yaml) khoá kết
+quả duyệt lẻ vào đúng chuỗi id đó — **31 bản ghi: 24 duyệt, 7 loại**, mỗi bản
+kèm lý do và tên người duyệt.
+
+Đổi kích thước chunk là mọi `ordinal` xê dịch. `hatinh_dua_chuot_vietgap#1` sau
+khi cắt lại là **một đoạn văn khác**, nhưng vẫn mang quyết định duyệt cũ. Không
+có gì báo lỗi: một chunk từng bị loại vì *"tiêu đề tin tức"* có thể được cấp
+phép vào kho, hoặc ngược lại — một đoạn liều lượng đã duyệt bị chặn.
+
+Đây là cổng DEC-005, thứ đang giữ `numeric_hallucination = 0`.
+
+**Muốn quét mục 4 thì phải làm hai việc trước:**
+
+1. Khoá quyết định duyệt vào thứ bền hơn thứ tự — `sha256` của văn bản chunk,
+   hoặc `(document_id, offset_đầu, offset_cuối)`.
+2. Quét trên **bản sao** cơ sở dữ liệu, không quét trên kho đang dùng để đo.
+
+Chưa làm xong việc 1 thì cái giá thật của mục 4 **không phải một lần quét** — mà
+là duyệt lại 31 chunk rủi ro cao bằng tay.
 
 ### 40.3. `[ASM]` — đã giả định, chờ NextFarm xác nhận
 
