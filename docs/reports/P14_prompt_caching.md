@@ -85,3 +85,24 @@ làm cho lượt gọi rẻ đi:
 | prompt caching | — | **không áp dụng được** |
 
 Con số `Ti` = 702 trong mô hình chi phí đã bao gồm sẵn khoản đầu tiên.
+
+---
+
+## Ghi chú 2026-08-22 — hai con số tham chiếu đã đo lại
+
+Báo cáo này đo ngày 2026-08-21, trên lần chạy C2 trước đó. Sau khi chạy lại
+C1 và C2 (reranker bật, đủ 222/222), hai con số `Ti` dẫn ở trên đã đổi nhẹ:
+
+| | bản này ghi | đo lại 22/08 |
+|---|---:|---:|
+| `Ti` trung bình mọi lượt | 702 | **698** |
+| `Ti` trung bình lượt *có gọi model* | 1.925 | **1.912** |
+
+**Giữ nguyên số cũ trong thân báo cáo** — đó là bản ghi tại thời điểm đo, sửa
+nó là làm hỏng bản ghi. Số dùng cho mô hình chi phí lấy ở
+[`GIAO_HANG_NEXTFARM.md`](../GIAO_HANG_NEXTFARM.md) Câu 5.
+
+**Kết luận của báo cáo không đổi.** Nó không phụ thuộc vào `Ti`: phần prompt
+cố định là **175 token**, còn ngưỡng tối thiểu Gemini đòi là **1.024 token**.
+Khoảng cách đó là do cấu trúc prompt, không do khối lượng chạy — dịch `Ti` vài
+token không đưa 175 lại gần 1.024 được.
