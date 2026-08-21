@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>NextFarm AI — Trợ lý Nông nghiệp Thông minh</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +11,6 @@
 :root {
   --primary: #059669;
   --primary-hover: #047857;
-  --primary-dark: #064e3b;
   --primary-light: #ecfdf5;
   --primary-glow: rgba(16, 185, 129, 0.18);
   
@@ -20,7 +19,7 @@
   --bg-card: #ffffff;
   --bg-card-hover: #f8fafc;
   --bg-subtle: #f1f5f9;
-  --bg-glass: rgba(255, 255, 255, 0.92);
+  --bg-glass: rgba(255, 255, 255, 0.94);
   
   --text-main: #0f172a;
   --text-muted: #64748b;
@@ -28,10 +27,7 @@
   --text-inverse: #ffffff;
   
   --border: #e2e8f0;
-  --border-subtle: #f1f5f9;
   --border-focus: #10b981;
-  
-  --sidebar-w: 280px;
   
   --amber: #d97706;
   --amber-bg: #fffbeb;
@@ -42,49 +38,36 @@
   --emerald-bg: #ecfdf5;
   --emerald-border: #a7f3d0;
   
-  --rose: #e11d48;
-  --rose-bg: #ffe4e6;
-  --rose-border: #fecdd3;
-  
-  --blue: #2563eb;
-  --blue-bg: #eff6ff;
-  --blue-border: #bfdbfe;
-  
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
-  --shadow-glow: 0 0 25px rgba(16, 185, 129, 0.25);
+  --shadow-lg: 0 10px 20px -3px rgba(0, 0, 0, 0.08);
+  --shadow-glow: 0 0 20px rgba(16, 185, 129, 0.25);
   
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 18px;
-  --radius-xl: 24px;
   --radius-full: 9999px;
-  
-  --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 [data-theme="dark"] {
   --primary: #10b981;
   --primary-hover: #34d399;
-  --primary-dark: #064e3b;
   --primary-light: #064e3b33;
   --primary-glow: rgba(16, 185, 129, 0.3);
   
-  --bg-app: #090e1a;
+  --bg-app: #0b1120;
   --bg-sidebar: #0f172a;
-  --bg-card: #141e33;
+  --bg-card: #131d31;
   --bg-card-hover: #1a2742;
-  --bg-subtle: #1a2742;
-  --bg-glass: rgba(20, 30, 51, 0.92);
+  --bg-subtle: #1e293b;
+  --bg-glass: rgba(19, 29, 49, 0.94);
   
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
   --text-light: #64748b;
-  --text-inverse: #090e1a;
+  --text-inverse: #0b1120;
   
-  --border: #1e2e4a;
-  --border-subtle: #141e33;
+  --border: #23324d;
   --border-focus: #34d399;
   
   --amber: #fbbf24;
@@ -96,67 +79,60 @@
   --emerald-bg: #063826;
   --emerald-border: #065f46;
   
-  --rose: #fb7185;
-  --rose-bg: #3f121d;
-  --rose-border: #881337;
-  
-  --blue: #60a5fa;
-  --blue-bg: #172554;
-  --blue-border: #1e3a8a;
-  
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 10px 20px -3px rgba(0, 0, 0, 0.6);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body {
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   background-color: var(--bg-app);
   color: var(--text-main);
   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   font-size: 15px;
   line-height: 1.6;
+}
+
+/* Fullscreen App Layout */
+.app-layout {
+  display: flex;
+  width: 100vw;
   height: 100vh;
-  display: flex;
   overflow: hidden;
-  transition: background-color 0.25s ease, color 0.25s ease;
-}
-
-.mono { font-family: 'JetBrains Mono', monospace; }
-
-/* App Layout Container */
-.app-container {
-  display: flex;
-  width: 100%;
-  height: 100%;
   position: relative;
-  overflow: hidden;
 }
 
-/* Sidebar Styles */
+/* ==========================================================================
+   Sidebar: History & Tools
+   ========================================================================== */
 .sidebar {
-  width: var(--sidebar-w);
+  width: 280px;
+  min-width: 280px;
+  max-width: 280px;
   height: 100%;
   background: var(--bg-sidebar);
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 40;
+  transition: margin-left 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 50;
+  position: relative;
 }
 
 .sidebar.collapsed {
-  width: 0;
-  transform: translateX(-100%);
-  border-right: none;
+  margin-left: -280px;
 }
 
 .sidebar-header {
-  padding: 16px 14px;
+  padding: 14px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   border-bottom: 1px solid var(--border);
 }
 
@@ -169,25 +145,25 @@ body {
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   color: #ffffff;
   border: none;
-  border-radius: var(--radius-md);
-  padding: 11px 16px;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
-  transition: var(--transition);
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.25);
+  transition: all 0.2s ease;
+  white-space: nowrap;
 }
 .btn-new-chat:hover {
   background: linear-gradient(135deg, #059669 0%, #047857 100%);
-  transform: translateY(-1px);
   box-shadow: var(--shadow-glow);
 }
-.btn-new-chat svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2.3; }
+.btn-new-chat svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 2.3; flex-shrink: 0; }
 
 .btn-icon-sq {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   border-radius: var(--radius-sm);
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -197,26 +173,26 @@ body {
   justify-content: center;
   cursor: pointer;
   flex-shrink: 0;
-  transition: var(--transition);
+  transition: all 0.2s ease;
 }
 .btn-icon-sq:hover {
   background: var(--bg-card-hover);
   color: var(--primary);
   border-color: var(--primary);
 }
-.btn-icon-sq svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 2.2; }
+.btn-icon-sq svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.2; }
 
 /* Sidebar Search */
 .sidebar-search {
-  padding: 12px 14px 6px;
+  padding: 10px 14px 4px;
 }
-.search-input-wrap {
+.search-wrap {
   position: relative;
   width: 100%;
 }
-.search-input-wrap input {
+.search-wrap input {
   width: 100%;
-  padding: 8px 12px 8px 32px;
+  padding: 7px 10px 7px 30px;
   border-radius: var(--radius-sm);
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -224,57 +200,55 @@ body {
   font-family: inherit;
   font-size: 13px;
   outline: none;
-  transition: var(--transition);
+  transition: all 0.2s ease;
 }
-.search-input-wrap input:focus {
+.search-wrap input:focus {
   border-color: var(--primary);
   box-shadow: 0 0 0 2px var(--primary-glow);
 }
-.search-input-wrap svg {
+.search-wrap svg {
   position: absolute;
-  left: 10px;
+  left: 9px;
   top: 50%;
   transform: translateY(-50%);
-  width: 14px;
-  height: 14px;
+  width: 13px;
+  height: 13px;
   stroke: var(--text-muted);
   fill: none;
 }
 
-/* Chat History List */
+/* Sidebar History List */
 .sidebar-history {
   flex: 1;
   overflow-y: auto;
-  padding: 8px 10px;
+  padding: 6px 10px;
 }
 
-.history-group-title {
-  font-size: 11.5px;
+.history-title-group {
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--text-light);
-  padding: 12px 8px 6px;
+  padding: 10px 6px 4px;
 }
 
-.chat-history-item {
+.chat-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 9px 10px;
+  padding: 8px 10px;
   border-radius: var(--radius-sm);
   margin-bottom: 2px;
   cursor: pointer;
   color: var(--text-muted);
-  transition: var(--transition);
-  position: relative;
-  group: true;
+  transition: all 0.15s ease;
 }
-.chat-history-item:hover {
+.chat-item:hover {
   background: var(--bg-card);
   color: var(--text-main);
 }
-.chat-history-item.active {
+.chat-item.active {
   background: var(--bg-card);
   color: var(--primary);
   font-weight: 600;
@@ -282,56 +256,44 @@ body {
   border-left: 3px solid var(--primary);
 }
 
-.chat-item-main {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  overflow: hidden;
-  flex: 1;
-}
-.chat-item-main svg {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-  stroke: currentColor;
-  fill: none;
-}
-.chat-item-title {
+.chat-item-text {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 13.5px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
 }
+.chat-item-text svg { width: 14px; height: 14px; stroke: currentColor; fill: none; flex-shrink: 0; }
 
-.chat-item-actions {
+.chat-item-tools {
   display: none;
   align-items: center;
   gap: 4px;
 }
-.chat-history-item:hover .chat-item-actions,
-.chat-history-item.active .chat-item-actions {
+.chat-item:hover .chat-item-tools,
+.chat-item.active .chat-item-tools {
   display: flex;
 }
 
-.btn-item-action {
+.btn-chat-tool {
   background: transparent;
   border: none;
   color: var(--text-light);
-  padding: 3px;
+  padding: 2px 4px;
   border-radius: 4px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
-.btn-item-action:hover {
+.btn-chat-tool:hover {
   color: var(--text-main);
   background: var(--bg-subtle);
 }
-.btn-item-action.del:hover {
-  color: var(--rose);
+.btn-chat-tool.del:hover {
+  color: #ef4444;
 }
-.btn-item-action svg { width: 13px; height: 13px; stroke: currentColor; fill: none; }
+.btn-chat-tool svg { width: 13px; height: 13px; stroke: currentColor; fill: none; }
 
 /* Sidebar Footer */
 .sidebar-footer {
@@ -343,14 +305,12 @@ body {
   gap: 8px;
 }
 
-.user-profile-badge {
+.user-badge-row {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 6px 8px;
-  border-radius: var(--radius-sm);
 }
-.profile-avatar {
+.user-avatar-circle {
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -359,14 +319,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 800;
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  flex-shrink: 0;
 }
-.profile-info {
+.user-info-col {
   flex: 1;
   overflow: hidden;
 }
-.profile-name {
+.user-name-txt {
   font-size: 13px;
   font-weight: 700;
   color: var(--text-main);
@@ -374,23 +335,22 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.profile-role {
-  font-size: 11.5px;
+.user-sub-txt {
+  font-size: 11px;
   color: var(--text-muted);
 }
 
-.footer-nav-row {
+.sidebar-nav-links {
   display: flex;
-  align-items: center;
   gap: 6px;
 }
-.btn-footer-link {
+.btn-nav-link {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 7px 8px;
+  gap: 5px;
+  padding: 6px 8px;
   border-radius: var(--radius-sm);
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -398,30 +358,36 @@ body {
   font-size: 12px;
   font-weight: 600;
   text-decoration: none;
-  transition: var(--transition);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
 }
-.btn-footer-link:hover {
+.btn-nav-link:hover {
   background: var(--bg-card-hover);
   color: var(--primary);
   border-color: var(--primary);
 }
-.btn-footer-link svg { width: 14px; height: 14px; stroke: currentColor; fill: none; }
+.btn-nav-link svg { width: 13px; height: 13px; stroke: currentColor; fill: none; }
 
-/* Main Chat Area */
-.chat-main {
+/* ==========================================================================
+   Main Chat Area
+   ========================================================================== */
+.main-chat-view {
   flex: 1;
+  min-width: 0;
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: var(--bg-app);
   position: relative;
   overflow: hidden;
+  background: var(--bg-app);
 }
 
 /* Chat Header */
-.chat-top-header {
-  height: 60px;
-  padding: 0 20px;
+.chat-header {
+  height: 58px;
+  min-height: 58px;
+  padding: 0 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -429,72 +395,79 @@ body {
   background: var(--bg-glass);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  z-index: 20;
+  z-index: 10;
 }
 
-.header-left {
+.header-left-part {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  min-width: 0;
 }
 
-.current-chat-title {
-  font-size: 15px;
+.header-chat-title {
+  font-size: 14.5px;
   font-weight: 700;
   color: var(--text-main);
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.model-tag {
+.guardrail-pill {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   padding: 3px 9px;
   border-radius: var(--radius-full);
   background: var(--emerald-bg);
   border: 1px solid var(--emerald-border);
   color: var(--primary);
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-.header-right {
+.header-right-tools {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  flex-shrink: 0;
 }
 
-/* Chat Content & Messages Stream */
-.chat-body {
+/* Messages Scroll Area */
+.chat-scroll-area {
   flex: 1;
   overflow-y: auto;
-  padding: 24px 20px 180px;
+  padding: 20px 20px 140px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   scroll-behavior: smooth;
 }
 
-.chat-content-limit {
-  max-width: 820px;
+.messages-max-container {
   width: 100%;
-  margin: 0 auto;
+  max-width: 820px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-/* Welcome Empty State */
-.welcome-hero {
+/* Welcome Empty Hero */
+.welcome-hero-box {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 40px 10px 20px;
-  animation: fadeIn 0.4s ease;
+  padding: 36px 12px 10px;
+  animation: fadeIn 0.3s ease;
 }
 
-.hero-brand-logo {
-  width: 64px;
-  height: 64px;
+.brand-icon-big {
+  width: 58px;
+  height: 58px;
   border-radius: var(--radius-lg);
   background: linear-gradient(135deg, #10b981 0%, #047857 100%);
   display: flex;
@@ -502,112 +475,96 @@ body {
   justify-content: center;
   color: #ffffff;
   box-shadow: var(--shadow-glow);
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
-.hero-brand-logo svg { width: 36px; height: 36px; fill: none; stroke: currentColor; stroke-width: 2.2; }
+.brand-icon-big svg { width: 32px; height: 32px; fill: none; stroke: currentColor; stroke-width: 2.2; }
 
-.hero-headline {
-  font-size: 26px;
+.welcome-title-h2 {
+  font-size: 24px;
   font-weight: 800;
   letter-spacing: -0.03em;
   color: var(--text-main);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
-.hero-subhead {
-  font-size: 15px;
+.welcome-desc-txt {
+  font-size: 14.5px;
   color: var(--text-muted);
-  max-width: 600px;
-  line-height: 1.6;
-  margin-bottom: 24px;
+  max-width: 580px;
+  line-height: 1.55;
+  margin-bottom: 20px;
 }
 
-.crop-chips-row {
+.crops-chip-row {
   display: flex;
   gap: 8px;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
   flex-wrap: wrap;
   justify-content: center;
 }
-.crop-chip {
-  padding: 6px 14px;
+.crop-tag-chip {
+  padding: 5px 12px;
   border-radius: var(--radius-full);
   background: var(--bg-card);
   border: 1px solid var(--border);
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   color: var(--text-main);
   box-shadow: var(--shadow-sm);
 }
 
-.bento-prompts-grid {
+.prompts-bento-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px;
   width: 100%;
   text-align: left;
 }
 
-.prompt-card {
+.bento-prompt-item {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: 14px 16px;
+  padding: 12px 14px;
   cursor: pointer;
-  transition: var(--transition);
+  transition: all 0.2s ease;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
   box-shadow: var(--shadow-sm);
 }
-.prompt-card:hover {
+.bento-prompt-item:hover {
   border-color: var(--primary);
   background: var(--bg-card-hover);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
-.prompt-card-top {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 11.5px;
+.bento-tag-title {
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--primary);
 }
-.prompt-card-text {
-  font-size: 13.5px;
+.bento-query-txt {
+  font-size: 13px;
   font-weight: 600;
   color: var(--text-main);
-  line-height: 1.45;
-}
-
-/* Chat Messages */
-.message-turn {
-  margin-bottom: 28px;
-  animation: messageAppear 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes messageAppear {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  line-height: 1.4;
 }
 
 /* User Message */
-.user-msg-row {
+.msg-user-row {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 12px;
 }
-
-.user-bubble {
+.msg-user-bubble {
   background: linear-gradient(135deg, #059669 0%, #047857 100%);
   color: #ffffff;
-  padding: 13px 18px;
-  border-radius: var(--radius-lg) var(--radius-lg) 4px var(--radius-lg);
+  padding: 12px 16px;
+  border-radius: 16px 16px 4px 16px;
   max-width: 82%;
-  font-size: 15.5px;
+  font-size: 15px;
   font-weight: 500;
   box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2);
   line-height: 1.55;
@@ -615,240 +572,239 @@ body {
 }
 
 /* Bot Message */
-.bot-msg-row {
+.msg-bot-row {
   display: flex;
-  gap: 14px;
+  gap: 12px;
   align-items: flex-start;
 }
 
-.bot-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-md);
+.bot-icon-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
   background: linear-gradient(135deg, #10b981 0%, #047857 100%);
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.25);
   margin-top: 2px;
 }
-.bot-avatar svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; }
+.bot-icon-avatar svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; }
 
-.bot-card-wrapper {
+.bot-card-box {
   flex: 1;
+  min-width: 0;
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 18px 20px;
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
   box-shadow: var(--shadow-sm);
-  position: relative;
 }
 
-.bot-card-wrapper.grounded {
+.bot-card-box.grounded {
   border-left: 4px solid var(--primary);
 }
 
-.bot-card-wrapper.abstained {
+.bot-card-box.abstained {
   background: var(--amber-bg);
   border-color: var(--amber-border);
   border-left: 4px solid var(--amber);
 }
 
-.bot-badge-header {
+.bot-status-tag {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  padding: 3px 9px;
+  padding: 3px 8px;
   border-radius: var(--radius-full);
   margin-bottom: 10px;
 }
 
-.bot-badge-header.grounded {
+.bot-status-tag.grounded {
   background: var(--emerald-bg);
   color: var(--primary);
   border: 1px solid var(--emerald-border);
 }
 
-.bot-badge-header.abstained {
+.bot-status-tag.abstained {
   background: var(--amber-bg);
   color: var(--amber-dark);
   border: 1px solid var(--amber-border);
 }
 
-.bot-badge-header svg { width: 14px; height: 14px; stroke-width: 2.3; fill: none; stroke: currentColor; }
+.bot-status-tag svg { width: 13px; height: 13px; stroke-width: 2.3; fill: none; stroke: currentColor; }
 
-.bot-message-body {
-  font-size: 15.5px;
-  line-height: 1.68;
+.bot-text-content {
+  font-size: 15px;
+  line-height: 1.65;
   color: var(--text-main);
   white-space: pre-wrap;
   word-wrap: break-word;
 }
 
-/* Citations Box */
-.citations-box {
-  margin-top: 16px;
-  padding-top: 14px;
+/* Citations */
+.citations-wrapper {
+  margin-top: 14px;
+  padding-top: 12px;
   border-top: 1px dashed var(--border);
 }
-
-.citations-label {
-  font-size: 12px;
+.citations-title-bar {
+  font-size: 11.5px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--text-muted);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
 }
-
-.source-pill-card {
+.citation-card-link {
   display: block;
   background: var(--bg-subtle);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  padding: 10px 12px;
-  margin-bottom: 6px;
+  padding: 9px 12px;
+  margin-bottom: 5px;
   text-decoration: none;
   color: inherit;
-  transition: var(--transition);
+  transition: all 0.15s ease;
 }
-.source-pill-card:hover {
+.citation-card-link:hover {
   border-color: var(--primary);
   background: var(--bg-card);
   transform: translateX(2px);
 }
-
-.source-head-line {
+.citation-head-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 }
-.source-doc-title {
-  font-size: 13.5px;
+.citation-doc-name {
+  font-size: 13px;
   font-weight: 700;
   color: var(--text-main);
 }
-.source-tier-tag {
-  font-size: 10.5px;
+.citation-tier-pill {
+  font-size: 10px;
   font-weight: 700;
-  padding: 2px 7px;
+  padding: 1px 6px;
   border-radius: var(--radius-full);
   background: var(--primary-light);
   color: var(--primary);
   border: 1px solid var(--emerald-border);
 }
-.source-quote-text {
-  font-size: 12.5px;
+.citation-quote-txt {
+  font-size: 12px;
   color: var(--text-muted);
   border-left: 2px solid var(--primary);
-  padding-left: 8px;
-  margin-top: 4px;
+  padding-left: 6px;
+  margin-top: 3px;
   font-style: italic;
 }
 
-/* Bot Actions Toolbar */
-.bot-action-toolbar {
+/* Bot Actions */
+.bot-tools-row {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-top: 14px;
-  padding-top: 10px;
-  border-top: 1px solid var(--border-subtle);
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
 }
-
-.btn-msg-tool {
+.btn-tool-pill {
   background: transparent;
   border: 1px solid transparent;
   color: var(--text-muted);
-  padding: 4px 8px;
+  padding: 3px 8px;
   border-radius: var(--radius-sm);
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 600;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  transition: var(--transition);
+  gap: 4px;
+  transition: all 0.15s ease;
 }
-.btn-msg-tool:hover {
+.btn-tool-pill:hover {
   background: var(--bg-subtle);
   color: var(--text-main);
   border-color: var(--border);
 }
-.btn-msg-tool svg { width: 14px; height: 14px; stroke: currentColor; fill: none; }
+.btn-tool-pill svg { width: 13px; height: 13px; stroke: currentColor; fill: none; }
 
-/* Typing Wave Animation */
-.typing-dots-wave {
+/* Typing Wave */
+.typing-wave-bar {
   display: flex;
   align-items: center;
   gap: 5px;
-  padding: 8px 0;
+  padding: 6px 0;
 }
-.typing-dot {
-  width: 7px;
-  height: 7px;
+.wave-dot {
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: var(--primary);
-  animation: typingBounce 1.4s infinite ease-in-out both;
+  animation: wavePulse 1.4s infinite ease-in-out both;
 }
-.typing-dot:nth-child(1) { animation-delay: -0.32s; }
-.typing-dot:nth-child(2) { animation-delay: -0.16s; }
-.typing-dot:nth-child(3) { animation-delay: 0s; }
+.wave-dot:nth-child(1) { animation-delay: -0.32s; }
+.wave-dot:nth-child(2) { animation-delay: -0.16s; }
+.wave-dot:nth-child(3) { animation-delay: 0s; }
 
-@keyframes typingBounce {
+@keyframes wavePulse {
   0%, 80%, 100% { transform: scale(0.6); opacity: 0.3; }
   40% { transform: scale(1); opacity: 1; }
 }
 
-/* Bottom Floating Input Container */
-.bottom-input-anchor {
+/* ==========================================================================
+   Bottom Input Floating Anchor
+   ========================================================================== */
+.input-floating-bottom {
   position: absolute;
   left: 0; right: 0; bottom: 0;
-  z-index: 30;
-  background: linear-gradient(180deg, rgba(248,250,252,0) 0%, var(--bg-app) 30%);
   padding: 16px 20px 14px;
+  background: linear-gradient(180deg, rgba(248,250,252,0) 0%, var(--bg-app) 35%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  z-index: 20;
 }
-[data-theme="dark"] .bottom-input-anchor {
-  background: linear-gradient(180deg, rgba(9,14,26,0) 0%, var(--bg-app) 30%);
+[data-theme="dark"] .input-floating-bottom {
+  background: linear-gradient(180deg, rgba(11,17,32,0) 0%, var(--bg-app) 35%);
 }
 
-.input-box-container {
+.input-box-wrap {
+  width: 100%;
   max-width: 820px;
-  margin: 0 auto;
-}
-
-.input-glass-pill {
+  pointer-events: auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 6px 8px 6px 14px;
   display: flex;
   align-items: flex-end;
   gap: 8px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 8px 10px 8px 16px;
   box-shadow: var(--shadow-lg);
-  transition: var(--transition);
+  transition: all 0.2s ease;
 }
-
-.input-glass-pill:focus-within {
+.input-box-wrap:focus-within {
   border-color: var(--border-focus);
   box-shadow: 0 0 0 3px var(--primary-glow), var(--shadow-lg);
 }
 
-textarea#user-text-input {
+textarea#main-query-input {
   flex: 1;
   font-family: inherit;
-  font-size: 15.5px;
+  font-size: 15px;
   line-height: 1.5;
   padding: 6px 0;
   resize: none;
@@ -860,10 +816,10 @@ textarea#user-text-input {
   outline: none;
 }
 
-.btn-send-main {
-  width: 38px;
-  height: 38px;
-  border-radius: var(--radius-md);
+.btn-send-action {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   color: #ffffff;
   border: none;
@@ -872,57 +828,57 @@ textarea#user-text-input {
   justify-content: center;
   cursor: pointer;
   flex-shrink: 0;
-  transition: var(--transition);
+  transition: all 0.2s ease;
 }
-.btn-send-main:hover:not(:disabled) {
+.btn-send-action:hover:not(:disabled) {
   transform: scale(1.05);
   box-shadow: var(--shadow-glow);
 }
-.btn-send-main:disabled {
+.btn-send-action:disabled {
   opacity: 0.4;
   cursor: not-allowed;
   transform: none;
 }
-.btn-send-main svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 2.3; }
+.btn-send-action svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.3; }
 
-.bottom-disclaimer {
+.bottom-meta-txt {
   text-align: center;
   font-size: 11.5px;
   color: var(--text-light);
-  margin-top: 8px;
+  margin-top: 6px;
 }
 
-/* Toast Notification */
-.toast-notice {
+/* Toast */
+.toast-bar {
   position: fixed;
-  bottom: 85px;
+  bottom: 80px;
   left: 50%;
   transform: translateX(-50%) translateY(20px);
   background: var(--text-main);
   color: var(--text-inverse);
-  padding: 8px 16px;
+  padding: 7px 16px;
   border-radius: var(--radius-full);
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   box-shadow: var(--shadow-lg);
   opacity: 0;
   pointer-events: none;
-  transition: var(--transition);
+  transition: all 0.2s ease;
   z-index: 100;
 }
-.toast-notice.show {
+.toast-bar.show {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
 
-/* Mobile Responsive Drawer */
-.sidebar-overlay {
+/* Mobile Overlay */
+.mobile-backdrop {
   display: none;
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(4px);
-  z-index: 35;
+  z-index: 45;
 }
 
 @media (max-width: 768px) {
@@ -931,16 +887,20 @@ textarea#user-text-input {
     top: 0; bottom: 0; left: 0;
     box-shadow: var(--shadow-lg);
   }
-  .sidebar-overlay.show { display: block; }
-  .user-bubble { max-width: 90%; }
+  .sidebar.collapsed {
+    margin-left: 0;
+    transform: translateX(-100%);
+  }
+  .mobile-backdrop.show { display: block; }
+  .msg-user-bubble { max-width: 90%; }
 }
 </style>
 </head>
 <body>
 
-<div class="app-container">
-  <!-- Mobile Backdrop Overlay -->
-  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+<div class="app-layout">
+  <!-- Mobile Backdrop -->
+  <div class="mobile-backdrop" id="mobile-backdrop"></div>
 
   <!-- Sidebar: Conversation History & Tools -->
   <aside class="sidebar" id="sidebar">
@@ -955,34 +915,32 @@ textarea#user-text-input {
     </div>
 
     <div class="sidebar-search">
-      <div class="search-input-wrap">
+      <div class="search-wrap">
         <svg viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-        <input type="text" id="history-search" placeholder="Tìm cuộc trò chuyện...">
+        <input type="text" id="history-search-input" placeholder="Tìm cuộc trò chuyện...">
       </div>
     </div>
 
-    <div class="sidebar-history" id="chat-history-list">
-      <!-- Grouped items rendered by JS -->
-    </div>
+    <div class="sidebar-history" id="sidebar-chat-list"></div>
 
     <div class="sidebar-footer">
-      <div class="user-profile-badge">
-        <div class="profile-avatar">🌾</div>
-        <div class="profile-info">
-          <div class="profile-name">Kỹ sư / Nông dân</div>
-          <div class="profile-role">NextFarm Agriculture AI</div>
+      <div class="user-badge-row">
+        <div class="user-avatar-circle">🌾</div>
+        <div class="user-info-col">
+          <div class="user-name-txt">Kỹ sư / Nông dân</div>
+          <div class="user-sub-txt">NextFarm AI Assistant</div>
         </div>
       </div>
-      <div class="footer-nav-row">
-        <button class="btn-footer-link" id="btn-theme-toggle" title="Chuyển chế độ Sáng / Tối">
+      <div class="sidebar-nav-links">
+        <button class="btn-nav-link" id="btn-theme-mode" title="Chuyển chế độ Sáng / Tối">
           <svg viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-          <span id="theme-text">Giao diện</span>
+          <span>Giao diện</span>
         </button>
-        <a href="/admin" class="btn-footer-link" title="Mở Bảng Quản trị">
+        <a href="/admin" class="btn-nav-link" title="Bảng Quản trị">
           <svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
           <span>Quản trị</span>
         </a>
-        <a href="/report" class="btn-footer-link" title="Xem Báo cáo Tổng kết">
+        <a href="/report" class="btn-nav-link" title="Báo cáo Tổng kết">
           <svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
           <span>Báo cáo</span>
         </a>
@@ -991,112 +949,96 @@ textarea#user-text-input {
   </aside>
 
   <!-- Main Chat Content -->
-  <main class="chat-main">
-    <!-- Top Header -->
-    <header class="chat-top-header">
-      <div class="header-left">
-        <button class="btn-icon-sq" id="btn-expand-sidebar" title="Mở thanh lịch sử">
+  <main class="main-chat-view">
+    <!-- Header -->
+    <header class="chat-header">
+      <div class="header-left-part">
+        <button class="btn-icon-sq" id="btn-toggle-sidebar" title="Mở / Đóng thanh bên">
           <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
-        <div class="current-chat-title" id="active-chat-title">
-          <span>Cuộc trò chuyện mới</span>
-        </div>
-        <div class="model-tag">
+        <div class="header-chat-title" id="active-title-label">Cuộc trò chuyện mới</div>
+        <div class="guardrail-pill">
           <span>🛡️ RAG C2 Guardrail</span>
         </div>
       </div>
-      <div class="header-right">
-        <button class="btn-icon-sq" id="btn-export-chat" title="Xuất nội dung hội thoại">
+      <div class="header-right-tools">
+        <button class="btn-icon-sq" id="btn-export-markdown" title="Xuất hội thoại ra Markdown">
           <svg viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
         </button>
-        <button class="btn-icon-sq" id="btn-clear-current" title="Xóa đoạn chat này">
+        <button class="btn-icon-sq" id="btn-clear-session" title="Xóa đoạn chat này">
           <svg viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
         </button>
       </div>
     </header>
 
-    <!-- Chat Messages Scroll Body -->
-    <div class="chat-body" id="chat-stream-body">
-      <div class="chat-content-limit" id="chat-content-wrap">
-        <!-- Empty Welcome Hero Banner -->
-        <div class="welcome-hero" id="welcome-hero">
-          <div class="hero-brand-logo">
+    <!-- Scrollable Messages Area -->
+    <div class="chat-scroll-area" id="chat-scroll-area">
+      <div class="messages-max-container" id="messages-max-container">
+        <!-- Empty State Hero -->
+        <div class="welcome-hero-box" id="welcome-hero-box">
+          <div class="brand-icon-big">
             <svg viewBox="0 0 24 24"><path d="M12 21V9M12 9C12 6 9 3 5 3c0 4 3 6 7 6M12 9c0-3 3-6 7-6 0 4-3 6-7 6"/></svg>
           </div>
-          <h2 class="hero-headline">Trợ lý Nông nghiệp NextFarm AI</h2>
-          <p class="hero-subhead">
+          <h2 class="welcome-title-h2">Trợ lý Nông nghiệp NextFarm AI</h2>
+          <p class="welcome-desc-txt">
             Tra cứu quy trình kỹ thuật khuyến nông đã kiểm duyệt. Hệ thống có cơ chế <strong>chống bịa đặt tự động</strong> và từ chối an toàn khi không có căn cứ.
           </p>
 
-          <div class="crop-chips-row">
-            <span class="crop-chip">🌾 Cây Lúa</span>
-            <span class="crop-chip">🍅 Cây Cà chua</span>
-            <span class="crop-chip">🥒 Cây Dưa chuột</span>
+          <div class="crops-chip-row">
+            <span class="crop-tag-chip">🌾 Cây Lúa</span>
+            <span class="crop-tag-chip">🍅 Cây Cà chua</span>
+            <span class="crop-tag-chip">🥒 Cây Dưa chuột</span>
           </div>
 
-          <div class="bento-prompts-grid">
-            <div class="prompt-card" data-prompt="Dưa chuột thích hợp với đất có pH khoảng bao nhiêu khi chuẩn bị đất?">
-              <div class="prompt-card-top">
-                <span>🌱 Chuẩn bị đất & pH</span>
-              </div>
-              <div class="prompt-card-text">Độ pH thích hợp của đất trồng dưa chuột?</div>
+          <div class="prompts-bento-grid">
+            <div class="bento-prompt-item" data-query="Dưa chuột thích hợp với đất có pH khoảng bao nhiêu khi chuẩn bị đất?">
+              <div class="bento-tag-title">🌱 Chuẩn bị đất & pH</div>
+              <div class="bento-query-txt">Độ pH thích hợp của đất trồng dưa chuột?</div>
             </div>
 
-            <div class="prompt-card" data-prompt="Quy trình bón thúc cho cà chua chia làm mấy lần và liều lượng thế nào?">
-              <div class="prompt-card-top">
-                <span>🍅 Quy trình bón phân</span>
-              </div>
-              <div class="prompt-card-text">Liều lượng và 4 đợt bón thúc cà chua?</div>
+            <div class="bento-prompt-item" data-query="Quy trình bón thúc cho cà chua chia làm mấy lần và liều lượng thế nào?">
+              <div class="bento-tag-title">🍅 Quy trình bón phân</div>
+              <div class="bento-query-txt">Liều lượng và 4 đợt bón thúc cà chua?</div>
             </div>
 
-            <div class="prompt-card" data-prompt="Năng suất thu hoạch lúa SRI tại Hưng Thắng là bao nhiêu?">
-              <div class="prompt-card-top">
-                <span>🌾 Năng suất mùa vụ</span>
-              </div>
-              <div class="prompt-card-text">Năng suất lúa canh tác SRI Hưng Thắng?</div>
+            <div class="bento-prompt-item" data-query="Năng suất thu hoạch lúa SRI tại Hưng Thắng là bao nhiêu?">
+              <div class="bento-tag-title">🌾 Năng suất mùa vụ</div>
+              <div class="bento-query-txt">Năng suất lúa canh tác SRI Hưng Thắng?</div>
             </div>
 
-            <div class="prompt-card" data-prompt="Độ ẩm nhà màng khu B hiện tại là bao nhiêu?">
-              <div class="prompt-card-top">
-                <span>🛡️ Thử nghiệm bẫy A1</span>
-              </div>
-              <div class="prompt-card-text">Độ ẩm nhà màng khu B hiện tại bao nhiêu?</div>
+            <div class="bento-prompt-item" data-query="Độ ẩm nhà màng khu B hiện tại là bao nhiêu?">
+              <div class="bento-tag-title">🛡️ Thử nghiệm bẫy A1</div>
+              <div class="bento-query-txt">Độ ẩm nhà màng khu B hiện tại bao nhiêu?</div>
             </div>
           </div>
         </div>
 
-        <!-- Messages stream container -->
-        <div id="messages-list"></div>
+        <!-- Messages Stream -->
+        <div id="dialog-flow" style="display:flex; flex-direction:column; gap:20px;"></div>
       </div>
     </div>
 
     <!-- Floating Input Pill -->
-    <div class="bottom-input-anchor">
-      <div class="input-box-container">
-        <div class="input-glass-pill">
-          <textarea id="user-text-input" rows="1" placeholder="Hỏi kỹ thuật trồng trọt (bón phân, độ pH, phòng trừ sâu bệnh)..." aria-label="Nội dung câu hỏi"></textarea>
-          <button class="btn-send-main" id="btn-send-msg" title="Gửi câu hỏi (Enter)">
-            <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-          </button>
-        </div>
-        <div class="bottom-disclaimer">
-          Thông tin được đối chiếu từ văn bản khuyến nông chính thống · NextFarm RAG C2 Engine
-        </div>
+    <div class="input-floating-bottom">
+      <div class="input-box-wrap">
+        <textarea id="main-query-input" rows="1" placeholder="Hỏi kỹ thuật trồng trọt (bón phân, độ pH, phòng trừ sâu bệnh)..." aria-label="Nội dung câu hỏi"></textarea>
+        <button class="btn-send-action" id="btn-send-action" title="Gửi câu hỏi (Enter)">
+          <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+      </div>
+      <div class="bottom-meta-txt">
+        Thông tin được đối chiếu từ văn bản khuyến nông chính thống · NextFarm RAG C2 Engine
       </div>
     </div>
   </main>
 </div>
 
-<!-- Toast Box -->
-<div class="toast-notice" id="toast-notice">Đã sao chép vào bộ nhớ tạm!</div>
+<!-- Toast Notice -->
+<div class="toast-bar" id="toast-bar">Đã sao chép vào bộ nhớ tạm!</div>
 
 <script>
-/* ==========================================================================
-   NextFarm AI Modern Chat Engine with Full Local Storage & History
-   ========================================================================== */
-
-const STORAGE_KEY = "nextfarm_conversations_v2";
-const ACTIVE_CHAT_KEY = "nextfarm_active_chat_id";
+const STORAGE_KEY = "nextfarm_conversations_v3";
+const ACTIVE_KEY = "nextfarm_active_id_v3";
 
 const REASON_LABELS = {
   garden_data:           "Chặn số liệu cảm biến vườn (A1)",
@@ -1113,21 +1055,20 @@ const REASON_LABELS = {
 const ICON_VERIFIED = '<svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>';
 const ICON_WARNING  = '<svg viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>';
 
-// State
 let conversations = [];
-let activeChatId = null;
-let isGenerating = false;
+let activeId = null;
+let isBusy = false;
 
-// DOM Elements
+// Elements
 const $sidebar = document.getElementById("sidebar");
-const $overlay = document.getElementById("sidebar-overlay");
-const $historyList = document.getElementById("chat-history-list");
-const $welcomeHero = document.getElementById("welcome-hero");
-const $messagesList = document.getElementById("messages-list");
-const $input = document.getElementById("user-text-input");
-const $btnSend = document.getElementById("btn-send-msg");
-const $chatTitle = document.getElementById("active-chat-title");
-const $toast = document.getElementById("toast-notice");
+const $backdrop = document.getElementById("mobile-backdrop");
+const $chatList = document.getElementById("sidebar-chat-list");
+const $welcomeBox = document.getElementById("welcome-hero-box");
+const $dialogFlow = document.getElementById("dialog-flow");
+const $input = document.getElementById("main-query-input");
+const $btnSend = document.getElementById("btn-send-action");
+const $titleLabel = document.getElementById("active-title-label");
+const $toast = document.getElementById("toast-bar");
 
 const escapeHtml = s => String(s ?? "").replace(/[&<>"']/g,
   c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -1138,10 +1079,8 @@ function showToast(msg) {
   setTimeout(() => $toast.classList.remove("show"), 2000);
 }
 
-// ---------------------------------------------------------------------------
-// Theme Management
-// ---------------------------------------------------------------------------
-const $btnTheme = document.getElementById("btn-theme-toggle");
+// Theme
+const $btnTheme = document.getElementById("btn-theme-mode");
 let currentTheme = localStorage.getItem("nextfarm_theme") || 
   (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
 document.documentElement.setAttribute("data-theme", currentTheme);
@@ -1152,36 +1091,34 @@ $btnTheme.onclick = () => {
   localStorage.setItem("nextfarm_theme", currentTheme);
 };
 
-// ---------------------------------------------------------------------------
-// Storage Management
-// ---------------------------------------------------------------------------
-function loadStorage() {
+// Storage
+function loadData() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     conversations = raw ? JSON.parse(raw) : [];
-    activeChatId = localStorage.getItem(ACTIVE_CHAT_KEY);
+    activeId = localStorage.getItem(ACTIVE_KEY);
   } catch (e) {
     conversations = [];
-    activeChatId = null;
+    activeId = null;
   }
 }
 
-function saveStorage() {
+function saveData() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(conversations));
-  if (activeChatId) localStorage.setItem(ACTIVE_CHAT_KEY, activeChatId);
+  if (activeId) localStorage.setItem(ACTIVE_KEY, activeId);
 }
 
 function createNewChat() {
   const newChat = {
-    id: "chat_" + Date.now() + "_" + Math.random().toString(36).substr(2, 6),
+    id: "chat_" + Date.now(),
     title: "Cuộc trò chuyện mới",
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     messages: []
   };
   conversations.unshift(newChat);
-  activeChatId = newChat.id;
-  saveStorage();
+  activeId = newChat.id;
+  saveData();
   renderSidebar();
   renderActiveChat();
   if (window.innerWidth <= 768) closeSidebar();
@@ -1191,10 +1128,10 @@ function deleteChat(id, e) {
   if (e) e.stopPropagation();
   if (!confirm("Bạn có chắc chắn muốn xóa cuộc trò chuyện này?")) return;
   conversations = conversations.filter(c => c.id !== id);
-  if (activeChatId === id) {
-    activeChatId = conversations.length ? conversations[0].id : null;
+  if (activeId === id) {
+    activeId = conversations.length ? conversations[0].id : null;
   }
-  saveStorage();
+  saveData();
   renderSidebar();
   renderActiveChat();
 }
@@ -1206,19 +1143,17 @@ function renameChat(id, e) {
   const newName = prompt("Nhập tên mới cho cuộc trò chuyện:", chat.title);
   if (newName && newName.trim()) {
     chat.title = newName.trim();
-    saveStorage();
+    saveData();
     renderSidebar();
-    if (activeChatId === id) {
-      $chatTitle.innerHTML = `<span>${escapeHtml(chat.title)}</span>`;
+    if (activeId === id) {
+      $titleLabel.textContent = chat.title;
     }
   }
 }
 
-// ---------------------------------------------------------------------------
-// Render Sidebar History
-// ---------------------------------------------------------------------------
+// Render Sidebar
 function renderSidebar(searchQuery = "") {
-  $historyList.innerHTML = "";
+  $chatList.innerHTML = "";
   const query = searchQuery.trim().toLowerCase();
 
   const filtered = conversations.filter(c => 
@@ -1227,106 +1162,99 @@ function renderSidebar(searchQuery = "") {
   );
 
   if (!filtered.length) {
-    $historyList.innerHTML = `
-      <div style="text-align:center; padding:30px 10px; color:var(--text-light); font-size:13px;">
+    $chatList.innerHTML = `
+      <div style="text-align:center; padding:30px 10px; color:var(--text-light); font-size:12.5px;">
         ${conversations.length ? "Không tìm thấy kết quả" : "Chưa có lịch sử trò chuyện"}
       </div>
     `;
     return;
   }
 
-  // Simple grouping (Today, Earlier)
   const now = new Date();
-  const todayItems = [];
-  const earlierItems = [];
+  const todayList = [];
+  const earlierList = [];
 
   filtered.forEach(chat => {
-    const chatDate = new Date(chat.updatedAt || chat.createdAt);
-    const isToday = chatDate.toDateString() === now.toDateString();
-    if (isToday) todayItems.push(chat);
-    else earlierItems.push(chat);
+    const d = new Date(chat.updatedAt || chat.createdAt);
+    if (d.toDateString() === now.toDateString()) todayList.push(chat);
+    else earlierList.push(chat);
   });
 
-  const renderGroup = (title, items) => {
-    if (!items.length) return;
-    const groupTitle = document.createElement("div");
-    groupTitle.className = "history-group-title";
-    groupTitle.textContent = title;
-    $historyList.appendChild(groupTitle);
+  const renderGroup = (title, list) => {
+    if (!list.length) return;
+    const gTitle = document.createElement("div");
+    gTitle.className = "history-title-group";
+    gTitle.textContent = title;
+    $chatList.appendChild(gTitle);
 
-    items.forEach(chat => {
+    list.forEach(chat => {
       const itemEl = document.createElement("div");
-      itemEl.className = `chat-history-item ${chat.id === activeChatId ? "active" : ""}`;
+      itemEl.className = `chat-item ${chat.id === activeId ? "active" : ""}`;
       itemEl.innerHTML = `
-        <div class="chat-item-main">
+        <div class="chat-item-text">
           <svg viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
-          <span class="chat-item-title">${escapeHtml(chat.title)}</span>
+          <span>${escapeHtml(chat.title)}</span>
         </div>
-        <div class="chat-item-actions">
-          <button class="btn-item-action edit" title="Đổi tên">
+        <div class="chat-item-tools">
+          <button class="btn-chat-tool edit" title="Đổi tên">
             <svg viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
           </button>
-          <button class="btn-item-action del" title="Xóa">
+          <button class="btn-chat-tool del" title="Xóa">
             <svg viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
           </button>
         </div>
       `;
 
       itemEl.onclick = () => {
-        activeChatId = chat.id;
-        saveStorage();
+        activeId = chat.id;
+        saveData();
         renderSidebar();
         renderActiveChat();
         if (window.innerWidth <= 768) closeSidebar();
       };
 
-      itemEl.querySelector(".btn-item-action.edit").onclick = (e) => renameChat(chat.id, e);
-      itemEl.querySelector(".btn-item-action.del").onclick = (e) => deleteChat(chat.id, e);
+      itemEl.querySelector(".btn-chat-tool.edit").onclick = (e) => renameChat(chat.id, e);
+      itemEl.querySelector(".btn-chat-tool.del").onclick = (e) => deleteChat(chat.id, e);
 
-      $historyList.appendChild(itemEl);
+      $chatList.appendChild(itemEl);
     });
   };
 
-  renderGroup("Hôm nay", todayItems);
-  renderGroup("Trước đó", earlierItems);
+  renderGroup("Hôm nay", todayList);
+  renderGroup("Trước đó", earlierList);
 }
 
-// ---------------------------------------------------------------------------
-// Render Active Chat Messages
-// ---------------------------------------------------------------------------
+// Render Active Chat
 function renderActiveChat() {
-  const currentChat = conversations.find(c => c.id === activeChatId);
+  const currentChat = conversations.find(c => c.id === activeId);
 
   if (!currentChat || !currentChat.messages || !currentChat.messages.length) {
-    $welcomeHero.style.display = "flex";
-    $messagesList.innerHTML = "";
-    $chatTitle.innerHTML = `<span>Cuộc trò chuyện mới</span>`;
+    $welcomeBox.style.display = "flex";
+    $dialogFlow.innerHTML = "";
+    $titleLabel.textContent = "Cuộc trò chuyện mới";
     return;
   }
 
-  $welcomeHero.style.display = "none";
-  $chatTitle.innerHTML = `<span>${escapeHtml(currentChat.title)}</span>`;
-  $messagesList.innerHTML = "";
+  $welcomeBox.style.display = "none";
+  $titleLabel.textContent = currentChat.title;
+  $dialogFlow.innerHTML = "";
 
   currentChat.messages.forEach(msg => {
-    appendMessageDom(msg);
+    appendMsgDom(msg);
   });
 
-  const scrollBody = document.getElementById("chat-stream-body");
-  scrollBody.scrollTop = scrollBody.scrollHeight;
+  const scrollArea = document.getElementById("chat-scroll-area");
+  scrollArea.scrollTop = scrollArea.scrollHeight;
 }
 
-function appendMessageDom(msg) {
-  const turnEl = document.createElement("div");
-  turnEl.className = "message-turn";
+function appendMsgDom(msg) {
+  const row = document.createElement("div");
 
   if (msg.role === "user") {
-    turnEl.innerHTML = `
-      <div class="user-msg-row">
-        <div class="user-bubble">${escapeHtml(msg.content)}</div>
-      </div>
-    `;
+    row.className = "msg-user-row";
+    row.innerHTML = `<div class="msg-user-bubble">${escapeHtml(msg.content)}</div>`;
   } else {
+    row.className = "msg-bot-row";
     const isAbstain = msg.isAbstained;
     const badgeClass = isAbstain ? "abstained" : "grounded";
     const badgeIcon = isAbstain ? ICON_WARNING : ICON_VERIFIED;
@@ -1334,92 +1262,86 @@ function appendMessageDom(msg) {
       ? (REASON_LABELS[msg.reason] || "Từ chối an toàn theo quy chuẩn")
       : "Có căn cứ tài liệu chính thống";
 
-    const sourcesHtml = renderSourcesDom(msg.sources);
+    const sourcesHtml = renderSourcesHtml(msg.sources);
 
-    turnEl.innerHTML = `
-      <div class="bot-msg-row">
-        <div class="bot-avatar">
-          <svg viewBox="0 0 24 24"><path d="M12 21V9M12 9C12 6 9 3 5 3c0 4 3 6 7 6M12 9c0-3 3-6 7-6 0 4-3 6-7 6"/></svg>
+    row.innerHTML = `
+      <div class="bot-icon-avatar">
+        <svg viewBox="0 0 24 24"><path d="M12 21V9M12 9C12 6 9 3 5 3c0 4 3 6 7 6M12 9c0-3 3-6 7-6 0 4-3 6-7 6"/></svg>
+      </div>
+      <div class="bot-card-box ${badgeClass}">
+        <div class="bot-status-tag ${badgeClass}">
+          ${badgeIcon}
+          <span>${escapeHtml(badgeText)}</span>
         </div>
-        <div class="bot-card-wrapper ${badgeClass}">
-          <div class="bot-badge-header ${badgeClass}">
-            ${badgeIcon}
-            <span>${escapeHtml(badgeText)}</span>
-          </div>
-          <div class="bot-message-body">${escapeHtml(msg.content)}</div>
-          ${sourcesHtml}
-          <div class="bot-action-toolbar">
-            <button class="btn-msg-tool copy-btn" title="Sao chép câu trả lời">
-              <svg viewBox="0 0 24 24"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-              <span>Sao chép</span>
-            </button>
-            <button class="btn-msg-tool speak-btn" title="Đọc câu trả lời">
-              <svg viewBox="0 0 24 24"><path d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
-              <span>Đọc</span>
-            </button>
-          </div>
+        <div class="bot-text-content">${escapeHtml(msg.content)}</div>
+        ${sourcesHtml}
+        <div class="bot-tools-row">
+          <button class="btn-tool-pill copy-btn" title="Sao chép câu trả lời">
+            <svg viewBox="0 0 24 24"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+            <span>Sao chép</span>
+          </button>
+          <button class="btn-tool-pill speak-btn" title="Đọc câu trả lời">
+            <svg viewBox="0 0 24 24"><path d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+            <span>Đọc</span>
+          </button>
         </div>
       </div>
     `;
 
-    // Bind copy & speech
-    turnEl.querySelector(".copy-btn").onclick = () => {
+    row.querySelector(".copy-btn").onclick = () => {
       navigator.clipboard.writeText(msg.content);
-      showToast("Đã sao chép nội dung vào bộ nhớ tạm!");
+      showToast("Đã sao chép nội dung!");
     };
 
-    turnEl.querySelector(".speak-btn").onclick = () => {
+    row.querySelector(".speak-btn").onclick = () => {
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
         const utter = new SpeechSynthesisUtterance(msg.content);
         utter.lang = 'vi-VN';
-        utter.rate = 1.0;
         window.speechSynthesis.speak(utter);
-        showToast("Đang đọc câu trả lời...");
+        showToast("Đang phát âm tiếng Việt...");
       } else {
-        alert("Trình duyệt của bạn không hỗ trợ đọc giọng nói.");
+        alert("Trình duyệt không hỗ trợ Web Speech API.");
       }
     };
   }
 
-  $messagesList.appendChild(turnEl);
+  $dialogFlow.appendChild(row);
 }
 
-function renderSourcesDom(sources) {
+function renderSourcesHtml(sources) {
   if (!sources || !sources.length) return "";
   return `
-    <div class="citations-box">
-      <div class="citations-label">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-        <span>Tài liệu trích dẫn xác thực (${sources.length})</span>
+    <div class="citations-wrapper">
+      <div class="citations-title-bar">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        <span>Tài liệu trích dẫn kiểm chứng (${sources.length})</span>
       </div>
       ${sources.map(s => `
-        <a class="source-pill-card" href="${escapeHtml(s.url || '#')}" target="_blank" rel="noopener noreferrer">
-          <div class="source-head-line">
-            <span class="source-doc-title">${escapeHtml(s.tieu_de || s.chunk_id)}</span>
-            ${s.tier ? `<span class="source-tier-tag">Tier ${s.tier}</span>` : ''}
+        <a class="citation-card-link" href="${escapeHtml(s.url || '#')}" target="_blank" rel="noopener noreferrer">
+          <div class="citation-head-row">
+            <span class="citation-doc-name">${escapeHtml(s.tieu_de || s.chunk_id)}</span>
+            ${s.tier ? `<span class="citation-tier-pill">Tier ${s.tier}</span>` : ''}
           </div>
-          <div class="source-quote-text">"${escapeHtml(s.trich || "")}"</div>
+          <div class="citation-quote-txt">"${escapeHtml(s.trich || "")}"</div>
         </a>
       `).join("")}
     </div>
   `;
 }
 
-// ---------------------------------------------------------------------------
-// Send Message Flow
-// ---------------------------------------------------------------------------
+// Send Message
 async function sendMessage(textToSend) {
   const query = (textToSend || $input.value).trim();
-  if (!query || isGenerating) return;
+  if (!query || isBusy) return;
 
-  isGenerating = true;
+  isBusy = true;
   $btnSend.disabled = true;
-  $welcomeHero.style.display = "none";
+  $welcomeBox.style.display = "none";
   $input.value = "";
   $input.style.height = "auto";
 
-  let currentChat = conversations.find(c => c.id === activeChatId);
+  let currentChat = conversations.find(c => c.id === activeId);
   if (!currentChat) {
     currentChat = {
       id: "chat_" + Date.now(),
@@ -1429,43 +1351,41 @@ async function sendMessage(textToSend) {
       messages: []
     };
     conversations.unshift(currentChat);
-    activeChatId = currentChat.id;
+    activeId = currentChat.id;
   } else if (currentChat.messages.length === 0) {
     currentChat.title = query.slice(0, 32);
+    $titleLabel.textContent = currentChat.title;
   }
 
   currentChat.updatedAt = new Date().toISOString();
 
-  // Add User Message
   const userMsg = { role: "user", content: query, timestamp: Date.now() };
   currentChat.messages.push(userMsg);
-  appendMessageDom(userMsg);
-  saveStorage();
+  appendMsgDom(userMsg);
+  saveData();
   renderSidebar();
 
-  const scrollBody = document.getElementById("chat-stream-body");
-  scrollBody.scrollTop = scrollBody.scrollHeight;
+  const scrollArea = document.getElementById("chat-scroll-area");
+  scrollArea.scrollTop = scrollArea.scrollHeight;
 
-  // Render typing indicator
-  const typingTurn = document.createElement("div");
-  typingTurn.className = "message-turn";
-  typingTurn.id = "typing-temp";
-  typingTurn.innerHTML = `
-    <div class="bot-msg-row">
-      <div class="bot-avatar">
-        <svg viewBox="0 0 24 24"><path d="M12 21V9M12 9C12 6 9 3 5 3c0 4 3 6 7 6M12 9c0-3 3-6 7-6 0 4-3 6-7 6"/></svg>
-      </div>
-      <div class="bot-card-wrapper">
-        <div class="typing-dots-wave">
-          <div class="typing-dot"></div>
-          <div class="typing-dot"></div>
-          <div class="typing-dot"></div>
-        </div>
+  // Typing Indicator
+  const typingRow = document.createElement("div");
+  typingRow.className = "msg-bot-row";
+  typingRow.id = "typing-temp";
+  typingRow.innerHTML = `
+    <div class="bot-icon-avatar">
+      <svg viewBox="0 0 24 24"><path d="M12 21V9M12 9C12 6 9 3 5 3c0 4 3 6 7 6M12 9c0-3 3-6 7-6 0 4-3 6-7 6"/></svg>
+    </div>
+    <div class="bot-card-box">
+      <div class="typing-wave-bar">
+        <div class="wave-dot"></div>
+        <div class="wave-dot"></div>
+        <div class="wave-dot"></div>
       </div>
     </div>
   `;
-  $messagesList.appendChild(typingTurn);
-  scrollBody.scrollTop = scrollBody.scrollHeight;
+  $dialogFlow.appendChild(typingRow);
+  scrollArea.scrollTop = scrollArea.scrollHeight;
 
   try {
     const contextTurns = currentChat.messages
@@ -1495,13 +1415,13 @@ async function sendMessage(textToSend) {
     };
 
     currentChat.messages.push(botMsg);
-    saveStorage();
+    saveData();
 
     const $temp = document.getElementById("typing-temp");
     if ($temp) $temp.remove();
 
-    appendMessageDom(botMsg);
-    scrollBody.scrollTop = scrollBody.scrollHeight;
+    appendMsgDom(botMsg);
+    scrollArea.scrollTop = scrollArea.scrollHeight;
   } catch (err) {
     const $temp = document.getElementById("typing-temp");
     if ($temp) $temp.remove();
@@ -1515,25 +1435,22 @@ async function sendMessage(textToSend) {
       timestamp: Date.now()
     };
     currentChat.messages.push(errorMsg);
-    saveStorage();
-    appendMessageDom(errorMsg);
+    saveData();
+    appendMsgDom(errorMsg);
   } finally {
-    isGenerating = false;
+    isBusy = false;
     $btnSend.disabled = false;
     $input.focus();
   }
 }
 
-// ---------------------------------------------------------------------------
-// Event Listeners & Controls
-// ---------------------------------------------------------------------------
+// UI Controls
 document.getElementById("btn-new-chat").onclick = createNewChat;
 
-document.getElementById("history-search").addEventListener("input", e => {
+document.getElementById("history-search-input").addEventListener("input", e => {
   renderSidebar(e.target.value);
 });
 
-// Auto-expand input
 $input.addEventListener("input", () => {
   $input.style.height = "auto";
   $input.style.height = Math.min($input.scrollHeight, 140) + "px";
@@ -1548,51 +1465,49 @@ $input.addEventListener("keydown", e => {
 
 $btnSend.onclick = () => sendMessage();
 
-// Prompt card click
-document.querySelectorAll(".prompt-card").forEach(card => {
+document.querySelectorAll(".bento-prompt-item").forEach(card => {
   card.onclick = () => {
-    const promptText = card.getAttribute("data-prompt");
-    if (promptText) sendMessage(promptText);
+    const q = card.getAttribute("data-query");
+    if (q) sendMessage(q);
   };
 });
 
-// Sidebar toggle
 function toggleSidebar() {
   $sidebar.classList.toggle("collapsed");
 }
 function openSidebarMobile() {
   $sidebar.classList.remove("collapsed");
-  $overlay.classList.add("show");
+  $backdrop.classList.add("show");
 }
 function closeSidebar() {
   $sidebar.classList.add("collapsed");
-  $overlay.classList.remove("show");
+  $backdrop.classList.remove("show");
 }
 
 document.getElementById("btn-collapse-sidebar").onclick = toggleSidebar;
-document.getElementById("btn-expand-sidebar").onclick = () => {
+document.getElementById("btn-toggle-sidebar").onclick = () => {
   if (window.innerWidth <= 768) openSidebarMobile();
   else toggleSidebar();
 };
-$overlay.onclick = closeSidebar;
+$backdrop.onclick = closeSidebar;
 
-// Clear Current Chat
-document.getElementById("btn-clear-current").onclick = () => {
-  if (!activeChatId) return;
-  const currentChat = conversations.find(c => c.id === activeChatId);
+// Clear Session
+document.getElementById("btn-clear-session").onclick = () => {
+  if (!activeId) return;
+  const currentChat = conversations.find(c => c.id === activeId);
   if (!currentChat) return;
   if (confirm("Xóa toàn bộ tin nhắn trong cuộc trò chuyện này?")) {
     currentChat.messages = [];
     currentChat.title = "Cuộc trò chuyện mới";
-    saveStorage();
+    saveData();
     renderSidebar();
     renderActiveChat();
   }
 };
 
-// Export Chat
-document.getElementById("btn-export-chat").onclick = () => {
-  const currentChat = conversations.find(c => c.id === activeChatId);
+// Export Markdown
+document.getElementById("btn-export-markdown").onclick = () => {
+  const currentChat = conversations.find(c => c.id === activeId);
   if (!currentChat || !currentChat.messages.length) {
     alert("Chưa có tin nhắn nào để xuất.");
     return;
@@ -1618,16 +1533,13 @@ document.getElementById("btn-export-chat").onclick = () => {
   showToast("Đã xuất file Markdown!");
 };
 
-// ---------------------------------------------------------------------------
-// Initialization
-// ---------------------------------------------------------------------------
-loadStorage();
-
+// Start
+loadData();
 if (!conversations.length) {
   createNewChat();
 } else {
-  if (!activeChatId || !conversations.some(c => c.id === activeChatId)) {
-    activeChatId = conversations[0].id;
+  if (!activeId || !conversations.some(c => c.id === activeId)) {
+    activeId = conversations[0].id;
   }
   renderSidebar();
   renderActiveChat();
