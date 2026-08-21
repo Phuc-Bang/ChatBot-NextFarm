@@ -13,7 +13,7 @@ lenh la biet - ma lai sai, thi moi con so kho kiem hon trong cung tai lieu
 cung mat trong luong.
 
 Test nay canh CAI GI:
-  - so test ghi trong ba tai lieu phai giong nhau
+  - so test ghi trong BON noi (ba tai lieu + trang /report) phai giong nhau
   - va phai bang so test pytest that su thu thap duoc
 
 Test nay KHONG canh:
@@ -39,21 +39,37 @@ sys.path.insert(0, str(GOC))
 # `(?!\s*case)` la bat buoc: "222 test case" la kich thuoc TAP KIEM THU, mot
 # con so hoan toan khac. Lan chay dau khong co no va test do vi bat nham 222.
 MAU = re.compile(r"(\d{3})\s*(?:/\s*\d{3}\s*)?"
-                 r"(?:unit\s+)?(?:[Tt]ests?(?!\s*case)|test tự động|xanh)")
+                 r"(?:[Uu]nit\s+)?(?:[Tt]ests?(?!\s*case)|test tự động|xanh)")
 
 TAI_LIEU = (
     "README.md",
     "docs/GIAO_HANG_NEXTFARM.md",
     "docs/BAO_CAO_TONG_KET_NEXTFARM.md",
+    # Trang /report la thu NextFarm thuc su nhin. Them vao 2026-08-22 sau
+    # khi phat hien no van ghi 310 trong khi ba file kia da sang 331.
+    "frontend/report.html",
 )
+
+
+# Trong report.html co mot o KPI la con so TRAN, khong co tu "test" ben canh:
+#     <div class="kpi-metric so">339 / 339</div>
+# MAU o tren khong bat duoc no. Da kiem: doi o do thanh 888 / 888 ma bo test
+# van xanh. Nen phai bat rieng bang mau markup.
+MAU_KPI = re.compile(r'class="kpi-metric so">\s*(\d{3})\s*/\s*(\d{3})\s*<')
 
 
 def _so_trong(ten: str) -> list[int]:
     van = (GOC / ten).read_text(encoding="utf-8")
-    return [int(m.group(1)) for m in MAU.finditer(van)]
+    so = [int(m.group(1)) for m in MAU.finditer(van)]
+    for m in MAU_KPI.finditer(van):
+        a, b = int(m.group(1)), int(m.group(2))
+        assert a == b, (ten + ": o KPI ghi " + str(a) + " / " + str(b)
+                        + " - hai nua phai bang nhau")
+        so.append(a)
+    return so
 
 
-def test_ba_tai_lieu_ghi_cung_mot_con_so():
+def test_moi_noi_ghi_cung_mot_con_so():
     """Loi pho bien nhat: sua mot cho, quen sau cho."""
     thay = {}
     for ten in TAI_LIEU:
@@ -64,7 +80,7 @@ def test_ba_tai_lieu_ghi_cung_mot_con_so():
 
     hop = set().union(*thay.values())
     assert len(hop) == 1, \
-        "ba tai lieu ghi so test khac nhau: " + \
+        "cac noi ghi so test khac nhau: " + \
         "; ".join(k + "=" + str(sorted(v)) for k, v in thay.items())
 
 
@@ -85,5 +101,5 @@ def test_so_trong_tai_lieu_bang_so_chay_that():
     ghi = set().union(*(set(_so_trong(t)) for t in TAI_LIEU))
     assert ghi == {that}, (
         "tai lieu ghi " + str(sorted(ghi)) + " test nhung pytest thu thap "
-        + str(that) + ". Sua ba tai lieu: " + ", ".join(TAI_LIEU)
+        + str(that) + ". Sua cac file: " + ", ".join(TAI_LIEU)
     )
