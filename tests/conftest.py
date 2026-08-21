@@ -4,6 +4,7 @@ Thu muc crawler/ khong phai package nen phai them vao sys.path de import duoc
 crawl.py va robots.py trong test.
 """
 
+import sentence_transformers  # noqa: F401 - Phai import truoc de tranh segfault tren Windows
 import sys
 from pathlib import Path
 
