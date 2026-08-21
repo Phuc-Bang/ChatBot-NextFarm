@@ -9,8 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --primary: #059669;
-  --primary-hover: #047857;
+  --primary: #16a34a;
+  --primary-hover: #15803d;
   --primary-light: #ecfdf5;
   
   --bg-page: #f8fafc;
@@ -28,9 +28,9 @@
   --amber-bg: #fffbeb;
   --amber-border: #fde68a;
   
-  --emerald: #10b981;
+  --emerald: #16a34a;
   --emerald-bg: #ecfdf5;
-  --emerald-border: #a7f3d0;
+  --emerald-border: #bbf7d0;
   
   --blue: #2563eb;
   --blue-bg: #eff6ff;
@@ -495,13 +495,15 @@ tbody tr:hover { background: var(--bg-subtle); }
 
 <header>
   <div class="header-brand">
-    <div class="brand-icon">
-      <svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-    </div>
-    <div class="header-title">
-      <h1>Bảng Quản trị & Kiểm định RAG NextFarm</h1>
-      <p id="system-subtitle">Đang nạp dữ liệu kiểm thử...</p>
-    </div>
+    <a href="https://nextfarm.vn" target="_blank" style="text-decoration:none; display:flex; align-items:center; gap:8px;" title="Truy cập nextfarm.vn">
+      <div class="brand-icon" style="background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.3"><path d="M12 21V9M12 9C12 6 9 3 5 3c0 4 3 6 7 6M12 9c0-3 3-6 7-6 0 4-3 6-7 6"/></svg>
+      </div>
+      <div class="header-title">
+        <h1 style="color:var(--primary); display:flex; align-items:center; gap:6px;">Nextfarm <span style="color:var(--text-main); font-weight:700; font-size:16px;">| Quản trị & Kiểm định RAG</span></h1>
+        <p id="system-subtitle">Nền tảng Nông nghiệp Thông minh — Hệ thống chống bịa đặt</p>
+      </div>
+    </a>
   </div>
   <div class="header-controls">
     <div class="system-pill">
@@ -522,6 +524,10 @@ tbody tr:hover { background: var(--bg-subtle); }
     <a href="/" class="btn-action" title="Quay lại giao diện Chat">
       <svg viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
       <span>Trang Chat</span>
+    </a>
+    <a href="https://nextfarm.vn" target="_blank" class="btn-action" title="Trang chủ Nextfarm.vn">
+      <svg viewBox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+      <span>nextfarm.vn ↗</span>
     </a>
   </div>
 </header>

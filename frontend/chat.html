@@ -3,23 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>NextFarm AI — Trợ lý Nông nghiệp Thông minh</title>
+<title>Nextfarm AI — Trợ lý Nông nghiệp Thông minh | nextfarm.vn</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --primary: #059669;
-  --primary-hover: #047857;
-  --primary-light: #ecfdf5;
-  --primary-glow: rgba(16, 185, 129, 0.18);
+  --brand: #16a34a;
+  --brand-hover: #15803d;
+  --brand-light: #ecfdf5;
+  --brand-glow: rgba(22, 163, 74, 0.2);
   
   --bg-app: #f8fafc;
   --bg-sidebar: #f1f5f9;
   --bg-card: #ffffff;
   --bg-card-hover: #f8fafc;
   --bg-subtle: #f1f5f9;
-  --bg-glass: rgba(255, 255, 255, 0.92);
+  --bg-glass: rgba(255, 255, 255, 0.94);
   
   --text-main: #0f172a;
   --text-muted: #64748b;
@@ -27,57 +27,57 @@
   --text-inverse: #ffffff;
   
   --border: #e2e8f0;
-  --border-focus: #10b981;
+  --border-focus: #16a34a;
   
   --amber: #d97706;
   --amber-bg: #fffbeb;
   --amber-border: #fde68a;
   --amber-dark: #b45309;
   
-  --emerald: #10b981;
+  --emerald: #16a34a;
   --emerald-bg: #ecfdf5;
-  --emerald-border: #a7f3d0;
+  --emerald-border: #bbf7d0;
   
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
   --shadow-lg: 0 10px 20px -3px rgba(0, 0, 0, 0.08);
-  --shadow-glow: 0 0 20px rgba(16, 185, 129, 0.25);
+  --shadow-glow: 0 0 20px rgba(22, 163, 74, 0.25);
   
   --radius-sm: 8px;
   --radius-md: 12px;
-  --radius-lg: 18px;
+  --radius-lg: 16px;
   --radius-full: 9999px;
   
   --sidebar-w: 280px;
 }
 
 [data-theme="dark"] {
-  --primary: #10b981;
-  --primary-hover: #34d399;
-  --primary-light: #064e3b44;
-  --primary-glow: rgba(16, 185, 129, 0.3);
+  --brand: #22c55e;
+  --brand-hover: #4ade80;
+  --brand-light: rgba(34, 197, 94, 0.12);
+  --brand-glow: rgba(34, 197, 94, 0.3);
   
   --bg-app: #0b1120;
   --bg-sidebar: #0f172a;
-  --bg-card: #131d31;
-  --bg-card-hover: #1a2742;
-  --bg-subtle: #1e293b;
-  --bg-glass: rgba(19, 29, 49, 0.92);
+  --bg-card: #1e293b;
+  --bg-card-hover: #27354f;
+  --bg-subtle: #182234;
+  --bg-glass: rgba(15, 23, 42, 0.92);
   
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
   --text-light: #64748b;
   --text-inverse: #0b1120;
   
-  --border: #23324d;
-  --border-focus: #34d399;
+  --border: #334155;
+  --border-focus: #22c55e;
   
   --amber: #fbbf24;
   --amber-bg: #2d2208;
   --amber-border: #78350f;
   --amber-dark: #f59e0b;
   
-  --emerald: #34d399;
+  --emerald: #22c55e;
   --emerald-bg: #063826;
   --emerald-border: #065f46;
   
@@ -110,7 +110,9 @@ html, body {
   position: relative;
 }
 
-/* Sidebar */
+/* ==========================================================================
+   Sidebar: History & Nextfarm Brand Links
+   ========================================================================== */
 .sidebar {
   width: var(--sidebar-w);
   min-width: var(--sidebar-w);
@@ -144,7 +146,7 @@ html, body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-hover) 100%);
   color: #ffffff;
   border: none;
   border-radius: var(--radius-sm);
@@ -153,12 +155,12 @@ html, body {
   font-size: 13.5px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.25);
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.28);
   transition: all 0.2s ease;
   white-space: nowrap;
 }
 .btn-new-chat:hover {
-  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  filter: brightness(1.08);
   box-shadow: var(--shadow-glow);
 }
 .btn-new-chat svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 2.3; flex-shrink: 0; }
@@ -179,8 +181,8 @@ html, body {
 }
 .btn-icon-sq:hover {
   background: var(--bg-card-hover);
-  color: var(--primary);
-  border-color: var(--primary);
+  color: var(--brand);
+  border-color: var(--brand);
 }
 .btn-icon-sq svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.2; }
 
@@ -204,8 +206,8 @@ html, body {
   transition: all 0.2s ease;
 }
 .search-wrap input:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 2px var(--primary-glow);
+  border-color: var(--brand);
+  box-shadow: 0 0 0 2px var(--brand-glow);
 }
 .search-wrap svg {
   position: absolute;
@@ -250,10 +252,10 @@ html, body {
 }
 .chat-item.active {
   background: var(--bg-card);
-  color: var(--primary);
+  color: var(--brand);
   font-weight: 600;
   box-shadow: var(--shadow-sm);
-  border-left: 3px solid var(--primary);
+  border-left: 3px solid var(--brand);
 }
 
 .chat-item-text {
@@ -295,8 +297,49 @@ html, body {
 }
 .btn-chat-tool svg { width: 13px; height: 13px; stroke: currentColor; fill: none; }
 
+/* Sidebar Nextfarm Ecosystem Links */
+.sidebar-ecosystem-box {
+  padding: 10px 14px;
+  border-top: 1px solid var(--border);
+  background: var(--bg-card);
+}
+.ecosystem-title {
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--brand);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ecosystem-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+.eco-link-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 4px 6px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  transition: all 0.15s ease;
+}
+.eco-link-pill:hover {
+  color: var(--brand);
+  background: var(--brand-light);
+}
+
+/* Sidebar Footer */
 .sidebar-footer {
-  padding: 12px 14px;
+  padding: 10px 14px;
   border-top: 1px solid var(--border);
   background: var(--bg-sidebar);
   display: flex;
@@ -313,14 +356,15 @@ html, body {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--primary-light);
-  color: var(--primary);
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-hover) 100%);
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 15px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 800;
   flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.25);
 }
 .user-info-col {
   flex: 1;
@@ -336,7 +380,8 @@ html, body {
 }
 .user-sub-txt {
   font-size: 11px;
-  color: var(--text-muted);
+  color: var(--brand);
+  font-weight: 600;
 }
 
 .sidebar-nav-links {
@@ -363,12 +408,14 @@ html, body {
 }
 .btn-nav-link:hover {
   background: var(--bg-card-hover);
-  color: var(--primary);
-  border-color: var(--primary);
+  color: var(--brand);
+  border-color: var(--brand);
 }
 .btn-nav-link svg { width: 13px; height: 13px; stroke: currentColor; fill: none; }
 
-/* Main View */
+/* ==========================================================================
+   Main Chat View (Nextfarm Brand Header)
+   ========================================================================== */
 .main-chat-view {
   flex: 1;
   min-width: 0;
@@ -381,9 +428,9 @@ html, body {
 }
 
 .chat-header {
-  height: 58px;
-  min-height: 58px;
-  padding: 0 18px;
+  height: 60px;
+  min-height: 60px;
+  padding: 0 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -397,12 +444,49 @@ html, body {
 .header-left-part {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   min-width: 0;
 }
 
+.brand-logo-mark {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+.brand-logo-text {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--brand);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.brand-logo-leaf {
+  width: 22px;
+  height: 22px;
+  color: var(--brand);
+}
+.brand-tagline-badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  background: var(--brand-light);
+  color: var(--brand);
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--emerald-border);
+  white-space: nowrap;
+}
+
+.header-divider-v {
+  width: 1px;
+  height: 20px;
+  background: var(--border);
+}
+
 .header-chat-title {
-  font-size: 14.5px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--text-main);
   white-space: nowrap;
@@ -410,32 +494,32 @@ html, body {
   text-overflow: ellipsis;
 }
 
+.header-right-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
 .guardrail-pill {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 3px 9px;
+  padding: 4px 10px;
   border-radius: var(--radius-full);
   background: var(--emerald-bg);
   border: 1px solid var(--emerald-border);
-  color: var(--primary);
-  font-size: 11px;
+  color: var(--brand);
+  font-size: 11.5px;
   font-weight: 700;
   white-space: nowrap;
-  flex-shrink: 0;
 }
 
-.header-right-tools {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-shrink: 0;
-}
-
+/* Messages Container */
 .chat-scroll-area {
   flex: 1;
   overflow-y: auto;
-  padding: 20px 20px 140px;
+  padding: 24px 20px 140px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -447,45 +531,50 @@ html, body {
   max-width: 820px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;
 }
 
-/* Empty Hero */
+/* ==========================================================================
+   Welcome Hero (Nextfarm Ecosystem Style)
+   ========================================================================== */
 .welcome-hero-box {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 36px 12px 10px;
+  padding: 28px 12px 10px;
   animation: fadeIn 0.3s ease;
 }
 
-.brand-icon-big {
-  width: 58px;
-  height: 58px;
-  border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
-  display: flex;
+.brand-badge-pill {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  box-shadow: var(--shadow-glow);
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  background: var(--brand-light);
+  color: var(--brand);
+  border: 1px solid var(--emerald-border);
+  font-size: 12px;
+  font-weight: 700;
   margin-bottom: 14px;
 }
-.brand-icon-big svg { width: 32px; height: 32px; fill: none; stroke: currentColor; stroke-width: 2.2; }
 
 .welcome-title-h2 {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 800;
   letter-spacing: -0.03em;
   color: var(--text-main);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+}
+.welcome-title-h2 span {
+  color: var(--brand);
 }
 
 .welcome-desc-txt {
   font-size: 14.5px;
   color: var(--text-muted);
-  max-width: 580px;
+  max-width: 600px;
   line-height: 1.55;
   margin-bottom: 20px;
 }
@@ -493,7 +582,7 @@ html, body {
 .crops-chip-row {
   display: flex;
   gap: 8px;
-  margin-bottom: 28px;
+  margin-bottom: 26px;
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -506,12 +595,15 @@ html, body {
   font-weight: 600;
   color: var(--text-main);
   box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .prompts-bento-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 10px;
+  gap: 12px;
   width: 100%;
   text-align: left;
 }
@@ -520,48 +612,50 @@ html, body {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: 12px 14px;
+  padding: 14px 16px;
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
   box-shadow: var(--shadow-sm);
 }
 .bento-prompt-item:hover {
-  border-color: var(--primary);
+  border-color: var(--brand);
   background: var(--bg-card-hover);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 .bento-tag-title {
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--primary);
+  color: var(--brand);
 }
 .bento-query-txt {
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 600;
   color: var(--text-main);
   line-height: 1.4;
 }
 
-/* Messages */
+/* ==========================================================================
+   Chat Messages & Clean Rendering
+   ========================================================================== */
 .msg-user-row {
   display: flex;
   justify-content: flex-end;
 }
 .msg-user-bubble {
-  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-hover) 100%);
   color: #ffffff;
-  padding: 12px 16px;
+  padding: 12px 18px;
   border-radius: 16px 16px 4px 16px;
   max-width: 82%;
   font-size: 15px;
   font-weight: 500;
-  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2);
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.22);
   line-height: 1.55;
   word-wrap: break-word;
 }
@@ -573,19 +667,19 @@ html, body {
 }
 
 .bot-icon-avatar {
-  width: 34px;
-  height: 34px;
-  border-radius: var(--radius-sm);
-  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-hover) 100%);
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.25);
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.28);
   margin-top: 2px;
 }
-.bot-icon-avatar svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; }
+.bot-icon-avatar svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; }
 
 .bot-card-box {
   flex: 1;
@@ -593,13 +687,13 @@ html, body {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: 16px 18px;
+  padding: 18px 20px;
   box-shadow: var(--shadow-sm);
   transition: all 0.2s ease;
 }
 
 .bot-card-box.grounded {
-  border-left: 4px solid var(--primary);
+  border-left: 4px solid var(--brand);
 }
 
 .bot-card-box.abstained {
@@ -613,17 +707,17 @@ html, body {
   align-items: center;
   gap: 6px;
   font-size: 11.5px;
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  padding: 3px 8px;
+  padding: 3px 9px;
   border-radius: var(--radius-full);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .bot-status-tag.grounded {
   background: var(--emerald-bg);
-  color: var(--primary);
+  color: var(--brand);
   border: 1px solid var(--emerald-border);
 }
 
@@ -633,7 +727,7 @@ html, body {
   border: 1px solid var(--amber-border);
 }
 
-.bot-status-tag svg { width: 13px; height: 13px; stroke-width: 2.3; fill: none; stroke: currentColor; }
+.bot-status-tag svg { width: 14px; height: 14px; stroke-width: 2.3; fill: none; stroke: currentColor; }
 
 .bot-text-content {
   font-size: 15px;
@@ -655,15 +749,15 @@ html, body {
   font-size: 13px;
 }
 
-/* Inline Citation Pill */
+/* Sleek Citation Pills */
 .cite-ref-pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-size: 11px;
-  font-weight: 700;
-  color: var(--primary);
-  background: var(--primary-light);
+  font-weight: 800;
+  color: var(--brand);
+  background: var(--brand-light);
   border: 1px solid var(--emerald-border);
   border-radius: 4px;
   padding: 1px 5px;
@@ -675,35 +769,35 @@ html, body {
   line-height: 1.2;
 }
 .cite-ref-pill:hover {
-  background: var(--primary);
+  background: var(--brand);
   color: #ffffff;
   transform: translateY(-1px);
-  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.35);
 }
 
-/* Citations Section */
+/* Citations Cards */
 .citations-wrapper {
-  margin-top: 14px;
-  padding-top: 12px;
+  margin-top: 16px;
+  padding-top: 14px;
   border-top: 1px dashed var(--border);
 }
 .citations-title-bar {
   font-size: 11.5px;
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   color: var(--text-muted);
   margin-bottom: 8px;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 }
 .citation-card-link {
   display: block;
   background: var(--bg-subtle);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  padding: 10px 12px;
+  padding: 10px 14px;
   margin-bottom: 6px;
   text-decoration: none;
   color: inherit;
@@ -711,15 +805,15 @@ html, body {
   scroll-margin-top: 70px;
 }
 .citation-card-link:hover {
-  border-color: var(--primary);
+  border-color: var(--brand);
   background: var(--bg-card);
   transform: translateX(2px);
   box-shadow: var(--shadow-sm);
 }
 .citation-card-link.highlight {
-  border-color: var(--primary);
-  background: var(--primary-light);
-  box-shadow: 0 0 0 2px var(--primary-glow);
+  border-color: var(--brand);
+  background: var(--brand-light);
+  box-shadow: 0 0 0 2px var(--brand-glow);
 }
 .citation-head-row {
   display: flex;
@@ -738,27 +832,27 @@ html, body {
   font-weight: 800;
   padding: 1px 6px;
   border-radius: 4px;
-  background: var(--primary);
+  background: var(--brand);
   color: #ffffff;
 }
 .citation-doc-name {
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 700;
   color: var(--text-main);
 }
 .citation-tier-pill {
   font-size: 10px;
-  font-weight: 700;
+  font-weight: 800;
   padding: 1px 6px;
   border-radius: var(--radius-full);
-  background: var(--primary-light);
-  color: var(--primary);
+  background: var(--brand-light);
+  color: var(--brand);
   border: 1px solid var(--emerald-border);
 }
 .citation-quote-txt {
   font-size: 12.5px;
   color: var(--text-muted);
-  border-left: 2px solid var(--primary);
+  border-left: 2px solid var(--brand);
   padding-left: 8px;
   margin-top: 4px;
   font-style: italic;
@@ -769,7 +863,7 @@ html, body {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-top: 12px;
+  margin-top: 14px;
   padding-top: 8px;
   border-top: 1px solid var(--border);
 }
@@ -777,9 +871,9 @@ html, body {
   background: transparent;
   border: 1px solid transparent;
   color: var(--text-muted);
-  padding: 3px 8px;
+  padding: 4px 9px;
   border-radius: var(--radius-sm);
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   display: inline-flex;
@@ -792,8 +886,9 @@ html, body {
   color: var(--text-main);
   border-color: var(--border);
 }
-.btn-tool-pill svg { width: 13px; height: 13px; stroke: currentColor; fill: none; }
+.btn-tool-pill svg { width: 14px; height: 14px; stroke: currentColor; fill: none; }
 
+/* Typing Wave */
 .typing-wave-bar {
   display: flex;
   align-items: center;
@@ -804,7 +899,7 @@ html, body {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--primary);
+  background: var(--brand);
   animation: wavePulse 1.4s infinite ease-in-out both;
 }
 .wave-dot:nth-child(1) { animation-delay: -0.32s; }
@@ -816,6 +911,9 @@ html, body {
   40% { transform: scale(1); opacity: 1; }
 }
 
+/* ==========================================================================
+   Bottom Input Floating Box
+   ========================================================================== */
 .input-floating-bottom {
   position: absolute;
   left: 0; right: 0; bottom: 0;
@@ -847,7 +945,7 @@ html, body {
 }
 .input-box-wrap:focus-within {
   border-color: var(--border-focus);
-  box-shadow: 0 0 0 3px var(--primary-glow), var(--shadow-lg);
+  box-shadow: 0 0 0 3px var(--brand-glow), var(--shadow-lg);
 }
 
 textarea#main-query-input {
@@ -860,16 +958,16 @@ textarea#main-query-input {
   border: none;
   background: transparent;
   color: var(--text-main);
-  min-height: 36px;
+  min-height: 38px;
   max-height: 140px;
   outline: none;
 }
 
 .btn-send-action {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: var(--radius-sm);
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-hover) 100%);
   color: #ffffff;
   border: none;
   display: flex;
@@ -888,13 +986,18 @@ textarea#main-query-input {
   cursor: not-allowed;
   transform: none;
 }
-.btn-send-action svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.3; }
+.btn-send-action svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 2.3; }
 
 .bottom-meta-txt {
   text-align: center;
   font-size: 11.5px;
   color: var(--text-light);
   margin-top: 6px;
+}
+.bottom-meta-txt a {
+  color: var(--brand);
+  text-decoration: none;
+  font-weight: 600;
 }
 
 .toast-bar {
@@ -944,10 +1047,11 @@ textarea#main-query-input {
 </style>
 </head>
 <body>
+
 <div class="app-layout">
   <div class="mobile-backdrop" id="mobile-backdrop"></div>
 
-  <!-- Sidebar: Conversation History & Tools -->
+  <!-- Sidebar: Conversation History & Nextfarm Platform Links -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <button class="btn-new-chat" id="btn-new-chat">
@@ -968,12 +1072,26 @@ textarea#main-query-input {
 
     <div class="sidebar-history" id="sidebar-chat-list"></div>
 
+    <!-- Nextfarm Platform Tools -->
+    <div class="sidebar-ecosystem-box">
+      <div class="ecosystem-title">
+        <span>Hệ sinh thái Nextfarm</span>
+        <a href="https://nextfarm.vn" target="_blank" style="color:var(--brand); text-decoration:none;">nextfarm.vn ↗</a>
+      </div>
+      <div class="ecosystem-list">
+        <a href="https://nextfarm.vn/vi/nen-tang/gis" target="_blank" class="eco-link-pill">🗺️ GIS Lô thửa</a>
+        <a href="https://nextfarm.vn/vi/nen-tang/tuoi-thong-minh" target="_blank" class="eco-link-pill">💧 Tưới Fertikit</a>
+        <a href="https://nextfarm.vn/vi/nen-tang/nmc" target="_blank" class="eco-link-pill">🌦️ Quan trắc NMC</a>
+        <a href="https://nextfarm.vn/vi/nen-tang/qr-check" target="_blank" class="eco-link-pill">📱 QR Check</a>
+      </div>
+    </div>
+
     <div class="sidebar-footer">
       <div class="user-badge-row">
-        <div class="user-avatar-circle">🌾</div>
+        <div class="user-avatar-circle">N</div>
         <div class="user-info-col">
-          <div class="user-name-txt">Kỹ sư / Nông dân</div>
-          <div class="user-sub-txt">NextFarm AI Assistant</div>
+          <div class="user-name-txt">Hợp tác xã / Nông hộ</div>
+          <div class="user-sub-txt">● Nextfarm AI Active</div>
         </div>
       </div>
       <div class="sidebar-nav-links">
@@ -1000,12 +1118,18 @@ textarea#main-query-input {
         <button class="btn-icon-sq" id="btn-toggle-sidebar" title="Mở / Đóng thanh bên">
           <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
+        <a href="https://nextfarm.vn" target="_blank" class="brand-logo-mark" title="Trang chủ Nextfarm.vn">
+          <svg class="brand-logo-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M12 21V9M12 9C12 6 9 3 5 3c0 4 3 6 7 6M12 9c0-3 3-6 7-6 0 4-3 6-7 6"/></svg>
+          <span class="brand-logo-text">Nextfarm</span>
+        </a>
+        <div class="brand-tagline-badge">AI Assistant</div>
+        <div class="header-divider-v"></div>
         <div class="header-chat-title" id="active-title-label">Cuộc trò chuyện mới</div>
-        <div class="guardrail-pill">
-          <span>🛡️ RAG C2 Guardrail</span>
-        </div>
       </div>
       <div class="header-right-tools">
+        <div class="guardrail-pill" title="Hệ thống RAG C2 chống bịa đặt kiểm chứng 3 tầng">
+          <span>🛡️ RAG C2 Guardrail</span>
+        </div>
         <button class="btn-icon-sq" id="btn-export-markdown" title="Xuất hội thoại ra Markdown">
           <svg viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
         </button>
@@ -1019,12 +1143,12 @@ textarea#main-query-input {
       <div class="messages-max-container" id="messages-max-container">
         <!-- Empty State Hero -->
         <div class="welcome-hero-box" id="welcome-hero-box">
-          <div class="brand-icon-big">
-            <svg viewBox="0 0 24 24"><path d="M12 21V9M12 9C12 6 9 3 5 3c0 4 3 6 7 6M12 9c0-3 3-6 7-6 0 4-3 6-7 6"/></svg>
+          <div class="brand-badge-pill">
+            <span>🌿 Nền tảng Nông nghiệp Thông minh Đi đầu tại Việt Nam</span>
           </div>
-          <h2 class="welcome-title-h2">Trợ lý Nông nghiệp NextFarm AI</h2>
+          <h2 class="welcome-title-h2">Trợ lý Kỹ thuật <span>Nextfarm AI</span></h2>
           <p class="welcome-desc-txt">
-            Tra cứu quy trình kỹ thuật khuyến nông đã kiểm duyệt. Hệ thống có cơ chế <strong>chống bịa đặt tự động</strong> và từ chối an toàn khi không có căn cứ.
+            Tư vấn quy trình canh tác, dinh dưỡng bón phân và độ pH chuẩn theo tài liệu khuyến nông đã kiểm duyệt. Hệ thống tích hợp cơ chế <strong>chống bịa đặt tự động</strong> và từ chối an toàn khi không có căn cứ.
           </p>
 
           <div class="crops-chip-row">
@@ -1056,29 +1180,30 @@ textarea#main-query-input {
           </div>
         </div>
 
-        <div id="dialog-flow" style="display:flex; flex-direction:column; gap:20px;"></div>
+        <div id="dialog-flow" style="display:flex; flex-direction:column; gap:22px;"></div>
       </div>
     </div>
 
     <!-- Floating Input Pill -->
     <div class="input-floating-bottom">
       <div class="input-box-wrap">
-        <textarea id="main-query-input" rows="1" placeholder="Hỏi kỹ thuật trồng trọt (bón phân, độ pH, phòng trừ sâu bệnh)..." aria-label="Nội dung câu hỏi"></textarea>
+        <textarea id="main-query-input" rows="1" placeholder="Hỏi kỹ thuật nông nghiệp (bón phân, độ pH, phòng trừ sâu bệnh, quy trình VietGAP)..." aria-label="Nội dung câu hỏi"></textarea>
         <button class="btn-send-action" id="btn-send-action" title="Gửi câu hỏi (Enter)">
           <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
         </button>
       </div>
       <div class="bottom-meta-txt">
-        Thông tin được đối chiếu từ văn bản khuyến nông chính thống · NextFarm RAG C2 Engine
+        Thông tin đối chiếu từ văn bản khuyến nông chính thống · <a href="https://nextfarm.vn" target="_blank">Nextfarm.vn RAG C2 Engine</a>
       </div>
     </div>
   </main>
 </div>
 
 <div class="toast-bar" id="toast-bar">Đã sao chép vào bộ nhớ tạm!</div>
+
 <script>
-const STORAGE_KEY = "nextfarm_conversations_v5";
-const ACTIVE_KEY = "nextfarm_active_id_v5";
+const STORAGE_KEY = "nextfarm_conversations_v6";
+const ACTIVE_KEY = "nextfarm_active_id_v6";
 
 const REASON_LABELS = {
   garden_data:           "Chặn số liệu cảm biến vườn (A1)",
@@ -1291,7 +1416,6 @@ function renderActiveChat() {
 function renderRichContent(rawText, sources) {
   if (!rawText) return "";
   
-  // 1. Build map of chunk_id to 1-indexed citation number
   const chunkMap = new Map();
   if (sources && sources.length) {
     sources.forEach((s, idx) => {
@@ -1299,14 +1423,11 @@ function renderRichContent(rawText, sources) {
     });
   }
 
-  // 2. Escape HTML first
   let html = escapeHtml(rawText);
 
-  // 3. Replace raw [chunk_id#num] or [chunk_id] with clickable citation pill
   html = html.replace(/\[([a-zA-Z0-9_\-#]+)\]/g, (match, chunkId) => {
     let index = chunkMap.get(chunkId);
     if (!index) {
-      // If not mapped yet, assign new index
       index = chunkMap.size + 1;
       chunkMap.set(chunkId, index);
     }
@@ -1315,15 +1436,10 @@ function renderRichContent(rawText, sources) {
     return `<a class="cite-ref-pill" href="#cite-${index}" data-cite-target="cite-${index}" title="Trích dẫn [${index}]: ${docTitle}">[${index}]</a>`;
   });
 
-  // 4. Parse Markdown syntax
-  // Bold **text**
   html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-  // Italic *text*
   html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
-  // Inline code `code`
   html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
 
-  // Parse Lists (- item or * item)
   const lines = html.split('\n');
   let inList = false;
   let result = [];
@@ -1408,7 +1524,6 @@ function appendMsgDom(msg) {
     });
 
     row.querySelector(".copy-btn").onclick = () => {
-      // Clean raw text citations if needed or copy plain text
       navigator.clipboard.writeText(msg.content);
       showToast("Đã sao chép nội dung!");
     };
@@ -1416,7 +1531,6 @@ function appendMsgDom(msg) {
     row.querySelector(".speak-btn").onclick = () => {
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
-        // Remove raw bracket citations when speaking for natural pronunciation
         const cleanSpeakText = msg.content.replace(/\[[^\]]+\]/g, "");
         const utter = new SpeechSynthesisUtterance(cleanSpeakText);
         utter.lang = 'vi-VN';

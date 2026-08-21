@@ -34,7 +34,7 @@ Thực nghiệm đo lường trên **222 test case độc lập** thuộc bộ k
 | **Tỷ lệ trả lời sai (`false_answer_rate`)** | **77,0%** | **3,2%** | Giảm 24 lần |
 | **Độ chính xác khi trả lời (`accuracy_on_answered`)** | **1,2%** | **66,7%** | Tăng 55 lần |
 | **Tỷ lệ nhận diện ca cần từ chối (`abstention_recall`)** | **3,4%** | **99,3%** | Bắt trúng 147/148 ca |
-| **Độ trễ xử lý $p_{50}$** | 1.840 ms | **11 ms** | Nhanh hơn 167 lần |
+| **Độ trễ xử lý $p_{50}$** | 2.608 ms | **11 ms** | Nhanh hơn 237 lần |
 | **Độ trễ xử lý $p_{95}$** | 11.451 ms | **8.084 ms** | Đạt ngân sách kỹ thuật |
 | **Chi phí API / 222 câu hỏi** | $0.0369 | **$0.0526** | ~$0.0002 / câu hỏi |
 
@@ -117,8 +117,9 @@ Nhằm đảm bảo tính chính thống và an toàn pháp lý cho khuyến nô
 * **Số liệu Fact bóc tách:** Bóc tách 141 fact candidates. Đã xác nhận **65 facts chính thức** (`facts.yaml`) về độ pH, mật độ gieo trồng, liều lượng bón phân qua các thời kỳ.
 * **Chunk rủi ro cao (High-risk Chunks - DEC-029):** 
   * Rà soát 44 chunk mang nội dung phân bón / thuốc BVTV.
-  * **23 chunk ĐÃ DUYỆT (`approved = true`)**: Các quy trình liều lượng chuẩn xác cho dưa chuột, cà chua, lúa.
-  * **21 chunk LOẠI BỎ (`approved = false`)**: Các chunk tiêu đề, footer, tin tức cá nhân.
+  * **24 chunk ĐÃ DUYỆT (`approved = true`)**: Các quy trình liều lượng chuẩn xác cho dưa chuột, cà chua, lúa.
+  * **7 chunk LOẠI BỎ tường minh (`approved = false`)**: Các chunk tiêu đề, footer, tin tức cá nhân.
+  * **13 chunk còn lại không cần duyệt lẻ**: chúng thuộc tài liệu đã bị loại ở luồng 1, nên `indexable_chunk` (đòi `d.approved AND c.approved`) đã chặn sẵn. Duyệt lẻ chúng không đổi được gì.
   * Kho tri thức tìm kiếm chính thức đạt **185 chunks indexable**.
 
 ---
@@ -126,7 +127,7 @@ Nhằm đảm bảo tính chính thống và an toàn pháp lý cho khuyến nô
 ## 5. CHUỖI 3 PHIÊN BẢN KIỂM THỬ (v1 $\rightarrow$ v2 $\rightarrow$ v3)
 
 Để chứng minh tính khách quan và khoa học của thực nghiệm:
-* **Phiên bản `v1`:** Bộ test sơ khai sinh bằng LLM $\rightarrow$ Phát hiện 9/30 ca bịa số liệu do LLM tự suy diễn. Được giữ nguyên làm chứng tích đối chứng.
+* **Phiên bản `v1`:** 260 case sơ khai sinh bằng LLM, bị loại vì chính LLM tự suy diễn ra số liệu. Được giữ nguyên làm chứng tích đối chứng. *(Tỷ lệ bịa cụ thể của v1 chưa có bản kiểm đếm nào trong repo — nêu một con số ở đây sẽ là suy đoán.)*
 * **Phiên bản `v2`:** Dựng từ bảng Fact đã duyệt $\rightarrow$ Phát hiện lọt đơn vị suy diễn qua tay người duyệt (ví dụ: `/1000m2` suy diễn từ câu lân cận).
 * **Phiên bản `v3` (Đóng băng chính thức):**
   * Xây dựng hàng rào kỹ thuật `so_khong_truy_duoc()`: Mọi con số trong đáp án chuẩn bắt buộc phải có trong câu nguyên văn hoặc trường `value_min`/`value_max` người duyệt chép ra.
