@@ -1,38 +1,64 @@
-# Báo cáo so sánh C0 · C2
+# Báo cáo so sánh C0 · C1 · C2
 
-> **Model:** `gemini-3.1-flash-lite` (cả hai cấu hình) · **Ngày đo:** 2026-08-20
-> **Tập kiểm thử:** v3 đã đóng băng — 222 case, sha256 `e541809d…`
-> Tái lập: `python evaluation/runners/run_c0.py` và `run_c2.py`
+> **Model:** `gemini-3.1-flash-lite` (cả ba cấu hình) · **Ngày đo:** C0 2026-08-20, C1 và C2 2026-08-22
+> **Tập kiểm thử:** v3 đã đóng băng — 222 case, sha256 `e541809d…` (kiểm bằng `pytest tests/test_eval_frozen.py`, 31 test xanh)
+> **Truy xuất:** reranker `itdainb/PhoRanker` BẬT ở C1 và C2 (xem `P6_reranker.md`). C0 không truy xuất nên không ảnh hưởng.
+> Tái lập: `make c0`, `make c1`, `make c2`
 
-**So sánh công bằng:** cùng tập kiểm thử, cùng model, cùng bộ chấm điểm. Khác duy nhất một điều — **có cơ chế kiểm soát tri thức hay không**.
+**So sánh công bằng:** cùng tập kiểm thử, cùng model, cùng bộ chấm điểm, cùng cấu hình truy xuất. Ba cấu hình khác nhau đúng một bậc mỗi lần:
+
+| | có tài liệu? | có cơ chế kiểm soát? |
+|---|---|---|
+| **C0** | không | không |
+| **C1** | **có** | không |
+| **C2** | có | **có** |
+
+Đó là cách tách được *"tài liệu đóng góp bao nhiêu"* khỏi *"cơ chế đóng góp bao nhiêu"* — câu hỏi số 2 mục 6 đề bài NextFarm.
 
 ---
 
 ## 1. Bảng số
 
-| Chỉ số | C0 — LLM trần | C2 — RAG + guardrail |
-|---|---:|---:|
-| `answer_rate` | 97,7% | **13,1%** |
-| `accuracy_when_answered` | **1,2%** | **66,7%** |
-| `false_answer_rate` | **77,0%** | **3,2%** |
-| `over_abstention_rate` | 0,0% | 1,8% |
-| `abstention_recall` | **3,4%** | **99,3%** |
-| `abstain_type_accuracy` | — | 93,2% |
+| Chỉ số | C0 — LLM trần | C1 — RAG | C2 — RAG + guardrail |
+|---|---:|---:|---:|
+| `answer_rate` | 97,7% | 41,4% | **14,4%** |
+| `accuracy_when_answered` | **1,2%** | 23,9% | **90,9%** |
+| `false_answer_rate` | **77,0%** | 23,0% | **0,9%** |
+| `over_abstention_rate` | 0,0% | 0,9% | 0,5% |
+| `abstention_recall` | **3,4%** | 69,6% | **100,0%** |
+| `abstain_type_accuracy` | — | — | 93,2% |
+| p50 / p95 (ms) | 2.608 / 11.451 | 2.555 / 11.895 | **15 / 6.185** |
+| `Ti` / `To` (token/lượt) | 46 / 102 | 1.827 / 65 | **698 / 42** |
+| Chi phí cả lượt chạy 222 case | — | $0,1231 | **$0,0527** |
 
 > **Đọc hai dòng đầu cùng nhau** (DEC-025). Tách ra thì một hệ thống từ chối tất
 > sẽ đạt 0% bịa đặt và trông như hoàn hảo — trong khi nó vô dụng.
 
 ### Nhóm chống bịa — mục tiêu là 0
 
-| Chỉ số | C0 | C2 |
-|---|---:|---:|
-| `fabricated_garden_data` | 8 | **0** |
-| `fabricated_feature` | 17 | **0** |
-| `device_control_leak` | 14 | **0** |
-| `out_of_scope_leak` | 22 | **0** |
-| `numeric_hallucination` | 0 | **0** |
-| `unsafe_misroute_rate` | — | **0 / 36** |
-| **TỔNG** | **61** | **0** |
+| Chỉ số | C0 | C1 | C2 |
+|---|---:|---:|---:|
+| `fabricated_garden_data` | 8 | 4 | **0** |
+| `fabricated_feature` | 17 | 7 | **0** |
+| `device_control_leak` | 14 | 3 | **0** |
+| `out_of_scope_leak` | 22 | 9 | **0** |
+| `numeric_hallucination` | 0 | 0 | **0** |
+| `unsafe_misroute_rate` | — | — | **0 / 36** |
+| **TỔNG** | **61** | **23** | **0** |
+
+### Đọc hàng TỔNG — đây là câu trả lời cho NextFarm
+
+```
+61  ──cho LLM tài liệu──▶  23  ──thêm cơ chế kiểm soát──▶  0
+    (cắt 62%)                  (cắt nốt 38% còn lại)
+```
+
+**RAG một mình không giải quyết được vấn đề.** Cho mô hình đủ tài liệu vẫn còn
+**23 ca bịa**: 4 ca bịa số liệu vườn, 7 ca bịa tính năng app, 3 ca rò lệnh thiết
+bị, 9 ca nhận câu ngoài phạm vi. Chỉ cơ chế kiểm soát mới đưa về 0.
+
+Đây là điều đáng nói nhất trong cả báo cáo: NextFarm hoàn toàn có thể tự dựng
+RAG, nhưng RAG **không phải** câu trả lời cho bài toán họ đặt ra.
 
 ---
 
@@ -189,25 +215,41 @@ Nhưng nguyên nhân đã đổi hẳn sau khi chốt tham số:
 
 ## 6. Giới hạn — đọc trước khi trích dẫn
 
-- **C1 mới 169/222 case** (RAG không guardrail). Thiếu C1 đầy đủ thì không tách được đóng góp của *"có tài liệu"* khỏi đóng góp của *"có guardrail"*. Không phải vì thiếu mã hay thiếu thời gian — quota free tier hồi nhỏ giọt theo phút, xem mục dưới.
-- **44/222 case chưa chấm tự động được** ở C0, 8/222 ở C2 — trả về `None` chứ không đoán bừa.
+- **Chưa chấm tự động được:** 44/222 ở C0, 25/222 ở C1, 10/222 ở C2 — trả về `None` chứ không đoán bừa. Đây là các câu mở, không có đáp án chuẩn.
 - **Người viết câu hỏi và người xây hệ thống là một.** Con số này để so sánh các cấu hình với nhau, **không dùng làm tỷ lệ chính xác báo cáo với NextFarm**. Con số đó chỉ đến từ bộ câu hỏi do chuyên gia NextFarm chấm (§32).
 - **Một lần chạy, một model.** Chưa biết dao động giữa các lần.
 - **Grounding Validator có đủ ba tầng** (từ 2026-08-20), nhưng tầng 3 chỉ ở mức quy tắc, không phải NLI đầy đủ. Nó bắt hai kiểu lỗi đo được trên C2 thật (mạo danh thẩm quyền, trả lời lạc đề); một **diễn giải sai tinh vi mà vẫn dùng đúng số, đúng chủ đề** thì chưa bắt được.
-- **`accuracy_when_answered` 66,7% tính trên 21 case.** Cỡ mẫu nhỏ; một case đổi kết quả là ±4,8 điểm phần trăm.
+- **`accuracy_when_answered` 90,9% của C2 tính trên 22 case.** Cỡ mẫu nhỏ; một case đổi kết quả là ±4,5 điểm phần trăm. Đừng trích con số này như một tỷ lệ chính xác ổn định.
+- **Ngưỡng từ chối chưa chốt bằng đường risk–coverage** — đã dựng đường và kết luận là *không* áp ngưỡng nào, vì mọi ngưỡng đưa risk về 0 đều làm coverage sụp. Xem [`P15_risk_coverage.md`](P15_risk_coverage.md).
 
 ---
 
 ## 7. Kết luận
 
-Trên cùng một tập kiểm thử đã đóng băng và cùng một model, thêm cơ chế kiểm soát tri thức đưa:
+Trên cùng một tập kiểm thử đã đóng băng, cùng model, cùng cấu hình truy xuất:
 
-- **61 ca bịa → 0**
-- `false_answer_rate` **77,0% → 3,2%**
-- `accuracy_when_answered` **1,2% → 66,7%**
-- độ trễ p95 **11.451 ms → 8.084 ms** (vào trong ngân sách)
+| | C0 → C1 (thêm tài liệu) | C1 → C2 (thêm cơ chế) |
+|---|---|---|
+| Ca bịa | 61 → **23** | 23 → **0** |
+| `false_answer_rate` | 77,0% → **23,0%** | 23,0% → **0,9%** |
+| `accuracy_when_answered` | 1,2% → **23,9%** | 23,9% → **90,9%** |
+| `abstention_recall` | 3,4% → **69,6%** | 69,6% → **100,0%** |
 
-Cái giá phải trả là `answer_rate` **97,7% → 13,1%**, trong đó phần lớn không phải do hệ thống mà do **kho tri thức mới có 161 chunk**. Kho lớn lên thì tỷ lệ này lên theo, và **cơ chế chống bịa không đổi**.
+**Hai bậc, hai vai trò khác nhau.** Tài liệu cắt được 62% số ca bịa và nâng độ
+chính xác lên gấp 20 lần. Cơ chế kiểm soát cắt nốt 38% còn lại — và nó là bậc
+duy nhất đưa về **bằng 0**.
+
+Cái giá là `answer_rate` **97,7% → 14,4%**. Phần lớn cái giá đó không đến từ cơ
+chế mà từ **kho tri thức chỉ có 185 chunk**: đo trên nhóm `high_risk`, chuỗi
+`ml/` xuất hiện **0 lần** trong toàn kho, nên bot trả lời "không đủ căn cứ" là
+nói đúng sự thật (xem [`P13_phan_tich_tu_choi.md`](P13_phan_tich_tu_choi.md)).
+Kho lớn lên thì tỷ lệ này lên theo, và **cơ chế chống bịa không phải đổi một
+dòng nào**.
+
+Thêm một điều đo được ngày 2026-08-22: **chi phí C2 rẻ hơn C1 gần một nửa**
+($0,0527 so với $0,1231 cho cùng 222 case). Vì 141/222 lượt bị chặn trước khi
+chạm mô hình, tốn 0 token. Cơ chế an toàn ở đây **không phải chi phí phải trả —
+nó là khoản tiết kiệm**.
 
 ---
 
@@ -250,39 +292,37 @@ lớn: không thể "đợi tới sáng mai rồi chạy một lượt".
 **Với NextFarm:** free tier không dùng được cho một đợt đo nghiêm túc, chứ
 không chỉ là "chậm hơn". Muốn đo lại toàn bộ ba cấu hình thì phải trả phí.
 
-## Trạng thái C1 tại thời điểm này
+## Trạng thái C1 — ĐÃ ĐỦ 222/222 (2026-08-22)
 
-**167/222 case** thành công, 12 case lỗi 429, 43 case chưa chạy. Kết quả
-lưu sau **từng case** nên chạy lại `make c1` sẽ bỏ qua phần đã có.
+Chạy trọn bộ, **không một lỗi 429 nào**. Quota free tier reset theo ngày UTC;
+chi tiết ở mục "Giới hạn free tier" dưới.
 
-Chưa đủ để lên bảng ba cấu hình. Bảng C0 và C2 không bị ảnh hưởng — cả hai
-đã đo trọn 222 case và đã commit.
+Bản C1 dở dang trước đó (169/222, reranker TẮT) giữ ở
+`evaluation/results/archive/` làm đối chứng — **không dùng cho bảng số**, vì
+trộn hai cấu hình truy xuất trong một cột cũng là một dạng trộn cấu hình.
+## Đường risk–coverage — ĐÃ DỰNG (2026-08-22)
 
----
+Dựng được sau khi sửa một lỗi làm điểm truy xuất luôn bằng 0 (`ChunkNguon`
+thiếu trường `diem`, `getattr` lặng lẽ trả mặc định). Báo cáo đầy đủ kèm bảng
+quét τ: **[`P15_risk_coverage.md`](P15_risk_coverage.md)**.
 
-## Đường risk–coverage — CHƯA DỰNG ĐƯỢC, và vì sao
+**Kết luận: KHÔNG áp dụng ngưỡng nào trên điểm truy xuất.**
 
-§30.4 của quy chuẩn yêu cầu chốt ngưỡng từ chối bằng đường risk–coverage:
-quét ngưỡng τ, vẽ quan hệ giữa *tỷ lệ trả lời* và *tỷ lệ trả lời sai*, chọn
-điểm coverage cao nhất mà `false_answer_rate ≈ 0`.
+Công cụ đề xuất τ = 0,9871 vì nó đưa risk về 0 — nhưng coverage sụt
+**38,3% → 4,9%**. Đó là đổi 27 câu trả lời đúng để bỏ 1 câu sai.
 
-**Chưa dựng được.** Kết quả C2 đã lưu (222 case) không có trường điểm tin cậy
-— chỉ có `da_tu_choi`, `ly_do`, `latency_ms`, `token_vao/ra`, `nguon`. Không
-có điểm thì không có trục τ để quét.
+Hình dạng đường cong do đúng hai ca sai quyết định, nằm ở hai đầu đối lập:
 
-Muốn dựng thì phải ghi lại điểm truy xuất cho từng case, tức **chạy lại C2**
-— cần quota API, hiện đã cạn (xem mục trên).
+| ca | điểm | chuyện gì |
+|---|---:|---|
+| `adv_013` | 0,0015 | đóng vai để né ràng buộc — ngưỡng khiêm tốn bắt được |
+| `pa_005` | 0,9865 | trích **sai nguồn** nhưng reranker rất tự tin — không ngưỡng nào bắt được mà không giết phần lớn câu đúng |
 
-> Không vẽ một đường cong từ dữ liệu không có. Ngưỡng hiện tại đến từ hành vi
-> nhị phân của Grounding Validator (đạt / không đạt), không phải từ một τ
-> chọn bằng cảm tính — nhưng đó **không** phải thứ §30.4 yêu cầu, và ghi ở
-> đây để không ai tưởng đã làm.
-
-**Việc cần làm khi có quota:** thêm `diem_retrieval` vào bản ghi kết quả của
-`run_c2.py`, chạy lại 222 case, rồi mới quét τ.
-
----
-
+Trục thứ hai (độ tin cậy Intent Router) **chưa dựng được**: mọi câu được trả lời
+đều thuộc nhánh `agronomy_knowledge`, và nhánh đó luôn mang `do_tin_cay = 0` —
+nghĩa là *"lớp rule không biết"*, không phải *"độ tin cậy bằng không"*
+(`app/services/intent/router.py:22`). Cần lớp phân loại LLM few-shot trước; đó
+là việc xây, không phải việc đo.
 ## Kiểm chứng end-to-end — 2026-08-20, qua HTTP thật
 
 Chạy đúng sáu kịch bản demo ở §Kiểm chứng của kế hoạch, gọi qua
