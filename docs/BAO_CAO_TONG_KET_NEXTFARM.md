@@ -20,23 +20,37 @@ Dự án NextFarm PoC Giai đoạn 1 tập trung giải quyết **Bài toán A: 
 
 ---
 
-## 2. KẾT QUẢ THỰC NGHIỆM ĐỐI CHỨNG (C0 vs C2)
+## 2. KẾT QUẢ THỰC NGHIỆM ĐỐI CHỨNG (C0 · C1 · C2)
 
-Thực nghiệm đo lường trên **222 test case độc lập** thuộc bộ kiểm thử đóng băng `v3`, chạy trên cùng mô hình nền tảng `gemini-3.1-flash-lite`:
+Thực nghiệm đo lường trên **222 test case độc lập** thuộc bộ kiểm thử đóng băng `v3`, chạy trên cùng mô hình nền tảng `gemini-3.1-flash-lite`, cùng bộ chấm điểm và cùng cấu hình truy xuất. Ba cấu hình khác nhau **đúng một bậc mỗi lần**: C0 không tài liệu không cơ chế, C1 có tài liệu, C2 có cả hai.
 
-| Chỉ số Đánh giá | C0: LLM Trần (Hiện trạng) | C2: NextFarm PoC (Giải pháp) | Mức độ Cải thiện |
+| Chỉ số Đánh giá | C0: LLM Trần | C1: RAG thuần | C2: NextFarm PoC |
 |---|:---:|:---:|:---:|
-| **Tổng số ca bịa số liệu** | **61 ca** (27,5%) | **0 ca** (0,0%) | **Triệt tiêu 100%** |
-| • Bịa số liệu vườn (A1) | 8 ca | **0 ca** | Triệt tiêu hoàn toàn |
-| • Bịa tính năng ứng dụng (A2) | 17 ca | **0 ca** | Triệt tiêu hoàn toàn |
-| • Rò rỉ lệnh điều khiển thiết bị | 14 ca | **0 ca** | An toàn tuyệt đối |
-| • Nhận câu hỏi ngoài phạm vi (A3) | 22 ca | **0 ca** | Chặn 100% |
-| **Tỷ lệ trả lời sai (`false_answer_rate`)** | **77,0%** | **3,2%** | Giảm 24 lần |
-| **Độ chính xác khi trả lời (`accuracy_on_answered`)** | **1,2%** | **66,7%** | Tăng 55 lần |
-| **Tỷ lệ nhận diện ca cần từ chối (`abstention_recall`)** | **3,4%** | **99,3%** | Bắt trúng 147/148 ca |
-| **Độ trễ xử lý $p_{50}$** | 2.608 ms | **11 ms** | Nhanh hơn 237 lần |
-| **Độ trễ xử lý $p_{95}$** | 11.451 ms | **8.084 ms** | Đạt ngân sách kỹ thuật |
-| **Chi phí API / 222 câu hỏi** | $0.0369 | **$0.0526** | ~$0.0002 / câu hỏi |
+| **Tổng số ca bịa** | **61 ca** (27,5%) | **23 ca** (10,4%) | **0 ca** (0,0%) |
+| • Bịa số liệu vườn (A1) | 8 ca | 4 ca | **0 ca** |
+| • Bịa tính năng ứng dụng (A2) | 17 ca | 7 ca | **0 ca** |
+| • Rò rỉ lệnh điều khiển thiết bị | 14 ca | 3 ca | **0 ca** |
+| • Nhận câu hỏi ngoài phạm vi (A3) | 22 ca | 9 ca | **0 ca** |
+| **Tỷ lệ trả lời sai (`false_answer_rate`)** | **77,0%** | 23,0% | **0,9%** |
+| **Độ chính xác khi trả lời (`accuracy_when_answered`)** | **1,2%** | 23,9% | **90,9%** |
+| **Tỷ lệ nhận diện ca cần từ chối (`abstention_recall`)** | **3,4%** | 69,6% | **100,0%** (148/148) |
+| **Độ trễ xử lý $p_{50}$** | 2.621 ms | 2.555 ms | **15 ms** |
+| **Độ trễ xử lý $p_{95}$** | 11.451 ms | 11.895 ms | **6.185 ms** |
+| **Chi phí API / 222 câu hỏi** | $0.0369 | $0.1231 | **$0.0527** |
+
+### Đọc hàng đầu tiên — đây là câu trả lời cho câu hỏi số 2 của đề bài
+
+```
+61  ──cho mô hình tài liệu──▶  23  ──thêm cơ chế kiểm soát──▶  0
+        (cắt 62%)                      (cắt nốt 38% còn lại)
+```
+
+**RAG một mình không giải quyết được bài toán.** Cho mô hình đủ tài liệu vẫn còn **23 ca bịa**. Chỉ cơ chế kiểm soát mới đưa về 0 — và nó đồng thời làm **chi phí giảm gần một nửa so với C1**, vì 141/222 lượt bị chặn trước khi chạm mô hình, tốn 0 token.
+
+> **Hai lưu ý khi trích dẫn bảng này.**
+>
+> 1. `accuracy_when_answered` 90,9% của C2 tính trên **22 case** chấm tự động được. Cỡ mẫu nhỏ — một case đổi kết quả là ±4,5 điểm phần trăm.
+> 2. `p95` 6.185 ms tính trên **cả 141 ca bị chặn sớm**. Riêng 81 ca có gọi model thì p95 là **21.188 ms**, vượt ngân sách ASM-01. Lập kế hoạch hạ tầng phải dùng con số sau.
 
 ---
 

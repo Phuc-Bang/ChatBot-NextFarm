@@ -171,11 +171,16 @@ chạm cơ sở dữ liệu hay gọi model. Câu trên bị chặn ở **6 ms**
 
 | | C0 | C2 | Ngân sách |
 |---|---:|---:|---|
-| p50 | 2.608 ms | **15 ms** | ≤ 5.000 ms |
+| p50 | 2.621 ms | **15 ms** | ≤ 5.000 ms |
 | p95 | 11.451 ms | **6.185 ms** | ≤ 10.000 ms |
 
 `answer_rate` tụt xuống 14,4% chủ yếu vì **kho tri thức mới có 185 chunk**, không
-phải vì hệ thống quá thận trọng: 33/46 ca từ chối là do kho không có tài liệu.
+phải vì hệ thống quá thận trọng: 25/42 ca từ chối trong nhóm đáng lẽ trả lời được
+là do kho không có tài liệu.
+
+> p95 = 6.185 ms đạt ngân sách, nhưng **tính trên cả 141 ca bị chặn sớm**. Riêng
+> 81 ca có gọi model thì p95 là **21.188 ms** — vượt ASM-01. Lập kế hoạch hạ tầng
+> phải nhìn con số sau.
 
 Chi tiết: [`BAO_CAO_SO_SANH.md`](docs/reports/BAO_CAO_SO_SANH.md) ·
 [`C0_baseline.md`](docs/reports/C0_baseline.md)

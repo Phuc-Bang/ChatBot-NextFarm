@@ -418,6 +418,7 @@ table.comp-table tr:last-child td {
 .badge-tag.danger { background: var(--rose-bg); color: var(--rose); border: 1px solid var(--rose-border); }
 .badge-tag.success { background: var(--emerald-bg); color: var(--primary); border: 1px solid var(--emerald-border); }
 .badge-tag.info { background: var(--blue-bg); color: var(--blue); border: 1px solid var(--blue-border); }
+.badge-tag.warning { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
 
 /* 4 Problems Grid */
 .problems-grid {
@@ -602,7 +603,7 @@ table.comp-table tr:last-child td {
         <div class="hero-status-dot"></div>
         <span>PoC Giai Đoạn 1 Hoàn Thành</span>
       </div>
-      <span class="hero-date">Ngày nghiệm thu: 21/08/2026 · 310/310 Unit Tests PASSED</span>
+      <span class="hero-date">Ngày đo: 22/08/2026 · 339/339 Unit Tests PASSED</span>
     </div>
     <h1 class="hero-title">Báo Cáo Tổng Kết Kỹ Thuật — Bài Toán A: Chống Bịa Đặt</h1>
     <p class="hero-subtitle">
@@ -618,7 +619,7 @@ table.comp-table tr:last-child td {
         <span class="badge-tag success">Triệt tiêu 100%</span>
       </div>
       <div class="kpi-metric so">0 ca</div>
-      <div class="kpi-foot">Giảm từ 61 ca ở LLM trần xuống 0 ca</div>
+      <div class="kpi-foot">61 ca ở LLM trần → 23 ca khi chỉ thêm RAG → 0 ca</div>
     </div>
 
     <div class="kpi-box blue">
@@ -626,8 +627,8 @@ table.comp-table tr:last-child td {
         <span>Bắt ca cần từ chối</span>
         <span class="badge-tag info">Chính xác cao</span>
       </div>
-      <div class="kpi-metric so">99,3%</div>
-      <div class="kpi-foot">Bắt đúng 147/148 ca bẫy và ngoài phạm vi</div>
+      <div class="kpi-metric so">100%</div>
+      <div class="kpi-foot">Bắt đúng 148/148 ca bẫy và ngoài phạm vi</div>
     </div>
 
     <div class="kpi-box">
@@ -635,8 +636,8 @@ table.comp-table tr:last-child td {
         <span>Độ trễ xử lý p50</span>
         <span class="badge-tag success">Siêu tốc</span>
       </div>
-      <div class="kpi-metric so">11 ms</div>
-      <div class="kpi-foot">Chặn sớm 141 ca trong 0–16ms (0 token)</div>
+      <div class="kpi-metric so">15 ms</div>
+      <div class="kpi-foot">141/222 ca chặn sớm trong 0–28 ms, tốn 0 token</div>
     </div>
 
     <div class="kpi-box">
@@ -644,7 +645,7 @@ table.comp-table tr:last-child td {
         <span>Bộ kiểm thử tự động</span>
         <span class="badge-tag success">Xanh 100%</span>
       </div>
-      <div class="kpi-metric so">310 / 310</div>
+      <div class="kpi-metric so">339 / 339</div>
       <div class="kpi-foot">Phủ toàn bộ pipeline, router và grounding</div>
     </div>
   </div>
@@ -655,10 +656,10 @@ table.comp-table tr:last-child td {
       <div class="section-icon">
         <svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
       </div>
-      <h2 class="section-title">1. Kết Quả Thực Nghiệm Đối Chứng (C0 vs C2)</h2>
+      <h2 class="section-title">1. Kết Quả Thực Nghiệm Đối Chứng (C0 · C1 · C2)</h2>
     </div>
     <p style="color:var(--text-muted); margin-bottom: 12px;">
-      Đo lường trên cùng bộ 222 test case đóng băng <code>v3</code> (12 nhóm kiểm thử), chạy trên cùng mô hình <code>gemini-3.1-flash-lite</code>:
+      Đo lường trên cùng bộ 222 test case đóng băng <code>v3</code> (12 nhóm kiểm thử), chạy trên cùng mô hình <code>gemini-3.1-flash-lite</code>, cùng bộ chấm điểm và cùng cấu hình truy xuất. Ba cấu hình khác nhau <strong>đúng một bậc mỗi lần</strong> — đó là cách tách được <em>tài liệu đóng góp bao nhiêu</em> khỏi <em>cơ chế đóng góp bao nhiêu</em>:
     </p>
 
     <div class="table-wrapper">
@@ -667,68 +668,102 @@ table.comp-table tr:last-child td {
           <tr>
             <th>Chỉ số Kiểm định</th>
             <th>C0: LLM Trần (Hiện trạng)</th>
+            <th>C1: RAG thuần</th>
             <th>C2: NextFarm PoC (Giải pháp)</th>
-            <th>Hiệu quả Cải thiện</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td><strong>Tổng số ca bịa số liệu nông học</strong></td>
             <td><span class="badge-tag danger">61 ca (27,5%)</span></td>
+            <td><span class="badge-tag warning">23 ca (10,4%)</span></td>
             <td><span class="badge-tag success">0 ca (0,0%)</span></td>
-            <td><strong style="color:var(--primary);">Triệt tiêu 100%</strong></td>
           </tr>
           <tr>
             <td>• Bịa số liệu cảm biến vườn (A1)</td>
             <td>8 ca bịa độ ẩm, nhiệt độ</td>
+            <td>4 ca</td>
             <td><strong>0 ca</strong> (Chặn tại Router)</td>
-            <td>An toàn tuyệt đối</td>
           </tr>
           <tr>
             <td>• Bịa tính năng ứng dụng (A2)</td>
             <td>17 ca tự nhận có tính năng</td>
+            <td>7 ca</td>
             <td><strong>0 ca</strong> (Chặn tại Router)</td>
-            <td>Bảo vệ uy tín sản phẩm</td>
           </tr>
           <tr>
             <td>• Rò rỉ lệnh điều khiển thiết bị</td>
             <td>14 ca chấp nhận bật/tắt van</td>
+            <td>3 ca</td>
             <td><strong>0 ca</strong> (Chặn tuyệt đối)</td>
-            <td>Ngăn sự cố phần cứng</td>
           </tr>
           <tr>
             <td>• Tư vấn ngoài phạm vi cây trồng (A3)</td>
             <td>22 ca tư vấn sầu riêng, cam...</td>
+            <td>9 ca</td>
             <td><strong>0 ca</strong> (Chặn tại Scope)</td>
-            <td>Đúng phạm vi Lúa/Cà/Dưa</td>
           </tr>
           <tr>
             <td><strong>Tỷ lệ trả lời sai (False Answer Rate)</strong></td>
             <td>77,0%</td>
-            <td><strong>3,2%</strong></td>
-            <td>Giảm 24 lần</td>
+            <td>23,0%</td>
+            <td><strong>0,9%</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Độ chính xác khi trả lời</strong></td>
+            <td>1,2%</td>
+            <td>23,9%</td>
+            <td><strong>90,9%</strong></td>
           </tr>
           <tr>
             <td><strong>Tỷ lệ bắt ca cần từ chối (Recall)</strong></td>
             <td>3,4% (Hầu hết đều trả lời bừa)</td>
-            <td><strong>99,3%</strong> (Bắt đúng 147/148 ca)</td>
-            <td>Tăng 29 lần</td>
+            <td>69,6%</td>
+            <td><strong>100%</strong> (Bắt đúng 148/148 ca)</td>
           </tr>
           <tr>
             <td><strong>Độ trễ p50 / p95</strong></td>
-            <td>1.840 ms / 11.451 ms</td>
-            <td><strong>11 ms / 8.084 ms</strong></td>
-            <td>Nhanh hơn vượt trội</td>
+            <td>2.621 ms / 11.451 ms</td>
+            <td>2.555 ms / 11.895 ms</td>
+            <td><strong>15 ms / 6.185 ms</strong></td>
           </tr>
           <tr>
             <td><strong>Chi phí API / 222 câu hỏi</strong></td>
             <td>$0.0369</td>
-            <td><strong>$0.0526</strong> (~$0.0002 / câu)</td>
-            <td>Tối ưu ngân sách</td>
+            <td>$0.1231</td>
+            <td><strong>$0.0527</strong> (~$0.0002 / câu)</td>
           </tr>
         </tbody>
       </table>
     </div>
+
+    <div style="margin-top:22px; padding:18px 22px; background:var(--emerald-bg);
+         border:1px solid var(--emerald-border); border-left:4px solid var(--primary);
+         border-radius:12px;">
+      <div style="font-weight:700; margin-bottom:8px; color:var(--primary);">
+        Cột C1 là điều đáng nói nhất trong cả bảng
+      </div>
+      <p style="margin:0 0 10px; line-height:1.65;">
+        <strong>RAG một mình không giải quyết được bài toán.</strong> Cho mô hình
+        đầy đủ tài liệu khuyến nông vẫn còn <strong>23 ca bịa</strong> — 4 ca bịa
+        số liệu vườn, 7 ca bịa tính năng app, 3 ca rò lệnh thiết bị, 9 ca nhận câu
+        ngoài phạm vi. Chỉ cơ chế kiểm soát mới đưa về 0.
+      </p>
+      <p style="margin:0; line-height:1.65;">
+        Và cơ chế đó <strong>không phải chi phí phải trả</strong>: C2 rẻ hơn C1
+        gần một nửa ($0.0527 so với $0.1231 cho cùng 222 câu), vì 141/222 lượt bị
+        chặn trước khi chạm mô hình.
+      </p>
+    </div>
+
+    <p style="margin-top:18px; font-size:13px; color:var(--text-muted); line-height:1.7;">
+      <strong>Hai lưu ý khi trích dẫn bảng này.</strong>
+      (1) Độ chính xác 90,9% của C2 tính trên 22 case chấm tự động được — cỡ mẫu
+      nhỏ, một case đổi kết quả là ±4,5 điểm phần trăm.
+      (2) p95 = 6.185 ms tính trên cả 141 ca bị chặn sớm; riêng 81 ca có gọi mô
+      hình thì p95 là <strong>21.188 ms</strong>. Lập kế hoạch hạ tầng phải dùng
+      con số sau.
+    </p>
   </div>
 
   <!-- Section 2: 4 Hiện tượng & Giải pháp -->
@@ -864,7 +899,7 @@ table.comp-table tr:last-child td {
       <div class="problem-card">
         <span class="problem-tag">Chunk Rủi Ro Cao</span>
         <h3>31 Chunk Đã Duyệt Lẻ</h3>
-        <p>23 chunk liều lượng phân bón/thuốc BVTV đạt chuẩn được cấp phép; 8 chunk tin tức bị loại bỏ.</p>
+        <p>24 chunk liều lượng phân bón/thuốc BVTV đạt chuẩn được cấp phép; 7 chunk bị loại. Còn lại 0 chunk chờ duyệt.</p>
       </div>
 
       <div class="problem-card">
@@ -879,7 +914,7 @@ table.comp-table tr:last-child td {
   <div class="footer-banner">
     <div>
       <h2>Hệ Thống Sẵn Sàng Bàn Giao Production</h2>
-      <p>Mã nguồn, CSDL PostgreSQL, bộ 310 unit tests và 2 giao diện Web Chat / Admin Dashboard đã đồng bộ 100%.</p>
+      <p>Mã nguồn, CSDL PostgreSQL, bộ 339 unit tests và 2 giao diện Web Chat / Admin Dashboard đã đồng bộ 100%.</p>
     </div>
     <div class="footer-buttons">
       <a href="/" class="btn-nav primary" style="background:#10b981; color:#fff; padding:10px 20px; font-size:14px;">
