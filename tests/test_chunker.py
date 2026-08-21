@@ -201,3 +201,74 @@ def test_chunk_thuan_ky_thuat_khong_dinh_co_nao():
     text = "1. Thời vụ\nVụ đông xuân gieo hạt vào thời điểm thích hợp của địa phương."
     cs = chunker.cat(text, ["liều lượng"], ["sâu bệnh"])
     assert all(not c.is_high_risk and not c.needs_caution for c in cs)
+
+
+# ---------------------------------------------------------------------------
+# Day BAY, khong phai test chuc nang.
+#
+# PHAT HIEN 2026-08-22
+#
+# chunk_id dung theo THU TU trong tai lieu (knowledge/ingestion/load.py:153):
+#
+#     cid = rec["id"] + "#" + str(c.ordinal)
+#
+# Con knowledge/review/chunks.yaml khoa ket qua duyet le vao dung chuoi id do -
+# 31 ban ghi, 24 duyet 7 loai, moi ban kem ly do va ten nguoi duyet.
+#
+# Doi bat ky hang so cat chunk nao la moi ordinal xe dich. Chunk
+# `hatinh_dua_chuot_vietgap#1` sau khi cat lai la MOT DOAN VAN KHAC, nhung van
+# mang quyet dinh duyet cu. KHONG CO GI BAO LOI. Mot chunk tung bi loai vi
+# "tieu de tin tuc" co the duoc cap phep vao kho, hoac mot doan lieu luong da
+# duyet bi chan.
+#
+# Do chinh la cong DEC-005 - thu dang giu numeric_hallucination = 0.
+#
+# Test nay khong ngan duoc viec doi hang so. No chi bat nguoi doi phai DOC cai
+# gia truoc khi doi.
+# ---------------------------------------------------------------------------
+
+HANG_SO_DA_CHOT = {
+    "KICH_THUOC_MUC_TIEU": 1200,
+    "KICH_THUOC_TOI_DA": 2200,
+    "CHONG_LAN": 150,
+    "CHUNK_TOI_THIEU": 120,
+}
+
+
+def test_doi_hang_so_cat_chunk_phai_duyet_lai_chunk_rui_ro_cao():
+    from knowledge.chunking import chunker
+
+    lech = {ten: (mong, getattr(chunker, ten))
+            for ten, mong in HANG_SO_DA_CHOT.items()
+            if getattr(chunker, ten) != mong}
+
+    assert not lech, (
+        "Hang so cat chunk da doi: "
+        + "; ".join(f"{k} {a} -> {b}" for k, (a, b) in lech.items())
+        + ".\n\n"
+        "Doi hang so nay lam moi chunk_id xe dich, trong khi "
+        "knowledge/review/chunks.yaml khoa 31 quyet dinh duyet le vao chuoi "
+        "id cu. Chung se de len nhung doan van KHAC ma khong bao loi.\n\n"
+        "Truoc khi doi, phai lam mot trong hai:\n"
+        "  (a) Khoa quyet dinh duyet vao sha256 van ban chunk (hoac offset) "
+        "thay vi thu tu, roi duyet lai file chunks.yaml; hoac\n"
+        "  (b) Duyet lai 31 chunk rui ro cao bang tay: "
+        "python knowledge/review/review_chunks.py\n\n"
+        "Lam xong thi cap nhat HANG_SO_DA_CHOT trong test nay."
+    )
+
+
+def test_chunk_id_van_dung_theo_thu_tu():
+    """Neu cach dung chunk_id doi, cai bay o tren khong con y nghia.
+
+    Doc ma nguon: bay gio la `rec["id"] + "#" + str(c.ordinal)`. Doi sang
+    sha256 la mot cai tien THAT - luc do xoa test nay va test o tren.
+    """
+    from pathlib import Path
+
+    goc = Path(__file__).resolve().parents[1]
+    src = (goc / "knowledge" / "ingestion" / "load.py").read_text(encoding="utf-8")
+    assert 'str(c.ordinal)' in src, (
+        "load.py khong con dung ordinal de dung chunk_id. Neu da chuyen sang "
+        "sha256 hoac offset thi cai bay o test truoc khong con can - xoa ca hai."
+    )
