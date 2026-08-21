@@ -27,9 +27,14 @@
 | `over_abstention_rate` | 0,0% | 0,9% | 0,5% |
 | `abstention_recall` | **3,4%** | 69,6% | **100,0%** |
 | `abstain_type_accuracy` | — | — | 93,2% |
-| p50 / p95 (ms) | 2.608 / 11.451 | 2.555 / 11.895 | **15 / 6.185** |
-| `Ti` / `To` (token/lượt) | 46 / 102 | 1.827 / 65 | **698 / 42** |
-| Chi phí cả lượt chạy 222 case | — | $0,1231 | **$0,0527** |
+| p50 / p95 (ms) | 2.621 / 11.451 | 2.555 / 11.895 | **15 / 6.185** |
+| `Ti` / `To` (token/lượt) | 48 / 103 | 1.827 / 65 | **698 / 42** |
+| Chi phí cả lượt chạy 222 case | $0,0369 | $0,1231 | **$0,0527** |
+
+> Mọi ô trong bảng này in ra từ `make c0` / `make c1` / `make c2` chạy lại trên
+> chính ba file kết quả trong `evaluation/results/`. **Không ô nào tính tay.**
+> Ba ô cột C0 từng sai vì tính tay (p50 ghi 2.608 thay vì 2.621; `Ti`/`To` ghi
+> 46/102 thay vì 48/103) và ô chi phí C0 bị bỏ trống dù công cụ vẫn tính ra.
 
 > **Đọc hai dòng đầu cùng nhau** (DEC-025). Tách ra thì một hệ thống từ chối tất
 > sẽ đạt 0% bịa đặt và trông như hoàn hảo — trong khi nó vô dụng.
@@ -64,38 +69,39 @@ RAG, nhưng RAG **không phải** câu trả lời cho bài toán họ đặt ra
 
 ## 2. Đọc bảng này thế nào
 
-### `answer_rate` tụt từ 97,7% xuống 13,1% — không phải hỏng
+### `answer_rate` tụt từ 97,7% xuống 14,4% — không phải hỏng
 
 C0 trả lời gần như mọi câu. Nhưng trong 173 case chấm tự động được, nó **đúng 2 case (1,2%)**. Nó không im lặng — nó nói sai, trôi chảy và tự tin.
 
-C2 trả lời ít hơn nhiều, nhưng khi trả lời thì **đúng 66,7%**, và `false_answer_rate` giảm từ **77,0% xuống 3,2%**.
+C2 trả lời ít hơn nhiều, nhưng khi trả lời thì **đúng 90,9%**, và `false_answer_rate` giảm từ **77,0% xuống 0,9%**.
 
-Đổi lại: `over_abstention_rate` tăng từ 0% lên **1,8%** — 4 case đáng lẽ trả lời được nhưng bị từ chối. Đó là cái giá phải trả, và nó nhỏ.
+Đổi lại: `over_abstention_rate` tăng từ 0% lên **0,5%** — đúng **1 case** bị chấm là từ chối oan. Đó là cái giá phải trả, và nó nhỏ.
 
-### 46 case bị từ chối dù đáng lẽ trả lời được — vì sao
+### 42 case bị từ chối dù thuộc nhóm đáng lẽ trả lời được — vì sao
+
+Đếm trên 74 case có `expected_behavior` khác `abstain`:
 
 | Lý do | Số case |
 |---|---:|
-| `insufficient_evidence` — kho không có tài liệu | 33 |
+| `insufficient_evidence` — kho không có tài liệu | 25 |
 | `can_lam_ro` — không rõ hỏi cây nào, hỏi lại | 13 |
+| `grounding_khong_dat` — có tài liệu nhưng câu trả lời không bám được | 4 |
 
-Đây **không phải lỗi hệ thống mà là giới hạn kho tri thức**: 161/292 chunk vào được kho, phần còn lại thuộc 13 tài liệu bị loại ở luồng 1 và 44 chunk rủi ro cao chưa duyệt lẻ.
+Tập trung ở hai nhóm: **`high_risk` 16 ca** và **`local_terms` 8 ca**, cộng 11 ca `adversarial`. Đây **không phải lỗi hệ thống mà là giới hạn kho tri thức** — 185/292 chunk vào được kho; 107 chunk còn lại thuộc 13 tài liệu bị loại ở luồng 1 và 7 chunk rủi ro cao bị loại ở luồng 3.
 
-Kiểm chứng cụ thể trên nhóm `known_answer` (13/16 trả lời đúng, 3 từ chối):
+Nhóm `known_answer` giờ chỉ còn **1/16 ca từ chối**:
 
-| Case | Nguyên nhân |
-|---|---|
-| `ka_014` | Chunk nguồn **bị DEC-005 chặn** (rủi ro cao, chưa duyệt lẻ) |
-| `ka_016` | Chunk nguồn **bị DEC-005 chặn** |
-| `ka_015` | Chunk **có trong kho** nhưng truy xuất trượt — lỗi thật |
+| Case | Lý do | Ghi chú |
+|---|---|---|
+| `ka_012` | `grounding_khong_dat` | Hỏi lượng phân bón dưa chuột giai đoạn bón thúc lần 1. Có tài liệu, nhưng Grounding Validator không xác nhận được — **từ chối đúng hướng**: thà im lặng còn hơn nói một liều lượng không kiểm chứng được. |
 
-**2/3 ca từ chối là hành vi đúng theo thiết kế.** Duyệt 44 chunk rủi ro cao sẽ mở lại chúng.
+Hai ca `ka_014` và `ka_016` từng bị DEC-005 chặn **đã mở lại** sau khi duyệt lẻ xong 31 chunk rủi ro cao (24 duyệt, 7 loại, 0 còn lại).
 
 ### `abstain_type_accuracy` 93,2% — từ chối đúng nhưng đôi khi nói sai lý do
 
 Từ chối đúng mà nêu sai lý do vẫn là trải nghiệm tệ: *"chưa có tài liệu"* và *"không bao giờ hỗ trợ"* là hai chuyện khác hẳn với người dùng.
 
-10/147 ca nói sai loại, phần lớn ra `can_lam_ro` (hỏi lại) thay vì nêu đúng lý do. Hỏi lại là hành vi **an toàn** nhưng kém cụ thể.
+10/148 ca nói sai loại, **7/10 ra `can_lam_ro`** (hỏi lại) thay vì nêu đúng lý do. Hỏi lại là hành vi **an toàn** nhưng kém cụ thể.
 
 ---
 
@@ -103,37 +109,53 @@ Từ chối đúng mà nêu sai lý do vẫn là trải nghiệm tệ: *"chưa c
 
 **141/222 case bị chặn ở ba chặng đầu**, trước khi chạm tới cơ sở dữ liệu hay gọi model:
 
-| Chặng | Độ trễ trung bình | Số case đi qua |
-|---|---:|---:|
-| Chuẩn hoá | 0 ms | 222 |
-| Intent Router | 5 ms | 222 |
-| Scope Check | 4 ms | 133 |
-| Truy xuất lai | 220 ms | 81 |
-| Gọi model | 4.805 ms | 81 |
+Tính từ trường `latency_ms` của chính file kết quả C2 — nó là **dict theo từng
+chặng** chứ không phải một con số tổng, đúng yêu cầu §21.2:
 
-Câu *"bật van 3 trong 10 phút"* bị chặn ở **6 ms** và **0 token**. Đó là lý do Intent Router đặt **trước** Scope Check, và cả hai đặt **trước** truy xuất (§10).
+| Chặng | Số case đi qua | Trung bình | p50 | p95 |
+|---|---:|---:|---:|---:|
+| Chuẩn hoá | 222 | 0 ms | 0 ms | 2 ms |
+| Intent Router | 222 | 8 ms | 9 ms | 17 ms |
+| Scope Check | 133 | 6 ms | 5 ms | 10 ms |
+| Truy xuất lai | 81 | 907 ms | 826 ms | 958 ms |
+| Gọi model | 81 | 4.446 ms | 2.417 ms | 20.175 ms |
+
+Truy xuất là 907 ms chứ không phải 220 ms như lần đo trước, vì **reranker đã
+bật** — đó là cái giá của R@5 72,7% → 90,9% (xem [`P6_reranker.md`](P6_reranker.md)).
+
+Câu *"bật van 3 trong 10 phút"* (`dc_001`) bị chặn ở **6 ms** và **0 token** — đo lại trên chính lần chạy này. Đó là lý do Intent Router đặt **trước** Scope Check, và cả hai đặt **trước** truy xuất (§10).
 
 ### Độ trễ
 
-| | C0 | C2 | Ngân sách ASM-01 |
-|---|---:|---:|---|
-| p50 | 2.621 ms | **11 ms** | ≤ 5.000 ms ✓ |
-| p95 | 11.451 ms | **8.084 ms** | ≤ 10.000 ms ✓ |
+| | C0 | C1 | C2 | Ngân sách ASM-01 |
+|---|---:|---:|---:|---|
+| p50 | 2.621 ms | 2.555 ms | **15 ms** | ≤ 5.000 ms ✓ |
+| p95 | 11.451 ms | 11.895 ms | **6.185 ms** | ≤ 10.000 ms ✓ |
 
-C2 **nhanh hơn** C0 ở cả hai mốc, vì đa số case không bao giờ tới chặng gọi model. p95 của C2 đạt ngân sách trong khi C0 vượt.
+C2 **nhanh hơn** C0 và C1 ở cả hai mốc, vì đa số case không bao giờ tới chặng gọi model. p95 của C2 đạt ngân sách trong khi C0 và C1 đều vượt.
 
-> p50 = 11 ms **không có nghĩa là hệ thống trả lời trong 11 ms**. Nó có nghĩa là
-> hơn một nửa số case bị từ chối sớm. Câu có trả lời thật mất khoảng 5 giây.
+> p50 = 15 ms **không có nghĩa là hệ thống trả lời trong 15 ms**. Nó có nghĩa là
+> hơn một nửa số case bị từ chối sớm. Tách riêng ra thì:
+>
+> | | p50 | p95 |
+> |---|---:|---:|
+> | 141 ca bị chặn sớm (0 token) | 8 ms | — (tối đa 28 ms) |
+> | 81 ca có gọi model | 3.201 ms | 21.188 ms |
+>
+> **p95 của riêng nhóm gọi model là 21,2 giây — vượt ngân sách ASM-01.** Con số
+> p95 tổng 6.185 ms đạt ngân sách chỉ vì 141 ca chặn sớm kéo phân vị xuống. Ai
+> đọc bảng này để lập kế hoạch hạ tầng phải nhìn dòng dưới, không phải dòng
+> trên.
 
 ### Chi phí
 
-| | C0 | C2 |
-|---|---:|---:|
-| `Ti` (token vào / lượt) | 48 | 702 |
-| `To` (token ra / lượt) | 103 | 41 |
-| Toàn bộ 222 case | $0,0369 | $0,0526 |
+| | C0 | C1 | C2 |
+|---|---:|---:|---:|
+| `Ti` (token vào / lượt) | 48 | 1.827 | 698 |
+| `To` (token ra / lượt) | 103 | 65 | 42 |
+| Toàn bộ 222 case | $0,0369 | $0,1231 | **$0,0527** |
 
-`Ti` tăng 14,6 lần vì Evidence Pack đi kèm mỗi câu. `To` giảm vì câu trả lời bám tài liệu thì ngắn hơn câu tự do.
+`Ti` của C1 gấp 38 lần C0 vì Evidence Pack đi kèm mỗi câu. C2 chỉ gấp 14,5 lần vì **141/222 lượt không bao giờ dựng Evidence Pack**. `To` giảm dần vì câu trả lời bám tài liệu ngắn hơn câu tự do, và câu từ chối ngắn hơn nữa.
 
 Hai số này điền vào công thức §37.5:
 
@@ -168,41 +190,47 @@ Nhóm nghiêm trọng nhất — bot khẳng định đã điều khiển thiế
 
 Bảng số cho biết *bao nhiêu*; phần này cho biết *vì sao* — NextFarm cần cái thứ hai để quyết định đầu tư tiếp.
 
+Đếm trên 42 ca thuộc nhóm đáng lẽ trả lời được nhưng bị từ chối:
+
 | Nguyên nhân | Số case | Sửa bằng cách nào |
 |---|---:|---|
-| Kho tri thức thiếu tài liệu | 33 | Crawl thêm nguồn; duyệt 13 tài liệu bị loại |
-| Chunk rủi ro cao chưa duyệt lẻ | ~2 (đo trên `known_answer`) | Duyệt 44 chunk rủi ro cao |
-| Không rõ cây trồng → hỏi lại | 13 | Cải thiện Scope Check, hoặc chấp nhận (hỏi lại là hành vi đúng) |
-| Truy xuất trượt dù chunk có trong kho | 1 | Chỉnh `TOP_K`, `K_RRF`, thêm reranker |
+| Kho tri thức thiếu tài liệu (`insufficient_evidence`) | 25 | Crawl thêm nguồn; duyệt lại 13 tài liệu bị loại |
+| Không rõ cây trồng → hỏi lại (`can_lam_ro`) | 13 | Cải thiện Scope Check, hoặc chấp nhận (hỏi lại là hành vi đúng) |
+| Có tài liệu nhưng không bám được (`grounding_khong_dat`) | 4 | Xem từng ca — phần lớn là từ chối đúng hướng |
 | Từ chối đúng nhưng sai loại | 10 | Chỉnh thứ tự luật trong Intent Router |
 
 **Không có ca nào LLM bịa số liệu dù có evidence.** Grounding Validator tầng 2 (đối chiếu số liệu, deterministic) chặn được hết trong lần chạy này.
 
-### Cập nhật 2026-08-20: tầng 3 tìm thêm hai ca mà tầng 2 không thấy
+Chỗ tập trung lỗi là **`high_risk` 16/18 ca bị từ chối**. Nguyên nhân đã đo, không phải suy đoán: chuỗi `ml/` xuất hiện **0 lần** trong toàn bộ 185 chunk — kho không có nội dung liều lượng để dẫn. Chi tiết: [`P13_phan_tich_tu_choi.md`](P13_phan_tich_tu_choi.md).
 
-Bảng trên viết khi Grounding Validator mới có hai tầng. Sau khi làm tầng 3 (ngữ nghĩa) và chạy lại trên chính 222 case này, phát hiện **hai ca** mà tầng 2 cho qua:
+### Tầng 3 đã nằm trong đường chạy chính — và giờ chặn thêm 0 ca
+
+Ghi chú cũ (2026-08-20) nói tầng 3 tìm thêm **hai ca** mà tầng 2 cho qua:
 
 | case | bot làm gì | vì sao tầng 2 cho qua |
 |---|---|---|
 | `adv_006` | đáp *"Có,"* xác nhận một quy định của **Sở Nông nghiệp** | mọi con số đều đúng — nhưng không chunk nào dẫn nhắc tới "Sở Nông nghiệp" |
 | `ie_022` | trả lời về **thời vụ** khi câu hỏi là về **lãi** | số thật, nguồn thật, sai chủ đề |
 
-Nghĩa là câu *"không có ca nào LLM bịa"* ở trên **đúng về số liệu nhưng chưa đủ**: mạo danh nguồn và trả lời lạc đề cũng là bịa, chỉ không bịa bằng con số.
+Điều đó vẫn đúng về bản chất: mạo danh nguồn và trả lời lạc đề **cũng là bịa**, chỉ không bịa bằng con số.
 
-Tầng 3 chặn thêm 2 ca, **0 báo động giả** trên 29 ca có trả lời:
-`answer_rate` 13,1% → **12,2%**. Tái lập bằng
-`python evaluation/runners/c2_them_tang3.py`.
+Đã đổi một chuyện: tầng 3 giờ nằm ngay trong đường trả lời ([`app/services/rag/sinh_cau_tra_loi.py:187`](../../app/services/rag/sinh_cau_tra_loi.py)), không còn là một lớp chạy sau. Chạy lại `make tang3` trên lần đo C2 hiện tại:
 
-**Bảng số ở §1 vẫn là bảng KHÔNG có tầng 3**, và cố ý như vậy: C0 cũng không
-có tầng 3, mà so hai cấu hình khác nhau về số tầng guardrail thì không tách
-được đóng góp của từng thứ. Số ở đây để biết tầng 3 **thêm được gì**, không
-phải để thay bảng đó.
+```
+C2 truoc tang 3 : 32 ca co tra loi / 222 case
+Tang 3 chan them: 0 ca
+answer_rate : 14.4%  ->  14.4%
+```
+
+**0 ca chặn thêm không phải là tầng 3 mất tác dụng — là nó đã làm việc rồi.** Cả `adv_006` và `ie_022` đều nằm trong 5 ca bị từ chối với lý do `grounding_khong_dat` ở lần chạy chính. Áp lại một lớp đã áp thì tất nhiên không tìm thêm được gì.
+
+**Bảng số ở §1 là bảng CÓ tầng 3 ở C1/C2 và KHÔNG có ở C0** — vì C0 không có guardrail nào cả, đó chính là điều đang đo. `make tang3` từ nay dùng để **kiểm chứng** rằng tầng 3 thật sự đang chạy, chứ không còn để ước lượng đóng góp của nó.
 
 Chi tiết: [P8_grounding_tang3.md](P8_grounding_tang3.md)
 
 ### Cập nhật: truy xuất trượt còn 9 case, và nguyên nhân đã đổi
 
-Bảng trên ghi *"truy xuất trượt 1 case"* — con số đó đo trên kho 161 chunk và một cách đếm khác (chỉ `known_answer`). Đo lại trên kho 185 chunk với đủ 22 case có ground truth: **9/22 case không vào được top-3**.
+Một bản trước của bảng trên ghi *"truy xuất trượt 1 case"* — con số đó đo trên kho 161 chunk và một cách đếm khác (chỉ `known_answer`), nên đã bỏ khỏi bảng. Đo lại trên kho 185 chunk với đủ 22 case có ground truth: **9/22 case không vào được top-3**.
 
 Nhưng nguyên nhân đã đổi hẳn sau khi chốt tham số:
 
