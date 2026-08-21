@@ -43,6 +43,32 @@ một deploy quên cấu hình từ *lặng lẽ phơi nhật ký* thành *từ 
 còn lại (khoá tĩnh không phải hệ thống danh tính) đã ghi vào tài liệu giao
 hàng thay vì bỏ qua.
 
+### Việc phát sinh khi rà soát lại — không nằm trong plan nào
+
+Làm xong ba plan rồi quét rộng lại thì lộ ra một nhóm lỗi cùng loại: **tài liệu
+và trang trình bày còn giữ số của lần đo trước khi chạy lại C1/C2.**
+
+| Chỗ | Vấn đề | Commit |
+|---|---|---|
+| `docs/reports/BAO_CAO_SO_SANH.md` | Bảng ở §1 đã cập nhật nhưng phần văn ở §2, §3, §5 thì không — tài liệu **tự mâu thuẫn với chính bảng của nó**. Ngoài ra 3 ô cột C0 sai vì tính tay | `efdd264` |
+| `frontend/report.html` | Trang NextFarm thực sự nhìn, vẫn hiển thị 310 test, recall 99,3%, p95 8.084 ms, và ô `1.840 ms` đã biết là sai | `28757b2` |
+| `docs/GIAO_HANG_NEXTFARM.md` Câu 5 | `Ti`/`To` của mô hình chi phí lệch (702/41 so với 698/42 đo lại) | `47ab42f` |
+| `§40.2` quy chuẩn | Sổ theo dõi 12 tham số chưa chốt chưa từng được cập nhật khi từng mục được chốt | `06e321d` |
+
+**Bài học chung của bốn dòng trên:** sửa bảng số mà không sửa phần văn diễn giải
+nó là cách phổ biến nhất để một tài liệu trở nên sai. Hàng rào ở plan 003 giờ
+phủ cả `frontend/report.html` — và nó **bắt lỗi ngay lần chạy thật đầu tiên**.
+
+### Hai chỗ suýt ghi sai, đã sửa trước khi commit
+
+1. **`§40.2` mục 4** — bản nháp ghi kích thước chunk là *đã chốt*, lý do "đã đo
+   Recall@K ở P6". Sai: Recall@K đo **tại** kích thước đó chứ không **chọn** nó.
+2. **Lời khuyên kèm theo** — bản nháp ghi mục 4 là *"rẻ nhất, nên làm tiếp"*.
+   Ngược lại: `chunk_id` dựng theo thứ tự, còn `chunks.yaml` khoá **31 quyết
+   định duyệt** vào chuỗi id đó. Quét kích thước chunk sẽ đè quyết định duyệt
+   lên những đoạn văn khác, **không báo lỗi**. Đã thêm dây bẫy ở
+   `tests/test_chunker.py` (`a936825`).
+
 ---
 
 ## Vì sao 001 đứng đầu
