@@ -126,22 +126,35 @@ def health():
 # API cho trang admin
 # ---------------------------------------------------------------------------
 
+# 503 chu khong phai 200 kem du lieu mac dinh. Trang admin la cho trinh bay
+# bang chung "he thong nay khong bia" - no khong duoc phep bia so cua chinh
+# no. Doc khong duoc thi phai noi la doc khong duoc.
+
 @app.get("/api/admin/tong_quan")
 def admin_tong_quan():
-    from app.core.nhat_ky import tong_quan
-    return tong_quan()
+    from app.core.nhat_ky import LoiDocNhatKy, tong_quan
+    try:
+        return tong_quan()
+    except LoiDocNhatKy as e:
+        return JSONResponse({"loi": str(e)}, 503)
 
 
 @app.get("/api/admin/nhat_ky")
 def admin_nhat_ky(limit: int = 50, chi_tu_choi: bool = False):
-    from app.core.nhat_ky import doc_nhat_ky
-    return doc_nhat_ky(limit=min(limit, 500), chi_tu_choi=chi_tu_choi)
+    from app.core.nhat_ky import LoiDocNhatKy, doc_nhat_ky
+    try:
+        return doc_nhat_ky(limit=min(limit, 500), chi_tu_choi=chi_tu_choi)
+    except LoiDocNhatKy as e:
+        return JSONResponse({"loi": str(e)}, 503)
 
 
 @app.get("/api/admin/kho_tri_thuc")
 def admin_kho():
-    from app.core.nhat_ky import thong_ke_kho
-    return thong_ke_kho()
+    from app.core.nhat_ky import LoiDocNhatKy, thong_ke_kho
+    try:
+        return thong_ke_kho()
+    except LoiDocNhatKy as e:
+        return JSONResponse({"loi": str(e)}, 503)
 
 
 # ---------------------------------------------------------------------------

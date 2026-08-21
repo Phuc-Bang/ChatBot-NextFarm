@@ -24,6 +24,16 @@ from typing import Any
 from app.core.db import ket_noi
 
 
+class LoiDocNhatKy(Exception):
+    """Khong doc duoc du lieu nhat ky.
+
+    Ton tai de tang tren PHAN BIET duoc "khong co du lieu" voi "khong doc
+    duoc du lieu". Truoc day ca hai deu tra ve gia tri binh thuong, nen mot
+    su co CSDL hien ra y het mot he thong chua ai dung - hoac te hon, hien ra
+    mot bo so day du trong nhu that.
+    """
+
+
 def ghi_query_log(kq) -> None:
     """Ghi mot luot hoi. `kq` la KetQuaHoi cua pipeline."""
     import json
@@ -63,8 +73,8 @@ def doc_nhat_ky(limit: int = 50, chi_tu_choi: bool = False) -> list[dict]:
                     "so_nguon": len(r[11] or []),
                 })
             return ra
-    except Exception:
-        return []
+    except Exception as e:
+        raise LoiDocNhatKy("khong doc duoc query_log: " + str(e)[:200]) from e
 
 
 def tong_quan() -> dict[str, Any]:
@@ -123,47 +133,16 @@ def tong_quan() -> dict[str, Any]:
             "chi_phi_usd": tien,
             "model": model,
             "ngay_tra_gia": NGAY_TRA_CUU,
-            "latency_p50_ms": p[0] if p else 11,
-            "latency_p95_ms": p[1] if p else 8084,
+            # None chu KHONG phai 11/8084. "Chua do duoc" va "do duoc 11ms"
+            # la hai chuyen khac nhau - dien so vao cho chua do la bia.
+            "latency_p50_ms": p[0] if p else None,
+            "latency_p95_ms": p[1] if p else None,
             "theo_ly_do": theo_ly_do,
             "theo_intent": theo_intent,
             "theo_chang": theo_chang,
         }
-    except Exception:
-        return {
-            "tong_luot": 222,
-            "so_tu_choi": 147,
-            "ty_le_tu_choi": 66.2,
-            "token_vao": 56862, "token_ra": 22680,
-            "Ti_trung_binh": 702,
-            "To_trung_binh": 280,
-            "chi_phi_usd": 0.0526,
-            "model": model or "gemini-3.1-flash-lite",
-            "ngay_tra_gia": NGAY_TRA_CUU,
-            "latency_p50_ms": 11,
-            "latency_p95_ms": 8084,
-            "theo_ly_do": [
-                {"ly_do": "garden_data", "so_luot": 8},
-                {"ly_do": "product_feature", "so_luot": 17},
-                {"ly_do": "device_control", "so_luot": 14},
-                {"ly_do": "out_of_scope", "so_luot": 22},
-                {"ly_do": "insufficient_evidence", "so_luot": 46},
-                {"ly_do": "grounding_khong_dat", "so_luot": 40},
-            ],
-            "theo_intent": [
-                {"intent": "agronomy_knowledge", "so_luot": 141},
-                {"intent": "garden_data", "so_luot": 8},
-                {"intent": "product_feature", "so_luot": 17},
-                {"intent": "device_control", "so_luot": 14},
-            ],
-            "theo_chang": [
-                {"chang": "llm", "trung_binh_ms": 4805},
-                {"chang": "truy_xuat", "trung_binh_ms": 220},
-                {"chang": "intent", "trung_binh_ms": 5},
-                {"chang": "scope", "trung_binh_ms": 4},
-                {"chang": "chuan_hoa", "trung_binh_ms": 0},
-            ],
-        }
+    except Exception as e:
+        raise LoiDocNhatKy("khong tong hop duoc nhat ky: " + str(e)[:200]) from e
 
 
 def thong_ke_kho() -> dict[str, Any]:
@@ -193,16 +172,5 @@ def thong_ke_kho() -> dict[str, Any]:
             "fact_tong": f_tong, "fact_da_duyet": f_duyet,
             "theo_cay": theo_cay,
         }
-    except Exception:
-        return {
-            "tai_lieu_tong": 31, "tai_lieu_da_duyet": 18,
-            "chunk_tong": 292, "chunk_index_duoc": 185,
-            "chunk_rui_ro_cao": 44,
-            "chunk_bi_chan": 107,
-            "fact_tong": 141, "fact_da_duyet": 65,
-            "theo_cay": [
-                {"cay": "lua", "so_chunk": 87},
-                {"cay": "dua_chuot", "so_chunk": 62},
-                {"cay": "ca_chua", "so_chunk": 36},
-            ],
-        }
+    except Exception as e:
+        raise LoiDocNhatKy("khong doc duoc thong ke kho: " + str(e)[:200]) from e
