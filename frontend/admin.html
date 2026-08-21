@@ -736,11 +736,28 @@ function renderTableRows() {
 // HTTP 503 van tra ve JSON hop le, nen `.then(r => r.json())` KHONG nem loi.
 // Thieu kiem tra r.ok thi trang se ve bieu do tu mot object {loi: "..."} va
 // hien ra mot dashboard trong rong trong nhu that.
+// Token admin. Lan dau mo bang /admin?token=XXX thi giu lai trong
+// sessionStorage de cac lan goi API sau khong phai dinh token vao URL nua.
+// sessionStorage chu khong phai localStorage: dong tab la mat, khong de lai
+// token tren may dung chung.
+const TOKEN_ADMIN = (function () {
+  try {
+    const u = new URLSearchParams(location.search).get("token");
+    if (u) { sessionStorage.setItem("nextfarm_admin_token", u); return u; }
+    return sessionStorage.getItem("nextfarm_admin_token") || "";
+  } catch (e) { return ""; }
+})();
+
 async function layJson(url) {
-  const r = await fetch(url);
+  const r = await fetch(url, TOKEN_ADMIN
+    ? { headers: { "X-Admin-Token": TOKEN_ADMIN } } : undefined);
   if (!r.ok) {
     let mo = "";
     try { mo = (await r.json()).loi || ""; } catch (e) { mo = ""; }
+    if (r.status === 401 || r.status === 403) {
+      throw new Error("Khong co quyen xem trang quan tri (HTTP " + r.status
+        + "). " + mo);
+    }
     throw new Error("HTTP " + r.status + (mo ? " — " + mo : "") + " (" + url + ")");
   }
   return r.json();

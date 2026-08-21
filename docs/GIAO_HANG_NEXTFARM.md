@@ -114,25 +114,30 @@ Test tự động chứng minh điều này: khi model **khai là có đủ căn
 
 ### 1. Triển khai và Đóng gói Production (Giai đoạn 1.5)
 * Đóng gói toàn bộ hệ thống (FastAPI, PostgreSQL + pgvector, local embedding) thành Docker Compose / Kubernetes manifest chuẩn enterprise.
-* Tích hợp pipeline CI/CD kiểm thử tự động với bộ 331 unit tests và bộ runner đánh giá chất lượng RAG trước mỗi bản release.
+* Tích hợp pipeline CI/CD kiểm thử tự động với bộ 339 unit tests và bộ runner đánh giá chất lượng RAG trước mỗi bản release.
 * Cấu hình dashboard giám sát token, chi phí và tỷ lệ từ chối theo thời gian thực (đã có sẵn tại `/admin`).
 
-> **`/admin` chưa có xác thực — đây là ranh giới có chủ đích của PoC, không phải sơ suất.**
+> **`/admin` mặc định an toàn, nhưng khoá hiện tại là khoá tĩnh — đọc trước khi triển khai.**
 >
-> Trang `/admin` và ba endpoint `/api/admin/*` hiện **không kiểm danh tính người
-> gọi**. Hôm nay an toàn **chỉ vì một chi tiết duy nhất**: [`Makefile:115`](../Makefile)
-> chạy uvicorn với `--host 127.0.0.1`, không phải `0.0.0.0` — server chỉ nhận
-> kết nối từ chính máy đang chạy nó. Đổi một chữ trong dòng đó là mất lớp bảo vệ.
+> `/admin` và ba endpoint `/api/admin/*` phơi ra **toàn bộ nhật ký truy vấn**:
+> câu hỏi nguyên văn của người dùng, câu trả lời, số token và chi phí từng lượt.
 >
-> Nếu triển khai lên máy chủ có địa chỉ công khai mà giữ nguyên hiện trạng,
-> `GET /api/admin/nhat_ky` sẽ trả về **toàn bộ nhật ký truy vấn** — câu hỏi
-> nguyên văn của người dùng, câu trả lời, số token và chi phí từng lượt — cho
-> bất kỳ ai gọi tới, không cần đăng nhập.
+> Cửa kiểm ở [`app/main.py`](../app/main.py) → `kiem_quyen_admin`:
 >
-> **Thêm xác thực cho `/admin` và `/api/admin/*` là điều kiện tiên quyết để
-> triển khai, không phải hạng mục tuỳ chọn.** Cơ chế cụ thể (khoá tĩnh, OAuth,
-> hay chặn ở reverse proxy) chưa chốt vì phụ thuộc hạ tầng NextFarm đang dùng —
-> đội chờ NextFarm nêu yêu cầu.
+> | `ADMIN_TOKEN` trong `.env` | hành vi |
+> |---|---|
+> | để trống (mặc định) | chỉ nhận request từ `127.0.0.1`; địa chỉ khác → **403** |
+> | có đặt | mọi request phải kèm header `X-Admin-Token` đúng — loopback **không** được miễn |
+>
+> Điểm quan trọng: một lần deploy đổi `--host 127.0.0.1` thành `0.0.0.0` mà quên
+> cấu hình sẽ **từ chối**, chứ không lặng lẽ phục vụ. Đó là lý do cửa này tồn
+> tại — một dòng ghi chú trong tài liệu không chặn được gì.
+>
+> **Vẫn còn việc NextFarm phải quyết:** khoá tĩnh là lớp tối thiểu để mặc định
+> an toàn, **không phải hệ thống danh tính** — nó không phân biệt được ai đang
+> xem, không thu hồi được quyền của một người, không ghi vết truy cập. Triển
+> khai thật nên đặt OAuth/SSO ở reverse proxy và giữ `ADMIN_TOKEN` làm tầng
+> trong. Đội không chốt cơ chế thay NextFarm vì nó phụ thuộc hạ tầng đang dùng.
 
 ### 2. Mở rộng Kho tri thức sang các Cây trồng Chủ lực tiếp theo (Giai đoạn 2)
 * Mở rộng hạ tầng crawler và công cụ kiểm duyệt bán tự động cho các cây ăn trái và cây công nghiệp giá trị cao của NextFarm: Sầu riêng, Xoài, Bơ, Cà phê, Hồ tiêu.
@@ -359,8 +364,8 @@ Tầng 3 bắt hai kiểu lỗi đo được trên C2 thật: xác nhận thẩm
 
 **5. Chưa kết nối dữ liệu vườn.** Tiêu chí ≥95% thuộc Bài toán B.
 
-**6. Trang quản trị chưa có đăng nhập.**
-`/admin` và `/api/admin/*` không kiểm danh tính. Chạy cục bộ nên hiện không sao — `make serve` bind `127.0.0.1`. Nhưng cái lộ ra nếu deploy ra ngoài mà quên là **toàn bộ nhật ký truy vấn**: câu hỏi nguyên văn của người dùng, câu trả lời, token và chi phí từng lượt. Thêm xác thực là **điều kiện tiên quyết để triển khai**, không phải việc làm sau.
+**6. Trang quản trị chỉ có khoá tĩnh, chưa có hệ thống danh tính.**
+`/admin` mặc định an toàn — không đặt `ADMIN_TOKEN` thì chỉ phục vụ `127.0.0.1`, đặt rồi thì mọi request phải kèm token. Nhưng khoá tĩnh **không phân biệt được ai đang xem**, không thu hồi được quyền của một người, và không ghi vết truy cập. Với dữ liệu mà `/admin` phơi ra (câu hỏi nguyên văn của người dùng), triển khai thật cần OAuth/SSO ở reverse proxy — `ADMIN_TOKEN` là tầng trong, không phải tầng duy nhất.
 
 **7. Một lần chạy, một model.** Chưa đo lặp lại nên chưa biết dao động.
 
@@ -392,7 +397,7 @@ Sinh lại bất cứ lúc nào: `make phieu-cham`
 make up          # PostgreSQL 16 + pgvector
 make check-ext   # xác nhận 3 extension: vector, unaccent, pg_trgm
 make ingest      # dựng lại toàn bộ kho tri thức từ file trong git
-make test        # 331 test tự động
+make test        # 339 test tự động
 
 make smoke       # thử LLM 3 câu — chạy TRƯỚC khi tốn 222 case
 make recall      # đo Recall@K, chọn model embedding
@@ -408,9 +413,10 @@ make phieu-cham     # sinh phiếu chấm cho chuyên gia
 make serve       # http://localhost:8000  và  /admin
 ```
 
-> `make serve` bind `127.0.0.1` có chủ đích. `/admin` **chưa có đăng nhập**, nên
-> đây là thứ đang giữ nhật ký truy vấn khỏi mạng ngoài — xem cảnh báo ở mục
-> *Triển khai và Đóng gói Production* phía trên trước khi đổi host.
+> `make serve` bind `127.0.0.1` có chủ đích, và `/admin` còn một cửa kiểm riêng
+> phía sau nữa — hai lớp, không phải một. Đặt `ADMIN_TOKEN` trong `.env` trước
+> khi cho `/admin` ra khỏi máy cục bộ; xem cảnh báo ở mục *Triển khai và Đóng
+> gói Production* phía trên.
 
 `make ingest` dựng lại được toàn bộ cơ sở dữ liệu từ các file YAML/JSON trong
 git — **mất database không mất công duyệt**, và kiểm chứng viên tái lập được

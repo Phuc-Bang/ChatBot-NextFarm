@@ -9,9 +9,26 @@ VI SAO TACH HAI TRANG
 Trang admin hien TOAN BO cau hoi nguoi dung va log he thong. Gop chung vao
 trang chat la de lo du lieu nguoi khac cho bat ky ai mo trang.
 
-Chay LOCAL nen chua co dang nhap - da thong nhat voi nguoi dung. Neu ve sau
-deploy ra ngoai thi BAT BUOC phai them khoa cho /admin va /api/admin/*.
-Ghi o day de khong ai quen.
+CANH CUA /admin (xem `kiem_quyen_admin`)
+
+Truoc day chi co mot dong ghi chu "deploy ra ngoai thi nho them khoa". Ghi chu
+khong chan duoc gi: doi `--host 127.0.0.1` thanh `0.0.0.0` la toan bo nhat ky
+truy van - cau hoi nguyen van cua nguoi dung - mo ra internet, khong mot buoc
+nao bat phai dung lai.
+
+Nen bay gio co mot canh cua that, MAC DINH AN TOAN:
+
+  - ADMIN_TOKEN co dat  -> moi request phai kem dung token do
+  - ADMIN_TOKEN de trong -> chi chap nhan request tu chinh may dang chay
+                            (loopback). Tu dia chi khac: 403 kem huong dan.
+
+De trong van la trai nghiem PoC hom nay - `make serve` chay 127.0.0.1 nen
+khong ai phai cau hinh gi. Cai doi la mot deploy quen cau hinh gio TU CHOI
+thay vi lang le phuc vu.
+
+KHONG chot co che xac thuc thay NextFarm. Token tinh la lop toi thieu de mac
+dinh an toan; NextFarm van dat OAuth/SSO o reverse proxy duoc, luc do dat
+ADMIN_TOKEN cho tang trong.
 
 NAP MODEL LUC KHOI DONG
 Nap model embedding mat ~16 giay (do duoc). Nap trong lifespan de nguoi dung
@@ -30,7 +47,7 @@ import time
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-from fastapi import BackgroundTasks, FastAPI
+from fastapi import BackgroundTasks, FastAPI, Request
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
@@ -123,6 +140,48 @@ def health():
 
 
 # ---------------------------------------------------------------------------
+# Canh cua /admin
+# ---------------------------------------------------------------------------
+
+# Dia chi duoc coi la "chinh may nay". ::1 va ::ffff:127.0.0.1 la dang IPv6
+# cua cung mot thu - thieu chung thi trinh duyet mo localhost tren mot so may
+# Windows se bi tu choi oan.
+LOOPBACK = {"127.0.0.1", "::1", "::ffff:127.0.0.1", "localhost"}
+
+
+def kiem_quyen_admin(req: Request):
+    """Tra ve None neu duoc phep, hoac JSONResponse loi neu khong.
+
+    Dung ham thuong chu khong dung Depends() de moi endpoint tu quyet dinh -
+    trang /admin can tra HTML loi de doc duoc trong trinh duyet, con
+    /api/admin/* tra JSON.
+    """
+    import hmac
+
+    token = (lay("ADMIN_TOKEN") or "").strip()
+    if token:
+        # compare_digest chu khong phai == : so sanh chuoi thuong dung som o
+        # ky tu dau khac nhau, do lech thoi gian do ro duoc tung ky tu.
+        gui = (req.headers.get("X-Admin-Token")
+               or req.query_params.get("token") or "")
+        if hmac.compare_digest(gui, token):
+            return None
+        return JSONResponse({"loi": "sai hoac thieu ADMIN_TOKEN"}, 401)
+
+    # Khong dat token -> chi phuc vu chinh may nay.
+    # req.client co the None (test client, mot so ASGI server). Coi nhu
+    # khong xac dinh duoc dia chi, va khong xac dinh duoc thi KHONG mo.
+    dia_chi = req.client.host if req.client else None
+    if dia_chi in LOOPBACK:
+        return None
+    return JSONResponse(
+        {"loi": "/admin chi phuc vu may cuc bo khi chua dat ADMIN_TOKEN. "
+                "Dat ADMIN_TOKEN trong .env roi goi lai kem header "
+                "X-Admin-Token.",
+         "dia_chi_goi": dia_chi}, 403)
+
+
+# ---------------------------------------------------------------------------
 # API cho trang admin
 # ---------------------------------------------------------------------------
 
@@ -131,7 +190,9 @@ def health():
 # no. Doc khong duoc thi phai noi la doc khong duoc.
 
 @app.get("/api/admin/tong_quan")
-def admin_tong_quan():
+def admin_tong_quan(req: Request):
+    if (chan := kiem_quyen_admin(req)) is not None:
+        return chan
     from app.core.nhat_ky import LoiDocNhatKy, tong_quan
     try:
         return tong_quan()
@@ -140,7 +201,9 @@ def admin_tong_quan():
 
 
 @app.get("/api/admin/nhat_ky")
-def admin_nhat_ky(limit: int = 50, chi_tu_choi: bool = False):
+def admin_nhat_ky(req: Request, limit: int = 50, chi_tu_choi: bool = False):
+    if (chan := kiem_quyen_admin(req)) is not None:
+        return chan
     from app.core.nhat_ky import LoiDocNhatKy, doc_nhat_ky
     try:
         return doc_nhat_ky(limit=min(limit, 500), chi_tu_choi=chi_tu_choi)
@@ -149,7 +212,9 @@ def admin_nhat_ky(limit: int = 50, chi_tu_choi: bool = False):
 
 
 @app.get("/api/admin/kho_tri_thuc")
-def admin_kho():
+def admin_kho(req: Request):
+    if (chan := kiem_quyen_admin(req)) is not None:
+        return chan
     from app.core.nhat_ky import LoiDocNhatKy, thong_ke_kho
     try:
         return thong_ke_kho()
@@ -174,7 +239,9 @@ def trang_chat():
 
 
 @app.get("/admin")
-def trang_admin():
+def trang_admin(req: Request):
+    if (chan := kiem_quyen_admin(req)) is not None:
+        return chan
     f = WEB / "admin.html"
     if not f.exists():
         return JSONResponse({"loi": "chua co frontend/admin.html"}, 404)

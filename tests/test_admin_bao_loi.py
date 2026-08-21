@@ -87,7 +87,13 @@ def test_khong_con_so_cung_trong_nhat_ky():
 
 
 def test_endpoint_admin_tra_503(monkeypatch):
-    """Loi phai noi len toi HTTP status, khong dung lai o tang service."""
+    """Loi phai noi len toi HTTP status, khong dung lai o tang service.
+
+    Phai dat ADMIN_TOKEN: TestClient goi tu dia chi "testclient", khong phai
+    loopback, nen canh cua /admin tu choi truoc khi cham toi CSDL. Do la hanh
+    vi DUNG cua canh cua - dia chi khong xac dinh duoc thi khong mo - nen
+    test phai di qua cua tu te chu khong duoc noi long cua.
+    """
     from fastapi.testclient import TestClient
 
     from app.core import nhat_ky
@@ -97,12 +103,13 @@ def test_endpoint_admin_tra_503(monkeypatch):
         raise RuntimeError("connection refused")
 
     monkeypatch.setattr(nhat_ky, "ket_noi", ket_noi_hong)
+    monkeypatch.setenv("ADMIN_TOKEN", "token-test")
 
     with TestClient(app) as c:
         for duong in ("/api/admin/tong_quan",
                       "/api/admin/nhat_ky",
                       "/api/admin/kho_tri_thuc"):
-            r = c.get(duong)
+            r = c.get(duong, headers={"X-Admin-Token": "token-test"})
             assert r.status_code == 503, duong + " tra " + str(r.status_code)
             assert "loi" in r.json(), duong + " thieu khoa 'loi'"
 

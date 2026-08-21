@@ -99,7 +99,7 @@ Chi tiết đầy đủ ở [quy chuẩn v2.0](docs/NEXTFARM_PROBLEM_A_STANDARD_
 | Chunk **index được** | **185** (18 tài liệu đã duyệt · 31/44 chunk rủi ro cao đã duyệt lẻ) |
 | Câu ứng viên số liệu | 193 — **65 fact đã xác nhận** |
 | Case kiểm thử | **222 / 12 nhóm — v3 đã đóng băng** |
-| Test tự động | **331 xanh** |
+| Test tự động | **339 xanh** |
 
 > **185 / 292 chunk** vào được kho tri thức. 107 chunk còn lại thuộc 13 tài
 > liệu bị loại ở luồng 1, cộng 13 chunk rủi ro cao chưa duyệt lẻ — tất cả
@@ -230,7 +230,16 @@ make up && python -m uvicorn app.main:app --port 8000
 | `/` | Trang chat cho nông dân — chữ 17px, từ chối hiển thị khác hẳn trả lời, nguồn luôn hiện |
 | `/admin` | Trang quản trị — kho tri thức, độ trễ từng chặng, chi phí, và **bộ lọc "chỉ xem ca đã chặn"** |
 
-Trang admin **chưa có đăng nhập** vì chạy cục bộ. Deploy ra ngoài thì bắt buộc thêm khoá.
+Trang admin **mặc định chỉ phục vụ máy cục bộ**. Cụ thể ([`app/main.py`](app/main.py) → `kiem_quyen_admin`):
+
+| `ADMIN_TOKEN` trong `.env` | hành vi |
+|---|---|
+| để trống (mặc định) | chỉ nhận request từ `127.0.0.1`. Địa chỉ khác → **403**, kể cả khi server bind `0.0.0.0` |
+| có đặt | mọi request phải kèm `X-Admin-Token` đúng, **loopback cũng không được miễn** |
+
+Nghĩa là một lần deploy quên cấu hình sẽ **từ chối**, chứ không lặng lẽ phục vụ
+toàn bộ nhật ký truy vấn ra mạng. `make serve` vẫn bind `127.0.0.1` — hai lớp,
+không phải một.
 
 ## Chạy thử
 
@@ -254,7 +263,7 @@ make install-crawler
 make ingest
 
 # 6. Chạy thử
-make test        # 331 test tự động
+make test        # 339 test tự động
 make serve       # http://localhost:8000  và  /admin
 ```
 
@@ -309,7 +318,7 @@ Ghi ở đây để không ai hiểu nhầm về phạm vi:
 - **GPU 4GB không chạy được model sinh câu trả lời.** Đã đo thật: `qwen3:4b` sập trên GPU (CUDA error, 2.5GB model không đủ chỗ cho KV-cache trên 3,96GB trống); chạy CPU thì được 11,4 token/giây — một câu hỏi RAG thật mất **32,3 giây**, quá ngưỡng ASM-01 (p50 ≤ 5s) sáu lần. Vì vậy **P12 (fine-tuning) không khả thi** trên phần cứng hiện có, và §37.5 phải viết lại: phương án self-host cần NextFarm đầu tư GPU mới, và đó là con số `[EXT]`.
 - **Free tier Gemini rất chặt.** `gemini-2.5-flash` cạn quota sau vài chục lần gọi — 80/80 case đầu của C0 trả về 429. Đã đổi sang `gemini-3.1-flash-lite`. Mọi lần chạy đo lường nên dùng `--nghi` để giãn nhịp.
 - **Grounding Validator mới có tầng 1 và 2.** Tầng 3 (ngữ nghĩa, NLI/LLM-judge) chưa làm.
-- **Trang admin chưa có đăng nhập** — chạy cục bộ. Deploy ra ngoài thì bắt buộc thêm khoá.
+- **Trang admin chỉ có khoá tĩnh** (`ADMIN_TOKEN`) — đủ để mặc định an toàn, chưa phải hệ thống danh tính. Deploy thật nên đặt OAuth/SSO ở reverse proxy và giữ `ADMIN_TOKEN` làm tầng trong.
 - Một số ngưỡng trong quy chuẩn là **giả định của đội** (`[ASM]`), chờ NextFarm xác nhận — xem §9.
 - **Intent Router mới có lớp rule.** Lớp LLM few-shot (§11.3) chưa làm được vì chưa chốt model (DEC-015). Khi không luật nào khớp, router trả về `nguồn = "mac_dinh"` với độ tin cậy 0 — đó là *"lớp rule không biết"*, không phải *"câu này là nông học"*.
 - **Tập kiểm thử có ba phiên bản, bản đang dùng là `v3`.** DEC-023 cấm sửa tại chỗ, nên mỗi lỗi phát hiện sau khi đóng băng đều phải cắt phiên bản mới; bản cũ giữ nguyên làm bằng chứng.
