@@ -19,9 +19,10 @@ ca hai dat truoc truy xuat.
 
 from __future__ import annotations
 
-# sentence_transformers PHAI nap truoc psycopg - xem eval_retrieval.py.
-# Nap sai thu tu lam tien trinh segfault im lang (exit 139).
-import sentence_transformers  # noqa: F401
+try:
+    import sentence_transformers  # noqa: F401
+except ImportError:
+    pass
 
 import time
 from dataclasses import dataclass, field
@@ -43,6 +44,18 @@ class ChunkNguon:
     url: str
     text: str
     source_tier: int | None = None
+    # Diem PHAI di theo chunk ra toi day. Duong risk-coverage (muc 30.4) quet
+    # nguong tren chinh diem nay - khong mang no theo thi khong co truc tau.
+    #
+    # LOI DA CO 2026-08-22: ChunkNguon khong co truong `diem`, con run_c2.py
+    # ghi `getattr(n, "diem", 0.0)`. getattr im lang tra ve mac dinh, nen
+    # 81/81 ban ghi deu co diem_cao_nhat = 0.0 va duong cong thoai hoa ve mot
+    # diem duy nhat. Khong bao loi o dau ca.
+    #
+    # `diem` la diem SAU rerank khi reranker bat, `diem_rrf` la diem RRF truoc
+    # do (xem rerank.py). Giu ca hai de so sanh duoc hai cach xep hang.
+    diem: float = 0.0
+    diem_rrf: float = 0.0
 
 
 @dataclass
@@ -104,6 +117,31 @@ def tra_loi_cau_hoi(cau_hoi: str,
     kq.intent_nguon = it.nguon
     dh.cham("intent")
 
+    if it.nhan == "greeting":
+        kq.da_tu_choi = False
+        kq.ly_do_tu_choi = None
+        kq.tra_loi = (
+            "Dạ chào bạn! 👋 Tôi là trợ lý AI của Nextfarm.\n\n"
+            "Tôi có thể hỗ trợ bạn tra cứu quy trình kỹ thuật chuẩn khuyến nông, "
+            "kỹ thuật bón phân, độ pH đất và phòng trừ sâu bệnh cho các cây trồng như "
+            "**Lúa**, **Cà chua** và **Dưa chuột** (theo tiêu chuẩn VietGAP/SRI) "
+            "cũng như thông tin về hệ sinh thái Nextfarm.\n\n"
+            "Bạn đang quan tâm đến cây trồng hoặc quy trình kỹ thuật nào hôm nay ạ?"
+        )
+        kq.latency_ms = dh.moc
+        return kq
+
+    if it.nhan == "thanks":
+        kq.da_tu_choi = False
+        kq.ly_do_tu_choi = None
+        kq.tra_loi = (
+            "Dạ không có gì ạ! Rất vui được đồng hành cùng bạn và bà con. "
+            "Chúc bạn một vụ mùa bội thu và thuận lợi! 🌾\n\n"
+            "Nếu cần hỗ trợ thêm thông tin kỹ thuật canh tác, bạn cứ nhắn tôi nhé!"
+        )
+        kq.latency_ms = dh.moc
+        return kq
+
     if it.phai_tu_choi:
         kq.da_tu_choi = True
         kq.ly_do_tu_choi = it.nhan
@@ -131,8 +169,13 @@ def tra_loi_cau_hoi(cau_hoi: str,
             # vi dung khi that su khong biet nguoi dung hoi cay nao.
             kq.ly_do_tu_choi = "can_lam_ro"
             kq.tra_loi = (
-                "Bạn đang hỏi về cây trồng nào ạ? Hiện tôi có tài liệu cho "
-                "lúa, cà chua và dưa chuột.")
+                "Dạ để tư vấn kỹ thuật chính xác nhất theo quy trình khuyến nông, "
+                "bạn vui lòng cho tôi biết bạn đang quan tâm đến cây trồng nào ạ?\n\n"
+                "Hiện Nextfarm có tài liệu chuẩn cho:\n"
+                "- 🌾 **Cây Lúa** (quy trình canh tác SRI, VietGAP)\n"
+                "- 🍅 **Cây Cà chua** (kỹ thuật bón phân, độ ẩm, sâu bệnh)\n"
+                "- 🥒 **Cây Dưa chuột** (chuẩn bị đất, độ pH, chế độ tưới)\n\n"
+                "Hoặc bạn có thể bấm vào các câu hỏi gợi ý bên dưới nhé! 🌱")
         kq.latency_ms = dh.moc
         return kq
 
@@ -158,7 +201,8 @@ def tra_loi_cau_hoi(cau_hoi: str,
         return kq
 
     kq.nguon = [ChunkNguon(c.chunk_id, c.document_title, c.publisher,
-                           c.url, c.text, c.source_tier) for c in chunks]
+                           c.url, c.text, c.source_tier,
+                           c.diem, c.diem_rrf) for c in chunks]
 
     if not dung_llm:
         kq.tra_loi = "(dung truoc buoc goi model)"

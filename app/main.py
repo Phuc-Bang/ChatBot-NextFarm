@@ -21,9 +21,10 @@ tien mat 16s trong khi ngan sach ASM-01 la 5s.
 
 from __future__ import annotations
 
-# sentence_transformers PHAI nap truoc psycopg - xem eval_retrieval.py.
-# Nap sai thu tu lam tien trinh segfault im lang (exit 139).
-import sentence_transformers  # noqa: F401
+try:
+    import sentence_transformers  # noqa: F401
+except ImportError:
+    pass
 
 import time
 from contextlib import asynccontextmanager

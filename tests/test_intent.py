@@ -352,3 +352,11 @@ def test_deterministic():
     q, ctx = "thế giờ đang bao nhiêu", ["cà chua khu A độ ẩm bao nhiêu là được ạ"]
     a, b = R.phan_loai(q, ctx), R.phan_loai(q, ctx)
     assert (a.nhan, a.do_tin_cay, a.khu, a.chi_so) == (b.nhan, b.do_tin_cay, b.khu, b.chi_so)
+
+
+def test_chao_hoi_va_cam_on():
+    for q in ["hello bạn", "chào bạn", "xin chào", "hi", "bạn là ai", "bạn có thể làm gì"]:
+        assert nhan(q) == R.GREETING, q
+    for q in ["cảm ơn", "cảm ơn bạn", "thanks", "ok cảm ơn em"]:
+        assert nhan(q) == R.THANKS, q
+

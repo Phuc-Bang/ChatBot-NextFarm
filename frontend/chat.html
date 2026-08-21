@@ -692,11 +692,19 @@ html, body {
   transition: all 0.2s ease;
 }
 
-.bot-card-box.grounded {
+.bot-card-box.grounded,
+.bot-card-box.assistant,
+.bot-card-box.clarify {
   border-left: 4px solid var(--brand);
+  background: var(--bg-card);
 }
 
-.bot-card-box.abstained {
+.bot-card-box.scope {
+  border-left: 4px solid #3b82f6;
+  background: var(--bg-card);
+}
+
+.bot-card-box.notice {
   background: var(--amber-bg);
   border-color: var(--amber-border);
   border-left: 4px solid var(--amber);
@@ -715,13 +723,26 @@ html, body {
   margin-bottom: 12px;
 }
 
-.bot-status-tag.grounded {
+.bot-status-tag.grounded,
+.bot-status-tag.assistant {
   background: var(--emerald-bg);
   color: var(--brand);
   border: 1px solid var(--emerald-border);
 }
 
-.bot-status-tag.abstained {
+.bot-status-tag.clarify {
+  background: var(--brand-light);
+  color: var(--brand);
+  border: 1px solid var(--emerald-border);
+}
+
+.bot-status-tag.scope {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.bot-status-tag.notice {
   background: var(--amber-bg);
   color: var(--amber-dark);
   border: 1px solid var(--amber-border);
@@ -1206,15 +1227,15 @@ const STORAGE_KEY = "nextfarm_conversations_v6";
 const ACTIVE_KEY = "nextfarm_active_id_v6";
 
 const REASON_LABELS = {
-  garden_data:           "Chặn số liệu cảm biến vườn (A1)",
-  product_feature:       "Chặn tính năng ứng dụng (A2)",
-  device_control:        "Chặn lệnh điều khiển thiết bị",
-  out_of_scope:          "Ngoài phạm vi cây trồng",
-  insufficient_evidence: "Chưa đủ căn cứ khuyến nông trong kho",
-  grounding_khong_dat:   "Không đạt kiểm chứng văn bản",
-  can_lam_ro:            "Cần làm rõ thêm loại cây",
-  loi_he_thong:          "Hệ thống bận (API Rate Limit)",
-  loi_dinh_dang:         "Lỗi cấu trúc câu trả lời",
+  garden_data:           "Lưu ý số liệu cảm biến vườn (A1)",
+  product_feature:       "Lưu ý tính năng ứng dụng (A2)",
+  device_control:        "Lưu ý điều khiển thiết bị",
+  out_of_scope:          "Phạm vi cây trồng hiện tại",
+  insufficient_evidence: "Chưa đủ tài liệu khuyến nông trong kho",
+  grounding_khong_dat:   "Không đạt đối chiếu tài liệu",
+  can_lam_ro:            "Gợi ý lựa chọn cây trồng",
+  loi_he_thong:          "Hệ thống đang bận",
+  loi_dinh_dang:         "Đang xử lý câu trả lời",
 };
 
 const ICON_VERIFIED = '<svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>';
@@ -1475,12 +1496,35 @@ function appendMsgDom(msg) {
     row.innerHTML = `<div class="msg-user-bubble">${escapeHtml(msg.content)}</div>`;
   } else {
     row.className = "msg-bot-row";
-    const isAbstain = msg.isAbstained;
-    const badgeClass = isAbstain ? "abstained" : "grounded";
-    const badgeIcon = isAbstain ? ICON_WARNING : ICON_VERIFIED;
-    const badgeText = isAbstain 
-      ? (REASON_LABELS[msg.reason] || "Từ chối an toàn theo quy chuẩn")
-      : "Có căn cứ tài liệu chính thống";
+    let badgeClass = "grounded";
+    let badgeIcon = ICON_VERIFIED;
+    let badgeText = "Có căn cứ tài liệu chính thống";
+
+    if (msg.isAbstained) {
+      if (msg.reason === "can_lam_ro") {
+        badgeClass = "clarify";
+        badgeIcon = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M12 21V9M12 9C12 6 9 3 5 3c0 4 3 6 7 6M12 9c0-3 3-6 7-6 0 4-3 6-7 6"/></svg>';
+        badgeText = "Gợi ý cây trồng";
+      } else if (msg.reason === "out_of_scope") {
+        badgeClass = "scope";
+        badgeIcon = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.3"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>';
+        badgeText = "Phạm vi cây trồng";
+      } else {
+        badgeClass = "notice";
+        badgeIcon = ICON_WARNING;
+        badgeText = REASON_LABELS[msg.reason] || "Lưu ý tư vấn";
+      }
+    } else {
+      if (!msg.sources || !msg.sources.length) {
+        badgeClass = "assistant";
+        badgeIcon = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M12 21V9M12 9C12 6 9 3 5 3c0 4 3 6 7 6M12 9c0-3 3-6 7-6 0 4-3 6-7 6"/></svg>';
+        badgeText = "Trợ lý Nextfarm AI";
+      } else {
+        badgeClass = "grounded";
+        badgeIcon = ICON_VERIFIED;
+        badgeText = "Có căn cứ tài liệu chính thống";
+      }
+    }
 
     const formattedContent = renderRichContent(msg.content, msg.sources);
     const sourcesHtml = renderSourcesHtml(msg.sources);

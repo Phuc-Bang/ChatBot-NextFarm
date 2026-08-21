@@ -67,6 +67,8 @@ AGRONOMY = "agronomy_knowledge"
 GARDEN_DATA = "garden_data"
 PRODUCT_FEATURE = "product_feature"
 DEVICE_CONTROL = "device_control"
+GREETING = "greeting"
+THANKS = "thanks"
 
 NHAN_TU_CHOI = (GARDEN_DATA, PRODUCT_FEATURE, DEVICE_CONTROL)
 
@@ -422,7 +424,42 @@ def _luat_garden_data(kd: str) -> tuple[float, list[str]] | None:
     return (0.95 if len(nhom) == 3 else 0.85), bc
 
 
+TU_CHAO_HOI = [
+    "hello", "xin chao", "chao", "hi", "hey", "chao ban", "chao em", "chao ad",
+    "chao bot", "he lo", "alo", "hi ban", "hello ban", "good morning", "chuc buoi sang",
+    "ban la ai", "may la ai", "ai day", "gioi thieu", "gioi thieu ve ban",
+    "ban co the lam gi", "ban lam duoc gi", "ban giup duoc gi", "tro giup", "huong dan",
+]
+
+TU_CAM_ON = [
+    "cam on", "cam on ban", "cam on em", "cam on ad", "cam on nhe", "thanks",
+    "thank you", "ok cam on", "da cam on", "tam biet", "bye", "bye bye",
+]
+
+
+def _luat_chao_hoi(kd: str) -> tuple[float, list[str]] | None:
+    tu_khoa = _tim(kd, TU_CHAO_HOI)
+    if tu_khoa:
+        words = kd.strip().split()
+        if len(words) <= 8:
+            return 1.0, ["chao hoi / lam quen: " + tu_khoa[0]]
+        if any(kd.startswith(p) for p in ("ban la ai", "gioi thieu", "ban co the", "ban lam duoc", "ban giup duoc")):
+            return 1.0, ["hoi nang luc tro ly: " + tu_khoa[0]]
+    return None
+
+
+def _luat_cam_on(kd: str) -> tuple[float, list[str]] | None:
+    tu_khoa = _tim(kd, TU_CAM_ON)
+    if tu_khoa:
+        words = kd.strip().split()
+        if len(words) <= 6:
+            return 1.0, ["cam on / tam biet: " + tu_khoa[0]]
+    return None
+
+
 LUAT = (
+    (GREETING, _luat_chao_hoi),
+    (THANKS, _luat_cam_on),
     (DEVICE_CONTROL, _luat_device_control),
     (PRODUCT_FEATURE, _luat_product_feature),
     (GARDEN_DATA, _luat_garden_data),
