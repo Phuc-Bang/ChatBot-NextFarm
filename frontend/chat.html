@@ -54,7 +54,7 @@
 [data-theme="dark"] {
   --primary: #10b981;
   --primary-hover: #34d399;
-  --primary-light: #064e3b33;
+  --primary-light: #064e3b44;
   --primary-glow: rgba(16, 185, 129, 0.3);
   
   --bg-app: #0b1120;
@@ -595,6 +595,7 @@ html, body {
   border-radius: var(--radius-md);
   padding: 16px 18px;
   box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
 }
 
 .bot-card-box.grounded {
@@ -636,13 +637,51 @@ html, body {
 
 .bot-text-content {
   font-size: 15px;
-  line-height: 1.65;
+  line-height: 1.68;
   color: var(--text-main);
-  white-space: pre-wrap;
   word-wrap: break-word;
 }
+.bot-text-content p { margin-bottom: 10px; }
+.bot-text-content p:last-child { margin-bottom: 0; }
+.bot-text-content ul, .bot-text-content ol { margin: 8px 0 10px 20px; }
+.bot-text-content li { margin-bottom: 4px; }
+.bot-text-content strong { color: var(--text-main); font-weight: 700; }
+.bot-text-content code {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+}
 
-/* Citations */
+/* Inline Citation Pill */
+.cite-ref-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary);
+  background: var(--primary-light);
+  border: 1px solid var(--emerald-border);
+  border-radius: 4px;
+  padding: 1px 5px;
+  margin: 0 3px;
+  text-decoration: none;
+  cursor: pointer;
+  vertical-align: 1px;
+  transition: all 0.15s ease;
+  line-height: 1.2;
+}
+.cite-ref-pill:hover {
+  background: var(--primary);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+}
+
+/* Citations Section */
 .citations-wrapper {
   margin-top: 14px;
   padding-top: 12px;
@@ -654,7 +693,7 @@ html, body {
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--text-muted);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   display: flex;
   align-items: center;
   gap: 5px;
@@ -664,23 +703,43 @@ html, body {
   background: var(--bg-subtle);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  padding: 9px 12px;
-  margin-bottom: 5px;
+  padding: 10px 12px;
+  margin-bottom: 6px;
   text-decoration: none;
   color: inherit;
-  transition: all 0.15s ease;
+  transition: all 0.18s ease;
+  scroll-margin-top: 70px;
 }
 .citation-card-link:hover {
   border-color: var(--primary);
   background: var(--bg-card);
   transform: translateX(2px);
+  box-shadow: var(--shadow-sm);
+}
+.citation-card-link.highlight {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  box-shadow: 0 0 0 2px var(--primary-glow);
 }
 .citation-head-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
+}
+.citation-doc-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.citation-index-badge {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--primary);
+  color: #ffffff;
 }
 .citation-doc-name {
   font-size: 13px;
@@ -697,12 +756,13 @@ html, body {
   border: 1px solid var(--emerald-border);
 }
 .citation-quote-txt {
-  font-size: 12px;
+  font-size: 12.5px;
   color: var(--text-muted);
   border-left: 2px solid var(--primary);
-  padding-left: 6px;
-  margin-top: 3px;
+  padding-left: 8px;
+  margin-top: 4px;
   font-style: italic;
+  line-height: 1.45;
 }
 
 .bot-tools-row {
@@ -1017,8 +1077,8 @@ textarea#main-query-input {
 
 <div class="toast-bar" id="toast-bar">Đã sao chép vào bộ nhớ tạm!</div>
 <script>
-const STORAGE_KEY = "nextfarm_conversations_v4";
-const ACTIVE_KEY = "nextfarm_active_id_v4";
+const STORAGE_KEY = "nextfarm_conversations_v5";
+const ACTIVE_KEY = "nextfarm_active_id_v5";
 
 const REASON_LABELS = {
   garden_data:           "Chặn số liệu cảm biến vườn (A1)",
@@ -1224,6 +1284,73 @@ function renderActiveChat() {
   scrollArea.scrollTop = scrollArea.scrollHeight;
 }
 
+/**
+ * Format raw markdown and citations into rich, clean HTML.
+ * Transforms raw [chunk_id] into sleek interactive citation pill badges [1], [2]...
+ */
+function renderRichContent(rawText, sources) {
+  if (!rawText) return "";
+  
+  // 1. Build map of chunk_id to 1-indexed citation number
+  const chunkMap = new Map();
+  if (sources && sources.length) {
+    sources.forEach((s, idx) => {
+      if (s.chunk_id) chunkMap.set(s.chunk_id, idx + 1);
+    });
+  }
+
+  // 2. Escape HTML first
+  let html = escapeHtml(rawText);
+
+  // 3. Replace raw [chunk_id#num] or [chunk_id] with clickable citation pill
+  html = html.replace(/\[([a-zA-Z0-9_\-#]+)\]/g, (match, chunkId) => {
+    let index = chunkMap.get(chunkId);
+    if (!index) {
+      // If not mapped yet, assign new index
+      index = chunkMap.size + 1;
+      chunkMap.set(chunkId, index);
+    }
+    const sourceObj = (sources && sources[index - 1]) || { chunk_id: chunkId };
+    const docTitle = escapeHtml(sourceObj.tieu_de || sourceObj.chunk_id || chunkId);
+    return `<a class="cite-ref-pill" href="#cite-${index}" data-cite-target="cite-${index}" title="Trích dẫn [${index}]: ${docTitle}">[${index}]</a>`;
+  });
+
+  // 4. Parse Markdown syntax
+  // Bold **text**
+  html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  // Italic *text*
+  html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+  // Inline code `code`
+  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+  // Parse Lists (- item or * item)
+  const lines = html.split('\n');
+  let inList = false;
+  let result = [];
+
+  for (let line of lines) {
+    const trimmed = line.trim();
+    if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+      if (!inList) {
+        result.push('<ul>');
+        inList = true;
+      }
+      result.push(`<li>${trimmed.substring(2)}</li>`);
+    } else {
+      if (inList) {
+        result.push('</ul>');
+        inList = false;
+      }
+      if (trimmed.length > 0) {
+        result.push(`<p>${line}</p>`);
+      }
+    }
+  }
+  if (inList) result.push('</ul>');
+
+  return result.join('');
+}
+
 function appendMsgDom(msg) {
   const row = document.createElement("div");
 
@@ -1239,6 +1366,7 @@ function appendMsgDom(msg) {
       ? (REASON_LABELS[msg.reason] || "Từ chối an toàn theo quy chuẩn")
       : "Có căn cứ tài liệu chính thống";
 
+    const formattedContent = renderRichContent(msg.content, msg.sources);
     const sourcesHtml = renderSourcesHtml(msg.sources);
 
     row.innerHTML = `
@@ -1250,7 +1378,7 @@ function appendMsgDom(msg) {
           ${badgeIcon}
           <span>${escapeHtml(badgeText)}</span>
         </div>
-        <div class="bot-text-content">${escapeHtml(msg.content)}</div>
+        <div class="bot-text-content">${formattedContent}</div>
         ${sourcesHtml}
         <div class="bot-tools-row">
           <button class="btn-tool-pill copy-btn" title="Sao chép câu trả lời">
@@ -1265,7 +1393,22 @@ function appendMsgDom(msg) {
       </div>
     `;
 
+    // Interactive Citation Click Handling
+    row.querySelectorAll(".cite-ref-pill").forEach(pill => {
+      pill.onclick = (e) => {
+        e.preventDefault();
+        const targetId = pill.getAttribute("data-cite-target");
+        const targetCard = row.querySelector(`#${targetId}`);
+        if (targetCard) {
+          targetCard.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          targetCard.classList.add("highlight");
+          setTimeout(() => targetCard.classList.remove("highlight"), 1800);
+        }
+      };
+    });
+
     row.querySelector(".copy-btn").onclick = () => {
+      // Clean raw text citations if needed or copy plain text
       navigator.clipboard.writeText(msg.content);
       showToast("Đã sao chép nội dung!");
     };
@@ -1273,7 +1416,9 @@ function appendMsgDom(msg) {
     row.querySelector(".speak-btn").onclick = () => {
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
-        const utter = new SpeechSynthesisUtterance(msg.content);
+        // Remove raw bracket citations when speaking for natural pronunciation
+        const cleanSpeakText = msg.content.replace(/\[[^\]]+\]/g, "");
+        const utter = new SpeechSynthesisUtterance(cleanSpeakText);
         utter.lang = 'vi-VN';
         window.speechSynthesis.speak(utter);
         showToast("Đang phát âm tiếng Việt...");
@@ -1294,10 +1439,13 @@ function renderSourcesHtml(sources) {
         <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
         <span>Tài liệu trích dẫn kiểm chứng (${sources.length})</span>
       </div>
-      ${sources.map(s => `
-        <a class="citation-card-link" href="${escapeHtml(s.url || '#')}" target="_blank" rel="noopener noreferrer">
+      ${sources.map((s, idx) => `
+        <a class="citation-card-link" id="cite-${idx + 1}" href="${escapeHtml(s.url || '#')}" target="_blank" rel="noopener noreferrer">
           <div class="citation-head-row">
-            <span class="citation-doc-name">${escapeHtml(s.tieu_de || s.chunk_id)}</span>
+            <div class="citation-doc-left">
+              <span class="citation-index-badge">${idx + 1}</span>
+              <span class="citation-doc-name">${escapeHtml(s.tieu_de || s.chunk_id)}</span>
+            </div>
             ${s.tier ? `<span class="citation-tier-pill">Tier ${s.tier}</span>` : ''}
           </div>
           <div class="citation-quote-txt">"${escapeHtml(s.trich || "")}"</div>
