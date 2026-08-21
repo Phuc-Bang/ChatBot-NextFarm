@@ -165,3 +165,11 @@ def trang_admin():
     if not f.exists():
         return JSONResponse({"loi": "chua co frontend/admin.html"}, 404)
     return FileResponse(f)
+
+
+@app.get("/report")
+def trang_report():
+    f = WEB / "report.html"
+    if not f.exists():
+        return JSONResponse({"loi": "chua co frontend/report.html"}, 404)
+    return FileResponse(f)
