@@ -130,3 +130,33 @@ def test_endpoint_ghi_diem_di_qua_canh_cua():
             "de duoc ket qua danh gia chuyen gia"
         return
     raise AssertionError("khong tim thay endpoint /api/expert/save")
+
+
+def test_khong_ghi_de_ban_ghi_bang_phieu_rong():
+    """POST rong khong duoc xoa cong cham cua chuyen gia.
+
+    SU CO THAT trong luc kiem thu 2026-08-22: mot lenh
+    `curl -X POST -d '{}' /api/expert/save` tra ve 200 va lam file diem con
+    dung hai ky tu `{}`. Endpoint THAY THE toan bo ban ghi, nen mot than yeu
+    cau sai la mat sach cong cham.
+    """
+    from fastapi.testclient import TestClient
+
+    from app.main import app
+
+    with TestClient(app) as c:
+        h = {"X-Admin-Token": "t"}
+        import os
+        os.environ["ADMIN_TOKEN"] = "t"
+        try:
+            for than in ({}, {"reviewer": "Nguyen Van A"},
+                         {"scores": {"cau_1": {"c1": 5}}},
+                         {"reviewer": "  ", "scores": {"cau_1": {"c1": 5}}},
+                         {"reviewer": "Nguyen Van A", "scores": {}}):
+                r = c.post("/api/expert/save", json=than, headers=h)
+                assert r.status_code == 400, \
+                    "than " + str(than) + " duoc chap nhan (HTTP " \
+                    + str(r.status_code) + ") - no se ghi de ban ghi danh gia"
+                assert "loi" in r.json()
+        finally:
+            os.environ.pop("ADMIN_TOKEN", None)

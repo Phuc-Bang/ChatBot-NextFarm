@@ -296,6 +296,24 @@ async def luu_diem_chuyen_gia(req: Request):
     try:
         import json
         payload = await req.json()
+
+        # Kiem truoc khi ghi de. Endpoint nay THAY THE toan bo ban ghi danh
+        # gia - mot POST rong se xoa sach cong cham cua chuyen gia ma khong
+        # bao gi. Da xay ra khi kiem thu: `curl -d '{}'` lam file con dung
+        # hai ky tu.
+        if not isinstance(payload, dict):
+            return JSONResponse({"loi": "than yeu cau phai la object JSON"}, 400)
+        nguoi = str(payload.get("reviewer") or "").strip()
+        diem = payload.get("scores")
+        if not nguoi:
+            return JSONResponse(
+                {"loi": "thieu 'reviewer' - diem cham phai kem ten nguoi "
+                        "chiu trach nhiem"}, 400)
+        if not isinstance(diem, dict) or not diem:
+            return JSONResponse(
+                {"loi": "thieu 'scores' - khong ghi de ban ghi danh gia bang "
+                        "mot phieu rong"}, 400)
+
         score_file = BASE / "evaluation" / "results" / "expert_scores.json"
         score_file.parent.mkdir(parents=True, exist_ok=True)
         score_file.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
