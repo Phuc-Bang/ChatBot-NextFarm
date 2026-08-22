@@ -198,3 +198,39 @@ def test_trang_expert_khong_tu_dien_ten_nguoi_cham():
         m = re.search(re.escape(nut) + r'"\)\.onclick[\s\S]{0,300}', ma)
         assert m and "layTenNguoiCham()" in m.group(0), \
             nut + " xuat ma khong doi ten nguoi cham"
+
+
+def test_trang_expert_co_luu_len_may_chu():
+    """Nut "Luu" phai luu THAT, khong chi vao localStorage.
+
+    SU CO THAT 2026-08-22
+
+    Trang /expert co nut "Luu & Tiep tuc" va o trang thai hien "Da luu luc
+    HH:MM:SS". Nguoi cham doc dong do va tin la xong. That ra ham dang sau
+    ten la `saveLocal` va chi ghi vao localStorage - trang KHONG BAO GIO goi
+    /api/expert/save.
+
+    Hau qua: cham xong 50 cau thi cong cham nam trong trinh duyet, khong toi
+    may chu, khong vao git, va khong ai ngoai cai may do nhin thay. Xoa du
+    lieu duyet web la mat sach.
+
+    Test canh hai dieu: trang co goi endpoint ghi, va no khong con bao "da
+    luu" mot cach vo dieu kien.
+    """
+    import re
+
+    html = (GOC / "frontend" / "expert.html").read_text(encoding="utf-8")
+    js = "\n".join(m.group(1) for m in
+                   re.finditer(r"<script>([\s\S]*?)</script>", html))
+    ma = "\n".join(re.sub(r"//.*$", "", d) for d in js.splitlines())
+
+    assert '"/api/expert/save"' in ma or "'/api/expert/save'" in ma, \
+        "expert.html khong goi /api/expert/save - cong cham chi nam trong " \
+        "localStorage, khong toi may chu va khong vao git"
+
+    assert "POST" in ma, "khong thay yeu cau POST nao de ghi diem"
+
+    # Phai phan biet duoc "luu trong trinh duyet" voi "luu len may chu".
+    assert "lên máy chủ" in js, \
+        "dong trang thai khong phan biet luu trinh duyet voi luu may chu - " \
+        "nguoi cham khong biet cong cua minh dang o dau"

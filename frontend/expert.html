@@ -768,7 +768,7 @@ main.review-workspace {
         </div>
 
         <div class="save-action-row">
-          <span style="font-size:12px; color:var(--text-muted);" id="save-status-text">Đã tự động lưu vào trình duyệt</span>
+          <span style="font-size:12px; color:var(--text-muted);" id="save-status-text">Chưa chấm câu nào</span>
           <button class="btn-header primary" id="btn-save-next">Lưu & Tiếp tục (Space / Enter) →</button>
         </div>
       </div>
@@ -849,6 +849,17 @@ async function loadSaved() {
   } catch(e) {}
 }
 
+// LOI DA CO 2026-08-22: ham nay ten la `saveLocal` nhung nut goi no ghi
+// "Luu & Tiep tuc", va o trang thai hien "Da luu luc HH:MM:SS". Nguoi cham
+// doc dong do va tin la da luu xong. That ra du lieu chi nam trong
+// localStorage cua trinh duyet - trang KHONG BAO GIO goi /api/expert/save,
+// nen khong co gi toi may chu, khong co gi vao git, va xoa du lieu duyet web
+// la mat sach cong cham 50 cau.
+//
+// Nay: van luu localStorage ngay (nhap la thay luu, khong cho mang), roi
+// day len may chu. Dong trang thai noi RO da luu toi dau.
+let _hen_dong_bo = null;
+
 function saveLocal() {
   const payload = {
     reviewer: $reviewerInput.value.trim(),
@@ -856,8 +867,44 @@ function saveLocal() {
     scores: evaluations
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
-  $saveStatus.textContent = "Đã lưu lúc " + new Date().toLocaleTimeString("vi-VN");
   updateProgress();
+
+  if (!payload.reviewer) {
+    // May chu tu choi phieu khong co ten nguoi chiu trach nhiem - dung, va
+    // phai noi that thay vi bao "da luu".
+    $saveStatus.textContent = "Đã lưu trong trình duyệt — nhập tên người chấm để lưu lên máy chủ";
+    return;
+  }
+  if (!Object.keys(evaluations).length) {
+    $saveStatus.textContent = "Chưa có câu nào được chấm";
+    return;
+  }
+
+  $saveStatus.textContent = "Đang lưu lên máy chủ…";
+  clearTimeout(_hen_dong_bo);
+  _hen_dong_bo = setTimeout(() => dongBoLenMayChu(payload), 400);
+}
+
+async function dongBoLenMayChu(payload) {
+  try {
+    const r = await fetch("/api/expert/save", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    if (r.ok) {
+      $saveStatus.textContent = "Đã lưu lên máy chủ lúc "
+        + new Date().toLocaleTimeString("vi-VN");
+    } else {
+      let mo = "";
+      try { mo = (await r.json()).loi || ""; } catch (e) {}
+      $saveStatus.textContent = "CHƯA lưu được lên máy chủ (HTTP " + r.status
+        + (mo ? " — " + mo : "") + "). Bản nháp vẫn còn trong trình duyệt.";
+    }
+  } catch (e) {
+    $saveStatus.textContent =
+      "CHƯA lưu được lên máy chủ (mất kết nối). Bản nháp vẫn còn trong trình duyệt.";
+  }
 }
 
 async function fetchCases() {
