@@ -1,0 +1,30 @@
+{"id": "reg_01", "crop": "lua", "region": "dong_bang_song_hong", "question": "Thời vụ gieo cấy lúa vụ xuân ở vùng đồng bằng sông Hồng khi nào?", "target_region": "dong_bang_song_hong"}
+{"id": "reg_02", "crop": "lua", "region": "dong_bang_song_hong", "question": "Kinh nghiệm bón phân NPK Văn Điển cho lúa xuân ở miền Bắc", "target_region": "dong_bang_song_hong"}
+{"id": "reg_03", "crop": "dua_chuot", "region": "dong_bang_song_hong", "question": "Kỹ thuật trồng dưa chuột vụ đông tại Ninh Bình", "target_region": "dong_bang_song_hong"}
+{"id": "reg_04", "crop": "dua_chuot", "region": "dong_bang_song_hong", "question": "Quy trình chăm sóc và tưới nước dưa chuột Ninh Bình", "target_region": "dong_bang_song_hong"}
+{"id": "reg_05", "crop": "ca_chua", "region": "dong_bang_song_hong", "question": "Hướng luống và chiều rộng luống trồng cà chua Ninh Bình", "target_region": "dong_bang_song_hong"}
+{"id": "reg_06", "crop": "lua", "region": "bac_trung_bo", "question": "Phòng trừ sâu rầy hại lúa hè thu ở Hà Tĩnh", "target_region": "bac_trung_bo"}
+{"id": "reg_07", "crop": "lua", "region": "bac_trung_bo", "question": "Liều lượng phun thuốc Chess và Sutin trừ rầy tại Hà Tĩnh", "target_region": "bac_trung_bo"}
+{"id": "reg_08", "crop": "dua_chuot", "region": "bac_trung_bo", "question": "Mật độ trồng dưa chuột VietGAP tại Hà Tĩnh vụ xuân", "target_region": "bac_trung_bo"}
+{"id": "reg_09", "crop": "dua_chuot", "region": "bac_trung_bo", "question": "Khoảng cách cắm giàn chữ A cho dưa chuột ở Hà Tĩnh", "target_region": "bac_trung_bo"}
+{"id": "reg_09b", "crop": "ca_chua", "region": "bac_trung_bo", "question": "Trồng cà chua VietGAP trong nhà kính ở vùng Hà Tĩnh", "target_region": "bac_trung_bo"}
+{"id": "reg_10", "crop": "ca_chua", "region": "dong_nam_bo", "question": "Quy trình kỹ thuật trồng cà chua bi Solanum lycopersicum tại TPHCM", "target_region": "dong_nam_bo"}
+{"id": "reg_11", "crop": "ca_chua", "region": "dong_nam_bo", "question": "Hệ thống tưới nhỏ giọt cho cà chua bi ở khu vực phía Nam", "target_region": "dong_nam_bo"}
+{"id": "reg_12", "crop": "ca_chua", "region": "trung_du_mien_nui", "question": "Mô hình trồng cà chua VietGAP tại Mộc Châu Sơn La", "target_region": "trung_du_mien_nui"}
+{"id": "reg_13", "crop": "dua_chuot", "region": "trung_du_mien_nui", "question": "Kỹ thuật trồng dưa chuột vụ xuân hè ở Lai Châu", "target_region": "trung_du_mien_nui"}
+{"id": "reg_14", "crop": "lua", "region": "dong_bang_song_cuu_long", "question": "Giải pháp cấy lúa bằng máy thích ứng biến đổi khí hậu ở ĐBSCL", "target_region": "dong_bang_song_cuu_long"}
+{"id": "reg_15", "crop": "lua", "region": "dong_bang_song_cuu_long", "question": "Cách né hạn mặn cuối vụ cho lúa tại vùng đồng bằng sông Cửu Long", "target_region": "dong_bang_song_cuu_long"}
+{"id": "reg_16", "crop": "lua", "region": "dong_bang_song_hong", "question": "Khắc phục mưa bão do hoàn lưu bão cho lúa tại Ninh Bình", "target_region": "dong_bang_song_hong"}
+{"id": "reg_17", "crop": "lua", "region": "dong_bang_song_hong", "question": "Bón phân lót sâu cho lúa xuân ở đồng bằng Bắc Bộ", "target_region": "dong_bang_song_hong"}
+{"id": "reg_18", "crop": "ca_chua", "region": "dong_bang_song_hong", "question": "Nhiệt độ ngâm ủ hạt giống cà chua theo khuyến nông Ninh Bình", "target_region": "dong_bang_song_hong"}
+{"id": "reg_19", "crop": "dua_chuot", "region": "dong_bang_song_hong", "question": "Kỹ thuật bấm ngọn tỉa cành dưa chuột vụ đông Ninh Bình", "target_region": "dong_bang_song_hong"}
+{"id": "reg_20", "crop": "lua", "region": "bac_trung_bo", "question": "Chăm sóc lúa xuân thích ứng thời tiết bất thường ở miền Trung", "target_region": "bac_trung_bo"}
+{"id": "reg_21", "crop": "dua_chuot", "region": "bac_trung_bo", "question": "Kỹ thuật làm bầu ươm hạt dưa chuột theo tiêu chuẩn VietGAP Hà Tĩnh", "target_region": "bac_trung_bo"}
+{"id": "reg_22", "crop": "ca_chua", "region": "bac_trung_bo", "question": "Năng suất cà chua VietGAP khi trồng trong nhà màng tại miền Trung", "target_region": "bac_trung_bo"}
+{"id": "reg_23", "crop": "ca_chua", "region": "dong_nam_bo", "question": "Thời vụ trồng cà chua bi phù hợp khí hậu miền Nam", "target_region": "dong_nam_bo"}
+{"id": "reg_24", "crop": "dua_chuot", "region": "trung_du_mien_nui", "question": "Phòng trừ bệnh lở cổ rễ trên dưa chuột vùng cao Lai Châu", "target_region": "trung_du_mien_nui"}
+{"id": "reg_25", "crop": "lua", "region": "dong_bang_song_cuu_long", "question": "Sử dụng máy cấy lúa giảm giống gieo sạ tại các tỉnh phía Nam", "target_region": "dong_bang_song_cuu_long"}
+{"id": "reg_26", "crop": "lua", "region": "dong_bang_song_hong", "question": "Bón đạm cân đối cho lúa khi trời rét ở miền Bắc", "target_region": "dong_bang_song_hong"}
+{"id": "reg_27", "crop": "ca_chua", "region": "dong_bang_song_hong", "question": "Tưới nước nhỏ giọt kết hợp bón phân cho cà chua ở Ninh Bình", "target_region": "dong_bang_song_hong"}
+{"id": "reg_28", "crop": "dua_chuot", "region": "bac_trung_bo", "question": "Thời gian thu hoạch dưa chuột ăn tươi tại Hà Tĩnh", "target_region": "bac_trung_bo"}
+{"id": "reg_29", "crop": "lua", "region": "dong_bang_song_cuu_long", "question": "Đặc tính bộ rễ lúa cấy máy chống ngã đổ khi mưa lớn miền Tây", "target_region": "dong_bang_song_cuu_long"}

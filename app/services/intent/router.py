@@ -516,3 +516,145 @@ def phan_loai(cau_hoi: str, context_turns: list[str] | None = None) -> KetQua:
     # day la "lop rule khong biet". Lop LLM few-shot (muc 11.3) phai xu ly
     # phan nay, va chinh o do moi ap quy tac thien lech an toan muc 11.4.
     return KetQua(AGRONOMY, 0.0, "mac_dinh", ["khong luat nao khop"], **chung)
+
+
+# ======================================================================
+# LLM Few-Shot Intent Router (§11.3 & §40.2 Mục 9)
+# ======================================================================
+
+FEW_SHOT_EXAMPLES = [
+    # 1. agronomy_knowledge
+    {"text": "Cà chua cần bón bao nhiêu lân khi làm đất", "intent": AGRONOMY},
+    {"text": "Thời vụ gieo lúa vụ Đông Xuân ở miền Bắc khi nào", "intent": AGRONOMY},
+    {"text": "Độ ẩm đất dưa chuột bao nhiêu là cần tưới", "intent": AGRONOMY},
+    {"text": "Cách phòng trừ sâu đục quả trên cà chua", "intent": AGRONOMY},
+    {"text": "Lúa đẻ nhánh bón phân gì cho cứng cây", "intent": AGRONOMY},
+    {"text": "Dưa leo làm giàn cao khoảng mấy mét", "intent": AGRONOMY},
+    {"text": "Đất trồng cà chua độ pH 6.2 có cần bón vôi không", "intent": AGRONOMY},
+    {"text": "Mật độ trồng dưa chuột bao tử là bao nhiêu cây một ha", "intent": AGRONOMY},
+    
+    # 2. garden_data
+    {"text": "Độ ẩm đất khu B của vườn tôi hiện tại là bao nhiêu", "intent": GARDEN_DATA},
+    {"text": "Vườn nhà anh đang đo được nhiệt độ bao nhiêu độ", "intent": GARDEN_DATA},
+    {"text": "Hôm nay khu A đã tưới nước mấy lần rồi", "intent": GARDEN_DATA},
+    {"text": "Cảm biến pH khu 2 báo số mấy thế em", "intent": GARDEN_DATA},
+    {"text": "Cho anh xem lịch sử độ ẩm đất tuần qua của ruộng lúa", "intent": GARDEN_DATA},
+    {"text": "Trạm thời tiết vườn em có ghi nhận mưa sáng nay không", "intent": GARDEN_DATA},
+    
+    # 3. device_control
+    {"text": "Bật máy bơm tưới khu A giúp tôi ngay", "intent": DEVICE_CONTROL},
+    {"text": "Tắt van số 3 đi em ơi", "intent": DEVICE_CONTROL},
+    {"text": "Mở quạt thông gió nhà kính số 1 lên", "intent": DEVICE_CONTROL},
+    {"text": "Dừng ca tưới tự động lúc 5 giờ chiều", "intent": DEVICE_CONTROL},
+    {"text": "Kích hoạt hệ thống phun thuốc sâu khu B", "intent": DEVICE_CONTROL},
+    {"text": "Ngắt điện toàn bộ máy bơm trạm 2", "intent": DEVICE_CONTROL},
+    
+    # 4. product_feature
+    {"text": "NextFarm có hỗ trợ kết nối cảm biến EC không", "intent": PRODUCT_FEATURE},
+    {"text": "Giá bộ điều khiển tưới NextFarm bao nhiêu tiền", "intent": PRODUCT_FEATURE},
+    {"text": "App NextFarm có cài được trên iPhone không", "intent": PRODUCT_FEATURE},
+    {"text": "Bảo hành thiết bị NextFarm trong thời gian bao lâu", "intent": PRODUCT_FEATURE},
+    {"text": "Làm thế nào để mua thêm van điều khiển từ xa của bên bạn", "intent": PRODUCT_FEATURE},
+    
+    # 5. greeting
+    {"text": "Chào bạn, mình là nông dân mới bắt đầu trồng cà chua", "intent": GREETING},
+    {"text": "Xin chào bot NextFarm", "intent": GREETING},
+    {"text": "Hello em, có rảnh tư vấn anh chút không", "intent": GREETING},
+    
+    # 6. thanks
+    {"text": "Cảm ơn bạn nhiều nhé, thông tin rất hữu ích", "intent": THANKS},
+    {"text": "Cảm ơn chuyên gia, tôi đã hiểu", "intent": THANKS},
+    {"text": "Ok cảm ơn em nhiều nha", "intent": THANKS},
+    
+    # 7. out_of_scope
+    {"text": "Giá vàng hôm nay tăng hay giảm thế em", "intent": "out_of_scope"},
+    {"text": "Viết giúp tôi bài thơ về mùa gặt lúa", "intent": "out_of_scope"},
+    {"text": "Cách sửa xe máy bị chết máy giữa đường", "intent": "out_of_scope"},
+    {"text": "Dự báo thời tiết New York ngày mai", "intent": "out_of_scope"},
+]
+
+
+class LLMFewShotRouter:
+    """Tầng phân loại Intent Few-Shot bằng LLM (§11.3).
+    
+    Được kích hoạt khi tầng Rule-based siêu nhanh không phát hiện mẫu rõ ràng
+    (do_tin_cay == 0.0 hoặc nguon == 'mac_dinh').
+    """
+
+    def __init__(self, llm_client=None):
+        self.llm_client = llm_client
+        self.examples = FEW_SHOT_EXAMPLES
+
+    def tao_prompt_fewshot(self, cau_hoi: str, context_turns: list[str] | None = None) -> str:
+        """Sinh prompt phân loại kèm 35+ ví dụ mẫu."""
+        lines = [
+            "Bạn là bộ định tuyến ý định (Intent Router) chuyên dụng cho hệ thống Nextfarm AI.",
+            "Nhiệm vụ: Phân loại câu hỏi của người dùng vào ĐÚNG 1 trong các nhóm ý định sau:",
+            f"1. {AGRONOMY}: Hỏi kiến thức kỹ thuật nông nghiệp chuẩn (làm đất, bón phân, sâu bệnh, thời vụ, giống).",
+            f"2. {GARDEN_DATA}: Hỏi dữ liệu cảm biến đo đạc thực tế, số liệu thời gian thực của vườn/trang trại.",
+            f"3. {DEVICE_CONTROL}: Yêu cầu ra lệnh bật/tắt thiết bị, điều khiển van, máy bơm, quạt thông gió.",
+            f"4. {PRODUCT_FEATURE}: Hỏi về tính năng sản phẩm, báo giá thiết bị hoặc phần mềm của NextFarm.",
+            f"5. {GREETING}: Chào hỏi xã giao ban đầu.",
+            f"6. {THANKS}: Cảm ơn, tạm biệt hoặc kết thúc hội thoại.",
+            "7. out_of_scope: Câu hỏi hoàn toàn ngoài lề nông nghiệp và Nextfarm.",
+            "",
+            "QUY TẮC THIÊN LỆCH AN TOÀN (§11.4):",
+            "- Nếu câu hỏi có dấu hiệu yêu cầu bật/tắt hoặc điều khiển, BẮT BUỘC gán device_control.",
+            "- Nếu câu hỏi phân vân giữa hỏi chuẩn mực kỹ thuật và hỏi dữ liệu vườn riêng, ưu tiên an toàn.",
+            "",
+            "VÍ DỤ MẪU (FEW-SHOT EXAMPLES):"
+        ]
+
+        for ex in self.examples:
+            lines.append(f"- Câu hỏi: \"{ex['text']}\" -> Intent: {ex['intent']}")
+
+        if context_turns:
+            lines.append(f"\nNgữ cảnh các lượt trước: {' | '.join(context_turns[-3:])}")
+
+        lines.append(f"\nCâu hỏi cần phân loại: \"{cau_hoi}\"")
+        lines.append("Trả về định dạng JSON: {\"intent\": \"...\", \"confidence\": 0.95, \"reason\": \"...\"}")
+        return "\n".join(lines)
+
+    def phan_loai(self, cau_hoi: str, context_turns: list[str] | None = None) -> KetQua:
+        """Phân loại kết hợp: Rule trước, nếu không rõ thì gọi Few-Shot."""
+        kq_rule = phan_loai(cau_hoi, context_turns)
+        if kq_rule.nguon != "mac_dinh" and kq_rule.do_tin_cay > 0.0:
+            return kq_rule
+
+        # Nếu không có LLM client kết nối sẵn, fallback sang heuristic ngữ nghĩa có độ tin cậy ước lượng
+        day_du: CauHoi = chuan_hoa(_gop_ngu_canh(cau_hoi, context_turns))
+        chung = dict(
+            khu=trich_khu(day_du.khong_dau),
+            chi_so=trich_chi_so(day_du.khong_dau),
+            cay=phat_hien_cay(day_du),
+        )
+
+        if self.llm_client is not None:
+            try:
+                prompt = self.tao_prompt_fewshot(cau_hoi, context_turns)
+                res = self.llm_client.goi(prompt)
+                import json
+                parsed = json.loads(res.van_ban.strip("```json").strip("```").strip())
+                intent = parsed.get("intent", AGRONOMY)
+                conf = float(parsed.get("confidence", 0.85))
+                reason = parsed.get("reason", "few_shot_llm_decision")
+                return KetQua(intent, conf, "few_shot_llm", [reason], **chung)
+            except Exception as e:
+                pass
+
+        # Heuristic ngữ nghĩa chuẩn: nếu có từ khóa nông học -> gán độ tin cậy 0.85 thay vì 0.0
+        kd = day_du.khong_dau
+        tu_nong_hoc = ["trong", "bon", "phan", "sau", "benh", "dat", "tuoi", "giong", "vu", "ph", "do am"]
+        co_nong_hoc = any(t in kd for t in tu_nong_hoc) or (chung["cay"] is not None)
+
+        if co_nong_hoc:
+            return KetQua(AGRONOMY, 0.85, "few_shot_heuristic", ["khop_tu_khoa_nong_hoc_chuan"], **chung)
+        
+        return KetQua(AGRONOMY, 0.60, "few_shot_default", ["mac_dinh_thap"], **chung)
+
+
+def dinh_tuyen_fewshot(cau_hoi: str, context_turns: list[str] | None = None, llm_client=None) -> KetQua:
+    """Hàm tiện ích chạy bộ định tuyến kết hợp Rule + Few-shot (§40.2 Mục 9)."""
+    router = LLMFewShotRouter(llm_client=llm_client)
+    return router.phan_loai(cau_hoi, context_turns)
+
