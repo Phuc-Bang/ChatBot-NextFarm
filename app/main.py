@@ -288,6 +288,11 @@ def lay_diem_chuyen_gia():
 
 @app.post("/api/expert/save")
 async def luu_diem_chuyen_gia(req: Request):
+    # Cung canh cua voi /admin. Endpoint nay GHI DE ban ghi danh gia chuyen
+    # gia - thu duy nhat cho ra ty le chinh xac that cua he thong. De no mo
+    # nghia la bat ky ai goi toi cung sua duoc ket qua nghiem thu.
+    if (chan := kiem_quyen_admin(req)) is not None:
+        return chan
     try:
         import json
         payload = await req.json()

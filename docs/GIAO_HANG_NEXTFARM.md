@@ -114,7 +114,7 @@ Test tự động chứng minh điều này: khi model **khai là có đủ căn
 
 ### 1. Triển khai và Đóng gói Production (Giai đoạn 1.5)
 * Đóng gói toàn bộ hệ thống (FastAPI, PostgreSQL + pgvector, local embedding) thành Docker Compose / Kubernetes manifest chuẩn enterprise.
-* Tích hợp pipeline CI/CD kiểm thử tự động với bộ 310 unit tests và bộ runner đánh giá chất lượng RAG trước mỗi bản release.
+* Tích hợp pipeline CI/CD kiểm thử tự động với bộ 349 unit tests và bộ runner đánh giá chất lượng RAG trước mỗi bản release.
 * Cấu hình dashboard giám sát token, chi phí và tỷ lệ từ chối theo thời gian thực (đã có sẵn tại `/admin`).
 
 > **`/admin` mặc định an toàn, nhưng khoá hiện tại là khoá tĩnh — đọc trước khi triển khai.**
@@ -397,7 +397,7 @@ Sinh lại bất cứ lúc nào: `make phieu-cham`
 make up          # PostgreSQL 16 + pgvector
 make check-ext   # xác nhận 3 extension: vector, unaccent, pg_trgm
 make ingest      # dựng lại toàn bộ kho tri thức từ file trong git
-make test        # 310 test tự động
+make test        # 349 test tự động
 
 make smoke       # thử LLM 3 câu — chạy TRƯỚC khi tốn 222 case
 make recall      # đo Recall@K, chọn model embedding

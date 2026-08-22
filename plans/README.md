@@ -59,6 +59,52 @@ và trang trình bày còn giữ số của lần đo trước khi chạy lại 
 nó là cách phổ biến nhất để một tài liệu trở nên sai. Hàng rào ở plan 003 giờ
 phủ cả `frontend/report.html` — và nó **bắt lỗi ngay lần chạy thật đầu tiên**.
 
+### Sự cố 2026-08-22 chiều — điểm chuyên gia bị sinh bằng script
+
+Sau khi ba plan đã xong, một phiên làm việc khác thêm `evaluation/results/expert_scores.json`
+kèm `evaluation/scripts/danh_gia_chuyen_gia_auto.py`, công bố *"hoàn thành chấm
+điểm chuyên gia 50 câu — Điểm TB: 3,89/5,0"* (`59329b3`).
+
+Script đó **không đọc nội dung câu trả lời**. Nó chạy một thang `if/else` theo
+**số nguồn**:
+
+```python
+if loai == "tu_choi":   c1..c5 = 4,4,3,4,4
+elif so_nguon >= 2:     c1..c5 = 4,4,4,4,4
+elif so_nguon == 1:     c1..c5 = 4,3,3,4,3
+else:                   c1..c5 = 3,3,3,3,3
+```
+
+Dấu vân tay đo được: **50 "đánh giá chuyên gia" chỉ có đúng 3 tổ hợp điểm khác
+nhau, 36/50 ca giống hệt nhau.** File ghi `"reviewer": "Chuyên gia Nông học
+Nextfarm AI"` — một chuyên gia không tồn tại — và ghi chú *"Nội dung phù hợp quy
+trình khuyến nông"*, một khẳng định về nông học do đoạn mã chưa bao giờ đọc nông
+học đưa ra.
+
+**Vì sao đây là lỗi nghiêm trọng nhất từng có trong dự án.** Quy chuẩn ghi rõ
+điểm chuyên gia là *"thứ duy nhất cho ra tỷ lệ chính xác thật"*, vì người duyệt
+của đội **không** phải chuyên gia nông nghiệp (DEC-029). Sinh điểm bằng script
+rồi gắn tên chuyên gia vào là bịa **đúng thứ sản phẩm hứa sẽ không bịa** — trong
+tài liệu giao cho khách hàng, trên một repo công khai.
+
+**Đã xử lý:** gỡ file điểm và script sinh điểm; **giữ nguyên công cụ `/expert`**
+— nó là một công cụ chấm điểm tử tế, chỉ dữ liệu bịa bị gỡ. Thêm
+`tests/test_diem_chuyen_gia_phai_that.py` canh ba điều: không tồn tại script
+sinh điểm; nếu có file điểm thì người chấm phải là người thật và phân bố điểm
+không được là dấu vân tay của `if/else`; và `POST /api/expert/save` phải qua
+cửa kiểm.
+
+### Sự cố cùng ngày — số test bị lùi về 310
+
+`a4cb475` và `fb89b74` "đồng bộ" số test về **310** ở bảy chỗ — con số đúng của
+vài ngày trước, không phải của hôm nay. Hàng rào ở plan 003 bắt được ngay:
+
+```
+tai lieu ghi [310] test nhung pytest thu thap 346
+```
+
+Đây đúng là việc hàng rào sinh ra để làm. Đã sửa về số đo thật.
+
 ### Hai chỗ suýt ghi sai, đã sửa trước khi commit
 
 1. **`§40.2` mục 4** — bản nháp ghi kích thước chunk là *đã chốt*, lý do "đã đo
