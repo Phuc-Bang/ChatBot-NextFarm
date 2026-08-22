@@ -501,6 +501,32 @@ html, body {
   flex-shrink: 0;
 }
 
+.btn-header-tool {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-header-tool:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+.btn-header-tool svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2.2;
+}
+
 .guardrail-pill {
   display: inline-flex;
   align-items: center;
@@ -1093,20 +1119,6 @@ textarea#main-query-input {
 
     <div class="sidebar-history" id="sidebar-chat-list"></div>
 
-    <!-- Nextfarm Platform Tools -->
-    <div class="sidebar-ecosystem-box">
-      <div class="ecosystem-title">
-        <span>Hệ sinh thái Nextfarm</span>
-        <a href="https://nextfarm.vn" target="_blank" style="color:var(--brand); text-decoration:none;">nextfarm.vn ↗</a>
-      </div>
-      <div class="ecosystem-list">
-        <a href="https://nextfarm.vn/vi/nen-tang/gis" target="_blank" class="eco-link-pill">🗺️ GIS Lô thửa</a>
-        <a href="https://nextfarm.vn/vi/nen-tang/tuoi-thong-minh" target="_blank" class="eco-link-pill">💧 Tưới Fertikit</a>
-        <a href="https://nextfarm.vn/vi/nen-tang/nmc" target="_blank" class="eco-link-pill">🌦️ Quan trắc NMC</a>
-        <a href="https://nextfarm.vn/vi/nen-tang/qr-check" target="_blank" class="eco-link-pill">📱 QR Check</a>
-      </div>
-    </div>
-
     <div class="sidebar-footer">
       <div class="user-badge-row">
         <div class="user-avatar-circle">N</div>
@@ -1116,10 +1128,6 @@ textarea#main-query-input {
         </div>
       </div>
       <div class="sidebar-nav-links">
-        <button class="btn-nav-link" id="btn-theme-mode" title="Chuyển chế độ Sáng / Tối">
-          <svg viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-          <span>Giao diện</span>
-        </button>
         <a href="/admin" class="btn-nav-link" title="Bảng Quản trị">
           <svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
           <span>Quản trị</span>
@@ -1155,6 +1163,10 @@ textarea#main-query-input {
         <div class="guardrail-pill" title="Hệ thống RAG C2 chống bịa đặt kiểm chứng 3 tầng">
           <span>🛡️ RAG C2 Guardrail</span>
         </div>
+        <button class="btn-header-tool" id="btn-theme-mode" title="Chuyển chế độ Giao diện Sáng / Tối">
+          <svg viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          <span>Giao diện</span>
+        </button>
         <button class="btn-icon-sq" id="btn-export-markdown" title="Xuất hội thoại ra Markdown">
           <svg viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
         </button>
