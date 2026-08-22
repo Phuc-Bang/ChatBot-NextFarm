@@ -1049,8 +1049,10 @@ document.querySelectorAll(".filter-chip").forEach(chip => {
 
 // Export JSON
 document.getElementById("btn-export-json").onclick = () => {
+  const tenNguoiCham = layTenNguoiCham();
+  if (!tenNguoiCham) return;
   const payload = {
-    reviewer: $reviewerInput.value.trim() || "Chuyen_gia_NextFarm",
+    reviewer: tenNguoiCham,
     export_date: new Date().toISOString(),
     total_cases: allCases.length,
     scores: evaluations
@@ -1063,9 +1065,29 @@ document.getElementById("btn-export-json").onclick = () => {
   showToast("Đã xuất file kết quả JSON!");
 };
 
+// Bao cao cham diem PHAI mang ten nguoi that su cham.
+//
+// LOI DA CO 2026-08-22: ca hai duong xuat deu co gia tri mac dinh
+// ("Chuyên gia Nông nghiệp NextFarm", "Chuyen_gia_NextFarm"). De trong o ten
+// roi bam Xuat la ra mot bao cao ghi ten mot chuyen gia NextFarm chua he
+// cham cau nao. Do la bia nguoi chiu trach nhiem - dung thu du an nay ton
+// tai de chong.
+function layTenNguoiCham() {
+  const t = $reviewerInput.value.trim();
+  if (!t) {
+    showToast("Nhập tên người chấm trước khi xuất — báo cáo phải ghi ai chịu trách nhiệm.");
+    $reviewerInput.focus();
+    $reviewerInput.style.borderColor = "var(--rose, #e11d48)";
+    setTimeout(() => { $reviewerInput.style.borderColor = ""; }, 2500);
+    return null;
+  }
+  return t;
+}
+
 // Export Markdown Report
 document.getElementById("btn-export-md").onclick = () => {
-  const reviewer = $reviewerInput.value.trim() || "Chuyên gia Nông nghiệp NextFarm";
+  const reviewer = layTenNguoiCham();
+  if (!reviewer) return;
   let md = `# Báo Cáo Đánh Giá Chuyên Gia Nông Nghiệp — Nextfarm AI\n\n`;
   md += `**Chuyên gia đánh giá:** ${reviewer}\n`;
   md += `**Thời gian xuất:** ${new Date().toLocaleString("vi-VN")}\n`;

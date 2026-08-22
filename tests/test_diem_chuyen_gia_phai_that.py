@@ -160,3 +160,41 @@ def test_khong_ghi_de_ban_ghi_bang_phieu_rong():
                 assert "loi" in r.json()
         finally:
             os.environ.pop("ADMIN_TOKEN", None)
+
+
+def test_trang_expert_khong_tu_dien_ten_nguoi_cham():
+    """Xuat bao cao ma de trong o ten thi KHONG duoc tu dien mot cai ten.
+
+    LOI DA CO 2026-08-22: ca hai duong xuat cua frontend/expert.html deu co
+    gia tri mac dinh:
+
+        reviewer = $reviewerInput.value.trim() || "Chuyên gia Nông nghiệp NextFarm"
+        reviewer: $reviewerInput.value.trim() || "Chuyen_gia_NextFarm"
+
+    De trong o ten roi bam Xuat la ra mot bao cao ghi ten mot chuyen gia
+    NextFarm chua he cham cau nao. Do la bia NGUOI CHIU TRACH NHIEM - cung
+    loai voi viec bia diem, chi khac duong di.
+
+    BO CHU THICH truoc khi kiem: chu thich giai thich su co nay co nhac lai
+    chinh hai chuoi do (giong cach lam o test_ghi_log_khong_chan.py:93).
+    """
+    import re
+
+    html = (GOC / "frontend" / "expert.html").read_text(encoding="utf-8")
+    js = "\n".join(m.group(1) for m in
+                   re.finditer(r"<script>([\s\S]*?)</script>", html))
+    ma = "\n".join(re.sub(r"//.*$", "", d) for d in js.splitlines())
+
+    for ten in ("Chuyên gia Nông nghiệp NextFarm", "Chuyen_gia_NextFarm"):
+        assert ten not in ma, \
+            "expert.html tu dien ten nguoi cham '" + ten + "' khi o ten bo " \
+            "trong - bao cao se ghi ten mot nguoi chua cham gi"
+
+    assert "function layTenNguoiCham()" in ma, \
+        "khong con ham chan viec xuat khi thieu ten nguoi cham"
+
+    # Ca hai nut xuat deu phai di qua ham chan.
+    for nut in ("btn-export-json", "btn-export-md"):
+        m = re.search(re.escape(nut) + r'"\)\.onclick[\s\S]{0,300}', ma)
+        assert m and "layTenNguoiCham()" in m.group(0), \
+            nut + " xuat ma khong doi ten nguoi cham"
