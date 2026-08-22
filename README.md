@@ -99,7 +99,7 @@ Chi tiết đầy đủ ở [quy chuẩn v2.0](docs/NEXTFARM_PROBLEM_A_STANDARD_
 | Chunk **index được** | **185** (18 tài liệu đã duyệt · 31/44 chunk rủi ro cao đã duyệt lẻ) |
 | Câu ứng viên số liệu | 193 — **65 fact đã xác nhận** |
 | Case kiểm thử | **222 / 12 nhóm — v3 đã đóng băng** |
-| Test tự động | **321 xanh** |
+| Test tự động | **358 xanh** |
 
 > **185 / 292 chunk** vào được kho tri thức. 107 chunk còn lại thuộc 13 tài
 > liệu bị loại ở luồng 1, cộng 13 chunk rủi ro cao chưa duyệt lẻ — tất cả
@@ -268,7 +268,7 @@ make install-crawler
 make ingest
 
 # 6. Chạy thử
-make test        # 321 test tự động
+make test        # 358 test tự động
 make serve       # http://localhost:8000  và  /admin
 ```
 

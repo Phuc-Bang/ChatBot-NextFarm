@@ -640,7 +640,13 @@ main.review-workspace {
   <!-- Main Workspace -->
   <main class="review-workspace">
     <div class="workspace-max-wrap">
-      
+
+      <!-- An mac dinh. Chi hien khi phat hien mot bo diem do may sinh. -->
+      <div id="bang-canh-bao" style="display:none; margin-bottom:16px; padding:14px 18px;
+           background:var(--amber-bg,#fffbeb); border:1px solid var(--amber-border,#fde68a);
+           border-left:4px solid var(--amber,#d97706); border-radius:10px;
+           font-size:13px; line-height:1.6; color:var(--text-main);"></div>
+
       <!-- Nav Question Top Bar -->
       <div class="question-nav-bar">
         <div class="question-nav-title">
@@ -769,6 +775,7 @@ main.review-workspace {
 
         <div class="save-action-row">
           <span style="font-size:12px; color:var(--text-muted);" id="save-status-text">Chưa chấm câu nào</span>
+          <button class="btn-header" id="btn-dat-lai" title="Xoá toàn bộ điểm đã chấm và bắt đầu lại">Đặt lại phiếu</button>
           <button class="btn-header primary" id="btn-save-next">Lưu & Tiếp tục (Space / Enter) →</button>
         </div>
       </div>
@@ -821,6 +828,44 @@ $btnTheme.onclick = () => {
 };
 
 // Load saved evaluations
+// Ba cau ghi chu duoi day chi den tu evaluation/scripts/danh_gia_chuyen_gia_auto.py
+// (da go o 02f5ebc). Chung khong the do nguoi go ra 36 lan giong het nhau.
+//
+// SU CO THAT 2026-08-22: script do tung ghi diem len may chu. Trang nay doc
+// may chu roi CHEP vao localStorage. Go file tren may chu roi thi trinh duyet
+// VAN GIU - mo /expert la chung hien lai, trong y het "diem minh da cham".
+// Nguoi dung nhap ten that vao roi bam Luu, va bo diem may sinh duoc day
+// nguoc len may chu duoi ten mot con nguoi (commit 2693ca8: 50 cau, 3 to hop
+// diem, trung khit tung o voi ban may sinh).
+//
+// Nen tu day: nhan ra thi VUT DI, khong nap.
+const GHI_CHU_MAY_SINH = [
+  "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn.",
+  "Nội dung đúng cơ sở tài liệu, có thể bổ sung thêm nguồn.",
+  "Từ chối an toàn đúng quy định, không bịa đặt số liệu.",
+  "Thông tin cơ bản đạt yêu cầu."
+];
+
+function laDiemMaySinh(diem) {
+  const ds = Object.values(diem || {});
+  if (ds.length < 10) return false;
+  const co = ds.filter(v => v && v.notes).length;
+  if (!co) return false;
+  // Toan bo ghi chu deu nam trong bo cau mau -> may sinh.
+  return ds.every(v => !v || !v.notes || GHI_CHU_MAY_SINH.includes(String(v.notes).trim()));
+}
+
+function canhBaoMaySinh(o_dau) {
+  const b = document.getElementById("bang-canh-bao");
+  if (!b) return;
+  b.style.display = "block";
+  b.innerHTML = '<strong>Đã bỏ qua một bộ điểm do máy sinh</strong><br>'
+    + 'Tìm thấy trong ' + o_dau + ': 50 câu nhưng chỉ có vài tổ hợp điểm và '
+    + 'ghi chú lặp nguyên văn — dấu vân tay của script chấm tự động đã gỡ, '
+    + 'không phải của người đọc từng câu. Phiếu đã được đặt lại trắng để bạn '
+    + 'chấm thật.';
+}
+
 async function loadSaved() {
   try {
     let localData = null;
@@ -834,6 +879,12 @@ async function loadSaved() {
       if (res.ok) {
         const serverData = await res.json();
         if (serverData.scores && Object.keys(serverData.scores).length > 0) {
+          if (laDiemMaySinh(serverData.scores)) {
+            canhBaoMaySinh("dữ liệu trên máy chủ");
+            evaluations = {};
+            localStorage.removeItem(STORAGE_KEY);
+            return;
+          }
           evaluations = serverData.scores;
           if (serverData.reviewer) $reviewerInput.value = serverData.reviewer;
           saveLocal();
@@ -843,6 +894,12 @@ async function loadSaved() {
     } catch(e) {}
 
     if (localData) {
+      if (laDiemMaySinh(localData.scores)) {
+        canhBaoMaySinh("bộ nhớ trình duyệt");
+        evaluations = {};
+        localStorage.removeItem(STORAGE_KEY);
+        return;
+      }
       evaluations = localData.scores || {};
       if (localData.reviewer) $reviewerInput.value = localData.reviewer;
     }
@@ -1078,6 +1135,19 @@ function goNext() {
 }
 
 document.getElementById("btn-next-case").onclick = goNext;
+document.getElementById("btn-dat-lai").onclick = () => {
+  if (!confirm("Xoá toàn bộ điểm đã chấm (cả trong trình duyệt và trên máy chủ) "
+             + "và bắt đầu lại từ phiếu trắng?")) return;
+  evaluations = {};
+  localStorage.removeItem(STORAGE_KEY);
+  const b = document.getElementById("bang-canh-bao");
+  if (b) b.style.display = "none";
+  $saveStatus.textContent = "Đã đặt lại phiếu — chưa chấm câu nào";
+  updateProgress();
+  renderSidebarList();
+  renderCurrentCase();
+};
+
 document.getElementById("btn-save-next").onclick = () => {
   saveLocal();
   showToast("Đã lưu câu " + (currentIndex + 1));

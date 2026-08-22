@@ -234,3 +234,43 @@ def test_trang_expert_co_luu_len_may_chu():
     assert "lên máy chủ" in js, \
         "dong trang thai khong phan biet luu trinh duyet voi luu may chu - " \
         "nguoi cham khong biet cong cua minh dang o dau"
+
+
+def test_trang_expert_chan_bo_diem_may_sinh():
+    """Diem may sinh trong localStorage phai bi VUT DI, khong duoc nap.
+
+    SU CO THAT 2026-08-22, xay ra HAI LAN voi cung mot bo du lieu.
+
+    Lan 1 (59329b3): script danh_gia_chuyen_gia_auto.py ghi 50 ca diem len
+    may chu. Trang /expert doc may chu roi CHEP vao localStorage.
+
+    Lan 2 (2693ca8): file tren may chu da go, nhung trinh duyet VAN GIU. Mo
+    /expert la chung hien lai, trong y het "diem minh da cham". Nguoi dung
+    nhap ten that vao, bam Luu, va bo diem may sinh duoc day nguoc len may
+    chu duoi ten mot con nguoi.
+
+    Doi chieu hai file: diem va ghi chu cua ca 50 cau TRUNG KHIT tung o.
+    Chi doi moi truong `reviewer` va thoi diem.
+
+    Nhan dien bang GHI CHU: script chi co bon cau mau va lap nguyen van.
+    Nguoi cham 50 cau nong hoc khong go ra 36 lan giong het nhau.
+    """
+    import re
+
+    html = (GOC / "frontend" / "expert.html").read_text(encoding="utf-8")
+    js = "\n".join(m.group(1) for m in
+                   re.finditer(r"<script>([\s\S]*?)</script>", html))
+
+    assert "laDiemMaySinh" in js, \
+        "expert.html khong con kiem tra bo diem may sinh khi nap"
+    assert "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn." in js, \
+        "danh sach ghi chu may sinh bi xoa - khong nhan ra du lieu cu nua"
+    assert "removeItem(STORAGE_KEY)" in js, \
+        "nhan ra du lieu may sinh nhung khong xoa khoi localStorage - no se " \
+        "hien lai o lan mo trang sau"
+
+    # Phai chan CA HAI duong nap: may chu va localStorage.
+    assert js.count("laDiemMaySinh(") >= 3, \
+        "chi chan mot duong nap - duong con lai van de du lieu may sinh lot qua"
+    assert 'id="btn-dat-lai"' in html, \
+        "khong co nut dat lai phieu - nguoi dung khong tu go duoc du lieu cu"
