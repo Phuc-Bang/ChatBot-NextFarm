@@ -39,6 +39,8 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "knowledge" / "chunking"))
 import chunker  # noqa: E402
 
+from app.core.text import bam_chunk  # noqa: E402
+
 MANIFEST = ROOT / "crawler" / "data" / "manifest.json"
 TEXT = ROOT / "crawler" / "data" / "text"
 DOC_REVIEW = ROOT / "knowledge" / "review" / "documents.yaml"
@@ -75,7 +77,15 @@ def doc_yaml(path: Path, khoa: str) -> dict:
     if khoa == "documents":
         return {d["document_id"]: d for d in muc}
     if khoa == "chunks":
-        return {c["chunk_id"]: c for c in muc}
+        # Khoa la sha256 NOI DUNG, khong phai chunk_id. Ban ghi thieu sha256
+        # (file cu chua backfill) bi BO QUA co y - chunk rui ro cao khong tra
+        # cuu duoc quyet dinh thi khong duoc duyet, va DEC-005 chan no. Hong
+        # theo huong an toan, va `review_chunks.py --status` se hien ra ngay.
+        thieu = [c["chunk_id"] for c in muc if not c.get("sha256")]
+        if thieu:
+            print("[canh bao] " + str(len(thieu)) + " ban ghi duyet chunk "
+                  "thieu sha256, se bi bo qua: " + ", ".join(thieu[:5]))
+        return {c["sha256"]: c for c in muc if c.get("sha256")}
     return {f["fact_key"]: f for f in muc}
 
 
@@ -151,7 +161,12 @@ def nap(conn, rebuild: bool) -> dict[str, int]:
             for c in chunker.cat(path.read_text(encoding="utf-8"),
                                  tu_khoa_rui_ro, tu_khoa_canh_bao):
                 cid = rec["id"] + "#" + str(c.ordinal)
-                cr = duyet_chunk.get(cid, {})
+                # Tra quyet dinh duyet le theo NOI DUNG, khong theo chunk_id.
+                # chunk_id chua `ordinal` nen no doi moi khi doi hang so cat
+                # chunk - tra theo id thi mot quyet dinh duyet cu se de len
+                # mot doan van khac ma khong bao loi. Xem app/core/text.py
+                # ham bam_chunk().
+                cr = duyet_chunk.get(bam_chunk(c.text), {})
                 if c.is_high_risk:
                     reviewed_hr = bool(cr.get("approved") is not None)
                     approved_chunk = bool(cr.get("approved", False))

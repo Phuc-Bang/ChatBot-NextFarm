@@ -51,6 +51,8 @@ sys.path.insert(0, str(ROOT))
 
 CHUNKS_YAML = BASE / "chunks.yaml"
 
+from app.core.text import bam_chunk  # noqa: E402
+
 
 def nap() -> dict:
     if not CHUNKS_YAML.exists():
@@ -99,14 +101,25 @@ def lay_chunk_rui_ro(chunk_id: str | None = None) -> list[dict]:
 
 
 def da_quyet_dinh(data: dict) -> dict[str, dict]:
-    return {c["chunk_id"]: c for c in data.get("chunks") or []}
+    """Khoa la sha256 NOI DUNG chunk, khong phai chunk_id.
+
+    chunk_id chua `ordinal` nen no doi moi khi doi hang so cat chunk. Tra
+    theo id thi mot quyet dinh duyet cu se de len mot doan van khac ma khong
+    bao loi - xem app/core/text.py ham bam_chunk().
+
+    Ban ghi thieu sha256 bi bo qua: khong tra cuu duoc thi chunk rui ro cao
+    coi nhu CHUA duyet, va DEC-005 chan no. Hong theo huong an toan.
+    """
+    return {c["sha256"]: c for c in data.get("chunks") or [] if c.get("sha256")}
 
 
 def in_trang_thai(data: dict) -> None:
     ds = lay_chunk_rui_ro()
     da = da_quyet_dinh(data)
-    duyet = sum(1 for c in ds if da.get(c["chunk_id"], {}).get("approved") is True)
-    loai = sum(1 for c in ds if da.get(c["chunk_id"], {}).get("approved") is False)
+    duyet = sum(1 for c in ds
+                if da.get(bam_chunk(c["text"]), {}).get("approved") is True)
+    loai = sum(1 for c in ds
+               if da.get(bam_chunk(c["text"]), {}).get("approved") is False)
     con = len(ds) - duyet - loai
     print(f"Chunk rui ro cao (tai lieu da duyet): {len(ds)}")
     print(f"  da duyet : {duyet}")
@@ -150,6 +163,7 @@ def duyet_mot(c: dict, nguoi: str) -> dict | None:
                 continue
             return {
                 "chunk_id": c["chunk_id"],
+                "sha256": bam_chunk(c["text"]),
                 "approved": True,
                 "note": note,
                 "reviewer": nguoi,
@@ -163,6 +177,7 @@ def duyet_mot(c: dict, nguoi: str) -> dict | None:
                 continue
             return {
                 "chunk_id": c["chunk_id"],
+                "sha256": bam_chunk(c["text"]),
                 "approved": False,
                 "reject_reason": ly_do,
                 "reviewer": nguoi,
@@ -188,7 +203,7 @@ def main() -> int:
 
     ds = lay_chunk_rui_ro(a.chunk_id)
     da = da_quyet_dinh(data)
-    con = [c for c in ds if c["chunk_id"] not in da]
+    con = [c for c in ds if bam_chunk(c["text"]) not in da]
 
     if not con:
         print("Khong con chunk rui ro cao nao chua duyet.")

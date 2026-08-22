@@ -1810,8 +1810,9 @@ Trạng thái cập nhật **2026-08-22**. Mười hai mục ban đầu: **7 đ�
 
 **Ba mục còn mở chặn bởi ba thứ khác nhau, và khác biệt đó quan trọng:**
 
-- **Mục 4** chờ *một lần quét* — nhưng **không rẻ như vẻ ngoài**, xem cảnh báo
-  dưới bảng này. Đây là mục có cái giá ẩn lớn nhất trong ba mục.
+- **Mục 4** chờ *một lần quét*. Rào chắn từng chặn nó **đã gỡ ngày 2026-08-22** —
+  quyết định duyệt nay khoá theo nội dung, xem mục dưới. Giờ đây là mục rẻ nhất
+  trong ba mục và là việc nên làm tiếp theo.
 - **Mục 9** chờ *xây thêm* — có lớp phân loại LLM few-shot rồi thì đo được ngay.
 - **Mục 11** chờ *dữ liệu để đo* — mã đã sẵn, tập kiểm thử chưa có case nào phân
   biệt được vùng miền. Chốt một con số lúc này là chốt trên giấy, đúng thứ §40.2
@@ -1822,9 +1823,14 @@ Trạng thái cập nhật **2026-08-22**. Mười hai mục ban đầu: **7 đ�
 > không **chọn** kích thước đó. Đo một tham số ở một giá trị không phải là chốt
 > tham số ấy — và đánh dấu nhầm sẽ xoá mất một việc chưa làm.
 
-### Cảnh báo trước khi ai đó quét kích thước chunk
+### Rào chắn của mục 4 — đã gỡ 2026-08-22
 
-**Quét mục 4 sẽ phá hỏng 31 quyết định duyệt của con người, một cách lặng lẽ.**
+> **Mục này ghi lại một lỗ hổng đã có thật và cách nó được vá.** Giữ nguyên phần
+> mô tả lỗ hổng, vì hiểu vì sao mới giữ được tính chất đã đạt.
+
+#### Lỗ hổng
+
+**Quét mục 4 lẽ ra sẽ phá hỏng 31 quyết định duyệt của con người, một cách lặng lẽ.**
 
 `chunk_id` được dựng theo **thứ tự trong tài liệu** — [`load.py:153`](../knowledge/ingestion/load.py):
 
@@ -1843,14 +1849,44 @@ phép vào kho, hoặc ngược lại — một đoạn liều lượng đã duy
 
 Đây là cổng DEC-005, thứ đang giữ `numeric_hallucination = 0`.
 
-**Muốn quét mục 4 thì phải làm hai việc trước:**
+#### Cách vá
 
-1. Khoá quyết định duyệt vào thứ bền hơn thứ tự — `sha256` của văn bản chunk,
-   hoặc `(document_id, offset_đầu, offset_cuối)`.
-2. Quét trên **bản sao** cơ sở dữ liệu, không quét trên kho đang dùng để đo.
+Quyết định duyệt nay khoá vào **`sha256` nội dung chunk**, không vào thứ tự —
+[`app/core/text.py`](../app/core/text.py) hàm `bam_chunk()`. Cả cổng nạp
+(`load.py`) và công cụ duyệt (`review_chunks.py`) tra cứu theo khoá đó, và
+31 bản ghi cũ đã được gắn hash.
 
-Chưa làm xong việc 1 thì cái giá thật của mục 4 **không phải một lần quét** — mà
-là duyệt lại 31 chunk rủi ro cao bằng tay.
+Băm sau khi chuẩn hoá NFC + gọn khoảng trắng: hai thứ đó không đổi **nghĩa** của
+chunk, nên một khác biệt về khoảng trắng không được phép huỷ một quyết định
+duyệt thật.
+
+**Tính chất đạt được: hỏng theo hướng an toàn.** Văn bản đổi → băm đổi → không
+khớp → chunk rủi ro cao **không được duyệt** → DEC-005 chặn. Người duyệt thấy
+ngay bằng `review_chunks.py --status`.
+
+#### Đã kiểm bằng thí nghiệm thật, không bằng lập luận
+
+Đổi kích thước chunk 1.200 → 700 ký tự rồi nạp lại kho. 292 chunk thành 440,
+số chunk rủi ro cao trong tài liệu đã duyệt từ 31 thành 41:
+
+| | khớp | trong đó **đè lên văn bản khác** |
+|---|---:|---:|
+| Khoá theo `chunk_id` (cách cũ) | 10 | **10** |
+| Khoá theo nội dung (cách hiện tại) | 7 | **0** |
+
+Cách cũ: **cả 10 trường hợp** đều gán một quyết định cũ cho một đoạn văn khác.
+Trong đó `lua__day_manh_canh_tac_lua_theo#3` mang quyết định **`approved=True`** —
+nó sẽ mở cửa cho một đoạn văn chưa ai đọc vào thẳng kho liều lượng.
+
+Cách hiện tại: 7 chunk khớp đều có văn bản **y hệt** bản đã duyệt; 34 chunk còn
+lại hiện ra là *"CÒN LẠI: 34"* chờ người duyệt. Đúng như thiết kế.
+
+Sau thí nghiệm đã khôi phục nguyên trạng: 292 chunk, 185 index được, 24 duyệt /
+7 loại / 0 còn lại.
+
+**Việc còn lại của mục 4** giờ đúng là một lần quét — nhưng vẫn nên quét trên
+**bản sao** cơ sở dữ liệu, vì mỗi lần nạp lại làm chunk rủi ro cao rơi về trạng
+thái chờ duyệt cho tới khi cắt lại đúng kích thước cũ.
 
 ### 40.3. `[ASM]` — đã giả định, chờ NextFarm xác nhận
 

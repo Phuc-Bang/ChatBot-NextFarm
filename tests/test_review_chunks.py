@@ -19,7 +19,8 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+GOC = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(GOC))
 
 import importlib.util
 
@@ -72,12 +73,20 @@ def test_truy_van_loc_tai_lieu_da_duyet():
     assert "is_high_risk" in src
 
 
-def test_da_quyet_dinh_lap_chi_muc_theo_chunk_id():
-    data = {"chunks": [{"chunk_id": "a#1", "approved": True},
-                       {"chunk_id": "b#2", "approved": False}]}
+def test_da_quyet_dinh_lap_chi_muc_theo_bam_noi_dung():
+    """DOI 2026-08-22: khoa la sha256 noi dung, khong con la chunk_id.
+
+    Ban cu cua test nay khang dinh chi muc theo chunk_id. Do dung voi ma luc
+    ay va SAI voi cai can bao ve: chunk_id chua `ordinal` nen no doi khi doi
+    hang so cat chunk, va mot quyet dinh duyet cu se de len doan van khac.
+    Giu lai test o day thay vi xoa, de nguoi doc sau thay khoa da doi va vi sao.
+    """
+    data = {"chunks": [{"chunk_id": "a#1", "sha256": "a" * 64, "approved": True},
+                       {"chunk_id": "b#2", "sha256": "b" * 64, "approved": False}]}
     d = rc.da_quyet_dinh(data)
-    assert d["a#1"]["approved"] is True
-    assert d["b#2"]["approved"] is False
+    assert d["a" * 64]["approved"] is True
+    assert d["b" * 64]["approved"] is False
+    assert "a#1" not in d, "van con lap chi muc theo chunk_id"
 
 
 def test_khong_co_co_duyet_het():
@@ -106,3 +115,103 @@ def test_khong_co_co_duyet_het():
     assert ten, "khong doc duoc tham so nao - test nay da mat tac dung"
     for co in ["--duyet-het", "--approve-all", "--tat-ca", "--yes", "--force"]:
         assert co not in ten, f"co {co} pha vo DEC-005"
+
+
+# ---------------------------------------------------------------------------
+# Quyet dinh duyet le phai khoa vao NOI DUNG, khong vao thu tu.
+#
+# LO HONG DA CO 2026-08-22
+#
+# chunk_id dung theo thu tu trong tai lieu (load.py:153):
+#     cid = rec["id"] + "#" + str(c.ordinal)
+#
+# Doi hang so cat chunk -> moi ordinal xe dich -> `hatinh_dua_chuot_vietgap#1`
+# tro thanh MOT DOAN VAN KHAC nhung van nhan quyet dinh duyet cu. Khong co gi
+# bao loi. Mot chunk tung bi loai vi "tieu de tin tuc" co the duoc cap phep
+# vao kho lieu luong thuoc BVTV.
+#
+# Da doi khoa sang sha256 noi dung. Tinh chat phai giu: van ban doi -> bam
+# doi -> KHONG khop -> chunk rui ro cao khong duoc duyet -> DEC-005 chan.
+# Hong theo huong AN TOAN.
+# ---------------------------------------------------------------------------
+
+
+def test_moi_ban_ghi_duyet_deu_co_sha256():
+    import yaml
+
+    d = yaml.safe_load((GOC / "knowledge" / "review" / "chunks.yaml")
+                       .read_text(encoding="utf-8"))
+    ds = d["chunks"]
+    assert ds, "chunks.yaml rong"
+    thieu = [c["chunk_id"] for c in ds if not c.get("sha256")]
+    assert not thieu, \
+        "ban ghi duyet thieu sha256: " + ", ".join(thieu[:5]) + \
+        " - chung se bi bo qua khi nap, chunk se khong duoc duyet"
+
+
+def test_khong_co_hai_ban_ghi_cung_bam():
+    import yaml
+
+    d = yaml.safe_load((GOC / "knowledge" / "review" / "chunks.yaml")
+                       .read_text(encoding="utf-8"))
+    bams = [c["sha256"] for c in d["chunks"] if c.get("sha256")]
+    assert len(bams) == len(set(bams)), \
+        "hai ban ghi duyet cung sha256 - mot quyet dinh dang de len quyet dinh kia"
+
+
+def test_bam_doi_theo_noi_dung_khong_theo_khoang_trang():
+    from app.core.text import bam_chunk
+
+    a = bam_chunk("Phun 1,5 lit/ha, cach ly 7 ngay")
+    assert bam_chunk("Phun 1,5 lit/ha,  cach ly 7 ngay\n") == a, \
+        "khac biet khoang trang lam doi bam - mot quyet dinh duyet that se bi " \
+        "huy oan chi vi dinh dang"
+    assert bam_chunk("Phun 2,5 lit/ha, cach ly 7 ngay") != a, \
+        "doi LIEU LUONG ma bam khong doi - quyet dinh duyet cu se de len " \
+        "mot lieu luong khac"
+
+
+def test_tra_cuu_khoa_theo_bam_chu_khong_theo_chunk_id():
+    """Doc ma nguon ca hai phia: cong nap va cong duyet.
+
+    Chi can mot phia tra theo chunk_id la lo hong quay lai.
+    """
+    load = (GOC / "knowledge" / "ingestion" / "load.py").read_text(encoding="utf-8")
+    assert 'duyet_chunk.get(bam_chunk(' in load, \
+        "load.py tra quyet dinh duyet khong theo bam noi dung"
+    assert '{c["chunk_id"]: c for c in muc}' not in load, \
+        "load.py van dung chunk_id lam khoa cho chunks.yaml"
+
+    rv = (GOC / "knowledge" / "review" / "review_chunks.py").read_text(encoding="utf-8")
+    assert '{c["sha256"]: c' in rv, \
+        "review_chunks.py van khoa theo chunk_id"
+    assert '"sha256": bam_chunk(' in rv, \
+        "review_chunks.py khong ghi sha256 khi luu quyet dinh"
+
+
+def test_ban_ghi_thieu_bam_bi_bo_qua_chu_khong_duoc_duyet_oan():
+    """Hong theo huong an toan: tra cuu that bai = CHUA duyet, khong phai duyet."""
+    import sys as _s
+
+    _s.path.insert(0, str(GOC / "knowledge" / "ingestion"))
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "_load_kt", GOC / "knowledge" / "ingestion" / "load.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+
+    import tempfile
+    import yaml
+    from pathlib import Path as _P
+
+    with tempfile.TemporaryDirectory() as d:
+        f = _P(d) / "chunks.yaml"
+        f.write_text(yaml.safe_dump({"chunks": [
+            {"chunk_id": "co_bam#1", "sha256": "a" * 64, "approved": True},
+            {"chunk_id": "thieu_bam#2", "approved": True},
+        ]}, allow_unicode=True), encoding="utf-8")
+        ra = mod.doc_yaml(f, "chunks")
+
+    assert "a" * 64 in ra, "ban ghi co sha256 phai tra cuu duoc"
+    assert len(ra) == 1, \
+        "ban ghi thieu sha256 van lot vao bang tra cuu - no se duoc duyet oan"

@@ -104,3 +104,32 @@ def khop_cum(chuan: str, khong_dau: str, cum: str,
     else:
         ban, muc = khong_dau, bo_dau(cum)
     return re.search(r"(?<!\w)" + re.escape(muc) + r"(?!\w)", ban) is not None
+
+
+def bam_chunk(text: str) -> str:
+    """Van tay cua NOI DUNG mot chunk. Dung lam khoa cho quyet dinh duyet le.
+
+    VI SAO CAN HAM NAY - phat hien 2026-08-22
+
+    Truoc day quyet dinh duyet le (knowledge/review/chunks.yaml) khoa vao
+    `chunk_id`, ma chunk_id dung theo THU TU trong tai lieu:
+
+        cid = rec["id"] + "#" + str(c.ordinal)     # load.py:153
+
+    Doi bat ky hang so cat chunk nao la moi ordinal xe dich. Chunk
+    `hatinh_dua_chuot_vietgap#1` sau khi cat lai la MOT DOAN VAN KHAC, nhung
+    van nhan quyet dinh duyet cu - va khong co gi bao loi. Mot chunk tung bi
+    loai vi "tieu de tin tuc" co the duoc cap phep vao kho lieu luong.
+
+    Khoa theo noi dung thi hong theo huong AN TOAN: van ban doi -> bam doi ->
+    khong khop -> chunk rui ro cao khong duoc duyet -> DEC-005 chan. Nguoi
+    duyet thay ngay bang `review_chunks.py --status`.
+
+    Chuan hoa truoc khi bam: NFC + gon khoang trang. Hai thu nay khong doi
+    NGHIA cua chunk, nen mot khac biet ve khoang trang khong duoc phep huy mot
+    quyet dinh duyet that.
+    """
+    import hashlib
+
+    chuan = gon_khoang_trang(chuan_hoa_nfc(text)).strip()
+    return hashlib.sha256(chuan.encode("utf-8")).hexdigest()

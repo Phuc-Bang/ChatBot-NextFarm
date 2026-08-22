@@ -246,15 +246,14 @@ def test_doi_hang_so_cat_chunk_phai_duyet_lai_chunk_rui_ro_cao():
         "Hang so cat chunk da doi: "
         + "; ".join(f"{k} {a} -> {b}" for k, (a, b) in lech.items())
         + ".\n\n"
-        "Doi hang so nay lam moi chunk_id xe dich, trong khi "
-        "knowledge/review/chunks.yaml khoa 31 quyet dinh duyet le vao chuoi "
-        "id cu. Chung se de len nhung doan van KHAC ma khong bao loi.\n\n"
-        "Truoc khi doi, phai lam mot trong hai:\n"
-        "  (a) Khoa quyet dinh duyet vao sha256 van ban chunk (hoac offset) "
-        "thay vi thu tu, roi duyet lai file chunks.yaml; hoac\n"
-        "  (b) Duyet lai 31 chunk rui ro cao bang tay: "
-        "python knowledge/review/review_chunks.py\n\n"
-        "Lam xong thi cap nhat HANG_SO_DA_CHOT trong test nay."
+        "Du lieu KHONG bi hong - quyet dinh duyet khoa theo sha256 noi dung, "
+        "nen van ban doi thi bam khong khop va chunk rui ro cao roi ve trang "
+        "thai CHUA DUYET. DEC-005 chan chung. Do la hanh vi dung.\n\n"
+        "Nhung nghia la: sau khi doi, 31 chunk rui ro cao can duyet lai.\n"
+        "  con lai bao nhieu: python knowledge/review/review_chunks.py --status\n"
+        "  duyet            : python knowledge/review/review_chunks.py --limit 10\n\n"
+        "Neu doi co chu dich (vi du dang quet muc 40.2), cap nhat "
+        "HANG_SO_DA_CHOT trong test nay sau khi duyet xong."
     )
 
 

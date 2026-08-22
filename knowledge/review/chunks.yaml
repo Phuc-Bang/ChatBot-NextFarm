@@ -1,155 +1,192 @@
+# Ket qua duyet le tung chunk rui ro cao (DEC-005, luong 3 cua DEC-020).
+#
+# KHOA LA `sha256`, KHONG PHAI `chunk_id`.
+# chunk_id dung theo thu tu trong tai lieu nen no doi khi cat lai chunk.
+# Giu chunk_id o day chi de nguoi doc de tra cuu. Xem app/core/text.py
+# ham bam_chunk() de biet vi sao.
 chunks:
 - chunk_id: dua_chuot__dua_chuot_nhat_ban_trong_nha#1
+  sha256: 7404dc52738da78a8799d5da83500bd6b6fcf4d40896fdfecda46576ced82036
   approved: false
   reject_reason: Tiêu đề tin tức, không có quy trình kỹ thuật
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: dua_chuot__dua_chuot_nhat_ban_trong_nha#2
+  sha256: 17131c7c035e80f6c2ae5d24586eddb25656e1b6f89622aeacedf23f8759ec9b
   approved: false
   reject_reason: Tin bài cá nhân, không có thông số kỹ thuật chi tiết
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: hatinh_dua_chuot_vietgap#1
+  sha256: d142ddea2196945f57b11cb270887f573dbfeff259a9d15b529faf0f70ba57d8
   approved: false
   reject_reason: Tiêu đề bài viết và ngày đăng
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: hatinh_dua_chuot_vietgap#6
+  sha256: dca81324335e6aae776befcf49023f834aeaae51e1e39fe397906e4f3de9b9ff
   approved: true
   note: Kỹ thuật đất trồng và lên luống dưa chuột VietGAP
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: hatinh_dua_chuot_vietgap#15
+  sha256: 262aeec3d34c98046e85a873cbe5e71ceb332b7376dbe20b34b0a451044a1d0e
   approved: true
   note: Quy trình phòng trừ sâu bệnh tổng hợp IPM cho dưa chuột
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: laichau_dua_chuot_xuanhe#5
+  sha256: 7fce5b2e38844644fb75328ebeefca9e097b9c59b151ec295f368ea785b7acb9
   approved: true
   note: Quy trình liều lượng 3 lần bón thúc dưa chuột vụ xuân hè
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: laichau_dua_chuot_xuanhe#7
+  sha256: d2d4912c6891c0863b33e522fea084f672f0756d5970a5fc76efcc3ec96a62d9
   approved: true
   note: Biện pháp phòng trừ sâu bệnh hại chính trên dưa chuột vụ xuân hè
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: lua__cay_lua_bang_may_giai_phap#6
+  sha256: 5931cbd30fbb24f498081e4cf601a28290e71c7f926c4c59f374f3db42aa3f61
   approved: false
   reject_reason: Thông tin hành chính, phê duyệt dự án
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: lua__cham_soc_lua_xuan_o_mien#5
+  sha256: a907d51683e6093dccd30e1251987dc8816b869b0f1ed843150d1a7c11869efc
   approved: true
   note: Kỹ thuật bón phân lót và xử lý đất lúa vụ xuân
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: lua__day_manh_canh_tac_lua_theo#2
+  sha256: a6cd4c6d7fb5c30b62cce2dd60c3c662251337b807d7ce3580acadaff6ff17c8
   approved: true
   note: Nguyên tắc canh tác lúa theo phương pháp SRI
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: lua__day_manh_canh_tac_lua_theo#3
+  sha256: dbe1b53e44e327b26ffb1211ec6ff2a5c3effdecfd32727a93def468f782e496
   approved: true
   note: Kết quả mô hình SRI liên kết sản xuất lúa sạch bệnh và năng suất
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: lua__day_manh_canh_tac_lua_theo#5
+  sha256: e4b62fad9fd705f08e1e6be618cfe0b6d3dffab547860cd1f58fe809d53cfa3e
   approved: false
   reject_reason: Ý kiến quản lý hành chính địa phương
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: lua__huong_dan_phong_tru_dich_hai#4
+  sha256: 343fe689c661f7e451e672b76704a31b8a6c730a1c7f79aa886983330e29def9
   approved: true
   note: Nhận diện giống lúa nhiễm bệnh đạo ôn lá và cổ bông
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: lua__huong_dan_phong_tru_dich_hai#5
+  sha256: 643870aadb5fdd2ab3e0e6abe3c36af5d8a4fcb002f43c39f6cb99500a1e213a
   approved: true
   note: Hướng dẫn phòng trừ bệnh bạc lá và đốm sọc vi khuẩn hại lúa
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: lua__huong_dan_phong_tru_dich_hai#6
+  sha256: 24cd6af31a6f64a80f4ad4fd200c1700532a56084706db4bce240050d05b3773
   approved: true
   note: Quy trình phun phòng bệnh đạo ôn cổ bông lúa
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: lua__huong_dan_phong_tru_dich_hai#7
+  sha256: 60bada71c9cdc9baa8ccb755f379332aa73f23727a323995ef95d74c4795141c
   approved: true
   note: Hướng dẫn phòng trừ bệnh khô vằn hại lúa
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: lua__huong_dan_phong_tru_dich_hai#8
+  sha256: 121ed5b7742c98951eb74d8b15706e27196857d2a2cc329ed089d55da0e5ba1b
   approved: true
   note: Biện pháp quản lý nước phòng trừ dịch hại lúa
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: lua__huong_dan_phong_tru_dich_hai#11
+  sha256: 5ec03060bd526a8817dcb255477a2d02c524e781034b786a2ab931ad3cdd7cb2
   approved: false
   reject_reason: Footer danh sách tin bài liên quan
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: lua__huong_dan_phong_tru_dich_hai#12
+  sha256: 18189b11007b0bb13513d05f166700d0762824de4fd7fbc467ee73ba4458eb4e
   approved: false
   reject_reason: Footer quyết định định mức kinh tế kỹ thuật
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: lua__khac_phuc_anh_huong_mua_bao#4
+  sha256: 159691eba03610cda876a533b3a266c170cc8fdf477b3c26c67bd448426706c7
   approved: true
   note: Biện pháp kỹ thuật khắc phục ngập úng thối rễ lúa sau mưa bão
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: lua__mach_nuoc_phong_tru_dich_hai#4
+  sha256: 9df235f2bf5e3f969ed1f814198556c157123bdd8d88355f802d457583962ca8
   approved: true
   note: Khuyến cáo kỹ thuật bảo vệ bộ lá đòng lúa
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: lua__mach_nuoc_phong_tru_dich_hai#6
+  sha256: 98199faddac9e7a4df40bd065d8ca76d10c7bac963009de79233710c97a9e35a
   approved: true
   note: Quy tắc an toàn 4 đúng khi sử dụng thuốc BVTV cho lúa
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: lua__phong_tru_co_dai_cho_lua#2
+  sha256: c50b87a37bbbe77858e566c7868c8e7a60d4afe4602afd0a6ec9c6c0bc293cad
   approved: true
   note: Biện pháp canh tác phòng ngừa cỏ dại từ nguồn giống lúa
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: lua__phong_tru_co_dai_cho_lua#3
+  sha256: b27e98c92484a6736fd7a1a81b6536e45c7cf5c823103016419a4e5c5911d7a7
   approved: true
   note: Đặc tính và thời điểm sử dụng nhóm thuốc trừ cỏ hậu nảy mầm cho lúa
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: lua__phong_tru_co_dai_cho_lua#4
+  sha256: 7e3ecad28a6255af0592acaa4884cc469d452260a16a27b02b1c63e5719fb180
   approved: true
   note: Kỹ thuật liều lượng và điều kiện nhiệt độ phun thuốc trừ cỏ cho lúa
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: ninhbinh_dua_chuot_dong#2
+  sha256: a9ad4c33eca22130c46a9b23360f904ca93d686c9d21c69a4f0d797377b77bc9
   approved: true
   note: Quy trình thời vụ, đất trồng pH và bón lót dưa chuột vụ đông Ninh Bình
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: ninhbinh_dua_chuot_dong#7
+  sha256: a25c2bc88f4f1d4d947ef079a3528f1563f470d975550f0bef82a5918351e4a1
   approved: true
   note: Biện pháp quản lý dịch hại tổng hợp IPM trên dưa chuột vụ đông
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: ninhbinh_dua_chuot_quytrinh#3
+  sha256: c8a2ce79d9128233267d4ae091fd47438f623cd8a590e1891463ecbf464ba96f
   approved: true
   note: Kỹ thuật chuẩn bị đất, độ pH 6,5-7,5 và xử lý nấm trichoderma cho dưa chuột
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: ninhbinh_gntt_ca_chua#9
+  sha256: f3626a4d3af9ba1919ba408649f0ab27d932795075be25a1be0c4b3c8aab9150
   approved: true
   note: Quy trình chi tiết 4 lần bón thúc cà chua kèm định lượng phân đơn/hỗn hợp
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: phanbonquocgia_ca_chua#4
+  sha256: a277ea679cc96567ba81f26486370994e756d05ac24fc15fae93d543d09c864a
   approved: true
   note: Kỹ thuật bón lót phân hữu cơ sinh học 1 tấn/1000m2 cho cà chua
   reviewer: Phúc Bằng
   reviewed_at: '2026-08-20T10:35:00+00:00'
 - chunk_id: phanbonquocgia_ca_chua#5
+  sha256: eacf4373c9f731098a03729020990d02172f39ee2a6d19babc37a2b26d5f7d9d
   approved: true
   note: Quy trình liều lượng bón phân Better NPK theo từng giai đoạn sinh trưởng cà chua
   reviewer: Phúc Bằng
