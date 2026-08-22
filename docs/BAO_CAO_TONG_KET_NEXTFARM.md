@@ -175,7 +175,7 @@ Hệ thống cung cấp 2 giao diện chuyên biệt được xây dựng theo t
 
 ## 8. LỘ TRÌNH PHÁT TRIỂN & BÀN GIAO TIẾP THEO
 
-1. **Giai đoạn 1.5 (Production Packaging):** Đóng gói Docker Compose / Helm Chart cho Kubernetes, kết nối CI/CD tự động chạy 346 tests khi triển khai.
+1. **Giai đoạn 1.5 (Production Packaging):** Đóng gói Docker Compose / Helm Chart cho Kubernetes, kết nối CI/CD tự động chạy 310 tests khi triển khai.
 2. **Giai đoạn 2 (Mở rộng Cây trồng):** Mở rộng kho khuyến nông cho các cây ăn trái & công nghiệp giá trị cao (Sầu riêng, Xoài, Bơ, Cà phê, Hồ tiêu), quy mô 2.000+ chunks.
 3. **Giai đoạn 3 (Tích hợp IoT NextFarm):** Kết nối API cảm biến vườn thực tế (chuyển nhóm `garden_data` sang truy vấn có phân quyền) và thiết lập rào chắn bảo vệ xác nhận 2 lớp cho lệnh điều khiển thiết bị (`device_control`).
 
