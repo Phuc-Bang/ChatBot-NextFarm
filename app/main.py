@@ -254,3 +254,47 @@ def trang_report():
     if not f.exists():
         return JSONResponse({"loi": "chua co frontend/report.html"}, 404)
     return FileResponse(f)
+
+
+@app.get("/expert")
+@app.get("/phieu-cham")
+def trang_expert():
+    f = WEB / "expert.html"
+    if not f.exists():
+        return JSONResponse({"loi": "chua co frontend/expert.html"}, 404)
+    return FileResponse(f)
+
+
+@app.get("/api/expert/cases")
+def lay_cases_chuyen_gia():
+    try:
+        from app.services.evaluation.expert_parser import doc_phieu_cham
+        return {"cases": doc_phieu_cham(), "tong_so": len(doc_phieu_cham())}
+    except Exception as e:
+        return JSONResponse({"loi": str(e)}, 500)
+
+
+@app.get("/api/expert/scores")
+def lay_diem_chuyen_gia():
+    score_file = BASE / "evaluation" / "results" / "expert_scores.json"
+    if score_file.exists():
+        import json
+        try:
+            return json.loads(score_file.read_text(encoding="utf-8"))
+        except Exception:
+            return {"scores": {}, "reviewer": "", "updated_at": ""}
+    return {"scores": {}, "reviewer": "", "updated_at": ""}
+
+
+@app.post("/api/expert/save")
+async def luu_diem_chuyen_gia(req: Request):
+    try:
+        import json
+        payload = await req.json()
+        score_file = BASE / "evaluation" / "results" / "expert_scores.json"
+        score_file.parent.mkdir(parents=True, exist_ok=True)
+        score_file.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+        return {"trang_thai": "ok", "message": "Da luu ket qua danh gia chuyen gia thanh cong"}
+    except Exception as e:
+        return JSONResponse({"loi": str(e)}, 500)
+

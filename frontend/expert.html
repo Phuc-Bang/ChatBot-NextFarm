@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phiếu Chấm Chuyên Gia Nông Nghiệp — Nextfarm AI | nextfarm.vn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --brand: #16a34a;
+  --brand-hover: #15803d;
+  --brand-light: #ecfdf5;
+  --brand-glow: rgba(22, 163, 74, 0.2);
+  
+  --bg-app: #f8fafc;
+  --bg-sidebar: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f8fafc;
+  --bg-subtle: #f1f5f9;
+  --bg-glass: rgba(255, 255, 255, 0.92);
+  
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --text-inverse: #ffffff;
+  
+  --border: #e2e8f0;
+  --border-focus: #16a34a;
+  
+  --amber: #d97706;
+  --amber-bg: #fffbeb;
+  --amber-border: #fde68a;
+  
+  --emerald: #16a34a;
+  --emerald-bg: #ecfdf5;
+  --emerald-border: #bbf7d0;
+  
+  --blue: #2563eb;
+  --blue-bg: #eff6ff;
+  --blue-border: #bfdbfe;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 20px -3px rgba(0, 0, 0, 0.08);
+  
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  
+  --sidebar-w: 320px;
+}
+
+[data-theme="dark"] {
+  --brand: #22c55e;
+  --brand-hover: #4ade80;
+  --brand-light: rgba(34, 197, 94, 0.12);
+  --brand-glow: rgba(34, 197, 94, 0.3);
+  
+  --bg-app: #0b1120;
+  --bg-sidebar: #0f172a;
+  --bg-card: #1e293b;
+  --bg-card-hover: #27354f;
+  --bg-subtle: #182234;
+  --bg-glass: rgba(15, 23, 42, 0.92);
+  
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --text-inverse: #0b1120;
+  
+  --border: #334155;
+  --border-focus: #22c55e;
+  
+  --amber: #fbbf24;
+  --amber-bg: #2d2208;
+  --amber-border: #78350f;
+  
+  --emerald: #22c55e;
+  --emerald-bg: #063826;
+  --emerald-border: #065f46;
+  
+  --blue: #60a5fa;
+  --blue-bg: #1e3a8a33;
+  --blue-border: #1e40af;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 20px -3px rgba(0, 0, 0, 0.6);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  font-size: 14.5px;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+header.app-header {
+  height: 60px;
+  min-height: 60px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  z-index: 20;
+}
+
+.brand-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.brand-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-hover) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.25);
+}
+.brand-icon svg { width: 19px; height: 19px; stroke: currentColor; fill: none; stroke-width: 2.3; }
+
+.brand-text-col h1 {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--brand);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.brand-text-col h1 span {
+  color: var(--text-main);
+  font-weight: 700;
+  font-size: 14px;
+}
+.brand-text-col p {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  font-size: 12.5px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.btn-header:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+.btn-header.primary {
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-hover) 100%);
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.28);
+}
+.btn-header.primary:hover {
+  filter: brightness(1.08);
+}
+.btn-header svg { width: 14px; height: 14px; stroke: currentColor; fill: none; }
+
+/* Main Layout */
+.app-body {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Sidebar Case List */
+aside.case-sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sidebar-stats-box {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-subtle);
+}
+.stats-progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+.progress-bar-bg {
+  width: 100%;
+  height: 7px;
+  border-radius: var(--radius-full);
+  background: var(--border);
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand) 0%, #34d399 100%);
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+.sidebar-filters {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.filter-chip {
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.filter-chip.active, .filter-chip:hover {
+  background: var(--brand);
+  color: #fff;
+  border-color: var(--brand);
+}
+
+.case-scroll-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 10px;
+}
+
+.case-item-card {
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.case-item-card:hover {
+  border-color: var(--brand);
+  transform: translateX(2px);
+}
+.case-item-card.active {
+  border-color: var(--brand);
+  background: var(--brand-light);
+  box-shadow: var(--shadow-sm);
+}
+.case-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.case-num-badge {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--brand);
+  color: #fff;
+}
+.case-status-dot {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+.case-status-dot.scored {
+  color: var(--brand);
+}
+.case-item-query {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Review Main Workspace */
+main.review-workspace {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 24px 30px 60px;
+  background: var(--bg-app);
+}
+
+.workspace-max-wrap {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Nav Question Header */
+.question-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 18px;
+  box-shadow: var(--shadow-sm);
+}
+
+.question-nav-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.case-type-pill {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+}
+.case-type-pill.tra_loi {
+  background: var(--emerald-bg);
+  color: var(--brand);
+  border: 1px solid var(--emerald-border);
+}
+.case-type-pill.tu_choi {
+  background: var(--amber-bg);
+  color: var(--amber);
+  border: 1px solid var(--amber-border);
+}
+
+.nav-actions-group {
+  display: flex;
+  gap: 6px;
+}
+
+/* Question & Answer Box */
+.qa-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px 22px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.qa-section-label {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.query-display-txt {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.5;
+  background: var(--bg-subtle);
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--brand);
+}
+
+.answer-display-txt {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-main);
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  border-left: 3px solid #3b82f6;
+  white-space: pre-line;
+}
+
+/* Sources Accordion */
+.sources-box {
+  border-top: 1px dashed var(--border);
+  padding-top: 14px;
+}
+.source-item {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-top: 8px;
+}
+.source-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.source-head a {
+  color: var(--brand);
+  text-decoration: none;
+  font-size: 12px;
+}
+.source-snippet {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.45;
+  border-left: 2px solid var(--brand);
+  padding-left: 8px;
+}
+
+/* Criteria Scoring Form */
+.scoring-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.criteria-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.criteria-info {
+  flex: 1;
+  min-width: 240px;
+}
+.criteria-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.criteria-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.score-buttons-group {
+  display: flex;
+  gap: 6px;
+}
+.btn-score-pill {
+  width: 38px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+.btn-score-pill:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+  transform: scale(1.08);
+}
+.btn-score-pill.active {
+  background: var(--brand);
+  color: #fff;
+  border-color: var(--brand);
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.35);
+}
+
+.notes-textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-subtle);
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 13.5px;
+  outline: none;
+  resize: vertical;
+  min-height: 60px;
+}
+.notes-textarea:focus {
+  border-color: var(--brand);
+  background: var(--bg-card);
+}
+
+.save-action-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+
+.toast-box {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #0f172a;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: all 0.25s ease;
+  z-index: 100;
+}
+.toast-box.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="brand-left">
+    <div class="brand-icon">
+      <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    </div>
+    <div class="brand-text-col">
+      <h1>Nextfarm <span>| Phiếu Chấm Chuyên Gia Nông Nghiệp</span></h1>
+      <p>50 câu thực nghiệm C2 · Thang điểm 1–5 · Ground Truth đánh giá độc lập</p>
+    </div>
+  </div>
+
+  <div class="header-nav">
+    <button class="btn-header" id="btn-theme" title="Chuyển chế độ Sáng / Tối">
+      <svg viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+      <span>Giao diện</span>
+    </button>
+    <button class="btn-header" id="btn-export-json" title="Xuất kết quả JSON">
+      <svg viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+      <span>Xuất JSON</span>
+    </button>
+    <button class="btn-header primary" id="btn-export-md" title="Xuất báo cáo Markdown hoàn chỉnh">
+      <svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+      <span>Xuất Báo Cáo</span>
+    </button>
+    <a href="/admin" class="btn-header">Quản trị</a>
+    <a href="/" class="btn-header">Trang Chat</a>
+  </div>
+</header>
+
+<div class="app-body">
+  <!-- Case Sidebar -->
+  <aside class="case-sidebar">
+    <div class="sidebar-stats-box">
+      <div class="stats-progress-label">
+        <span>Tiến độ đánh giá:</span>
+        <span id="progress-text">0 / 50 câu (0%)</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-fill"></div>
+      </div>
+      <div style="margin-top:8px; font-size:12px; color:var(--text-muted); display:flex; justify-content:space-between;">
+        <span>Điểm TB: <strong id="avg-score-display" style="color:var(--brand);">--</strong> / 5.0</span>
+        <input type="text" id="reviewer-input" placeholder="Tên chuyên gia..." style="border:1px solid var(--border); border-radius:4px; padding:2px 6px; font-size:11px; width:130px; background:var(--bg-card); color:var(--text-main);">
+      </div>
+    </div>
+
+    <div class="sidebar-filters">
+      <button class="filter-chip active" data-filter="all">Tất cả (50)</button>
+      <button class="filter-chip" data-filter="unscored">Chưa chấm</button>
+      <button class="filter-chip" data-filter="scored">Đã chấm</button>
+      <button class="filter-chip" data-filter="tra_loi">Có nguồn</button>
+      <button class="filter-chip" data-filter="tu_choi">Từ chối</button>
+    </div>
+
+    <div class="case-scroll-list" id="case-list-container"></div>
+  </aside>
+
+  <!-- Main Workspace -->
+  <main class="review-workspace">
+    <div class="workspace-max-wrap">
+      
+      <!-- Nav Question Top Bar -->
+      <div class="question-nav-bar">
+        <div class="question-nav-title">
+          <span id="cur-case-num">Câu 1 / 50</span>
+          <span class="case-type-pill tra_loi" id="cur-case-type">Có tài liệu</span>
+        </div>
+        <div class="nav-actions-group">
+          <button class="btn-header" id="btn-prev-case">← Câu trước</button>
+          <button class="btn-header primary" id="btn-next-case">Câu tiếp theo →</button>
+        </div>
+      </div>
+
+      <!-- Question & Answer Display -->
+      <div class="qa-card">
+        <div class="qa-section-label">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+          <span>Câu hỏi của Nông dân / Kỹ sư:</span>
+        </div>
+        <div class="query-display-txt" id="display-query">Đang nạp câu hỏi...</div>
+
+        <div class="qa-section-label" style="margin-top:6px;">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21V9M12 9C12 6 9 3 5 3c0 4 3 6 7 6M12 9c0-3 3-6 7-6 0 4-3 6-7 6"/></svg>
+          <span>Câu trả lời của Nextfarm AI:</span>
+        </div>
+        <div class="answer-display-txt" id="display-answer">Đang nạp câu trả lời...</div>
+
+        <!-- Sources Box -->
+        <div class="sources-box" id="display-sources-wrap">
+          <div class="qa-section-label">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            <span>Tài liệu trích dẫn kiểm chứng:</span>
+          </div>
+          <div id="sources-list-container"></div>
+        </div>
+      </div>
+
+      <!-- 5 Criteria Scoring Card -->
+      <div class="scoring-card">
+        <div class="qa-section-label" style="font-size:12px; color:var(--brand);">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+          <span>Bảng Chấm Điểm 5 Tiêu Chí (Thang 1–5: 1 = Sai/Kém · 3 = Tạm được · 5 = Tốt/Chuẩn xác)</span>
+        </div>
+
+        <!-- 1. Đúng đắn nông học -->
+        <div class="criteria-row">
+          <div class="criteria-info">
+            <div class="criteria-title">1. Đúng đắn về nông học</div>
+            <div class="criteria-desc">Thông tin có chuẩn xác theo quy trình khuyến nông không? (Với ca từ chối: Từ chối có đúng không?)</div>
+          </div>
+          <div class="score-buttons-group" data-criterion="c1">
+            <button class="btn-score-pill" data-val="1">1</button>
+            <button class="btn-score-pill" data-val="2">2</button>
+            <button class="btn-score-pill" data-val="3">3</button>
+            <button class="btn-score-pill" data-val="4">4</button>
+            <button class="btn-score-pill" data-val="5">5</button>
+          </div>
+        </div>
+
+        <!-- 2. Phù hợp cây / vùng -->
+        <div class="criteria-row">
+          <div class="criteria-info">
+            <div class="criteria-title">2. Phù hợp cây trồng & vùng miền</div>
+            <div class="criteria-desc">Có đúng giống cây, thời vụ và thổ nhưỡng vùng miền được hỏi không?</div>
+          </div>
+          <div class="score-buttons-group" data-criterion="c2">
+            <button class="btn-score-pill" data-val="1">1</button>
+            <button class="btn-score-pill" data-val="2">2</button>
+            <button class="btn-score-pill" data-val="3">3</button>
+            <button class="btn-score-pill" data-val="4">4</button>
+            <button class="btn-score-pill" data-val="5">5</button>
+          </div>
+        </div>
+
+        <!-- 3. Đầy đủ -->
+        <div class="criteria-row">
+          <div class="criteria-info">
+            <div class="criteria-title">3. Đầy đủ điều kiện áp dụng</div>
+            <div class="criteria-desc">Có thiếu sót các lưu ý quan trọng (giai đoạn sinh trưởng, liều lượng, cảnh báo an toàn)?</div>
+          </div>
+          <div class="score-buttons-group" data-criterion="c3">
+            <button class="btn-score-pill" data-val="1">1</button>
+            <button class="btn-score-pill" data-val="2">2</button>
+            <button class="btn-score-pill" data-val="3">3</button>
+            <button class="btn-score-pill" data-val="4">4</button>
+            <button class="btn-score-pill" data-val="5">5</button>
+          </div>
+        </div>
+
+        <!-- 4. Rõ ràng với nông dân -->
+        <div class="criteria-row">
+          <div class="criteria-info">
+            <div class="criteria-title">4. Dễ hiểu & Rõ ràng với nông dân</div>
+            <div class="criteria-desc">Ngôn từ gần gũi, bà con nông dân và cán bộ HTX đọc có thể làm theo được ngay không?</div>
+          </div>
+          <div class="score-buttons-group" data-criterion="c4">
+            <button class="btn-score-pill" data-val="1">1</button>
+            <button class="btn-score-pill" data-val="2">2</button>
+            <button class="btn-score-pill" data-val="3">3</button>
+            <button class="btn-score-pill" data-val="4">4</button>
+            <button class="btn-score-pill" data-val="5">5</button>
+          </div>
+        </div>
+
+        <!-- 5. Nguồn hợp lý -->
+        <div class="criteria-row">
+          <div class="criteria-info">
+            <div class="criteria-title">5. Tính xác thực của nguồn trích dẫn</div>
+            <div class="criteria-desc">Tài liệu và đoạn trích hệ thống dẫn có THẬT SỰ chứa nội dung câu trả lời không?</div>
+          </div>
+          <div class="score-buttons-group" data-criterion="c5">
+            <button class="btn-score-pill" data-val="1">1</button>
+            <button class="btn-score-pill" data-val="2">2</button>
+            <button class="btn-score-pill" data-val="3">3</button>
+            <button class="btn-score-pill" data-val="4">4</button>
+            <button class="btn-score-pill" data-val="5">5</button>
+          </div>
+        </div>
+
+        <!-- Nhận xét chuyên môn -->
+        <div>
+          <label style="font-size:12px; font-weight:700; color:var(--text-main); display:block; margin-bottom:5px;">
+            Nhận xét chuyên môn & Góp ý của chuyên gia (tùy chọn):
+          </label>
+          <textarea class="notes-textarea" id="case-notes-input" placeholder="Ghi chú thêm về nội dung, lỗi khuyến nông hoặc đề xuất bổ sung tài liệu..."></textarea>
+        </div>
+
+        <div class="save-action-row">
+          <span style="font-size:12px; color:var(--text-muted);" id="save-status-text">Đã tự động lưu vào trình duyệt</span>
+          <button class="btn-header primary" id="btn-save-next">Lưu & Tiếp tục (Space / Enter) →</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<div class="toast-box" id="toast-box">Đã lưu điểm thành công!</div>
+
+<script>
+const STORAGE_KEY = "nextfarm_expert_eval_v1";
+
+let allCases = [];
+let currentIndex = 0;
+let evaluations = {};
+let currentFilter = "all";
+
+const $progressText = document.getElementById("progress-text");
+const $progressFill = document.getElementById("progress-fill");
+const $avgScore = document.getElementById("avg-score-display");
+const $reviewerInput = document.getElementById("reviewer-input");
+const $caseList = document.getElementById("case-list-container");
+
+const $curCaseNum = document.getElementById("cur-case-num");
+const $curCaseType = document.getElementById("cur-case-type");
+const $displayQuery = document.getElementById("display-query");
+const $displayAnswer = document.getElementById("display-answer");
+const $sourcesList = document.getElementById("sources-list-container");
+const $sourcesWrap = document.getElementById("display-sources-wrap");
+const $notesInput = document.getElementById("case-notes-input");
+const $saveStatus = document.getElementById("save-status-text");
+const $toast = document.getElementById("toast-box");
+
+function showToast(msg) {
+  $toast.textContent = msg;
+  $toast.classList.add("show");
+  setTimeout(() => $toast.classList.remove("show"), 2000);
+}
+
+// Theme
+const $btnTheme = document.getElementById("btn-theme");
+let currentTheme = localStorage.getItem("nextfarm_theme") || 
+  (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+document.documentElement.setAttribute("data-theme", currentTheme);
+$btnTheme.onclick = () => {
+  currentTheme = currentTheme === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", currentTheme);
+  localStorage.setItem("nextfarm_theme", currentTheme);
+};
+
+// Load saved evaluations
+function loadSaved() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const data = JSON.parse(raw);
+      evaluations = data.scores || {};
+      if (data.reviewer) $reviewerInput.value = data.reviewer;
+    }
+  } catch(e) {}
+}
+
+function saveLocal() {
+  const payload = {
+    reviewer: $reviewerInput.value.trim(),
+    updated_at: new Date().toISOString(),
+    scores: evaluations
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+  $saveStatus.textContent = "Đã lưu lúc " + new Date().toLocaleTimeString("vi-VN");
+  updateProgress();
+}
+
+async function fetchCases() {
+  try {
+    const res = await fetch("/api/expert/cases");
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const data = await res.json();
+    allCases = data.cases || [];
+    loadSaved();
+    renderSidebarList();
+    renderCurrentCase();
+    updateProgress();
+  } catch (err) {
+    console.error("Loi lay cases:", err);
+    $displayQuery.textContent = "Không tải được danh sách 50 câu hỏi: " + err.message;
+  }
+}
+
+function updateProgress() {
+  const total = allCases.length || 50;
+  let scoredCount = 0;
+  let totalPoints = 0;
+  let totalItems = 0;
+
+  Object.values(evaluations).forEach(item => {
+    if (item.c1 && item.c2 && item.c3 && item.c4 && item.c5) {
+      scoredCount++;
+      const avg = (item.c1 + item.c2 + item.c3 + item.c4 + item.c5) / 5;
+      totalPoints += avg;
+      totalItems++;
+    }
+  });
+
+  const pct = Math.round((scoredCount / total) * 100);
+  $progressText.textContent = `${scoredCount} / ${total} câu (${pct}%)`;
+  $progressFill.style.width = pct + "%";
+
+  if (totalItems > 0) {
+    $avgScore.textContent = (totalPoints / totalItems).toFixed(2);
+  } else {
+    $avgScore.textContent = "--";
+  }
+}
+
+function renderSidebarList() {
+  $caseList.innerHTML = "";
+  
+  const filtered = allCases.filter(c => {
+    const isScored = evaluations[c.id] && evaluations[c.id].c1;
+    if (currentFilter === "unscored") return !isScored;
+    if (currentFilter === "scored") return isScored;
+    if (currentFilter === "tra_loi") return c.loai === "tra_loi";
+    if (currentFilter === "tu_choi") return c.loai === "tu_choi";
+    return true;
+  });
+
+  filtered.forEach(c => {
+    const idx = allCases.indexOf(c);
+    const isScored = evaluations[c.id] && evaluations[c.id].c1;
+    const card = document.createElement("div");
+    card.className = `case-item-card ${idx === currentIndex ? "active" : ""}`;
+    card.innerHTML = `
+      <div class="case-item-top">
+        <span class="case-num-badge">Câu ${c.so}</span>
+        <span class="case-status-dot ${isScored ? "scored" : ""}">${isScored ? "★ Đã chấm" : "Chưa chấm"}</span>
+      </div>
+      <div class="case-item-query">${escapeHtml(c.cau_hoi)}</div>
+    `;
+    card.onclick = () => {
+      currentIndex = idx;
+      renderSidebarList();
+      renderCurrentCase();
+    };
+    $caseList.appendChild(card);
+  });
+}
+
+function escapeHtml(s) {
+  return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+function renderCurrentCase() {
+  if (!allCases.length) return;
+  const c = allCases[currentIndex];
+  if (!c) return;
+
+  $curCaseNum.textContent = `Câu ${c.so} / ${allCases.length}`;
+  $curCaseType.className = `case-type-pill ${c.loai}`;
+  $curCaseType.textContent = c.loai === "tu_choi" ? "Từ chối an toàn" : "Có căn cứ tài liệu";
+
+  $displayQuery.textContent = c.cau_hoi;
+  $displayAnswer.textContent = c.tra_loi;
+
+  if (c.nguon && c.nguon.length) {
+    $sourcesWrap.style.display = "block";
+    $sourcesList.innerHTML = c.nguon.map((n, i) => `
+      <div class="source-item">
+        <div class="source-head">
+          <span>[${i+1}] ${escapeHtml(n.tieu_de)} ${n.co_quan ? `— ${escapeHtml(n.co_quan)}` : ''}</span>
+          ${n.url ? `<a href="${escapeHtml(n.url)}" target="_blank">Xem tài liệu gốc ↗</a>` : ''}
+        </div>
+        <div class="source-snippet">"${escapeHtml(n.trich_doan)}"</div>
+      </div>
+    `).join("");
+  } else {
+    $sourcesWrap.style.display = "none";
+    $sourcesList.innerHTML = "";
+  }
+
+  // Load scores for this case
+  const scoreData = evaluations[c.id] || {};
+  document.querySelectorAll(".score-buttons-group").forEach(group => {
+    const crit = group.getAttribute("data-criterion");
+    const val = scoreData[crit];
+    group.querySelectorAll(".btn-score-pill").forEach(btn => {
+      if (parseInt(btn.getAttribute("data-val")) === val) {
+        btn.classList.add("active");
+      } else {
+        btn.classList.remove("active");
+      }
+    });
+  });
+
+  $notesInput.value = scoreData.notes || "";
+}
+
+// Score button click handling
+document.querySelectorAll(".score-buttons-group").forEach(group => {
+  const crit = group.getAttribute("data-criterion");
+  group.querySelectorAll(".btn-score-pill").forEach(btn => {
+    btn.onclick = () => {
+      const val = parseInt(btn.getAttribute("data-val"));
+      group.querySelectorAll(".btn-score-pill").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const c = allCases[currentIndex];
+      if (!evaluations[c.id]) evaluations[c.id] = {};
+      evaluations[c.id][crit] = val;
+      saveLocal();
+      renderSidebarList();
+    };
+  });
+});
+
+$notesInput.addEventListener("input", () => {
+  const c = allCases[currentIndex];
+  if (!evaluations[c.id]) evaluations[c.id] = {};
+  evaluations[c.id].notes = $notesInput.value;
+  saveLocal();
+});
+
+$reviewerInput.addEventListener("change", saveLocal);
+
+// Navigation
+document.getElementById("btn-prev-case").onclick = () => {
+  if (currentIndex > 0) {
+    currentIndex--;
+    renderSidebarList();
+    renderCurrentCase();
+  }
+};
+
+function goNext() {
+  if (currentIndex < allCases.length - 1) {
+    currentIndex++;
+    renderSidebarList();
+    renderCurrentCase();
+  } else {
+    showToast("Đã đến câu cuối cùng trong danh sách 50 câu!");
+  }
+}
+
+document.getElementById("btn-next-case").onclick = goNext;
+document.getElementById("btn-save-next").onclick = () => {
+  saveLocal();
+  showToast("Đã lưu câu " + (currentIndex + 1));
+  goNext();
+};
+
+// Filter handling
+document.querySelectorAll(".filter-chip").forEach(chip => {
+  chip.onclick = () => {
+    document.querySelectorAll(".filter-chip").forEach(ch => ch.classList.remove("active"));
+    chip.classList.add("active");
+    currentFilter = chip.getAttribute("data-filter");
+    renderSidebarList();
+  };
+});
+
+// Export JSON
+document.getElementById("btn-export-json").onclick = () => {
+  const payload = {
+    reviewer: $reviewerInput.value.trim() || "Chuyen_gia_NextFarm",
+    export_date: new Date().toISOString(),
+    total_cases: allCases.length,
+    scores: evaluations
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `phieu_cham_chuyen_gia_nextfarm_${Date.now()}.json`;
+  a.click();
+  showToast("Đã xuất file kết quả JSON!");
+};
+
+// Export Markdown Report
+document.getElementById("btn-export-md").onclick = () => {
+  const reviewer = $reviewerInput.value.trim() || "Chuyên gia Nông nghiệp NextFarm";
+  let md = `# Báo Cáo Đánh Giá Chuyên Gia Nông Nghiệp — Nextfarm AI\n\n`;
+  md += `**Chuyên gia đánh giá:** ${reviewer}\n`;
+  md += `**Thời gian xuất:** ${new Date().toLocaleString("vi-VN")}\n`;
+  md += `**Tổng số câu đánh giá:** 50 câu hỏi thực nghiệm (C2 Production Config)\n\n---\n\n`;
+
+  let totalAvg = 0;
+  let scoredCount = 0;
+
+  allCases.forEach(c => {
+    const sc = evaluations[c.id] || {};
+    const hasScores = sc.c1 && sc.c2 && sc.c3 && sc.c4 && sc.c5;
+    if (hasScores) {
+      const avg = (sc.c1 + sc.c2 + sc.c3 + sc.c4 + sc.c5) / 5;
+      totalAvg += avg;
+      scoredCount++;
+    }
+
+    md += `### Câu ${c.so}: ${c.cau_hoi}\n\n`;
+    md += `**Trả lời:**\n> ${c.tra_loi}\n\n`;
+    if (c.nguon && c.nguon.length) {
+      md += `**Nguồn đã dẫn:**\n`;
+      c.nguon.forEach(n => {
+        md += `- **${n.tieu_de}** (${n.url}): "${n.trich_doan}"\n`;
+      });
+      md += `\n`;
+    }
+    md += `| Tiêu chí | Điểm (1-5) |\n|---|---|\n`;
+    md += `| Đúng đắn nông học | ${sc.c1 || "—"} |\n`;
+    md += `| Phù hợp cây / vùng | ${sc.c2 || "—"} |\n`;
+    md += `| Đầy đủ điều kiện | ${sc.c3 || "—"} |\n`;
+    md += `| Dễ hiểu với nông dân | ${sc.c4 || "—"} |\n`;
+    md += `| Nguồn xác thực | ${sc.c5 || "—"} |\n\n`;
+    if (sc.notes) {
+      md += `**Nhận xét chuyên môn:** ${sc.notes}\n\n`;
+    }
+    md += `---\n\n`;
+  });
+
+  const finalAvg = scoredCount > 0 ? (totalAvg / scoredCount).toFixed(2) : "--";
+  md = `# Báo Cáo Đánh Giá Chuyên Gia Nông Nghiệp — Nextfarm AI\n\n**Điểm Trung Bình Chung:** ${finalAvg} / 5.0 (trên ${scoredCount}/50 câu đã chấm)\n\n` + md;
+
+  const blob = new Blob([md], { type: "text/markdown;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `bao_cao_chuyen_gia_nextfarm_${Date.now()}.md`;
+  a.click();
+  showToast("Đã xuất Báo cáo Markdown!");
+};
+
+fetchCases();
+</script>
+</body>
+</html>
