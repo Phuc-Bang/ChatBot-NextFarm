@@ -4,7 +4,7 @@
 > **Mã nguồn:** `github.com/Phuc-Bang/ChatBot-NextFarm`  
 > **Ngày hoàn thành:** 21/08/2026  
 > **Quy chuẩn kỹ thuật tham chiếu:** `NEXTFARM_PROBLEM_A_STANDARD_v2.0.md`  
-> **Trạng thái kiểm thử:** 322/322 Unit Tests PASSED (100%) · Working Tree Clean
+> **Trạng thái kiểm thử:** 358/358 Unit Tests PASSED (100%) · Working Tree Clean
 
 ---
 
@@ -167,7 +167,7 @@ Hệ thống cung cấp 2 giao diện chuyên biệt được xây dựng theo t
 
 ## 7. ĐÁNH GIÁ CHẤT LƯỢNG MÃ NGUỒN & ĐỘ TIN CẬY
 
-* **Bộ kiểm thử tự động:** **322/322 Unit Tests PASSED (100%)** với độ phủ toàn diện từ chuẩn hóa, định tuyến, phân mảnh, truy xuất lai, kiểm duyệt fact, đến mô phỏng pipeline qua HTTP thật.
+* **Bộ kiểm thử tự động:** **358/358 Unit Tests PASSED (100%)** với độ phủ toàn diện từ chuẩn hóa, định tuyến, phân mảnh, truy xuất lai, kiểm duyệt fact, đến mô phỏng pipeline qua HTTP thật.
 * **Bảo vệ rò rỉ dữ liệu:** Toàn bộ API keys, chuỗi kết nối CSDL và biến môi trường được cách ly trong `.env`, loại trừ tuyệt đối khỏi Git repository.
 * **Khả năng tái lập 100%:** Chỉ với 1 lệnh `make ingest`, toàn bộ kho tri thức 292 chunk / 185 chunk indexable / 141 fact được tái lập hoàn hảo từ các tệp cấu hình YAML có version control trong Git.
 
@@ -175,7 +175,7 @@ Hệ thống cung cấp 2 giao diện chuyên biệt được xây dựng theo t
 
 ## 8. LỘ TRÌNH PHÁT TRIỂN & BÀN GIAO TIẾP THEO
 
-1. **Giai đoạn 1.5 (Production Packaging):** Đóng gói Docker Compose / Helm Chart cho Kubernetes, kết nối CI/CD tự động chạy 322 tests khi triển khai.
+1. **Giai đoạn 1.5 (Production Packaging):** Đóng gói Docker Compose / Helm Chart cho Kubernetes, kết nối CI/CD tự động chạy 358 tests khi triển khai.
 2. **Giai đoạn 2 (Mở rộng Cây trồng):** Mở rộng kho khuyến nông cho các cây ăn trái & công nghiệp giá trị cao (Sầu riêng, Xoài, Bơ, Cà phê, Hồ tiêu), quy mô 2.000+ chunks.
 3. **Giai đoạn 3 (Tích hợp IoT NextFarm):** Kết nối API cảm biến vườn thực tế (chuyển nhóm `garden_data` sang truy vấn có phân quyền) và thiết lập rào chắn bảo vệ xác nhận 2 lớp cho lệnh điều khiển thiết bị (`device_control`).
 
