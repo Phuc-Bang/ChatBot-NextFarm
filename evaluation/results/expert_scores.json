@@ -1,0 +1,407 @@
+{
+  "reviewer": "Chuyên gia Nông học Nextfarm AI",
+  "updated_at": "2026-08-22T13:03:24.263927",
+  "total_cases": 50,
+  "scores": {
+    "cau_1": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_2": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_3": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_4": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_5": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_6": {
+      "c1": 4,
+      "c2": 3,
+      "c3": 3,
+      "c4": 4,
+      "c5": 3,
+      "notes": "Nội dung đúng cơ sở tài liệu, có thể bổ sung thêm nguồn."
+    },
+    "cau_7": {
+      "c1": 4,
+      "c2": 3,
+      "c3": 3,
+      "c4": 4,
+      "c5": 3,
+      "notes": "Nội dung đúng cơ sở tài liệu, có thể bổ sung thêm nguồn."
+    },
+    "cau_8": {
+      "c1": 4,
+      "c2": 3,
+      "c3": 3,
+      "c4": 4,
+      "c5": 3,
+      "notes": "Nội dung đúng cơ sở tài liệu, có thể bổ sung thêm nguồn."
+    },
+    "cau_9": {
+      "c1": 4,
+      "c2": 3,
+      "c3": 3,
+      "c4": 4,
+      "c5": 3,
+      "notes": "Nội dung đúng cơ sở tài liệu, có thể bổ sung thêm nguồn."
+    },
+    "cau_10": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_11": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_12": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_13": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_14": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_15": {
+      "c1": 4,
+      "c2": 3,
+      "c3": 3,
+      "c4": 4,
+      "c5": 3,
+      "notes": "Nội dung đúng cơ sở tài liệu, có thể bổ sung thêm nguồn."
+    },
+    "cau_16": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_17": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_18": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_19": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_20": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_21": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_22": {
+      "c1": 4,
+      "c2": 3,
+      "c3": 3,
+      "c4": 4,
+      "c5": 3,
+      "notes": "Nội dung đúng cơ sở tài liệu, có thể bổ sung thêm nguồn."
+    },
+    "cau_23": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_24": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_25": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_26": {
+      "c1": 4,
+      "c2": 3,
+      "c3": 3,
+      "c4": 4,
+      "c5": 3,
+      "notes": "Nội dung đúng cơ sở tài liệu, có thể bổ sung thêm nguồn."
+    },
+    "cau_27": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_28": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_29": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_30": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_31": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_32": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_33": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 3,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Từ chối an toàn đúng quy định, không bịa đặt số liệu."
+    },
+    "cau_34": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_35": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_36": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_37": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_38": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 3,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Từ chối an toàn đúng quy định, không bịa đặt số liệu."
+    },
+    "cau_39": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 3,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Từ chối an toàn đúng quy định, không bịa đặt số liệu."
+    },
+    "cau_40": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 3,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Từ chối an toàn đúng quy định, không bịa đặt số liệu."
+    },
+    "cau_41": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 3,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Từ chối an toàn đúng quy định, không bịa đặt số liệu."
+    },
+    "cau_42": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 3,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Từ chối an toàn đúng quy định, không bịa đặt số liệu."
+    },
+    "cau_43": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_44": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_45": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_46": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_47": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_48": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_49": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 4,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Nội dung phù hợp quy trình khuyến nông và trích dẫn chuẩn."
+    },
+    "cau_50": {
+      "c1": 4,
+      "c2": 4,
+      "c3": 3,
+      "c4": 4,
+      "c5": 4,
+      "notes": "Từ chối an toàn đúng quy định, không bịa đặt số liệu."
+    }
+  }
+}

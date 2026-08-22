@@ -821,13 +821,30 @@ $btnTheme.onclick = () => {
 };
 
 // Load saved evaluations
-function loadSaved() {
+async function loadSaved() {
   try {
+    let localData = null;
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
-      const data = JSON.parse(raw);
-      evaluations = data.scores || {};
-      if (data.reviewer) $reviewerInput.value = data.reviewer;
+      try { localData = JSON.parse(raw); } catch(e) {}
+    }
+
+    try {
+      const res = await fetch("/api/expert/scores");
+      if (res.ok) {
+        const serverData = await res.json();
+        if (serverData.scores && Object.keys(serverData.scores).length > 0) {
+          evaluations = serverData.scores;
+          if (serverData.reviewer) $reviewerInput.value = serverData.reviewer;
+          saveLocal();
+          return;
+        }
+      }
+    } catch(e) {}
+
+    if (localData) {
+      evaluations = localData.scores || {};
+      if (localData.reviewer) $reviewerInput.value = localData.reviewer;
     }
   } catch(e) {}
 }
@@ -849,7 +866,7 @@ async function fetchCases() {
     if (!res.ok) throw new Error("HTTP " + res.status);
     const data = await res.json();
     allCases = data.cases || [];
-    loadSaved();
+    await loadSaved();
     renderSidebarList();
     renderCurrentCase();
     updateProgress();
