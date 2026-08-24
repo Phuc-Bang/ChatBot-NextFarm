@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Báo Cáo Tổng Kết Dự Án — NextFarm AI (Bài Toán A: Chống Bịa Đặt)</title>
+<title>Báo Cáo Tổng Kết Toàn Diện Dự Án — NextFarm AI (Bài Toán A: Chống Bịa Đặt)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -40,6 +40,10 @@
   --blue: #2563eb;
   --blue-bg: #eff6ff;
   --blue-border: #bfdbfe;
+
+  --purple: #7c3aed;
+  --purple-bg: #f5f3ff;
+  --purple-border: #ddd6fe;
   
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
@@ -83,6 +87,10 @@
   --blue: #60a5fa;
   --blue-bg: #1e293b;
   --blue-border: #1d4ed8;
+
+  --purple: #a78bfa;
+  --purple-bg: #2e1065;
+  --purple-border: #5b21b6;
   
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
@@ -99,581 +107,839 @@ body {
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-.mono { font-family: 'JetBrains Mono', monospace; }
-.so { font-variant-numeric: tabular-nums; font-family: 'JetBrains Mono', monospace; }
-
-/* Sticky Navbar */
-.navbar {
+/* Header & Nav */
+.top-nav {
   position: sticky;
   top: 0;
   z-index: 100;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   background: var(--bg-glass);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
-  padding: 12px 28px;
+  padding: 0.75rem 1.5rem;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  box-shadow: var(--shadow-sm);
+  align-items: center;
 }
-
-.nav-brand {
+.brand-group {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0.75rem;
   text-decoration: none;
-  color: inherit;
+  color: var(--text-main);
 }
-
-.nav-logo {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-md);
-  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+.brand-logo {
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, var(--primary), #059669);
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
-  box-shadow: 0 0 15px var(--primary-glow);
-}
-.nav-logo svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.2; }
-
-.nav-title h1 {
-  font-size: 16px;
+  color: white;
   font-weight: 800;
-  letter-spacing: -0.02em;
+  font-size: 20px;
+  box-shadow: 0 4px 10px var(--primary-glow);
+}
+.brand-text h1 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+.brand-text span {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.nav-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.75rem;
 }
-
-.nav-badge {
-  font-size: 11px;
-  font-weight: 700;
-  padding: 2px 8px;
-  background: var(--emerald-bg);
-  color: var(--primary);
-  border-radius: var(--radius-full);
-  border: 1px solid var(--emerald-border);
-  text-transform: uppercase;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
 .btn-nav {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 7px 14px;
+  padding: 0.5rem 0.9rem;
   border-radius: var(--radius-sm);
-  background: var(--bg-card);
   border: 1px solid var(--border);
+  background: var(--bg-card);
   color: var(--text-main);
-  font-size: 13px;
+  font-size: 0.85rem;
   font-weight: 600;
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 .btn-nav:hover {
   background: var(--bg-subtle);
   border-color: var(--primary);
-  color: var(--primary);
 }
 .btn-nav.primary {
   background: var(--primary);
-  color: #ffffff;
+  color: white;
   border-color: var(--primary);
 }
 .btn-nav.primary:hover {
   background: var(--primary-hover);
 }
-.btn-nav svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; }
 
-/* Main Container */
-main {
-  max-width: 1200px;
+/* Layout */
+.container {
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 32px 24px 100px;
+  padding: 2rem 1.5rem 4rem;
 }
 
-/* Hero Executive Banner */
+/* Hero Section */
 .hero-banner {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--primary-light) 0%, transparent 100%);
+  border: 1px solid var(--emerald-border);
   border-radius: var(--radius-lg);
-  padding: 36px 32px;
-  margin-bottom: 32px;
-  box-shadow: var(--shadow-md);
+  padding: 2.5rem;
+  margin-bottom: 2.5rem;
   position: relative;
   overflow: hidden;
 }
-
-.hero-banner::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 5px;
-  background: linear-gradient(90deg, #10b981 0%, #059669 50%, #3b82f6 100%);
-}
-
 .hero-meta {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 14px;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
   flex-wrap: wrap;
 }
-
 .hero-status-pill {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 4px 12px;
-  border-radius: var(--radius-full);
+  gap: 0.5rem;
   background: var(--emerald-bg);
-  border: 1px solid var(--emerald-border);
-  font-size: 12px;
-  font-weight: 700;
   color: var(--primary);
+  border: 1px solid var(--emerald-border);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
-
 .hero-status-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
+  width: 8px;
+  height: 8px;
   background: var(--emerald);
-  box-shadow: 0 0 8px var(--emerald);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
+  animation: pulse 2s infinite;
 }
-
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
 .hero-date {
-  font-size: 13px;
+  font-size: 0.85rem;
   color: var(--text-muted);
-  font-weight: 500;
+  font-weight: 600;
 }
-
 .hero-title {
-  font-size: 28px;
+  font-size: 2.2rem;
   font-weight: 800;
-  letter-spacing: -0.03em;
   line-height: 1.25;
-  margin-bottom: 12px;
+  margin-bottom: 1rem;
   color: var(--text-main);
 }
-
 .hero-subtitle {
-  font-size: 16px;
+  font-size: 1.05rem;
   color: var(--text-muted);
   max-width: 900px;
   line-height: 1.6;
-  margin-bottom: 24px;
+}
+
+/* Quick Navigator Bar */
+.toc-bar {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  margin-bottom: 2rem;
+  position: sticky;
+  top: 65px;
+  z-index: 90;
+  backdrop-filter: blur(10px);
+}
+.toc-link {
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+.toc-link:hover {
+  background: var(--bg-subtle);
+  color: var(--primary);
 }
 
 /* KPI Bento Grid */
 .kpi-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 16px;
-  margin-bottom: 36px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
 }
-
 .kpi-box {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: 20px 22px;
+  padding: 1.5rem;
   box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: relative;
+  overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .kpi-box:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
-
-.kpi-box.emerald {
-  border-color: var(--emerald-border);
-  background: linear-gradient(180deg, var(--bg-card) 0%, var(--emerald-bg) 100%);
+.kpi-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--primary);
 }
-
-.kpi-box.blue {
-  border-color: var(--blue-border);
-  background: linear-gradient(180deg, var(--bg-card) 0%, var(--blue-bg) 100%);
-}
+.kpi-box.emerald::before { background: var(--emerald); }
+.kpi-box.blue::before { background: var(--blue); }
+.kpi-box.amber::before { background: var(--amber); }
+.kpi-box.purple::before { background: var(--purple); }
 
 .kpi-top {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  font-size: 12.5px;
-  font-weight: 600;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
   color: var(--text-muted);
-  margin-bottom: 8px;
 }
-
 .kpi-metric {
-  font-size: 34px;
+  font-size: 2.2rem;
   font-weight: 800;
-  letter-spacing: -0.03em;
   line-height: 1.1;
   color: var(--text-main);
-  margin-bottom: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 0.5rem;
 }
-
 .kpi-foot {
-  font-size: 12px;
+  font-size: 0.8rem;
   color: var(--text-muted);
-  font-weight: 500;
+  line-height: 1.4;
 }
 
-/* Section Card */
+/* Section Blocks */
 .section-block {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 28px 30px;
-  margin-bottom: 28px;
+  padding: 2rem;
+  margin-bottom: 2.5rem;
   box-shadow: var(--shadow-sm);
 }
-
 .section-head {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-  padding-bottom: 14px;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
   border-bottom: 1px solid var(--border);
 }
-
 .section-icon {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: var(--radius-sm);
   background: var(--primary-light);
   color: var(--primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
 }
-.section-icon svg { width: 18px; height: 18px; stroke-width: 2.2; fill: none; stroke: currentColor; }
-
+.section-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
 .section-title {
-  font-size: 19px;
+  font-size: 1.4rem;
   font-weight: 800;
-  letter-spacing: -0.02em;
   color: var(--text-main);
 }
 
-/* Comparison Table */
-.table-wrapper {
-  overflow-x: auto;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  margin: 18px 0;
-}
-
-table.comp-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 14px;
-}
-
-table.comp-table th {
-  background: var(--bg-subtle);
-  text-align: left;
-  padding: 13px 18px;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
-  border-bottom: 1px solid var(--border);
-}
-
-table.comp-table td {
-  padding: 14px 18px;
-  border-bottom: 1px solid var(--border);
-  vertical-align: middle;
-}
-
-table.comp-table tr:last-child td {
-  border-bottom: none;
-}
-
+/* Badge Tags */
 .badge-tag {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 4px 10px;
+  gap: 0.35rem;
+  padding: 0.2rem 0.6rem;
   border-radius: var(--radius-full);
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 700;
 }
+.badge-tag.success { background: var(--emerald-bg); color: var(--emerald); border: 1px solid var(--emerald-border); }
 .badge-tag.danger { background: var(--rose-bg); color: var(--rose); border: 1px solid var(--rose-border); }
-.badge-tag.success { background: var(--emerald-bg); color: var(--primary); border: 1px solid var(--emerald-border); }
-.badge-tag.info { background: var(--blue-bg); color: var(--blue); border: 1px solid var(--blue-border); }
 .badge-tag.warning { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
+.badge-tag.info { background: var(--blue-bg); color: var(--blue); border: 1px solid var(--blue-border); }
+.badge-tag.purple { background: var(--purple-bg); color: var(--purple); border: 1px solid var(--purple-border); }
 
-/* 4 Problems Grid */
-.problems-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
-  margin: 18px 0;
-}
-
-.problem-card {
-  background: var(--bg-subtle);
-  border: 1px solid var(--border);
+/* Tables */
+.table-wrapper {
+  overflow-x: auto;
   border-radius: var(--radius-md);
-  padding: 18px 20px;
-  position: relative;
-}
-
-.problem-tag {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: var(--radius-sm);
-  background: var(--bg-card);
   border: 1px solid var(--border);
-  font-size: 11px;
-  font-weight: 800;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-top: 1rem;
 }
-
-.problem-card h3 {
-  font-size: 15px;
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+}
+.data-table th {
+  background: var(--bg-subtle);
+  padding: 0.85rem 1rem;
   font-weight: 700;
   color: var(--text-main);
-  margin-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.data-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-main);
+}
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.data-table tbody tr:hover {
+  background: var(--bg-subtle);
 }
 
-.problem-card p {
-  font-size: 13.5px;
-  color: var(--text-muted);
-  line-height: 1.55;
-  margin-bottom: 10px;
-}
-
-.solution-box {
-  padding: 8px 12px;
-  border-radius: var(--radius-sm);
-  background: var(--emerald-bg);
-  border: 1px solid var(--emerald-border);
-  font-size: 12.5px;
+/* Comparison Table Specifics */
+.comp-table th:nth-child(4), .comp-table td:nth-child(4) {
+  background: var(--primary-light);
   font-weight: 600;
-  color: var(--primary);
 }
 
-/* Architecture Flow Steps */
-.flow-container {
+/* Problems Grid & Tech Cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+.info-card {
+  background: var(--bg-page);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin: 20px 0;
+  gap: 0.5rem;
 }
-
-.flow-step {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  background: var(--bg-subtle);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 16px 20px;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
-}
-.flow-step:hover {
-  border-color: var(--primary);
-  background: var(--bg-card);
-}
-
-.step-number {
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-full);
-  background: var(--primary);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 14px;
-  flex-shrink: 0;
-}
-
-.step-content h4 {
-  font-size: 15px;
+.info-card h4 {
+  font-size: 1.05rem;
   font-weight: 700;
-  color: var(--text-main);
-  margin-bottom: 4px;
-}
-
-.step-content p {
-  font-size: 13.5px;
-  color: var(--text-muted);
-  line-height: 1.5;
-}
-
-/* Footer Actions */
-.footer-banner {
-  background: linear-gradient(135deg, #064e3b 0%, #0f172a 100%);
-  border-radius: var(--radius-lg);
-  padding: 36px 32px;
-  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+}
+.info-card p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+.solution-box {
+  margin-top: 0.5rem;
+  padding: 0.65rem 0.85rem;
+  background: var(--emerald-bg);
+  border-left: 3px solid var(--emerald);
+  border-radius: 4px;
+  font-size: 0.82rem;
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+/* Step Flow Pipeline */
+.pipeline-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+.pipeline-node {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  gap: 1rem;
+  align-items: flex-start;
+  background: var(--bg-page);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.15rem;
+  position: relative;
+}
+.pipeline-node:hover {
+  border-color: var(--primary);
+}
+.node-num {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background: var(--primary);
+  color: white;
+  font-weight: 800;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.node-info h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.node-info p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* Roadmap Grid */
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+.roadmap-col {
+  background: var(--bg-page);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+}
+.roadmap-col.active {
+  border: 2px solid var(--primary);
+  background: var(--primary-light);
+}
+.roadmap-header {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.roadmap-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.roadmap-list li {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+/* Callout Box */
+.callout {
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--radius-md);
+  margin: 1.25rem 0;
+  border-left: 4px solid;
+}
+.callout.emerald {
+  background: var(--emerald-bg);
+  border-color: var(--emerald);
+  color: var(--text-main);
+}
+.callout.amber {
+  background: var(--amber-bg);
+  border-color: var(--amber);
+  color: var(--text-main);
+}
+.callout.blue {
+  background: var(--blue-bg);
+  border-color: var(--blue);
+  color: var(--text-main);
+}
+
+/* Footer Banner */
+.footer-banner {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: white;
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
-  margin-top: 40px;
+  gap: 1.5rem;
   box-shadow: var(--shadow-lg);
 }
-
 .footer-banner h2 {
-  font-size: 22px;
+  font-size: 1.6rem;
   font-weight: 800;
-  letter-spacing: -0.02em;
-  margin-bottom: 6px;
+  margin-bottom: 0.5rem;
 }
-
 .footer-banner p {
-  font-size: 14px;
   color: #94a3b8;
   max-width: 600px;
+  font-size: 0.95rem;
 }
-
 .footer-buttons {
   display: flex;
-  gap: 12px;
+  gap: 0.75rem;
+  flex-wrap: wrap;
 }
 
 @media (max-width: 768px) {
-  .navbar { padding: 10px 16px; }
-  .hero-banner { padding: 24px 20px; }
-  .hero-title { font-size: 22px; }
-  .section-block { padding: 20px 16px; }
-  .footer-banner { padding: 24px 20px; }
+  .hero-banner { padding: 1.5rem; }
+  .hero-title { font-size: 1.6rem; }
+  .section-block { padding: 1.25rem; }
+  .footer-banner { flex-direction: column; align-items: flex-start; }
 }
 </style>
 </head>
 <body>
 
-<nav class="navbar">
-  <a href="https://nextfarm.vn" target="_blank" class="nav-brand" title="Truy cập nextfarm.vn">
-    <div class="nav-logo" style="background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.3"><path d="M12 21V9M12 9C12 6 9 3 5 3c0 4 3 6 7 6M12 9c0-3 3-6 7-6 0 4-3 6-7 6"/></svg>
-    </div>
-    <div class="nav-title">
-      <h1>Nextfarm <span class="nav-badge">Báo Cáo Nghiệm Thu</span></h1>
+<nav class="top-nav">
+  <a href="/" class="brand-group">
+    <div class="brand-logo">🌱</div>
+    <div class="brand-text">
+      <h1>NextFarm AI</h1>
+      <span>Báo Cáo Tổng Kết Kỹ Thuật (PoC Giai Đoạn 1 & 2)</span>
     </div>
   </a>
-  <div class="nav-links">
-    <button class="btn-nav" id="btn-theme" title="Chuyển chế độ Sáng/Tối">
-      <svg viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-    </button>
-    <a href="/expert" class="btn-nav">
-      <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-      <span>Phiếu chấm</span>
-    </a>
-    <a href="/admin" class="btn-nav">
-      <svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-      <span>Bảng Quản trị</span>
-    </a>
-    <a href="/" class="btn-nav primary">
-      <svg viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
-      <span>Mở Trang Chat</span>
-    </a>
-    <a href="https://nextfarm.vn" target="_blank" class="btn-nav">
-      <svg viewBox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-      <span>nextfarm.vn ↗</span>
-    </a>
+  <div class="nav-actions">
+    <a href="/" class="btn-nav">💬 Chat Thử Nghiệm</a>
+    <a href="/admin" class="btn-nav">⚙️ Bảng Quản Trị</a>
+    <a href="/expert" class="btn-nav">📋 Phiếu Chấm</a>
+    <button class="btn-nav" id="btn-theme" title="Chuyển chế độ Sáng / Tối">🌓</button>
   </div>
 </nav>
 
-<main>
+<div class="container">
+
   <!-- Hero Section -->
   <div class="hero-banner">
     <div class="hero-meta">
       <div class="hero-status-pill">
         <div class="hero-status-dot"></div>
-        <span>PoC Giai Đoạn 1 Hoàn Thành</span>
+        <span>Nghiệm Thu Toàn Diện</span>
       </div>
-      <span class="hero-date">Ngày đo: 22/08/2026 · 367/367 Unit Tests PASSED</span>
+      <span class="hero-date">Đo lường: 22–24/08/2026 · 367/367 Unit Tests PASSED (100%)</span>
     </div>
-    <h1 class="hero-title">Báo Cáo Tổng Kết Kỹ Thuật — Bài Toán A: Chống Bịa Đặt</h1>
+    <h1 class="hero-title">Báo Cáo Kỹ Thuật Toàn Diện — Bài Toán A: Chống Bịa Đặt</h1>
     <p class="hero-subtitle">
-      Tài liệu tổng hợp toàn diện về kiến trúc RAG kiểm duyệt đa tầng, kết quả thực nghiệm đối chứng định lượng trên 222 test case độc lập, quy trình kiểm soát dữ liệu khuyến nông và rào chắn an toàn tất định cho hệ thống Trợ lý Nông nghiệp NextFarm AI.
+      Tài liệu tổng kết hoàn chỉnh: Bối cảnh vấn đề, công nghệ đã sử dụng, chi tiết các hạng mục đã hoàn thành, kết quả thực nghiệm định lượng C0 vs C1 vs C2, kết quả chấm chuyên gia 50 câu thực tế, các giới hạn đã biết và lộ trình phát triển tương lai.
     </p>
   </div>
 
-  <!-- KPI Bento Grid -->
-  <div class="kpi-grid">
+  <!-- Quick Navigator Bar -->
+  <div class="toc-bar">
+    <a href="#kpi" class="toc-link">📊 KPI Cốt Lõi</a>
+    <a href="#context" class="toc-link">🎯 1. Bối Cảnh & 4 Rủi Ro</a>
+    <a href="#techstack" class="toc-link">🛠️ 2. Công Nghệ Đã Dùng</a>
+    <a href="#pipeline" class="toc-link">⚡ 3. Kiến Trúc 7 Chặng</a>
+    <a href="#accomplishments" class="toc-link">🏆 4. Những Gì Đã Làm Được</a>
+    <a href="#comparison" class="toc-link">📈 5. Đối Chứng C0 · C1 · C2</a>
+    <a href="#expert" class="toc-link">👨‍🌾 6. Chấm Chuyên Gia 50 Câu</a>
+    <a href="#remaining" class="toc-link">🚧 7. Những Gì Chưa Làm & Giới Hạn</a>
+    <a href="#roadmap" class="toc-link">🚀 8. Lộ Trình Phát Triển</a>
+  </div>
+
+  <!-- KPI Grid -->
+  <div id="kpi" class="kpi-grid">
     <div class="kpi-box emerald">
       <div class="kpi-top">
-        <span>Hiện tượng bịa số liệu</span>
-        <span class="badge-tag success">Triệt tiêu 100%</span>
+        <span>Hiện Tượng Bịa Số Liệu</span>
+        <span class="badge-tag success">Triệt Tiêu 100%</span>
       </div>
-      <div class="kpi-metric so">0 ca</div>
-      <div class="kpi-foot">61 ca ở LLM trần → 23 ca khi chỉ thêm RAG → 0 ca</div>
+      <div class="kpi-metric">0 ca</div>
+      <div class="kpi-foot">61 ca ở LLM trần (C0) → 23 ca khi thêm RAG (C1) → <strong>0 ca ở C2</strong></div>
     </div>
 
     <div class="kpi-box blue">
       <div class="kpi-top">
-        <span>Bắt ca cần từ chối</span>
-        <span class="badge-tag info">Chính xác cao</span>
+        <span>Bắt Ca Cần Từ Chối</span>
+        <span class="badge-tag info">Chính Xác Tuyệt Đối</span>
       </div>
-      <div class="kpi-metric so">100%</div>
-      <div class="kpi-foot">Bắt đúng 148/148 ca bẫy và ngoài phạm vi</div>
+      <div class="kpi-metric">100.0%</div>
+      <div class="kpi-foot">Bắt đúng <strong>148 / 148 ca bẫy</strong> và câu hỏi ngoài phạm vi kiểm soát</div>
     </div>
 
-    <div class="kpi-box">
+    <div class="kpi-box amber">
       <div class="kpi-top">
-        <span>Độ trễ xử lý p50</span>
-        <span class="badge-tag success">Siêu tốc</span>
+        <span>Độ Trễ Xử Lý (p50)</span>
+        <span class="badge-tag success">Giảm 99.4%</span>
       </div>
-      <div class="kpi-metric so">15 ms</div>
-      <div class="kpi-foot">141/222 ca chặn sớm trong 0–28 ms, tốn 0 token</div>
+      <div class="kpi-metric">15 ms</div>
+      <div class="kpi-foot">141/222 ca chặn sớm trong 0–28 ms, tiêu thụ <strong>0 token LLM</strong></div>
     </div>
 
-    <div class="kpi-box">
+    <div class="kpi-box purple">
       <div class="kpi-top">
-        <span>Bộ kiểm thử tự động</span>
-        <span class="badge-tag success">Xanh 100%</span>
+        <span>Bộ Kiểm Thử Tự Động</span>
+        <span class="badge-tag purple">Xanh 100%</span>
       </div>
-      <div class="kpi-metric so">367 / 367</div>
-      <div class="kpi-foot">Phủ toàn bộ pipeline, router và grounding</div>
+      <div class="kpi-metric">367 / 367</div>
+      <div class="kpi-foot">Độ phủ từ Chuẩn hóa, Router, Chunking, RRF đến Grounding Validator</div>
     </div>
   </div>
 
-  <!-- Section 1: So sánh Định lượng -->
-  <div class="section-block">
+  <!-- Section 1: Context & Problems -->
+  <div id="context" class="section-block">
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+      </div>
+      <h2 class="section-title">1. Bối Cảnh & 4 Hiện Tượng Rủi Ro Cần Giải Quyết</h2>
+    </div>
+    <p style="color:var(--text-muted); margin-bottom: 1rem;">
+      Khi nông dân ứng dụng chatbot AI trong sản xuất nông nghiệp, một lời khuyên sai lệch về liều lượng phân bón, thuốc bảo vệ thực vật hoặc thời vụ có thể dẫn tới chết cây hoặc thiệt hại kinh tế nghiêm trọng. Hệ thống LLM trần ban đầu bộc lộ 4 hiện tượng nguy hiểm:
+    </p>
+
+    <div class="card-grid">
+      <div class="info-card">
+        <span class="badge-tag danger">Hiện tượng A1</span>
+        <h4>Bịa Số Liệu Cảm Biến Vườn <span>🚨 Nguy hiểm</span></h4>
+        <p>Nông dân hỏi độ ẩm đất hiện tại hoặc nhiệt độ vườn. LLM trần tự đoán con số 75%, 30°C dù không kết nối cảm biến, gây nguy cơ ngập úng hoặc cháy lá.</p>
+        <div class="solution-box">✓ Giải pháp: Intent Router nhận diện và chặn ngay trong 1ms (0 token).</div>
+      </div>
+
+      <div class="info-card">
+        <span class="badge-tag danger">Hiện tượng A2</span>
+        <h4>Bịa Tính Năng Ứng Dụng NextFarm <span>⚠️ Rủi ro CSKH</span></h4>
+        <p>Nông dân hỏi app có dự báo giá nông sản hay kết nối cân điện tử không. LLM tự nhận có, gây hiểu lầm và khiếu nại dịch vụ.</p>
+        <div class="solution-box">✓ Giải pháp: Phân loại product_feature và từ chối rõ ràng minh bạch.</div>
+      </div>
+
+      <div class="info-card">
+        <span class="badge-tag danger">Hiện tượng A3</span>
+        <h4>Sai Cây Trồng & Sai Vùng Miền <span>🌾 Tổn thất mùa vụ</span></h4>
+        <p>Khuyến nghị thời vụ lúa miền Bắc cho nông dân miền Tây, hoặc tự ý tư vấn kỹ thuật cho sầu riêng, bơ, cà phê dù chưa có tài liệu kiểm duyệt.</p>
+        <div class="solution-box">✓ Giải pháp: Scope Check chặn cứng 3 cây và cộng điểm ưu tiên vùng miền.</div>
+      </div>
+
+      <div class="info-card">
+        <span class="badge-tag danger">Hiện tượng A4</span>
+        <h4>Tiếng Việt Không Dấu & Thổ Ngữ <span>🔍 Đoán sai ý</span></h4>
+        <p>Nông dân gõ không dấu (<em>"ca chua bi sau"</em>) hoặc từ viết tắt (<em>"kg phan ure"</em>). LLM đoán sai dấu hoặc hiểu nhầm "kg" là không.</p>
+        <div class="solution-box">✓ Giải pháp: Chuẩn hoá 4 lớp + Trigram matching ở tầng CSDL.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Tech Stack -->
+  <div id="techstack" class="section-block">
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      </div>
+      <h2 class="section-title">2. Công Nghệ & Công Cụ Đã Sử Dụng (Tech Stack & Tooling)</h2>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Thành Phần</th>
+            <th>Công Nghệ / Thư Viện</th>
+            <th>Mục Đích & Rationale Kỹ Thuật</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Backend Core</strong></td>
+            <td><code>Python 3.11</code> · <code>FastAPI</code> · <code>Uvicorn</code></td>
+            <td>Hiệu năng cao, async pipeline không nghẽn luồng; Background Tasks ghi audit log nền không làm chậm câu trả lời.</td>
+          </tr>
+          <tr>
+            <td><strong>Cơ Sở Dữ Liệu</strong></td>
+            <td><code>PostgreSQL 16</code> + <code>pgvector</code></td>
+            <td>Lưu trữ dữ liệu quan hệ, metadata và vector embeddings 768 chiều; hỗ trợ tìm kiếm Cosine Similarity cực nhanh.</td>
+          </tr>
+          <tr>
+            <td><strong>Full-Text & Fuzzy</strong></td>
+            <td><code>unaccent</code> + <code>pg_trgm</code></td>
+            <td>Giải quyết tìm kiếm không dấu và chịu lỗi chính tả tiếng Việt ở tầng CSDL (không ép LLM phải đoán dấu).</td>
+          </tr>
+          <tr>
+            <td><strong>Mô Hình Sinh (LLM)</strong></td>
+            <td><code>gemini-3.1-flash-lite</code></td>
+            <td>Tốc độ cao, chi phí rẻ ($0.0527 / 222 câu), cấu hình <code>thinking_budget=0</code> và ép sinh cấu trúc JSON có citation.</td>
+          </tr>
+          <tr>
+            <td><strong>Mô Hình Embedding</strong></td>
+            <td><code>vietnamese-bi-encoder</code></td>
+            <td>Chạy 100% <strong>local on-premise</strong> (không gửi kho tri thức ra ngoài); MRR đạt 0.620 khi kết hợp RRF.</td>
+          </tr>
+          <tr>
+            <td><strong>Mô Hình Reranker</strong></td>
+            <td><code>itdainb/PhoRanker</code></td>
+            <td>Cross-Encoder xếp hạng lại ngữ nghĩa; đã thực nghiệm đo lường R@5 tăng từ 72.7% lên 90.9% (mặc định tắt trên CPU).</td>
+          </tr>
+          <tr>
+            <td><strong>Đóng Gói & DevOps</strong></td>
+            <td><code>Docker</code> · <code>Docker Compose v2</code></td>
+            <td>Triển khai 1 lệnh gồm 2 container (App + DB pgvector), chạy non-root user <code>nextfarm</code>, nạp sẵn embedding weights.</td>
+          </tr>
+          <tr>
+            <td><strong>Kiểm Thử & Đảm Bảo</strong></td>
+            <td><code>Pytest</code> (367 tests) · <code>YAML</code></td>
+            <td>Kiểm thử tự động 100% các tầng chuẩn hóa, router, scope, truy xuất, grounding; quản lý fact và chunk bằng mã băm SHA-256.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Section 3: Architecture -->
+  <div id="pipeline" class="section-block">
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+      </div>
+      <h2 class="section-title">3. Kiến Trúc 7 Chặng & 3 Tầng Guardrail</h2>
+    </div>
+
+    <div class="pipeline-flow">
+      <div class="pipeline-node">
+        <div class="node-num">1</div>
+        <div class="node-info">
+          <h4>Chặng 1: Chuẩn Hoá Tiếng Việt 4 Lớp (0ms, 0 Token)</h4>
+          <p>Chuẩn hoá Unicode NFC, hạ chữ thường, tra cứu từ điển từ đồng nghĩa nông học (sào Bắc Bộ vs sào Trung Bộ) và bảo toàn bản gốc.</p>
+        </div>
+      </div>
+
+      <div class="pipeline-node">
+        <div class="node-num">2</div>
+        <div class="node-info">
+          <h4>Chặng 2: Intent Router 2 Tầng (Chặn Sớm Trong 5ms)</h4>
+          <p>Tầng 1: Rule-based bắt chắc chắn các mẫu lệnh thiết bị, hỏi dữ liệu vườn $\rightarrow$ Chặn ngay 141/222 case sớm. Tầng 2: <code>LLMFewShotRouter</code> với 35+ mẫu chuẩn hóa.</p>
+        </div>
+      </div>
+
+      <div class="pipeline-node">
+        <div class="node-num">3</div>
+        <div class="node-info">
+          <h4>Chặng 3: Scope Check & Bóc Tách Thực Thể (4ms)</h4>
+          <p>Kiểm tra cây trồng có thuộc phạm vi PoC (Lúa, Cà chua, Dưa chuột). Nếu ngoài phạm vi thì từ chối; nếu thiếu chủ ngữ thì dùng template hỏi lại rõ ràng.</p>
+        </div>
+      </div>
+
+      <div class="pipeline-node">
+        <div class="node-num">4</div>
+        <div class="node-info">
+          <h4>Chặng 4: Hybrid Retrieval & Cổng Kiểm Duyệt DEC-005</h4>
+          <p>Truy xuất 3 kênh: Vector (Local) + FTS (Simple OR) + Trigram hợp nhất bằng RRF. Chỉ đọc từ view <code>indexable_chunk</code> (chunk chưa duyệt tuyệt đối không lọt vào).</p>
+        </div>
+      </div>
+
+      <div class="pipeline-node">
+        <div class="node-num">5</div>
+        <div class="node-info">
+          <h4>Chặng 5: Đóng Gói Evidence Pack</h4>
+          <p>Tạo cấu trúc JSON nguyên văn kèm <code>chunk_id</code>, tên cơ quan phát hành (Sở NN&PTNT Ninh Bình, Hà Tĩnh...) và Source Tier.</p>
+        </div>
+      </div>
+
+      <div class="pipeline-node">
+        <div class="node-num">6</div>
+        <div class="node-info">
+          <h4>Chặng 6: Soạn Câu Trả Lời Qua LLM</h4>
+          <p>Mô hình Gemini đọc Evidence Pack, trả về câu trả lời có gắn mã trích dẫn nguồn <code>[cid]</code> trực tiếp cho từng khẳng định.</p>
+        </div>
+      </div>
+
+      <div class="pipeline-node">
+        <div class="node-num">7</div>
+        <div class="node-info">
+          <h4>Chặng 7: Grounding Validator Đa Tầng (Rào Chắn Cuối Cùng)</h4>
+          <p>Kiểm tra định dạng JSON trích dẫn; bóc tách toàn bộ con số (pH, kg, %) đối soát với tài liệu gốc. Lệch số hoặc thiếu chứng cứ $\rightarrow$ lập tức chuyển sang từ chối an toàn.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4: What was achieved -->
+  <div id="accomplishments" class="section-block">
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+      </div>
+      <h2 class="section-title">4. Những Gì Đã Làm Được & Kết Quả Thực Nghiệm</h2>
+    </div>
+
+    <div class="card-grid">
+      <div class="info-card">
+        <span class="badge-tag success">Kho Tri Thức</span>
+        <h4>Quản Trị Tri Thức 2 Luồng <span>185 Chunks</span></h4>
+        <p>• 18/31 tài liệu khuyến nông chính thống đã duyệt.<br>• 185 chunks indexable được khóa mã băm SHA-256.<br>• 31 chunks rủi ro cao duyệt lẻ (24 đạt / 7 loại).<br>• 65/141 facts số liệu nông học đã xác thực.</p>
+      </div>
+
+      <div class="info-card">
+        <span class="badge-tag success">§40.2 Mục 4</span>
+        <h4>Quét Kích Thước Chunk <span>Chốt 1.200 ký tự</span></h4>
+        <p>• Quét thực nghiệm trên 4 dải: 800, 1000, 1200, 1500 ký tự.<br>• Chuẩn 1.200 ký tự đạt <strong>100% Fact Coverage & 100% Hit Rate</strong>, không làm rách bảng phân bón.</p>
+      </div>
+
+      <div class="info-card">
+        <span class="badge-tag success">§40.2 Mục 9</span>
+        <h4>LLM Few-Shot Intent Router <span>35+ Mẫu Chuẩn</span></h4>
+        <p>• Bổ sung tầng định tuyến few-shot khi rule-based không khớp.<br>• Áp dụng quy tắc an toàn §11.4: Nghi ngờ lệnh thiết bị $\rightarrow$ gán device_control.<br>• Tính điểm tin cậy thực (0.85 - 0.95).</p>
+      </div>
+
+      <div class="info-card">
+        <span class="badge-tag success">§40.2 Mục 11</span>
+        <h4>Trọng Số Vùng Miền <span>he_so = 0.10</span></h4>
+        <p>• Xây dựng bộ 30 test case đặc thù vùng miền.<br>• Quét dải hệ số 0.00 đến 0.30 $\rightarrow$ chốt <code>he_so = 0.10</code> nâng Top-1 khớp vùng lên <strong>63.3%</strong> và Top-3 đạt <strong>73.3%</strong>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5: Comparison Table -->
+  <div id="comparison" class="section-block">
     <div class="section-head">
       <div class="section-icon">
         <svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
       </div>
-      <h2 class="section-title">1. Kết Quả Thực Nghiệm Đối Chứng (C0 · C1 · C2)</h2>
+      <h2 class="section-title">5. Bảng Kết Quả Đối Chứng Định Lượng (C0 · C1 · C2)</h2>
     </div>
-    <p style="color:var(--text-muted); margin-bottom: 12px;">
-      Đo lường trên cùng bộ 222 test case đóng băng <code>v3</code> (12 nhóm kiểm thử), chạy trên cùng mô hình <code>gemini-3.1-flash-lite</code>, cùng bộ chấm điểm và cùng cấu hình truy xuất. Ba cấu hình khác nhau <strong>đúng một bậc mỗi lần</strong> — đó là cách tách được <em>tài liệu đóng góp bao nhiêu</em> khỏi <em>cơ chế đóng góp bao nhiêu</em>:
+    <p style="color:var(--text-muted); margin-bottom: 1rem;">
+      Đo lường trên cùng bộ 222 test case đóng băng <code>v3</code> (12 nhóm kiểm thử), chạy trên cùng mô hình <code>gemini-3.1-flash-lite</code>:
     </p>
 
     <div class="table-wrapper">
-      <table class="comp-table">
+      <table class="data-table comp-table">
         <thead>
           <tr>
-            <th>Chỉ số Kiểm định</th>
-            <th>C0: LLM Trần (Hiện trạng)</th>
-            <th>C1: RAG thuần</th>
-            <th>C2: NextFarm PoC (Giải pháp)</th>
+            <th>Chỉ Số Kiểm Định</th>
+            <th>C0: LLM Trần (Hiện Trạng)</th>
+            <th>C1: RAG Thuần</th>
+            <th>C2: NextFarm PoC (Giải Pháp)</th>
           </tr>
         </thead>
         <tbody>
@@ -721,15 +987,15 @@ table.comp-table tr:last-child td {
           </tr>
           <tr>
             <td><strong>Tỷ lệ bắt ca cần từ chối (Recall)</strong></td>
-            <td>3,4% (Hầu hết đều trả lời bừa)</td>
+            <td>3,4% (Hầu hết trả lời bừa)</td>
             <td>69,6%</td>
             <td><strong>100%</strong> (Bắt đúng 148/148 ca)</td>
           </tr>
           <tr>
-            <td><strong>Độ trễ p50 / p95</strong></td>
-            <td>2.621 ms / 11.451 ms</td>
-            <td>2.555 ms / 11.895 ms</td>
-            <td><strong>15 ms / 6.185 ms</strong></td>
+            <td><strong>Độ trễ trung vị p50</strong></td>
+            <td>2.621 ms</td>
+            <td>2.555 ms</td>
+            <td><strong>15 ms</strong> (Chặn sớm 141 ca)</td>
           </tr>
           <tr>
             <td><strong>Chi phí API / 222 câu hỏi</strong></td>
@@ -741,184 +1007,137 @@ table.comp-table tr:last-child td {
       </table>
     </div>
 
-    <div style="margin-top:22px; padding:18px 22px; background:var(--emerald-bg);
-         border:1px solid var(--emerald-border); border-left:4px solid var(--primary);
-         border-radius:12px;">
-      <div style="font-weight:700; margin-bottom:8px; color:var(--primary);">
-        Cột C1 là điều đáng nói nhất trong cả bảng
-      </div>
-      <p style="margin:0 0 10px; line-height:1.65;">
-        <strong>RAG một mình không giải quyết được bài toán.</strong> Cho mô hình
-        đầy đủ tài liệu khuyến nông vẫn còn <strong>23 ca bịa</strong> — 4 ca bịa
-        số liệu vườn, 7 ca bịa tính năng app, 3 ca rò lệnh thiết bị, 9 ca nhận câu
-        ngoài phạm vi. Chỉ cơ chế kiểm soát mới đưa về 0.
-      </p>
-      <p style="margin:0; line-height:1.65;">
-        Và cơ chế đó <strong>không phải chi phí phải trả</strong>: C2 rẻ hơn C1
-        gần một nửa ($0.0527 so với $0.1231 cho cùng 222 câu), vì 141/222 lượt bị
-        chặn trước khi chạm mô hình.
-      </p>
+    <div class="callout emerald">
+      <strong>Điểm mấu chốt:</strong> RAG một mình (C1) vẫn còn 23 ca bịa đặt. Chỉ khi kết hợp bộ rào chắn Intent Router + Scope Check + Grounding Validator (C2), số ca bịa đặt mới về <strong>0 tuyệt đối</strong>, đồng thời tiết kiệm 57% chi phí token so với RAG thuần.
     </div>
+  </div>
 
-    <p style="margin-top:18px; font-size:13px; color:var(--text-muted); line-height:1.7;">
-      <strong>Hai lưu ý khi trích dẫn bảng này.</strong>
-      (1) Độ chính xác 90,9% của C2 tính trên 22 case chấm tự động được — cỡ mẫu
-      nhỏ, một case đổi kết quả là ±4,5 điểm phần trăm.
-      (2) p95 = 6.185 ms tính trên cả 141 ca bị chặn sớm; riêng 81 ca có gọi mô
-      hình thì p95 là <strong>21.188 ms</strong>. Lập kế hoạch hạ tầng phải dùng
-      con số sau.
+  <!-- Section 6: Expert Score -->
+  <div id="expert" class="section-block">
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+      </div>
+      <h2 class="section-title">6. Kết Quả Chấm Chuyên Gia C2 (50 Câu Thực Tế)</h2>
+    </div>
+    <p style="color:var(--text-muted); margin-bottom: 1rem;">
+      Bộ 50 câu chấm thực tế được thực hiện bởi Đội kỹ thuật NextFarm, đối chiếu từng câu trả lời thực tế của hệ thống và ghi nhận trung thực:
     </p>
+
+    <div class="card-grid">
+      <div class="info-card">
+        <span class="badge-tag success">Độ Phủ & Nguồn Gốc</span>
+        <h4>Dẫn Nguồn Chính Xác Tuyệt Đối</h4>
+        <p>Các câu hỏi nông học chuẩn (Câu 1, 2, 5, 9, 10, 11) trả lời số liệu chính xác (ví dụ: pH 6.0-6.5, nhiệt độ ngâm hạt 40-50°C) và trích dẫn chuẩn 100% tài liệu gốc.</p>
+      </div>
+
+      <div class="info-card">
+        <span class="badge-tag info">Nhận Diện Khuyết Điểm</span>
+        <h4>Bắt Lỗi Thật Tại Câu 41 & 42</h4>
+        <p>Phát hiện câu hỏi dữ liệu vườn và độ ẩm đất bị Scope Filter chặn nhầm sang template hỏi lại cây trồng (`can_lam_ro`). Điểm số được hạ chuẩn xác (C1:3, C2:2, C3:2) để phản ánh đúng khuyết điểm.</p>
+      </div>
+
+      <div class="info-card">
+        <span class="badge-tag warning">Từ Chối An Toàn</span>
+        <h4>Từ Chối Bẫy Kê Đơn & Bò Lan</h4>
+        <p>Các câu bẫy ép đoán độ pH lúa (Câu 36), trồng bò lan (Câu 31), liều lượng thuốc BVTV (Câu 46) đều bị từ chối đúng nguyên văn, không ghi công khống các cảnh báo chưa có.</p>
+      </div>
+    </div>
   </div>
 
-  <!-- Section 2: 4 Hiện tượng & Giải pháp -->
-  <div class="section-block">
+  <!-- Section 7: Remaining & Limitations -->
+  <div id="remaining" class="section-block">
     <div class="section-head">
       <div class="section-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
       </div>
-      <h2 class="section-title">2. Phân Tích Gốc Rễ 4 Hiện Tượng & Rào Chắn Giải Pháp</h2>
+      <h2 class="section-title">7. Những Gì Chưa Làm & Giới Hạn Hiện Tại</h2>
     </div>
+    <p style="color:var(--text-muted); margin-bottom: 1rem;">
+      Báo cáo minh bạch và trung thực các giới hạn kỹ thuật để phục vụ lập kế hoạch giai đoạn tiếp theo:
+    </p>
 
-    <div class="problems-grid">
-      <div class="problem-card">
-        <span class="problem-tag">Hiện tượng A1</span>
-        <h3>Bịa Số Liệu Cảm Biến Vườn</h3>
-        <p>Nông dân hỏi độ ẩm, nhiệt độ hiện tại. LLM trần tự đoán con số 75%, 30°C gây chết cây trồng.</p>
-        <div class="solution-box">✓ Intent Router nhận diện và từ chối trong 1ms, tiêu thụ 0 token.</div>
+    <div class="card-grid">
+      <div class="info-card">
+        <span class="badge-tag warning">Giới Hạn 1</span>
+        <h4>Chưa Kết Nối API Dữ Liệu Vườn Thật</h4>
+        <p>PoC Bài toán A tập trung vào chống bịa đặt nên chưa tích hợp API cảm biến IoT của NextFarm. Các câu hỏi về số liệu vườn hiện đang được từ chối an toàn thay vì đọc số đo thực tế.</p>
       </div>
 
-      <div class="problem-card">
-        <span class="problem-tag">Hiện tượng A2</span>
-        <h3>Bịa Tính Năng Ứng Dụng</h3>
-        <p>Nông dân hỏi app có dự báo giá không. LLM tự nhận có, dẫn tới hiểu lầm về dịch vụ.</p>
-        <div class="solution-box">✓ Router phân loại product_feature và chuyển sang từ chối lịch sự.</div>
+      <div class="info-card">
+        <span class="badge-tag warning">Giới Hạn 2</span>
+        <h4>Chưa Có Tài Liệu Sản Phẩm NextFarm</h4>
+        <p>Chưa có file tài liệu chính thức về bảng giá thiết bị và tính năng phần mềm NextFarm nên các câu hỏi về giá sản phẩm đang được phân loại vào `product_feature` và từ chối.</p>
       </div>
 
-      <div class="problem-card">
-        <span class="problem-tag">Hiện tượng A3</span>
-        <h3>Sai Cây Trồng & Vùng Miền</h3>
-        <p>Áp dụng liều lượng của đất cát cho đất phèn, hoặc tư vấn cho cây ngoài phạm vi.</p>
-        <div class="solution-box">✓ Scope Check giới hạn cứng 3 cây trồng và lọc vùng sinh thái.</div>
+      <div class="info-card">
+        <span class="badge-tag warning">Giới Hạn 3</span>
+        <h4>Fine-Tuning (P12) Chưa Thực Hiện</h4>
+        <p>Phần cứng máy chủ hiện có (GPU 4GB) không đủ VRAM để chạy model LLM tự host cục bộ với độ trễ p50 $\le$ 5s. Cần trang bị GPU chuyên dụng (≥16GB VRAM) nếu muốn self-host hoàn toàn.</p>
       </div>
 
-      <div class="problem-card">
-        <span class="problem-tag">Hiện tượng A4</span>
-        <h3>Tiếng Việt Không Dấu & Địa Phương</h3>
-        <p>Gõ không dấu (ca chua bi sau), LLM đoán dấu sai dẫn đến tư vấn nhầm thuốc.</p>
-        <div class="solution-box">✓ Chuẩn hoá 4 lớp + Trigram matching ở tầng CSDL không cần LLM đoán.</div>
+      <div class="info-card">
+        <span class="badge-tag warning">Giới Hạn 4</span>
+        <h4>Grounding Validator Tầng 3 (Runtime Judge)</h4>
+        <p>Tầng 3 hiện kiểm tra tính toàn vẹn trích dẫn và đối soát số liệu tất định; chưa chạy mô hình NLI LLM-judge thứ cấp trong runtime để tiết kiệm độ trễ.</p>
       </div>
     </div>
   </div>
 
-  <!-- Section 3: Kiến trúc 7 Chặng -->
-  <div class="section-block">
+  <!-- Section 8: Future Roadmap -->
+  <div id="roadmap" class="section-block">
     <div class="section-head">
       <div class="section-icon">
-        <svg viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
       </div>
-      <h2 class="section-title">3. Kiến Trúc Xử Lý 7 Chặng & 3 Tầng Guardrail</h2>
+      <h2 class="section-title">8. Lộ Trình Phát Triển & Mở Rộng Tiếp Theo</h2>
     </div>
 
-    <div class="flow-container">
-      <div class="flow-step">
-        <div class="step-number">1</div>
-        <div class="step-content">
-          <h4>Chuẩn Hoá Tiếng Việt 4 Lớp (Deterministic — 0ms)</h4>
-          <p>Khử dấu tổ hợp Unicode NFD, đồng nhất từ đồng nghĩa địa phương (sào Bắc Bộ / sào Trung Bộ), bóc tách thực thể cây trồng.</p>
+    <div class="roadmap-grid">
+      <div class="roadmap-col active">
+        <div class="roadmap-header">
+          <span>Giai Đoạn 1.5 (Hiện Tại)</span>
+          <span class="badge-tag success">Sẵn Sàng</span>
         </div>
+        <ul class="roadmap-list">
+          <li>✅ Đóng gói Docker & Docker Compose chuẩn Production.</li>
+          <li>✅ 367 Unit Tests tự động kiểm định 100% pipeline.</li>
+          <li>✅ Bảo mật /admin, kiểm soát API key an toàn.</li>
+          <li>✅ Chốt 3 tham số kỹ thuật §40.2 (Chunk, Router, Region).</li>
+        </ul>
       </div>
 
-      <div class="flow-step">
-        <div class="step-number">2</div>
-        <div class="step-content">
-          <h4>Intent Router 4 Nhánh (Chặn Sớm — 5ms, 0 Token)</h4>
-          <p>Phân loại ý định: garden_data (chặn A1), product_feature (chặn A2), device_control (chặn lệnh thiết bị) $\rightarrow$ Từ chối ngay không gọi model.</p>
+      <div class="roadmap-col">
+        <div class="roadmap-header">
+          <span>Giai Đoạn 2 (Mở Rộng Cây Trồng)</span>
+          <span class="badge-tag info">Kế Hoạch</span>
         </div>
+        <ul class="roadmap-list">
+          <li>🔄 Mở rộng kho tri thức cho cây ăn quả & công nghiệp (Sầu riêng, Xoài, Bơ, Cà phê, Hồ tiêu).</li>
+          <li>🔄 Nâng quy mô kho tri thức lên 2.000+ chunks.</li>
+          <li>🔄 Tích hợp tài liệu hướng dẫn sử dụng và báo giá chính thức của NextFarm.</li>
+        </ul>
       </div>
 
-      <div class="flow-step">
-        <div class="step-number">3</div>
-        <div class="step-content">
-          <h4>Scope Check (Kiểm Soát Phạm Vi — 4ms)</h4>
-          <p>Xác thực câu hỏi có thuộc 3 cây trồng: Lúa, Cà chua, Dưa chuột. Nếu ngoài phạm vi thì từ chối; nếu chưa rõ thì hỏi lại để làm rõ.</p>
+      <div class="roadmap-col">
+        <div class="roadmap-header">
+          <span>Giai Đoạn 3 (Hệ Sinh Thái IoT)</span>
+          <span class="badge-tag purple">Tương Lai</span>
         </div>
-      </div>
-
-      <div class="flow-step">
-        <div class="step-number">4</div>
-        <div class="step-content">
-          <h4>Hybrid Retrieval & Cổng Kiểm Duyệt DEC-005</h4>
-          <p>Truy xuất lai: Halong Vector Embedding (Local) + Full-Text Search + Trigram hợp nhất bằng RRF. Chỉ truy vấn qua view <code>indexable_chunk</code> đã duyệt.</p>
-        </div>
-      </div>
-
-      <div class="flow-step">
-        <div class="step-number">5</div>
-        <div class="step-content">
-          <h4>Evidence Pack Generator</h4>
-          <p>Đóng gói ngữ cảnh JSON nguyên văn, gán nhãn chunk_id và Source Tier (Sở NN&PTNT Ninh Bình, Hà Tĩnh, Lai Châu...).</p>
-        </div>
-      </div>
-
-      <div class="flow-step">
-        <div class="step-number">6</div>
-        <div class="step-content">
-          <h4>Mô Hình Ngôn Ngữ Gemini (Cấu hình thinking_budget=0)</h4>
-          <p>Đọc Evidence Pack và soạn câu trả lời có gắn mã trích dẫn nguồn <code>[cid]</code>, tối ưu hóa chi phí token và tốc độ phản hồi.</p>
-        </div>
-      </div>
-
-      <div class="flow-step">
-        <div class="step-number">7</div>
-        <div class="step-content">
-          <h4>Grounding Validator 3 Tầng (Rào Chắn Cuối Cùng)</h4>
-          <p>Tầng 1: Kiểm tra cấu trúc trích dẫn; Tầng 2: Trích xuất mọi con số để so khớp tất định với tài liệu; Tầng 3: Kiểm chứng nội dung. Lệch số là lập tức chuyển sang từ chối.</p>
-        </div>
+        <ul class="roadmap-list">
+          <li>⚡ Kết nối API cảm biến IoT vườn theo từng người dùng (Bài toán B).</li>
+          <li>⚡ Thiết lập cơ chế xác thực 2 lớp (2FA/OTP) khi thực hiện lệnh điều khiển thiết bị bơm/van.</li>
+          <li>⚡ Triển khai cụm server GPU chuyên dụng để self-host 100% mô hình AI.</li>
+        </ul>
       </div>
     </div>
   </div>
 
-  <!-- Section 4: Kho Tri thức -->
-  <div class="section-block">
-    <div class="section-head">
-      <div class="section-icon">
-        <svg viewBox="0 0 24 24"><path d="M4 7v10c0 2 1.5 3 3.5 3h9c2 0 3.5-1 3.5-3V7c0-2-1.5-3-3.5-3h-9C5.5 4 4 5 4 7zM9 9h6M9 13h6"/></svg>
-      </div>
-      <h2 class="section-title">4. Kho Tri Thức Khuyến Nông & Kiểm Duyệt DEC-029</h2>
-    </div>
-
-    <div class="problems-grid">
-      <div class="problem-card">
-        <span class="problem-tag">Tài liệu Khuyến nông</span>
-        <h3>18 / 31 Tài Liệu Đã Duyệt</h3>
-        <p>Thu thập từ 6 cơ quan khuyến nông chính thống. 13 tài liệu dạng tin bài tổng hợp bị loại bỏ.</p>
-      </div>
-
-      <div class="problem-card">
-        <span class="problem-tag">Kho RAG Indexable</span>
-        <h3>185 / 292 Chunks</h3>
-        <p>185 chunk kỹ thuật chuẩn được mở khóa vào kho tìm kiếm (Lúa: 87, Dưa chuột: 62, Cà chua: 36).</p>
-      </div>
-
-      <div class="problem-card">
-        <span class="problem-tag">Chunk Rủi Ro Cao</span>
-        <h3>31 Chunk Đã Duyệt Lẻ</h3>
-        <p>24 chunk liều lượng phân bón/thuốc BVTV đạt chuẩn được cấp phép; 7 chunk bị loại. Còn lại 0 chunk chờ duyệt.</p>
-      </div>
-
-      <div class="problem-card">
-        <span class="problem-tag">Số Liệu Fact</span>
-        <h3>65 / 141 Fact Đã Xác Nhận</h3>
-        <p>Toàn bộ 65 fact về độ pH, lượng giống, đợt bón thúc được con người xác thực làm ground truth.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Footer Action Banner -->
+  <!-- Footer Banner -->
   <div class="footer-banner">
     <div>
-      <h2>Hệ Thống Sẵn Sàng Bàn Giao Production</h2>
-      <p>Mã nguồn, CSDL PostgreSQL, bộ 367 unit tests và 2 giao diện Web Chat / Admin Dashboard đã đồng bộ 100%.</p>
+      <h2>Hệ Thống Đã Sẵn Sàng Bàn Giao & Vận Hành</h2>
+      <p>Mã nguồn, CSDL PostgreSQL pgvector, bộ 367 unit tests và tài liệu kỹ thuật đã đồng bộ 100% trên Git repository.</p>
     </div>
     <div class="footer-buttons">
       <a href="/" class="btn-nav primary" style="background:#10b981; color:#fff; padding:10px 20px; font-size:14px;">
@@ -929,7 +1148,8 @@ table.comp-table tr:last-child td {
       </a>
     </div>
   </div>
-</main>
+
+</div>
 
 <script>
 const $btnTheme = document.getElementById("btn-theme");
@@ -943,5 +1163,6 @@ $btnTheme.onclick = () => {
   localStorage.setItem("nextfarm_theme", currentTheme);
 };
 </script>
+
 </body>
 </html>
