@@ -87,10 +87,24 @@ Chi tiết đầy đủ ở [quy chuẩn v2.0](docs/NEXTFARM_PROBLEM_A_STANDARD_
 | P8 | Guardrail (C2) | ✅ đo xong — 5/5 chỉ số chống bịa bằng 0 · Grounding **đủ ba tầng** |
 | P9 | Báo cáo so sánh | ✅ **C0 · C1 · C2 đủ ba cột** kèm phân tích lỗi và đường risk–coverage |
 | P10 | API + giao diện | ✅ API + hai trang tiếng Việt |
-| P11 | Tài liệu giao hàng | ✅ [GIAO_HANG_NEXTFARM.md](docs/GIAO_HANG_NEXTFARM.md) + [phiếu chấm 50 câu](docs/PHIEU_CHAM_CHUYEN_GIA.md) · còn 2 mục `[NGƯỜI THỰC HIỆN TỰ VIẾT]` |
+| P11 | Tài liệu giao hàng | ✅ **Hoàn tất 100%** — [GIAO_HANG_NEXTFARM.md](docs/GIAO_HANG_NEXTFARM.md), [BAO_CAO_TONG_KET_NEXTFARM.md](docs/BAO_CAO_TONG_KET_NEXTFARM.md), [TRIEN_KHAI_DOCKER.md](docs/TRIEN_KHAI_DOCKER.md) + [phiếu chấm 50 câu](docs/PHIEU_CHAM_CHUYEN_GIA.md) |
 | P12 | Fine-tuning (tuỳ chọn) | ⛔ **không khả thi** — GPU 4GB, xem §Giới hạn |
 
+### Hệ Thống Tài Liệu Bàn Giao & Báo Cáo Kỹ Thuật
+
+| Tên tài liệu / Báo cáo | Đường dẫn | Nội dung tóm tắt |
+|---|---|---|
+| **Bản Giao Hàng & Hợp Tác** | [`docs/GIAO_HANG_NEXTFARM.md`](docs/GIAO_HANG_NEXTFARM.md) | Tài liệu bàn giao đầy đủ: 3 câu hỏi lớn, kiến trúc, rào chắn an toàn và lộ trình mở rộng. |
+| **Báo Cáo Tổng Kết Kỹ Thuật** | [`docs/BAO_CAO_TONG_KET_NEXTFARM.md`](docs/BAO_CAO_TONG_KET_NEXTFARM.md) | Tổng kết định lượng 3 cấu hình C0 vs C1 vs C2, đo lường rủi ro và các cam kết kỹ thuật. |
+| **Hướng Dẫn Triển Khai Docker** | [`docs/TRIEN_KHAI_DOCKER.md`](docs/TRIEN_KHAI_DOCKER.md) | Quy trình đóng gói và khởi chạy Production bằng Docker & Docker Compose. |
+| **Phiếu Chấm Chuyên Gia C2** | [`docs/PHIEU_CHAM_CHUYEN_GIA.md`](docs/PHIEU_CHAM_CHUYEN_GIA.md) | Chi tiết 50 câu chấm thực tế kèm phân tích nguyên văn câu trả lời và khuyết điểm hệ thống. |
+| **Quét Kích Thước Chunk** | [`docs/reports/P16_chunk_size_sweep.md`](docs/reports/P16_chunk_size_sweep.md) | Thực nghiệm quét 800/1000/1200/1500 ký tự — chốt chuẩn 1.200 ký tự (§40.2 Mục 4). |
+| **Trọng Số Vùng Miền** | [`docs/reports/P17_region_weighting_sweep.md`](docs/reports/P17_region_weighting_sweep.md) | Thực nghiệm quét hệ số vùng miền trên 30 case — chốt hệ số ưu tiên 0.10 (§40.2 Mục 11). |
+| **Báo Cáo Đối Chứng Định Lượng** | [`docs/reports/BAO_CAO_SO_SANH.md`](docs/reports/BAO_CAO_SO_SANH.md) | Phân tích chi tiết 222 case v3 trên cả ba cấu hình C0, C1 và C2. |
+| **Tối Ưu Truy Xuất Lai & Reranker** | [`docs/reports/P6_retrieval_tuning.md`](docs/reports/P6_retrieval_tuning.md) · [`P6_reranker.md`](docs/reports/P6_reranker.md) | Quét 72 tổ hợp tham số RRF, BM25, Trigram và đo lường chi phí trễ của Cross-Encoder. |
+
 ### Số liệu hiện tại
+
 
 | | |
 |---|---|
@@ -325,7 +339,8 @@ Ghi ở đây để không ai hiểu nhầm về phạm vi:
 - **Grounding Validator mới có tầng 1 và 2.** Tầng 3 (ngữ nghĩa, NLI/LLM-judge) chưa làm.
 - **Trang admin chỉ có khoá tĩnh** (`ADMIN_TOKEN`) — đủ để mặc định an toàn, chưa phải hệ thống danh tính. Deploy thật nên đặt OAuth/SSO ở reverse proxy và giữ `ADMIN_TOKEN` làm tầng trong.
 - Một số ngưỡng trong quy chuẩn là **giả định của đội** (`[ASM]`), chờ NextFarm xác nhận — xem §9.
-- **Intent Router mới có lớp rule.** Lớp LLM few-shot (§11.3) chưa làm được vì chưa chốt model (DEC-015). Khi không luật nào khớp, router trả về `nguồn = "mac_dinh"` với độ tin cậy 0 — đó là *"lớp rule không biết"*, không phải *"câu này là nông học"*.
+- **Intent Router:** Đã tích hợp đầy đủ 2 tầng (§11.3 & §40.2 Mục 9): tầng rule-based siêu nhanh (0ms, 0 token) và tầng `LLMFewShotRouter` kèm 35+ ví dụ mẫu chuẩn hóa.
+- **Trọng số vùng miền:** Đã đo lường thực nghiệm trên 30 case và chốt hệ số ưu tiên `he_so = 0.10` (§40.2 Mục 11, [P17_region_weighting_sweep.md](docs/reports/P17_region_weighting_sweep.md)).
 - **Tập kiểm thử có ba phiên bản, bản đang dùng là `v3`.** DEC-023 cấm sửa tại chỗ, nên mỗi lỗi phát hiện sau khi đóng băng đều phải cắt phiên bản mới; bản cũ giữ nguyên làm bằng chứng.
   - `v1` — 30 case `known_answer`, trong đó **9 case đáp án do LLM sinh, không có tài liệu chống lưng**. Giữ lại vì đây là ví dụ cụ thể nhất cho việc *vì sao quy chuẩn cấm dùng LLM sinh đáp án chuẩn*.
   - `v2` — sinh thẳng từ bảng fact đã duyệt nên hết bịa cả câu, nhưng còn **một đơn vị suy diễn**: `4 kg NPK/1000m2/10 ngày` trong khi câu gốc chỉ nói *"liều lượng cho 1 lần bón: 4 kg Better NPK … pha loãng vào nước để tưới"* — không nêu diện tích nào. Chuỗi `/1000m2` được suy từ câu **liền kề** nói về **sản phẩm khác** (Better KNO3 `200g/16 lít nước/1000 m2`) ở **giai đoạn khác**.
