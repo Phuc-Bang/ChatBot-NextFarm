@@ -28,3 +28,6 @@ docs/reports/_*.log
 
 # File khoa tam cua Word/PowerPoint - sinh ra khi mo file, khong duoc commit
 ~$*
+
+# Thu muc nhap - script tam, khong phai san pham ban giao
+scratch/
