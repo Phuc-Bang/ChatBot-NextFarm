@@ -256,6 +256,14 @@ def trang_report():
     return FileResponse(f)
 
 
+@app.get("/slides")
+def trang_slides():
+    f = WEB / "slides.html"
+    if not f.exists():
+        return JSONResponse({"loi": "chua co frontend/slides.html"}, 404)
+    return FileResponse(f)
+
+
 @app.get("/expert")
 @app.get("/phieu-cham")
 def trang_expert():

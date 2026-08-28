@@ -1,0 +1,690 @@
+<!-- Sao chep slides tu frontend sang docs -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slide Thuyết Trình — NextFarm AI Assistant (Bài Toán A: Chống Bịa Đặt)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #16a34a;
+  --primary-hover: #15803d;
+  --primary-light: #ecfdf5;
+  --bg-dark: #0f172a;
+  --bg-card-dark: #1e293b;
+  --bg-page: #f8fafc;
+  --bg-card: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+  --emerald: #10b981;
+  --rose: #e11d48;
+  --amber: #d97706;
+  --blue: #2563eb;
+}
+
+[data-theme="dark"] {
+  --bg-page: #090d16;
+  --bg-card: #131d31;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border: #23324d;
+  --primary-light: #064e3b33;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Progress bar */
+.progress-container {
+  width: 100%;
+  height: 4px;
+  background: rgba(0,0,0,0.05);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+.progress-bar {
+  height: 100%;
+  background: var(--primary);
+  width: 10%;
+  transition: width 0.3s ease;
+}
+
+/* Controls Header */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  z-index: 100;
+}
+.brand-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--text-main);
+  text-decoration: none;
+}
+.brand-tag span {
+  background: var(--primary);
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+}
+.slide-nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.btn-control {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.15s ease;
+}
+.btn-control:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+.slide-counter {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  min-width: 60px;
+  text-align: center;
+}
+
+/* Slide Viewport */
+.deck-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem 2rem;
+  position: relative;
+}
+
+.slide {
+  display: none;
+  width: 100%;
+  max-width: 1180px;
+  height: 100%;
+  max-height: 640px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.08);
+  flex-direction: column;
+  justify-content: space-between;
+  animation: slideFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.slide.active {
+  display: flex;
+}
+@keyframes slideFadeIn {
+  from { opacity: 0; transform: scale(0.98) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Slide Content Styles */
+.slide-pill {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+.slide-heading {
+  font-size: 1.85rem;
+  font-weight: 800;
+  line-height: 1.25;
+  margin-bottom: 1.5rem;
+  color: var(--text-main);
+}
+.slide-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Grid & Cards */
+.slide-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+.slide-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+.slide-card {
+  background: var(--bg-page);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.slide-card.primary { border-left: 4px solid var(--primary); }
+.slide-card.danger { border-left: 4px solid var(--rose); }
+.slide-card.amber { border-left: 4px solid var(--amber); }
+.slide-card.blue { border-left: 4px solid var(--blue); }
+
+.slide-card h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+.slide-card p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Table Style inside slide */
+.slide-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  margin-top: 0.5rem;
+}
+.slide-table th {
+  background: var(--bg-page);
+  padding: 0.65rem 0.85rem;
+  text-align: left;
+  font-weight: 700;
+  border-bottom: 2px solid var(--border);
+}
+.slide-table td {
+  padding: 0.65rem 0.85rem;
+  border-bottom: 1px solid var(--border);
+}
+.slide-table tr:last-child td { border-bottom: none; }
+.slide-table tr:hover { background: rgba(0,0,0,0.02); }
+
+/* Cover Slide Specific */
+.cover-slide {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: white;
+  border: none;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 4rem;
+}
+.cover-slide h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  line-height: 1.15;
+  margin: 0.5rem 0 1rem;
+}
+.cover-slide p {
+  color: #94a3b8;
+  font-size: 1.2rem;
+  max-width: 800px;
+  line-height: 1.6;
+}
+.cover-meta {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* Footer of Slide */
+.slide-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border);
+  padding-top: 0.85rem;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Keyboard hint */
+.kbd-hint {
+  position: fixed;
+  bottom: 12px;
+  right: 20px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+}
+kbd {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-weight: 700;
+}
+</style>
+</head>
+<body>
+
+<div class="progress-container">
+  <div class="progress-bar" id="progress-bar"></div>
+</div>
+
+<header class="top-bar">
+  <a href="/" class="brand-tag">
+    🌱 NextFarm AI <span>Slide Deck</span>
+  </a>
+  <div class="slide-nav-controls">
+    <button class="btn-control" id="btn-prev" title="Slide Trước (Phím Trái)">← Trước</button>
+    <span class="slide-counter" id="slide-num">1 / 10</span>
+    <button class="btn-control" id="btn-next" title="Slide Sau (Phím Phải / Phím Cách)">Sau →</button>
+    <button class="btn-control" id="btn-fullscreen" title="Toàn Màn Hình">⛶</button>
+    <button class="btn-control" id="btn-theme" title="Sáng / Tối">🌓</button>
+  </div>
+</header>
+
+<main class="deck-container">
+
+  <!-- Slide 1: Cover -->
+  <div class="slide cover-slide active" data-title="Trang Bìa">
+    <div class="slide-pill" style="color:#10b981;">BÁO CÁO TỔNG KẾT KỸ THUẬT</div>
+    <h1>Trợ Lý Nông Nghiệp NextFarm AI</h1>
+    <p>Bài Toán A: Chống Bịa Đặt (Anti-Hallucination) & Đảm Bảo An Toàn Cho Nông Dân Trồng Lúa, Cà Chua và Dưa Chuột.</p>
+    <div class="cover-meta">
+      <div>✓ PoC Giai Đoạn 1 & 2 Hoàn Tất</div>
+      <div>✓ 367 Unit Tests Xanh 100%</div>
+      <div>✓ Tháng 08/2026</div>
+    </div>
+  </div>
+
+  <!-- Slide 2: 4 Rủi Ro -->
+  <div class="slide" data-title="4 Hiện Tượng Rủi Ro">
+    <div>
+      <div class="slide-pill">1. VẤN ĐỀ & BỐI CẢNH</div>
+      <h2 class="slide-heading">Phân Tích 4 Hiện Tượng Rủi Ro Của LLM Trần</h2>
+    </div>
+    <div class="slide-body">
+      <div class="slide-grid-2">
+        <div class="slide-card danger">
+          <h4>A1: Bịa Số Liệu Cảm Biến Vườn</h4>
+          <p>Nông dân hỏi độ ẩm đất hiện tại $\rightarrow$ LLM tự đoán 75%, 30°C dù không có cảm biến, gây nguy cơ úng cây, cháy lá.<br><strong>✓ Giải pháp:</strong> Router chặn trong 1ms (0 token).</p>
+        </div>
+        <div class="slide-card amber">
+          <h4>A2: Bịa Tính Năng Ứng Dụng</h4>
+          <p>Nông dân hỏi app có dự báo giá nông sản không $\rightarrow$ LLM tự nhận có, gây hiểu lầm dịch vụ.<br><strong>✓ Giải pháp:</strong> Phân loại product_feature và từ chối rõ ràng.</p>
+        </div>
+        <div class="slide-card danger">
+          <h4>A3: Sai Cây Trồng & Vùng Miền</h4>
+          <p>Áp thời vụ miền Bắc cho miền Tây; tư vấn cây ngoài phạm vi (sầu riêng, cam).<br><strong>✓ Giải pháp:</strong> Scope Check chặn cứng 3 cây; RRF cộng điểm vùng.</p>
+        </div>
+        <div class="slide-card primary">
+          <h4>A4: Tiếng Việt Không Dấu & Thổ Ngữ</h4>
+          <p>Nông dân gõ <em>"ca chua bi sau"</em> $\rightarrow$ LLM đoán sai dấu hoặc nhầm 'kg'.<br><strong>✓ Giải pháp:</strong> Chuẩn hoá 4 lớp + Trigram matching ở CSDL.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>NextFarm AI — Bài Toán A</span>
+      <span>Slide 2 / 10</span>
+    </div>
+  </div>
+
+  <!-- Slide 3: Pipeline 7 Chặng -->
+  <div class="slide" data-title="Kiến Trúc Pipeline">
+    <div>
+      <div class="slide-pill">2. KIẾN TRÚC HỆ THỐNG</div>
+      <h2 class="slide-heading">Kiến Trúc Pipeline 7 Chặng & 3 Tầng Guardrail</h2>
+    </div>
+    <div class="slide-body">
+      <div style="display:flex; flex-direction:column; gap:0.6rem;">
+        <div class="slide-card primary" style="padding:0.75rem 1rem;">
+          <strong>1. Chuẩn Hoá (0ms):</strong> Unicode NFC, hạ chữ thường, từ điển đồng nghĩa nông học (sào Bắc Bộ vs sào Trung Bộ).
+        </div>
+        <div class="slide-card primary" style="padding:0.75rem 1rem;">
+          <strong>2. Intent Router (5ms):</strong> Tầng 1 Rule-based chặn 141 ca sớm; Tầng 2 LLM Few-shot Router (§11.3).
+        </div>
+        <div class="slide-card primary" style="padding:0.75rem 1rem;">
+          <strong>3. Scope Check (4ms):</strong> Giới hạn cứng 3 cây trồng: Lúa, Cà chua, Dưa chuột (hỏi lại khi thiếu chủ ngữ).
+        </div>
+        <div class="slide-card primary" style="padding:0.75rem 1rem;">
+          <strong>4. Hybrid RRF (12ms):</strong> FTS Simple OR + Trigram + Local Vector Embedding (View indexable_chunk).
+        </div>
+        <div class="slide-card primary" style="padding:0.75rem 1rem;">
+          <strong>5. LLM & Grounding:</strong> Gemini 3.1 Flash Lite sinh JSON kèm mã [cid]; Grounding Validator đối soát số liệu tất định.
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>NextFarm AI — Kiến Trúc Xử Lý</span>
+      <span>Slide 3 / 10</span>
+    </div>
+  </div>
+
+  <!-- Slide 4: Kho Tri Thức -->
+  <div class="slide" data-title="Kho Tri Thức">
+    <div>
+      <div class="slide-pill">3. DỮ LIỆU & KIỂM DUYỆT</div>
+      <h2 class="slide-heading">Quản Trị Kho Tri Thức Khuyến Nông (DEC-005)</h2>
+    </div>
+    <div class="slide-body">
+      <div class="slide-grid-2">
+        <div class="slide-card primary">
+          <h4>18 / 31 Tài Liệu Đã Duyệt</h4>
+          <p>Thu thập từ các cổng khuyến nông chính thống .gov.vn (Ninh Bình, Hà Tĩnh, Lai Châu...); loại bỏ 13 bài tin tức tổng hợp.</p>
+        </div>
+        <div class="slide-card primary">
+          <h4>185 / 292 Chunks Indexable</h4>
+          <p>185 chunks kỹ thuật chuẩn được mở khóa vào kho tìm kiếm (Lúa: 87 · Dưa chuột: 62 · Cà chua: 36), khóa mã băm SHA-256.</p>
+        </div>
+        <div class="slide-card amber">
+          <h4>31 Chunks Rủi Ro Cao Duyệt Lẻ</h4>
+          <p>Chứa liều lượng phân bón và hoạt chất thuốc BVTV: 24 chunk đạt chuẩn được cấp phép; 7 chunk bị loại (0 chunk chờ duyệt).</p>
+        </div>
+        <div class="slide-card blue">
+          <h4>65 / 141 Facts Ground Truth</h4>
+          <p>65 fact số liệu về độ pH đất, lượng giống gieo, ngày cách ly được xác thực thủ công làm ground truth kiểm định.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>NextFarm AI — Kho Tri Thức</span>
+      <span>Slide 4 / 10</span>
+    </div>
+  </div>
+
+  <!-- Slide 5: 3 Tham Số §40.2 -->
+  <div class="slide" data-title="3 Mục §40.2">
+    <div>
+      <div class="slide-pill">4. TỐI ƯU THAM SỐ</div>
+      <h2 class="slide-heading">Giải Quyết 3 Mục Kỹ Thuật §40.2 (P16 & P17)</h2>
+    </div>
+    <div class="slide-body">
+      <div class="slide-grid-3">
+        <div class="slide-card primary">
+          <h4>Mục 4: Quét Chunk Size</h4>
+          <p>• Quét 800, 1000, 1200, 1500 ký tự.<br>• <strong>1.200 ký tự</strong> đạt 100% Fact Coverage & 100% Hit Rate.<br>• Giữ trọn vẹn bảng phân bón.<br><em>(Báo cáo: P16_chunk_size_sweep.md)</em></p>
+        </div>
+        <div class="slide-card blue">
+          <h4>Mục 9: LLM Few-Shot</h4>
+          <p>• Tích hợp LLMFewShotRouter.<br>• 35+ ví dụ mẫu chuẩn hóa 6 intent.<br>• Thiên lệch an toàn theo §11.4.<br>• Tính điểm tin cậy thực 0.85–0.95.<br>• An toàn tuyệt đối lệnh thiết bị.</p>
+        </div>
+        <div class="slide-card amber">
+          <h4>Mục 11: Trọng Số Vùng</h4>
+          <p>• Tạo tập 30 test case địa phương.<br>• Quét dải hệ số 0.00 đến 0.30.<br>• Chốt <strong>he_so = 0.10</strong> nâng Top-1 khớp vùng lên 63.3%, Top-3 lên 73.3%.<br><em>(Báo cáo: P17_region_weighting_sweep.md)</em></p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>NextFarm AI — Tối Ưu §40.2</span>
+      <span>Slide 5 / 10</span>
+    </div>
+  </div>
+
+  <!-- Slide 6: Đối Chứng C0 C1 C2 -->
+  <div class="slide" data-title="Đối Chứng C0-C1-C2">
+    <div>
+      <div class="slide-pill">5. KẾT QUẢ ĐỐI CHỨNG</div>
+      <h2 class="slide-heading">Bảng Thực Nghiệm Đối Chứng Định Lượng (C0 · C1 · C2)</h2>
+    </div>
+    <div class="slide-body">
+      <table class="slide-table">
+        <thead>
+          <tr>
+            <th>Chỉ Số Đo Lường (222 Case v3)</th>
+            <th>C0: LLM Trần</th>
+            <th>C1: RAG Thuần</th>
+            <th style="color:var(--primary);">C2: NextFarm PoC</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Số ca bịa số liệu nông học</strong></td>
+            <td style="color:var(--rose);">61 ca (27.5%)</td>
+            <td style="color:var(--amber);">23 ca (10.4%)</td>
+            <td style="color:var(--primary); font-weight:700;">0 ca (0.0% Triệt tiêu)</td>
+          </tr>
+          <tr>
+            <td>Tỷ lệ trả lời sai (False Answer Rate)</td>
+            <td>77.0%</td>
+            <td>23.0%</td>
+            <td style="font-weight:700;">0.9%</td>
+          </tr>
+          <tr>
+            <td>Độ chính xác khi trả lời</td>
+            <td>1.2%</td>
+            <td>23.9%</td>
+            <td style="font-weight:700;">90.9%</td>
+          </tr>
+          <tr>
+            <td>Bắt ca cần từ chối (Abstention Recall)</td>
+            <td>3.4%</td>
+            <td>69.6%</td>
+            <td style="font-weight:700; color:var(--primary);">100.0% (148/148 ca)</td>
+          </tr>
+          <tr>
+            <td>Độ trễ trung vị (p50)</td>
+            <td>2.621 ms</td>
+            <td>2.555 ms</td>
+            <td style="font-weight:700;">15 ms (Giảm 99.4%)</td>
+          </tr>
+          <tr>
+            <td>Chi phí API / 222 câu hỏi</td>
+            <td>$0.0369</td>
+            <td>$0.1231</td>
+            <td style="font-weight:700;">$0.0527 (~$0.0002/câu)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="slide-footer">
+      <span>NextFarm AI — Đo Lường Định Lượng</span>
+      <span>Slide 6 / 10</span>
+    </div>
+  </div>
+
+  <!-- Slide 7: Chấm Chuyên Gia -->
+  <div class="slide" data-title="Chấm Chuyên Gia 50 Câu">
+    <div>
+      <div class="slide-pill">6. KIỂM ĐỊNH THỰC TẾ</div>
+      <h2 class="slide-heading">Kết Quả Chấm Chuyên Gia C2 (50 Câu Thực Tế)</h2>
+    </div>
+    <div class="slide-body">
+      <div class="slide-grid-2">
+        <div class="slide-card primary">
+          <h4>Chấm Thật Dựa Trên Câu Trả Lời Của Máy</h4>
+          <p>• Người chấm: <em>Nguyen Phuc Bang (Doi ky thuat NextFarm)</em>.<br>• Trích dẫn nguyên văn bằng chứng cho câu trả lời chuẩn (pH 6.0-6.5, ngâm hạt 40-50°C).<br>• Từ chối bẫy kê đơn thuốc và bò lan chuẩn xác.<br>• Điểm số phân hóa tự nhiên theo 8+ tổ hợp thực tế.</p>
+        </div>
+        <div class="slide-card amber">
+          <h4>Bắt Lỗi Thật Tại Câu 41 & 42</h4>
+          <p>• Hỏi về dữ liệu vườn và cảm biến độ ẩm $\rightarrow$ Máy bị Scope Check dùng nhầm template hỏi cây trồng (<em>"can_lam_ro"</em>).<br>• Ghi nhận trung thực khuyết điểm: Từ chối an toàn nhưng sai lý do.<br>• Hạ điểm chuẩn xác (C1:3, C2:2, C3:2) để phản ánh đúng thực tế.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>NextFarm AI — Phiếu Chấm Chuyên Gia</span>
+      <span>Slide 7 / 10</span>
+    </div>
+  </div>
+
+  <!-- Slide 8: DevOps & Production -->
+  <div class="slide" data-title="Đóng Gói Sản Xuất">
+    <div>
+      <div class="slide-pill">7. DEVOPS & PRODUCTION</div>
+      <h2 class="slide-heading">Đóng Gói Sản Xuất & Đảm Bảo Chất Lượng</h2>
+    </div>
+    <div class="slide-body">
+      <div class="slide-grid-2">
+        <div class="slide-card primary">
+          <h4>Docker Compose 1 Lệnh</h4>
+          <p>Dockerfile Python 3.11-slim non-root user <code>nextfarm</code>; khởi chạy cùng PostgreSQL 16 pgvector, có healthcheck và network cô lập an toàn.</p>
+        </div>
+        <div class="slide-card primary">
+          <h4>Local Embedding & Bảo Mật</h4>
+          <p>Mô hình embedding chạy 100% on-premise, không gửi kho tri thức ra ngoài; cửa quản trị /admin mặc định an toàn.</p>
+        </div>
+        <div class="slide-card primary">
+          <h4>367 Unit Tests Xanh 100%</h4>
+          <p>Bộ test tự động bao phủ toàn diện từ chuẩn hóa, router, retrieval, reranker đến grounding validator.</p>
+        </div>
+        <div class="slide-card blue">
+          <h4>4 Giao Diện Web Đa Dạng</h4>
+          <p>Chat nông dân (/), Bảng Quản trị (/admin), Báo cáo (/report) và Chấm điểm (/expert) hỗ trợ Dark/Light mode.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>NextFarm AI — Đóng Gói Sản Xuất</span>
+      <span>Slide 8 / 10</span>
+    </div>
+  </div>
+
+  <!-- Slide 9: Giới Hạn & Lộ Trình -->
+  <div class="slide" data-title="Lộ Trình Phát Triển">
+    <div>
+      <div class="slide-pill">8. LỘ TRÌNH MỞ RỘNG</div>
+      <h2 class="slide-heading">Giới Hạn Đã Biết & Lộ Trình Phát Triển Tiếp Theo</h2>
+    </div>
+    <div class="slide-body">
+      <div class="slide-grid-2">
+        <div class="slide-card amber">
+          <h4>Giới Hạn Hiện Tại (Minh Bạch)</h4>
+          <p>• Chưa kết nối API cảm biến IoT vườn thật (từ chối an toàn khi hỏi số liệu vườn).<br>• Chưa có tài liệu cẩm nang sản phẩm NextFarm.<br>• Fine-tuning self-host cần GPU chuyên dụng (≥16GB VRAM).<br>• Kho tri thức hiện tập trung 3 cây trồng chủ lực.</p>
+        </div>
+        <div class="slide-card primary">
+          <h4>Lộ Trình Tiếp Theo</h4>
+          <p>• <strong>Giai Đoạn 2:</strong> Mở rộng kho tri thức cho cây ăn quả/công nghiệp (Sầu riêng, Xoài, Cà phê...) lên 2.000+ chunks.<br>• <strong>Giai Đoạn 3:</strong> Kết nối API cảm biến IoT vườn thực tế (Bài toán B) và xác thực 2 lớp (2FA) cho lệnh điều khiển bơm/van.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>NextFarm AI — Lộ Trình Mở Rộng</span>
+      <span>Slide 9 / 10</span>
+    </div>
+  </div>
+
+  <!-- Slide 10: Kết Luận -->
+  <div class="slide cover-slide" data-title="Kết Luận & Bàn Giao">
+    <div class="slide-pill" style="color:#10b981;">TỔNG KẾT DỰ ÁN</div>
+    <h1>Hệ Thống Đã Sẵn Sàng Bàn Giao</h1>
+    <div style="font-size:1.15rem; color:#e2e8f0; line-height:1.7; margin-top:1rem;">
+      ✓ <strong>Triệt tiêu 100%</strong> ca bịa số liệu nông học (61 ca $\rightarrow$ 0 ca).<br>
+      ✓ <strong>Bắt đúng 100%</strong> ca cần từ chối (148/148 ca bẫy và ngoài phạm vi).<br>
+      ✓ <strong>Độ trễ p50 đạt 15ms</strong> (giảm 99.4% thời gian phản hồi).<br>
+      ✓ <strong>367 Unit Tests tự động xanh 100%</strong> và đóng gói Docker 1 lệnh.
+    </div>
+    <div class="cover-meta" style="margin-top:2.5rem;">
+      <a href="/" style="color:#10b981; text-decoration:none; font-weight:700;">🌱 Mở Trang Chat</a>
+      <a href="/report" style="color:#60a5fa; text-decoration:none; font-weight:700;">📊 Xem Báo Cáo Chi Tiết</a>
+      <a href="/admin" style="color:#fbbf24; text-decoration:none; font-weight:700;">⚙️ Mở Bảng Quản Trị</a>
+    </div>
+  </div>
+
+</main>
+
+<div class="kbd-hint">
+  <span>Điều khiển:</span>
+  <kbd>←</kbd> <kbd>→</kbd> hoặc <kbd>Space</kbd> | <kbd>F</kbd> Toàn màn hình
+</div>
+
+<script>
+const slides = document.querySelectorAll(".slide");
+const progressBar = document.getElementById("progress-bar");
+const slideNum = document.getElementById("slide-num");
+const btnPrev = document.getElementById("btn-prev");
+const btnNext = document.getElementById("btn-next");
+const btnTheme = document.getElementById("btn-theme");
+const btnFullscreen = document.getElementById("btn-fullscreen");
+
+let currentIndex = 0;
+const totalSlides = slides.length;
+
+function showSlide(index) {
+  if (index < 0) index = 0;
+  if (index >= totalSlides) index = totalSlides - 1;
+  currentIndex = index;
+
+  slides.forEach((s, idx) => {
+    s.classList.toggle("active", idx === currentIndex);
+  });
+
+  const progressPercent = ((currentIndex + 1) / totalSlides) * 100;
+  progressBar.style.width = progressPercent + "%";
+  slideNum.textContent = `${currentIndex + 1} / ${totalSlides}`;
+
+  btnPrev.disabled = currentIndex === 0;
+  btnNext.disabled = currentIndex === totalSlides - 1;
+}
+
+btnPrev.onclick = () => showSlide(currentIndex - 1);
+btnNext.onclick = () => showSlide(currentIndex + 1);
+
+// Keyboard controls
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") {
+    e.preventDefault();
+    showSlide(currentIndex + 1);
+  } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+    e.preventDefault();
+    showSlide(currentIndex - 1);
+  } else if (e.key.toLowerCase() === "f") {
+    toggleFullscreen();
+  }
+});
+
+// Fullscreen
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(() => {});
+  } else {
+    document.exitFullscreen().catch(() => {});
+  }
+}
+btnFullscreen.onclick = toggleFullscreen;
+
+// Theme toggle
+let currentTheme = localStorage.getItem("nextfarm_theme") || "dark";
+document.documentElement.setAttribute("data-theme", currentTheme);
+btnTheme.onclick = () => {
+  currentTheme = currentTheme === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", currentTheme);
+  localStorage.setItem("nextfarm_theme", currentTheme);
+};
+
+showSlide(0);
+</script>
+</body>
+</html>
