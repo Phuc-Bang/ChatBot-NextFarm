@@ -1,6 +1,6 @@
 {
   "version": "v3",
-  "frozen_at": "2026-08-20T06:09:35.004008+00:00",
+  "frozen_at": "2026-08-28T07:32:17.826468+00:00",
   "total_cases": 222,
   "groups": {
     "adversarial": 16,
@@ -17,18 +17,18 @@
     "typo": 23
   },
   "files": {
-    "adversarial.yaml": "ab9866ebe70cb71abba5b9e249e223dcf0cf56e2ffd137e884b1477f17bd30c9",
-    "device_control.yaml": "2872637840b445799909cf652989922a02a79603e7f45d09d96d4eef8fd6bab2",
-    "garden_data.yaml": "c1fc2933dec2c336413a335c034c0def6b642cab6beb98750f5167d6c343c687",
-    "high_risk.yaml": "8b31ce14bc30382fdd4d2e4ecfe6ae7b4906ee2d3150d291600097deeb0ca317",
-    "insufficient_evidence.yaml": "2ae5ea57e8dce52b636cd04ba104db01a26d619008be026a11873cbe6813f211",
-    "known_answer.yaml": "fdd2e7aad226f599f5bd69b8aca16bfa4b3075e4bbb44abb6fcdfc0fde6b6216",
-    "local_terms.yaml": "bcbb1c9ba5a14a803179db11304ec4cfcae8887b7b778e15c18016910bd49dd8",
-    "no_diacritic.yaml": "606f056e79847a45a48f8f9a79a6702f39ca7980ba91daa8264bcda7487674ab",
-    "out_of_scope.yaml": "1bc4674d33e5bd16e75f181ce7bb4bf7d977b2c91aea04d2070676311fb7e255",
-    "paraphrase.yaml": "8cd90772c997a2043eb114396805965bf9faa5c48c8664bb2fc5fdc3cf2cd745",
-    "product_feature.yaml": "0ae8c92661bc489a1a401cc26ef89f76322731e2183f1269531d74296c62f2f0",
-    "typo.yaml": "d7448954911a625f61dff4010367ea900c9d4c2a5f6b37a59c33ef78a1bb67f0"
+    "adversarial.yaml": "22eb9aae9d9ba88ac7b44c4cb163cf31ba7dcf33f9441666892f1631942599e3",
+    "device_control.yaml": "153b48260932fac17d050a5e288292d24c1c225f63e984418468dd1cd2ab90c0",
+    "garden_data.yaml": "1df2f2d0d5db4b35433eb37b182297ab3e48c8bea194098c0e59569b13b8b89b",
+    "high_risk.yaml": "be942cd81f3a4e7aa9245b94ac56b64de3c8b3147f1087935bc2c15e3024d2a4",
+    "insufficient_evidence.yaml": "3c97891293bb19c7d9dfdfeecf8e9af014c182de4a5c49e976d66a3fe8dd8b0c",
+    "known_answer.yaml": "3fb13f80ed5b231970b463604eee0ae2aafaa77a55ec54e352472459f8d8ec95",
+    "local_terms.yaml": "be6775f0af9e5cc9600c70f17c95699d35e1f9c65b3eaa8a439f67e528758960",
+    "no_diacritic.yaml": "df0572dfb1027b8280ddd63568b849793b40aa76c0f3e37e00486db8445a8278",
+    "out_of_scope.yaml": "f9138376a4a66835ae1892646b9823889651737ade1059efa9ef56dae4f07407",
+    "paraphrase.yaml": "0b4c3fc0798ed059168c342343681e5f87e4f24d7ff7fecbcd6f1509c4ac29fd",
+    "product_feature.yaml": "48868b9cb10be3d85a4cc6b8347d924cb3a31736f3a6eb67ed49ff31ea52b5ab",
+    "typo.yaml": "bc31624947a04c6e4936212c5aea5fef3585795b896aefa352b0b917cbd126d1"
   },
-  "combined_sha256": "e541809dc5dd79f556ccdb323544d0e8f64e7aa91fe507da93c62340ebffc496"
+  "combined_sha256": "9281e50f45b1e4fb51151952fc2f29027bcb30eb527f97465148acb4cd7fc35b"
 }

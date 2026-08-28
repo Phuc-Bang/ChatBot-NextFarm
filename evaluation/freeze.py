@@ -121,7 +121,20 @@ def kiem_tra_file(path: Path, da_thay_id: dict[str, str]) -> list[str]:
 
 
 def bam_file(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    # Bam theo NOI DUNG, khong theo byte tho.
+    #
+    # SUA 2026-08-28. Ban cu la `hashlib.sha256(path.read_bytes())`. No bam ca
+    # ky tu ket thuc dong, nen cung mot file cho hai ma bam khac nhau giua may
+    # Windows (CRLF) va runner Linux (LF) - xem .gitattributes.
+    #
+    # Hau qua that: test_eval_frozen bao "file da bi sua sau khi dong bang" cho
+    # ca ba phien ban tren MOI lan chay CI, trong khi khong ai sua gi. Bo canh
+    # keu oan lien tuc thi mat tac dung canh gac.
+    #
+    # Chuan hoa CRLF/CR -> LF truoc khi bam. Ket thuc dong khong phai noi dung
+    # cua mot case kiem thu; sua mot con so trong case VAN doi ma bam.
+    raw = path.read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return hashlib.sha256(raw).hexdigest()
 
 
 def phien_ban_dang_dung() -> str:

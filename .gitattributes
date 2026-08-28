@@ -1,0 +1,33 @@
+# Chuan hoa ket thuc dong.
+#
+# LY DO CU THE - do 2026-08-28:
+#
+# core.autocrlf=true tren may Windows nay nen ban lam viec co CRLF, con runner
+# Linux checkout ra LF. evaluation/freeze.py bam BYTE THO (`path.read_bytes()`),
+# nen cung mot noi dung cho hai ma bam khac nhau.
+#
+# Hau qua: test_eval_frozen bao "file da bi sua sau khi dong bang" cho ca v1,
+# v2, v3 tren MOI lan chay CI - trong khi khong ai sua mot ky tu nao. Do la ly
+# do CI do tu lan chay dau tien.
+#
+# Bo canh DEC-023 la thu chan viec sua tap kiem thu sau khi dong bang. Mot bo
+# canh keu oan tren moi lan chay thi khong ai con doc no nua - va luc do mot
+# lan sua that se di qua ma khong ai thay.
+
+* text=auto
+
+# Cac file duoi day duoc bam de kiem toan ven -> BAT BUOC LF o moi noi.
+*.yaml   text eol=lf
+*.yml    text eol=lf
+*.json   text eol=lf
+*.jsonl  text eol=lf
+*.py     text eol=lf
+*.md     text eol=lf
+*.sql    text eol=lf
+
+# Nhi phan - khong dung cham
+*.pdf    binary
+*.pptx   binary
+*.docx   binary
+*.png    binary
+*.jpg    binary
