@@ -49,13 +49,32 @@ def test_tao_prompt_fewshot_chua_du_thong_tin():
 
 
 def test_rule_layer_uu_tien_truoc():
-    """Khi Rule Layer da chac chan, Few-shot Router tra ve ngay ket qua tu Rule."""
+    """Khi Rule Layer da chac chan, Few-shot Router tra ve NGAY ket qua tu Rule.
+
+    SUA 2026-08-28: ban dau khang dinh `do_tin_cay == 1.0`. Sai - va sai theo
+    kieu chua bao gio chay: luat device_control tra 0.95 (router.py:364) tu
+    truoc khi file test nay ra doi, nen phep khang dinh do khong the dung o
+    bat ky thoi diem nao. Bo test do do lien tuc ke tu commit 8e5f93f.
+
+    0.95 khong phai loi. Do la quy uoc cua tang rule: 1.0 danh cho cac mau
+    khop nguyen van (chao hoi, cam on - dong 445/447/456), 0.95 cho mau ghep
+    hai tin hieu (dong tu + thiet bi). Khang dinh mot con so cu the o day la
+    buoc tang rule phai giu nguyen thang diem cho MOI luat, khong lien quan
+    gi den dieu test nay canh.
+
+    Dieu test nay canh la UU TIEN: rule thang thi khong goi LLM. Cong tac
+    that nam o `phan_loai()` dong 621:
+
+        if kq_rule.nguon != "mac_dinh" and kq_rule.do_tin_cay > 0.0:
+
+    Nen khang dinh dung chinh hai dieu kien ay.
+    """
     r = LLMFewShotRouter()
     # Cau ro rang la device_control
     kq = r.phan_loai("Bật máy bơm khu A giúp tôi")
     assert kq.nhan == DEVICE_CONTROL
     assert kq.nguon == "rule"
-    assert kq.do_tin_cay == 1.0
+    assert kq.do_tin_cay > 0.0, "khong vuot duoc cong uu tien -> se roi xuong LLM"
 
 
 def test_fewshot_heuristic_fallback_khi_chua_co_llm():

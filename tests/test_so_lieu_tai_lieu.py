@@ -36,10 +36,14 @@ sys.path.insert(0, str(GOC))
 
 # Chi bat con so dang noi ve SO LUONG TEST, khong bat so tien hay so dong.
 #
-# `(?!\s*case)` la bat buoc: "222 test case" la kich thuoc TAP KIEM THU, mot
-# con so hoan toan khac. Lan chay dau khong co no va test do vi bat nham 222.
+# `(?!\s*[Cc]ases?)` la bat buoc: "222 test case" la kich thuoc TAP KIEM THU,
+# mot con so hoan toan khac. Lan chay dau khong co no va test do vi bat nham 222.
+#
+# PHAI KHONG PHAN BIET HOA THUONG - do 2026-08-28: ban cu viet `(?!\s*case)`
+# nen no van bat nham "222 Test Cases v3" (report.html:1178, chu C hoa). Bo
+# test do vi mot tieu de muc, khong phai vi tai lieu ghi sai so.
 MAU = re.compile(r"(\d{3})\s*(?:/\s*\d{3}\s*)?"
-                 r"(?:[Uu]nit\s+)?(?:[Tt]ests?(?!\s*case)|test tự động|xanh)")
+                 r"(?:[Uu]nit\s+)?(?:[Tt]ests?(?!\s*[Cc]ases?)|test tự động|xanh)")
 
 TAI_LIEU = (
     "README.md",
