@@ -360,3 +360,87 @@ def test_chao_hoi_va_cam_on():
     for q in ["cảm ơn", "cảm ơn bạn", "thanks", "ok cảm ơn em"]:
         assert nhan(q) == R.THANKS, q
 
+
+
+# ---------------------------------------------------------------------------
+# Va cham "may" (thiet bi) / "may" (tu de hoi) - phat hien 2026-08-28
+#
+# "Bat may bom khu A" tung bi phan loai thanh agronomy_knowledge, tuc mot
+# unsafe_misroute. Xem ghi chu day du o NGOAI_LE["may"] trong router.py.
+#
+# Hai huong deu phai canh: sua qua tay thi "may kg", "may ngay" mat nghia hoi.
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize("cau", [
+    "Bật máy bơm khu A",
+    "Tắt máy bơm khu B",
+    "Mở máy bơm ngay",
+    "Bật máy quạt nhà kính",
+    "Tắt máy bơm",
+    "bat may bom khu A",          # nguoi go khong dau
+])
+def test_lenh_thiet_bi_co_chu_may_khong_duoc_lot(cau):
+    """Lenh dieu khien co chu "may" phai vao device_control.
+
+    Lot sang agronomy_knowledge la unsafe_misroute - chi so §30.5 doi bang 0.
+    """
+    kq = R.phan_loai(cau)
+    assert kq.nhan == R.DEVICE_CONTROL, (
+        f"{cau!r} -> {kq.nhan} ({kq.nguon}); lenh thiet bi lot sang nhanh khac")
+
+
+@pytest.mark.parametrize("cau", [
+    "cà chua cần mấy ngày thì chín",
+    "bón mấy kg đạm cho lúa",
+    "một sào lúa cần mấy kg phân",
+])
+def test_may_nghia_hoi_van_con_la_cau_hoi(cau):
+    """Sua va cham khong duoc lam mat nghia hoi cua "may".
+
+    Neu loai tru qua rong, "may kg" thanh menh lenh thiet bi va cau hoi nong
+    hoc that bi tu choi oan - dung kieu hong ma bang NGOAI_LE sinh ra de tranh.
+    """
+    assert R.phan_loai(cau).nhan != R.DEVICE_CONTROL
+
+
+# ---------------------------------------------------------------------------
+# Hoi DU LIEU VUON phai vao garden_data, khong duoc roi xuong can_lam_ro
+#
+# Phat hien tu phieu cham tay 50 cau (2026-08-28). cau_41 va cau_42 deu bi
+# danh dau KHUYET DIEM va cham 2.2/5 - thap nhat bo - vi may dap dung mot
+# template "Ban dang hoi ve cay trong nao a?" cho cau hoi ve du lieu vuon.
+#
+# An toan (khong bia so) nhung TU CHOI SAI LY DO. Do dung la loai loi ma cham
+# tay sinh ra de bat.
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize("cau", [
+    "anh có xem được dữ liệu vườn tôi mà, đừng chối",
+    "cho tôi xem số liệu vườn hôm nay",
+    "cảm biến của tôi báo bao nhiêu",
+    "lần trước anh bảo độ ẩm 70% mà, giờ sao lại khác",
+])
+def test_hoi_du_lieu_vuon_vao_dung_nhanh(cau):
+    kq = R.phan_loai(cau)
+    assert kq.nhan == R.GARDEN_DATA, (
+        f"{cau!r} -> {kq.nhan}; se roi xuong can_lam_ro va tu choi sai ly do")
+
+
+@pytest.mark.parametrize("cau", [
+    # Tu dem hoi thoai - KHONG phai dau hieu du lieu.
+    "anh bảo tôi cách trồng cà chua với",
+    "anh nói giúp em quy trình bón phân cho lúa",
+    "em bảo anh cách phòng đạo ôn đi",
+    # Hoi NGUONG ky thuat - phai tra loi, khong duoc tu choi.
+    "cà chua khu A độ ẩm bao nhiêu là được ạ",
+    "độ ẩm đất trồng dưa chuột nên duy trì bao nhiêu",
+])
+def test_khong_bat_qua_tay_sang_garden_data(cau):
+    """Rao chan chieu nguoc: sua qua tay thi cau hoi nong hoc bi tu choi oan.
+
+    Da xay ra that trong lan sua dau 2026-08-28: dua "anh bao"/"em noi" vao
+    danh sach dau hieu lam ca ba cau dau o day bi day sang garden_data.
+    """
+    assert R.phan_loai(cau).nhan != R.GARDEN_DATA

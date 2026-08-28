@@ -113,7 +113,7 @@ Chi tiết đầy đủ ở [quy chuẩn v2.0](docs/NEXTFARM_PROBLEM_A_STANDARD_
 | Chunk **index được** | **185** (18 tài liệu đã duyệt · 31/44 chunk rủi ro cao đã duyệt lẻ) |
 | Câu ứng viên số liệu | 193 — **65 fact đã xác nhận** |
 | Case kiểm thử | **222 / 12 nhóm — v3 đã đóng băng** |
-| Test tự động | **367 xanh** khi có PostgreSQL · thiếu DB thì 36 ca tự bỏ qua |
+| Test tự động | **391 xanh** khi có PostgreSQL · thiếu DB thì 36 ca tự bỏ qua |
 
 > **185 / 292 chunk** vào được kho tri thức. 107 chunk còn lại thuộc 13 tài
 > liệu bị loại ở luồng 1, cộng 13 chunk rủi ro cao chưa duyệt lẻ — tất cả
@@ -282,7 +282,7 @@ make install-crawler
 make ingest
 
 # 6. Chạy thử
-make test        # 367 test tự động
+make test        # 391 test tự động
 make serve       # http://localhost:8000  và  /admin
 ```
 
@@ -339,6 +339,7 @@ Ghi ở đây để không ai hiểu nhầm về phạm vi:
 - **Grounding Validator có đủ ba tầng.** Tầng 1 (chunk_id có thật) và tầng 2 (mọi con số phải có trong bằng chứng) nằm ở `kiem_grounding()` (`app/services/rag/sinh_cau_tra_loi.py:105`). Tầng 3 (ngữ nghĩa) ở `app/services/grounding/ngu_nghia.py`, nối vào đường trả lời tại `sinh_cau_tra_loi.py:187`. Hai phép kiểm quy tắc của tầng 3 luôn chạy; nhánh LLM-judge (`tang3_llm=True`) tốn thêm một lượt gọi nên **hiện chưa bật ở đường sống** — không caller nào truyền cờ này.
 - **Trang admin chỉ có khoá tĩnh** (`ADMIN_TOKEN`) — đủ để mặc định an toàn, chưa phải hệ thống danh tính. Deploy thật nên đặt OAuth/SSO ở reverse proxy và giữ `ADMIN_TOKEN` làm tầng trong.
 - Một số ngưỡng trong quy chuẩn là **giả định của đội** (`[ASM]`), chờ NextFarm xác nhận — xem §9.
+- **Bảng số C2 đang cũ hơn mã 2 case.** Ngày 28/08 sửa hai lỗi định tuyến ("máy bơm" bị nhận nhầm là từ để hỏi; hỏi dữ liệu vườn rơi xuống `can_lam_ro`). Đo tất định trên 222 case: **2 case đổi, cả hai là cải thiện, không hồi quy**. File kết quả C2 giữ nguyên không sửa tay — muốn cập nhật phải chạy lại thật (222 lượt gọi model). Năm chỉ số chống bịa không đổi; `abstain_type_accuracy` đang thấp hơn thực tế 1 case. Chi tiết: [P18_sua_dinh_tuyen.md](docs/reports/P18_sua_dinh_tuyen.md)
 - **Intent Router: tầng rule đang chạy, tầng few-shot đã xây nhưng CHƯA nối.** Đường sống gọi `phan_loai()` (`router.py:486`) — thuần rule, 0ms, 0 token. Lớp `LLMFewShotRouter` (`router.py:577`) có 35+ ví dụ mẫu và 6 test, nhưng không chỗ nào trong `pipeline.py` khởi tạo nó. **Cố ý giữ vậy:** mọi số đo C0/C1/C2 hiện có đều đo trên router thuần rule; bật tầng LLM lên là các con số đó không còn mô tả hệ thống đang chạy nữa, phải đo lại toàn bộ 222 case. Xem §40.2 Mục 9 để biết cách bật và đo.
 - **Trọng số vùng miền:** Đã đo lường thực nghiệm trên 30 case và chốt hệ số ưu tiên `he_so = 0.10` (§40.2 Mục 11, [P17_region_weighting_sweep.md](docs/reports/P17_region_weighting_sweep.md)).
 - **Tập kiểm thử có ba phiên bản, bản đang dùng là `v3`.** DEC-023 cấm sửa tại chỗ, nên mỗi lỗi phát hiện sau khi đóng băng đều phải cắt phiên bản mới; bản cũ giữ nguyên làm bằng chứng.

@@ -30,7 +30,7 @@ from dataclasses import dataclass, field
 from app.services.abstention import templates as tpl
 from app.services.intent import scope
 from app.services.intent.router import (
-    AGRONOMY, DEVICE_CONTROL, GARDEN_DATA, PRODUCT_FEATURE, phan_loai)
+    AGRONOMY, DEVICE_CONTROL, GARDEN_DATA, PRODUCT_FEATURE, dinh_tuyen)
 from app.services.normalization.vietnamese import chuan_hoa
 
 
@@ -111,7 +111,7 @@ def tra_loi_cau_hoi(cau_hoi: str,
     dh.cham("chuan_hoa")
 
     # ---- 2. Intent Router (khong goi model) -------------------------
-    it = phan_loai(cau_hoi, context_turns)
+    it = dinh_tuyen(cau_hoi, context_turns)
     kq.intent = it.nhan
     kq.intent_do_tin_cay = it.do_tin_cay
     kq.intent_nguon = it.nguon
