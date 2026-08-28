@@ -28,3 +28,13 @@ numpy==2.2.1
 # Kiem thu
 pytest==8.3.4
 pytest-asyncio==0.25.0
+
+# httpx: starlette.testclient BAT BUOC co, khong co thi TestClient nem
+# RuntimeError chu khong bo qua. Bon test dung no: test_admin_bao_loi,
+# test_canh_cua_admin (x2), test_diem_chuyen_gia_phai_that.
+#
+# THIEU TU TRUOC, bo sung 2026-08-28. Day la ly do CI DO SUOT 13 lan chay: tren
+# may nay httpx vao theo duong phu thuoc gian tiep nen khong ai thay, con runner
+# sach thi khong co. Cung mot loai loi voi numpy - phu thuoc that nhung khong
+# khai, va chi lo ra khi cai tu dau.
+httpx==0.28.1

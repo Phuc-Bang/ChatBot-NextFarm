@@ -1,4 +1,4 @@
-"""
+r"""
 Bo tach phieu cham phai doc dung ca hai dang ban ghi.
 
 SU CO THAT 2026-08-22
