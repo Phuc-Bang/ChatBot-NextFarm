@@ -25,3 +25,6 @@ docs/reports/_*.log
 
 # Cache model HuggingFace - dat o o D vi o C day 99%, xem app/__init__.py
 .cache/
+
+# File khoa tam cua Word/PowerPoint - sinh ra khi mo file, khong duoc commit
+~$*
