@@ -10,6 +10,21 @@ pydantic-settings==2.7.0
 python-dotenv==1.0.1
 PyYAML==6.0.2
 
+# numpy: 4 module dung TRUC TIEP (embedding/base.py, embedding/local.py,
+# retrieval/vector.py, evaluation/runners/eval_retrieval.py) nhung truoc
+# 2026-08-28 khong khai o dau ca - no vao may theo duong phu thuoc gian tiep.
+numpy==2.2.1
+
+# KENH VECTOR VA RERANKER KHONG NAM O DAY - xem requirements-ml.txt.
+#
+# sentence-transformers keo theo torch (~2.5GB ban CUDA) va tai model tu
+# HuggingFace lan chay dau. De trong file nay thi:
+#   - CI cai nhanh, khong tai model, khong can GPU
+#   - `pytest` van chay du 331 ca khong dung DB
+# Kien truc da chiu duoc dieu do: pipeline.py:22 boc import trong try/except,
+# va hybrid.tim_kiem() van chay bang FTS + trigram khi kenh vector hong, chi
+# in mot dong canh bao. Do la suy giam CO Y BAO, khong phai im lang.
+
 # Kiem thu
 pytest==8.3.4
 pytest-asyncio==0.25.0

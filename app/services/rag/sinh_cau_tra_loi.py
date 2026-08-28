@@ -105,8 +105,13 @@ def dung_evidence_pack(chunks) -> str:
 def kiem_grounding(tra_loi: str, chunks, chunk_da_dung: list[str]) -> list[str]:
     """Tang 1 + tang 2. Tra ve danh sach loi; rong = dat.
 
-    Tang 3 (ngu nghia) CHUA LAM - ghi ro o day thay vi de nguoi doc tuong
-    da du ba tang.
+    Tang 3 (ngu nghia) KHONG nam trong ham nay - no o
+    `app/services/grounding/ngu_nghia.py` va duoc goi rieng trong
+    `sinh_va_kiem()` ngay sau khi ham nay chay xong (dong 187).
+
+    SUA 2026-08-28: ban cu ghi "Tang 3 CHUA LAM". Dung luc viet, sai ke tu
+    khi tang 3 duoc noi vao. Mot dong ghi chu qua han nam ngay tren ma
+    nguoi doc dang doc thi te hon la khong co ghi chu gi.
     """
     loi: list[str] = []
     hop_le = {c.chunk_id for c in chunks}

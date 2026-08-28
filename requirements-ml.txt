@@ -1,0 +1,14 @@
+# Phu thuoc nang cho kenh VECTOR va RERANKER.
+#
+# Tach khoi requirements.txt tu 2026-08-28. Ly do: torch ~2.5GB va lan chay
+# dau phai tai model tu HuggingFace. Gop chung se lam CI cham va phu thuoc
+# vao mang cua ben thu ba cho mot bo test khong can den chung.
+#
+# CAI KHI CAN: sinh embedding, chay kenh vector, hoac bat RERANKER_MODEL.
+#     pip install -r requirements.txt -r requirements-ml.txt
+#
+# KHONG CAI THI: he thong van chay bang hai kenh tu khoa (FTS + trigram) va
+# in canh bao "khong dung duoc kenh vector". Chat luong truy xuat giam - do
+# duoc o docs/reports/P6_reranker.md: R@5 tu 90.9 xuong 72.7 khi tat reranker.
+
+sentence-transformers==6.0.0

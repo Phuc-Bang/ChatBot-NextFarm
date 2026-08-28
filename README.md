@@ -113,7 +113,7 @@ Chi tiết đầy đủ ở [quy chuẩn v2.0](docs/NEXTFARM_PROBLEM_A_STANDARD_
 | Chunk **index được** | **185** (18 tài liệu đã duyệt · 31/44 chunk rủi ro cao đã duyệt lẻ) |
 | Câu ứng viên số liệu | 193 — **65 fact đã xác nhận** |
 | Case kiểm thử | **222 / 12 nhóm — v3 đã đóng băng** |
-| Test tự động | **367 xanh** |
+| Test tự động | **367 test** — 331 chạy được, 36 bỏ qua khi máy không có PostgreSQL |
 
 > **185 / 292 chunk** vào được kho tri thức. 107 chunk còn lại thuộc 13 tài
 > liệu bị loại ở luồng 1, cộng 13 chunk rủi ro cao chưa duyệt lẻ — tất cả
@@ -336,10 +336,10 @@ Ghi ở đây để không ai hiểu nhầm về phạm vi:
 - **Chưa có tài liệu sản phẩm NextFarm**, nên câu hỏi về tính năng app luôn bị từ chối. C0 cho thấy đây là chỗ LLM trần bịa nhiều nhất (17/18 case).
 - **GPU 4GB không chạy được model sinh câu trả lời.** Đã đo thật: `qwen3:4b` sập trên GPU (CUDA error, 2.5GB model không đủ chỗ cho KV-cache trên 3,96GB trống); chạy CPU thì được 11,4 token/giây — một câu hỏi RAG thật mất **32,3 giây**, quá ngưỡng ASM-01 (p50 ≤ 5s) sáu lần. Vì vậy **P12 (fine-tuning) không khả thi** trên phần cứng hiện có, và §37.5 phải viết lại: phương án self-host cần NextFarm đầu tư GPU mới, và đó là con số `[EXT]`.
 - **Free tier Gemini rất chặt.** `gemini-2.5-flash` cạn quota sau vài chục lần gọi — 80/80 case đầu của C0 trả về 429. Đã đổi sang `gemini-3.1-flash-lite`. Mọi lần chạy đo lường nên dùng `--nghi` để giãn nhịp.
-- **Grounding Validator mới có tầng 1 và 2.** Tầng 3 (ngữ nghĩa, NLI/LLM-judge) chưa làm.
+- **Grounding Validator có đủ ba tầng.** Tầng 1 (chunk_id có thật) và tầng 2 (mọi con số phải có trong bằng chứng) nằm ở `kiem_grounding()` (`app/services/rag/sinh_cau_tra_loi.py:105`). Tầng 3 (ngữ nghĩa) ở `app/services/grounding/ngu_nghia.py`, nối vào đường trả lời tại `sinh_cau_tra_loi.py:187`. Hai phép kiểm quy tắc của tầng 3 luôn chạy; nhánh LLM-judge (`tang3_llm=True`) tốn thêm một lượt gọi nên **hiện chưa bật ở đường sống** — không caller nào truyền cờ này.
 - **Trang admin chỉ có khoá tĩnh** (`ADMIN_TOKEN`) — đủ để mặc định an toàn, chưa phải hệ thống danh tính. Deploy thật nên đặt OAuth/SSO ở reverse proxy và giữ `ADMIN_TOKEN` làm tầng trong.
 - Một số ngưỡng trong quy chuẩn là **giả định của đội** (`[ASM]`), chờ NextFarm xác nhận — xem §9.
-- **Intent Router:** Đã tích hợp đầy đủ 2 tầng (§11.3 & §40.2 Mục 9): tầng rule-based siêu nhanh (0ms, 0 token) và tầng `LLMFewShotRouter` kèm 35+ ví dụ mẫu chuẩn hóa.
+- **Intent Router: tầng rule đang chạy, tầng few-shot đã xây nhưng CHƯA nối.** Đường sống gọi `phan_loai()` (`router.py:486`) — thuần rule, 0ms, 0 token. Lớp `LLMFewShotRouter` (`router.py:577`) có 35+ ví dụ mẫu và 6 test, nhưng không chỗ nào trong `pipeline.py` khởi tạo nó. **Cố ý giữ vậy:** mọi số đo C0/C1/C2 hiện có đều đo trên router thuần rule; bật tầng LLM lên là các con số đó không còn mô tả hệ thống đang chạy nữa, phải đo lại toàn bộ 222 case. Xem §40.2 Mục 9 để biết cách bật và đo.
 - **Trọng số vùng miền:** Đã đo lường thực nghiệm trên 30 case và chốt hệ số ưu tiên `he_so = 0.10` (§40.2 Mục 11, [P17_region_weighting_sweep.md](docs/reports/P17_region_weighting_sweep.md)).
 - **Tập kiểm thử có ba phiên bản, bản đang dùng là `v3`.** DEC-023 cấm sửa tại chỗ, nên mỗi lỗi phát hiện sau khi đóng băng đều phải cắt phiên bản mới; bản cũ giữ nguyên làm bằng chứng.
   - `v1` — 30 case `known_answer`, trong đó **9 case đáp án do LLM sinh, không có tài liệu chống lưng**. Giữ lại vì đây là ví dụ cụ thể nhất cho việc *vì sao quy chuẩn cấm dùng LLM sinh đáp án chuẩn*.

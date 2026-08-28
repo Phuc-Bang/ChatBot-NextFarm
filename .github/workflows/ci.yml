@@ -10,6 +10,7 @@ jobs:
   test:
     name: Run Pytest Suite
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -20,12 +21,41 @@ jobs:
           python-version: "3.11"
           cache: "pip"
 
+      # KHONG cai requirements-ml.txt o day.
+      #
+      # sentence-transformers keo torch ~2.5GB va tai model tu HuggingFace.
+      # Bo test khong can den chung: 331 ca chay duoc khong dung kenh vector.
+      # Doi lai, CI khong kiem duoc duong embedding - da ghi ro o buoc bao cao
+      # ben duoi thay vi de nguoi doc tuong CI phu 100%.
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          pip install pytest pytest-asyncio
+          pip install -r requirements.txt
+          pip install -r crawler/requirements.txt
 
+      # KHONG dung PostgreSQL service.
+      #
+      # 36 ca dung DB tu bo qua khi khong ket noi duoc (vi du: tests/test_schema.py
+      # ham `co_db()`). Do la thiet ke co y - de nguoi chua dung docker van chay
+      # duoc bo test. CI chay dung nhanh do va BAO RO so ca bo qua, khong lam
+      # tron thanh "PASSED 100%".
       - name: Run Tests
+        run: pytest tests/ -v --tb=short
+
+      - name: Ghi ro pham vi CI da phu
+        if: always()
         run: |
-          pytest tests/ -v
+          {
+            echo "### Pham vi bo test trong CI"
+            echo ""
+            echo "CI nay **khong** dung PostgreSQL va **khong** cai \`requirements-ml.txt\`."
+            echo ""
+            echo "| Duoc kiem | Khong duoc kiem trong CI |"
+            echo "| --- | --- |"
+            echo "| Chuan hoa tieng Viet, Intent Router, Scope Check | Truy van that tren PostgreSQL (36 ca tu bo qua) |"
+            echo "| Cat chunk, duyet fact, bam sha256 | Kenh vector va reranker (can \`requirements-ml.txt\`) |"
+            echo "| Grounding tang 1-2-3, mau tu choi | View \`indexable_chunk\` tren DB that |"
+            echo "| Cong \`/admin\`, dinh dang phieu cham | Sinh embedding |"
+            echo ""
+            echo "Muon chay day du tren may: \`make up && python db/migrate.py && pytest\`."
+          } >> "$GITHUB_STEP_SUMMARY"

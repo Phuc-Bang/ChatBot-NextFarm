@@ -186,40 +186,84 @@ def main():
         "| :---: | :---: | :---: | :---: | :--- |",
     ]
 
+    # Nhan cot phai SUY TU SO DO, khong tu gia tri he_so.
+    #
+    # SUA 2026-08-28: ban cu gan nhan bang cach so sanh `hs == 0.10` roi in
+    # "**Diem can bang toi uu**". Nghia la ket luan duoc viet TRUOC khi do, va
+    # giu nguyen du bang so noi nguoc lai - 0.15 hon 0.10 ca Top-1 lan Top-3.
+    # Mot bao cao tu chon nguoi thang truoc khi chay thi khong con la phep do.
+    tot_nhat = max(r["top1_match"] for r in results)
+    hs_tot = [r["he_so"] for r in results if r["top1_match"] == tot_nhat]
+    hs_nho_nhat_dat_dinh = min(hs_tot)
+
     for r in results:
         hs = r["he_so"]
         if hs == 0.0:
-            note = "Baseline: Không ưu tiên vùng (dễ trích nhầm tài liệu tỉnh khác)"
-        elif hs == 0.10:
-            note = "**Điểm cân bằng tối ưu** (Đạt độ chính xác vùng cao, không méo điểm ngữ nghĩa)"
-        elif hs >= 0.25:
-            note = "Cảnh báo: Trọng số quá mạnh, có thể đẩy chunk sai nội dung lên top chỉ vì đúng tỉnh"
+            note = "Baseline: không cộng điểm vùng"
+        elif r["top1_match"] == tot_nhat and hs == hs_nho_nhat_dat_dinh:
+            note = f"**Top-1 cao nhất đo được** ({r['top1_rate']}), đạt ở hệ số thấp nhất trong nhóm cùng điểm"
+        elif r["top1_match"] == tot_nhat:
+            note = f"Bằng đỉnh Top-1 ({r['top1_rate']}) nhưng hệ số cao hơn mức cần thiết"
         else:
-            note = "Cải thiện độ khớp vùng miền"
+            note = f"Thấp hơn đỉnh {tot_nhat - r['top1_match']} ca"
 
         report_lines.append(
             f"| **{hs:.2f}** | {r['total']} | **{r['top1_rate']}** ({r['top1_match']}/{r['total']}) | **{r['top3_rate']}** ({r['top3_match']}/{r['total']}) | {note} |"
         )
 
+    base = next(r for r in results if r["he_so"] == 0.0)
+    dinh = next(r for r in results if r["he_so"] == hs_nho_nhat_dat_dinh)
+    mac_dinh = next(r for r in results if r["he_so"] == 0.10)
+
     report_lines.extend([
         "",
         "---",
         "",
-        "## 2. Phân Tích Kỹ Thuật",
+        "## 2. Đọc bảng trên",
         "",
-        "1. **Khi `he_so = 0.0` (Baseline không cộng điểm):**",
-        "   - Tỷ lệ Top-1 khớp vùng chỉ đạt mức trung bình do các tài liệu chung (toàn quốc/Ninh Bình) có mật độ từ khóa cao áp đảo tài liệu địa phương đặc thù (Hà Tĩnh, ĐBSCL).",
+        f"- **Baseline `0.00`:** Top-1 {base['top1_rate']} ({base['top1_match']}/{base['total']}).",
+        f"- **Đỉnh đo được:** hệ số `{hs_nho_nhat_dat_dinh:.2f}` — Top-1 {dinh['top1_rate']} "
+        f"({dinh['top1_match']}/{dinh['total']}), hơn baseline {dinh['top1_match'] - base['top1_match']} ca.",
+        f"- **Mặc định đang đặt trong mã (`he_so = 0.10`):** Top-1 {mac_dinh['top1_rate']} "
+        f"({mac_dinh['top1_match']}/{mac_dinh['total']})"
+        + (f" — **thấp hơn đỉnh {dinh['top1_match'] - mac_dinh['top1_match']} ca**."
+           if mac_dinh['top1_match'] < dinh['top1_match'] else " — bằng đỉnh."),
         "",
-        "2. **Khi `he_so = 0.10` (Giá trị tối ưu):**",
-        "   - Tỷ lệ Top-1 khớp vùng miền tăng vọt từ 60% lên **85%+** mà vẫn bảo toàn tính chính xác của tài liệu kỹ thuật.",
-        "   - Khi không có tài liệu cùng tỉnh, hệ thống vẫn giữ nguyên tài liệu tỉnh lân cận hoặc tài liệu toàn quốc thay vì từ chối oan.",
+        "> Phép đo này KHÔNG đo được hiện tượng \"trọng số quá mạnh đẩy chunk sai nội dung lên "
+        "top\". Muốn khẳng định điều đó phải chấm nội dung từng chunk trả về, không chỉ đếm khớp "
+        "vùng. Bản báo cáo trước có câu đó nhưng không có số nào chống lưng — đã bỏ.",
         "",
-        "3. **Khi `he_so >= 0.25` (Quá cao):**",
-        "   - Xuất hiện hiện tượng méo mó xếp hạng: các chunk đúng tỉnh nhưng chỉ nhắc thoáng qua từ khóa lại bị đẩy lên trên chunk hướng dẫn chi tiết của tỉnh khác.",
+        "## 3. Giới hạn phải nói rõ",
         "",
-        "## 3. Kết luận §40.2 Mục 11",
+    ])
+
+    if hs_nho_nhat_dat_dinh == max(he_so_list):
+        report_lines.extend([
+            f"0. **Đỉnh rơi đúng vào biên của dải quét.** Giá trị cao nhất được thử là "
+            f"`{max(he_so_list):.2f}` và chính nó cho Top-1 cao nhất. Khi đỉnh nằm ở mép, phép "
+            "quét chưa chứng minh được đã tìm ra điểm tốt nhất — rất có thể hệ số còn tốt hơn "
+            "nằm ngoài dải. Muốn kết luận phải nới dải rồi quét lại.",
+            "",
+        ])
+
+    report_lines.extend([
+        "1. **Tham số này hiện KHÔNG tác động lên hệ thống đang chạy.** `cong_diem_vung()` chỉ "
+        "chạy khi `tim_kiem()` nhận đối số `region`. Đường sống gọi "
+        "`tim_kiem(cau, crop=..., top_k=...)` (`app/services/pipeline.py:185`) — không truyền "
+        "`region`, nên nhánh `if region:` (`hybrid.py:65`) không bao giờ vào. Chỉ chính script "
+        "này truyền `region`. Mọi con số trên đo một nhánh mã mà người dùng thật chưa chạm tới.",
+        "2. **Tập 30 câu là tự viết, nằm NGOÀI tập đóng băng v3.** Nó được tạo trong cùng commit "
+        "chốt tham số (`8e5f93f`). Tự viết thước rồi tự đo — kết quả chỉ nên dùng để định hướng, "
+        "không dùng làm bằng chứng nghiệm thu. 0/222 case của v3 khai trường `region`.",
         "",
-        "> **Quyết định chốt thông số:** Chính thức phê chuẩn giá trị mặc định **`he_so = 0.10`** cho hàm `cong_diem_vung()` trong pipeline `hybrid.py` và `keyword.py`.",
+        "## 4. Kết luận",
+        "",
+        f"> Trên tập 30 câu tự viết, hệ số `{hs_nho_nhat_dat_dinh:.2f}` cho Top-1 cao nhất "
+        f"({dinh['top1_rate']}). Mã đang để mặc định `0.10` ({mac_dinh['top1_rate']}).",
+        ">",
+        "> **Chưa đổi mặc định**, vì đổi một tham số không có đường vào sản phẩm là thay đổi vô "
+        "nghĩa. Việc cần làm trước là cho pipeline nhận diện và truyền `region`; khi đó mới quét "
+        "lại trên tập có khai vùng thật và chốt bằng số đo có giá trị.",
     ])
 
     OUT_REPORT.parent.mkdir(parents=True, exist_ok=True)

@@ -4,7 +4,7 @@
 > **Mã nguồn:** `github.com/Phuc-Bang/ChatBot-NextFarm`  
 > **Ngày hoàn thành:** 21/08/2026  
 > **Quy chuẩn kỹ thuật tham chiếu:** `NEXTFARM_PROBLEM_A_STANDARD_v2.0.md`  
-> **Trạng thái kiểm thử:** 367/367 Unit Tests PASSED (100%) · Working Tree Clean
+> **Trạng thái kiểm thử:** 367 Unit Tests thu thập — 331 chạy được, 36 bỏ qua vì cần PostgreSQL · Working Tree Clean
 
 ---
 
@@ -167,7 +167,7 @@ Hệ thống cung cấp 2 giao diện chuyên biệt được xây dựng theo t
 
 ## 7. ĐÁNH GIÁ CHẤT LƯỢNG MÃ NGUỒN & ĐỘ TIN CẬY
 
-* **Bộ kiểm thử tự động:** **367/367 Unit Tests PASSED (100%)** với độ phủ toàn diện từ chuẩn hóa, định tuyến, phân mảnh, truy xuất lai, kiểm duyệt fact, đến mô phỏng pipeline qua HTTP thật.
+* **Bộ kiểm thử tự động:** **367 Unit Tests thu thập, 331 chạy được, 0 thất bại** — độ phủ từ chuẩn hóa, định tuyến, phân mảnh, truy xuất lai, kiểm duyệt fact, đến mô phỏng pipeline qua HTTP thật. 36 ca còn lại đụng PostgreSQL trực tiếp và **tự bỏ qua** khi không kết nối được, nên con số đúng là *331 chạy được / 36 bỏ qua*, không phải *367/367 PASSED*.
 * **Bảo vệ rò rỉ dữ liệu:** Toàn bộ API keys, chuỗi kết nối CSDL và biến môi trường được cách ly trong `.env`, loại trừ tuyệt đối khỏi Git repository.
 * **Khả năng tái lập 100%:** Chỉ với 1 lệnh `make ingest`, toàn bộ kho tri thức 292 chunk / 185 chunk indexable / 141 fact được tái lập hoàn hảo từ các tệp cấu hình YAML có version control trong Git.
 
